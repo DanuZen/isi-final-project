@@ -21,46 +21,31 @@ interface TaStepperProps {
 const DEFAULT_STEPS: StepItem[] = [
   {
     id: 1,
-    key: "clearing",
-    title: "Clearing Nilai",
-    subtitle: "Verifikasi SKS & Syarat",
-    status: "selesai",
-    completedAt: "12 Mar 2026",
-  },
-  {
-    id: 2,
     key: "proposal",
     title: "Usulan Judul",
-    subtitle: "Review & Assign Pembimbing",
+    subtitle: "Review & Similarity Check",
     status: "selesai",
     completedAt: "28 Mar 2026",
   },
   {
-    id: 3,
+    id: 2,
     key: "bimbingan",
-    title: "Bimbingan",
-    subtitle: "Log Draft & Progress",
+    title: "Bimbingan TA",
+    subtitle: "Log Draft & Consultation",
     status: "aktif",
   },
   {
-    id: 4,
+    id: 3,
     key: "seminar",
-    title: "ACC Seminar",
-    subtitle: "Sempro / Semhas",
+    title: "Jadwal Seminar",
+    subtitle: "Seminar Proposal",
     status: "terkunci",
   },
   {
-    id: 5,
+    id: 4,
     key: "ujian",
-    title: "ACC Ujian",
-    subtitle: "Sidang Akhir Skripsi",
-    status: "terkunci",
-  },
-  {
-    id: 6,
-    key: "tamat",
-    title: "Tamat",
-    subtitle: "Yudisium & Pengesahan",
+    title: "Ujian Sidang",
+    subtitle: "Sidang Skripsi Final",
     status: "terkunci",
   },
 ];
@@ -98,12 +83,12 @@ export const TaStepper: React.FC<TaStepperProps> = ({
           <h3 className="text-base font-semibold text-[#1A1A1A] font-display">
             Progress Perjalanan Tugas Akhir
           </h3>
-          <p className="text-xs text-[#616161]">
-            Tahap saat ini: <span className="font-semibold text-[#FF5722]">3. Bimbingan Tugas Akhir</span>
+          <p className="text-xs text-slate-500 font-medium">
+            Tahap saat ini: <span className="font-bold text-[#C62828]">2. Bimbingan TA</span>
           </p>
         </div>
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FFF8E1] text-[#B78103] border border-[#FFC107]/40">
-          Tahap 3 dari 6
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+          Tahap 2 dari 4
         </span>
       </div>
 

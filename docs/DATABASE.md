@@ -83,12 +83,10 @@ enum StatusSidangEnum {
 }
 
 enum StatusTaEnum {
-  CLEARING
   PROPOSAL
   BIMBINGAN
   SEMINAR
   SIDANG
-  TAMAT
 }
 ```
 
