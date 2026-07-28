@@ -79,7 +79,7 @@ export default function DashboardPage() {
 
                 <div>
                   <h4 className="text-base font-bold text-[#1A1A1A] leading-snug font-display">
-                    "Rancang Bangun Sistem Informasi Manajemen Tugas Akhir Berbasis Web Menggunakan Arsitektur Microservices di UPI YPTK Padang"
+                    &quot;Rancang Bangun Sistem Informasi Manajemen Tugas Akhir Berbasis Web Menggunakan Arsitektur Microservices di UPI YPTK Padang&quot;
                   </h4>
                   <p className="text-xs text-[#616161] mt-2 leading-relaxed">
                     <strong>Abstrak Singkat:</strong> Penelitian ini bertujuan untuk mengoptimalkan proses pemantauan tugas akhir mahasiswa secara visual, terintegrasi notifikasi WhatsApp, serta meningkatkan transparansi alur bimbingan hingga yudisium.
@@ -141,7 +141,7 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     <p className="text-xs text-[#212121]">
-                      "Pak, saya telah memperbarui Diagram Sequence dan ERD pada Bab 3 sesuai dengan masukkan pada sesi sebelumnya. Mohon ketersediaan Bapak untuk memeriksa kembali."
+                      &quot;Pak, saya telah memperbarui Diagram Sequence dan ERD pada Bab 3 sesuai dengan masukkan pada sesi sebelumnya. Mohon ketersediaan Bapak untuk memeriksa kembali.&quot;
                     </p>
                   </div>
 
@@ -156,7 +156,7 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     <p className="text-xs text-[#212121]">
-                      "Diagram sequence Bab 3 sudah rapi dan sesuai alur. Silakan lanjutkan pengerjaan Bab 4 (Implementasi & Pengujian). Persiapkan draf kasar untuk persiapan ACC Seminar."
+                      &quot;Diagram sequence Bab 3 sudah rapi dan sesuai alur. Silakan lanjutkan pengerjaan Bab 4 (Implementasi &amp; Pengujian). Persiapkan draf kasar untuk persiapan ACC Seminar.&quot;
                     </p>
                   </div>
                 </div>
