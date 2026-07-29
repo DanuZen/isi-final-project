@@ -8,8 +8,8 @@ Dokumen ini menjelaskan alur kerja (*end-to-end workflow*) dan diagram interaksi
 
 ```mermaid
 flowchart TD
-    A[Prasyarat: Clearing Nilai SKS di Admin Prodi] -->|Akun Aktif| B[Stage 1: Usulan Judul & Similarity Check]
-    B -->|Review & Approve Prodi| C[Penetapan Dosen Pembimbing Utama & Pendamping]
+    A[Prasyarat Luring: Clearing Nilai SKS Manual di Kampus] -->|Admin Aktifkan Akun| B[Stage 1: Usulan Judul, Similarity Check & Pengajuan Pembimbing]
+    B -->|Review & Approve Dosen & Prodi| C[Penetapan Dosen Pembimbing Utama & Pendamping]
     C --> D[Stage 2: Bimbingan TA Rutin - Min. 5 Sesi]
     D -->|Opsional: Pengajuan Perubahan Judul| E[Approval Perubahan Judul oleh Dosen & Prodi]
     E --> D
@@ -25,27 +25,35 @@ flowchart TD
 
 ## 2. Alur Kerja Detail Per Tahap
 
-### 2.1 Prasyarat: Clearing Nilai & Aktivasi Akun
-Mahasiswa mengajukan verifikasi SKS & IPK ke Admin Prodi. Admin memverifikasi transkrip dan membuatkan/mengaktifkan akun SIPETA mahasiswa.
+### 2.1 Prasyarat: Clearing Nilai Manual (Luring / Offline di Kampus)
+Pengurusan Clearing Nilai SKS & IPK dilakukan mahasiswa secara **manual/langsung di kampus** dengan mendatangi Bagian Akademik / Admin Prodi.  
+* **Proses Offline:** Mahasiswa membawa bukti transkrip nilai ke kampus untuk diverifikasi oleh Admin Prodi.  
+* **Tidak Ada di Sistem:** Proses pemeriksaan berkas clearing nilai **TIDAK memiliki form / modul input di dalam aplikasi web SIPETA**.  
+* **Aktivasi Akun:** Setelah mahasiswa dinyatakan lulus clearing nilai secara luring, Admin Prodi akan membuatkan/mengaktifkan akun SIPETA mahasiswa agar dapat login dan mengusulkan judul TA.
 
 ---
 
-### 2.2 Stage 1: Usulan Judul & Cek Kemiripan (Similarity)
+### 2.2 Stage 1: Usulan Judul, Cek Kemiripan & Pengajuan Pembimbing
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor M as Mahasiswa
+    actor D as Dosen Pembimbing
     actor P as Admin Prodi
     participant S as Sistem SIPETA
 
-    M->>S: Form Usulan Judul (Judul, Abstrak, Bidang Kajian)
+    note over M,P: Prasyarat Luring: Mahasiswa Mengurus Clearing Nilai Langsung di Kampus
+    P->>S: Buatkan / Aktifkan Akun SIPETA Mahasiswa
+    M->>S: Login & Isi Form Usulan Judul (Judul, Abstrak, Bidang Kajian)
     M->>S: Klik "Cek Kemiripan (Similarity)" Realtime
     S->>S: Calculate Fuzzy Match Similarity Score (%)
     S-->>M: Tampilkan Skor Kemiripan (< 25% Layak)
-    M->>S: Submit Form Proposal Judul
-    P->>S: Review & Approve Proposal + Assign Pembimbing I & II
-    S-->>M: Status Judul Disetujui & Dosen Pembimbing Ditetapkan
+    M->>S: Cari & Pilih Dosen Pembimbing I & II (/pembimbing)
+    M->>S: Submit Form Usulan Judul + Pengajuan Pembimbing
+    D->>S: Konfirmasi / Approve Pengajuan Bimbingan oleh Dosen
+    P->>S: Review & Verifikasi Akhir Penetapan Pembimbing oleh Prodi
+    S-->>M: Status Judul Disetujui & Dosen Pembimbing Resmi Ditetapkan
 ```
 
 ---
