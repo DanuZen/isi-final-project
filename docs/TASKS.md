@@ -10,6 +10,8 @@ Breakdown status pengembangan frontend UI/UX dan rencana integrasi backend.
 - [x] Import Design System & Brand Identity UPI YPTK Padang (`#C62828` Deep Crimson Red, `#F59E0B` Amber Gold, Plus Jakarta Sans, IBM Plex Mono)
 - [x] Centered Logo Emblem **UPI YPTK Padang** & **SIPETA** di Sidebar Header
 - [x] Responsive Collapsible Sidebar dengan Toggle Button `Sidebar Navigasi` di Header Bar
+- [x] Standardisasi **Fit-Viewport Layout Architecture (`100dvh`)** di seluruh 10 rute halaman (`/`, `/proposal`, `/pembimbing`, `/bimbingan`, `/seminar`, `/sidang`, `/list-judul`, `/clearing`, `/yudisium`, `/kalender`)
+- [x] Implementasi **Clean Internal Card Scroll (`scrollbar-none`)** untuk mencegah pemotongan card di layar desktop beresolusi rendah
 - [x] Zero empty space layout — *Flush Bottom Baseline Alignment* di semua halaman 2-kolom
 
 ## Fase 1 — Modul Mahasiswa (Selesai ✓)
