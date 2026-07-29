@@ -7,9 +7,10 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FileSpreadsheet,
+  UserCheck,
   BookOpen,
+  CalendarDays,
   Calendar,
-  Award,
   GraduationCap,
   ShieldCheck,
 } from "lucide-react";
@@ -33,10 +34,20 @@ const NAV_ITEMS: NavItem[] = [
     icon: <FileSpreadsheet className="w-4 h-4" />,
   },
   {
+    label: "Pengajuan Pembimbing",
+    href: "/pembimbing",
+    icon: <UserCheck className="w-4 h-4" />,
+  },
+  {
     label: "Bimbingan TA",
     href: "/bimbingan",
     icon: <BookOpen className="w-4 h-4" />,
     badge: "Aktif",
+  },
+  {
+    label: "Kalender TA",
+    href: "/kalender",
+    icon: <CalendarDays className="w-4 h-4" />,
   },
   {
     label: "Jadwal Seminar",
@@ -64,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
 
   return (
     <aside
-      className={`w-[260px] bg-[#1A1A1A] text-white flex flex-col min-h-screen shrink-0 border-r border-[#333333] transition-all duration-300 ${
+      className={`w-[260px] bg-[#1A1A1A] text-white flex flex-col h-screen sticky top-0 shrink-0 border-r border-[#333333] transition-all duration-300 z-30 ${
         !isOpen ? "-ml-[260px] opacity-0 overflow-hidden" : "ml-0 opacity-100"
       }`}
     >
