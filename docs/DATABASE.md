@@ -1,6 +1,6 @@
 # Database Schema & Data Models — SIMTA-Next
 
-Dokumen ini menjelaskan rancangan basis data, Entity-Relationship Diagram (ERD), serta spesifikasi model **Prisma ORM** yang digunakan pada **SIMTA-Next**.
+Dokumen ini menjelaskan rancangan basis data, Entity-Relationship Diagram (ERD), serta spesifikasi model **Prisma ORM** yang digunakan pada **SIPETA**.
 
 ---
 
@@ -9,7 +9,6 @@ Dokumen ini menjelaskan rancangan basis data, Entity-Relationship Diagram (ERD),
 ```mermaid
 erDiagram
     USER ||--o{ ROLES : has
-    USER ||--o| CLEARING_NILAI : submits
     USER ||--o{ PROPOSAL_JUDUL : proposes
     USER ||--o{ PERUBAHAN_JUDUL : requests
     USER ||--o{ BIMBINGAN_LOG : writes
@@ -40,14 +39,8 @@ enum RoleEnum {
   DOSEN
   ADMIN_PRODI
   ADMIN_FAKULTAS
-  SUPERADMIN
   PIMPINAN
-}
-
-enum StatusClearingEnum {
-  PENDING
-  APPROVED
-  REJECTED
+  SUPERADMIN
 }
 
 enum StatusProposalEnum {
@@ -138,11 +131,10 @@ model User {
   role           RoleEnum
   prodiId        String?
   prodi          Prodi?        @relation(fields: [prodiId], references: [id])
-  statusTa       StatusTaEnum  @default(CLEARING)
-  isVerified     Boolean       @default(false)
+  statusTa       StatusTaEnum  @default(PROPOSAL)
+  isVerified     Boolean       @default(false) // Verified via Offline Clearing at Campus by Admin Prodi
   
   // Relations
-  clearingNilai  ClearingNilai?
   proposals      ProposalJudul[]    @relation("MahasiswaProposal")
   bimbinganLogs  BimbinganLog[]     @relation("MahasiswaBimbingan")
   feedbackGiven  BimbinganLog[]     @relation("DosenFeedback")
@@ -156,23 +148,10 @@ model User {
 }
 
 // ------------------------------------------------------
-// CLEARING NILAI & PROPOSAL
+// PROPOSAL & PENGAJUAN PEMBIMBING
+// Note: Clearing Nilai dilakukan secara Luring/Offline di Kampus.
+// Pasca clearing offline verified, Admin Prodi membuatkan/mengaktifkan akun User.
 // ------------------------------------------------------
-
-model ClearingNilai {
-  id             String             @id @default(uuid())
-  mahasiswaId    String             @unique
-  mahasiswa      User               @relation(fields: [mahasiswaId], references: [id])
-  totalSks       Int
-  ipk            Float
-  fileTranskrip  String
-  status         StatusClearingEnum @default(PENDING)
-  catatan        String?
-  verifiedBy     String?
-  verifiedAt     DateTime?
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
-}
 
 model ProposalJudul {
   id             String             @id @default(uuid())
@@ -345,4 +324,3 @@ model AuditLog {
   ipAddress String?
   createdAt DateTime @default(now())
 }
-```
