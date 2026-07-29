@@ -17,6 +17,7 @@ import {
   X,
   FileText,
   Download,
+  UserCheck,
 } from "lucide-react";
 
 export default function BimbinganPage() {
@@ -34,32 +35,16 @@ export default function BimbinganPage() {
   const [alasanPerubahan, setAlasanPerubahan] = useState("");
   const [perubahanSubmitted, setPerubahanSubmitted] = useState(false);
 
-  const [logList, setLogList] = useState([
-    {
-      id: 5,
-      tanggal: "24 Juli 2026, 14:30 WIB",
-      mahasiswaNama: "Danu Zen",
-      catatanMahasiswa:
-        "Pak, saya telah memperbarui Diagram Sequence dan ERD pada Bab 3 sesuai dengan masukkan pada sesi sebelumnya. Mohon ketersediaan Bapak untuk memeriksa kembali.",
-      fileAttachment: "Naskah_Bab3_V2.pdf",
-      dosenNama: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc. (Pembimbing I)",
-      catatanDosen:
-        "Diagram sequence Bab 3 sudah rapi dan sesuai alur. Silakan lanjutkan pengerjaan Bab 4 (Implementasi & Pengujian). Persiapkan draf kasar untuk persiapan ACC Seminar.",
-      statusFeedback: "Disetujui Pembimbing",
-    },
-    {
-      id: 4,
-      tanggal: "15 Juli 2026, 10:15 WIB",
-      mahasiswaNama: "Danu Zen",
-      catatanMahasiswa:
-        "Draft Bab 3 (Analisis & Perancangan Sistem). Memuat perancangan mockup UI/UX dan alur State Machine Tugas Akhir.",
-      fileAttachment: "Naskah_Bab3_Draft1.pdf",
-      dosenNama: "Dr. Jasmir, S.Kom., M.Kom. (Pembimbing II)",
-      catatanDosen:
-        "Mockup UI sudah bagus. Tambahkan penjelasan mengenai penanganan notifikasi WhatsApp gateway di Bab 3.2.",
-      statusFeedback: "Revisi Ringan",
-    },
-  ]);
+  const [logList, setLogList] = useState<{
+    id: number;
+    tanggal: string;
+    mahasiswaNama: string;
+    catatanMahasiswa: string;
+    fileAttachment: string;
+    dosenNama: string;
+    catatanDosen: string;
+    statusFeedback: string;
+  }[]>([]); // Kosong — belum ada sesi bimbingan
 
   const handleAddLog = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,47 +77,50 @@ export default function BimbinganPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
-            {/* Welcome Banner */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#F59E0B] text-[#1A1A1A] flex items-center gap-1">
-                      <BookOpen className="w-3.5 h-3.5" /> Bimbingan Aktif (5 dari 8 Sesi Terpenuhi)
-                    </span>
-                    <span className="text-xs font-mono-data text-[#A0A0A0]">
-                      Pembimbing: Dr. Eng. H. Sarjon Defit &amp; Dr. Jasmir
+          <main className="flex-1 p-5 md:p-6 space-y-5 overflow-hidden shell-body flex flex-col min-h-0">
+            {/* ── Welcome Banner ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                {/* Left: greeting + status */}
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Pembimbing Terverifikasi
                     </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
-                    Log Bimbingan Skripsi &amp; Pengajuan Perubahan Judul
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed">
-                    Catat progres konsultasi rutin, ungga berkas draft naskah, dan ajukan perubahan judul jika diperlukan.
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                    Bimbingan &amp; Konsultasi TA
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                    Catatan histori komunikasi bimbingan rutin, draf progres naskah Bab, serta pengajuan perubahan judul Tugas Akhir.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
+                {/* Right: quick action buttons */}
+                <div className="flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => setShowLogModal(true)}
-                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-2"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
                   >
-                    <PlusCircle className="w-4 h-4" /> Catat Sesi Bimbingan
+                    <PlusCircle className="w-4 h-4" />
+                    <span>Catat Sesi Bimbingan</span>
                   </button>
                   <button
                     onClick={() => setShowPerubahanJudulModal(true)}
-                    className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-[#2A2A2A] border border-[#444444] text-white hover:bg-[#333333] transition-all flex items-center gap-1.5 shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 shadow-xs"
                   >
-                    <FileEdit className="w-4 h-4 text-[#A0A0A0]" /> Ajukan Perubahan Judul
+                    <FileEdit className="w-4 h-4 text-neutral-400" />
+                    <span>Ajukan Perubahan Judul</span>
                   </button>
                 </div>
               </div>
+              {/* Bottom accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
             {/* Perubahan Judul Status Card (If Submitted) */}
@@ -159,79 +147,80 @@ export default function BimbinganPage() {
             )}
 
             {/* Main Content Layout: Log Thread & ACC Requirements (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              {/* Left Column (2 Cols): Interactive Log Thread */}
-              <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#C62828] flex items-center justify-center font-bold">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+              {/* Left Column (8/12): Interactive Log Thread */}
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+                  <div className="flex flex-col h-full min-h-0 overflow-hidden">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 shrink-0">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <MessageSquare className="w-4 h-4" />
                         </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Riwayat Thread Sesi Bimbingan ({logList.length} Sesi Recorded)
+                          Riwayat Thread Sesi Bimbingan
                         </h3>
                       </div>
-                      <span className="text-xs font-mono-data text-slate-500 font-medium">
-                        Minimal 5 Sesi Terpenuhi
+                      <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                        {logList.length} / 5 Sesi Recorded
                       </span>
                     </div>
 
-                    {/* Thread Messages List */}
-                    <div className="space-y-6 mt-4">
+                    {/* Thread Messages List (Internally Scrollable) */}
+                    <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none pr-1 space-y-4">
                       {logList.map((log) => (
                         <div
                           key={log.id}
-                          className="p-4 rounded-xl border border-slate-200/60 bg-slate-50/60 space-y-3"
+                          className="p-4.5 rounded-2xl border border-slate-200/90 bg-slate-50/70 space-y-3.5 shadow-xs"
                         >
                           {/* Log Header */}
-                          <div className="flex items-center justify-between border-b border-slate-200/60 pb-2 text-xs">
-                            <span className="font-bold text-slate-900 font-display">
+                          <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5 text-xs">
+                            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-xs font-display">
                               Sesi Bimbingan #{log.id}
                             </span>
-                            <span className="text-[11px] font-mono-data text-slate-500">
+                            <span className="text-[11px] font-medium text-slate-500">
                               {log.tanggal}
                             </span>
                           </div>
 
                           {/* Student Message Bubble */}
-                          <div className="bg-rose-50/60 p-3.5 rounded-xl border border-rose-200/60 space-y-1.5">
-                            <div className="flex items-center justify-between">
-                              <p className="text-xs font-bold text-[#C62828]">
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-xs">
+                            <div className="flex items-center justify-between gap-2 flex-wrap">
+                              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200">
                                 {log.mahasiswaNama} (Mahasiswa)
-                              </p>
+                              </span>
                               {log.fileAttachment && (
-                                <span className="text-[10px] font-mono-data bg-white px-2 py-0.5 rounded-md border border-slate-200 text-slate-800 flex items-center gap-1 font-semibold">
-                                  <Paperclip className="w-3 h-3 text-[#C62828]" /> {log.fileAttachment}
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition-colors shadow-xs">
+                                  <Paperclip className="w-3.5 h-3.5 text-[#C62828]" />
+                                  <span>{log.fileAttachment}</span>
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-slate-800 leading-relaxed font-medium">
-                              &quot;{log.catatanMahasiswa}&quot;
+                            <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#C62828]">
+                              &ldquo;{log.catatanMahasiswa}&rdquo;
                             </p>
                           </div>
 
                           {/* Lecturer Response Bubble */}
-                          <div className="bg-amber-50/80 p-3.5 rounded-xl border border-amber-200/80 border-l-4 border-l-amber-500 space-y-1.5 ml-3">
-                            <div className="flex items-center justify-between">
-                              <p className="text-xs font-bold text-amber-900">
+                          <div className="bg-white p-4 rounded-xl border border-amber-200 border-l-4 border-l-[#F59E0B] space-y-2 ml-3 shadow-xs">
+                            <div className="flex items-center justify-between gap-2 flex-wrap">
+                              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
                                 {log.dosenNama}
-                              </p>
+                              </span>
                               <span
-                                className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                                className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white shadow-xs ${
                                   log.statusFeedback === "Disetujui Pembimbing"
-                                    ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                                    ? "bg-emerald-600"
                                     : log.statusFeedback === "Menunggu Review"
-                                    ? "bg-amber-100 text-amber-800 border border-amber-300"
-                                    : "bg-orange-100 text-orange-800 border border-orange-300"
+                                    ? "bg-[#F59E0B]"
+                                    : "bg-[#D97706]"
                                 }`}
                               >
                                 {log.statusFeedback}
                               </span>
                             </div>
-                            <p className="text-xs text-slate-800 leading-relaxed font-medium">
-                              &quot;{log.catatanDosen}&quot;
+                            <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#F59E0B]">
+                              &ldquo;{log.catatanDosen}&rdquo;
                             </p>
                           </div>
                         </div>
@@ -241,105 +230,123 @@ export default function BimbinganPage() {
                 </div>
               </div>
 
-              {/* Right Column (1 Col): Requirements Checklist, Lecturer Info & Template Downloads */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
+              {/* Right Column (4/12): Requirements Checklist & Info */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+                {/* Card 1: Syarat Pengajuan ACC Seminar (shrink-0) */}
                 {/* Card 1: Syarat Pengajuan ACC Seminar */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2.5 flex items-center justify-between">
-                    <span>Syarat Pengajuan ACC Seminar</span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-3 shrink-0">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Syarat Pengajuan ACC Seminar
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#D97706] text-white shadow-xs">
                       Progress 2/3
                     </span>
-                  </h3>
+                  </div>
 
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-2.5 text-xs">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2 text-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <p className="font-bold text-slate-800">Clearing SKS &amp; IPK Akademik</p>
-                        <p className="text-[11px] text-slate-500 font-medium">Terpenuhi (144 SKS • IPK 3.65)</p>
+                        <p className="text-[10px] text-slate-500 font-medium">Terpenuhi (144 SKS • IPK 3.65)</p>
                       </div>
                     </li>
 
-                    <li className="flex items-start gap-2.5 text-xs">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <li className="flex items-start gap-2 text-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <p className="font-bold text-slate-800">Minimal 5 Sesi Bimbingan Rutin</p>
-                        <p className="text-[11px] text-emerald-600 font-bold">Terpenuhi (5 / 5 Sesi Recorded)</p>
+                        <p className="text-[10px] text-emerald-600 font-bold">Terpenuhi (5 / 5 Sesi Recorded)</p>
                       </div>
                     </li>
 
-                    <li className="flex items-start gap-2.5 text-xs">
-                      <Clock className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                    <li className="flex items-start gap-2 text-xs">
+                      <Clock className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
                       <div>
                         <p className="font-bold text-slate-800">ACC Klik Dosen Pembimbing</p>
-                        <p className="text-[11px] text-amber-600 font-bold">Menunggu Verifikasi Pembimbing I</p>
+                        <p className="text-[10px] text-amber-600 font-bold">Menunggu Verifikasi Pembimbing I</p>
                       </div>
                     </li>
                   </ul>
 
                   <Link
                     href="/seminar"
-                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all text-center block shadow-md shadow-[#C62828]/20"
+                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all text-center block shadow-xs active:scale-95"
                   >
                     Lihat Status &amp; Jadwal Seminar
                   </Link>
                 </div>
 
-                {/* Card 2: Dosen Pembimbing & Jam Konsultasi */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
-                  <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                    Dosen Pembimbing &amp; Kontak Bimbingan
-                  </h3>
+                {/* Card 2: Dosen Pembimbing & Jam Konsultasi (shrink-0) */}
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-2.5 shrink-0">
+                  <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <UserCheck className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-bold text-sm text-slate-900 font-display">
+                      Dosen Pembimbing &amp; Kontak Bimbingan
+                    </h3>
+                  </div>
 
-                  <div className="space-y-3 text-xs">
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-rose-50 text-[#C62828] rounded-full">
+                  <div className="space-y-2 text-xs">
+                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/60 space-y-0.5">
+                      <span className="px-2.5 py-0.5 text-[9px] font-extrabold bg-[#C62828] text-white rounded-full">
                         Pembimbing Utama (I)
                       </span>
-                      <p className="font-bold text-slate-900 mt-1">
+                      <p className="font-bold text-slate-900 mt-1 truncate">
                         Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.
                       </p>
-                      <p className="text-[11px] text-slate-500 font-mono-data">
-                        Jadwal Tatap Muka: Selasa &amp; Kamis (10:00 - 12:00)
+                      <p className="text-[10px] text-slate-500 font-mono-data">
+                        Selasa &amp; Kamis (10:00 - 12:00)
                       </p>
                     </div>
 
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-amber-50 text-amber-700 rounded-full">
+                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/60 space-y-0.5">
+                      <span className="px-2.5 py-0.5 text-[9px] font-extrabold bg-[#D97706] text-white rounded-full">
                         Pembimbing Pendamping (II)
                       </span>
-                      <p className="font-bold text-slate-900 mt-1">
+                      <p className="font-bold text-slate-900 mt-1 truncate">
                         Dr. Jasmir, S.Kom., M.Kom.
                       </p>
-                      <p className="text-[11px] text-slate-500 font-mono-data">
-                        Jadwal Tatap Muka: Rabu &amp; Jumat (13:00 - 15:00)
+                      <p className="text-[10px] text-slate-500 font-mono-data">
+                        Rabu &amp; Jumat (13:00 - 15:00)
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Card 3: Template & Panduan Penulisan Skripsi (Stretches to match bottom baseline) */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
+                {/* Card 3: Template & Panduan (Stretches to match bottom baseline) */}
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-2.5 flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                      Panduan &amp; Template Naskah TA
-                    </h3>
+                    <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Panduan &amp; Template Naskah TA
+                      </h3>
+                    </div>
 
-                    <ul className="space-y-2 text-xs mt-3">
-                      <li className="p-2.5 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200/60 flex items-center justify-between transition-colors cursor-pointer">
-                        <div className="flex items-center gap-2">
-                          <FileText className="w-4 h-4 text-[#C62828]" />
-                          <span className="font-semibold text-slate-800">Panduan Penulisan Skripsi FIK.pdf</span>
+                    <ul className="space-y-2 text-xs mt-2.5">
+                      <li className="p-2 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200/60 flex items-center justify-between transition-colors cursor-pointer">
+                        <div className="flex items-center gap-2 truncate">
+                          <FileText className="w-4 h-4 text-[#C62828] shrink-0" />
+                          <span className="font-semibold text-slate-800 text-[11px] truncate">Panduan Skripsi UPI YPTK.pdf</span>
                         </div>
-                        <Download className="w-3.5 h-3.5 text-slate-400" />
+                        <Download className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       </li>
-                      <li className="p-2.5 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200/60 flex items-center justify-between transition-colors cursor-pointer">
-                        <div className="flex items-center gap-2">
-                          <FileText className="w-4 h-4 text-[#C62828]" />
-                          <span className="font-semibold text-slate-800">Template Microsoft Word SKRIPSI_UPI.docx</span>
+                      <li className="p-2 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200/60 flex items-center justify-between transition-colors cursor-pointer">
+                        <div className="flex items-center gap-2 truncate">
+                          <FileText className="w-4 h-4 text-[#C62828] shrink-0" />
+                          <span className="font-semibold text-slate-800 text-[11px] truncate">Template_Skripsi_UPI.docx</span>
                         </div>
-                        <Download className="w-3.5 h-3.5 text-slate-400" />
+                        <Download className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       </li>
                     </ul>
                   </div>
@@ -377,32 +384,32 @@ export default function BimbinganPage() {
                   placeholder="Jelaskan progres naskah Bab yang telah diperbarui atau bagian yang membutuhkan konsultasi..."
                   value={newLogCatatan}
                   onChange={(e) => setNewLogCatatan(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0E0E0] bg-[#FAFAFA] text-[#212121] focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:bg-white focus:border-[#C62828] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#212121] mb-1">
+                <label className="block font-semibold text-slate-800 mb-1">
                   Unggah Draft Naskah (PDF):
                 </label>
                 <input
                   type="file"
                   onChange={(e) => setNewLogFile(e.target.files?.[0]?.name || "Naskah_Draft_Progress.pdf")}
-                  className="w-full text-xs text-[#616161] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#FF5722] file:text-white hover:file:bg-[#D32F2F]"
+                  className="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#C62828] file:text-white hover:file:bg-[#B71C1C] cursor-pointer"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E0E0E0]">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowLogModal(false)}
-                  className="px-4 py-2 rounded-lg border border-[#E0E0E0] text-[#212121] hover:bg-[#FAFAFA] font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-[#FF5722] text-white hover:bg-[#D32F2F] font-semibold flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-[#C62828] text-white hover:bg-[#B71C1C] font-bold flex items-center gap-1.5 shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5" /> Kirim Log Bimbingan
                 </button>
@@ -415,14 +422,14 @@ export default function BimbinganPage() {
       {/* Modal Pengajuan Perubahan Judul */}
       {showPerubahanJudulModal && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl border border-[#E0E0E0] max-w-lg w-full p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between border-b border-[#E0E0E0] pb-3">
-              <h3 className="font-bold text-base text-[#1A1A1A] font-display">
+          <div className="bg-white rounded-xl border border-slate-200 max-w-lg w-full p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="font-bold text-base text-slate-900 font-display">
                 Formulir Pengajuan Perubahan Judul TA
               </h3>
               <button
                 onClick={() => setShowPerubahanJudulModal(false)}
-                className="p-1 rounded text-[#616161] hover:bg-[#FAFAFA]"
+                className="p-1 rounded text-slate-500 hover:bg-slate-100"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -430,16 +437,16 @@ export default function BimbinganPage() {
 
             <form onSubmit={handlePerubahanJudulSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-[#616161] mb-1">
+                <label className="block font-semibold text-slate-600 mb-1">
                   Judul Skripsi Saat Ini (Lama):
                 </label>
-                <p className="p-2.5 bg-[#FAFAFA] rounded-lg border border-[#E0E0E0] text-[#616161] font-medium leading-relaxed">
+                <p className="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-slate-700 font-medium leading-relaxed">
                   &quot;{judulLama}&quot;
                 </p>
               </div>
 
               <div>
-                <label className="block font-semibold text-[#212121] mb-1">
+                <label className="block font-semibold text-slate-800 mb-1">
                   Usulan Judul Baru:
                 </label>
                 <input
@@ -448,12 +455,12 @@ export default function BimbinganPage() {
                   placeholder="Masukkan usulan perubahan judul baru..."
                   value={judulBaru}
                   onChange={(e) => setJudulBaru(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0E0E0] bg-[#FAFAFA] text-[#212121] focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:bg-white focus:border-[#C62828] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#212121] mb-1">
+                <label className="block font-semibold text-slate-800 mb-1">
                   Alasan Perubahan Judul:
                 </label>
                 <textarea
@@ -462,21 +469,21 @@ export default function BimbinganPage() {
                   placeholder="Jelaskan alasan revisi/penyesuaian arah penelitian dari dosen pembimbing..."
                   value={alasanPerubahan}
                   onChange={(e) => setAlasanPerubahan(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0E0E0] bg-[#FAFAFA] text-[#212121] focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:bg-white focus:border-[#C62828] transition-all"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E0E0E0]">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowPerubahanJudulModal(false)}
-                  className="px-4 py-2 rounded-lg border border-[#E0E0E0] text-[#212121] hover:bg-[#FAFAFA] font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-[#FF5722] text-white hover:bg-[#D32F2F] font-semibold"
+                  className="px-4 py-2 rounded-xl bg-[#C62828] text-white hover:bg-[#B71C1C] font-bold shadow-xs"
                 >
                   Kirim Pengajuan Perubahan Judul
                 </button>

@@ -30,10 +30,10 @@ export default function SeminarPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
           <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
             {/* Welcome Banner */}
@@ -71,27 +71,27 @@ export default function SeminarPage() {
             </div>
 
             {/* Grid Layout: Schedule & Revision Form (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              {/* Left Column (2 Cols): Schedule Details & Board of Examiners */}
-              <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-5 flex-1 flex flex-col justify-between">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Column (8/12): Schedule Details & Board of Examiners */}
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-6 h-full">
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#C62828] flex items-center justify-center font-bold">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <Calendar className="w-4 h-4" />
                         </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
                           Detail Pelaksanaan Seminar Proposal
                         </h3>
                       </div>
-                      <span className="px-2.5 py-0.5 text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+                      <span className="px-3 py-1 text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full">
                         Terjadwal Resmi
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs mt-4">
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                         <div className="flex items-center gap-1.5 text-slate-500">
                           <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
                           <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
@@ -99,7 +99,7 @@ export default function SeminarPage() {
                         <p className="font-bold text-slate-900">Kamis, 20 Agustus 2026</p>
                       </div>
 
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
+                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                         <div className="flex items-center gap-1.5 text-slate-500">
                           <Clock className="w-3.5 h-3.5 text-[#C62828]" />
                           <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Pelaksanaan</span>
@@ -107,28 +107,28 @@ export default function SeminarPage() {
                         <p className="font-bold text-slate-900">09:00 - 10:30 WIB</p>
                       </div>
 
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
+                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                         <div className="flex items-center gap-1.5 text-slate-500">
                           <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
                           <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Seminar</span>
                         </div>
-                        <p className="font-bold text-slate-900">Gedung FIK - Ruang 302</p>
+                        <p className="font-bold text-slate-900">Ruang 302</p>
                       </div>
                     </div>
 
                     {/* Examiners Table */}
-                    <div className="space-y-3 pt-4">
-                      <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-1.5">
+                    <div className="space-y-3 pt-5">
+                      <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
                         <Users className="w-4 h-4 text-[#C62828]" /> Susunan Dewan Penguji Seminar:
                       </h4>
 
-                      <div className="overflow-x-auto">
+                      <div className="overflow-x-auto rounded-xl border border-slate-200">
                         <table className="w-full text-left text-xs">
-                          <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200/60">
+                          <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
                             <tr>
-                              <th className="py-2.5 px-3 font-bold">Jabatan Penguji</th>
-                              <th className="py-2.5 px-3 font-bold">Nama Dosen Penguji</th>
-                              <th className="py-2.5 px-3 font-bold">Status Hadir</th>
+                              <th className="py-3 px-4 font-bold">Jabatan Penguji</th>
+                              <th className="py-3 px-4 font-bold">Nama Dosen Penguji</th>
+                              <th className="py-3 px-4 font-bold">Status Hadir</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100 text-slate-800">
@@ -155,12 +155,12 @@ export default function SeminarPage() {
                 </div>
               </div>
 
-              {/* Right Column (1 Col): Post-Seminar Revision Upload */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
+              {/* Right Column (4/12): Post-Seminar Revision Upload */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-6 h-full">
                 {/* Card 1: Upload Revisi */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                    <div className="flex items-center gap-2">
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div className="flex items-center gap-2.5">
                       <FileCheck className="w-4 h-4 text-[#C62828]" />
                       <h3 className="font-bold text-sm text-slate-900 font-display">
                         Upload Revisi Pasca-Seminar
@@ -169,16 +169,16 @@ export default function SeminarPage() {
                   </div>
 
                   {revisiSubmitted ? (
-                    <div className="p-4 bg-emerald-50/80 rounded-xl border border-emerald-200/80 space-y-2 text-xs">
+                    <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 space-y-2 text-xs">
                       <div className="flex items-center gap-2 text-emerald-800 font-bold">
-                        <CheckCircle2 className="w-4 h-4" /> Berkas Revisi Berhasil Diunggah!
+                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B]" /> Berkas Revisi Berhasil Diunggah!
                       </div>
                       <p className="text-slate-800 text-[11px] font-medium leading-relaxed">
                         Berkas naskah revisi proposal telah diterima oleh Ketua Penguji &amp; Sekretariat Prodi. Anda diizinkan melanjutkan ke persiapan Sidang Skripsi.
                       </p>
                     </div>
                   ) : (
-                    <form onSubmit={handleUploadRevisi} className="space-y-3 text-xs">
+                    <form onSubmit={handleUploadRevisi} className="space-y-3.5 text-xs">
                       <p className="text-slate-600 leading-relaxed text-[11px] font-medium">
                         Unggah lembar perbaikan revisi yang telah ditandatangani oleh Dosen Penguji (maksimal 14 hari kerja setelah seminar).
                       </p>
@@ -187,12 +187,12 @@ export default function SeminarPage() {
                         type="file"
                         required
                         onChange={(e) => setRevisiFile(e.target.files?.[0]?.name || "Naskah_Revisi_Sempro.pdf")}
-                        className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#C62828] file:text-white hover:file:bg-[#990000] cursor-pointer"
+                        className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#C62828] file:text-white hover:file:bg-[#B71C1C] cursor-pointer"
                       />
 
                       <button
                         type="submit"
-                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#C62828]/20"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 shadow-xs"
                       >
                         <Upload className="w-4 h-4" /> Unggah Lembar Revisi Final
                       </button>
@@ -201,23 +201,23 @@ export default function SeminarPage() {
                 </div>
 
                 {/* Card 2: Tata Tertib Seminar (Stretches to match bottom baseline) */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
+                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-3">
                       Tata Tertib Presentasi Seminar
                     </h3>
 
-                    <ul className="space-y-2 text-xs text-slate-600 font-medium mt-3">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <ul className="space-y-2.5 text-xs text-slate-600 font-medium mt-3">
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
                         <span>Memakai kemeja putih &amp; Jas Almamater UPI YPTK</span>
                       </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
                         <span>Hadir 15 menit sebelum alokasi waktu ujian</span>
                       </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
                         <span>Membawa draf proposal 3 rangkap untuk penguji</span>
                       </li>
                     </ul>

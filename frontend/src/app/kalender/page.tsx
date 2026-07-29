@@ -15,7 +15,11 @@ import {
   Download,
   X,
   Sparkles,
+  Building2,
+  GraduationCap,
 } from "lucide-react";
+import { UPI_YPTK_FAKULTAS, PROGRAM_PASCASARJANA } from "@/constants/upiyptk";
+import { CustomDropdown } from "@/components/ui/custom-dropdown";
 
 interface CalendarEvent {
   id: string;
@@ -157,6 +161,7 @@ export default function KalenderPage() {
   // Filter States
   const [viewMode, setViewMode] = useState<"BULAN" | "MINGGU" | "HARI">("BULAN");
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
+  const [selectedFakultas, setSelectedFakultas] = useState<string>("FILKOM");
   const [selectedProdi, setSelectedProdi] = useState<string>("ALL");
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
@@ -184,26 +189,26 @@ export default function KalenderPage() {
   const getCategoryBadgeClass = (kategori: CalendarEvent["kategori"]) => {
     switch (kategori) {
       case "BIMBINGAN":
-        return "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100";
+        return "bg-[#D97706] text-white border-[#D97706] hover:bg-[#B45309]";
       case "SEMPRO":
-        return "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100";
+        return "bg-[#1D4ED8] text-white border-[#1D4ED8] hover:bg-[#1E40AF]";
       case "SIDANG":
-        return "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100";
+        return "bg-[#15803D] text-white border-[#15803D] hover:bg-[#166534]";
       case "DEADLINE":
-        return "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100";
+        return "bg-[#C62828] text-white border-[#C62828] hover:bg-[#B71C1C]";
       default:
-        return "bg-slate-50 text-slate-700 border-slate-200";
+        return "bg-slate-700 text-white border-slate-700";
     }
   };
 
   const getCategoryDotColor = (kategori: CalendarEvent["kategori"]) => {
     switch (kategori) {
       case "BIMBINGAN":
-        return "bg-[#F59E0B]";
+        return "bg-[#D97706]";
       case "SEMPRO":
-        return "bg-[#2563EB]";
+        return "bg-[#1D4ED8]";
       case "SIDANG":
-        return "bg-[#10B981]";
+        return "bg-[#15803D]";
       case "DEADLINE":
         return "bg-[#C62828]";
       default:
@@ -214,85 +219,51 @@ export default function KalenderPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
-            {/* Top Banner Hero */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#C62828] text-white flex items-center gap-1">
-                      <CalendarDays className="w-3.5 h-3.5" /> Kalender Akademik FIK
-                    </span>
-                    <span className="text-xs font-mono-data text-[#F59E0B] font-bold">
-                      Agustus 2026 • 9 Agenda Terdaftar
+          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+            {/* ── Welcome Banner ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                {/* Left: greeting + status */}
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs">
+                      <CalendarDays className="w-3.5 h-3.5" /> Kalender Akademik Universitas
                     </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Kalender Interaktif TA &amp; Sidang Skripsi
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed">
-                    Jadwal terpadu sesi Bimbingan Rutin, Seminar Proposal, Ujian Sidang Skripsi, dan Tenggat Waktu Akademik Fakultas Ilmu Komputer UPI YPTK Padang.
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                    Jadwal alokasi bimbingan rutin, seminar proposal, ujian sidang skripsi, dan batas akhir akademik mahasiswa UPI YPTK Padang.
                   </p>
                 </div>
-
-                {/* View Switchers */}
-                <div className="flex items-center gap-1 bg-[#141414] p-1.5 rounded-xl border border-[#333333] shrink-0">
-                  <button
-                    onClick={() => setViewMode("BULAN")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === "BULAN"
-                        ? "bg-[#C62828] text-white shadow-sm"
-                        : "text-[#A0A0A0] hover:text-white"
-                    }`}
-                  >
-                    Bulan
-                  </button>
-                  <button
-                    onClick={() => setViewMode("MINGGU")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === "MINGGU"
-                        ? "bg-[#C62828] text-white shadow-sm"
-                        : "text-[#A0A0A0] hover:text-white"
-                    }`}
-                  >
-                    Minggu
-                  </button>
-                  <button
-                    onClick={() => setViewMode("HARI")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === "HARI"
-                        ? "bg-[#C62828] text-white shadow-sm"
-                        : "text-[#A0A0A0] hover:text-white"
-                    }`}
-                  >
-                    Hari
-                  </button>
-                </div>
               </div>
+              {/* Bottom accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
             {/* Controls Bar & Filter Legend */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 shrink-0">
               {/* Month Nav Controls */}
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-                  <button className="p-1.5 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
+                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <span className="px-3 text-xs font-black font-display text-slate-900">
                     {currentMonthName}
                   </span>
-                  <button className="p-1.5 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
+                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
 
-                <button className="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all">
+                <button className="px-3 py-1 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all">
                   Hari Ini
                 </button>
               </div>
@@ -301,10 +272,10 @@ export default function KalenderPage() {
               <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
                 <button
                   onClick={() => setActiveCategory("ALL")}
-                  className={`px-3 py-1.5 rounded-xl border transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full border transition-all ${
                     activeCategory === "ALL"
-                      ? "bg-slate-900 text-white border-slate-900 shadow-sm"
-                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                      ? "bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-xs font-extrabold"
+                      : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
                   Semua ({EVENTS_DATA.length})
@@ -312,62 +283,62 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("BIMBINGAN")}
-                  className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
                     activeCategory === "BIMBINGAN"
-                      ? "bg-[#F59E0B] text-white border-[#F59E0B] shadow-sm"
-                      : "bg-amber-50/80 text-amber-800 border-amber-200 hover:bg-amber-100"
+                      ? "bg-[#D97706] text-white border-[#D97706] shadow-xs font-extrabold"
+                      : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#F59E0B] bg-white" />
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "BIMBINGAN" ? "bg-white" : "bg-[#D97706]"}`} />
                   Bimbingan (5)
                 </button>
 
                 <button
                   onClick={() => setActiveCategory("SEMPRO")}
-                  className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
                     activeCategory === "SEMPRO"
-                      ? "bg-[#2563EB] text-white border-[#2563EB] shadow-sm"
-                      : "bg-blue-50/80 text-blue-800 border-blue-200 hover:bg-blue-100"
+                      ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs font-extrabold"
+                      : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#2563EB]" />
-                  Seminar Proposal (2)
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "SEMPRO" ? "bg-white" : "bg-[#1D4ED8]"}`} />
+                  Seminar (2)
                 </button>
 
                 <button
                   onClick={() => setActiveCategory("SIDANG")}
-                  className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
                     activeCategory === "SIDANG"
-                      ? "bg-[#10B981] text-white border-[#10B981] shadow-sm"
-                      : "bg-emerald-50/80 text-emerald-800 border-emerald-200 hover:bg-emerald-100"
+                      ? "bg-[#15803D] text-white border-[#15803D] shadow-xs font-extrabold"
+                      : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                  Ujian Sidang (1)
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "SIDANG" ? "bg-white" : "bg-[#15803D]"}`} />
+                  Sidang (1)
                 </button>
 
                 <button
                   onClick={() => setActiveCategory("DEADLINE")}
-                  className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
                     activeCategory === "DEADLINE"
-                      ? "bg-[#C62828] text-white border-[#C62828] shadow-sm"
-                      : "bg-rose-50/80 text-rose-800 border-rose-200 hover:bg-rose-100"
+                      ? "bg-[#C62828] text-white border-[#C62828] shadow-xs font-extrabold"
+                      : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "DEADLINE" ? "bg-white" : "bg-[#C62828]"}`} />
                   Deadline (1)
                 </button>
               </div>
             </div>
 
-            {/* Main 2-Column Grid (Flush Bottom Alignment) */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-stretch">
-              {/* Left 3 Columns: Interactive Calendar View */}
-              <div className="lg:col-span-3 flex flex-col justify-between space-y-6">
+            {/* Main 12-Column Grid (Fit to Viewport, Flush Bottom Alignment) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+              {/* Left 8 Columns: Interactive Calendar View */}
+              <div className="lg:col-span-8 flex flex-col h-full min-h-0 overflow-hidden">
                 {viewMode === "BULAN" && (
-                  <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
+                  <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                     {/* Days Header */}
-                    <div className="grid grid-cols-7 gap-2 text-center pb-2 border-b border-slate-100 text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                    <div className="grid grid-cols-7 gap-1.5 text-center pb-2 border-b border-slate-100 text-xs font-extrabold uppercase tracking-wider text-slate-400 shrink-0">
                       <div>Minggu</div>
                       <div>Senin</div>
                       <div>Selasa</div>
@@ -377,13 +348,13 @@ export default function KalenderPage() {
                       <div>Sabtu</div>
                     </div>
 
-                    {/* Days Matrix (5 Rows x 7 Columns) */}
-                    <div className="grid grid-cols-7 gap-2">
+                    {/* Days Matrix (6 Rows x 7 Columns - Stretches 100% height) */}
+                    <div className="grid grid-cols-7 grid-rows-6 gap-1.5 flex-1 min-h-0 mt-2">
                       {/* Empty Offset cells before Aug 1 */}
                       {Array.from({ length: startDayOffset }).map((_, idx) => (
                         <div
                           key={`empty-${idx}`}
-                          className="min-h-[75px] md:min-h-[82px] p-2 bg-slate-50/40 rounded-xl border border-slate-100 opacity-40"
+                          className="p-1.5 bg-slate-50/40 rounded-lg border border-slate-100 opacity-40 min-h-0 h-full"
                         />
                       ))}
 
@@ -391,42 +362,42 @@ export default function KalenderPage() {
                       {Array.from({ length: daysInMonth }).map((_, idx) => {
                         const dayNum = idx + 1;
                         const dayEvents = getEventsForDay(dayNum);
-                        const isToday = dayNum === 28; // Current active day demo
+                        const isToday = dayNum === 28;
 
                         return (
                           <div
                             key={`day-${dayNum}`}
-                            className={`min-h-[75px] md:min-h-[82px] p-2 rounded-xl border transition-all flex flex-col justify-between ${
+                            className={`p-1.5 rounded-lg border transition-all flex flex-col justify-between min-h-0 h-full overflow-hidden ${
                               isToday
-                                ? "bg-rose-50/30 border-[#C62828] shadow-sm"
-                                : "bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-sm"
+                                ? "bg-rose-50/40 border-[#C62828] shadow-xs"
+                                : "bg-white border-slate-200 hover:border-slate-300"
                             }`}
                           >
                             {/* Top Date Header */}
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between shrink-0">
                               <span
-                                className={`text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center font-display ${
+                                className={`text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center font-display ${
                                   isToday
-                                    ? "bg-[#C62828] text-white shadow-sm"
+                                    ? "bg-[#C62828] text-white shadow-xs"
                                     : "text-slate-700"
                                 }`}
                               >
                                 {dayNum}
                               </span>
                               {dayEvents.length > 0 && (
-                                <span className="text-[10px] font-bold text-slate-400">
-                                  {dayEvents.length} Agenda
+                                <span className="text-[9px] font-bold text-slate-400">
+                                  {dayEvents.length}
                                 </span>
                               )}
                             </div>
 
                             {/* Event Chips List */}
-                            <div className="space-y-1 mt-1 overflow-y-auto max-h-[50px] scrollbar-none pr-0.5">
+                            <div className="space-y-0.5 mt-0.5 flex-1 min-h-0 overflow-y-auto scrollbar-none">
                               {dayEvents.map((evt) => (
                                 <button
                                   key={evt.id}
                                   onClick={() => setSelectedEvent(evt)}
-                                  className={`w-full text-left p-1.5 rounded-lg border text-[10px] font-bold transition-all truncate block ${getCategoryBadgeClass(
+                                  className={`w-full text-left px-1.5 py-0.5 rounded border text-[9px] font-bold transition-all truncate block ${getCategoryBadgeClass(
                                     evt.kategori
                                   )}`}
                                 >
@@ -450,8 +421,8 @@ export default function KalenderPage() {
 
                 {/* View Mode: MINGGU & HARI Fallback View */}
                 {viewMode !== "BULAN" && (
-                  <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
                       <h3 className="font-bold text-sm text-slate-900 font-display">
                         Tampilan Agenda List ({viewMode})
                       </h3>
@@ -460,16 +431,16 @@ export default function KalenderPage() {
                       </span>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2.5 flex-1 min-h-0 overflow-y-auto scrollbar-thin pr-1 mt-3">
                       {filteredEvents.map((evt) => (
                         <div
                           key={evt.id}
                           onClick={() => setSelectedEvent(evt)}
-                          className="p-4 rounded-xl border border-slate-200 hover:border-[#C62828] bg-slate-50/50 hover:bg-white transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
+                          className="p-3.5 rounded-xl border border-slate-200 hover:border-[#C62828] bg-slate-50/50 hover:bg-white transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-3"
                         >
                           <div className="flex items-start gap-3">
                             <div
-                              className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-xs font-black text-white ${
+                              className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-black text-white ${
                                 evt.kategori === "BIMBINGAN"
                                   ? "bg-[#F59E0B]"
                                   : evt.kategori === "SEMPRO"
@@ -509,63 +480,76 @@ export default function KalenderPage() {
                     </div>
                   </div>
                 )}
-
-                {/* Bottom Info Banner */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-rose-50 text-[#C62828] flex items-center justify-center font-bold shrink-0">
-                      <CalendarIcon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900 font-display">
-                        Sinkronisasi Kalender Otomatis
-                      </h4>
-                      <p className="text-[11px] text-slate-500">
-                        Setiap perubahan jadwal sidang atau seminar yang disetujui Admin Prodi otomatis ter-update di kalender ini.
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
 
-              {/* Right Column (1 Column): Agenda Terdekat & Filter Prodi */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
-                {/* Card 1: Filter Prodi */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
-                  <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <Filter className="w-4 h-4 text-[#C62828]" />
+              {/* Right Column (4/12): Agenda Terdekat & Filter Prodi */}
+              <div className="lg:col-span-4 flex flex-col h-full min-h-0 space-y-4">
+                {/* Card 1: Filter Fakultas & Program Studi */}
+                <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs space-y-3 shrink-0">
+                  <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <Filter className="w-4 h-4" />
+                    </div>
                     <h3 className="font-bold text-sm text-slate-900 font-display">
-                      Filter Program Studi
+                      Filter Fakultas &amp; Program Studi
                     </h3>
                   </div>
 
-                  <div className="space-y-1.5 text-xs font-bold">
-                    {[
-                      { id: "ALL", label: "Semua Prodi FIK" },
-                      { id: "Teknik Informatika", label: "Teknik Informatika" },
-                      { id: "Sistem Informasi", label: "Sistem Informasi" },
-                      { id: "Sistem Komputer", label: "Sistem Komputer" },
-                    ].map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => setSelectedProdi(p.id)}
-                        className={`w-full px-3 py-2 rounded-xl text-left transition-all ${
-                          selectedProdi === p.id
-                            ? "bg-rose-50 text-[#C62828] border border-rose-200"
-                            : "text-slate-600 hover:bg-slate-50"
-                        }`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
+                  {/* Dropdown Pilihan Fakultas */}
+                  <CustomDropdown
+                    label="Fakultas (UPI YPTK Padang):"
+                    value={selectedFakultas}
+                    onChange={(val) => {
+                      setSelectedFakultas(val);
+                      setSelectedProdi("ALL");
+                    }}
+                    options={[
+                      { id: "ALL", label: "Semua Fakultas UPI YPTK", badge: "ALL" },
+                      ...UPI_YPTK_FAKULTAS.map((fak) => ({
+                        id: fak.id,
+                        label: `${fak.nama} (${fak.singkatan})`,
+                        badge: fak.singkatan,
+                      })),
+                      { id: "PASCASARJANA", label: "Program Pascasarjana (S2 & S3)", badge: "PASCASARJANA" },
+                    ]}
+                  />
+
+                  {/* Dropdown Program Studi (Dinamis Sesuai Fakultas) */}
+                  <CustomDropdown
+                    label="Program Studi:"
+                    value={selectedProdi}
+                    onChange={(val) => setSelectedProdi(val)}
+                    placeholder="Pilih Program Studi..."
+                    options={[
+                      {
+                        id: "ALL",
+                        label: `Semua Prodi ${selectedFakultas !== "ALL" ? selectedFakultas : "UPI YPTK"}`,
+                        badge: "ALL",
+                      },
+                      ...(selectedFakultas === "ALL"
+                        ? UPI_YPTK_FAKULTAS.flatMap((f) => f.prodiList)
+                        : selectedFakultas === "PASCASARJANA"
+                        ? [
+                            ...PROGRAM_PASCASARJANA.magister.map((m) => ({ ...m, jenjang: "S2" })),
+                            ...PROGRAM_PASCASARJANA.doktor.map((d) => ({ ...d, jenjang: "S3" })),
+                          ]
+                        : UPI_YPTK_FAKULTAS.find((f) => f.id === selectedFakultas)?.prodiList || []
+                      ).map((p) => ({
+                        id: p.nama,
+                        label: p.nama,
+                        badge: p.jenjang,
+                      })),
+                    ]}
+                  />
                 </div>
 
-                {/* Card 2: Agenda Terdekat List */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#F59E0B]" />
+                {/* Card 2: Agenda Terdekat (Flex Stretch) */}
+                <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <CalendarDays className="w-4 h-4" />
+                      </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
                         Agenda Terdekat
                       </h3>
@@ -575,12 +559,12 @@ export default function KalenderPage() {
                     </span>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2 flex-1 min-h-0 overflow-y-auto scrollbar-thin pr-1 mt-2.5">
                     {EVENTS_DATA.slice(0, 4).map((evt) => (
                       <div
                         key={`upcoming-${evt.id}`}
                         onClick={() => setSelectedEvent(evt)}
-                        className="p-3 bg-slate-50/80 hover:bg-white rounded-xl border border-slate-200/80 transition-all cursor-pointer space-y-1"
+                        className="p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200 transition-all cursor-pointer space-y-1"
                       >
                         <div className="flex items-center justify-between text-[10px] font-bold">
                           <span
@@ -598,29 +582,15 @@ export default function KalenderPage() {
                           {evt.judul}
                         </p>
                         <p className="text-[10px] text-slate-500 truncate">
-                          📍 {evt.ruangan} • {evt.waktu}
+                          {evt.ruangan} • {evt.waktu}
                         </p>
                       </div>
                     ))}
-                  </div>
-                </div>
-
-                {/* Card 3: Helpdesk & Tata Tertib Ruang Sidang (Stretches to match bottom baseline) */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                      Tata Tertib Ruang Sidang FIK
-                    </h3>
-                    <ul className="text-[11px] text-slate-600 mt-2 space-y-1.5 font-medium leading-relaxed">
-                      <li>• Berpakaian rapi (Kemeja Putih &amp; Jas Almamater).</li>
-                      <li>• Hadir 15 menit sebelum jadwal di lokasi ruangan.</li>
-                      <li>• Membawa draf naskah cetak &amp; slide presentasi.</li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             </div>
-          </main>
+          </div>
+        </main>
         </div>
       </div>
 

@@ -22,99 +22,102 @@ export default function ClearingNilaiPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
           <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
-            {/* Welcome & Status Banner */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#2F8F5B] text-white flex items-center gap-1">
+            {/* ── Welcome Banner ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                {/* Left: greeting + status */}
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Clearing SKS &amp; Akademik Disetujui
                     </span>
-                    <span className="text-xs font-mono-data text-[#A0A0A0]">
-                      Ref ID: CLR-2026-0892
-                    </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Clearing Nilai &amp; Verifikasi Prasyarat Akademik
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed">
-                    Verifikasi kecukupan SKS, IPK kumulatif, dan mata kuliah wajib sebagai syarat resmi memulai Tugas Akhir.
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                    Verifikasi kecukupan SKS, IPK kumulatif, dan mata kuliah wajib sebagai syarat resmi mahasiswa UPI YPTK Padang memulai Tugas Akhir.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <button className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-[#2A2A2A] border border-[#444444] text-white hover:bg-[#333333] transition-all flex items-center gap-1.5 shadow-xs">
-                    <Download className="w-4 h-4 text-[#A0A0A0]" /> Unduh Surat Clearing (PDF)
+                {/* Right: quick action buttons */}
+                <div className="flex flex-wrap gap-2.5 shrink-0">
+                  <button className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 shadow-xs">
+                    <Download className="w-4 h-4 text-neutral-400" />
+                    <span>Unduh Surat Clearing (PDF)</span>
                   </button>
                   <Link
                     href="/proposal"
-                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-1.5"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
                   >
-                    Lanjut Usulan Judul <ArrowRight className="w-4 h-4" />
+                    <span>Lanjut Usulan Judul</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
+              {/* Bottom accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
             {/* Academic Checklist Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-white p-4 rounded-xl border border-[#E0E0E0] shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#E3F3EA] text-[#2F8F5B] flex items-center justify-center shrink-0">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#616161] font-display">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-display">
                     Total SKS Lulus
                   </p>
-                  <p className="text-lg font-bold text-[#1A1A1A] font-mono-data">
-                    144 / 144 <span className="text-xs font-normal text-[#2F8F5B]">(Min. 138)</span>
+                  <p className="text-lg font-bold text-slate-900 font-mono-data">
+                    144 / 144 <span className="text-xs font-bold text-emerald-600">(Min. 138)</span>
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-xl border border-[#E0E0E0] shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#E3F3EA] text-[#2F8F5B] flex items-center justify-center shrink-0">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#616161] font-display">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-display">
                     IPK Kumulatif
                   </p>
-                  <p className="text-lg font-bold text-[#1A1A1A] font-mono-data">
-                    3.65 <span className="text-xs font-normal text-[#2F8F5B]">(Min. 2.75)</span>
+                  <p className="text-lg font-bold text-slate-900 font-mono-data">
+                    3.65 <span className="text-xs font-bold text-emerald-600">(Min. 2.75)</span>
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-xl border border-[#E0E0E0] shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#E3F3EA] text-[#2F8F5B] flex items-center justify-center shrink-0">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#616161] font-display">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-display">
                     Bebas Tunggakan
                   </p>
-                  <p className="text-xs font-bold text-[#2F8F5B] mt-1 flex items-center gap-1">
+                  <p className="text-xs font-bold text-emerald-600 mt-1 flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" /> Lunas &amp; Bebas Pustaka
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-xl border border-[#E0E0E0] shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#FFF8E1] text-[#B78103] flex items-center justify-center shrink-0">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                   <UserCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#616161] font-display">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-display">
                     Verifikator Prodi
                   </p>
-                  <p className="text-xs font-bold text-[#1A1A1A] truncate mt-1">
+                  <p className="text-xs font-bold text-slate-900 truncate mt-1">
                     Dra. Yulia Rifa, M.Kom.
                   </p>
                 </div>
@@ -122,76 +125,81 @@ export default function ClearingNilaiPage() {
             </div>
 
             {/* Main Layout: Prerequisite Courses Table & Submitted Documents (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              {/* Left Column (2 Cols): Matakuliah Prasyarat TA */}
-              <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4 flex-1 flex flex-col justify-between">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Column (8/12): Matakuliah Prasyarat TA */}
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-6 h-full">
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                      <div>
-                        <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Mata Kuliah Prasyarat Tugas Akhir
-                        </h3>
-                        <p className="text-xs text-slate-500 font-medium">
-                          Mata kuliah metodologi dan keahlian inti yang wajib lulus (minimal nilai C).
-                        </p>
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                          <BookOpen className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-sm text-slate-900 font-display">
+                            Mata Kuliah Prasyarat Tugas Akhir
+                          </h3>
+                          <p className="text-xs text-slate-500 font-medium">
+                            Mata kuliah metodologi dan keahlian inti yang wajib lulus (minimal nilai C).
+                          </p>
+                        </div>
                       </div>
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white shadow-xs">
                         Semua Syarat Lulus
                       </span>
                     </div>
 
-                    <div className="overflow-x-auto mt-4">
+                    <div className="overflow-x-auto rounded-xl border border-slate-200">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80">
+                        <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
                           <tr>
-                            <th className="py-2.5 px-3">Kode MK</th>
-                            <th className="py-2.5 px-3">Nama Mata Kuliah</th>
-                            <th className="py-2.5 px-3">SKS</th>
-                            <th className="py-2.5 px-3">Nilai</th>
-                            <th className="py-2.5 px-3">Status</th>
+                            <th className="py-3 px-4 font-bold">Kode MK</th>
+                            <th className="py-3 px-4 font-bold">Nama Mata Kuliah</th>
+                            <th className="py-3 px-4 font-bold">SKS</th>
+                            <th className="py-3 px-4 font-bold">Nilai</th>
+                            <th className="py-3 px-4 font-bold">Status</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 text-slate-800">
-                          <tr className="hover:bg-slate-50/80 transition-colors">
-                            <td className="py-2.5 px-3 font-mono-data font-bold">TIF-301</td>
-                            <td className="py-2.5 px-3 font-bold text-slate-900">Metodologi Penelitian &amp; Penulisan Ilmiah</td>
-                            <td className="py-2.5 px-3 font-mono-data">3</td>
-                            <td className="py-2.5 px-3 font-bold text-emerald-600">A</td>
-                            <td className="py-2.5 px-3">
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="py-3 px-4 font-mono-data font-bold">TIF-301</td>
+                            <td className="py-3 px-4 font-bold text-slate-900">Metodologi Penelitian &amp; Penulisan Ilmiah</td>
+                            <td className="py-3 px-4 font-mono-data">3</td>
+                            <td className="py-3 px-4 font-bold text-emerald-600">A</td>
+                            <td className="py-3 px-4">
                               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
                                 <CheckCircle2 className="w-3.5 h-3.5" /> Lulus
                               </span>
                             </td>
                           </tr>
-                          <tr className="hover:bg-slate-50/80 transition-colors">
-                            <td className="py-2.5 px-3 font-mono-data font-bold">TIF-304</td>
-                            <td className="py-2.5 px-3 font-bold text-slate-900">Rekayasa Perangkat Lunak Lanjut</td>
-                            <td className="py-2.5 px-3 font-mono-data">3</td>
-                            <td className="py-2.5 px-3 font-bold text-emerald-600">A-</td>
-                            <td className="py-2.5 px-3">
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="py-3 px-4 font-mono-data font-bold">TIF-304</td>
+                            <td className="py-3 px-4 font-bold text-slate-900">Rekayasa Perangkat Lunak Lanjut</td>
+                            <td className="py-3 px-4 font-mono-data">3</td>
+                            <td className="py-3 px-4 font-bold text-emerald-600">A-</td>
+                            <td className="py-3 px-4">
                               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
                                 <CheckCircle2 className="w-3.5 h-3.5" /> Lulus
                               </span>
                             </td>
                           </tr>
-                          <tr className="hover:bg-slate-50/80 transition-colors">
-                            <td className="py-2.5 px-3 font-mono-data font-bold">TIF-208</td>
-                            <td className="py-2.5 px-3 font-bold text-slate-900">Sistem Basis Data Lanjut</td>
-                            <td className="py-2.5 px-3 font-mono-data">3</td>
-                            <td className="py-2.5 px-3 font-bold text-emerald-600">A</td>
-                            <td className="py-2.5 px-3">
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="py-3 px-4 font-mono-data font-bold">TIF-208</td>
+                            <td className="py-3 px-4 font-bold text-slate-900">Sistem Basis Data Lanjut</td>
+                            <td className="py-3 px-4 font-mono-data">3</td>
+                            <td className="py-3 px-4 font-bold text-emerald-600">A</td>
+                            <td className="py-3 px-4">
                               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
                                 <CheckCircle2 className="w-3.5 h-3.5" /> Lulus
                               </span>
                             </td>
                           </tr>
-                          <tr className="hover:bg-slate-50/80 transition-colors">
-                            <td className="py-2.5 px-3 font-mono-data font-bold">TIF-202</td>
-                            <td className="py-2.5 px-3 font-bold text-slate-900">Algoritma &amp; Pemrograman II</td>
-                            <td className="py-2.5 px-3 font-mono-data">4</td>
-                            <td className="py-2.5 px-3 font-bold text-emerald-600">B+</td>
-                            <td className="py-2.5 px-3">
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="py-3 px-4 font-mono-data font-bold">TIF-202</td>
+                            <td className="py-3 px-4 font-bold text-slate-900">Algoritma &amp; Pemrograman II</td>
+                            <td className="py-3 px-4 font-mono-data">4</td>
+                            <td className="py-3 px-4 font-bold text-emerald-600">B+</td>
+                            <td className="py-3 px-4">
                               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
                                 <CheckCircle2 className="w-3.5 h-3.5" /> Lulus
                               </span>
@@ -204,44 +212,51 @@ export default function ClearingNilaiPage() {
                 </div>
               </div>
 
-              {/* Right Column (1 Col): Verified Documents, SKS Breakdown & Support Card */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
+              {/* Right Column (4/12): Verified Documents, SKS Breakdown & Support Card */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-6 h-full">
                 {/* Card 1: Verified Documents */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2.5 flex items-center justify-between">
-                    <span>Dokumen Persyaratan Berhasil Diverifikasi</span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Dokumen Persyaratan
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
                       2/2 Valid
                     </span>
-                  </h3>
+                  </div>
 
                   <ul className="space-y-3">
                     <li className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#C62828] flex items-center justify-center font-bold">
-                          <FileText className="w-4 h-4" />
+                        <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-200 text-[#C62828] flex items-center justify-center font-bold shrink-0">
+                          <FileText className="w-3.5 h-3.5" />
                         </div>
                         <div>
                           <p className="font-bold text-slate-900">Transkrip Nilai Akademik Resmi</p>
                           <p className="text-[10px] font-mono-data text-slate-500">PDF • 1.2 MB</p>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+                      <span className="px-2.5 py-0.5 text-[10px] font-bold bg-emerald-600 text-white rounded-full shadow-xs">
                         Terverifikasi
                       </span>
                     </li>
 
                     <li className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#C62828] flex items-center justify-center font-bold">
-                          <FileText className="w-4 h-4" />
+                        <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-200 text-[#C62828] flex items-center justify-center font-bold shrink-0">
+                          <FileText className="w-3.5 h-3.5" />
                         </div>
                         <div>
                           <p className="font-bold text-slate-900">Surat Bebas SPP &amp; Pustaka</p>
                           <p className="text-[10px] font-mono-data text-slate-500">PDF • 850 KB</p>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+                      <span className="px-2.5 py-0.5 text-[10px] font-bold bg-emerald-600 text-white rounded-full shadow-xs">
                         Terverifikasi
                       </span>
                     </li>
@@ -257,9 +272,14 @@ export default function ClearingNilaiPage() {
 
                 {/* Card 2: IPK & SKS Distribution Summary */}
                 <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
-                  <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                    Ringkasan Kredit SKS Akademik
-                  </h3>
+                  <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <Award className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-bold text-sm text-slate-900 font-display">
+                      Ringkasan Kredit SKS Akademik
+                    </h3>
+                  </div>
 
                   <div className="space-y-2.5 text-xs">
                     <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-200/60">
@@ -280,15 +300,20 @@ export default function ClearingNilaiPage() {
                 {/* Card 3: Layanan Bantuan Akademik (Stretches to match bottom baseline) */}
                 <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                      Layanan Bantuan Sekretariat Prodi
-                    </h3>
+                    <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <UserCheck className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Layanan Bantuan Sekretariat Prodi
+                      </h3>
+                    </div>
                     <p className="text-xs text-slate-600 leading-relaxed font-medium mt-2">
-                      Jika terdapat ketidaksesuaian data transkrip nilai atau SKS yang diakui, silakan hubungi Sekretariat Prodi Teknik Informatika FIK UPI YPTK Padang.
+                      Jika terdapat ketidaksesuaian data transkrip nilai atau SKS yang diakui, silakan hubungi Sekretariat Prodi UPI YPTK Padang.
                     </p>
                   </div>
                   <div className="p-3 bg-[#1A1A1A] text-white rounded-xl text-xs space-y-1">
-                    <p className="font-bold text-[#F59E0B]">Sekretariat FIK UPI YPTK</p>
+                    <p className="font-bold text-[#F59E0B]">Sekretariat Prodi UPI YPTK</p>
                     <p className="text-[11px] text-slate-300 font-mono-data">WA Helpdesk: +62 812-6789-0101</p>
                   </div>
                 </div>

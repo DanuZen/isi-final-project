@@ -58,3 +58,79 @@ Aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** memaduk
 
 ### 3.5 Flush Bottom Baseline Alignment
 - Semua halaman 2-kolom memuat container kanan-kiri yang secara presisi sejajar di garis bawah paling dasar (*Zero awkward empty space*).
+
+---
+
+## 4. Mobile Responsiveness Guidelines (Fase 1D)
+
+### 4.1 Breakpoints
+| Breakpoint | Lebar | Perilaku |
+|---|---|---|
+| **Mobile** | < 768px (`md:`) | Sidebar tersembunyi, layout stack vertikal, bottom nav bar |
+| **Tablet** | 768–1024px | Sidebar collapsible minimal, grid 2-kolom |
+| **Desktop** | ≥ 1024px (`lg:`) | Layout penuh, sidebar expanded 260px |
+
+### 4.2 Sidebar Mobile
+- Tampil sebagai **Overlay Drawer** dari kiri (`fixed inset-0 z-50`)
+- Backdrop hitam semi-transparan (`bg-black/50`) saat drawer terbuka
+- Ditutup via tombol `✕` atau klik backdrop
+- **Bukan** collapsible column seperti di desktop
+
+### 4.3 Header Mobile
+- Hamburger icon (`Menu` lucide) di pojok kiri — membuka drawer sidebar
+- Logo SIPETA kecil di tengah
+- Notif bell + avatar di kanan
+- Tidak menampilkan teks role/nama panjang
+
+### 4.4 Bottom Navigation Bar (Mahasiswa)
+- Fixed di bawah layar (`fixed bottom-0 left-0 right-0 z-40`)
+- 5 tab ikon: 🏠 Dashboard | 📚 Bimbingan | 📅 Sidang | 🗓️ Kalender | 👤 Profil
+- Active tab: icon + teks kecil berwarna `#C62828`
+- Background: `bg-white border-t border-slate-200`
+
+### 4.5 Grid Adaptasi Mobile
+| Komponen | Desktop | Mobile |
+|---|---|---|
+| Stat Cards | 4-kolom | 2×2 grid |
+| Main Layout | 12-kolom (8/4 split) | Stack vertikal (100% lebar) |
+| Tabel Data | Full-width | Scroll horizontal (`overflow-x-auto`) |
+| Banner Buttons | Row di kanan | Stack bawah banner |
+
+### 4.6 Pola Khusus Mobile
+- **Tabel → Card List:** Tabel mahasiswa bimbingan dikonversi menjadi card list vertikal di mobile
+- **Filter → Bottom Sheet:** Filter bidang kajian di list-judul tampil sebagai drawer dari bawah
+- **Kalender → List Agenda:** Mode default "Hari" di mobile, bukan grid bulan penuh
+- **FAB (Floating Action Button):** Tombol aksi utama (catat log, aktivasi akun) sebagai FAB bulat di pojok kanan bawah
+
+---
+
+## 5. Portal Role Design Standards
+
+Setiap portal role (Dosen, Admin Prodi, Admin Fakultas, Dekanat, Super Admin) **wajib** mengikuti standar berikut:
+
+### 5.1 Badge Role Warna
+| Role | Badge Color |
+|---|---|
+| Mahasiswa | `bg-emerald-600` |
+| Dosen Pembimbing | `bg-[#C62828]` (merah) |
+| Dosen Penguji | `bg-violet-600` |
+| Admin Prodi FIK | `bg-blue-700` |
+| Admin Fakultas | `bg-indigo-700` |
+| Pimpinan / Dekanat | `bg-amber-600` |
+| Super Admin | `bg-slate-800` |
+
+### 5.2 Sidebar Nav per Role
+- Setiap portal memiliki `NAV_ITEMS` array tersendiri (seperti `DOSEN_NAV_ITEMS` yang sudah ada)
+- Sidebar menerima prop `roleName` (contoh: `"PORTAL PENGUJI"`) dan `items`
+- Warna sidebar tetap `#1A1A1A` — unified design across all roles
+
+### 5.3 Welcome Banner Standard
+Semua portal menggunakan banner standar:
+```
+bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm
+  → inner padding p-5 md:p-6
+  → bottom accent: h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]
+  → badge: solid color per role (lihat 5.1)
+  → h1: text-xl md:text-2xl font-black font-display text-white
+```
+

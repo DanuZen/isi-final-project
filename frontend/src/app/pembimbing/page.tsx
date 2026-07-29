@@ -16,6 +16,7 @@ import {
   Send,
   XCircle,
 } from "lucide-react";
+import { CustomDropdown } from "@/components/ui/custom-dropdown";
 
 interface Dosen {
   id: string;
@@ -120,19 +121,13 @@ export default function PengajuanPembimbingPage() {
   const [selectedBidangFilter, setSelectedBidangFilter] = useState("ALL");
 
   // State for Selection
-  const [selectedPembimbing1, setSelectedPembimbing1] = useState<Dosen | null>(
-    DOSEN_LIST[0]
-  );
-  const [selectedPembimbing2, setSelectedPembimbing2] = useState<Dosen | null>(
-    DOSEN_LIST[1]
-  );
-  const [catatanAlasan, setCatatanAlasan] = useState(
-    "Pengajuan sesuai dengan keselarasan topik skripsi 'SIPETA Web Platform' di bidang Software Engineering."
-  );
+  const [selectedPembimbing1, setSelectedPembimbing1] = useState<Dosen | null>(null);
+  const [selectedPembimbing2, setSelectedPembimbing2] = useState<Dosen | null>(null);
+  const [catatanAlasan, setCatatanAlasan] = useState("");
 
   const [, setSubmissionStatus] = useState<
     "APPROVED" | "PENDING" | "SUBMITTED"
-  >("APPROVED");
+  >("PENDING");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Filter logic
@@ -151,11 +146,15 @@ export default function PengajuanPembimbingPage() {
     return matchesSearch && matchesBidang;
   });
 
+  // State for Modal Form Usulan
+  const [showFormModal, setShowFormModal] = useState(false);
+
   const handleSelectPembimbing1 = (dosen: Dosen) => {
     if (selectedPembimbing2?.id === dosen.id) {
       setSelectedPembimbing2(null);
     }
     setSelectedPembimbing1(dosen);
+    setShowFormModal(true);
   };
 
   const handleSelectPembimbing2 = (dosen: Dosen) => {
@@ -163,6 +162,7 @@ export default function PengajuanPembimbingPage() {
       setSelectedPembimbing1(null);
     }
     setSelectedPembimbing2(dosen);
+    setShowFormModal(true);
   };
 
   const handleSubmitForm = (e: React.FormEvent) => {
@@ -175,6 +175,7 @@ export default function PengajuanPembimbingPage() {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmissionStatus("SUBMITTED");
+      setShowFormModal(false);
       alert("Pengajuan Dosen Pembimbing berhasil dikirim ke Admin Prodi!");
     }, 1000);
   };
@@ -182,428 +183,307 @@ export default function PengajuanPembimbingPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
-            {/* Welcome Banner */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#2F8F5B] text-white flex items-center gap-1">
+          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+            {/* ── Welcome Banner ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                {/* Left: greeting + status */}
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Pembimbing Disetujui Prodi
                     </span>
-                    <span className="text-xs font-mono-data text-[#A0A0A0]">
-                      Ref ID: PB-2026-0814
-                    </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Pengajuan &amp; Usulan Dosen Pembimbing TA
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed">
-                    Mahasiswa memilih dan mengajukan calon Dosen Pembimbing Utama (Pembimbing I) dan Pendamping (Pembimbing II) sesuai bidang keahlian topik Tugas Akhir.
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                    Mahasiswa memilih dan mengajukan calon Dosen Pembimbing Utama (Pembimbing I) dan Pendamping (Pembimbing II) dari katalog dosen UPI YPTK Padang.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <Link
-                    href="/bimbingan"
-                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-1.5"
+                {/* Right: quick action button */}
+                <div className="flex flex-wrap gap-2.5 shrink-0">
+                  <button
+                    onClick={() => setShowFormModal(true)}
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
                   >
-                    Lanjut ke Bimbingan TA <ArrowRight className="w-4 h-4" />
-                  </Link>
+                    <UserCheck className="w-4 h-4" />
+                    <span>Form Usulan Pembimbing</span>
+                  </button>
                 </div>
               </div>
+              {/* Bottom accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
-            {/* Main 2-Column Grid (Flush Bottom Baseline Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              {/* Left Column (2 Cols): Dosen Selector & Directory */}
-              <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-                {/* Directory Search & Filter */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#C62828] flex items-center justify-center font-bold">
+            {/* Main 12-Column Grid (Flush Bottom Baseline Aligned) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+              {/* Left Column (8/12): Dosen Directory Table List */}
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+                <div className="bg-white rounded-xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                  {/* Table Header Controls */}
+                  <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <Users className="w-4 h-4" />
                       </div>
                       <div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Katalog Dosen FIK UPI YPTK
+                          Katalog Dosen UPI YPTK
                         </h3>
                         <p className="text-[11px] text-slate-500 font-medium">
-                          Pilih Dosen berdasarkan ketersediaan kuota &amp; bidang keahlian
+                          Pilih Dosen untuk membuka Form Usulan Pembimbing TA
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold">
-                      <button
-                        onClick={() => setSelectedBidangFilter("ALL")}
-                        className={`px-3 py-1 rounded-lg transition-all ${
-                          selectedBidangFilter === "ALL"
-                            ? "bg-white text-slate-900 shadow-sm"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        Semua
-                      </button>
-                      <button
-                        onClick={() => setSelectedBidangFilter("RPL")}
-                        className={`px-3 py-1 rounded-lg transition-all ${
-                          selectedBidangFilter === "RPL"
-                            ? "bg-white text-slate-900 shadow-sm"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        RPL
-                      </button>
-                      <button
-                        onClick={() => setSelectedBidangFilter("AI")}
-                        className={`px-3 py-1 rounded-lg transition-all ${
-                          selectedBidangFilter === "AI"
-                            ? "bg-white text-slate-900 shadow-sm"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        AI &amp; Data
-                      </button>
-                      <button
-                        onClick={() => setSelectedBidangFilter("JARINGAN")}
-                        className={`px-3 py-1 rounded-lg transition-all ${
-                          selectedBidangFilter === "JARINGAN"
-                            ? "bg-white text-slate-900 shadow-sm"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        Jaringan
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Search Bar Input */}
-                  <div className="relative">
-                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-                    <input
-                      type="text"
-                      placeholder="Cari Dosen berdasarkan Nama, NIDN, atau Bidang Keahlian..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/80 text-slate-900 text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#C62828] transition-all"
+                    <CustomDropdown
+                      value={selectedBidangFilter}
+                      onChange={(val) => setSelectedBidangFilter(val)}
+                      options={[
+                        { id: "ALL", label: "Semua Bidang Keahlian", badge: "ALL" },
+                        { id: "RPL", label: "Software Engineering (RPL)", badge: "RPL" },
+                        { id: "AI", label: "Artificial Intelligence (AI)", badge: "AI" },
+                        { id: "JARINGAN", label: "Computer Network & Security", badge: "JARINGAN" },
+                      ]}
+                      placeholder="Filter Bidang..."
+                      className="w-56"
                     />
                   </div>
 
-                  {/* ViewportFitGrid for Dosen Cards */}
-                  <ViewportFitGrid minCardWidth={240} gap={16}>
-                    {filteredDosen.map((dosen) => {
-                      const isSelected1 = selectedPembimbing1?.id === dosen.id;
-                      const isSelected2 = selectedPembimbing2?.id === dosen.id;
+                  {/* Search Bar Input */}
+                  <div className="p-3 border-b border-slate-100 bg-slate-50/50 shrink-0">
+                    <div className="relative">
+                      <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                      <input
+                        type="text"
+                        placeholder="Cari Dosen berdasarkan Nama, NIDN, atau Bidang Keahlian..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-semibold focus:outline-none focus:border-[#C62828] transition-all"
+                      />
+                    </div>
+                  </div>
 
-                      return (
-                        <div
-                          key={dosen.id}
-                          className={`p-4 rounded-2xl border transition-all flex flex-col justify-between space-y-3 ${
-                            isSelected1
-                              ? "bg-rose-50/50 border-[#C62828] shadow-sm"
-                              : isSelected2
-                              ? "bg-amber-50/50 border-[#F59E0B] shadow-sm"
-                              : "bg-slate-50/60 border-slate-200/80 hover:border-slate-300 hover:bg-white"
-                          }`}
-                        >
-                          <div className="space-y-2">
-                            <div className="flex items-start justify-between gap-2">
-                              <div>
-                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                  {/* Scrollable Dosen List Table */}
+                  <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
+                        <tr>
+                          <th className="py-3 px-3.5 w-10 text-center">No</th>
+                          <th className="py-3 px-3.5">Nama Dosen &amp; NIDN</th>
+                          <th className="py-3 px-3.5">Jabatan &amp; Keahlian</th>
+                          <th className="py-3 px-3.5 w-40">Kuota Bimbingan</th>
+                          <th className="py-3 px-3.5 w-48 text-center">Pilih Usulan</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 text-slate-800">
+                        {filteredDosen.map((dosen, idx) => {
+                          const isSelected1 = selectedPembimbing1?.id === dosen.id;
+                          const isSelected2 = selectedPembimbing2?.id === dosen.id;
+
+                          return (
+                            <tr key={dosen.id} className="hover:bg-slate-50/80 transition-colors">
+                              <td className="py-3.5 px-3.5 text-center font-mono-data font-bold text-slate-500">
+                                {idx + 1}
+                              </td>
+                              <td className="py-3.5 px-3.5 font-bold text-slate-900">
+                                <p className="font-bold text-slate-900 leading-snug">{dosen.nama}</p>
+                                <p className="text-[10px] font-mono-data text-slate-500">NIDN: {dosen.nidn}</p>
+                              </td>
+                              <td className="py-3.5 px-3.5">
+                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block mb-1">
                                   {dosen.jabatan}
                                 </span>
-                                <h4 className="text-xs font-bold text-slate-900 font-display leading-snug">
-                                  {dosen.nama}
-                                </h4>
-                                <p className="text-[11px] font-mono-data text-slate-500">
-                                  NIDN: {dosen.nidn}
-                                </p>
-                              </div>
-                              {isSelected1 && (
-                                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#C62828] text-white rounded-full shrink-0 shadow-sm">
-                                  Pembimbing I
-                                </span>
-                              )}
-                              {isSelected2 && (
-                                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#F59E0B] text-white rounded-full shrink-0 shadow-sm">
-                                  Pembimbing II
-                                </span>
-                              )}
-                            </div>
+                                <div className="flex flex-wrap gap-1">
+                                  {dosen.tags.map((tag) => (
+                                    <span key={tag} className="px-2 py-0.5 text-[9px] font-semibold bg-slate-100 border border-slate-200 text-slate-700 rounded-md">
+                                      #{tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              </td>
+                              <td className="py-3.5 px-3.5">
+                                <div className="space-y-1">
+                                  <div className="flex justify-between text-[10px] font-bold">
+                                    <span className="text-slate-600">Utama:</span>
+                                    <span className={dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "text-rose-600 font-extrabold" : "text-emerald-600 font-extrabold"}>
+                                      {dosen.kuotaUtama}/{dosen.kuotaUtamaMax} {dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "(Penuh)" : "(Tersedia)"}
+                                    </span>
+                                  </div>
+                                  <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div
+                                      className={`h-full rounded-full ${dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "bg-rose-500" : "bg-emerald-500"}`}
+                                      style={{ width: `${(dosen.kuotaUtama / dosen.kuotaUtamaMax) * 100}%` }}
+                                    />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-3.5 px-3.5 text-center">
+                                <div className="flex items-center justify-center gap-1.5">
+                                  {isSelected1 ? (
+                                    <span className="py-1.5 px-3 rounded-xl text-[11px] font-bold bg-[#C62828] text-white shadow-xs inline-flex items-center gap-1">
+                                      ✓ Pembimbing I
+                                    </span>
+                                  ) : isSelected2 ? (
+                                    <span className="py-1.5 px-3 rounded-xl text-[11px] font-bold bg-[#D97706] text-white shadow-xs inline-flex items-center gap-1">
+                                      ✓ Pembimbing II
+                                    </span>
+                                  ) : (
+                                    <>
+                                      <button
+                                        type="button"
+                                        disabled={!dosen.isAvailable}
+                                        onClick={() => handleSelectPembimbing1(dosen)}
+                                        className={`py-1.5 px-2.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1 ${
+                                          dosen.isAvailable
+                                            ? "bg-slate-100 text-slate-700 hover:bg-[#C62828] hover:text-white active:scale-95"
+                                            : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                                        }`}
+                                      >
+                                        + Pilih I
+                                      </button>
 
-                            {/* Bidang & Tags */}
-                            <div className="flex flex-wrap gap-1">
-                              {dosen.tags.map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-2 py-0.5 text-[10px] font-semibold bg-white border border-slate-200 text-slate-600 rounded-md"
-                                >
-                                  #{tag}
-                                </span>
-                              ))}
-                            </div>
-
-                            {/* Quota Progress Bar */}
-                            <div className="p-2 bg-white/80 rounded-xl border border-slate-200/60 space-y-1">
-                              <div className="flex justify-between text-[10px] font-bold text-slate-600">
-                                <span>Kuota Bimbingan Utama:</span>
-                                <span
-                                  className={
-                                    dosen.kuotaUtama >= dosen.kuotaUtamaMax
-                                      ? "text-rose-600 font-extrabold"
-                                      : "text-emerald-600"
-                                  }
-                                >
-                                  {dosen.kuotaUtama} / {dosen.kuotaUtamaMax}{" "}
-                                  {dosen.kuotaUtama >= dosen.kuotaUtamaMax
-                                    ? "(Penuh)"
-                                    : "(Tersedia)"}
-                                </span>
-                              </div>
-                              <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                <div
-                                  className={`h-full rounded-full transition-all ${
-                                    dosen.kuotaUtama >= dosen.kuotaUtamaMax
-                                      ? "bg-rose-500"
-                                      : "bg-emerald-500"
-                                  }`}
-                                  style={{
-                                    width: `${
-                                      (dosen.kuotaUtama / dosen.kuotaUtamaMax) *
-                                      100
-                                    }%`,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Action Buttons */}
-                          <div className="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100">
-                            <button
-                              type="button"
-                              disabled={!dosen.isAvailable && !isSelected1}
-                              onClick={() => handleSelectPembimbing1(dosen)}
-                              className={`py-1.5 px-2 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
-                                isSelected1
-                                  ? "bg-[#C62828] text-white shadow-sm"
-                                  : dosen.isAvailable
-                                  ? "bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] hover:border-rose-200"
-                                  : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                              }`}
-                            >
-                              {isSelected1 ? "✓ Terpilih (I)" : "+ Pilih (I)"}
-                            </button>
-
-                            <button
-                              type="button"
-                              onClick={() => handleSelectPembimbing2(dosen)}
-                              className={`py-1.5 px-2 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
-                                isSelected2
-                                  ? "bg-[#F59E0B] text-white shadow-sm"
-                                  : "bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:text-[#F59E0B] hover:border-amber-200"
-                              }`}
-                            >
-                              {isSelected2 ? "✓ Terpilih (II)" : "+ Pilih (II)"}
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </ViewportFitGrid>
-                </div>
-
-                {/* Bottom Info Banner */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900 font-display">
-                        Ketentuan Penetapan Dosen Pembimbing
-                      </h4>
-                      <p className="text-[11px] text-slate-500">
-                        Penetapan akhir dilakukan oleh Admin Prodi FIK berdasarkan keselarasan topik &amp; pemerataan kuota bimbingan.
-                      </p>
-                    </div>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleSelectPembimbing2(dosen)}
+                                        className="py-1.5 px-2.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1 bg-slate-100 text-slate-700 hover:bg-[#D97706] hover:text-white active:scale-95"
+                                      >
+                                        + Pilih II
+                                      </button>
+                                    </>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column (1 Col): Form Pengajuan & Status Review */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
-                {/* Form Pengajuan Card */}
-                <form
-                  onSubmit={handleSubmitForm}
-                  className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4"
-                >
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <div className="flex items-center gap-2">
-                      <UserCheck className="w-4 h-4 text-[#C62828]" />
+              {/* Right Column (4/12): Ringkasan Status & Form Modal Trigger */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+                {/* Status Summary Card */}
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-3.5 shrink-0">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <UserCheck className="w-4 h-4" />
+                      </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
-                        Form Usulan Pembimbing
+                        Usulan Pembimbing TA
                       </h3>
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="px-3 py-1 text-[10px] font-bold bg-emerald-600 text-white rounded-full shadow-xs">
                       Disetujui Prodi
                     </span>
                   </div>
 
-                  {/* Selected Pembimbing I */}
-                  <div className="space-y-1">
-                    <label className="block text-xs font-bold text-slate-700">
-                      Dosen Pembimbing I (Utama):
-                    </label>
-                    {selectedPembimbing1 ? (
-                      <div className="p-3 bg-rose-50/60 rounded-xl border border-rose-200 flex items-center justify-between gap-2">
-                        <div>
-                          <p className="text-xs font-bold text-slate-900">
-                            {selectedPembimbing1.nama}
-                          </p>
-                          <p className="text-[10px] font-mono-data text-slate-500">
-                            NIDN: {selectedPembimbing1.nidn}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPembimbing1(null)}
-                          className="text-slate-400 hover:text-rose-600 p-1"
-                        >
-                          <XCircle className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="p-3 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-400 font-medium">
-                        Belum memilih Pembimbing I
-                      </div>
-                    )}
+                  <div className="space-y-2 text-xs">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-1">
+                      <span className="px-2 py-0.5 text-[9px] font-extrabold bg-[#C62828] text-white rounded-full">
+                        Pembimbing Utama (I)
+                      </span>
+                      <p className="font-bold text-slate-900 mt-1 truncate">
+                        {selectedPembimbing1 ? selectedPembimbing1.nama : "Belum Dipilih"}
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-mono-data">
+                        NIDN: {selectedPembimbing1 ? selectedPembimbing1.nidn : "-"}
+                      </p>
+                    </div>
+
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-1">
+                      <span className="px-2 py-0.5 text-[9px] font-extrabold bg-[#D97706] text-white rounded-full">
+                        Pembimbing Pendamping (II)
+                      </span>
+                      <p className="font-bold text-slate-900 mt-1 truncate">
+                        {selectedPembimbing2 ? selectedPembimbing2.nama : "Belum Dipilih"}
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-mono-data">
+                        NIDN: {selectedPembimbing2 ? selectedPembimbing2.nidn : "-"}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Selected Pembimbing II */}
-                  <div className="space-y-1">
-                    <label className="block text-xs font-bold text-slate-700">
-                      Dosen Pembimbing II (Pendamping):
-                    </label>
-                    {selectedPembimbing2 ? (
-                      <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200 flex items-center justify-between gap-2">
-                        <div>
-                          <p className="text-xs font-bold text-slate-900">
-                            {selectedPembimbing2.nama}
-                          </p>
-                          <p className="text-[10px] font-mono-data text-slate-500">
-                            NIDN: {selectedPembimbing2.nidn}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPembimbing2(null)}
-                          className="text-slate-400 hover:text-amber-600 p-1"
-                        >
-                          <XCircle className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="p-3 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-400 font-medium">
-                        Belum memilih Pembimbing II
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Catatan Alasan Selection */}
-                  <div className="space-y-1">
-                    <label className="block text-xs font-bold text-slate-700">
-                      Alasan / Catatan Keselarasan Topik:
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={catatanAlasan}
-                      onChange={(e) => setCatatanAlasan(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-slate-900 text-xs font-medium focus:outline-none focus:bg-white focus:border-[#C62828] transition-all leading-relaxed"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
                   <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center justify-center gap-2"
+                    onClick={() => setShowFormModal(true)}
+                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all text-center block shadow-sm shadow-[#C62828]/20"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    {isSubmitting ? "Mengirim Pengajuan..." : "Kirim Pengajuan Pembimbing"}
+                    Buka Form Usulan Pembimbing
                   </button>
-                </form>
-
-                {/* Status Verification Card */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <Clock className="w-4 h-4 text-slate-500" />
-                    <h3 className="font-bold text-sm text-slate-900 font-display">
-                      Alur Verification &amp; Approval
-                    </h3>
-                  </div>
-
-                  <div className="space-y-3 text-xs">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                        ✓
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-800">
-                          1. Pengajuan oleh Mahasiswa
-                        </p>
-                        <p className="text-[11px] text-slate-500">
-                          Disubmit pada 27 Maret 2026
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                        ✓
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-800">
-                          2. Konfirmasi Dosen Pembimbing
-                        </p>
-                        <p className="text-[11px] text-slate-500">
-                          Disetujui oleh Sarjon Defit &amp; Jasmir
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                        ✓
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-800">
-                          3. SK Penetapan Admin Prodi
-                        </p>
-                        <p className="text-[11px] text-slate-500">
-                          SK No: SK-TA/FIK/2026/0412
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
-                {/* Card 3: Requirements Info (Flush bottom fill) */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                      Layanan Helpdesk Prodi FIK
-                    </h3>
-                    <p className="text-xs text-slate-600 mt-2 font-medium leading-relaxed">
-                      Jika kuota pembimbing pilihan Anda penuh atau ingin memohon penyesuaian khusus, silakan hubungi Sekprodi FIK UPI YPTK Padang.
-                    </p>
+                {/* Status Verification Card */}
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+                  <div className="space-y-3.5">
+                    <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Alur Verification &amp; Approval
+                      </h3>
+                    </div>
+
+                    {/* Vertical Timeline Steps */}
+                    <div className="relative pl-6 space-y-3.5 text-xs before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-emerald-500">
+                      {/* Step 1 */}
+                      <div className="relative group">
+                        <div className="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs shrink-0 z-10">
+                          ✓
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all space-y-0.5">
+                          <div className="flex items-center justify-between">
+                            <p className="font-bold text-slate-900 font-display">1. Pengajuan Mahasiswa</p>
+                            <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                              Selesai
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 font-medium">Disubmit pada 27 Maret 2026</p>
+                        </div>
+                      </div>
+
+                      {/* Step 2 */}
+                      <div className="relative group">
+                        <div className="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs shrink-0 z-10">
+                          ✓
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all space-y-0.5">
+                          <div className="flex items-center justify-between">
+                            <p className="font-bold text-slate-900 font-display">2. Konfirmasi Pembimbing</p>
+                            <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                              Disetujui
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 font-medium">Disetujui oleh Dr. Sarjon Defit &amp; Dr. Jasmir</p>
+                        </div>
+                      </div>
+
+                      {/* Step 3 */}
+                      <div className="relative group">
+                        <div className="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs shrink-0 z-10">
+                          ✓
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all space-y-0.5">
+                          <div className="flex items-center justify-between">
+                            <p className="font-bold text-slate-900 font-display">3. SK Penetapan Prodi</p>
+                            <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                              SK Terbit
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 font-medium">SK No: SK-TA/2026/0412</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -611,6 +491,130 @@ export default function PengajuanPembimbingPage() {
           </main>
         </div>
       </div>
+
+      {/* Modal Form Usulan Pembimbing */}
+      {showFormModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl border border-slate-200 max-w-lg w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <UserCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-slate-900 font-display">
+                    Form Usulan Dosen Pembimbing TA
+                  </h3>
+                  <p className="text-[11px] text-slate-500">
+                    Konfirmasi usulan dosen pembimbing Tugas Akhir
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowFormModal(false)}
+                className="text-slate-400 hover:text-slate-700 p-1 font-bold text-sm"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmitForm} className="space-y-4 text-xs">
+              {/* Selected Pembimbing I */}
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-700">
+                  Dosen Pembimbing I (Utama):
+                </label>
+                {selectedPembimbing1 ? (
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between gap-2">
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">
+                        {selectedPembimbing1.nama}
+                      </p>
+                      <p className="text-[10px] font-mono-data text-slate-500">
+                        NIDN: {selectedPembimbing1.nidn}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPembimbing1(null)}
+                      className="text-slate-400 hover:text-rose-600 p-1"
+                    >
+                      <XCircle className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-400 font-medium">
+                    Belum memilih Pembimbing I (Pilih dari Tabel Katalog Dosen)
+                  </div>
+                )}
+              </div>
+
+              {/* Selected Pembimbing II */}
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-700">
+                  Dosen Pembimbing II (Pendamping):
+                </label>
+                {selectedPembimbing2 ? (
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between gap-2">
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">
+                        {selectedPembimbing2.nama}
+                      </p>
+                      <p className="text-[10px] font-mono-data text-slate-500">
+                        NIDN: {selectedPembimbing2.nidn}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPembimbing2(null)}
+                      className="text-slate-400 hover:text-amber-600 p-1"
+                    >
+                      <XCircle className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-400 font-medium">
+                    Belum memilih Pembimbing II (Pilih dari Tabel Katalog Dosen)
+                  </div>
+                )}
+              </div>
+
+              {/* Catatan Alasan Selection */}
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-700">
+                  Alasan / Catatan Keselarasan Topik:
+                </label>
+                <textarea
+                  rows={3}
+                  value={catatanAlasan}
+                  onChange={(e) => setCatatanAlasan(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-slate-900 text-xs font-medium focus:outline-none focus:bg-white focus:border-[#C62828] transition-all leading-relaxed"
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 border-t border-slate-100 flex items-center gap-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center justify-center gap-2"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  {isSubmitting ? "Mengirim Pengajuan..." : "Kirim Pengajuan Pembimbing"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowFormModal(false)}
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all"
+                >
+                  Batal
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

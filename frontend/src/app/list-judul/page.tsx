@@ -14,7 +14,9 @@ import {
   Sparkles,
   Download,
   CheckCircle2,
+  PieChart,
 } from "lucide-react";
+import { CustomDropdown } from "@/components/ui/custom-dropdown";
 
 interface JudulItem {
   no: number;
@@ -166,45 +168,40 @@ export default function ListJudulPage() {
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Sidebar Navigation */}
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           {/* Top Header */}
-          <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" />
 
           {/* Page Body */}
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
-            {/* Dark Hero Header Banner */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#C62828] text-white flex items-center gap-1">
-                      <BookOpen className="w-3.5 h-3.5" /> Repositori Resmi FIK
-                    </span>
-                    <span className="text-xs font-mono-data text-[#A0A0A0]">
-                      111 Total Judul Terdaftar
+          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+            {/* ── Welcome Banner ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                {/* Left: greeting + status */}
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs">
+                      <BookOpen className="w-3.5 h-3.5" /> Repositori Resmi UPI YPTK
                     </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
-                    Daftar &amp; Referensi Judul Tugas Akhir 📚
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed font-medium">
-                    Database judul Skripsi / Tugas Akhir mahasiswa Fakultas Ilmu Komputer UPI YPTK Padang. Gunakan pencarian untuk memeriksa kemiripan ide atau mencari referensi topik penelitian.
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                    Daftar &amp; Referensi Judul Tugas Akhir
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                    Database repositori naskah Skripsi / Tugas Akhir seluruh mahasiswa Universitas UPI YPTK Padang. Gunakan pencarian untuk mengecek ketersediaan judul atau mencari referensi topik.
                   </p>
                 </div>
-
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <button className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#F59E0B]" /> Uji Kemiripan Judul
-                  </button>
-                </div>
               </div>
+              {/* Bottom accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
+
             {/* Search & Filter Controls Bar */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
               {/* Search Input */}
               <div className="relative flex-1 max-w-md">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -218,58 +215,57 @@ export default function ListJudulPage() {
               </div>
 
               {/* Filter Dropdowns */}
-              <div className="flex items-center gap-3 text-xs">
-                <div className="flex items-center gap-1.5 text-slate-500 font-bold">
-                  <Filter className="w-3.5 h-3.5 text-[#C62828]" />
-                  <span>Bidang:</span>
-                </div>
-                <select
+              <div className="flex items-center gap-3 text-xs z-20">
+                <CustomDropdown
                   value={selectedBidang}
-                  onChange={(e) => setSelectedBidang(e.target.value)}
-                  className="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-slate-800 text-xs font-bold focus:outline-none focus:border-[#C62828] transition-all"
-                >
-                  <option value="Semua">Semua Bidang Kajian</option>
-                  <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
-                  <option value="Jaringan Komputer">Jaringan Komputer</option>
-                </select>
+                  onChange={(val) => setSelectedBidang(val)}
+                  options={[
+                    { id: "Semua", label: "Semua Bidang Kajian", badge: "ALL" },
+                    { id: "Rekayasa Perangkat Lunak", label: "Rekayasa Perangkat Lunak (RPL)" },
+                    { id: "Kecerdasan Buatan", label: "Kecerdasan Buatan (AI/Data)" },
+                    { id: "Jaringan Komputer", label: "Jaringan Komputer" },
+                  ]}
+                  placeholder="Pilih Bidang..."
+                  className="w-56"
+                />
 
-                <div className="flex items-center gap-1.5 text-slate-500 font-bold ml-2">
-                  <span>Tampilkan:</span>
-                </div>
-                <select
-                  value={entriesPerPage}
-                  onChange={(e) => setEntriesPerPage(Number(e.target.value))}
-                  className="px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-slate-800 text-xs font-bold focus:outline-none focus:border-[#C62828] transition-all"
-                >
-                  <option value={10}>10 data</option>
-                  <option value={25}>25 data</option>
-                  <option value={50}>50 data</option>
-                </select>
+                <CustomDropdown
+                  value={String(entriesPerPage)}
+                  onChange={(val) => setEntriesPerPage(Number(val))}
+                  options={[
+                    { id: "10", label: "10 data / hal" },
+                    { id: "25", label: "25 data / hal" },
+                    { id: "50", label: "50 data / hal" },
+                  ]}
+                  placeholder="Jumlah..."
+                  className="w-36"
+                />
               </div>
             </div>
 
             {/* Main Grid: Data Table & Sidebar Info (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              {/* Left Column (2 Cols): Data Table */}
-              <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-                <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-[#C62828]" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+              {/* Left Column (8/12): Data Table */}
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+                <div className="bg-white rounded-xl border border-slate-200 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+                  <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
+                    <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                          <FileText className="w-4 h-4" />
+                        </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Daftar Judul Tugas Akhir Mahasiswa FIK
+                          Daftar Judul Tugas Akhir Mahasiswa UPI YPTK
                         </h3>
                       </div>
-                      <span className="px-2.5 py-0.5 text-xs font-bold bg-rose-50 text-[#C62828] rounded-full border border-rose-200">
+                      <span className="px-3 py-1 text-xs font-extrabold bg-[#C62828] text-white rounded-full shadow-xs">
                         {filteredData.length} Judul Ditemukan
                       </span>
                     </div>
 
-                    <div className="overflow-x-auto overflow-y-auto max-h-[380px] scrollbar-none">
+                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80">
+                        <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
                           <tr>
                             <th className="py-3 px-3.5 w-10 text-center">No</th>
                             <th className="py-3 px-3.5 w-44">Nama Mahasiswa</th>
@@ -302,15 +298,12 @@ export default function ListJudulPage() {
                                 </div>
                               </td>
                               <td className="py-3 px-3.5 font-semibold text-slate-700">
-                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                                <span className="px-3 py-1 rounded-full text-[10px] font-extrabold bg-slate-800 text-white shadow-xs">
                                   {item.jenisTA}
                                 </span>
                               </td>
                               <td className="py-3 px-3.5 font-medium text-slate-700">
-                                <div className="flex items-center gap-1 text-slate-800 font-bold">
-                                  <UserCheck className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
-                                  <span className="text-[11px]">{item.pembimbing}</span>
-                                </div>
+                                <span className="text-[11px] font-bold text-slate-800">{item.pembimbing}</span>
                               </td>
                             </tr>
                           ))}
@@ -320,7 +313,7 @@ export default function ListJudulPage() {
                   </div>
 
                   {/* Pagination Footer */}
-                  <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                  <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shrink-0">
                     <p className="text-slate-500 font-medium">
                       Menampilkan <strong className="text-slate-800">1 - {filteredData.length}</strong> dari <strong className="text-slate-800">111</strong> total data
                     </p>
@@ -350,14 +343,18 @@ export default function ListJudulPage() {
                 </div>
               </div>
 
-              {/* Right Column (1 Col): Statistics & Search Tips */}
-              <div className="lg:col-span-1 flex flex-col justify-between space-y-6">
+              {/* Right Column (4/12): Statistics & Search Tips */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
                 {/* Card 1: Distribusi Domain Penelitian */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-4">
-                  <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#C62828]" />
-                    Distribusi Domain Penelitian
-                  </h3>
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
+                  <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <PieChart className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-bold text-sm text-slate-900 font-display">
+                      Distribusi Domain Penelitian
+                    </h3>
+                  </div>
 
                   <div className="space-y-3 text-xs">
                     <div>
@@ -395,9 +392,14 @@ export default function ListJudulPage() {
                 {/* Card 2: Panduan Pengajuan Judul Baru (Stretches to match bottom baseline) */}
                 <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 font-display border-b border-slate-100 pb-2">
-                      Ketentuan Mengajukan Judul
-                    </h3>
+                    <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Ketentuan Mengajukan Judul
+                      </h3>
+                    </div>
 
                     <ul className="space-y-2 text-xs text-slate-600 font-medium mt-3">
                       <li className="flex items-center gap-2">
