@@ -10,6 +10,7 @@ interface HeaderProps {
   prodiName?: string;
   onToggleSidebar?: () => void;
   isSidebarOpen?: boolean;
+  className?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,9 +19,10 @@ export const Header: React.FC<HeaderProps> = ({
   userRole = "Mahasiswa",
   prodiName = "Teknik Informatika",
   onToggleSidebar,
+  className = "",
 }) => {
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-md bg-white/90 border-b border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+    <header className={`sticky top-0 z-30 shrink-0 backdrop-blur-md bg-white/90 border-b border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.02)] ${className}`}>
       {/* Signature UPI YPTK Red & Gold Top Accent Bar */}
       <div className="h-1 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
 
