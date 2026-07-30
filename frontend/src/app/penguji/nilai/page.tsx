@@ -159,8 +159,8 @@ export default function PengujiNilaiPage() {
                         </div>
 
                         {isSaved ? (
-                          <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                          <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white shadow-2xs font-display">
+                            <CheckCircle2 className="w-4 h-4 text-white" />
                             <span className="text-xs font-bold">Tersimpan di Sistem</span>
                           </div>
                         ) : (
