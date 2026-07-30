@@ -196,8 +196,8 @@ export default function DosenDashboardPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
-                  <FileCheck className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-[#F59E0B] text-slate-950 flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <FileCheck className="w-5 h-5 text-slate-950" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Menunggu ACC Seminar</p>
@@ -208,8 +208,8 @@ export default function DosenDashboardPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0">
-                  <UserCheck className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <UserCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Permohonan Baru</p>
