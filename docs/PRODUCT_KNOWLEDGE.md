@@ -45,14 +45,14 @@ Platform ini menghubungkan **7 peran pengguna (role)** dalam satu ekosistem digi
 
 | No | Peran Pengguna | Jumlah Modul |
 |:---:|---|:---:|
-| 1 | Mahasiswa | 12 Modul |
+| 1 | Mahasiswa | 11 Modul |
 | 2 | Dosen Pembimbing | 4 Modul |
 | 3 | Dosen Penguji | 4 Modul |
 | 4 | Admin Program Studi (Prodi) FIK | 5 Modul |
 | 5 | Admin Fakultas | 4 Modul |
 | 6 | Pimpinan / Dekanat | 4 Modul |
 | 7 | Super Admin (Administrator Teknis) | 5 Modul |
-| | **Total** | **39 Modul** |
+| | **Total** | **38 Modul** |
 
 SIPETA mengotomasi **4 tahapan inti Tugas Akhir**: Usulan Judul & Cek Kemiripan → Bimbingan TA → Seminar Proposal → Ujian Sidang Skripsi, dengan tetap mempertahankan proses clearing nilai sebagai tahapan luring (offline) yang dilakukan langsung di kampus.
 
@@ -215,7 +215,7 @@ SIPETA RBAC Hierarchy
 |---|---|
 | **Kategori** | Pengguna Akademik (End User Utama) |
 | **Prasyarat Akses** | Mahasiswa menyelesaikan clearing nilai SKS & IPK secara **luring di kampus** → Admin Prodi memverifikasi → Akun SIPETA diaktifkan |
-| **Jumlah Modul** | 12 modul halaman |
+| **Jumlah Modul** | 11 modul halaman |
 | **Fungsi Utama** | Mengusulkan judul TA, cek kemiripan judul, memilih dosen pembimbing, mencatat log bimbingan rutin, mengajukan perubahan judul, memantau jadwal seminar & sidang, mengunggah naskah revisi/final, melihat repositori judul alumni |
 
 **Fitur yang Dapat Diakses:**
@@ -226,12 +226,11 @@ SIPETA RBAC Hierarchy
 4. **Log Bimbingan TA (`/bimbingan`)** — Thread konsultasi, upload draft PDF, minimal 5 sesi terverifikasi
 5. **Seminar Proposal (`/seminar`)** — Jadwal sempro, daftar penguji, upload naskah revisi
 6. **Ujian Sidang Skripsi (`/sidang`)** — Detail jadwal sidang, majelis penguji, upload hardcover
-7. **Clearing Nilai (`/clearing`)** — Status verifikasi prasyarat SKS, IPK, dan dokumen
-8. **Repositori Judul (`/list-judul`)** — Pencarian & filter judul TA alumni FIK
-9. **Kalender TA (`/kalender`)** — Kalender interaktif bulanan/mingguan/harian
-10. **Profil Akademik (`/profil`)** — Banner akademik, statistik, timeline progres
-11. **Keamanan Akun (`/akun`)** — Ubah password, status akun
-12. **Login (`/login`)** — Form autentikasi kredensial
+7. **Repositori Judul (`/list-judul`)** — Pencarian & filter judul TA alumni FIK
+8. **Kalender TA (`/kalender`)** — Kalender interaktif bulanan/mingguan/harian
+9. **Profil Akademik (`/profil`)** — Banner akademik, statistik, timeline progres
+10. **Keamanan Akun (`/akun`)** — Ubah password, status akun
+11. **Login (`/login`)** — Form autentikasi kredensial
 
 ---
 
@@ -461,7 +460,7 @@ Berikut adalah ringkasan hubungan dan pertukaran data antar 7 role dalam SIPETA:
 
 ## 8. Spesifikasi Modul & Fitur Per Portal
 
-### 8.1 Portal Mahasiswa — 12 Modul
+### 8.1 Portal Mahasiswa — 11 Modul
 
 | No | Rute | Nama Modul | Fitur Utama |
 |:---:|---|---|---|
@@ -471,12 +470,11 @@ Berikut adalah ringkasan hubungan dan pertukaran data antar 7 role dalam SIPETA:
 | 4 | `/bimbingan` | Log Bimbingan TA | Thread chat-style bimbingan, modal catat log baru + upload draft PDF, modal pengajuan perubahan judul, progress sesi (min. 5x) |
 | 5 | `/seminar` | Seminar Proposal | Jadwal seminar proposal, lokasi ruangan, daftar penguji, form upload naskah revisi pasca seminar |
 | 6 | `/sidang` | Ujian Sidang Skripsi | Jadwal ujian sidang di Aula FIK, majelis dewan penguji, form upload naskah final hardcover & lembar bebas revisi |
-| 7 | `/clearing` | Clearing Nilai | Tampilan status verifikasi prasyarat SKS, IPK, dan dokumen akademik |
-| 8 | `/list-judul` | Repositori Judul TA | Pencarian & filter judul TA alumni FIK (search by nama/NIM/judul/dosen), filter bidang kajian, widget distribusi domain penelitian |
-| 9 | `/kalender` | Kalender TA Interaktif | Grid kalender bulanan 35 cell, switch mode bulan/minggu/hari, chip event berwarna (bimbingan/sempro/sidang/deadline), detail agenda modal |
-| 10 | `/profil` | Profil Akademik | Banner data akademik, stats grid prestasi, timeline progres TA |
-| 11 | `/akun` | Keamanan Akun | Ubah password, status keamanan akun |
-| 12 | `/login` | Login | Form kredensial (NIM/NIDN/Username + Password) |
+| 7 | `/list-judul` | Repositori Judul TA | Pencarian & filter judul TA alumni FIK (search by nama/NIM/judul/dosen), filter bidang kajian, widget distribusi domain penelitian |
+| 8 | `/kalender` | Kalender TA Interaktif | Grid kalender bulanan 35 cell, switch mode bulan/minggu/hari, chip event berwarna (bimbingan/sempro/sidang/deadline), detail agenda modal |
+| 9 | `/profil` | Profil Akademik | Banner data akademik, stats grid prestasi, timeline progres TA |
+| 10 | `/akun` | Keamanan Akun | Ubah password, status keamanan akun |
+| 11 | `/login` | Login | Form kredensial (NIM/NIDN/Username + Password) |
 
 ---
 

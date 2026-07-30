@@ -24,7 +24,7 @@ sipeta-upiyptk/
 │   └── ARCHITECTURE_AND_WORKFLOWS.md # Dokumen Arsitektur & Alur Kerja Ini
 │
 └── frontend/src/
-    ├── app/                     # App Router — 39 Rute Halaman (7 Role)
+    ├── app/                     # App Router — 38 Rute Halaman (7 Role)
     │   ├── page.tsx             # Dashboard Mahasiswa (Stepper 4-Stage)
     │   ├── login/               # Halaman Login Multi-Role + Dev Quick Login
     │   ├── proposal/            # Usulan Judul & Simulator Cek Similarity
@@ -32,7 +32,6 @@ sipeta-upiyptk/
     │   ├── bimbingan/           # Thread Log Bimbingan & Perubahan Judul
     │   ├── seminar/             # Jadwal & Upload Revisi Sempro
     │   ├── sidang/              # Detail Ujian Sidang & Hardcover
-    │   ├── clearing/            # Verification Prerequisites SKS/IPK
     │   ├── list-judul/          # Repositori Judul Skripsi Alumni
     │   ├── kalender/            # Kalender TA Interaktif
     │   ├── profil/ & akun/      # Data Pribadi & Keamanan Akun
@@ -89,14 +88,14 @@ sipeta-upiyptk/
 | Role | Kategori | Jumlah Rute | Daftar Rute Halaman |
 |---|---|:---:|---|
 | **Auth** | Login & Akses | 1 Rute | `/login` |
-| **1. Mahasiswa** | Pengguna Akademik | 12 Rute | `/`, `/proposal`, `/pembimbing`, `/bimbingan`, `/seminar`, `/sidang`, `/clearing`, `/list-judul`, `/kalender`, `/profil`, `/akun` |
+| **1. Mahasiswa** | Pengguna Akademik | 11 Rute | `/`, `/proposal`, `/pembimbing`, `/bimbingan`, `/seminar`, `/sidang`, `/list-judul`, `/kalender`, `/profil`, `/akun` |
 | **2. Dosen Pembimbing** | Evaluator & Pembimbing | 4 Rute | `/dosen/dashboard`, `/dosen/bimbingan`, `/dosen/pengajuan`, `/dosen/kalender` |
 | **3. Dosen Penguji** | Evaluator Ujian | 4 Rute | `/penguji/dashboard`, `/penguji/jadwal`, `/penguji/nilai`, `/penguji/revisi` |
 | **4. Admin Prodi FIK** | Pengelola Operasional | 5 Rute | `/admin-prodi/dashboard`, `/admin-prodi/mahasiswa`, `/admin-prodi/aktivasi`, `/admin-prodi/jadwal`, `/admin-prodi/repositori` |
 | **5. Admin Fakultas** | Administrator Fakultas | 4 Rute | `/admin-fakultas/dashboard`, `/admin-fakultas/sk`, `/admin-fakultas/bebas`, `/admin-fakultas/arsip` |
 | **6. Pimpinan / Dekanat**| Executive Monitoring | 4 Rute | `/dekanat/dashboard`, `/dekanat/statistik`, `/dekanat/kalender`, `/dekanat/laporan` |
 | **7. Super Admin** | Administrator Teknis | 5 Rute | `/super-admin/dashboard`, `/super-admin/users`, `/super-admin/audit`, `/super-admin/config`, `/super-admin/master` |
-| **TOTAL** | | **39 Rute** | **Seluruh Rute Berhasil Terkompilasi & Siap Diaudit** |
+| **TOTAL** | | **38 Rute** | **Seluruh Rute Berhasil Terkompilasi & Siap Diaudit** |
 
 ---
 

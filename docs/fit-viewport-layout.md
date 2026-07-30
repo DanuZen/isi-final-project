@@ -113,8 +113,6 @@ Seluruh 10 rute aplikasi telah 100% mematuhi standar Fit-Viewport Layout & Clean
 | `/seminar` (Seminar Proposal) | ✅ Terpasang (`100dvh`) | ✅ Clean Scroll | ✅ Pass |
 | `/sidang` (Ujian Sidang) | ✅ Terpasang (`100dvh`) | ✅ Clean Scroll | ✅ Pass |
 | `/list-judul` (Daftar Judul TA) | ✅ Terpasang (`100dvh`) | ✅ Scroll Tabel (`380px`) | ✅ Pass |
-| `/clearing` (Clearing Nilai) | ✅ Terpasang (`100dvh`) | ✅ Clean Scroll | ✅ Pass |
-| `/yudisium` (Status Yudisium) | ✅ Terpasang (`100dvh`) | ✅ Clean Scroll | ✅ Pass |
 | `/kalender` (Kalender Akademik) | ✅ Terpasang (`100dvh`) | ✅ Grid & Chip Scroll | ✅ Pass |
 
 ---

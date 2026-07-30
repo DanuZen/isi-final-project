@@ -10,14 +10,14 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 |---|:---:|:---:|:---:|
 | **Fondasi & System Design** | — | ✅ Selesai | ✅ Viewport Shell (`100dvh`) |
 | **Halaman Auth (Login)** | 1 Rute | ✅ Selesai | ✅ Form + Dev Quick Login |
-| **1. Portal Mahasiswa** | 12 Rute | ✅ Selesai | ✅ 12 Sub-Halaman Lengkap |
+| **1. Portal Mahasiswa** | 11 Rute | ✅ Selesai | ✅ 11 Sub-Halaman Lengkap |
 | **2. Portal Dosen Pembimbing** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Lengkap |
 | **3. Portal Dosen Penguji** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Lengkap |
 | **4. Portal Admin Prodi FIK** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Lengkap |
 | **5. Portal Admin Fakultas** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Lengkap |
 | **6. Portal Pimpinan / Dekanat** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Lengkap |
 | **7. Portal Super Admin** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Lengkap |
-| **TOTAL KESELURUHAN** | **39 Rute** | **✅ 100% Built** | **✅ Ready For Systematic Audit** |
+| **TOTAL KESELURUHAN** | **38 Rute** | **✅ 100% Built** | **✅ Ready For Systematic Audit** |
 
 ---
 
@@ -25,14 +25,13 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 
 Checklist verifikasi fungsionalitas visual, keselarasan komponen, interaksi UI, dan kelengkapan data per role:
 
-### 1. Portal Mahasiswa (`/`) — 12 Sub-Halaman
+### 1. Portal Mahasiswa (`/`) — 11 Sub-Halaman
 - [ ] `/` — Dashboard (Stepper 4-Stage TA + Kalender Interaktif)
 - [ ] `/proposal` — Usulan Judul & Simulator Cek Similarity
 - [ ] `/pembimbing` — Pilih Dosen Pembimbing I & II + Status Kuota
 - [ ] `/bimbingan` — Thread Log Bimbingan + Modal Catat Log + Perubahan Judul
 - [ ] `/seminar` — Jadwal Seminar Proposal, Majelis Penguji, & Upload Revisi
 - [ ] `/sidang` — Detail Ujian Sidang Skripsi, Majelis, & Upload Hardcover
-- [ ] `/clearing` — Verification SKS, IPK, & Dokumen Prasyarat
 - [ ] `/list-judul` — Repositori Judul Skripsi Alumni + Search/Filter
 - [ ] `/kalender` — Kalender TA Interaktif (Bulan / Minggu / Hari)
 - [ ] `/login` — Login Form Kredensial + Dev Quick Login Drawer
