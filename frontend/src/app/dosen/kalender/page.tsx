@@ -75,6 +75,7 @@ export default function DosenKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filterJenis, setFilterJenis] = useState<string>("Semua");
   const [selectedEventId, setSelectedEventId] = useState<number>(1);
+  const [showBeritaAcaraModal, setShowBeritaAcaraModal] = useState(false);
   const [attendedMap, setAttendedMap] = useState<Record<number, boolean>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -335,7 +336,7 @@ export default function DosenKalenderPage() {
                     <div className="flex items-center gap-2.5">
                       {selectedEv.jenis !== "Bimbingan" && (
                         <button
-                          onClick={() => showToast(`Membuka Berita Acara ${selectedEv.jenis} ${selectedEv.nama}...`)}
+                          onClick={() => setShowBeritaAcaraModal(true)}
                           className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
                         >
                           <FileText className="w-4 h-4 text-white" /> Berita Acara
@@ -360,6 +361,93 @@ export default function DosenKalenderPage() {
               </div>
 
             </div>
+
+            {/* ── Official Berita Acara Modal ── */}
+            {showBeritaAcaraModal && (
+              <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col h-[85vh] animate-in fade-in zoom-in-95">
+                  {/* Modal Header */}
+                  <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                        <FileText className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm font-display text-white">Dokumen Berita Acara {selectedEv.jenis}</h3>
+                        <p className="text-[10px] text-neutral-400 font-mono">Form_BA_{selectedEv.jenis}_{selectedEv.nim}.pdf</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setShowBeritaAcaraModal(false)}
+                      className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Toolbar */}
+                  <div className="px-4 py-2 bg-slate-100 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
+                    <span className="text-slate-600 font-bold font-display">Status Dokumen: Resmi Terverifikasi</span>
+                    <button
+                      onClick={() => {
+                        showToast(`Mengunduh Berita Acara ${selectedEv.jenis} ${selectedEv.nama}...`);
+                        setShowBeritaAcaraModal(false);
+                      }}
+                      className="px-3.5 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                    >
+                      <FileText className="w-3.5 h-3.5" /> Cetak / Download PDF
+                    </button>
+                  </div>
+
+                  {/* Official Document Sheet Mockup */}
+                  <div className="flex-1 overflow-y-auto p-6 bg-slate-200/80 flex justify-center">
+                    <div className="bg-white rounded-lg shadow-md border border-slate-300 p-8 w-full max-w-lg space-y-5 text-slate-900 font-serif">
+                      <div className="text-center space-y-1 pb-3 border-b-2 border-slate-900">
+                        <p className="text-[10px] uppercase font-bold tracking-widest text-slate-600 font-sans">
+                          UNIVERSITAS PUTRA INDONESIA YPTK PADANG
+                        </p>
+                        <h2 className="text-xs font-black uppercase tracking-wider font-sans text-slate-900">
+                          FAKULTAS ILMU KOMPUTER — PRODI {selectedEv.prodi.toUpperCase()}
+                        </h2>
+                        <p className="text-[11px] font-bold font-sans pt-1 text-[#C62828]">
+                          BERITA ACARA {selectedEv.jenis.toUpperCase()} TUGAS AKHIR
+                        </p>
+                      </div>
+
+                      <div className="space-y-2 text-xs font-sans">
+                        <p className="leading-relaxed">
+                          Pada hari ini <strong>{selectedEv.hari}</strong>, tanggal <strong>{selectedEv.tglNum} {selectedEv.bulan}</strong>, telah dilaksanakan ujian/seminar tugas akhir secara resmi bagi mahasiswa:
+                        </p>
+
+                        <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1 font-mono text-[11px]">
+                          <p><strong>Nama:</strong> {selectedEv.nama}</p>
+                          <p><strong>NIM:</strong> {selectedEv.nim}</p>
+                          <p><strong>Prodi:</strong> {selectedEv.prodi}</p>
+                          <p><strong>Judul:</strong> &ldquo;{selectedEv.judul}&rdquo;</p>
+                        </div>
+
+                        <div className="pt-2 space-y-1">
+                          <p><strong>Peran Penguji:</strong> {selectedEv.role}</p>
+                          <p><strong>Waktu &amp; Ruang:</strong> {selectedEv.waktu} WIB ({selectedEv.ruang})</p>
+                          <p><strong>Keputusan Hasil Ujian:</strong> <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">LULUS DENGAN REVISI KECIL</span></p>
+                        </div>
+                      </div>
+
+                      <div className="pt-6 flex justify-between items-end font-sans text-xs">
+                        <div className="text-center space-y-8">
+                          <p className="text-[10px] text-slate-500">Mengetahui, Ketua Prodi</p>
+                          <p className="font-bold underline">Dr. Sarjon Defit, S.Kom., M.Sc.</p>
+                        </div>
+                        <div className="text-center space-y-8">
+                          <p className="text-[10px] text-slate-500">Dosen Pembimbing / Penguji</p>
+                          <p className="font-bold underline">Dr. Sarjon Defit, S.Kom., M.Sc.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
           </main>
         </div>
