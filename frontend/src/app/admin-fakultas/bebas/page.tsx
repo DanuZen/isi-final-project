@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, FileText, Shield, Archive,
-  CheckCircle2, Search, ArrowRight, X, ShieldCheck, CreditCard, Laptop, BookOpen, XCircle, Eye
+  CheckCircle2, Search, ArrowRight, X, ShieldCheck, CreditCard, Laptop, BookOpen, XCircle, AlertCircle
 } from "lucide-react";
 
 const NAV = [
@@ -39,14 +39,15 @@ export default function AdminFakultasBebasPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [list, setList] = useState<BebasItem[]>(INITIAL_BEBAS);
   const [search, setSearch] = useState("");
-  const [selectedBebas, setSelectedBebas] = useState<BebasItem | null>(null);
+  
+  // Default select 1st student item
+  const [selectedNim, setSelectedNim] = useState<string>("20101152630133");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleVerify = (nim: string, nama: string) => {
     setList((prev) =>
       prev.map((item) => (item.nim === nim ? { ...item, status: "Lulus Verifikasi" } : item))
     );
-    setSelectedBebas(null);
     setToastMessage(`Surat Keterangan Bebas Fakultas (SKBF) atas nama ${nama} BERHASIL DITERBITKAN!`);
     setTimeout(() => setToastMessage(null), 5000);
   };
@@ -56,6 +57,9 @@ export default function AdminFakultasBebasPage() {
       item.nama.toLowerCase().includes(search.toLowerCase()) ||
       item.nim.includes(search)
   );
+
+  const selected = list.find((item) => item.nim === selectedNim) || filtered[0] || list[0];
+  const isEligible = selected?.bebasPustaka && selected?.bebasLab && selected?.bebasSPP;
 
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -97,208 +101,194 @@ export default function AdminFakultasBebasPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
-            {/* Main Card Table */}
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                    <Shield className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Pengajuan Bebas Fakultas</h2>
-                    <p className="text-[10px] text-slate-400 font-medium">Total: {filtered.length} Pengajuan</p>
-                  </div>
+            {/* Control Bar */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between gap-3 flex-wrap shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                  <Shield className="w-4 h-4 text-white" />
                 </div>
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    type="text"
-                    placeholder="Cari NIM atau Nama..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all font-display"
-                  />
+                <div>
+                  <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Pengajuan Bebas Fakultas ({filtered.length})</h2>
+                </div>
+              </div>
+              <div className="relative">
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Cari NIM atau Nama..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all font-display"
+                />
+              </div>
+            </div>
+
+            {/* Grid layout with Detail Side Panel */}
+            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+              
+              {/* Table Container */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+                <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
+                  <table className="w-full text-xs">
+                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                      <tr>
+                        {["NIM", "Nama Mahasiswa", "Prodi", "Tgl Pengajuan", "Bebas Pustaka", "Bebas Lab", "Bebas SPP", "Status Verifikasi"].map((h) => (
+                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {filtered.map((row) => {
+                        const isSelected = selected?.nim === row.nim;
+                        return (
+                          <tr
+                            key={row.nim}
+                            onClick={() => setSelectedNim(row.nim)}
+                            className={`transition-all cursor-pointer select-none ${
+                              isSelected
+                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
+                                : "hover:bg-slate-50"
+                            }`}
+                          >
+                            <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500 font-semibold">{row.nim}</td>
+                            <td className="px-4 py-3.5 font-bold text-slate-800 whitespace-nowrap font-display">{row.nama}</td>
+                            <td className="px-4 py-3.5 text-slate-600 whitespace-nowrap">{row.prodi}</td>
+                            <td className="px-4 py-3.5 text-slate-500 whitespace-nowrap font-mono">{row.tglPengajuan}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap">
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasPustaka ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
+                                {row.bebasPustaka ? "✓ Lunas" : "✗ Belum"}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3.5 whitespace-nowrap">
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasLab ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
+                                {row.bebasLab ? "✓ Clear" : "✗ Pinjaman"}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3.5 whitespace-nowrap">
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasSPP ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
+                                {row.bebasSPP ? "✓ Lunas" : "✗ Tunggakan"}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3.5 whitespace-nowrap">
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${row.status === "Lulus Verifikasi" ? "bg-emerald-600" : "bg-amber-600"}`}>
+                                {row.status}
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
-              <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                <table className="w-full text-xs">
-                  <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                    <tr>
-                      {["NIM", "Nama Mahasiswa", "Prodi", "Tgl Pengajuan", "Bebas Pustaka", "Bebas Lab", "Bebas SPP", "Status Verifikasi", "Aksi"].map((h) => (
-                        <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {filtered.map((row) => (
-                      <tr key={row.nim} className="hover:bg-slate-50 transition-colors">
-                        <td className="px-4 py-3 font-mono text-[10.5px] text-slate-500">{row.nim}</td>
-                        <td className="px-4 py-3 font-bold text-slate-800 whitespace-nowrap font-display">{row.nama}</td>
-                        <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{row.prodi}</td>
-                        <td className="px-4 py-3 text-slate-500 whitespace-nowrap font-mono">{row.tglPengajuan}</td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasPustaka ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
-                            {row.bebasPustaka ? "✓ Lunas" : "✗ Belum"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasLab ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
-                            {row.bebasLab ? "✓ Clear" : "✗ Pinjaman"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${row.bebasSPP ? "bg-emerald-600 text-white" : "bg-red-600 text-white"} font-display shadow-2xs`}>
-                            {row.bebasSPP ? "✓ Lunas" : "✗ Tunggakan"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${row.status === "Lulus Verifikasi" ? "bg-emerald-600" : "bg-amber-600"}`}>
-                            {row.status}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          {row.status === "Pending" ? (
-                            <button
-                              onClick={() => setSelectedBebas(row)}
-                              className="px-3.5 py-1.5 rounded-xl text-[11px] font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
-                            >
-                              <ShieldCheck className="w-3.5 h-3.5 text-white" /> Verifikasi &amp; Detail Syarat
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => setSelectedBebas(row)}
-                              className="px-3 py-1.5 rounded-xl text-[10.5px] font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-1 cursor-pointer font-display"
-                            >
-                              <Eye className="w-3.5 h-3.5 text-slate-600" /> Lihat Detail
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {/* Side Detail Panel Card (Assessment Checklist) */}
+              {selected && (
+                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                  <div className="space-y-4 overflow-y-auto scrollbar-none">
+                    <div className="pb-3 border-b border-slate-100 space-y-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold text-white font-display shadow-2xs ${selected.status === "Lulus Verifikasi" ? "bg-emerald-600" : "bg-amber-600"}`}>
+                          {selected.status}
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400 font-semibold">{selected.tglPengajuan}</span>
+                      </div>
+                      <h3 className="text-base font-black text-slate-900 font-display mt-1">{selected.nama}</h3>
+                      <p className="text-[11px] font-mono text-slate-500">{selected.nim} — {selected.prodi}</p>
+                    </div>
+
+                    <div className="space-y-3 text-xs">
+                      <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-display block">Penilaian 3 Prasyarat Kelayakan:</span>
+
+                      {/* 1. Perpustakaan */}
+                      <div className={`p-3 rounded-xl border flex items-center justify-between gap-2 ${selected.bebasPustaka ? "bg-emerald-50/70 border-emerald-200" : "bg-red-50/70 border-red-200"}`}>
+                        <div className="flex items-center gap-2">
+                          <BookOpen className={`w-4 h-4 shrink-0 ${selected.bebasPustaka ? "text-emerald-700" : "text-red-600"}`} />
+                          <div>
+                            <p className="font-bold text-slate-900 text-[11.5px] font-display">Bebas Perpustakaan</p>
+                            <p className="text-[10px] text-slate-500 font-medium">{selected.bebasPustaka ? "Bebas pinjaman & denda" : "Ada tunggakan buku"}</p>
+                          </div>
+                        </div>
+                        <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-bold text-white ${selected.bebasPustaka ? "bg-emerald-600" : "bg-red-600"}`}>
+                          {selected.bebasPustaka ? "Lunas ✅" : "Tunggakan ❌"}
+                        </span>
+                      </div>
+
+                      {/* 2. Lab Komputer */}
+                      <div className={`p-3 rounded-xl border flex items-center justify-between gap-2 ${selected.bebasLab ? "bg-emerald-50/70 border-emerald-200" : "bg-red-50/70 border-red-200"}`}>
+                        <div className="flex items-center gap-2">
+                          <Laptop className={`w-4 h-4 shrink-0 ${selected.bebasLab ? "text-emerald-700" : "text-red-600"}`} />
+                          <div>
+                            <p className="font-bold text-slate-900 text-[11.5px] font-display">Bebas Lab Komputer</p>
+                            <p className="text-[10px] text-slate-500 font-medium">{selected.bebasLab ? "Alat & modul dikembalikan" : "Inventaris belum kembali"}</p>
+                          </div>
+                        </div>
+                        <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-bold text-white ${selected.bebasLab ? "bg-emerald-600" : "bg-red-600"}`}>
+                          {selected.bebasLab ? "Clear ✅" : "Pinjaman ❌"}
+                        </span>
+                      </div>
+
+                      {/* 3. Keuangan & SPP */}
+                      <div className={`p-3 rounded-xl border flex items-center justify-between gap-2 ${selected.bebasSPP ? "bg-emerald-50/70 border-emerald-200" : "bg-red-50/70 border-red-200"}`}>
+                        <div className="flex items-center gap-2">
+                          <CreditCard className={`w-4 h-4 shrink-0 ${selected.bebasSPP ? "text-emerald-700" : "text-red-600"}`} />
+                          <div>
+                            <p className="font-bold text-slate-900 text-[11.5px] font-display">Bebas SPP / Keuangan</p>
+                            <p className="text-[10px] text-slate-500 font-medium">{selected.bebasSPP ? "UKT/SPP Lunas s/d Sem 8" : "Tunggakan SPP belum lunas"}</p>
+                          </div>
+                        </div>
+                        <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-bold text-white ${selected.bebasSPP ? "bg-emerald-600" : "bg-red-600"}`}>
+                          {selected.bebasSPP ? "Lunas ✅" : "Tunggakan ❌"}
+                        </span>
+                      </div>
+
+                      {/* Summary Assessment Verdict Box */}
+                      <div className={`p-3.5 rounded-2xl border text-xs space-y-1 ${isEligible ? "bg-emerald-500/10 border-emerald-300 text-emerald-900" : "bg-red-500/10 border-red-300 text-red-900"}`}>
+                        <div className="flex items-center gap-1.5 font-bold font-display text-[11px]">
+                          {isEligible ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+                          <span>Kesimpulan Evaluasi Kelayakan:</span>
+                        </div>
+                        <p className="text-[10.5px] font-semibold leading-relaxed">
+                          {isEligible
+                            ? "Mahasiswa LAYAK diverifikasi. Seluruh 3 prasyarat (Pustaka, Lab, SPP) telah 100% dipenuhi."
+                            : "Mahasiswa BELUM LAYAK diverifikasi karena masih ada tunggakan berkas/keuangan."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100">
+                    {selected.status === "Pending" ? (
+                      <button
+                        disabled={!isEligible}
+                        onClick={() => handleVerify(selected.nim, selected.nama)}
+                        className={`w-full py-2.5 rounded-xl text-xs font-bold text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display ${
+                          isEligible
+                            ? "bg-emerald-600 hover:bg-emerald-700 cursor-pointer"
+                            : "bg-slate-300 cursor-not-allowed opacity-70"
+                        }`}
+                      >
+                        <ShieldCheck className="w-4 h-4 text-white" />
+                        <span>Setujui &amp; Terbitkan SKBF</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => alert(`Mengunduh berkas Surat Keterangan Bebas Fakultas (SKBF) ${selected.nama}...`)}
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-white" />
+                        <span>Unduh Surat Bebas Fakultas PDF</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
             </div>
+
           </main>
         </div>
       </div>
-
-      {/* MODAL CHECKLIST DETAIL VERIFIKASI SYARAT BEBAS FAKULTAS */}
-      {selectedBebas && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-xs">
-                  <ShieldCheck className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm font-display text-white">Detail Verifikasi Syarat Bebas Fakultas</h3>
-                  <p className="text-[10.5px] text-slate-400 font-medium">Validasi Kelayakan Wisuda / Yudisium FIK</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setSelectedBebas(null)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-6 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-display">Mahasiswa Pemohon:</p>
-                <h2 className="text-base font-black text-slate-900 font-display mt-0.5">{selectedBebas.nama}</h2>
-                <p className="text-xs font-mono text-slate-500">{selectedBebas.nim} — {selectedBebas.prodi}</p>
-              </div>
-
-              <div className="space-y-2.5">
-                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wide font-display">Status Verifikasi 3 Syarat Fakultas:</p>
-                
-                {/* 1. Perpustakaan */}
-                <div className="p-3.5 rounded-2xl border border-emerald-200 bg-emerald-50/70 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0">
-                      <BookOpen className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-slate-900 font-display">Bebas Perpustakaan FIK</h4>
-                      <p className="text-[10.5px] text-emerald-800 font-medium">Tidak ada pinjaman buku &amp; denda terlambat</p>
-                    </div>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white font-display shrink-0">
-                    Lunas &amp; Bebas ✅
-                  </span>
-                </div>
-
-                {/* 2. Laboratorium Komputer */}
-                <div className="p-3.5 rounded-2xl border border-emerald-200 bg-emerald-50/70 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0">
-                      <Laptop className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-slate-900 font-display">Bebas Laboratorium Komputer</h4>
-                      <p className="text-[10.5px] text-emerald-800 font-medium">Inventaris &amp; modul praktikum dikembalikan lengkap</p>
-                    </div>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white font-display shrink-0">
-                    Lunas &amp; Bebas ✅
-                  </span>
-                </div>
-
-                {/* 3. Keuangan & SPP */}
-                <div className="p-3.5 rounded-2xl border border-emerald-200 bg-emerald-50/70 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0">
-                      <CreditCard className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-slate-900 font-display">Bebas SPP / Keuangan</h4>
-                      <p className="text-[10.5px] text-emerald-800 font-medium">Pembayaran UKT/SPP Lunas s/d Semester 8</p>
-                    </div>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white font-display shrink-0">
-                    Lunas &amp; Bebas ✅
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Catatan Validasi Petugas:</span>
-                <p className="font-semibold text-slate-800 mt-0.5 leading-snug">Seluruh persyaratan administrasi perpustakaan, laboratorium, dan keuangan telah tervalidasi 100% bebas tunggakan.</p>
-              </div>
-
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
-                <button
-                  onClick={() => setSelectedBebas(null)}
-                  className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all font-display cursor-pointer"
-                >
-                  Batal
-                </button>
-                {selectedBebas.status === "Pending" ? (
-                  <button
-                    onClick={() => handleVerify(selectedBebas.nim, selectedBebas.nama)}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-white" />
-                    <span>Setujui &amp; Terbitkan Surat Bebas Fakultas</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setSelectedBebas(null)}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-white" />
-                    <span>Sudah Terverifikasi</span>
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Floating Toast Popup Notification */}
       {toastMessage && (
