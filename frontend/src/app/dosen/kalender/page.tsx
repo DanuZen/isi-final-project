@@ -66,9 +66,9 @@ const EVENTS: Array<EventItem> = [
 ];
 
 const JENIS_SOLID: Record<string, { bg: string; text: string }> = {
-  "Seminar":   { bg: "bg-violet-600", text: "text-white" },
+  "Seminar":   { bg: "bg-blue-600",   text: "text-white" },
   "Sidang":    { bg: "bg-[#C62828]",  text: "text-white" },
-  "Bimbingan": { bg: "bg-blue-600",   text: "text-white" },
+  "Bimbingan": { bg: "bg-indigo-600", text: "text-white" },
 };
 
 export default function DosenKalenderPage() {

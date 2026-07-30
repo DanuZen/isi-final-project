@@ -55,8 +55,8 @@ export default function PengujiRevisiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-purple-600 text-white shadow-xs">
-                      <FileEdit className="w-3.5 h-3.5" /> Monitoring Lembar Revisi Ujian
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <FileEdit className="w-3.5 h-3.5 text-white" /> Monitoring Lembar Revisi Ujian
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -70,10 +70,10 @@ export default function PengujiRevisiPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/penguji/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Dashboard Penguji</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
@@ -86,17 +86,17 @@ export default function PengujiRevisiPage() {
                 const isApproved = approved[r.nim];
                 return (
                   <div key={r.nim} className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-                    <div className="h-1" style={{ background: r.status === "Belum Diserahkan" ? "#b45309" : "#7c3aed" }} />
+                    <div className="h-1" style={{ background: r.status === "Belum Diserahkan" ? "#b45309" : "#2563EB" }} />
                     <div className="p-5 space-y-4">
 
                       <div className="flex items-start justify-between gap-3 flex-wrap">
                         <div>
                           <h3 className="text-base font-black text-slate-900 font-display">{r.nama}</h3>
                           <p className="text-xs font-mono text-slate-400 mt-0.5">{r.nim}</p>
-                          <p className="text-xs text-slate-600 font-medium mt-1">"{r.judul}"</p>
+                          <p className="text-xs text-slate-600 font-medium mt-1">&ldquo;{r.judul}&rdquo;</p>
                         </div>
                         <div className="space-y-1 text-right">
-                          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10.5px] font-bold ${r.status === "Belum Diserahkan" ? "bg-amber-50 text-amber-700 border border-amber-200" : "bg-violet-50 text-violet-700 border border-violet-200"}`}>
+                          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10.5px] font-bold font-display shadow-2xs ${r.status === "Belum Diserahkan" ? "bg-[#F59E0B] text-slate-950" : "bg-blue-600 text-white"}`}>
                             {r.status === "Belum Diserahkan" ? <Clock className="w-3 h-3" /> : <AlertCircle className="w-3 h-3" />}
                             {r.status}
                           </span>
@@ -115,8 +115,8 @@ export default function PengujiRevisiPage() {
                       {r.revisiMasuk && !isApproved && (
                         <div className="space-y-2.5 pt-1">
                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Status Upload Revisi Mahasiswa</p>
-                          <div className="p-4 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-between gap-3 flex-wrap">
-                            <p className="text-xs text-violet-900 font-semibold">Mahasiswa telah mengunggah naskah revisi final.</p>
+                          <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-between gap-3 flex-wrap">
+                            <p className="text-xs text-blue-900 font-semibold">Mahasiswa telah mengunggah naskah revisi final.</p>
                             <div className="flex gap-2">
                               <button
                                 onClick={() => setApproved((prev) => ({ ...prev, [r.nim]: true }))}

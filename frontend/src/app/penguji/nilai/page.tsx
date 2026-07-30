@@ -66,8 +66,8 @@ export default function PengujiNilaiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-violet-600 text-white shadow-xs">
-                      <Star className="w-3.5 h-3.5" /> Penilaian Ujian Dosen Penguji
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <Star className="w-3.5 h-3.5 text-white" /> Penilaian Ujian Dosen Penguji
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -81,10 +81,10 @@ export default function PengujiNilaiPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/penguji/jadwal"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Lihat Jadwal Pengujian</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
@@ -112,10 +112,10 @@ export default function PengujiNilaiPage() {
                       <div>
                         <h3 className="text-base font-black text-slate-900 font-display">{mhs.nama}</h3>
                         <p className="text-xs font-mono text-slate-400 mt-0.5">{mhs.nim}</p>
-                        <p className="text-xs text-slate-600 font-medium mt-1">"{mhs.judul}"</p>
+                        <p className="text-xs text-slate-600 font-medium mt-1">&ldquo;{mhs.judul}&rdquo;</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold ${mhs.jenis === "Sidang" ? "bg-rose-50 text-rose-700 border border-rose-200" : "bg-violet-50 text-violet-700 border border-violet-200"}`}>
+                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold font-display text-white shadow-2xs ${mhs.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"}`}>
                           {mhs.jenis}
                         </span>
                         <span className="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full">{mhs.tanggal}</span>

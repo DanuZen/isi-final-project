@@ -15,7 +15,7 @@ import {
 const ROLES = [
   { id: "mahasiswa",        label: "Mahasiswa",        desc: "Portal Tugas Akhir",    path: "/",                         icon: GraduationCap,   accent: "#059669", accentBg: "#ecfdf5", accentLight: "#a7f3d0" },
   { id: "dosen_pembimbing", label: "Dosen Pembimbing", desc: "Bimbingan & ACC",        path: "/dosen/dashboard",          icon: UserCheck,       accent: "#C62828", accentBg: "#fef2f2", accentLight: "#fecaca" },
-  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian & Sidang",     path: "/penguji/dashboard",        icon: ShieldCheck,     accent: "#7c3aed", accentBg: "#f5f3ff", accentLight: "#ddd6fe" },
+  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian & Sidang",     path: "/penguji/dashboard",        icon: ShieldCheck,     accent: "#C62828", accentBg: "#fef2f2", accentLight: "#fca5a5" },
   { id: "admin_prodi",      label: "Admin Prodi",      desc: "Kelola & Verifikasi",    path: "/admin-prodi/dashboard",    icon: Building2,       accent: "#1d4ed8", accentBg: "#eff6ff", accentLight: "#bfdbfe" },
   { id: "admin_fakultas",   label: "Admin Fakultas",   desc: "SK & Bebas Fakultas",    path: "/admin-fakultas/dashboard", icon: School,          accent: "#4338ca", accentBg: "#eef2ff", accentLight: "#c7d2fe" },
   { id: "pimpinan",         label: "Pimpinan",         desc: "Laporan Eksekutif",      path: "/dekanat/dashboard",        icon: LayoutDashboard, accent: "#b45309", accentBg: "#fffbeb", accentLight: "#fde68a" },

@@ -108,7 +108,7 @@ export default function DekanatStatistikPage() {
                 {[
                   { label: "Usulan Judul", count: 45, color: "#b45309", pct: 18 },
                   { label: "Proses Bimbingan", count: 98, color: "#1d4ed8", pct: 40 },
-                  { label: "Seminar Proposal", count: 42, color: "#7c3aed", pct: 17 },
+                  { label: "Seminar Proposal", count: 42, color: "#2563EB", pct: 17 },
                   { label: "Ujian Sidang", count: 35, color: "#C62828", pct: 14 },
                   { label: "Lulus / Selesai", count: 28, color: "#059669", pct: 11 },
                 ].map((item) => (

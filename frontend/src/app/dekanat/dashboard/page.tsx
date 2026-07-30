@@ -41,7 +41,7 @@ const SIDANG_BULAN = [
 // SVG Donut chart data
 const BIDANG = [
   { label: "Rekayasa Perangkat Lunak", pct: 42, color: "#C62828" },
-  { label: "Kecerdasan Buatan",         pct: 31, color: "#7c3aed" },
+  { label: "Kecerdasan Buatan",         pct: 31, color: "#2563EB" },
   { label: "Jaringan & Keamanan",       pct: 27, color: "#1d4ed8" },
 ];
 

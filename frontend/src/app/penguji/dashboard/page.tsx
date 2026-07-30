@@ -20,7 +20,7 @@ const NAV = [
 
 /* ── Mock Data ── */
 const STATS = [
-  { label: "Jadwal Seminar",       value: "5 Mahasiswa", sub: "Aktif bulan ini",    icon: CalendarDays, bg: "bg-violet-600", text: "text-white" },
+  { label: "Jadwal Seminar",       value: "5 Mahasiswa", sub: "Aktif bulan ini",    icon: CalendarDays, bg: "bg-blue-600", text: "text-white" },
   { label: "Ujian Sidang Aktif",   value: "3 Mahasiswa", sub: "Terjadwal",          icon: Award,        bg: "bg-[#C62828]",  text: "text-white" },
   { label: "Lembar Revisi",        value: "8 Berkas",    sub: "Pending diserahkan", icon: FileEdit,     bg: "bg-[#F59E0B]",  text: "text-slate-950" },
   { label: "Mahasiswa Dinilai",    value: "14 Selesai",  sub: "Total semester ini", icon: CheckCircle2, bg: "bg-emerald-600", text: "text-white" },
@@ -64,7 +64,7 @@ export default function PengujiDashboard() {
                     Selamat Datang, Dr. Ahmad Fauzi
                   </h1>
                   <p className="text-xs text-neutral-400 max-w-2xl font-medium">
-                    Anda memiliki <strong className="text-violet-400 font-bold">5 jadwal seminar</strong> dan{" "}
+                    Anda memiliki <strong className="text-blue-400 font-bold">5 jadwal seminar</strong> dan{" "}
                     <strong className="text-rose-400 font-bold">3 jadwal sidang</strong> aktif bulan ini. Harap segera input nilai setelah pengujian selesai.
                   </p>
                 </div>
@@ -140,7 +140,7 @@ export default function PengujiDashboard() {
                           <td className="px-4 py-3 whitespace-nowrap text-slate-600 font-medium">{row.ruang}</td>
                           <td className="px-4 py-3">
                             <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display text-white ${
-                              row.jenis === "Sidang" ? "bg-[#C62828]" : "bg-violet-600"
+                              row.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"
                             }`}>
                               {row.jenis}
                             </span>
@@ -176,7 +176,7 @@ export default function PengujiDashboard() {
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: "Rata-rata Nilai Seminar", value: "78.4", bg: "bg-violet-600", text: "text-white" },
+                  { label: "Rata-rata Nilai Seminar", value: "78.4", bg: "bg-blue-600", text: "text-white" },
                   { label: "Rata-rata Nilai Sidang",  value: "82.1", bg: "bg-emerald-600", text: "text-white" },
                   { label: "Belum Dinilai",           value: "6 Mahasiswa", bg: "bg-[#F59E0B]", text: "text-slate-950" },
                 ].map((item) => (

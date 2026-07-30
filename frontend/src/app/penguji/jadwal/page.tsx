@@ -26,7 +26,7 @@ const JADWAL = [
 ];
 
 const JENIS_CFG: Record<string, { color: string; bg: string }> = {
-  "Seminar": { color: "#7c3aed", bg: "#f5f3ff" },
+  "Seminar": { color: "#2563EB", bg: "#eff6ff" },
   "Sidang":  { color: "#C62828", bg: "#fef2f2" },
 };
 const STATUS_CFG: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
@@ -61,7 +61,7 @@ export default function PengujiJadwalPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-violet-600 text-white shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
                       <CalendarDays className="w-3.5 h-3.5" /> Majelis Penguji Aktif
                     </span>
                   </div>

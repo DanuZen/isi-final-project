@@ -145,7 +145,7 @@ const MAHASISWA: Array<MahasiswaItem> = [
 const TAHAP_COLOR: Record<TahapKey, { color: string; bg: string }> = {
   "Usulan":   { color: "#b45309", bg: "#fffbeb" },
   "Bimbingan":{ color: "#1d4ed8", bg: "#eff6ff" },
-  "Seminar":  { color: "#7c3aed", bg: "#f5f3ff" },
+  "Seminar":  { color: "#2563EB", bg: "#eff6ff" },
   "Sidang":   { color: "#C62828", bg: "#fef2f2" },
   "Selesai":  { color: "#059669", bg: "#ecfdf5" },
 };

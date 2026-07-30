@@ -5,7 +5,7 @@ import { RoleLayout } from "@/components/layout/role-layout";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
   CheckCircle2, Clock, XCircle, Search, Filter,
-  FileText, AlertCircle,
+  FileText, AlertCircle, Building2,
 } from "lucide-react";
 
 const NAV = [
@@ -20,7 +20,7 @@ const STATS = [
   { label: "Mahasiswa TA Aktif",    value: "124", sub: "Semester ini",         color: "#1d4ed8", bg: "#eff6ff" },
   { label: "Menunggu Aktivasi",     value: "7",   sub: "Setelah clearing",     color: "#b45309", bg: "#fffbeb" },
   { label: "Sidang Bulan Ini",      value: "18",  sub: "Terjadwal Agustus",    color: "#C62828", bg: "#fef2f2" },
-  { label: "Proposal Pending",      value: "11",  sub: "Belum diverifikasi",   color: "#7c3aed", bg: "#f5f3ff" },
+  { label: "Proposal Pending",      value: "11",  sub: "Belum diverifikasi",   color: "#2563EB", bg: "#eff6ff" },
 ];
 
 const MAHASISWA = [
@@ -41,10 +41,16 @@ const PERMOHONAN = [
 const TAHAP_COLOR: Record<string, { color: string; bg: string }> = {
   "Usulan":   { color: "#b45309", bg: "#fffbeb" },
   "Bimbingan":{ color: "#1d4ed8", bg: "#eff6ff" },
-  "Seminar":  { color: "#7c3aed", bg: "#f5f3ff" },
+  "Seminar":  { color: "#2563EB", bg: "#eff6ff" },
   "Sidang":   { color: "#C62828", bg: "#fef2f2" },
   "Selesai":  { color: "#059669", bg: "#ecfdf5" },
 };
+
+const PROPOSAL_PENDING = [
+  { nim: "20101152630045", nama: "Danu Zen",         judul: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)", tgl: "30 Jul 2026", pembimbing: "Dr. Sarjon Defit", prodi: "Teknik Informatika" },
+  { nim: "20101152630112", nama: "Nadia Rahma",      judul: "Penerapan Deep Learning Untuk Klasifikasi Kanker Payudara",  tgl: "29 Jul 2026", pembimbing: "Ir. H. Sumijan",    prodi: "Teknik Informatika" },
+  { nim: "20101152630099", nama: "Taufik Hidayat",   judul: "Pengembangan Chatbot Pelayanan Kampus Berbasis NLP",        tgl: "28 Jul 2026", pembimbing: "Dr. Gunadi Widi",   prodi: "Sistem Informasi" },
+];
 
 export default function AdminProdiDashboard() {
   const [search, setSearch] = useState("");
@@ -59,10 +65,10 @@ export default function AdminProdiDashboard() {
   return (
     <RoleLayout
       navItems={NAV}
-      userName="Dr. Ratna Dewi, M.Pd."
-      userCode="NIDN: 1098765432"
-      userRole="Admin Prodi FIK"
-      userUnit="FIK — Teknik Informatika"
+      userName="Hafizah, S.Kom., M.Kom."
+      userCode="NIP: 198504122010122001"
+      userRole="Admin Prodi"
+      userUnit="Fakultas Ilmu Komputer"
       accentColor="#1d4ed8"
     >
       {/* Welcome Banner */}
@@ -70,14 +76,13 @@ export default function AdminProdiDashboard() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:p-6">
           <div className="space-y-1.5">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-600 text-white">
-              <Users className="w-3.5 h-3.5" /> Admin Prodi FIK
+              <Building2 className="w-3.5 h-3.5" /> Portal Administrasi Prodi
             </span>
-            <h1 className="text-xl md:text-2xl font-black text-white tracking-wide">
-              Selamat Datang, Dr. Ratna Dewi
+            <h1 className="text-xl md:text-2xl font-black text-white tracking-wide leading-tight">
+              Dashboard Admin Program Studi
             </h1>
             <p className="text-xs text-neutral-400 max-w-2xl">
-              Terdapat <strong className="text-amber-400">7 mahasiswa</strong> menunggu aktivasi akun dan{" "}
-              <strong className="text-violet-400">11 proposal</strong> perlu diverifikasi.
+              Selamat datang, Ibu Hafizah. Terdapat <strong className="text-blue-400">11 proposal</strong> perlu diverifikasi.
             </p>
           </div>
           <div className="flex gap-2.5 shrink-0 flex-wrap">

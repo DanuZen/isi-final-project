@@ -26,7 +26,7 @@ const STATS = [
 const ROLE_DIST = [
   { role: "Mahasiswa",        count: 356, color: "#059669" },
   { role: "Dosen Pembimbing", count: 38,  color: "#C62828" },
-  { role: "Dosen Penguji",    count: 22,  color: "#7c3aed" },
+  { role: "Dosen Penguji",    count: 22,  color: "#2563EB" },
   { role: "Admin Prodi",      count: 4,   color: "#1d4ed8" },
   { role: "Admin Fakultas",   count: 2,   color: "#4338ca" },
   { role: "Pimpinan",         count: 3,   color: "#b45309" },
