@@ -19,7 +19,7 @@ const DOSEN_NAV = [
 
 interface EventItem {
   id: number;
-  tgl: string;
+  hari: string;
   tglNum: string;
   bulan: string;
   jenis: "Seminar" | "Sidang" | "Bimbingan";
@@ -34,31 +34,31 @@ interface EventItem {
 
 const EVENTS: Array<EventItem> = [
   {
-    id: 1, tgl: "Kam", tglNum: "1",  bulan: "Agt 2026",
+    id: 1, hari: "Kamis", tglNum: "1", bulan: "Agustus 2026",
     jenis: "Seminar", nama: "Danu Zen", nim: "20101152630045", prodi: "Teknik Informatika",
     waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing I",
     judul: "Sistem Informasi Manajemen Gudang Berbasis Web Berbasis Real-Time Data",
   },
   {
-    id: 2, tgl: "Sab", tglNum: "3",  bulan: "Agt 2026",
-    jenis: "Sidang",  nama: "Rafi Andika", nim: "20101152630089", prodi: "Teknik Informatika",
+    id: 2, hari: "Sabtu", tglNum: "3", bulan: "Agustus 2026",
+    jenis: "Sidang", nama: "Rafi Andika", nim: "20101152630089", prodi: "Teknik Informatika",
     waktu: "10:00 - 11:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
     judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes",
   },
   {
-    id: 3, tgl: "Sel", tglNum: "5",  bulan: "Agt 2026",
+    id: 3, hari: "Selasa", tglNum: "5", bulan: "Agustus 2026",
     jenis: "Bimbingan", nama: "Siti Rahayu", nim: "20101152630101", prodi: "Sistem Informasi",
     waktu: "13:00 - 14:00", ruang: "Ruang Dosen FIK", role: "Pembimbing I",
     judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra",
   },
   {
-    id: 4, tgl: "Jum", tglNum: "8",  bulan: "Agt 2026",
-    jenis: "Sidang",  nama: "Budi Prasetyo", nim: "20101152630022", prodi: "Teknik Informatika",
+    id: 4, hari: "Jumat", tglNum: "8", bulan: "Agustus 2026",
+    jenis: "Sidang", nama: "Budi Prasetyo", nim: "20101152630022", prodi: "Teknik Informatika",
     waktu: "14:00 - 15:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
     judul: "Pengembangan Aplikasi Mobile Absensi Mahasiswa Berbasis Geolocation",
   },
   {
-    id: 5, tgl: "Sen", tglNum: "12", bulan: "Agt 2026",
+    id: 5, hari: "Senin", tglNum: "12", bulan: "Agustus 2026",
     jenis: "Seminar", nama: "Anisa Permatasari", nim: "20101152630067", prodi: "Teknik Informatika",
     waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing II",
     judul: "Klasifikasi Citra Daun Menggunakan Convolutional Neural Network (CNN)",
@@ -157,7 +157,7 @@ export default function DosenKalenderPage() {
                 {/* Card Header + Filters */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <CalendarDays className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -210,19 +210,23 @@ export default function DosenKalenderPage() {
                           }`}
                         >
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            {/* Date Box + Title */}
+                            {/* Sleek Minimal Date Info */}
                             <div className="flex items-center gap-3 min-w-0 flex-1">
-                              <div className={`w-11 h-11 rounded-xl flex flex-col items-center justify-center shrink-0 text-white font-display shadow-xs ${solidCfg.bg}`}>
-                                <span className="text-[9px] font-black uppercase text-white/80 leading-none">{ev.tgl}</span>
-                                <span className="text-base font-black leading-none my-0.5">{ev.tglNum}</span>
+                              <div className="flex flex-col shrink-0 min-w-[75px]">
+                                <span className="text-xs font-black text-slate-900 font-display leading-tight">
+                                  {ev.hari.slice(0, 3)}, {ev.tglNum} Agt
+                                </span>
+                                <span className="text-[10px] text-slate-500 font-mono font-medium">
+                                  {ev.waktu.split(" - ")[0]} WIB
+                                </span>
                               </div>
 
-                              <div className="space-y-0.5 min-w-0 flex-1">
+                              <div className="space-y-0.5 min-w-0 flex-1 border-l border-slate-200/80 pl-3">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold shadow-2xs font-display ${solidCfg.bg} text-white`}>
+                                  <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display ${solidCfg.bg} text-white`}>
                                     {ev.jenis}
                                   </span>
-                                  <span className="text-[9px] font-bold text-white bg-slate-900 px-2 py-0.5 rounded-full shadow-2xs font-mono">
+                                  <span className="text-[9.5px] font-bold text-white bg-slate-900 px-2.5 py-0.5 rounded-full shadow-2xs font-mono">
                                     {ev.role}
                                   </span>
                                 </div>
@@ -233,27 +237,18 @@ export default function DosenKalenderPage() {
 
                             {/* Location & Quick Action */}
                             <div className="flex items-center gap-2 shrink-0 justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200/60">
-                              <div className="text-right text-[10px] text-slate-500 space-y-0.5 hidden sm:block">
-                                <p className="font-bold text-slate-800 flex items-center justify-end gap-1">
-                                  <Clock className="w-3 h-3 text-[#C62828]" /> {ev.waktu}
-                                </p>
-                                <p className="font-medium text-slate-500 truncate max-w-[130px] flex items-center justify-end gap-1">
-                                  <MapPin className="w-3 h-3 text-[#C62828]" /> {ev.ruang}
-                                </p>
-                              </div>
-
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleToggleAttendance(ev.id, ev.nama, ev.jenis);
                                 }}
-                                className={`px-2.5 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-2xs ${
+                                className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-2xs font-display ${
                                   isAttended
                                     ? "bg-emerald-600 text-white"
                                     : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                                 }`}
                               >
-                                <CheckCircle2 className={`w-3 h-3 ${isAttended ? "text-white" : "text-emerald-600"}`} />
+                                <CheckCircle2 className={`w-3.5 h-3.5 ${isAttended ? "text-white" : "text-emerald-600"}`} />
                                 {isAttended ? "Hadir" : "Absen"}
                               </button>
                             </div>
@@ -290,24 +285,25 @@ export default function DosenKalenderPage() {
                 {selectedEv ? (
                   <div className="flex-1 overflow-y-auto scrollbar-none p-5 space-y-4">
                     {/* Event Time & Venue Box */}
-                    <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-14 h-14 rounded-2xl ${JENIS_SOLID[selectedEv.jenis]?.bg} text-white flex flex-col items-center justify-center shrink-0 shadow-md font-display`}>
-                          <span className="text-[10px] font-black uppercase text-white/80 leading-none">{selectedEv.tgl}</span>
-                          <span className="text-xl font-black leading-none my-0.5">{selectedEv.tglNum}</span>
-                          <span className="text-[9px] font-bold text-white/70">{selectedEv.bulan}</span>
-                        </div>
-                        <div className="space-y-1">
-                          <span className="px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-slate-900 text-white font-mono shadow-2xs">
-                            {selectedEv.role}
-                          </span>
-                          <p className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-[#C62828]" /> {selectedEv.waktu} WIB
-                          </p>
-                          <p className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> {selectedEv.ruang}
-                          </p>
-                        </div>
+                    <div className="p-4 rounded-xl border border-slate-200/80 bg-slate-50 space-y-2.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Waktu &amp; Lokasi</span>
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-slate-900 text-white font-mono shadow-2xs">
+                          {selectedEv.role}
+                        </span>
+                      </div>
+
+                      <h3 className="text-sm font-black text-slate-900 font-display">
+                        {selectedEv.hari}, {selectedEv.tglNum} {selectedEv.bulan}
+                      </h3>
+
+                      <div className="pt-2 border-t border-slate-200/60 space-y-1.5 text-xs text-slate-700 font-medium">
+                        <p className="flex items-center gap-2">
+                          <Clock className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Waktu:</strong> {selectedEv.waktu} WIB
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Lokasi:</strong> {selectedEv.ruang}
+                        </p>
                       </div>
                     </div>
 
