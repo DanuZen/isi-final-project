@@ -196,7 +196,7 @@ export default function AdminFakultasDashboard() {
               <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#F59E0B] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Shield className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">Bebas Fakultas</h2>
