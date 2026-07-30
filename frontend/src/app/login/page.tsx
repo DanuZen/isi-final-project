@@ -219,9 +219,8 @@ export default function LoginPage() {
          ════════════════════════════════════════════════════════════ */}
       <div className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-[#0B0F19] via-[#1A0C14] to-[#C62828]/90 relative flex-col justify-center p-12 xl:p-16 text-white overflow-hidden">
         
-        {/* Subtle Ambient Vertical Light Streams */}
-        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,transparent_70%)]" />
-        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px)] bg-[size:4rem_100%]" />
+        {/* Soft Radial Ambient Glow */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(ellipse_at_center,rgba(198,40,40,0.35)_0%,transparent_75%)]" />
 
         {/* Full-bleed Photo Backdrop overlay */}
         <div className="absolute inset-0 z-0 opacity-25">
