@@ -71,8 +71,8 @@ export function RoleLayout({
             </div>
             {sidebarOpen && (
               <div className="min-w-0">
-                <p className="font-black text-[13px] tracking-[0.15em] text-white leading-none">SIPETA</p>
-                <p className="text-[8px] font-bold tracking-[0.2em] uppercase mt-0.5 leading-none" style={{ color: "#F59E0B" }}>
+                <p className="font-black text-sm tracking-wider text-white font-display leading-none">SIPETA</p>
+                <p className="text-[8.5px] font-bold tracking-widest uppercase mt-1 leading-none text-[#C62828] font-display">
                   UPI YPTK PADANG
                 </p>
               </div>

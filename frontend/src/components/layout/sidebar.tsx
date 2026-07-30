@@ -84,23 +84,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <button
         onClick={onToggle}
         title={isOpen ? "Perkecil sidebar" : "Perbesar sidebar"}
-        className={`border-b border-[#333333] bg-gradient-to-b from-[#252525] to-[#1A1A1A] flex items-center transition-all duration-300 shrink-0 w-full hover:brightness-110 active:scale-95 cursor-pointer ${
-          isOpen
-            ? "p-5 flex-col justify-center text-center space-y-2.5"
-            : "p-3 justify-center"
+        className={`border-b border-[#333333] bg-gradient-to-b from-[#252525] to-[#1A1A1A] flex items-center transition-all duration-300 shrink-0 w-full hover:brightness-110 active:scale-95 cursor-pointer h-[60px] ${
+          isOpen ? "px-4 gap-3 justify-start" : "p-2 justify-center"
         }`}
       >
         {/* Emblem Logo */}
         <div
-          className={`relative flex items-center justify-center shrink-0 filter drop-shadow-lg transition-all duration-300 ${
-            isOpen ? "w-14 h-14" : "w-9 h-9"
+          className={`relative flex items-center justify-center shrink-0 filter drop-shadow-md transition-all duration-300 ${
+            isOpen ? "w-10 h-10" : "w-8 h-8"
           }`}
         >
           <Image
             src="/upiyptk_emblem.webp"
             alt="Emblem UPI YPTK"
-            width={56}
-            height={56}
+            width={40}
+            height={40}
             className="object-contain w-full h-full"
             priority
           />
@@ -108,12 +106,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Text — only when expanded */}
         {isOpen && (
-          <div className="flex flex-col items-center justify-center text-center">
-            <h1 className="font-black text-2xl tracking-widest font-display text-white leading-none">
+          <div className="flex flex-col text-left min-w-0">
+            <h1 className="font-black text-lg tracking-wider font-display text-white leading-none">
               SIPETA
             </h1>
-            <p className="text-[10px] font-extrabold text-[#F59E0B] font-display tracking-widest uppercase mt-1.5 leading-none">
-              {roleName}
+            <p className="text-[8.5px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-1 leading-none">
+              UPI YPTK PADANG
             </p>
           </div>
         )}
