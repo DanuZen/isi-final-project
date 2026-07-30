@@ -232,28 +232,32 @@ export default function DosenPengajuanPage() {
 
                 {/* History Card */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 shrink-0">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-slate-950 text-white flex items-center justify-center shrink-0">
-                      <History className="w-3.5 h-3.5 text-white" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <History className="w-4 h-4 text-white" />
                     </div>
-                    <h2 className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
+                    <h2 className="text-xs font-bold text-slate-800 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
                   </div>
 
-                  <div className="divide-y divide-slate-100 max-h-36 overflow-y-auto scrollbar-none">
+                  <div className="divide-y divide-slate-100 max-h-40 overflow-y-auto scrollbar-none">
                     {riwayatList.map((r, i) => (
-                      <div key={i} className="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${r.aksi === "Diterima" ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-600"}`}>
+                      <div key={i} className="flex items-center gap-3 py-2.5 first:pt-0 last:pb-0">
+                        <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 shadow-2xs font-bold ${
+                          r.aksi === "Diterima" ? "bg-emerald-600 text-white" : "bg-[#C62828] text-white"
+                        }`}>
                           {r.aksi === "Diterima"
-                            ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                            : <XCircle className="w-3.5 h-3.5 text-red-500" />
+                            ? <CheckCircle2 className="w-4 h-4 text-white" />
+                            : <XCircle className="w-4 h-4 text-white" />
                           }
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-slate-800 font-display">{r.nama} <span className="font-mono text-slate-400 text-[10px]">({r.nim})</span></p>
-                          <p className="text-[10.5px] text-slate-500 truncate font-medium">&ldquo;{r.judul}&rdquo;</p>
+                          <p className="text-xs font-black text-slate-900 font-display">{r.nama} <span className="font-mono text-slate-400 text-[10px] font-normal">({r.nim})</span></p>
+                          <p className="text-[11px] text-slate-500 truncate font-medium">&ldquo;{r.judul}&rdquo;</p>
                         </div>
                         <div className="text-right shrink-0">
-                          <span className={`text-[9.5px] font-bold px-2 py-0.5 rounded-full font-display ${r.aksi === "Diterima" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-red-50 text-red-600 border border-red-200"}`}>
+                          <span className={`text-[9.5px] font-bold px-2.5 py-0.5 rounded-full font-display border shadow-2xs ${
+                            r.aksi === "Diterima" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-rose-50 text-rose-700 border-rose-200"
+                          }`}>
                             {r.aksi}
                           </span>
                         </div>
