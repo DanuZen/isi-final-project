@@ -154,20 +154,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {isOpen && <span>{item.label}</span>}
               </div>
 
-              {/* Badge — only when expanded */}
-              {isOpen && item.badge && (
-                <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    isActive
-                      ? "bg-white/20 text-white"
-                      : item.badge === "Aktif"
-                      ? "bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30"
-                      : "bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30"
-                  }`}
-                >
-                  {item.badge}
-                </span>
-              )}
+
 
               {/* Tooltip on collapsed */}
               {!isOpen && (
