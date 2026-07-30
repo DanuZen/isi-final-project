@@ -168,63 +168,84 @@ export default function BimbinganPage() {
 
                     {/* Thread Messages List (Internally Scrollable) */}
                     <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none pr-1 space-y-4">
-                      {logList.map((log) => (
-                        <div
-                          key={log.id}
-                          className="p-4.5 rounded-2xl border border-slate-200/90 bg-slate-50/70 space-y-3.5 shadow-xs"
-                        >
-                          {/* Log Header */}
-                          <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5 text-xs">
-                            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-xs font-display">
-                              Sesi Bimbingan #{log.id}
-                            </span>
-                            <span className="text-[11px] font-medium text-slate-500">
-                              {log.tanggal}
-                            </span>
+                      {logList.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center h-full py-12 text-center space-y-3">
+                          <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#C62828] shadow-xs">
+                            <MessageSquare className="w-7 h-7 text-[#C62828]" />
                           </div>
-
-                          {/* Student Message Bubble */}
-                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-xs">
-                            <div className="flex items-center justify-between gap-2 flex-wrap">
-                              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200">
-                                {log.mahasiswaNama} (Mahasiswa)
-                              </span>
-                              {log.fileAttachment && (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition-colors shadow-xs">
-                                  <Paperclip className="w-3.5 h-3.5 text-[#C62828]" />
-                                  <span>{log.fileAttachment}</span>
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#C62828]">
-                              &ldquo;{log.catatanMahasiswa}&rdquo;
+                          <div className="space-y-1 max-w-sm">
+                            <h4 className="font-bold text-sm text-slate-900 font-display">Belum Ada Catatan Bimbingan</h4>
+                            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                              Anda belum memiliki histori sesi bimbingan. Klik tombol <strong className="text-[#C62828]">&ldquo;Catat Sesi Bimbingan&rdquo;</strong> di atas untuk mencatat konsultasi dengan Dosen Pembimbing.
                             </p>
                           </div>
-
-                          {/* Lecturer Response Bubble */}
-                          <div className="bg-white p-4 rounded-xl border border-amber-200 border-l-4 border-l-[#F59E0B] space-y-2 ml-3 shadow-xs">
-                            <div className="flex items-center justify-between gap-2 flex-wrap">
-                              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
-                                {log.dosenNama}
-                              </span>
-                              <span
-                                className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white shadow-xs ${
-                                  log.statusFeedback === "Disetujui Pembimbing"
-                                    ? "bg-emerald-600"
-                                    : log.statusFeedback === "Menunggu Review"
-                                    ? "bg-[#F59E0B]"
-                                    : "bg-[#D97706]"
-                                }`}
-                              >
-                                {log.statusFeedback}
-                              </span>
-                            </div>
-                            <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#F59E0B]">
-                              &ldquo;{log.catatanDosen}&rdquo;
-                            </p>
-                          </div>
+                          <button
+                            onClick={() => setShowLogModal(true)}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#a81f1f] transition-all active:scale-95 shadow-xs font-display cursor-pointer mt-1"
+                          >
+                            <PlusCircle className="w-4 h-4" />
+                            <span>Catat Sesi Bimbingan Pertama</span>
+                          </button>
                         </div>
-                      ))}
+                      ) : (
+                        logList.map((log) => (
+                          <div
+                            key={log.id}
+                            className="p-4.5 rounded-2xl border border-slate-200/90 bg-slate-50/70 space-y-3.5 shadow-xs"
+                          >
+                            {/* Log Header */}
+                            <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5 text-xs">
+                              <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-xs font-display">
+                                Sesi Bimbingan #{log.id}
+                              </span>
+                              <span className="text-[11px] font-medium text-slate-500">
+                                {log.tanggal}
+                              </span>
+                            </div>
+
+                            {/* Student Message Bubble */}
+                            <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-xs">
+                              <div className="flex items-center justify-between gap-2 flex-wrap">
+                                <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200">
+                                  {log.mahasiswaNama} (Mahasiswa)
+                                </span>
+                                {log.fileAttachment && (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition-colors shadow-xs">
+                                    <Paperclip className="w-3.5 h-3.5 text-[#C62828]" />
+                                    <span>{log.fileAttachment}</span>
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#C62828]">
+                                &ldquo;{log.catatanMahasiswa}&rdquo;
+                              </p>
+                            </div>
+
+                            {/* Lecturer Response Bubble */}
+                            <div className="bg-white p-4 rounded-xl border border-amber-200 border-l-4 border-l-[#F59E0B] space-y-2 ml-3 shadow-xs">
+                              <div className="flex items-center justify-between gap-2 flex-wrap">
+                                <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                                  {log.dosenNama}
+                                </span>
+                                <span
+                                  className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white shadow-xs ${
+                                    log.statusFeedback === "Disetujui Pembimbing"
+                                      ? "bg-emerald-600"
+                                      : log.statusFeedback === "Menunggu Review"
+                                      ? "bg-[#F59E0B]"
+                                      : "bg-[#D97706]"
+                                  }`}
+                                >
+                                  {log.statusFeedback}
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#F59E0B]">
+                                &ldquo;{log.catatanDosen}&rdquo;
+                              </p>
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>
