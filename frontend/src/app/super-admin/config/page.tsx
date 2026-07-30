@@ -33,28 +33,28 @@ export default function SuperAdminConfigPage() {
   };
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
+    <div className="flex flex-col h-screen overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Irvan Syahputra, S.T." userNim="SA-001" userRole="Super Admin" prodiName="Sistem Utama SIPETA" />
 
-          <main className="flex-1 p-5 md:p-6 space-y-3.5 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 md:p-5 space-y-3 overflow-hidden shell-body flex flex-col min-h-0">
 
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-5 relative">
-                <div className="space-y-1 flex-1 min-w-0">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 md:p-4 relative">
+                <div className="space-y-0.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10.5px] font-bold bg-[#C62828] text-white shadow-xs font-display">
-                      <Settings className="w-3.5 h-3.5 text-white" /> Konfigurasi Global Sistem
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <Settings className="w-3 h-3 text-white" /> Konfigurasi Global Sistem
                     </span>
                   </div>
-                  <h1 className="text-lg md:text-xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-base md:text-lg font-black font-display text-white tracking-wide leading-tight">
                     Pengaturan Parameter &amp; Syarat Akademik TA
                   </h1>
-                  <p className="text-[11.5px] text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                  <p className="text-[11px] text-neutral-400 leading-snug max-w-2xl font-medium">
                     Pengaturan mode pemeliharaan, syarat kelayakan SKS &amp; IPK aktivasi TA, kuota bimbingan dosen, serta ambang kemiripan judul.
                   </p>
                 </div>
@@ -62,7 +62,7 @@ export default function SuperAdminConfigPage() {
                 <div className="flex flex-wrap gap-2 shrink-0">
                   <button
                     onClick={handleSave}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5 text-white" />
                     <span>{savedSuccess ? "Tersimpan!" : "Simpan Konfigurasi"}</span>
@@ -73,90 +73,90 @@ export default function SuperAdminConfigPage() {
             </div>
 
             {/* Main Settings Panel (Strict 100% Viewport Fit Layout) */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1 min-h-0 overflow-hidden">
               
               {/* Left Column (2/3): Academic Rules & Limits */}
-              <div className="lg:col-span-2 space-y-3.5 min-h-0 overflow-y-auto scrollbar-none pr-1 pb-10">
+              <div className="lg:col-span-2 flex flex-col justify-between gap-3 min-h-0 overflow-hidden">
                 
                 {/* 1. Academic Rules Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 shrink-0">
-                  <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 space-y-2.5 flex-1 min-h-0 flex flex-col justify-between">
+                  <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 shrink-0">
+                    <div className="w-6 h-6 rounded-lg bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Settings className="w-3.5 h-3.5 text-white" />
                     </div>
                     <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">Syarat Kelayakan Aktivasi &amp; Batas Kuota TA</h2>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 flex-1">
                     <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-slate-700 font-display">Tahun Akademik Aktif</label>
+                      <label className="text-[10.5px] font-bold text-slate-700 font-display">Tahun Akademik Aktif</label>
                       <input
                         type="text"
                         value={tahunAkademik}
                         onChange={(e) => setTahunAkademik(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-display"
+                        className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-display"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-slate-700 font-display">Maksimal Kuota Bimbingan per Dosen</label>
+                      <label className="text-[10.5px] font-bold text-slate-700 font-display">Maksimal Kuota Bimbingan per Dosen</label>
                       <input
                         type="number"
                         value={maxKuota}
                         onChange={(e) => setMaxKuota(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                        className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-slate-700 font-display">Batas Minimal Lulus SKS (Syarat Aktivasi)</label>
+                      <label className="text-[10.5px] font-bold text-slate-700 font-display">Batas Minimal Lulus SKS (Syarat Aktivasi)</label>
                       <input
                         type="number"
                         value={minSks}
                         onChange={(e) => setMinSks(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                        className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-slate-700 font-display">Batas Minimal IPK (Syarat Aktivasi)</label>
+                      <label className="text-[10.5px] font-bold text-slate-700 font-display">Batas Minimal IPK (Syarat Aktivasi)</label>
                       <input
                         type="text"
                         value={minIpk}
                         onChange={(e) => setMinIpk(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                        className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-1 pt-2 border-t border-slate-100">
-                    <label className="text-[11px] font-bold text-slate-700 font-display">Batas Maksimal Kemiripan Judul (Similarity Check %)</label>
+                  <div className="space-y-1 pt-1.5 border-t border-slate-100 shrink-0">
+                    <label className="text-[10.5px] font-bold text-slate-700 font-display">Batas Maksimal Kemiripan Judul (Similarity Check %)</label>
                     <input
                       type="number"
                       value={similarityThreshold}
                       onChange={(e) => setSimilarityThreshold(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                      className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
                     />
-                    <p className="text-[10px] text-slate-400 font-medium">Judul dengan kemiripan di atas {similarityThreshold}% akan otomatis ditolak oleh repositori sistem.</p>
+                    <p className="text-[9.5px] text-slate-400 font-medium">Judul dengan kemiripan di atas {similarityThreshold}% akan otomatis ditolak oleh repositori sistem.</p>
                   </div>
                 </div>
 
                 {/* 2. Security & System Maintenance Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 shrink-0">
-                  <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3 space-y-2 shrink-0">
+                  <div className="flex items-center gap-2 pb-1 border-b border-slate-100">
+                    <div className="w-6 h-6 rounded-lg bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Lock className="w-3.5 h-3.5 text-white" />
                     </div>
                     <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">Keamanan &amp; Pemeliharaan Server</h2>
                   </div>
 
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div>
                       <p className="text-xs font-bold text-slate-800 font-display">Mode Maintenance Sistem</p>
-                      <p className="text-[10.5px] text-slate-500 font-medium">Hanya Super Admin yang dapat mengakses sistem saat mode ini aktif.</p>
+                      <p className="text-[10px] text-slate-500 font-medium">Hanya Super Admin yang dapat mengakses sistem saat mode ini aktif.</p>
                     </div>
                     <button onClick={() => setMaintenance(!maintenance)} className="cursor-pointer">
-                      {maintenance ? <ToggleRight className="w-8 h-8 text-[#C62828]" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                      {maintenance ? <ToggleRight className="w-7 h-7 text-[#C62828]" /> : <ToggleLeft className="w-7 h-7 text-slate-300" />}
                     </button>
                   </div>
                 </div>
@@ -164,22 +164,22 @@ export default function SuperAdminConfigPage() {
               </div>
 
               {/* Right Column (1/3): Summary & Status Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 flex flex-col justify-between min-h-0 h-full">
-                <div className="space-y-3 overflow-y-auto scrollbar-none">
-                  <div className="pb-2 border-b border-slate-100 space-y-1">
-                    <div className="flex items-center gap-2">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 flex flex-col justify-between min-h-0 h-full overflow-hidden">
+                <div className="space-y-2.5 overflow-hidden flex-1 flex flex-col">
+                  <div className="pb-1.5 border-b border-slate-100 space-y-0.5 shrink-0">
+                    <div className="flex items-center gap-1.5">
                       <div className="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold shadow-xs">
                         <Cpu className="w-3.5 h-3.5 text-white" />
                       </div>
                       <h3 className="text-xs font-black text-slate-900 font-display">Status Parameter Aktif</h3>
                     </div>
-                    <p className="text-[10.5px] text-slate-500 leading-relaxed font-medium">
+                    <p className="text-[10px] text-slate-500 leading-tight font-medium">
                       Ringkasan parameter operasional sistem SIPETA yang sedang berlaku.
                     </p>
                   </div>
 
-                  <div className="space-y-2 text-xs">
-                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-[11px]">
+                  <div className="space-y-2 text-xs flex-1 flex flex-col justify-between">
+                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-[10.5px]">
                       <div className="flex items-center justify-between">
                         <span className="text-slate-500 font-medium">Tahun Akademik:</span>
                         <strong className="text-slate-900 font-display">{tahunAkademik}</strong>
@@ -198,17 +198,17 @@ export default function SuperAdminConfigPage() {
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-[10.5px] font-semibold space-y-1">
+                    <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-[10px] font-semibold space-y-0.5">
                       <div className="flex items-center gap-1.5 font-bold text-emerald-800">
                         <Check className="w-3.5 h-3.5 text-emerald-700" />
                         <span>Konfigurasi Terverifikasi Valid</span>
                       </div>
-                      <p className="text-[10px] text-emerald-700 font-medium">Aturan akademik telah disinkronkan dengan database universitas.</p>
+                      <p className="text-[9.5px] text-emerald-700 font-medium">Aturan akademik telah disinkronkan dengan database universitas.</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-100">
+                <div className="pt-2 border-t border-slate-100 shrink-0">
                   <button
                     onClick={handleSave}
                     className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
