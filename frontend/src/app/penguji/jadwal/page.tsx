@@ -6,14 +6,14 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
-  Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight
+  Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award
 } from "lucide-react";
 
 const NAV = [
-  { label: "Dashboard",        href: "/penguji/dashboard",  icon: <LayoutDashboard className="w-4 h-4" /> },
-  { label: "Jadwal Pengujian", href: "/penguji/jadwal",     icon: <CalendarDays className="w-4 h-4" />, badge: "3" },
-  { label: "Input Nilai",      href: "/penguji/nilai",      icon: <Star className="w-4 h-4" /> },
-  { label: "Lembar Revisi",    href: "/penguji/revisi",     icon: <FileEdit className="w-4 h-4" />, badge: "2" },
+  { label: "Dashboard Penguji", href: "/penguji/dashboard", icon: <ShieldCheck className="w-4 h-4" /> },
+  { label: "Jadwal Pengujian",  href: "/penguji/jadwal",    icon: <CalendarDays className="w-4 h-4" /> },
+  { label: "Input Nilai",       href: "/penguji/nilai",      icon: <Award className="w-4 h-4" /> },
+  { label: "Lembar Revisi",     href: "/penguji/revisi",    icon: <FileEdit className="w-4 h-4" /> },
 ];
 
 const JADWAL = [

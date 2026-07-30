@@ -11,7 +11,7 @@ import {
 const NAV = [
   { label: "Dashboard",       href: "/super-admin/dashboard",   icon: <LayoutDashboard className="w-4 h-4" /> },
   { label: "Manajemen User",  href: "/super-admin/users",       icon: <Users className="w-4 h-4" /> },
-  { label: "Audit Log",       href: "/super-admin/audit",       icon: <ClipboardList className="w-4 h-4" />, badge: "12" },
+  { label: "Audit Log",       href: "/super-admin/audit",       icon: <ClipboardList className="w-4 h-4" /> },
   { label: "Konfigurasi",     href: "/super-admin/config",      icon: <Settings className="w-4 h-4" /> },
   { label: "Master Data",     href: "/super-admin/master",      icon: <Database className="w-4 h-4" /> },
 ];

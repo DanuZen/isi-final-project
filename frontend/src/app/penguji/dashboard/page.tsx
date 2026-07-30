@@ -4,15 +4,15 @@ import React from "react";
 import { RoleLayout } from "@/components/layout/role-layout";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
-  CheckCircle2, Clock, AlertCircle, TrendingUp,
+  CheckCircle2, Clock, AlertCircle, TrendingUp, ShieldCheck, Award,
 } from "lucide-react";
 
 /* ── Nav ── */
 const NAV = [
-  { label: "Dashboard",        href: "/penguji/dashboard",        icon: <LayoutDashboard className="w-4 h-4" /> },
-  { label: "Jadwal Pengujian", href: "/penguji/jadwal",           icon: <CalendarDays className="w-4 h-4" />,   badge: "3" },
-  { label: "Input Nilai",      href: "/penguji/nilai",            icon: <Star className="w-4 h-4" /> },
-  { label: "Lembar Revisi",    href: "/penguji/revisi",           icon: <FileEdit className="w-4 h-4" />,       badge: "2" },
+  { label: "Dashboard Penguji", href: "/penguji/dashboard",        icon: <ShieldCheck className="w-4 h-4" /> },
+  { label: "Jadwal Pengujian", href: "/penguji/jadwal",           icon: <CalendarDays className="w-4 h-4" /> },
+  { label: "Input Nilai",      href: "/penguji/nilai",            icon: <Award className="w-4 h-4" /> },
+  { label: "Lembar Revisi",    href: "/penguji/revisi",           icon: <FileEdit className="w-4 h-4" /> },
 ];
 
 /* ── Mock Data ── */
