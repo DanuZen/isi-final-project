@@ -85,14 +85,6 @@ export default function LoginPage() {
               <p className="text-[8.5px] font-bold text-[#C62828] tracking-widest uppercase mt-0.5 font-display">UPI YPTK PADANG</p>
             </div>
           </div>
-
-          <button
-            onClick={() => setShowFaqModal(true)}
-            className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer"
-            title="Bantuan & FAQ"
-          >
-            <HelpCircle className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Form Content Body */}
@@ -170,7 +162,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <span>Lanjutkan ke Portal SIPETA</span>
+                  <span>Masuk</span>
                   <ArrowRight className="w-4 h-4 text-white ml-1" />
                 </>
               )}
