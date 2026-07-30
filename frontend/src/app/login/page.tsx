@@ -1,32 +1,54 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   GraduationCap, UserCheck, ShieldCheck, Building2,
   LayoutDashboard, Users, Lock, LogIn, User, Eye, EyeOff,
   ArrowRight, CheckCircle2, School, FileText, BookOpen,
-  FileCheck, Award, Sparkles, ChevronRight
+  FileCheck, Award, Sparkles, ChevronRight, HelpCircle, X,
+  Shield, Check, ArrowUpRight, Zap
 } from "lucide-react";
 
 /* ─────────────────────────── DATA ROLES ─────────────────────────── */
 
 const QUICK_ROLES = [
-  { id: "mahasiswa",        label: "Mahasiswa",        desc: "Portal Skripsi",        path: "/",                         icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
+  { id: "mahasiswa",        label: "Mahasiswa",        desc: "Portal Skripsi & TA",    path: "/",                         icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
   { id: "dosen_pembimbing", label: "Dosen Pembimbing", desc: "Bimbingan & ACC",     path: "/dosen/dashboard",          icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
-  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian & Sidang",  path: "/penguji/dashboard",        icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
+  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian Ujian",     path: "/penguji/dashboard",        icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
   { id: "admin_prodi",      label: "Admin Prodi",      desc: "Verifikasi & Jadwal", path: "/admin-prodi/dashboard",    icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
   { id: "admin_fakultas",   label: "Admin Fakultas",   desc: "SK & Bebas Fakultas", path: "/admin-fakultas/dashboard", icon: School,        bg: "bg-indigo-600", text: "text-white" },
-  { id: "pimpinan",         label: "Pimpinan / Dekan", desc: "Laporan Eksekutif",   path: "/dekanat/dashboard",        icon: LayoutDashboard, bg: "bg-[#F59E0B]", text: "text-slate-950" },
-  { id: "super_admin",      label: "Super Admin",      desc: "Audit & Konfigurasi", path: "/super-admin/dashboard",    icon: Users,         bg: "bg-slate-900",  text: "text-white" },
+  { id: "pimpinan",         label: "Pimpinan / Dekan", desc: "Eksekutif & Laporan", path: "/dekanat/dashboard",        icon: LayoutDashboard, bg: "bg-[#F59E0B]", text: "text-slate-950" },
+  { id: "super_admin",      label: "Super Admin",      desc: "Audit & System Config", path: "/super-admin/dashboard",  icon: Users,         bg: "bg-slate-900",  text: "text-white" },
 ];
 
 const TA_STEPS = [
-  { icon: FileText,  title: "1. Usulan Judul",   desc: "Pengajuan & Cek Kemiripan" },
-  { icon: BookOpen,  title: "2. Bimbingan TA",   desc: "Min. 5 Sesi Log Digital" },
-  { icon: FileCheck, title: "3. Sempro",         desc: "Seminar & Berita Acara" },
-  { icon: Award,     title: "4. Sidang Skripsi", desc: "Ujian Final & Hardcover" },
+  { icon: FileText,  title: "1. Usulan Judul",   desc: "Pengajuan & Similarity Check" },
+  { icon: BookOpen,  title: "2. Bimbingan TA",   desc: "Min. 5 Sesi Log Bimbingan Digital" },
+  { icon: FileCheck, title: "3. Sempro",         desc: "Seminar Proposal & Berita Acara" },
+  { icon: Award,     title: "4. Sidang Skripsi", desc: "Ujian Final & Hardcover Skripsi" },
+];
+
+const STATS_SUMMARY = [
+  { value: "1.200+", label: "Mahasiswa Aktif" },
+  { value: "180+",   label: "Dosen Pembimbing" },
+  { value: "98.4%",  label: "Kelulusan Tepat Waktu" },
+];
+
+const FAQ_ITEMS = [
+  {
+    q: "Bagaimana cara mendapatkan akun SIPETA?",
+    a: "Akun SIPETA diberikan secara otomatis oleh Admin Program Studi setelah Anda menyelesaikan proses clearing SKS & IPK di sekretariat prodi."
+  },
+  {
+    q: "Bagaimana jika saya lupa kata sandi?",
+    a: "Klik tombol 'Lupa Sandi?' pada form login, atau hubungi Sekretariat Admin Prodi kampus Anda dengan membawa KTM/Kartu Identitas."
+  },
+  {
+    q: "Berapa batas minimal sesi bimbingan untuk daftar Sempro?",
+    a: "Sesuai regulasi akademik UPI YPTK Padang, mahasiswa wajib mencatatkan minimal 5 sesi bimbingan yang telah di-ACC oleh Dosen Pembimbing."
+  }
 ];
 
 export default function LoginPage() {
@@ -37,6 +59,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading]           = useState(false);
   const [targetPath, setTargetPath]     = useState("/");
+  const [showFaqModal, setShowFaqModal] = useState(false);
 
   // Switch role tabs & auto-fill demo credentials
   const handleTabSwitch = (tab: "mahasiswa" | "dosen" | "admin") => {
@@ -73,7 +96,7 @@ export default function LoginPage() {
       <div className="hidden lg:flex w-1/2 relative flex-col justify-between p-10 xl:p-14 overflow-hidden bg-[#0B0F19]">
         
         {/* Full-bleed Background Image */}
-        <div className="absolute inset-0 z-0 opacity-40">
+        <div className="absolute inset-0 z-0 opacity-35">
           <Image
             src="/upi.jpeg"
             alt="Gedung UPI YPTK Padang"
@@ -87,7 +110,7 @@ export default function LoginPage() {
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/80 to-[#0B0F19]/40" />
         <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0B0F19] to-transparent z-0" />
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/90 to-transparent z-0" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_left,rgba(198,40,40,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_left,rgba(198,40,40,0.22),transparent_60%)]" />
 
         {/* Top Branding Section */}
         <div className="relative z-10 flex items-center justify-between">
@@ -102,6 +125,14 @@ export default function LoginPage() {
               </p>
             </div>
           </div>
+
+          <button
+            onClick={() => setShowFaqModal(true)}
+            className="px-3.5 py-1.5 rounded-full text-[11px] font-bold bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/15 transition-all flex items-center gap-1.5 cursor-pointer font-display"
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-[#F59E0B]" />
+            <span>Pusat Bantuan &amp; FAQ</span>
+          </button>
         </div>
 
         {/* Middle Hero Text Section */}
@@ -116,13 +147,13 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* 4 Tahap Process Chips */}
+          {/* 4 Tahap Process Chips Grid */}
           <div className="grid grid-cols-2 gap-3 pt-2">
             {TA_STEPS.map((step) => {
               const StepIcon = step.icon;
               return (
                 <div key={step.title} className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#C62828]/20 border border-[#C62828]/40 text-white flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#C62828]/20 border border-[#C62828]/40 text-white flex items-center justify-center shrink-0 shadow-xs">
                     <StepIcon className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -132,6 +163,16 @@ export default function LoginPage() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Real Live Stats Bar */}
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md grid grid-cols-3 gap-2">
+            {STATS_SUMMARY.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-lg xl:text-xl font-black font-display text-white">{stat.value}</p>
+                <p className="text-[10px] text-slate-400 font-medium">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -158,9 +199,15 @@ export default function LoginPage() {
               <p className="text-[8px] font-bold text-[#C62828] uppercase font-display">UPI YPTK PADANG</p>
             </div>
           </div>
+          <button
+            onClick={() => setShowFaqModal(true)}
+            className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-900 text-white flex items-center gap-1"
+          >
+            <HelpCircle className="w-3 h-3 text-[#F59E0B]" /> FAQ
+          </button>
         </div>
 
-        <div className="max-w-md w-full mx-auto my-auto space-y-7 py-6">
+        <div className="max-w-md w-full mx-auto my-auto space-y-6 py-4">
 
           {/* Form Header Title */}
           <div className="space-y-2">
@@ -172,18 +219,18 @@ export default function LoginPage() {
               Selamat Datang di SIPETA
             </h2>
             <p className="text-xs text-slate-500 font-medium">
-              Silakan pilih kategori peran dan masukkan NIM/NIDN Anda untuk masuk.
+              Silakan pilih kategori peran dan masukkan kredensial Anda untuk masuk.
             </p>
           </div>
 
           {/* ── Category Role Switcher Tabs ── */}
-          <div className="p-1 bg-slate-200/70 rounded-2xl grid grid-cols-3 gap-1">
+          <div className="p-1 bg-slate-200/70 rounded-2xl grid grid-cols-3 gap-1 shadow-2xs">
             <button
               type="button"
               onClick={() => handleTabSwitch("mahasiswa")}
               className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
                 activeTab === "mahasiswa"
-                  ? "bg-white text-slate-900 shadow-sm"
+                  ? "bg-white text-slate-900 shadow-xs ring-1 ring-slate-200"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
@@ -196,7 +243,7 @@ export default function LoginPage() {
               onClick={() => handleTabSwitch("dosen")}
               className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
                 activeTab === "dosen"
-                  ? "bg-white text-slate-900 shadow-sm"
+                  ? "bg-white text-slate-900 shadow-xs ring-1 ring-slate-200"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
@@ -209,7 +256,7 @@ export default function LoginPage() {
               onClick={() => handleTabSwitch("admin")}
               className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
                 activeTab === "admin"
-                  ? "bg-white text-slate-900 shadow-sm"
+                  ? "bg-white text-slate-900 shadow-xs ring-1 ring-slate-200"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
@@ -221,6 +268,16 @@ export default function LoginPage() {
           {/* ── Login Form Card ── */}
           <form onSubmit={handleLogin} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
             
+            {/* Active Role Indicator Pill */}
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 text-xs">
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest font-display">Kredensial Sesi</span>
+              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold font-display text-white ${
+                activeTab === "mahasiswa" ? "bg-emerald-600" : activeTab === "dosen" ? "bg-[#C62828]" : "bg-blue-600"
+              }`}>
+                Mode {activeTab === "mahasiswa" ? "Mahasiswa" : activeTab === "dosen" ? "Dosen (Pembimbing / Penguji)" : "Admin Prodi / Fakultas"}
+              </span>
+            </div>
+
             {/* Username Input */}
             <div className="space-y-1.5">
               <label className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-display">
@@ -233,7 +290,13 @@ export default function LoginPage() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  placeholder="Masukkan nomor identitas..."
+                  placeholder={
+                    activeTab === "mahasiswa"
+                      ? "Contoh: 20101152630045"
+                      : activeTab === "dosen"
+                      ? "Contoh: 1012057301"
+                      : "Contoh: 198504122010122001"
+                  }
                   className="w-full pl-10 pr-4 py-3 rounded-xl text-xs text-slate-900 font-bold bg-slate-50 border border-slate-200 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs font-mono"
                 />
               </div>
@@ -243,7 +306,11 @@ export default function LoginPage() {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-display">Kata Sandi</label>
-                <button type="button" className="text-[11px] font-bold text-[#C62828] hover:underline cursor-pointer font-display">
+                <button
+                  type="button"
+                  onClick={() => setShowFaqModal(true)}
+                  className="text-[11px] font-bold text-[#C62828] hover:underline cursor-pointer font-display"
+                >
                   Lupa sandi?
                 </button>
               </div>
@@ -289,10 +356,12 @@ export default function LoginPage() {
           </form>
 
           {/* ── Quick Direct Portal Links Grid (Clear & Professional) ── */}
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-1">
             <div className="flex items-center justify-between">
-              <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest font-display">Akses Pintas Portal (Dev Direct Access)</span>
-              <span className="text-[9.5px] font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-700 font-mono">7 Portal Role</span>
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest font-display flex items-center gap-1">
+                <Zap className="w-3 h-3 text-[#F59E0B]" /> Pintasan Akses Portal Direct (Dev Access)
+              </span>
+              <span className="text-[9.5px] font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-700 font-mono">7 Role</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -321,7 +390,7 @@ export default function LoginPage() {
           </div>
 
           {/* Security Notice */}
-          <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 flex items-start gap-2.5 text-slate-600 text-[11px] font-medium">
+          <div className="p-3 rounded-xl bg-slate-100 border border-slate-200 flex items-start gap-2 text-slate-600 text-[11px] font-medium">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <p>
               Akun SIPETA diterbitkan secara resmi oleh <strong>Admin Prodi</strong> setelah verifikasi clearing SKS &amp; IPK di kampus.
@@ -331,11 +400,58 @@ export default function LoginPage() {
         </div>
 
         {/* Page Footer */}
-        <div className="text-center pt-6 border-t border-slate-200/80 text-[11px] text-slate-400 font-medium">
+        <div className="text-center pt-4 border-t border-slate-200/80 text-[11px] text-slate-400 font-medium">
           SIPETA v1.4 — Universitas Putra Indonesia YPTK Padang
         </div>
 
       </div>
+
+      {/* ── FAQ & Help Modal ── */}
+      {showFaqModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col animate-in fade-in zoom-in-95">
+            <div className="p-5 bg-[#1A1A1A] text-white flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                  <HelpCircle className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm font-display text-white">Pusat Bantuan &amp; FAQ SIPETA</h3>
+                  <p className="text-[10px] text-neutral-400">Universitas Putra Indonesia YPTK Padang</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowFaqModal(false)}
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4 overflow-y-auto max-h-[60vh]">
+              {FAQ_ITEMS.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                  <p className="text-xs font-bold text-slate-900 font-display flex items-start gap-2">
+                    <span className="text-[#C62828] font-bold">Q:</span> {item.q}
+                  </p>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed pl-5">
+                    {item.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-4 bg-slate-100 border-t border-slate-200 flex justify-end">
+              <button
+                onClick={() => setShowFaqModal(false)}
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all cursor-pointer font-display"
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
