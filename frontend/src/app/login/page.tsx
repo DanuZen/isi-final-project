@@ -265,7 +265,7 @@ export default function LoginPage() {
       {/* ════════════════════════════════════════════════════════════
           RIGHT COLUMN (50% Width): 100% Full-Screen Visual & Hero Showcase
          ════════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-[#0B0F19] via-[#1A0C14] to-[#C62828]/90 relative flex-col justify-between p-12 xl:p-16 text-white overflow-hidden">
+      <div className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-[#0B0F19] via-[#1A0C14] to-[#C62828]/90 relative flex-col justify-center p-12 xl:p-16 text-white overflow-hidden">
         
         {/* Subtle Ambient Vertical Light Streams */}
         <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,transparent_70%)]" />
@@ -282,13 +282,6 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Header Badge */}
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/15 font-display">
-            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" /> Portal Perjalanan Tugas Akhir
-          </span>
-        </div>
-
         {/* Centered Graphic Card Showcase */}
         <div className="relative z-10 my-auto text-center space-y-6 py-12 max-w-lg mx-auto">
           <div className="w-36 h-36 mx-auto relative drop-shadow-[0_20px_50px_rgba(198,40,40,0.6)] animate-bounce-slow">
@@ -303,12 +296,6 @@ export default function LoginPage() {
               Kelola usulan judul, log bimbingan, penjadwalan ujian seminar &amp; sidang skripsi secara transparan bagi seluruh Civitas Akademika UPI YPTK Padang.
             </p>
           </div>
-        </div>
-
-        {/* Bottom Card Summary Footnote */}
-        <div className="relative z-10 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md flex items-center justify-between text-xs font-medium">
-          <span>SIPETA UPI YPTK Padang</span>
-          <span className="text-emerald-400 font-bold font-mono">Status: Active Operational</span>
         </div>
 
       </div>
