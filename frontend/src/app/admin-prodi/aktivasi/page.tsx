@@ -76,8 +76,8 @@ export default function AdminProdiAktivasiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-amber-600 text-white shadow-xs">
-                      <UserPlus className="w-3.5 h-3.5" /> Antrean Aktivasi Account Clearing
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <UserPlus className="w-3.5 h-3.5 text-white" /> Antrean Aktivasi Account Clearing
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -91,7 +91,7 @@ export default function AdminProdiAktivasiPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-prodi/mahasiswa"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Daftar Mahasiswa TA</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -110,10 +110,10 @@ export default function AdminProdiAktivasiPage() {
 
             {/* Main Container */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <UserCheck className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <UserCheck className="w-4 h-4 text-white" />
                   </div>
                   <div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Antrean Clearing Luring</h2>
@@ -132,7 +132,7 @@ export default function AdminProdiAktivasiPage() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto flex-1">
+              <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="border-b border-slate-100 bg-slate-50">

@@ -37,10 +37,10 @@ const MAHASISWA: Array<{
 
 const TAHAP_CFG: Record<TahapKey, { color: string; bg: string }> = {
   "Usulan":   { color: "#ffffff", bg: "bg-amber-600" },
-  "Bimbingan":{ color: "#ffffff", bg: "bg-blue-600" },
-  "Seminar":  { color: "#ffffff", bg: "bg-indigo-600" },
+  "Bimbingan":{ color: "#ffffff", bg: "bg-emerald-600" },
+  "Seminar":  { color: "#ffffff", bg: "bg-amber-600" },
   "Sidang":   { color: "#ffffff", bg: "bg-[#C62828]" },
-  "Selesai":  { color: "#ffffff", bg: "bg-emerald-600" },
+  "Selesai":  { color: "#ffffff", bg: "bg-emerald-700" },
 };
 
 export default function AdminProdiMahasiswaPage() {
@@ -72,8 +72,8 @@ export default function AdminProdiMahasiswaPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-600 text-white shadow-xs">
-                      <Users className="w-3.5 h-3.5" /> Database Mahasiswa TA Prodi TI
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <Users className="w-3.5 h-3.5 text-white" /> Database Mahasiswa TA Prodi TI
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
