@@ -179,7 +179,7 @@ export default function DosenPengajuanPage() {
                         <p className="text-[10px] text-slate-400 font-medium">Klik permohonan untuk pratinjau detail</p>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-[10.5px] font-bold bg-amber-100 text-amber-800 border border-amber-200 font-display">
+                    <span className="px-3 py-1 rounded-full text-[10.5px] font-bold bg-[#F59E0B] text-slate-950 shadow-2xs font-display">
                       {pengajuanList.length} Menunggu
                     </span>
                   </div>
@@ -215,7 +215,7 @@ export default function DosenPengajuanPage() {
                                 </div>
                               </div>
 
-                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-50 text-blue-700 border border-blue-100 shrink-0">
+                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-600 text-white shadow-2xs shrink-0 font-display">
                                 {p.bidang}
                               </span>
                             </div>
@@ -255,8 +255,8 @@ export default function DosenPengajuanPage() {
                           <p className="text-[11px] text-slate-500 truncate font-medium">&ldquo;{r.judul}&rdquo;</p>
                         </div>
                         <div className="text-right shrink-0">
-                          <span className={`text-[9.5px] font-bold px-2.5 py-0.5 rounded-full font-display border shadow-2xs ${
-                            r.aksi === "Diterima" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-rose-50 text-rose-700 border-rose-200"
+                          <span className={`text-[9.5px] font-bold px-2.5 py-0.5 rounded-full font-display shadow-2xs text-white ${
+                            r.aksi === "Diterima" ? "bg-emerald-600" : "bg-[#C62828]"
                           }`}>
                             {r.aksi}
                           </span>
@@ -283,7 +283,7 @@ export default function DosenPengajuanPage() {
                   </div>
 
                   {selectedMhs && (
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 font-mono">
+                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
                       {selectedMhs.nim}
                     </span>
                   )}
@@ -312,7 +312,7 @@ export default function DosenPengajuanPage() {
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Rencana Topik Skripsi</span>
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-600 text-white shadow-2xs font-display">
                           {selectedMhs.bidang}
                         </span>
                       </div>
