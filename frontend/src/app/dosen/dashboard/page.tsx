@@ -297,7 +297,7 @@ export default function DosenDashboardPage() {
               <div className="lg:col-span-4 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#F59E0B] text-white flex items-center justify-center font-bold shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
                       <UserCheck className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">
