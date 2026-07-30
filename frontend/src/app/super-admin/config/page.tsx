@@ -243,13 +243,13 @@ export default function SuperAdminConfigPage() {
                   {/* Status Server Box */}
                   <div className="pb-3 border-b border-slate-100 space-y-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold shadow-xs">
+                      <div className="w-7 h-7 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
                         <Cpu className="w-3.5 h-3.5 text-white" />
                       </div>
                       <h3 className="text-sm font-black text-slate-900 font-display">Server Infrastructure</h3>
                     </div>
-                    <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-medium space-y-1">
-                      <div className="flex items-center justify-between font-bold text-emerald-800">
+                    <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs font-medium space-y-1">
+                      <div className="flex items-center justify-between font-bold text-rose-800">
                         <span>Status Server:</span>
                         <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Online (99.98%)</span>
                       </div>
