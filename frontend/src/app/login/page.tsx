@@ -102,10 +102,6 @@ export default function LoginPage() {
               </p>
             </div>
           </div>
-
-          <span className="px-3.5 py-1 rounded-full text-[10.5px] font-bold bg-[#C62828] text-white shadow-xs font-display">
-            Fakultas Ilmu Komputer
-          </span>
         </div>
 
         {/* Middle Hero Text Section */}
@@ -162,7 +158,6 @@ export default function LoginPage() {
               <p className="text-[8px] font-bold text-[#C62828] uppercase font-display">UPI YPTK PADANG</p>
             </div>
           </div>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#C62828] text-white">FIK</span>
         </div>
 
         <div className="max-w-md w-full mx-auto my-auto space-y-7 py-6">
@@ -329,7 +324,7 @@ export default function LoginPage() {
           <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 flex items-start gap-2.5 text-slate-600 text-[11px] font-medium">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <p>
-              Akun SIPETA diterbitkan secara resmi oleh <strong>Admin Prodi FIK</strong> setelah verifikasi clearing SKS &amp; IPK di kampus.
+              Akun SIPETA diterbitkan secara resmi oleh <strong>Admin Prodi</strong> setelah verifikasi clearing SKS &amp; IPK di kampus.
             </p>
           </div>
 
@@ -337,7 +332,7 @@ export default function LoginPage() {
 
         {/* Page Footer */}
         <div className="text-center pt-6 border-t border-slate-200/80 text-[11px] text-slate-400 font-medium">
-          SIPETA v1.4 — Fakultas Ilmu Komputer UPI YPTK Padang
+          SIPETA v1.4 — Universitas Putra Indonesia YPTK Padang
         </div>
 
       </div>
