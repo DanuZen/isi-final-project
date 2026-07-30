@@ -7,7 +7,7 @@ import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   Clock, MapPin, CheckCircle2, FileText, ArrowRight,
-  Sparkles, X, Filter
+  Sparkles, X, Filter, BookOpen, Check
 } from "lucide-react";
 
 const DOSEN_NAV = [
@@ -24,6 +24,8 @@ interface EventItem {
   bulan: string;
   jenis: "Seminar" | "Sidang" | "Bimbingan";
   nama: string;
+  nim: string;
+  prodi: string;
   waktu: string;
   ruang: string;
   role: string;
@@ -32,45 +34,52 @@ interface EventItem {
 
 const EVENTS: Array<EventItem> = [
   {
-    id: 1, tgl: "Kam", tglNum: "1",  bulan: "Agt",
-    jenis: "Seminar", nama: "Danu Zen",    waktu: "09:00",  ruang: "Ruang 302",   role: "Pembimbing I",
-    judul: "Sistem Informasi Manajemen Gudang Berbasis Web",
+    id: 1, tgl: "Kam", tglNum: "1",  bulan: "Agt 2026",
+    jenis: "Seminar", nama: "Danu Zen", nim: "20101152630045", prodi: "Teknik Informatika",
+    waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing I",
+    judul: "Sistem Informasi Manajemen Gudang Berbasis Web Berbasis Real-Time Data",
   },
   {
-    id: 2, tgl: "Sab", tglNum: "3",  bulan: "Agt",
-    jenis: "Sidang",  nama: "Rafi Andika", waktu: "10:00",  ruang: "Aula FIK",    role: "Pembimbing I",
-    judul: "Implementasi ML untuk Deteksi Spam Email",
+    id: 2, tgl: "Sab", tglNum: "3",  bulan: "Agt 2026",
+    jenis: "Sidang",  nama: "Rafi Andika", nim: "20101152630089", prodi: "Teknik Informatika",
+    waktu: "10:00 - 11:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
+    judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes",
   },
   {
-    id: 3, tgl: "Sel", tglNum: "5",  bulan: "Agt",
-    jenis: "Bimbingan",nama: "Siti Rahayu",waktu: "13:00",  ruang: "Ruang Dosen", role: "Pembimbing I",
-    judul: "Optimisasi Routing Jaringan Komputer",
+    id: 3, tgl: "Sel", tglNum: "5",  bulan: "Agt 2026",
+    jenis: "Bimbingan", nama: "Siti Rahayu", nim: "20101152630101", prodi: "Sistem Informasi",
+    waktu: "13:00 - 14:00", ruang: "Ruang Dosen FIK", role: "Pembimbing I",
+    judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra",
   },
   {
-    id: 4, tgl: "Jum", tglNum: "8",  bulan: "Agt",
-    jenis: "Sidang",  nama: "Budi Prasetyo",waktu: "14:00", ruang: "Aula FIK",    role: "Pembimbing I",
-    judul: "Pengembangan Aplikasi Mobile Absensi Mahasiswa",
+    id: 4, tgl: "Jum", tglNum: "8",  bulan: "Agt 2026",
+    jenis: "Sidang",  nama: "Budi Prasetyo", nim: "20101152630022", prodi: "Teknik Informatika",
+    waktu: "14:00 - 15:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
+    judul: "Pengembangan Aplikasi Mobile Absensi Mahasiswa Berbasis Geolocation",
   },
   {
-    id: 5, tgl: "Sen", tglNum: "12", bulan: "Agt",
-    jenis: "Seminar", nama: "Anisa Permatasari",waktu: "09:00",ruang:"Ruang 302", role: "Pembimbing II",
-    judul: "Klasifikasi Citra Daun Menggunakan CNN",
+    id: 5, tgl: "Sen", tglNum: "12", bulan: "Agt 2026",
+    jenis: "Seminar", nama: "Anisa Permatasari", nim: "20101152630067", prodi: "Teknik Informatika",
+    waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing II",
+    judul: "Klasifikasi Citra Daun Menggunakan Convolutional Neural Network (CNN)",
   },
 ];
 
-const JENIS_SOLID: Record<string, { bg: string; text: string; dateBg: string }> = {
-  "Seminar":   { bg: "bg-violet-600", text: "text-white", dateBg: "bg-violet-700" },
-  "Sidang":    { bg: "bg-[#C62828]",  text: "text-white", dateBg: "bg-red-800" },
-  "Bimbingan": { bg: "bg-blue-600",   text: "text-white", dateBg: "bg-blue-700" },
+const JENIS_SOLID: Record<string, { bg: string; text: string }> = {
+  "Seminar":   { bg: "bg-violet-600", text: "text-white" },
+  "Sidang":    { bg: "bg-[#C62828]",  text: "text-white" },
+  "Bimbingan": { bg: "bg-blue-600",   text: "text-white" },
 };
 
 export default function DosenKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filterJenis, setFilterJenis] = useState<string>("Semua");
+  const [selectedEventId, setSelectedEventId] = useState<number>(1);
   const [attendedMap, setAttendedMap] = useState<Record<number, boolean>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const filteredEvents = EVENTS.filter((ev) => filterJenis === "Semua" || ev.jenis === filterJenis);
+  const selectedEv = EVENTS.find((e) => e.id === selectedEventId) || EVENTS[0];
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -115,7 +124,7 @@ export default function DosenKalenderPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
                       <CalendarDays className="w-3.5 h-3.5 text-white" /> Agenda Akademik Dosen Active
                     </span>
                   </div>
@@ -130,7 +139,7 @@ export default function DosenKalenderPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dosen/dashboard"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer font-display"
                   >
                     <span>Kembali ke Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
@@ -140,101 +149,222 @@ export default function DosenKalenderPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
-            {/* Legend & Filter Bar */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs flex items-center justify-between gap-4 flex-wrap shrink-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs mr-1">
-                  <CalendarDays className="w-4 h-4 text-white" />
+            {/* ── Split 2-Column Card Layout (7/12 & 5/12) ── */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
+              
+              {/* ── LEFT COLUMN (7/12): Main Agenda Card Container ── */}
+              <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+                {/* Card Header + Filters */}
+                <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <CalendarDays className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Agenda Bimbingan &amp; Sidang</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">Klik agenda untuk melihat detail lokasi &amp; berita acara</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 flex-wrap ml-auto">
+                    <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
+                      <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
+                      {["Semua", "Seminar", "Sidang", "Bimbingan"].map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setFilterJenis(t)}
+                          className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer font-display"
+                          style={filterJenis === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                    <span className="text-[10.5px] font-bold text-white bg-[#C62828] px-2.5 py-1 rounded-xl shadow-2xs font-display">
+                      Agustus 2026
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
-                  <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
-                  {["Semua", "Seminar", "Sidang", "Bimbingan"].map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setFilterJenis(t)}
-                      className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer font-display"
-                      style={filterJenis === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                    >
-                      {t}
-                    </button>
-                  ))}
+
+                {/* Scrollable Agenda List Container */}
+                <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5">
+                  {filteredEvents.length === 0 ? (
+                    <div className="p-8 text-center text-slate-400 space-y-2">
+                      <CalendarDays className="w-8 h-8 mx-auto text-slate-300" />
+                      <p className="text-xs font-bold text-slate-700 font-display">Tidak ada agenda ditemukan</p>
+                    </div>
+                  ) : (
+                    filteredEvents.map((ev) => {
+                      const solidCfg = JENIS_SOLID[ev.jenis] ?? JENIS_SOLID["Bimbingan"];
+                      const isSelected = selectedEv && selectedEv.id === ev.id;
+                      const isAttended = attendedMap[ev.id];
+
+                      return (
+                        <div
+                          key={ev.id}
+                          onClick={() => setSelectedEventId(ev.id)}
+                          className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2.5 ${
+                            isSelected
+                              ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
+                              : "bg-slate-50/50 border-slate-200/80 hover:bg-white hover:border-slate-300"
+                          }`}
+                        >
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            {/* Date Box + Title */}
+                            <div className="flex items-center gap-3 min-w-0 flex-1">
+                              <div className={`w-11 h-11 rounded-xl flex flex-col items-center justify-center shrink-0 text-white font-display shadow-xs ${solidCfg.bg}`}>
+                                <span className="text-[9px] font-black uppercase text-white/80 leading-none">{ev.tgl}</span>
+                                <span className="text-base font-black leading-none my-0.5">{ev.tglNum}</span>
+                              </div>
+
+                              <div className="space-y-0.5 min-w-0 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold shadow-2xs font-display ${solidCfg.bg} text-white`}>
+                                    {ev.jenis}
+                                  </span>
+                                  <span className="text-[9px] font-bold text-white bg-slate-900 px-2 py-0.5 rounded-full shadow-2xs font-mono">
+                                    {ev.role}
+                                  </span>
+                                </div>
+                                <h3 className="text-xs font-black text-slate-900 font-display truncate">{ev.nama}</h3>
+                                <p className="text-[11px] text-slate-600 font-medium truncate">&ldquo;{ev.judul}&rdquo;</p>
+                              </div>
+                            </div>
+
+                            {/* Location & Quick Action */}
+                            <div className="flex items-center gap-2 shrink-0 justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200/60">
+                              <div className="text-right text-[10px] text-slate-500 space-y-0.5 hidden sm:block">
+                                <p className="font-bold text-slate-800 flex items-center justify-end gap-1">
+                                  <Clock className="w-3 h-3 text-[#C62828]" /> {ev.waktu}
+                                </p>
+                                <p className="font-medium text-slate-500 truncate max-w-[130px] flex items-center justify-end gap-1">
+                                  <MapPin className="w-3 h-3 text-[#C62828]" /> {ev.ruang}
+                                </p>
+                              </div>
+
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleToggleAttendance(ev.id, ev.nama, ev.jenis);
+                                }}
+                                className={`px-2.5 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-2xs ${
+                                  isAttended
+                                    ? "bg-emerald-600 text-white"
+                                    : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
+                                }`}
+                              >
+                                <CheckCircle2 className={`w-3 h-3 ${isAttended ? "text-white" : "text-emerald-600"}`} />
+                                {isAttended ? "Hadir" : "Absen"}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
               </div>
 
-              <span className="text-xs font-bold text-white bg-[#C62828] px-3.5 py-1.5 rounded-full shadow-2xs font-display">
-                Agustus 2026
-              </span>
-            </div>
+              {/* ── RIGHT COLUMN (5/12): Detail Agenda Card Panel ── */}
+              <div className="lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+                {/* Card Header Detail */}
+                <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <BookOpen className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Detail Agenda &amp; Pengujian</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">Informasi pelaksanaan &amp; berita acara</p>
+                    </div>
+                  </div>
 
-            {/* Timeline Events */}
-            <div className="space-y-3 flex-1 min-h-0 overflow-y-auto scrollbar-none">
-              {filteredEvents.map((ev) => {
-                const solidCfg = JENIS_SOLID[ev.jenis] ?? JENIS_SOLID["Bimbingan"];
-                const isAttended = attendedMap[ev.id];
+                  {selectedEv && (
+                    <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display ${JENIS_SOLID[selectedEv.jenis]?.bg} text-white`}>
+                      {selectedEv.jenis}
+                    </span>
+                  )}
+                </div>
 
-                return (
-                  <div key={ev.id} className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden hover:shadow-md transition-all">
-                    <div className="flex flex-col sm:flex-row">
-                      {/* Date Badge Box */}
-                      <div className={`flex flex-col items-center justify-center px-5 py-4 shrink-0 border-b sm:border-b-0 sm:border-r border-slate-100 min-w-[95px] ${solidCfg.bg} text-white`}>
-                        <p className="text-[10px] font-black uppercase tracking-wider text-white/80 font-display">{ev.tgl}</p>
-                        <p className="text-3xl font-black leading-none my-0.5 font-display text-white">{ev.tglNum}</p>
-                        <p className="text-[10px] font-bold text-white/70 font-display">{ev.bulan}</p>
-                      </div>
-
-                      {/* Info Content */}
-                      <div className="flex-1 p-5 space-y-2">
-                        <div className="flex items-start justify-between gap-2 flex-wrap">
-                          <div className="flex items-center gap-2">
-                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-2xs font-display ${solidCfg.bg} text-white`}>
-                              {ev.jenis}
-                            </span>
-                            <span className="text-[10px] font-bold text-white bg-slate-900 px-2.5 py-0.5 rounded-full shadow-2xs font-mono">
-                              {ev.role}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-3 text-xs text-slate-500 font-medium">
-                            <span className="flex items-center gap-1 font-bold text-slate-700">
-                              <Clock className="w-3.5 h-3.5 text-[#C62828]" /> {ev.waktu} WIB
-                            </span>
-                            <span className="flex items-center gap-1 font-bold text-slate-700">
-                              <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> {ev.ruang}
-                            </span>
-                          </div>
+                {/* Content Area Detail */}
+                {selectedEv ? (
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-5 space-y-4">
+                    {/* Event Time & Venue Box */}
+                    <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-14 h-14 rounded-2xl ${JENIS_SOLID[selectedEv.jenis]?.bg} text-white flex flex-col items-center justify-center shrink-0 shadow-md font-display`}>
+                          <span className="text-[10px] font-black uppercase text-white/80 leading-none">{selectedEv.tgl}</span>
+                          <span className="text-xl font-black leading-none my-0.5">{selectedEv.tglNum}</span>
+                          <span className="text-[9px] font-bold text-white/70">{selectedEv.bulan}</span>
                         </div>
-
-                        <h3 className="text-sm font-black text-slate-900 font-display">{ev.nama}</h3>
-                        <p className="text-xs text-slate-600 font-medium line-clamp-1">&ldquo;{ev.judul}&rdquo;</p>
+                        <div className="space-y-1">
+                          <span className="px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-slate-900 text-white font-mono shadow-2xs">
+                            {selectedEv.role}
+                          </span>
+                          <p className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-[#C62828]" /> {selectedEv.waktu} WIB
+                          </p>
+                          <p className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> {selectedEv.ruang}
+                          </p>
+                        </div>
                       </div>
+                    </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-2 px-5 py-4 border-t sm:border-t-0 sm:border-l border-slate-100 shrink-0 bg-slate-50/50">
-                        {ev.jenis !== "Bimbingan" && (
-                          <button
-                            onClick={() => showToast(`Membuka Berita Acara ${ev.jenis} ${ev.nama}...`)}
-                            className="px-3 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95"
-                          >
-                            <FileText className="w-3.5 h-3.5 text-white" /> Berita Acara
-                          </button>
-                        )}
-
-                        <button
-                          onClick={() => handleToggleAttendance(ev.id, ev.nama, ev.jenis)}
-                          className={`px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer font-display active:scale-95 shadow-2xs ${
-                            isAttended
-                              ? "bg-emerald-600 text-white border border-emerald-700"
-                              : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
-                          }`}
-                        >
-                          <CheckCircle2 className={`w-3.5 h-3.5 ${isAttended ? "text-white" : "text-emerald-600"}`} />
-                          {isAttended ? "Hadir (Verified)" : "Konfirmasi Hadir"}
-                        </button>
+                    {/* Student & Thesis Info Box */}
+                    <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Mahasiswa Teruji</span>
+                      <div>
+                        <h3 className="text-base font-black text-slate-900 font-display leading-tight">{selectedEv.nama}</h3>
+                        <p className="text-xs text-slate-500 font-medium">{selectedEv.prodi} · NIM: <span className="font-mono">{selectedEv.nim}</span></p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-100 space-y-1">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Tugas Akhir</span>
+                        <p className="text-xs font-bold text-slate-800 leading-relaxed font-display">
+                          &ldquo;{selectedEv.judul}&rdquo;
+                        </p>
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                ) : (
+                  <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-slate-400 space-y-2">
+                    <CalendarDays className="w-8 h-8 text-slate-300" />
+                    <p className="text-xs font-bold text-slate-700 font-display">Pilih agenda untuk melihat detail</p>
+                  </div>
+                )}
+
+                {/* Bottom Action Panel */}
+                {selectedEv && (
+                  <div className="p-4 border-t border-slate-100 bg-slate-50/80 shrink-0 space-y-2">
+                    <div className="flex items-center gap-2.5">
+                      {selectedEv.jenis !== "Bimbingan" && (
+                        <button
+                          onClick={() => showToast(`Membuka Berita Acara ${selectedEv.jenis} ${selectedEv.nama}...`)}
+                          className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
+                        >
+                          <FileText className="w-4 h-4 text-white" /> Berita Acara
+                        </button>
+                      )}
+
+                      <button
+                        onClick={() => handleToggleAttendance(selectedEv.id, selectedEv.nama, selectedEv.jenis)}
+                        className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer font-display active:scale-95 shadow-2xs ${
+                          attendedMap[selectedEv.id]
+                            ? "bg-emerald-600 text-white"
+                            : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
+                        }`}
+                      >
+                        <CheckCircle2 className={`w-4 h-4 ${attendedMap[selectedEv.id] ? "text-white" : "text-emerald-600"}`} />
+                        {attendedMap[selectedEv.id] ? "Kehadiran Dikirim" : "Konfirmasi Hadir"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
             </div>
+
           </main>
         </div>
       </div>
