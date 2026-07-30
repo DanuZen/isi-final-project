@@ -220,11 +220,11 @@ export default function AdminProdiDashboard() {
               </div>
 
               {/* Tab Content Body (Scrolls Internally inside the card container) */}
-              <div className="p-5 flex-1 overflow-y-auto scrollbar-none space-y-4">
+              <div className="p-5 pb-10 flex-1 overflow-y-auto scrollbar-none space-y-4">
                 
                 {/* TAB 1: VERIFIKASI PROPOSAL JUDUL */}
                 {activeTab === "proposal" && (
-                  <div className="space-y-4">
+                  <div className="space-y-4 pb-4">
                     {proposalList.length === 0 ? (
                       <div className="p-12 text-center space-y-2 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                         <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
@@ -233,12 +233,12 @@ export default function AdminProdiDashboard() {
                       </div>
                     ) : (
                       proposalList.map((p) => (
-                        <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-red-300 transition-all space-y-3.5 shadow-2xs">
+                        <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-white hover:border-[#C62828] hover:shadow-md transition-all space-y-4 shadow-2xs">
                           
                           {/* Header info row */}
-                          <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-200/80 pb-3">
+                          <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-3">
                             <div className="flex items-center gap-2.5">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display">
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
                                 {p.id}
                               </span>
                               <h3 className="font-bold text-sm text-slate-900 font-display">{p.nama}</h3>
@@ -249,22 +249,22 @@ export default function AdminProdiDashboard() {
                               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
                                 Kemiripan: {p.similarity} (Tersedia)
                               </span>
-                              <span className="text-[11px] font-medium text-slate-400">{p.tgl}</span>
+                              <span className="text-[11px] font-medium text-slate-400 font-mono">{p.tgl}</span>
                             </div>
                           </div>
 
                           {/* Title & Metadata */}
                           <div className="space-y-1.5">
-                            <p className="text-xs font-bold text-slate-900 leading-snug font-display">
+                            <p className="text-xs sm:text-sm font-black text-slate-900 leading-snug font-display">
                               &ldquo;{p.judul}&rdquo;
                             </p>
                             <p className="text-[11px] font-semibold text-slate-500">
-                              Bidang Kajian: <strong className="text-slate-800">{p.bidang}</strong>
+                              Bidang Kajian: <strong className="text-slate-800 font-bold">{p.bidang}</strong>
                             </p>
                           </div>
 
                           {/* Pembimbing assignment proposal */}
-                          <div className="p-3 rounded-xl bg-white border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                          <div className="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 border-l-4 border-l-[#C62828] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                             <div>
                               <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing I:</span>
                               <span className="font-bold text-slate-800 mt-0.5 block">{p.usulanPembimbing1}</span>
@@ -276,10 +276,10 @@ export default function AdminProdiDashboard() {
                           </div>
 
                           {/* Action buttons */}
-                          <div className="flex items-center justify-end gap-2.5 pt-1">
+                          <div className="flex items-center justify-end gap-2.5 pt-1 border-t border-slate-100">
                             <button
                               onClick={() => handleApproveProposal(p.id, p.nama)}
-                              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95"
+                              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95"
                             >
                               <CheckCircle2 className="w-3.5 h-3.5 text-white" />
                               <span>Setujui Proposal &amp; Pembimbing</span>
