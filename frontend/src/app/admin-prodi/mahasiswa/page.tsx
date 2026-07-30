@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  Search, Filter, Eye, Download, FileText, ArrowRight,
+  Search, Filter, Download, FileText, ArrowRight,
   CheckCircle2, Plus, X, XCircle
 } from "lucide-react";
 
@@ -50,7 +50,9 @@ export default function AdminProdiMahasiswaPage() {
   const [mahasiswaList, setMahasiswaList] = useState<MahasiswaItem[]>(INITIAL_MAHASISWA);
   const [search, setSearch] = useState("");
   const [filterTahap, setFilterTahap] = useState("Semua");
-  const [selectedNim, setSelectedNim] = useState<string | null>(null);
+  
+  // Default selected 1st student
+  const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Form Modal State
@@ -79,8 +81,9 @@ export default function AdminProdiMahasiswaPage() {
     };
 
     setMahasiswaList([newItem, ...mahasiswaList]);
+    setSelectedNim(formNim); // Select newly created student
     setShowAddModal(false);
-    setToastMessage(`Data mahasiswa ${formNama} (${formNim}) berhasil di-inputkan oleh Admin Prodi!`);
+    setToastMessage(`Data mahasiswa ${formNama} (${formNim}) berhasil di-inputkan!`);
 
     // Reset Form
     setFormNim("");
@@ -95,7 +98,7 @@ export default function AdminProdiMahasiswaPage() {
     return ms && mt;
   });
 
-  const selected = mahasiswaList.find((m) => m.nim === selectedNim);
+  const selected = mahasiswaList.find((m) => m.nim === selectedNim) || filtered[0] || INITIAL_MAHASISWA[0];
 
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -174,14 +177,14 @@ export default function AdminProdiMahasiswaPage() {
               </div>
             </div>
 
-            {/* Grid layout with optional Side Panel */}
+            {/* Grid layout with Detail Side Panel */}
             <div className="flex gap-4 items-stretch flex-1 min-h-0">
               <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex flex-col`}>
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
                   <table className="w-full text-xs">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
-                        {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK", "Aksi"].map((h) => (
+                        {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK"].map((h) => (
                           <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
                         ))}
                       </tr>
@@ -189,23 +192,27 @@ export default function AdminProdiMahasiswaPage() {
                     <tbody className="divide-y divide-slate-100">
                       {filtered.map((row) => {
                         const tc = TAHAP_CFG[row.tahap];
-                        const isSelected = selectedNim === row.nim;
+                        const isSelected = selected?.nim === row.nim;
                         return (
-                          <tr key={row.nim} className={`hover:bg-slate-50 transition-colors cursor-pointer ${isSelected ? "bg-rose-50/40" : ""}`}
-                            onClick={() => setSelectedNim(isSelected ? null : row.nim)}>
-                            <td className="px-4 py-3 font-mono text-[10px] text-slate-500">{row.nim}</td>
-                            <td className="px-4 py-3 font-bold text-slate-800 whitespace-nowrap font-display">{row.nama}</td>
-                            <td className="px-4 py-3 max-w-[200px]"><p className="text-slate-600 truncate text-[11.5px] font-medium">&ldquo;{row.judul}&rdquo;</p></td>
-                            <td className="px-4 py-3 whitespace-nowrap text-slate-600 font-medium">{row.pembimbing1}</td>
-                            <td className="px-4 py-3">
+                          <tr
+                            key={row.nim}
+                            onClick={() => setSelectedNim(row.nim)}
+                            className={`transition-all cursor-pointer select-none ${
+                              isSelected
+                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
+                                : "hover:bg-slate-50"
+                            }`}
+                          >
+                            <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500">{row.nim}</td>
+                            <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
+                            <td className="px-4 py-3.5 max-w-[220px]">
+                              <p className="text-slate-600 truncate text-[11.5px] font-medium">&ldquo;{row.judul}&rdquo;</p>
+                            </td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.pembimbing1}</td>
+                            <td className="px-4 py-3.5">
                               <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${tc.bg}`}>{row.tahap}</span>
                             </td>
-                            <td className="px-4 py-3 font-black text-slate-800 font-display">{row.ipk}</td>
-                            <td className="px-4 py-3">
-                              <button className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center hover:bg-[#B71C1C] transition-all shadow-xs cursor-pointer">
-                                <Eye className="w-3.5 h-3.5 text-white" />
-                              </button>
-                            </td>
+                            <td className="px-4 py-3.5 font-black text-slate-900 font-display">{row.ipk}</td>
                           </tr>
                         );
                       })}
@@ -214,12 +221,12 @@ export default function AdminProdiMahasiswaPage() {
                 </div>
               </div>
 
-              {/* Detail Panel */}
+              {/* Always Visible Detail Panel (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4">
+                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     <div className="pb-3 border-b border-slate-100">
-                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa</span>
+                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa Selected</span>
                       <h3 className="text-base font-black text-slate-900 font-display mt-0.5">{selected.nama}</h3>
                       <p className="text-xs font-mono text-slate-400">{selected.nim}</p>
                     </div>
