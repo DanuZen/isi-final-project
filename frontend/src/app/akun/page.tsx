@@ -57,8 +57,8 @@ export default function DetailAkunPage() {
                     </p>
                   </div>
                 </div>
-                <button className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 shadow-xs shrink-0">
-                  <Edit3 className="w-4 h-4 text-neutral-400" />
+                <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 shadow-md transition-all active:scale-95 shrink-0 cursor-pointer">
+                  <Edit3 className="w-4 h-4 text-slate-700" />
                   <span>Edit Profil</span>
                 </button>
               </div>

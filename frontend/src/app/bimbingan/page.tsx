@@ -105,16 +105,16 @@ export default function BimbinganPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => setShowLogModal(true)}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer"
                   >
                     <PlusCircle className="w-4 h-4" />
                     <span>Catat Sesi Bimbingan</span>
                   </button>
                   <button
                     onClick={() => setShowPerubahanJudulModal(true)}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-md shadow-amber-950/20 transition-all active:scale-95 cursor-pointer"
                   >
-                    <FileEdit className="w-4 h-4 text-neutral-400" />
+                    <FileEdit className="w-4 h-4 text-slate-950" />
                     <span>Ajukan Perubahan Judul</span>
                   </button>
                 </div>
