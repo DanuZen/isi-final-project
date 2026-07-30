@@ -597,38 +597,41 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 #### Header Bar
 
+### 10.2 Komponen Desain Utama
+
+#### Header & Top Navigation
+
+- Layout fit-viewport 100% atau natural page scroll yang responsif
 - Tombol toggle sidebar di pojok kiri
 - Garis aksen warna merah-emas di bagian atas (`#C62828` via `#F59E0B`)
-- Indikator notifikasi dan avatar profil pengguna
+- Indikator profil pengguna dengan nama, NIK/NIM, dan prodi
 
 #### Welcome Banner
 
 - Banner gelap (`#1A1A1A`) dengan border neutral di setiap halaman portal
 - Garis aksen gradient merah-emas di bagian bawah banner
-- Badge warna sesuai role pengguna
+- Badge warna sesuai role pengguna dengan Red Signature (`#C62828`)
 
-#### Progress Stepper 4 Tahap
+#### Pola Tabel List Ringkas + Live Side Detail Panel Card
 
-- Visualisasi horizontal 4 node: Usulan Judul → Bimbingan TA → Seminar → Sidang
-- Badge status: ✅ Selesai (hijau), ⏳ Aktif (amber), 🔒 Terkunci (abu-abu)
+- Seluruh tabel utama menghilangkan kolom `AKSI` redundan demi efisiensi ruang
+- Dikombinasikan dengan kartu panel detail di kolom kanan (`w-80 shrink-0`) yang ter-update secara *live* saat pengguna mengklik baris mana saja pada tabel list
+- Baris terdefinisi dengan indikator highlight `bg-rose-50/70 border-l-4 border-l-[#C62828]`
 
-#### Kalender Interaktif
+#### Kartu Statistik Seragam
 
-- Grid bulanan 5×7 cell dengan chip event berwarna
-- Mode tampilan: Bulan / Minggu / Hari
-- Penanda tanggal hari ini dengan badge merah
+- Seluruh kartu statistik status/antrean di dashboard 7 role menggunakan aksen warna **Kuning Emas Amber Warm (`#D97706` / `bg-amber-500`)**
+- Tidak menggunakan warna ungu (`#7C3AED`) pada chart maupun indikator progres (menggunakan Teal `#0D9488`)
 
-### 10.3 Warna Badge Per Role
+### 10.3 Warna Akses & Palette Sistem
 
-| Role | Warna Badge | Kode Warna |
+| Elemen UI | Warna Utama | Kode Warna Tailwind |
 |---|---|---|
-| Mahasiswa | Hijau | `bg-emerald-600` |
-| Dosen Pembimbing | Merah | `bg-[#C62828]` |
-| Dosen Penguji | Ungu | `bg-violet-600` |
-| Admin Prodi FIK | Biru | `bg-blue-700` |
-| Admin Fakultas | Indigo | `bg-indigo-700` |
-| Pimpinan / Dekanat | Amber | `bg-amber-600` |
-| Super Admin | Slate | `bg-slate-800` |
+| Red Signature (Tombol & Banner) | Merah Signature UPI | `bg-[#C62828]` / `#C62828` |
+| Kartu Statistik Antrean | Kuning Emas Amber Warm | `bg-amber-500` / `#D97706` |
+| Indikator Seminar Proposal | Teal Modern | `bg-teal-600` / `#0D9488` |
+| Teks Highlight & Status Lulus | Emerald | `bg-emerald-600` / `#059669` |
+| Slate & Neutral Background | Neutral Slate | `bg-[#FAFAFA]` / `bg-slate-900` |
 
 ### 10.4 Responsivitas Multi-Device
 
@@ -751,10 +754,9 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 | Fase | Status | Keterangan |
 |---|:---:|---|
 | **Fase 1A — Fondasi & Design System** | ✅ Selesai | Arsitektur viewport, tokens warna, tipografi, komponen layout |
-| **Fase 1B — Portal Mahasiswa (12 Modul)** | ✅ Selesai | Seluruh 12 sub-halaman mahasiswa |
-| **Fase 1C — Portal 6 Role Tambahan (27 Modul)** | ✅ Selesai | Dosen Pembimbing (4), Dosen Penguji (4), Admin Prodi (5), Admin Fakultas (4), Dekanat (4), Super Admin (5) |
-| **Fase 1D — Mobile Responsive UI** | 🔜 Berikutnya | Sidebar mobile drawer, bottom navigation bar, card stack responsive |
-| **Fase 1E — Audit & Verifikasi Sub-Halaman** | ⏳ In Progress | Pengecekan fungsionalitas visual per role |
+| **Fase 1B — Portal Mahasiswa (11 Modul)** | ✅ Selesai | Seluruh 11 sub-halaman mahasiswa |
+| **Fase 1C — Portal 6 Role Tambahan (26 Modul)** | ✅ Selesai | Dosen Pembimbing (4), Dosen Penguji (4), Admin Prodi (5), Admin Fakultas (4), Dekanat (4), Super Admin (5) |
+| **Fase 1E — Audit & Verifikasi Sub-Halaman** | ✅ Selesai | 100% audit visual 38 rute, perbaikan warna Red Signature `#C62828` & Amber `#D97706`, fit layout & natural scroll, serta pola Side Detail Panel Card |
 
 ### 13.2 Roadmap Fase Selanjutnya
 
