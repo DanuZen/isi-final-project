@@ -134,7 +134,7 @@ export default function AdminProdiJadwalPage() {
                   <div key={item.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors">
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.jenis === "Ujian Sidang" ? "bg-rose-50 text-rose-700 border border-rose-200" : "bg-blue-50 text-blue-700 border border-blue-200"}`}>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs ${item.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"}`}>
                           {item.jenis}
                         </span>
                         <span className="text-[11px] font-mono text-slate-400">{item.id}</span>

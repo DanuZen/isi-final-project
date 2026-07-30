@@ -36,11 +36,11 @@ const MAHASISWA: Array<{
 ];
 
 const TAHAP_CFG: Record<TahapKey, { color: string; bg: string }> = {
-  "Usulan":   { color: "#b45309", bg: "#fffbeb" },
-  "Bimbingan":{ color: "#1d4ed8", bg: "#eff6ff" },
-  "Seminar":  { color: "#2563EB", bg: "#eff6ff" },
-  "Sidang":   { color: "#C62828", bg: "#fef2f2" },
-  "Selesai":  { color: "#059669", bg: "#ecfdf5" },
+  "Usulan":   { color: "#ffffff", bg: "bg-amber-600" },
+  "Bimbingan":{ color: "#ffffff", bg: "bg-blue-600" },
+  "Seminar":  { color: "#ffffff", bg: "bg-indigo-600" },
+  "Sidang":   { color: "#ffffff", bg: "bg-[#C62828]" },
+  "Selesai":  { color: "#ffffff", bg: "bg-emerald-600" },
 };
 
 export default function AdminProdiMahasiswaPage() {
@@ -155,7 +155,7 @@ export default function AdminProdiMahasiswaPage() {
                             <td className="px-4 py-3 max-w-[200px]"><p className="text-slate-600 truncate text-[11.5px]">"{row.judul}"</p></td>
                             <td className="px-4 py-3 whitespace-nowrap text-slate-600 font-medium">{row.pembimbing1}</td>
                             <td className="px-4 py-3">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: tc.bg, color: tc.color }}>{row.tahap}</span>
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs ${tc.bg}`}>{row.tahap}</span>
                             </td>
                             <td className="px-4 py-3 font-black text-slate-800 font-display">{row.ipk}</td>
                             <td className="px-4 py-3">

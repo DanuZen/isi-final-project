@@ -39,11 +39,11 @@ const PERMOHONAN = [
 ];
 
 const TAHAP_COLOR: Record<string, { color: string; bg: string }> = {
-  "Usulan":   { color: "#b45309", bg: "#fffbeb" },
-  "Bimbingan":{ color: "#1d4ed8", bg: "#eff6ff" },
-  "Seminar":  { color: "#2563EB", bg: "#eff6ff" },
-  "Sidang":   { color: "#C62828", bg: "#fef2f2" },
-  "Selesai":  { color: "#059669", bg: "#ecfdf5" },
+  "Usulan":   { color: "#ffffff", bg: "bg-amber-600" },
+  "Bimbingan":{ color: "#ffffff", bg: "bg-blue-600" },
+  "Seminar":  { color: "#ffffff", bg: "bg-indigo-600" },
+  "Sidang":   { color: "#ffffff", bg: "bg-[#C62828]" },
+  "Selesai":  { color: "#ffffff", bg: "bg-emerald-600" },
 };
 
 const PROPOSAL_PENDING = [
@@ -152,12 +152,12 @@ export default function AdminProdiDashboard() {
                       <td className="px-4 py-3 font-bold text-slate-800 whitespace-nowrap">{row.nama}</td>
                       <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{row.pembimbing1}</td>
                       <td className="px-4 py-3">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold" style={{ background: tc.bg, color: tc.color }}>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs ${tc.bg}`}>
                           {row.tahap}
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${row.status === "Lulus" ? "bg-emerald-50 text-emerald-700" : "bg-blue-50 text-blue-700"}`}>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs ${row.status === "Lulus" ? "bg-emerald-600" : "bg-blue-600"}`}>
                           {row.status}
                         </span>
                       </td>
