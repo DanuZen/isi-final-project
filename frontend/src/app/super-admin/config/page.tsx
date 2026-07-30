@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, ClipboardList, Settings, Database,
-  ToggleLeft, ToggleRight, Save, ArrowRight, ShieldCheck, Check, Cpu, Lock, FileCheck, HardDrive, RefreshCw, Printer, FileBadge
+  ToggleLeft, ToggleRight, Save, ArrowRight, ShieldCheck, Check, Cpu, Lock, FileCheck, HardDrive, RefreshCw
 } from "lucide-react";
 
 const NAV = [
@@ -22,7 +22,6 @@ export default function SuperAdminConfigPage() {
   const [maintenance, setMaintenance] = useState(false);
   const [ssoEnforced, setSsoEnforced] = useState(true);
   const [emailNotif, setEmailNotif] = useState(true);
-  const [stempelDigital, setStempelDigital] = useState(true);
 
   const [maxKuota, setMaxKuota] = useState("8");
   const [tahunAkademik, setTahunAkademik] = useState("2025/2026 Genap");
@@ -30,10 +29,6 @@ export default function SuperAdminConfigPage() {
   const [minSks, setMinSks] = useState("110");
   const [minIpk, setMinIpk] = useState("2.00");
   const [maxFileSize, setMaxFileSize] = useState("25");
-
-  const [kopSurat, setKopSurat] = useState("Fakultas Ilmu Komputer - Universitas Putra Indonesia YPTK Padang");
-  const [penandatangan, setPenandatangan] = useState("Prof. Dr. H. Zulherman, M.T. (Dekan FIK)");
-  const [formatNoSk, setFormatNoSk] = useState("045/SK-TA/FIK-UPIYPTK/{TAHUN}");
 
   const [backupFreq] = useState("Harian (Setiap Pukul 00:00 WIB)");
 
@@ -54,17 +49,17 @@ export default function SuperAdminConfigPage() {
   };
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
-      <div className="flex flex-1 min-h-0 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
+      <div className="flex flex-1 min-h-0">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
 
-        <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 min-h-screen">
           <Header className="shell-header shrink-0" userName="Irvan Syahputra, S.T." userNim="SA-001" userRole="Super Admin" prodiName="Sistem Utama SIPETA" />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-5 md:p-6 space-y-5 shell-body pb-16">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
@@ -76,7 +71,7 @@ export default function SuperAdminConfigPage() {
                     Pengaturan Parameter &amp; Syarat Akademik TA
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Pengaturan mode pemeliharaan, syarat kelayakan SKS &amp; IPK aktivasi TA, kuota bimbingan dosen, serta template penerbitan SK Dekan.
+                    Pengaturan mode pemeliharaan, syarat kelayakan SKS &amp; IPK aktivasi TA, kuota bimbingan dosen, serta ambang kemiripan repositori.
                   </p>
                 </div>
 
@@ -94,13 +89,13 @@ export default function SuperAdminConfigPage() {
             </div>
 
             {/* Main Settings Panel Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               
-              {/* Left Column (2/3): Academic, Repository, Legal SK, & Backup Cards */}
-              <div className="lg:col-span-2 space-y-4 min-h-0 overflow-y-auto scrollbar-none pb-12 pr-1">
+              {/* Left Column (2/3): Academic, Repository, & Security Cards */}
+              <div className="lg:col-span-2 space-y-5">
                 
                 {/* 1. Academic Rules Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Settings className="w-4 h-4 text-white" />
@@ -152,7 +147,7 @@ export default function SuperAdminConfigPage() {
                 </div>
 
                 {/* 2. Repository & Plagiarism Rules Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <FileCheck className="w-4 h-4 text-white" />
@@ -183,62 +178,8 @@ export default function SuperAdminConfigPage() {
                   </div>
                 </div>
 
-                {/* 3. Legal SK Dekan & Print Template Card (Fills Bottom Area) */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
-                  <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                      <Printer className="w-4 h-4 text-white" />
-                    </div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Konfigurasi Cetak Dokumen &amp; Template SK Dekan</h2>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-700 font-display">Header Kop Surat Resmi Universitas</label>
-                      <input
-                        type="text"
-                        value={kopSurat}
-                        onChange={(e) => setKopSurat(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-display"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 font-display">Penandatangan Legal SK</label>
-                        <input
-                          type="text"
-                          value={penandatangan}
-                          onChange={(e) => setPenandatangan(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-display"
-                        />
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 font-display">Format Format Penomoran SK</label>
-                        <input
-                          type="text"
-                          value={formatNoSk}
-                          onChange={(e) => setFormatNoSk(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 font-display">Sematkan Stempel &amp; TTD Digital Dekan</p>
-                        <p className="text-[11px] text-slate-500 font-medium">Otomatis sertakan stempel QR-code terverifikasi pada dokumen PDF SK</p>
-                      </div>
-                      <button onClick={() => setStempelDigital(!stempelDigital)} className="cursor-pointer">
-                        {stempelDigital ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. Automated Backup & Security Toggles Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
+                {/* 3. Automated Backup & Security Toggles Card */}
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <HardDrive className="w-4 h-4 text-white" />
@@ -246,8 +187,8 @@ export default function SuperAdminConfigPage() {
                     <h2 className="font-bold text-sm text-slate-900 font-display">Backup Database &amp; Keamanan Server</h2>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex-wrap sm:flex-nowrap">
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 border border-slate-200 flex-wrap sm:flex-nowrap">
                       <div>
                         <p className="text-xs font-bold text-slate-800 font-display">Jadwal Backup Otomatis Database</p>
                         <p className="text-[11px] text-slate-500 font-medium">{backupFreq}</p>
@@ -261,7 +202,7 @@ export default function SuperAdminConfigPage() {
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
                       <div>
                         <p className="text-xs font-bold text-slate-800 font-display">Mode Maintenance Sistem</p>
                         <p className="text-[11px] text-slate-500 font-medium">Kunci akses publik aplikasi hanya untuk Super Admin</p>
@@ -271,7 +212,7 @@ export default function SuperAdminConfigPage() {
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
                       <div>
                         <p className="text-xs font-bold text-slate-800 font-display">Otentikasi SSO Terenkripsi</p>
                         <p className="text-[11px] text-slate-500 font-medium">Wajibkan SSO login universitas untuk seluruh role</p>
@@ -281,7 +222,7 @@ export default function SuperAdminConfigPage() {
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
                       <div>
                         <p className="text-xs font-bold text-slate-800 font-display">Notifikasi Email Otomatis</p>
                         <p className="text-[11px] text-slate-500 font-medium">Kirim email otomatis saat terjadi perubahan status TA / SK</p>
@@ -296,8 +237,8 @@ export default function SuperAdminConfigPage() {
               </div>
 
               {/* Right Column (1/3): Summary & Status Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between overflow-hidden">
-                <div className="space-y-4 overflow-y-auto scrollbar-none">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 flex flex-col justify-between space-y-5">
+                <div className="space-y-4">
                   
                   {/* Status Server Box */}
                   <div className="pb-3 border-b border-slate-100 space-y-2">
@@ -323,7 +264,7 @@ export default function SuperAdminConfigPage() {
                   <div className="space-y-3 text-xs">
                     <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest font-display block">Parameter Operasional Aktif:</span>
                     
-                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
                       <div className="flex items-center justify-between">
                         <span className="text-slate-500 font-medium">Tahun Akademik:</span>
                         <strong className="text-slate-900 font-display">{tahunAkademik}</strong>
@@ -346,7 +287,7 @@ export default function SuperAdminConfigPage() {
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-slate-900 text-white space-y-1">
+                    <div className="p-3.5 rounded-xl bg-slate-900 text-white space-y-1">
                       <div className="flex items-center gap-1.5 font-bold text-amber-400 text-xs font-display">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         <span>Otoritas Super Admin</span>
