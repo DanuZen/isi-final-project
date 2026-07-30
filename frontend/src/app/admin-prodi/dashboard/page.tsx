@@ -22,7 +22,7 @@ const NAV = [
 
 const STATS = [
   { label: "Mahasiswa TA Aktif",    value: "124", sub: "Semester Genap 2026", color: "#C62828", bgIcon: "bg-[#C62828]", icon: Users },
-  { label: "Aktivasi Pending",      value: "7",   sub: "Clearing SKS & IPK",   color: "#C62828", bgIcon: "bg-[#C62828]", icon: UserPlus },
+  { label: "Aktivasi Pending",      value: "7",   sub: "Clearing SKS & IPK",   color: "#D97706", bgIcon: "bg-amber-500", icon: UserPlus },
   { label: "Proposal Masuk",        value: "11",  sub: "Menunggu Verifikasi",  color: "#C62828", bgIcon: "bg-rose-700",   icon: FileText },
   { label: "Ujian Terjadwal",       value: "18",  sub: "Seminar & Sidang",     color: "#059669", bgIcon: "bg-emerald-600",icon: CalendarDays },
 ];
