@@ -8,7 +8,8 @@ import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
   CheckCircle2, Clock, XCircle, Search, Filter,
   FileText, AlertCircle, Building2, ShieldCheck, ArrowRight,
-  UserCheck, Sparkles, FileCheck, Check, Eye, Trash2
+  UserCheck, Sparkles, FileCheck, Check, Eye, Trash2,
+  ChevronDown, ChevronUp
 } from "lucide-react";
 
 const NAV = [
@@ -80,6 +81,9 @@ export default function AdminProdiDashboard() {
   const [proposalList, setProposalList] = useState(PROPOSAL_MASUK);
   const [aktivasiList, setAktivasiList] = useState(ANTREAN_AKTIVASI);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  
+  // Accordion Expand State: Default expand the first item
+  const [expandedPropId, setExpandedPropId] = useState<string | null>("PROP-01");
 
   const handleApproveProposal = (id: string, nama: string) => {
     setProposalList((prev) => prev.filter((p) => p.id !== id));
@@ -91,6 +95,10 @@ export default function AdminProdiDashboard() {
     setAktivasiList((prev) => prev.filter((a) => a.nim !== nim));
     setToastMessage(`Akun SIPETA mahasiswa ${nama} (${nim}) telah BERHASIL DIAKTIFKAN!`);
     setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  const toggleExpandProposal = (id: string) => {
+    setExpandedPropId((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -163,7 +171,7 @@ export default function AdminProdiDashboard() {
               </div>
             )}
 
-            {/* ── 4 Executive Stat Cards (SOLID ICON BG WITH WHITE ICON) ── */}
+            {/* ── 4 Executive Stat Cards ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
               {STATS.map((s) => {
                 const IconComp = s.icon;
@@ -174,8 +182,7 @@ export default function AdminProdiDashboard() {
                       <p className="text-2xl sm:text-3xl font-black font-display" style={{ color: s.color }}>{s.value}</p>
                       <p className="text-[10px] text-slate-400 font-semibold truncate">{s.sub}</p>
                     </div>
-                    {/* SOLID COLOR ICON BOX WITH WHITE ICON */}
-                    <div className={`w-11 h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs`}>
+                    <div className={`w-11 h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
                       <IconComp className="w-5 h-5 text-white" />
                     </div>
                   </div>
@@ -219,12 +226,12 @@ export default function AdminProdiDashboard() {
                 </span>
               </div>
 
-              {/* Tab Content Body (Scrolls Internally inside the card container) */}
-              <div className="p-5 pb-10 flex-1 overflow-y-auto scrollbar-none space-y-4">
+              {/* Tab Content Body (Scrolls Internally inside the card container with generous bottom margin) */}
+              <div className="p-5 flex-1 overflow-y-auto scrollbar-none">
                 
-                {/* TAB 1: VERIFIKASI PROPOSAL JUDUL */}
+                {/* TAB 1: VERIFIKASI PROPOSAL JUDUL (COMPACT EXPANDABLE ACCORDION) */}
                 {activeTab === "proposal" && (
-                  <div className="space-y-4 pb-4">
+                  <div className="space-y-3 pb-12">
                     {proposalList.length === 0 ? (
                       <div className="p-12 text-center space-y-2 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                         <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
@@ -232,69 +239,121 @@ export default function AdminProdiDashboard() {
                         <p className="text-xs text-slate-500 font-medium">Tidak ada antrean proposal baru yang memerlukan persetujuan.</p>
                       </div>
                     ) : (
-                      proposalList.map((p) => (
-                        <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-white hover:border-[#C62828] hover:shadow-md transition-all space-y-4 shadow-2xs">
-                          
-                          {/* Header info row */}
-                          <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-3">
-                            <div className="flex items-center gap-2.5">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
-                                {p.id}
-                              </span>
-                              <h3 className="font-bold text-sm text-slate-900 font-display">{p.nama}</h3>
-                              <span className="text-xs font-mono text-slate-400">({p.nim})</span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
-                                Kemiripan: {p.similarity} (Tersedia)
-                              </span>
-                              <span className="text-[11px] font-medium text-slate-400 font-mono">{p.tgl}</span>
-                            </div>
-                          </div>
-
-                          {/* Title & Metadata */}
-                          <div className="space-y-1.5">
-                            <p className="text-xs sm:text-sm font-black text-slate-900 leading-snug font-display">
-                              &ldquo;{p.judul}&rdquo;
-                            </p>
-                            <p className="text-[11px] font-semibold text-slate-500">
-                              Bidang Kajian: <strong className="text-slate-800 font-bold">{p.bidang}</strong>
-                            </p>
-                          </div>
-
-                          {/* Pembimbing assignment proposal */}
-                          <div className="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 border-l-4 border-l-[#C62828] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                            <div>
-                              <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing I:</span>
-                              <span className="font-bold text-slate-800 mt-0.5 block">{p.usulanPembimbing1}</span>
-                            </div>
-                            <div>
-                              <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing II:</span>
-                              <span className="font-bold text-slate-800 mt-0.5 block">{p.usulanPembimbing2}</span>
-                            </div>
-                          </div>
-
-                          {/* Action buttons */}
-                          <div className="flex items-center justify-end gap-2.5 pt-1 border-t border-slate-100">
-                            <button
-                              onClick={() => handleApproveProposal(p.id, p.nama)}
-                              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95"
+                      proposalList.map((p) => {
+                        const isExpanded = expandedPropId === p.id;
+                        return (
+                          <div
+                            key={p.id}
+                            className={`rounded-2xl border transition-all overflow-hidden ${
+                              isExpanded
+                                ? "bg-white border-[#C62828] shadow-md"
+                                : "bg-white border-slate-200 hover:border-slate-300 shadow-2xs"
+                            }`}
+                          >
+                            {/* COMPACT SUMMARY HEADER (ALWAYS VISIBLE & CLICKABLE TO TOGGLE) */}
+                            <div
+                              onClick={() => toggleExpandProposal(p.id)}
+                              className="p-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/70 transition-colors select-none"
                             >
-                              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                              <span>Setujui Proposal &amp; Pembimbing</span>
-                            </button>
-                          </div>
+                              <div className="flex items-center gap-3 min-w-0 flex-1">
+                                <span className="px-2.5 py-1 rounded-full text-[10.5px] font-black bg-[#C62828] text-white font-display shrink-0 shadow-2xs">
+                                  {p.id}
+                                </span>
+                                
+                                <div className="min-w-0 flex-1 space-y-0.5">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <h3 className="font-bold text-xs sm:text-sm text-slate-900 font-display truncate">
+                                      {p.nama}
+                                    </h3>
+                                    <span className="text-[11px] font-mono text-slate-400 shrink-0">({p.nim})</span>
+                                  </div>
+                                  <p className="text-xs font-semibold text-slate-600 truncate">
+                                    &ldquo;{p.judul}&rdquo;
+                                  </p>
+                                </div>
+                              </div>
 
-                        </div>
-                      ))
+                              <div className="flex items-center gap-3 shrink-0">
+                                <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
+                                  Kemiripan: {p.similarity} (Tersedia)
+                                </span>
+                                <span className="text-[11px] font-medium text-slate-400 font-mono hidden md:inline">{p.tgl}</span>
+                                
+                                <button className={`p-1.5 rounded-xl border transition-all ${
+                                  isExpanded
+                                    ? "bg-rose-50 border-rose-200 text-[#C62828]"
+                                    : "bg-slate-50 border-slate-200 text-slate-500"
+                                }`}>
+                                  {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* EXPANDED DETAILS BODY (REVEALED WHEN EXPANDED) */}
+                            {isExpanded && (
+                              <div className="px-5 pb-5 pt-2 border-t border-slate-100 bg-slate-50/40 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                                
+                                {/* Full Title & Bidang Kajian */}
+                                <div className="space-y-1.5 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Lengkap Proposal:</span>
+                                  <p className="text-xs sm:text-sm font-black text-slate-900 leading-relaxed font-display">
+                                    &ldquo;{p.judul}&rdquo;
+                                  </p>
+                                  <div className="pt-2 flex items-center justify-between gap-2 flex-wrap text-xs">
+                                    <span className="text-[11px] font-semibold text-slate-600">
+                                      Bidang Kajian: <strong className="text-slate-900 font-bold">{p.bidang}</strong>
+                                    </span>
+                                    <span className="text-[10.5px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-display">
+                                      Uji Kemiripan: {p.similarity}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* Usulan Pembimbing Box with Left Red Signature Accent */}
+                                <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-[#C62828] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs shadow-2xs">
+                                  <div>
+                                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing I:</span>
+                                    <span className="font-bold text-slate-900 mt-0.5 block">{p.usulanPembimbing1}</span>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing II:</span>
+                                    <span className="font-bold text-slate-900 mt-0.5 block">{p.usulanPembimbing2}</span>
+                                  </div>
+                                </div>
+
+                                {/* Action Bar */}
+                                <div className="flex items-center justify-between gap-3 pt-2 flex-wrap">
+                                  <button
+                                    onClick={() => toggleExpandProposal(p.id)}
+                                    className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1 cursor-pointer font-display"
+                                  >
+                                    <ChevronUp className="w-3.5 h-3.5" /> Tutup Detail
+                                  </button>
+
+                                  <button
+                                    onClick={() => handleApproveProposal(p.id, p.nama)}
+                                    className="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
+                                  >
+                                    <CheckCircle2 className="w-4 h-4 text-white" />
+                                    <span>Setujui Proposal &amp; Usulan Pembimbing</span>
+                                  </button>
+                                </div>
+
+                              </div>
+                            )}
+
+                          </div>
+                        );
+                      })
                     )}
+                    {/* Generous bottom spacer to prevent scrollbar clipping */}
+                    <div className="h-6" />
                   </div>
                 )}
 
                 {/* TAB 2: AKTIVASI CLEARING AKUN */}
                 {activeTab === "aktivasi" && (
-                  <div className="space-y-3">
+                  <div className="space-y-3 pb-12">
                     {aktivasiList.length === 0 ? (
                       <div className="p-12 text-center space-y-2 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                         <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
@@ -302,7 +361,7 @@ export default function AdminProdiDashboard() {
                       </div>
                     ) : (
                       aktivasiList.map((a) => (
-                        <div key={a.nim} className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-4 flex-wrap hover:bg-white transition-all shadow-2xs">
+                        <div key={a.nim} className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-4 flex-wrap hover:bg-white hover:border-slate-300 transition-all shadow-2xs">
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
                               <span className="font-bold text-sm text-slate-900 font-display">{a.nama}</span>
@@ -323,6 +382,8 @@ export default function AdminProdiDashboard() {
                         </div>
                       ))
                     )}
+                    {/* Generous bottom spacer to prevent scrollbar clipping */}
+                    <div className="h-6" />
                   </div>
                 )}
 
