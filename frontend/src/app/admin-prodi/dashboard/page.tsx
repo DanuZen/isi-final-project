@@ -20,10 +20,10 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Mahasiswa TA Aktif",    value: "124", sub: "Semester Genap 2026", color: "#2563EB", icon: Users },
-  { label: "Aktivasi Pending",      value: "7",   sub: "Clearing SKS & IPK",   color: "#F59E0B", icon: UserPlus },
-  { label: "Proposal Masuk",        value: "11",  sub: "Menunggu Verifikasi",  color: "#C62828", icon: FileText },
-  { label: "Ujian Terjadwal",       value: "18",  sub: "Seminar & Sidang",     color: "#059669", icon: CalendarDays },
+  { label: "Mahasiswa TA Aktif",    value: "124", sub: "Semester Genap 2026", color: "#C62828", bgIcon: "bg-[#C62828]", icon: Users },
+  { label: "Aktivasi Pending",      value: "7",   sub: "Clearing SKS & IPK",   color: "#F59E0B", bgIcon: "bg-[#F59E0B]", icon: UserPlus },
+  { label: "Proposal Masuk",        value: "11",  sub: "Menunggu Verifikasi",  color: "#C62828", bgIcon: "bg-rose-700",   icon: FileText },
+  { label: "Ujian Terjadwal",       value: "18",  sub: "Seminar & Sidang",     color: "#059669", bgIcon: "bg-emerald-600",icon: CalendarDays },
 ];
 
 const PROPOSAL_MASUK = [
@@ -118,7 +118,7 @@ export default function AdminProdiDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-600 text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
                       <Building2 className="w-3.5 h-3.5 text-white" /> Portal Utama Program Studi Teknik Informatika
                     </span>
                   </div>
@@ -126,7 +126,7 @@ export default function AdminProdiDashboard() {
                     Dashboard Admin Program Studi
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Selamat datang kembali, Ibu Hafizah. Terdapat <strong className="text-blue-400 font-bold">{proposalList.length} proposal judul</strong> dan <strong className="text-amber-400 font-bold">{aktivasiList.length} akun clearing</strong> perlu penanganan hari ini.
+                    Selamat datang kembali, Ibu Hafizah. Terdapat <strong className="text-[#C62828] font-bold">{proposalList.length} proposal judul</strong> dan <strong className="text-amber-400 font-bold">{aktivasiList.length} akun clearing</strong> perlu penanganan hari ini.
                   </p>
                 </div>
 
@@ -147,7 +147,7 @@ export default function AdminProdiDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563EB] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
             {/* Toast Alert Notice */}
@@ -163,7 +163,7 @@ export default function AdminProdiDashboard() {
               </div>
             )}
 
-            {/* ── 4 Executive Stat Cards ── */}
+            {/* ── 4 Executive Stat Cards (SOLID ICON BG WITH WHITE ICON) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
               {STATS.map((s) => {
                 const IconComp = s.icon;
@@ -174,8 +174,9 @@ export default function AdminProdiDashboard() {
                       <p className="text-2xl sm:text-3xl font-black font-display" style={{ color: s.color }}>{s.value}</p>
                       <p className="text-[10px] text-slate-400 font-semibold truncate">{s.sub}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-xs" style={{ background: s.color + "15", color: s.color }}>
-                      <IconComp className="w-6 h-6" />
+                    {/* SOLID COLOR ICON BOX WITH WHITE ICON */}
+                    <div className={`w-11 h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs`}>
+                      <IconComp className="w-5 h-5 text-white" />
                     </div>
                   </div>
                 );
@@ -192,7 +193,7 @@ export default function AdminProdiDashboard() {
                     onClick={() => setActiveTab("proposal")}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer font-display ${
                       activeTab === "proposal"
-                        ? "bg-[#2563EB] text-white shadow-xs"
+                        ? "bg-[#C62828] text-white shadow-xs"
                         : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200"
                     }`}
                   >
@@ -204,7 +205,7 @@ export default function AdminProdiDashboard() {
                     onClick={() => setActiveTab("aktivasi")}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer font-display ${
                       activeTab === "aktivasi"
-                        ? "bg-[#2563EB] text-white shadow-xs"
+                        ? "bg-[#C62828] text-white shadow-xs"
                         : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200"
                     }`}
                   >
@@ -232,12 +233,12 @@ export default function AdminProdiDashboard() {
                       </div>
                     ) : (
                       proposalList.map((p) => (
-                        <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-300 transition-all space-y-3.5 shadow-2xs">
+                        <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-red-300 transition-all space-y-3.5 shadow-2xs">
                           
                           {/* Header info row */}
                           <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-200/80 pb-3">
                             <div className="flex items-center gap-2.5">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-600 text-white font-display">
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display">
                                 {p.id}
                               </span>
                               <h3 className="font-bold text-sm text-slate-900 font-display">{p.nama}</h3>
@@ -308,7 +309,7 @@ export default function AdminProdiDashboard() {
                               <span className="text-xs font-mono text-slate-400">({a.nim})</span>
                             </div>
                             <p className="text-xs text-slate-600 font-medium">
-                              Clearing SKS: <strong className="text-emerald-600 font-bold">{a.sks} SKS</strong> · IPK: <strong className="text-blue-600 font-bold">{a.ipk}</strong> · Petugas: {a.petugas} ({a.clearingDate})
+                              Clearing SKS: <strong className="text-emerald-600 font-bold">{a.sks} SKS</strong> · IPK: <strong className="text-[#C62828] font-bold">{a.ipk}</strong> · Petugas: {a.petugas} ({a.clearingDate})
                             </p>
                           </div>
 
