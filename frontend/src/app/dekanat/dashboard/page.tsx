@@ -17,7 +17,7 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#F59E0B", bgIcon: "bg-amber-600",   trend: "+12%", icon: Users },
+  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "+12%", icon: Users },
   { label: "Selesai Tahun Ini",     value: "89",  sub: "s.d. Juli 2026",          color: "#059669", bgIcon: "bg-emerald-600", trend: "+8%",  icon: CheckCircle2 },
   { label: "Rata-rata Durasi Studi",value: "1.8", sub: "Semester (≈ 10 bulan)",   color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "-0.2", icon: Clock },
   { label: "Tingkat Kelulusan",     value: "94%", sub: "Semester ini",            color: "#C62828", bgIcon: "bg-rose-700",    trend: "+2%",  icon: Award },
@@ -43,7 +43,7 @@ const SIDANG_BULAN = [
 const BIDANG = [
   { label: "Rekayasa Perangkat Lunak", pct: 42, color: "#C62828" },
   { label: "Kecerdasan Buatan",         pct: 31, color: "#059669" },
-  { label: "Jaringan & Keamanan",       pct: 27, color: "#F59E0B" },
+  { label: "Jaringan & Keamanan",       pct: 27, color: "#2563EB" },
 ];
 
 function DonutChart() {

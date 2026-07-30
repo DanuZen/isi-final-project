@@ -22,13 +22,13 @@ const STATS = [
   { label: "Total User Aktif",      value: "412",  sub: "Seluruh Akun Aktif",    color: "#0F172A", bgIcon: "bg-slate-900", icon: Users },
   { label: "Login Hari Ini",       value: "87",   sub: "Sesi Aktif Realtime",   color: "#059669", bgIcon: "bg-emerald-600",icon: CheckCircle2 },
   { label: "Error Log 24 Jam",     value: "3",    sub: "Perlu Ditinjau",        color: "#C62828", bgIcon: "bg-[#C62828]",  icon: AlertTriangle },
-  { label: "User Nonaktif",        value: "14",   sub: "Akun Suspended",        color: "#F59E0B", bgIcon: "bg-[#F59E0B]", icon: Clock },
+  { label: "User Nonaktif",        value: "14",   sub: "Akun Suspended",        color: "#C62828", bgIcon: "bg-[#C62828]", icon: Clock },
 ];
 
 const ROLE_DIST = [
   { role: "Mahasiswa",        count: 356, color: "#059669" },
   { role: "Dosen Pembimbing", count: 38,  color: "#C62828" },
-  { role: "Dosen Penguji",    count: 22,  color: "#F59E0B" },
+  { role: "Dosen Penguji",    count: 22,  color: "#2563EB" },
   { role: "Admin Prodi",      count: 4,   color: "#0F172A" },
   { role: "Admin Fakultas",   count: 2,   color: "#475569" },
   { role: "Pimpinan",         count: 3,   color: "#b45309" },
