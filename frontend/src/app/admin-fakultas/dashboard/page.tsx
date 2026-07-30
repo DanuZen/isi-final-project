@@ -239,9 +239,6 @@ export default function AdminFakultasDashboard() {
                           <p className="text-xs font-bold text-slate-900 font-display">{mhs.nama}</p>
                           <p className="text-[10px] text-slate-500 font-mono">{mhs.nim} · {mhs.prodi}</p>
                         </div>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-amber-600 text-white shadow-2xs font-display">
-                          <Clock className="w-2.5 h-2.5 text-white" /> {mhs.status}
-                        </span>
                         <div className="flex gap-2 pt-1">
                           <button
                             onClick={() => setSelectedBebas(mhs)}
