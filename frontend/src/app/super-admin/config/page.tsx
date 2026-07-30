@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, ClipboardList, Settings, Database,
-  ToggleLeft, ToggleRight, Save, ArrowRight, ShieldCheck, Check, Cpu, Lock, FileCheck, MessageSquare, HardDrive, RefreshCw
+  ToggleLeft, ToggleRight, Save, ArrowRight, ShieldCheck, Check, Cpu, Lock, FileCheck, HardDrive, RefreshCw
 } from "lucide-react";
 
 const NAV = [
@@ -22,7 +22,6 @@ export default function SuperAdminConfigPage() {
   const [maintenance, setMaintenance] = useState(false);
   const [ssoEnforced, setSsoEnforced] = useState(true);
   const [emailNotif, setEmailNotif] = useState(true);
-  const [waGatewayNotif, setWaGatewayNotif] = useState(true);
 
   const [maxKuota, setMaxKuota] = useState("8");
   const [tahunAkademik, setTahunAkademik] = useState("2025/2026 Genap");
@@ -31,8 +30,7 @@ export default function SuperAdminConfigPage() {
   const [minIpk, setMinIpk] = useState("2.00");
   const [maxFileSize, setMaxFileSize] = useState("25");
 
-  const [waEndpoint, setWaEndpoint] = useState("https://api.upiyptk.ac.id/wa-gateway/v1/send");
-  const [backupFreq, setBackupFreq] = useState("Harian (Setiap Pukul 00:00 WIB)");
+  const [backupFreq] = useState("Harian (Setiap Pukul 00:00 WIB)");
 
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [backupProgress, setBackupProgress] = useState(false);
@@ -73,7 +71,7 @@ export default function SuperAdminConfigPage() {
                     Pengaturan Parameter &amp; Syarat Akademik TA
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Pengaturan mode pemeliharaan, syarat kelayakan SKS &amp; IPK aktivasi TA, kuota bimbingan dosen, serta integrasi gateway notifikasi.
+                    Pengaturan mode pemeliharaan, syarat kelayakan SKS &amp; IPK aktivasi TA, kuota bimbingan dosen, serta ambang kemiripan repositori.
                   </p>
                 </div>
 
@@ -93,7 +91,7 @@ export default function SuperAdminConfigPage() {
             {/* Main Settings Panel Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1 min-h-0 overflow-hidden">
               
-              {/* Left Column (2/3): Academic, Security, WA Gateway, & Backup Cards */}
+              {/* Left Column (2/3): Academic, Security, & Backup Cards */}
               <div className="lg:col-span-2 space-y-4 min-h-0 overflow-y-auto scrollbar-none pb-12 pr-1">
                 
                 {/* 1. Academic Rules Card */}
@@ -180,39 +178,7 @@ export default function SuperAdminConfigPage() {
                   </div>
                 </div>
 
-                {/* 3. WhatsApp & Notification Gateway Card (Fills Middle-Bottom Space) */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
-                  <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                      <MessageSquare className="w-4 h-4 text-white" />
-                    </div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Integrasi WhatsApp &amp; Gateway Notifikasi</h2>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-700 font-display">URL Endpoint WA Gateway API</label>
-                      <input
-                        type="text"
-                        value={waEndpoint}
-                        onChange={(e) => setWaEndpoint(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono text-slate-700"
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 font-display">Kirim Notifikasi WA Otomatis</p>
-                        <p className="text-[11px] text-slate-500 font-medium">Kirimkan pesan WA instan ke mahasiswa &amp; dosen saat jadwal sidang terbit</p>
-                      </div>
-                      <button onClick={() => setWaGatewayNotif(!waGatewayNotif)} className="cursor-pointer">
-                        {waGatewayNotif ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. Automated Backup & Security Toggles Card (Fills Bottom Area) */}
+                {/* 3. Automated Backup & Security Toggles Card */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
@@ -229,7 +195,7 @@ export default function SuperAdminConfigPage() {
                       </div>
                       <button
                         onClick={handleRunBackup}
-                        className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all flex items-center gap-1.5 shrink-0 font-display cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all flex items-center gap-1.5 shrink-0 font-display cursor-pointer"
                       >
                         <RefreshCw className={`w-3.5 h-3.5 text-white ${backupProgress ? "animate-spin" : ""}`} />
                         <span>{backupProgress ? "Proses..." : "Backup Sekarang"}</span>
@@ -253,6 +219,16 @@ export default function SuperAdminConfigPage() {
                       </div>
                       <button onClick={() => setSsoEnforced(!ssoEnforced)} className="cursor-pointer">
                         {ssoEnforced ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 font-display">Notifikasi Email Otomatis</p>
+                        <p className="text-[11px] text-slate-500 font-medium">Kirim email otomatis saat terjadi perubahan status TA / SK</p>
+                      </div>
+                      <button onClick={() => setEmailNotif(!emailNotif)} className="cursor-pointer">
+                        {emailNotif ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
                       </button>
                     </div>
                   </div>
