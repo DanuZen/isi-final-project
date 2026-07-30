@@ -30,13 +30,11 @@ const DOSEN_NAV_ITEMS = [
     label: "Mahasiswa Bimbingan",
     href: "/dosen/bimbingan",
     icon: <Users className="w-4 h-4" />,
-    badge: "6 Act",
   },
   {
     label: "Permohonan Masuk",
     href: "/dosen/pengajuan",
     icon: <UserCheck className="w-4 h-4" />,
-    badge: "2 Baru",
   },
   {
     label: "Jadwal & Sidang",
