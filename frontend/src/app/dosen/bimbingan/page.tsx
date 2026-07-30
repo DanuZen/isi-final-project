@@ -166,6 +166,7 @@ export default function DosenBimbinganPage() {
   
   // Chat Modal State
   const [showChatModal, setShowChatModal] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false);
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState<Array<{ sender: string; text: string; time: string }>>([
     { sender: "mahasiswa", text: "Selamat siang Pak, draf Bab 4 sudah saya unggah untuk ditinjau.", time: "14:25 WIB" },
@@ -386,9 +387,12 @@ export default function DosenBimbinganPage() {
 
                               <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
                                 <button
-                                  onClick={() => setSelectedNim(mhs.nim)}
+                                  onClick={() => {
+                                    setSelectedNim(mhs.nim);
+                                    setShowPdfModal(true);
+                                  }}
                                   className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
-                                  title="Lihat Detail"
+                                  title="Pratinjau Draf PDF Skripsi"
                                 >
                                   <Eye className="w-3.5 h-3.5" />
                                 </button>
@@ -634,6 +638,78 @@ export default function DosenBimbinganPage() {
                       <Send className="w-3.5 h-3.5" /> Kirim
                     </button>
                   </form>
+                </div>
+              </div>
+            )}
+            {/* ── PDF Draft Preview Modal ── */}
+            {showPdfModal && (
+              <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col h-[80vh] animate-in fade-in zoom-in-95">
+                  {/* Modal Header */}
+                  <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                        <FileText className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm font-display text-white">Pratinjau Draf Naskah Skripsi</h3>
+                        <p className="text-[10px] text-neutral-400 font-mono">Draf_Skripsi_{selectedMhs.nim}.pdf · {selectedMhs.nama}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setShowPdfModal(false)}
+                      className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Document Toolbar */}
+                  <div className="px-4 py-2 bg-slate-100 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
+                    <div className="flex items-center gap-2 text-slate-600 font-medium">
+                      <span>Halaman 1 / 48</span>
+                      <span className="text-slate-300">|</span>
+                      <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                        Status Draf: {selectedMhs.tahap}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        showToast(`Mengunduh Draf_Skripsi_${selectedMhs.nim}.pdf ...`);
+                        setShowPdfModal(false);
+                      }}
+                      className="px-3 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1 shadow-xs transition-all cursor-pointer"
+                    >
+                      <FileText className="w-3.5 h-3.5" /> Unduh PDF
+                    </button>
+                  </div>
+
+                  {/* PDF Document Body Mockup */}
+                  <div className="flex-1 overflow-y-auto p-6 bg-slate-200/80 flex justify-center">
+                    <div className="bg-white rounded-lg shadow-md border border-slate-300 p-8 w-full max-w-lg space-y-6 text-slate-800 font-serif">
+                      <div className="text-center space-y-2 pb-4 border-b border-slate-200">
+                        <p className="text-xs uppercase font-bold tracking-widest text-slate-500 font-sans">
+                          UNIVERSITAS PUTRA INDONESIA YPTK PADANG
+                        </p>
+                        <h2 className="text-sm font-bold uppercase leading-snug font-sans">
+                          {selectedMhs.judul}
+                        </h2>
+                        <p className="text-[11px] font-sans text-slate-600 pt-2">
+                          Oleh: <strong>{selectedMhs.nama}</strong> ({selectedMhs.nim})
+                        </p>
+                      </div>
+
+                      <div className="space-y-3 text-xs leading-relaxed text-justify">
+                        <p className="font-bold font-sans text-slate-900">ABSTRAK</p>
+                        <p>
+                          Penelitian ini bertujuan untuk merancang dan mengimplementasikan sistem informasi yang efisien berbasis web di lingkungan Fakultas Ilmu Komputer UPI YPTK Padang. Metodologi yang digunakan meliputi analisis kebutuhan, perancangan database ERD, implementasi arsitektur modular, dan pengujian blackbox.
+                        </p>
+                        <p>
+                          Hasil pengujian menunjukkan bahwa sistem mampu meningkatkan efisiensi proses pemantauan tugas akhir hingga 85% dibandingkan proses manual sebelumnya.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
