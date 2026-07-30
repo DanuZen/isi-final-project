@@ -84,21 +84,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <button
         onClick={onToggle}
         title={isOpen ? "Perkecil sidebar" : "Perbesar sidebar"}
-        className={`border-b border-[#333333] bg-gradient-to-b from-[#252525] to-[#1A1A1A] flex items-center transition-all duration-300 shrink-0 w-full hover:brightness-110 active:scale-95 cursor-pointer h-[60px] ${
-          isOpen ? "px-4 gap-3 justify-start" : "p-2 justify-center"
+        className={`flex items-center transition-all duration-300 shrink-0 w-full hover:brightness-110 active:scale-95 cursor-pointer py-5 ${
+          isOpen ? "px-5 gap-3.5 justify-center" : "px-2 justify-center"
         }`}
       >
         {/* Emblem Logo */}
         <div
           className={`relative flex items-center justify-center shrink-0 filter drop-shadow-md transition-all duration-300 ${
-            isOpen ? "w-10 h-10" : "w-8 h-8"
+            isOpen ? "w-11 h-11" : "w-8 h-8"
           }`}
         >
           <Image
             src="/upiyptk_emblem.webp"
             alt="Emblem UPI YPTK"
-            width={40}
-            height={40}
+            width={44}
+            height={44}
             className="object-contain w-full h-full"
             priority
           />
@@ -107,10 +107,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Text — only when expanded */}
         {isOpen && (
           <div className="flex flex-col text-left min-w-0">
-            <h1 className="font-black text-lg tracking-wider font-display text-white leading-none">
+            <h1 className="font-black text-xl tracking-wider font-display text-white leading-none">
               SIPETA
             </h1>
-            <p className="text-[8.5px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-1 leading-none">
+            <p className="text-[9px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-1 leading-none">
               UPI YPTK PADANG
             </p>
           </div>

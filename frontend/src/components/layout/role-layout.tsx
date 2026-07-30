@@ -65,14 +65,14 @@ export function RoleLayout({
           }`}
         >
           {/* Logo area */}
-          <div className={`flex items-center h-[56px] shrink-0 border-b border-[#2A2A2A] ${sidebarOpen ? "px-4 gap-3" : "justify-center px-2"}`}>
-            <div className="w-8 h-8 relative shrink-0">
+          <div className={`flex items-center shrink-0 py-5 ${sidebarOpen ? "px-5 gap-3.5 justify-center" : "justify-center px-2"}`}>
+            <div className="w-10 h-10 relative shrink-0">
               <Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill className="object-contain" />
             </div>
             {sidebarOpen && (
               <div className="min-w-0">
-                <p className="font-black text-sm tracking-wider text-white font-display leading-none">SIPETA</p>
-                <p className="text-[8.5px] font-bold tracking-widest uppercase mt-1 leading-none text-[#C62828] font-display">
+                <p className="font-black text-xl tracking-wider text-white font-display leading-none">SIPETA</p>
+                <p className="text-[9px] font-bold tracking-widest uppercase mt-1 leading-none text-[#C62828] font-display">
                   UPI YPTK PADANG
                 </p>
               </div>
