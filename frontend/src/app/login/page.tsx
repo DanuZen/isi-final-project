@@ -6,412 +6,347 @@ import { useRouter } from "next/navigation";
 import {
   GraduationCap, UserCheck, ShieldCheck, Building2,
   LayoutDashboard, Users, Lock, LogIn, User, Eye, EyeOff,
-  ArrowRight, CheckCircle2, ChevronDown, School,
-  FileText, BookOpen, FileCheck, Award, Zap,
+  ArrowRight, CheckCircle2, School, FileText, BookOpen,
+  FileCheck, Award, Sparkles, ChevronRight
 } from "lucide-react";
 
-/* ─────────────────────────── DATA ─────────────────────────── */
+/* ─────────────────────────── DATA ROLES ─────────────────────────── */
 
-const ROLES = [
-  { id: "mahasiswa",        label: "Mahasiswa",        desc: "Portal Tugas Akhir",    path: "/",                         icon: GraduationCap,   accent: "#059669", accentBg: "#ecfdf5", accentLight: "#a7f3d0" },
-  { id: "dosen_pembimbing", label: "Dosen Pembimbing", desc: "Bimbingan & ACC",        path: "/dosen/dashboard",          icon: UserCheck,       accent: "#C62828", accentBg: "#fef2f2", accentLight: "#fecaca" },
-  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian & Sidang",     path: "/penguji/dashboard",        icon: ShieldCheck,     accent: "#C62828", accentBg: "#fef2f2", accentLight: "#fca5a5" },
-  { id: "admin_prodi",      label: "Admin Prodi",      desc: "Kelola & Verifikasi",    path: "/admin-prodi/dashboard",    icon: Building2,       accent: "#1d4ed8", accentBg: "#eff6ff", accentLight: "#bfdbfe" },
-  { id: "admin_fakultas",   label: "Admin Fakultas",   desc: "SK & Bebas Fakultas",    path: "/admin-fakultas/dashboard", icon: School,          accent: "#4338ca", accentBg: "#eef2ff", accentLight: "#c7d2fe" },
-  { id: "pimpinan",         label: "Pimpinan",         desc: "Laporan Eksekutif",      path: "/dekanat/dashboard",        icon: LayoutDashboard, accent: "#b45309", accentBg: "#fffbeb", accentLight: "#fde68a" },
-  { id: "super_admin",      label: "Super Admin",      desc: "Konfigurasi Sistem",     path: "/super-admin/dashboard",    icon: Users,           accent: "#475569", accentBg: "#f8fafc", accentLight: "#cbd5e1" },
+const QUICK_ROLES = [
+  { id: "mahasiswa",        label: "Mahasiswa",        desc: "Portal Skripsi",        path: "/",                         icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
+  { id: "dosen_pembimbing", label: "Dosen Pembimbing", desc: "Bimbingan & ACC",     path: "/dosen/dashboard",          icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
+  { id: "dosen_penguji",    label: "Dosen Penguji",    desc: "Penilaian & Sidang",  path: "/penguji/dashboard",        icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
+  { id: "admin_prodi",      label: "Admin Prodi",      desc: "Verifikasi & Jadwal", path: "/admin-prodi/dashboard",    icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
+  { id: "admin_fakultas",   label: "Admin Fakultas",   desc: "SK & Bebas Fakultas", path: "/admin-fakultas/dashboard", icon: School,        bg: "bg-indigo-600", text: "text-white" },
+  { id: "pimpinan",         label: "Pimpinan / Dekan", desc: "Laporan Eksekutif",   path: "/dekanat/dashboard",        icon: LayoutDashboard, bg: "bg-[#F59E0B]", text: "text-slate-950" },
+  { id: "super_admin",      label: "Super Admin",      desc: "Audit & Konfigurasi", path: "/super-admin/dashboard",    icon: Users,         bg: "bg-slate-900",  text: "text-white" },
 ];
 
 const TA_STEPS = [
-  { icon: FileText,  label: "Usulan Judul",     sub: "Proposal & Similarity Check",  color: "#C62828" },
-  { icon: BookOpen,  label: "Bimbingan TA",     sub: "Min. 5 Sesi Log Bimbingan",    color: "#F59E0B" },
-  { icon: FileCheck, label: "Seminar Proposal", sub: "Jadwal, ACC & Revisi",         color: "#3b82f6" },
-  { icon: Award,     label: "Ujian Sidang",     sub: "Sidang Skripsi & Hardcover",   color: "#059669" },
+  { icon: FileText,  title: "1. Usulan Judul",   desc: "Pengajuan & Cek Kemiripan" },
+  { icon: BookOpen,  title: "2. Bimbingan TA",   desc: "Min. 5 Sesi Log Digital" },
+  { icon: FileCheck, title: "3. Sempro",         desc: "Seminar & Berita Acara" },
+  { icon: Award,     title: "4. Sidang Skripsi", desc: "Ujian Final & Hardcover" },
 ];
-
-const STATS = [
-  { value: "1.200+", label: "Mahasiswa Aktif" },
-  { value: "180+",   label: "Dosen Pembimbing" },
-  { value: "4 Tahap", label: "Alur Terstruktur" },
-];
-
-/* ─────────────────────────── COMPONENT ─────────────────────────── */
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername]         = useState("");
-  const [password, setPassword]         = useState("");
+  const [activeTab, setActiveTab]       = useState<"mahasiswa" | "dosen" | "admin">("mahasiswa");
+  const [username, setUsername]         = useState("20101152630045");
+  const [password, setPassword]         = useState("••••••••");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading]           = useState(false);
-  const [mounted, setMounted]           = useState(false);
-  const [showQuickLogin, setShowQuickLogin] = useState(false);
+  const [targetPath, setTargetPath]     = useState("/");
 
-  useEffect(() => { setMounted(true); }, []);
+  // Switch role tabs & auto-fill demo credentials
+  const handleTabSwitch = (tab: "mahasiswa" | "dosen" | "admin") => {
+    setActiveTab(tab);
+    if (tab === "mahasiswa") {
+      setUsername("20101152630045");
+      setPassword("••••••••");
+      setTargetPath("/");
+    } else if (tab === "dosen") {
+      setUsername("1012057301");
+      setPassword("••••••••");
+      setTargetPath("/dosen/dashboard");
+    } else {
+      setUsername("198504122010122001");
+      setPassword("••••••••");
+      setTargetPath("/admin-prodi/dashboard");
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Default → mahasiswa dashboard
-    setTimeout(() => router.push("/"), 800);
+    setTimeout(() => {
+      router.push(targetPath);
+    }, 600);
   };
 
   return (
-    <div className="min-h-screen flex" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div className="min-h-screen w-full flex bg-[#F5F5F7] overflow-x-hidden font-sans">
 
-      {/* ══════════ LEFT PANEL — UPI PHOTO ══════════ */}
-      <div className="hidden lg:flex w-[46%] xl:w-[44%] relative flex-col overflow-hidden">
-
-        {/* Full-bleed photo */}
-        <div className="absolute inset-0">
-          <Image src="/upi.jpeg" alt="Gedung UPI YPTK Padang" fill className="object-cover object-center" priority />
+      {/* ════════════════════════════════════════════════════════════
+          LEFT PANEL — Official UPI YPTK Photo Banner (50% Width)
+         ════════════════════════════════════════════════════════════ */}
+      <div className="hidden lg:flex w-1/2 relative flex-col justify-between p-10 xl:p-14 overflow-hidden bg-[#0B0F19]">
+        
+        {/* Full-bleed Background Image */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <Image
+            src="/upi.jpeg"
+            alt="Gedung UPI YPTK Padang"
+            fill
+            className="object-cover object-center scale-105"
+            priority
+          />
         </div>
 
-        {/* Overlays */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.15) 100%)" }} />
-        <div className="absolute top-0 left-0 right-0 h-44 bg-gradient-to-b from-black/75 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-[65%] bg-gradient-to-t from-black/95 via-black/65 to-transparent" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 45% at 5% 100%, rgba(198,40,40,0.22), transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-px bg-white/10" />
+        {/* Cinematic Gradient Overlays */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/80 to-[#0B0F19]/40" />
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0B0F19] to-transparent z-0" />
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/90 to-transparent z-0" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_left,rgba(198,40,40,0.18),transparent_60%)]" />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col h-full px-10 xl:px-14 py-10">
-
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 relative shrink-0" style={{ filter: "drop-shadow(0 0 14px rgba(198,40,40,0.6))" }}>
-              <Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill className="object-contain" />
+        {/* Top Branding Section */}
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 relative shrink-0 drop-shadow-md">
+              <Image src="/upiyptk_emblem.webp" alt="Emblem UPI YPTK" fill className="object-contain" />
             </div>
             <div>
-              <p className="font-black text-[21px] tracking-[0.2em] text-white leading-none" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.6)" }}>SIPETA</p>
-              <p className="text-[8px] font-extrabold tracking-[0.28em] uppercase mt-0.5 leading-none" style={{ color: "#F59E0B" }}>UPI YPTK PADANG</p>
-            </div>
-          </div>
-
-          <div className="flex-1" />
-
-          {/* Bottom content */}
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h1
-                className="font-black leading-[1.05] text-white"
-                style={{ fontSize: "46px", textShadow: "0 4px 20px rgba(0,0,0,0.7)" }}
-              >
-                Perjalanan<br />
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: "linear-gradient(135deg, #FF6B6B 0%, #EF4444 40%, #F59E0B 100%)" }}
-                >
-                  Tugas Akhir
-                </span>
-              </h1>
-              <p className="text-[13px] leading-relaxed max-w-[300px]" style={{ color: "rgba(255,255,255,0.72)", textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
-                Platform resmi <span className="text-white font-semibold">UPI YPTK Padang</span> untuk mengelola dan memantau alur Tugas Akhir secara digital.
+              <p className="font-black text-2xl tracking-widest text-white leading-none font-display">SIPETA</p>
+              <p className="text-[9px] font-bold tracking-[0.25em] uppercase text-[#F59E0B] mt-1 font-display">
+                UNIVERSITAS PUTRA INDONESIA YPTK PADANG
               </p>
             </div>
-
-            {/* 4-Stage TA */}
-            <div className="space-y-2.5">
-              <p className="text-[9.5px] font-bold tracking-[0.22em] uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>Alur 4 Tahap Tugas Akhir</p>
-              <div className="grid grid-cols-2 gap-2">
-                {TA_STEPS.map((step) => {
-                  const Icon = step.icon;
-                  return (
-                    <div key={step.label} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                      <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${step.color}33`, border: `1px solid ${step.color}55` }}>
-                        <Icon className="w-3.5 h-3.5" style={{ color: step.color }} />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[10.5px] font-bold text-white leading-none truncate">{step.label}</p>
-                        <p className="text-[9px] mt-0.5 truncate" style={{ color: "rgba(255,255,255,0.45)" }}>{step.sub}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="flex gap-6 pt-5 border-t" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
-              {STATS.map(({ value, label }) => (
-                <div key={label}>
-                  <p className="text-[19px] font-black text-white leading-none" style={{ fontFamily: "'IBM Plex Mono', monospace", textShadow: "0 2px 8px rgba(0,0,0,0.4)" }}>{value}</p>
-                  <p className="text-[9.5px] mt-1" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-[9.5px]" style={{ color: "rgba(255,255,255,0.2)" }}>© 2026 Universitas Putra Indonesia YPTK Padang</p>
           </div>
-        </div>
-      </div>
 
-      {/* ══════════ RIGHT PANEL — LIGHT FORM ══════════ */}
-      <div className="flex-1 flex flex-col bg-[#F4F6F9] relative overflow-hidden">
-
-        {/* BG decoration */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: "radial-gradient(circle at 85% 8%, rgba(198,40,40,0.07) 0%, transparent 45%), radial-gradient(circle at 15% 92%, rgba(245,158,11,0.06) 0%, transparent 45%)",
-        }} />
-        <div className="absolute inset-0 pointer-events-none opacity-40" style={{
-          backgroundImage: "radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-        }} />
-
-        {/* Mobile header */}
-        <div className="lg:hidden relative z-10 flex items-center justify-between px-6 py-4 bg-white border-b border-slate-200">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 relative"><Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill className="object-contain" /></div>
-            <div>
-              <p className="font-black text-sm text-slate-900 tracking-widest leading-none">SIPETA</p>
-              <p className="text-[8px] font-bold tracking-widest uppercase mt-0.5" style={{ color: "#C62828" }}>UPI YPTK PADANG</p>
-            </div>
-          </div>
-          <span className="text-[10px] font-semibold text-slate-500 border border-slate-200 px-2.5 py-1 rounded-full bg-white">Multi-Role</span>
+          <span className="px-3.5 py-1 rounded-full text-[10.5px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+            Fakultas Ilmu Komputer
+          </span>
         </div>
 
-        {/* Centered form */}
-        <div className="relative z-10 flex-1 flex items-center justify-center p-6 md:p-10 overflow-y-auto">
-          <div
-            className="w-full max-w-[430px]"
-            style={{
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? "translateY(0)" : "translateY(20px)",
-              transition: "opacity 0.5s ease, transform 0.5s ease",
-            }}
-          >
+        {/* Middle Hero Text Section */}
+        <div className="relative z-10 my-auto py-8 space-y-6">
+          <div className="space-y-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/10 text-white backdrop-blur-md border border-white/15">
+              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" /> Portal Perjalanan &amp; Evaluasi Tugas Akhir
+            </span>
 
-            {/* ── White card ── */}
-            <div className="bg-white rounded-3xl overflow-hidden" style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.04), 0 10px 40px rgba(0,0,0,0.08)", border: "1px solid rgba(0,0,0,0.06)" }}>
+            <h1 className="text-3xl xl:text-4xl font-black text-white leading-tight font-display tracking-tight">
+              Sistem Informasi Terintegrasi Skripsi &amp; Tugas Akhir
+            </h1>
 
-              {/* Accent top bar */}
-              <div className="h-1.5" style={{ background: "linear-gradient(90deg, #C62828 0%, #EF4444 50%, #F59E0B 100%)" }} />
-
-              <div className="px-8 pt-7 pb-8 space-y-6">
-
-                {/* Heading */}
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #C62828, #991B1B)" }}>
-                      <LogIn className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400">Portal Akademik</p>
-                      <h2 className="text-xl font-black text-slate-900 leading-tight">
-                        Masuk ke{" "}
-                        <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #C62828, #EF4444)" }}>
-                          SIPETA
-                        </span>
-                      </h2>
-                    </div>
-                  </div>
-                  <p className="text-[12.5px] text-slate-500 leading-relaxed">
-                    Masukkan kredensial akun SIPETA Anda untuk mengakses sistem.
-                  </p>
-                </div>
-
-                {/* ── Form ── */}
-                <form onSubmit={handleLogin} className="space-y-5">
-
-                  {/* Divider */}
-                  <div className="flex items-center gap-3">
-                    <div className="h-px flex-1 bg-slate-100" />
-                    <span className="text-[9.5px] font-semibold text-slate-400 uppercase tracking-wider">Kredensial</span>
-                    <div className="h-px flex-1 bg-slate-100" />
-                  </div>
-
-                  {/* Username */}
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      NIM / NIDN / Username
-                    </label>
-                    <div className="relative">
-                      <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-300" />
-                      <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        autoComplete="username"
-                        placeholder="Masukkan NIM atau NIDN Anda"
-                        className="w-full pl-10 pr-4 py-3.5 rounded-xl text-[13px] text-slate-800 placeholder-slate-300 border-2 border-slate-100 bg-slate-50 focus:outline-none transition-all"
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "#C62828";
-                          e.currentTarget.style.background  = "white";
-                          e.currentTarget.style.boxShadow   = "0 0 0 3px rgba(198,40,40,0.1)";
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = "#f1f5f9";
-                          e.currentTarget.style.background  = "#f8fafc";
-                          e.currentTarget.style.boxShadow   = "none";
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Password */}
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Kata Sandi</label>
-                      <button type="button" className="text-[11px] font-semibold text-[#C62828] hover:opacity-75 transition-opacity">
-                        Lupa sandi?
-                      </button>
-                    </div>
-                    <div className="relative">
-                      <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-300" />
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        autoComplete="current-password"
-                        placeholder="Masukkan kata sandi"
-                        className="w-full pl-10 pr-11 py-3.5 rounded-xl text-[13px] text-slate-800 placeholder-slate-300 border-2 border-slate-100 bg-slate-50 focus:outline-none transition-all"
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "#C62828";
-                          e.currentTarget.style.background  = "white";
-                          e.currentTarget.style.boxShadow   = "0 0 0 3px rgba(198,40,40,0.1)";
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = "#f1f5f9";
-                          e.currentTarget.style.background  = "#f8fafc";
-                          e.currentTarget.style.boxShadow   = "none";
-                        }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Submit */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="relative w-full py-4 rounded-xl text-white font-bold text-[14px] overflow-hidden group active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition-all"
-                    style={{
-                      background: "linear-gradient(135deg, #C62828 0%, #991B1B 100%)",
-                      boxShadow: "0 6px 20px rgba(198,40,40,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
-                    }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                    <div className="absolute top-0 left-8 right-8 h-px bg-white/30 rounded-full" />
-                    <span className="relative z-10 flex items-center justify-center gap-2.5">
-                      {loading ? (
-                        <>
-                          <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                          Memproses...
-                        </>
-                      ) : (
-                        <>
-                          <LogIn className="w-4 h-4" />
-                          Masuk ke SIPETA
-                          <ArrowRight className="w-4 h-4 ml-auto opacity-70 group-hover:translate-x-0.5 transition-transform" />
-                        </>
-                      )}
-                    </span>
-                  </button>
-                </form>
-
-                {/* ── DEV ONLY: Login Cepat ── */}
-                <div className="space-y-3">
-                  <button
-                    type="button"
-                    onClick={() => setShowQuickLogin((v) => !v)}
-                    className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 border-dashed border-amber-300 bg-amber-50 hover:bg-amber-100 transition-all group"
-                  >
-                    <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-                    <span className="text-[11.5px] font-bold text-amber-700 flex-1 text-left">Login Cepat</span>
-                    <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-200 text-amber-800">DEV ONLY</span>
-                    <ChevronDown
-                      className="w-3.5 h-3.5 text-amber-500 shrink-0"
-                      style={{ transform: showQuickLogin ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}
-                    />
-                  </button>
-
-                  <div style={{
-                    maxHeight: showQuickLogin ? "600px" : "0px",
-                    opacity: showQuickLogin ? 1 : 0,
-                    overflow: "hidden",
-                    transition: "max-height 0.4s ease, opacity 0.25s ease",
-                  }}>
-                    <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-dashed border-amber-200 space-y-3">
-                      <p className="text-[10px] text-amber-700 font-medium leading-relaxed">
-                        ⚡ Shortcut navigasi tanpa login — untuk mempermudah development. Akan dihapus saat production.
-                      </p>
-
-                      {/* Top 3 */}
-                      <div className="grid grid-cols-3 gap-2">
-                        {ROLES.slice(0, 3).map((role) => {
-                          const Icon = role.icon;
-                          return (
-                            <button
-                              key={role.id}
-                              type="button"
-                              onClick={() => router.push(role.path)}
-                              className="p-3 rounded-xl border-2 text-left transition-all hover:shadow-md hover:-translate-y-0.5 active:scale-95"
-                              style={{ background: role.accentBg, borderColor: role.accentLight }}
-                            >
-                              <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2" style={{ background: role.accent }}>
-                                <Icon className="w-4 h-4 text-white" />
-                              </div>
-                              <p className="text-[10.5px] font-black leading-tight" style={{ color: role.accent }}>{role.label}</p>
-                              <p className="text-[8.5px] text-slate-400 mt-0.5">{role.desc}</p>
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      {/* Bottom 4 */}
-                      <div className="grid grid-cols-2 gap-1.5">
-                        {ROLES.slice(3).map((role) => {
-                          const Icon = role.icon;
-                          return (
-                            <button
-                              key={role.id}
-                              type="button"
-                              onClick={() => router.push(role.path)}
-                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl border-2 transition-all hover:shadow-sm active:scale-95"
-                              style={{ background: role.accentBg, borderColor: role.accentLight }}
-                            >
-                              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: role.accent }}>
-                                <Icon className="w-3.5 h-3.5 text-white" />
-                              </div>
-                              <div className="min-w-0">
-                                <p className="text-[10.5px] font-bold leading-tight truncate" style={{ color: role.accent }}>{role.label}</p>
-                                <p className="text-[8.5px] text-slate-400 truncate">{role.desc}</p>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Info note */}
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                  <CheckCircle2 className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
-                  <p className="text-[11.5px] text-slate-500 leading-relaxed">
-                    Akun SIPETA diberikan oleh{" "}
-                    <span className="text-slate-700 font-semibold">Admin Prodi</span>{" "}
-                    setelah verifikasi <span className="text-slate-700 font-semibold">clearing nilai akademik</span> di kampus.
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Footer */}
-            <p className="text-center text-[10.5px] text-slate-400 mt-5">
-              © 2026 Universitas Putra Indonesia YPTK Padang &mdash; FIK SIPETA v1.3
+            <p className="text-sm text-slate-300 max-w-lg leading-relaxed font-medium">
+              Platform resmi digitalisasi bimbingan, pengajuan judul, penjadwalan ujian seminar/sidang, serta penerbitan SK kelulusan bagi Civitas Akademika UPI YPTK Padang.
             </p>
           </div>
+
+          {/* 4 Tahap Process Chips */}
+          <div className="grid grid-cols-2 gap-3 pt-2">
+            {TA_STEPS.map((step) => {
+              const StepIcon = step.icon;
+              return (
+                <div key={step.title} className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C62828]/20 border border-[#C62828]/40 text-white flex items-center justify-center shrink-0">
+                    <StepIcon className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-white font-display">{step.title}</p>
+                    <p className="text-[10px] text-slate-400 font-medium">{step.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Bottom Trust Footer */}
+        <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between text-slate-400 text-xs font-medium">
+          <p>© 2026 Universitas Putra Indonesia YPTK Padang</p>
+          <span className="text-[11px] text-emerald-400 font-bold font-mono">v1.4 Status: Operational</span>
+        </div>
+
       </div>
+
+      {/* ════════════════════════════════════════════════════════════
+          RIGHT PANEL — Executive Authentic Login Form (50% Width)
+         ════════════════════════════════════════════════════════════ */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 xl:p-14 overflow-y-auto">
+        
+        {/* Mobile Header (Shown on Small Screens) */}
+        <div className="lg:hidden flex items-center justify-between pb-6 border-b border-slate-200">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 relative shrink-0">
+              <Image src="/upiyptk_emblem.webp" alt="Emblem UPI YPTK" fill className="object-contain" />
+            </div>
+            <div>
+              <p className="font-black text-lg tracking-wider text-slate-900 leading-none font-display">SIPETA</p>
+              <p className="text-[8px] font-bold text-[#C62828] uppercase font-display">UPI YPTK PADANG</p>
+            </div>
+          </div>
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#C62828] text-white">FIK</span>
+        </div>
+
+        <div className="max-w-md w-full mx-auto my-auto space-y-7 py-6">
+
+          {/* Form Header Title */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+              <p className="text-xs font-bold uppercase tracking-widest text-[#C62828] font-display">Portal Autentikasi Akademik</p>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-display tracking-tight">
+              Selamat Datang di SIPETA
+            </h2>
+            <p className="text-xs text-slate-500 font-medium">
+              Silakan pilih kategori peran dan masukkan NIM/NIDN Anda untuk masuk.
+            </p>
+          </div>
+
+          {/* ── Category Role Switcher Tabs ── */}
+          <div className="p-1 bg-slate-200/70 rounded-2xl grid grid-cols-3 gap-1">
+            <button
+              type="button"
+              onClick={() => handleTabSwitch("mahasiswa")}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
+                activeTab === "mahasiswa"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <GraduationCap className="w-4 h-4 text-emerald-600" />
+              <span>Mahasiswa</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabSwitch("dosen")}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
+                activeTab === "dosen"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <UserCheck className="w-4 h-4 text-[#C62828]" />
+              <span>Dosen</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabSwitch("admin")}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
+                activeTab === "admin"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <Building2 className="w-4 h-4 text-blue-600" />
+              <span>Staf / Admin</span>
+            </button>
+          </div>
+
+          {/* ── Login Form Card ── */}
+          <form onSubmit={handleLogin} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            
+            {/* Username Input */}
+            <div className="space-y-1.5">
+              <label className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-display">
+                {activeTab === "mahasiswa" ? "NIM Mahasiswa" : activeTab === "dosen" ? "NIDN Dosen" : "NIP / Username Admin"}
+              </label>
+              <div className="relative">
+                <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Masukkan nomor identitas..."
+                  className="w-full pl-10 pr-4 py-3 rounded-xl text-xs text-slate-900 font-bold bg-slate-50 border border-slate-200 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs font-mono"
+                />
+              </div>
+            </div>
+
+            {/* Password Input */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-display">Kata Sandi</label>
+                <button type="button" className="text-[11px] font-bold text-[#C62828] hover:underline cursor-pointer font-display">
+                  Lupa sandi?
+                </button>
+              </div>
+              <div className="relative">
+                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Masukkan kata sandi..."
+                  className="w-full pl-10 pr-10 py-3 rounded-xl text-xs text-slate-900 font-bold bg-slate-50 border border-slate-200 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 rounded-xl bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-xs transition-all active:scale-[0.98] shadow-md shadow-red-950/20 flex items-center justify-center gap-2 cursor-pointer font-display disabled:opacity-60"
+            >
+              {loading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                  Mengotentikasi Sesi...
+                </>
+              ) : (
+                <>
+                  <LogIn className="w-4 h-4 text-white" />
+                  Masuk ke Portal SIPETA
+                  <ArrowRight className="w-4 h-4 text-white ml-1" />
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* ── Quick Direct Portal Links Grid (Clear & Professional) ── */}
+          <div className="space-y-3 pt-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest font-display">Akses Pintas Portal (Dev Direct Access)</span>
+              <span className="text-[9.5px] font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-700 font-mono">7 Portal Role</span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {QUICK_ROLES.map((r) => {
+                const RoleIcon = r.icon;
+                return (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => router.push(r.path)}
+                    className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-[#C62828] hover:shadow-xs transition-all text-left group cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className={`w-7 h-7 rounded-lg ${r.bg} ${r.text} flex items-center justify-center shrink-0 shadow-2xs font-bold`}>
+                        <RoleIcon className="w-3.5 h-3.5 text-current" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-bold text-slate-900 font-display truncate group-hover:text-[#C62828] transition-colors">{r.label}</p>
+                        <p className="text-[9px] text-slate-400 font-medium truncate">{r.desc}</p>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Security Notice */}
+          <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 flex items-start gap-2.5 text-slate-600 text-[11px] font-medium">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <p>
+              Akun SIPETA diterbitkan secara resmi oleh <strong>Admin Prodi FIK</strong> setelah verifikasi clearing SKS &amp; IPK di kampus.
+            </p>
+          </div>
+
+        </div>
+
+        {/* Page Footer */}
+        <div className="text-center pt-6 border-t border-slate-200/80 text-[11px] text-slate-400 font-medium">
+          SIPETA v1.4 — Fakultas Ilmu Komputer UPI YPTK Padang
+        </div>
+
+      </div>
+
     </div>
   );
 }
