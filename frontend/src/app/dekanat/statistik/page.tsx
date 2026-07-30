@@ -26,7 +26,7 @@ const METRICS = [
 const TAHAP_TA = [
   { label: "Usulan Judul & Topik",    count: 45, color: "#D97706", pct: 18, desc: "Review komisi etik & prodi" },
   { label: "Proses Bimbingan SK",     count: 98, color: "#2563EB", pct: 40, desc: "Penyusunan Bab 1 s.d. 5" },
-  { label: "Seminar Proposal",        count: 42, color: "#7C3AED", pct: 17, desc: "Presentasi kelayakan riset" },
+  { label: "Seminar Proposal",        count: 42, color: "#0D9488", pct: 17, desc: "Presentasi kelayakan riset" },
   { label: "Ujian Sidang Skripsi",    count: 35, color: "#C62828", pct: 14, desc: "Ujian komprehensif 4 Penguji" },
   { label: "Lulus & Terverifikasi",  count: 28, color: "#059669", pct: 11, desc: "Bebas Fakultas & wisuda" },
 ];
