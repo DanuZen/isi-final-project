@@ -18,7 +18,7 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "SK Pending Terbit",       value: "9",  sub: "Menunggu Penandatanganan Dekan", color: "#F59E0B", bgIcon: "bg-[#F59E0B]", icon: Clock },
+  { label: "SK Pending Terbit",       value: "9",  sub: "Menunggu Penandatanganan Dekan", color: "#D97706", bgIcon: "bg-amber-500", icon: Clock },
   { label: "SK Diterbitkan",          value: "34", sub: "Bulan Agustus 2026",            color: "#059669", bgIcon: "bg-emerald-600",icon: CheckCircle2 },
   { label: "Bebas Fakultas Pending",  value: "5",  sub: "Verifikasi Diperlukan",          color: "#C62828", bgIcon: "bg-[#C62828]",  icon: Shield },
 ];

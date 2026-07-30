@@ -17,10 +17,10 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "+12%", icon: Users },
+  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#D97706", bgIcon: "bg-amber-500",   trend: "+12%", icon: Users },
   { label: "Selesai Tahun Ini",     value: "89",  sub: "s.d. Juli 2026",          color: "#059669", bgIcon: "bg-emerald-600", trend: "+8%",  icon: CheckCircle2 },
-  { label: "Rata-rata Durasi Studi",value: "1.8", sub: "Semester (≈ 10 bulan)",   color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "-0.2", icon: Clock },
-  { label: "Tingkat Kelulusan",     value: "94%", sub: "Semester ini",            color: "#C62828", bgIcon: "bg-rose-700",    trend: "+2%",  icon: Award },
+  { label: "Rata-rata Durasi Studi",value: "1.8", sub: "Semester (≈ 10 bulan)",   color: "#D97706", bgIcon: "bg-yellow-500",  trend: "-0.2", icon: Clock },
+  { label: "Tingkat Kelulusan",     value: "94%", sub: "Semester ini",            color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "+2%",  icon: Award },
 ];
 
 const REKAPITULASI = [
