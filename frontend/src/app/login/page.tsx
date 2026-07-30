@@ -91,11 +91,11 @@ export default function LoginPage() {
         <div className="max-w-md w-full mx-auto my-auto space-y-6 py-8">
           
           {/* Title & Subtitle */}
-          <div className="space-y-1.5 text-center sm:text-left">
+          <div className="space-y-2 text-center">
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight">
               Selamat Datang
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 font-medium">
+            <p className="text-xs sm:text-sm text-slate-500 font-medium max-w-sm mx-auto leading-relaxed">
               Masukkan kredensial akun SIPETA Anda untuk mengakses portal.
             </p>
           </div>
