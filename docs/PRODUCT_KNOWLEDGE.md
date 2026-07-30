@@ -159,52 +159,65 @@ SIPETA mengadopsi **Fit-Viewport Architecture (`100dvh`)** untuk pengalaman peng
 
 ### 5.3 Diagram Arsitektur Sistem
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       CLIENT (Browser)                          │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │                   Next.js 14 App Router                  │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌─────────┐ │   │
-│  │  │  Login    │  │ Portal   │  │ Portal   │  │ Portal  │ │   │
-│  │  │  Page     │  │ Mhs (12) │  │ Dosen(8) │  │Admin(14)│ │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └─────────┘ │   │
-│  │  ┌──────────────────────────────────────────────────┐   │   │
-│  │  │     Shared Layout: Sidebar + Header + Banner     │   │   │
-│  │  └──────────────────────────────────────────────────┘   │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└────────────────────────────┬────────────────────────────────────┘
-                             │ HTTPS REST API (Planned)
-┌────────────────────────────┴────────────────────────────────────┐
-│                     SERVER (Planned)                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │   NestJS      │  │  JWT Auth +  │  │  Prisma ORM          │  │
-│  │   REST API    │  │  RBAC Guard  │  │  (Type-safe queries) │  │
-│  └──────────────┘  └──────────────┘  └──────────┬───────────┘  │
-└─────────────────────────────────────────────────┬───────────────┘
-                                                  │
-                             ┌────────────────────┴───────────┐
-                             │     PostgreSQL Database         │
-                             │  (15 Tabel + 6 Enum States)     │
-                             └─────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph CLIENT["Client Layer (Web Browser)"]
+        FE["Next.js 16 App Router (React + TS)"]
+        SHELL["3-Layer Viewport Shell (Sidebar + Header + Main Body)"]
+        P_MHS["Portal Mahasiswa (11 Sub-Halaman)"]
+        P_DSN["Portal Dosen Pembimbing & Penguji (8 Sub-Halaman)"]
+        P_ADM["Portal Admin Prodi & Fakultas (9 Sub-Halaman)"]
+        P_DEK["Portal Dekanat & Super Admin (9 Sub-Halaman)"]
+        
+        FE --> SHELL
+        SHELL --> P_MHS
+        SHELL --> P_DSN
+        SHELL --> P_ADM
+        SHELL --> P_DEK
+    end
+
+    subgraph API["Network & Security Layer"]
+        HTTP["HTTPS / REST API Service"]
+        JWT["JWT Auth & Role Guard Middleware"]
+    end
+
+    subgraph SERVER["Backend Application Server"]
+        BE["NestJS Application Framework"]
+        ORM["Prisma ORM (Type-Safe Database Query)"]
+        PDF["PDF Generator (SK Dekan & Laporan Eksekutif)"]
+    end
+
+    subgraph STORAGE["Data & Storage Layer"]
+        DB[(PostgreSQL Relational DB)]
+        S3["Cloud File Storage (Dokumen PDF / Hardcover)"]
+    end
+
+    CLIENT -->|REST API Request| HTTP
+    HTTP --> JWT
+    JWT --> BE
+    BE --> ORM
+    BE --> PDF
+    ORM --> DB
+    BE --> S3
 ```
 
 ---
 
 ## 6. Manajemen Pengguna — 7 Role System
 
-### 6.1 Hierarki Peran Pengguna
+### 6.1 Diagram Hierarki Peran Pengguna (RBAC)
 
 SIPETA menerapkan **Role-Based Access Control (RBAC)** dengan 7 peran pengguna yang disusun berdasarkan hierarki kewenangan:
 
-```
-SIPETA RBAC Hierarchy
- ├── Level 1: SUPER ADMIN        → Administrator Teknis & Keamanan Sistem
- ├── Level 2: PIMPINAN           → Executive Monitoring & Analitik Keputusan
- ├── Level 3: ADMIN FAKULTAS     → Administrasi SK Dekan & Bebas Fakultas
- ├── Level 4: ADMIN PRODI        → Operasional Akademik Prodi (Aktivasi, Jadwal, Assign)
- ├── Level 5: DOSEN PEMBIMBING   → Review Naskah, Log Bimbingan, ACC Ujian
- ├── Level 6: DOSEN PENGUJI      → Penilaian Ujian Sempro/Sidang, Verifikasi Revisi
- └── Level 7: MAHASISWA          → Pengajuan Judul, Bimbingan, Upload Naskah
+```mermaid
+graph TD
+    SA["Level 1: SUPER ADMIN<br/>(System Administrator & Keamanan)"] --> DEK["Level 2: PIMPINAN / DEKANAT<br/>(Executive Monitoring & Analytics)"]
+    DEK --> AF["Level 3: ADMIN FAKULTAS<br/>(Penerbitan SK Dekan & Bebas Fakultas)"]
+    AF --> AP["Level 4: ADMIN PRODI<br/>(Operasional Akademik & Penjadwalan)"]
+    AP --> DP["Level 5: DOSEN PEMBIMBING<br/>(Review Naskah, Bimbingan & ACC TA)"]
+    AP --> DG["Level 6: DOSEN PENGUJI<br/>(Pengujian Sempro/Sidang & Penilaian)"]
+    DP --> MHS["Level 7: MAHASISWA<br/>(Pengajuan Judul, Bimbingan & Ujian)"]
+    DG --> MHS
 ```
 
 ### 6.2 Profil Detail Setiap Role
@@ -346,25 +359,45 @@ SIPETA RBAC Hierarchy
 
 ## 7. Alur Kerja End-to-End Tugas Akhir
 
-### 7.1 Gambaran Umum 5 Tahap Siklus TA
+### 7.1 Diagram Alur Kerja End-to-End Tugas Akhir
 
 Seluruh perjalanan Tugas Akhir mahasiswa di SIPETA melewati **5 tahapan besar** yang saling terhubung:
 
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                    SIKLUS PERJALANAN TUGAS AKHIR SIPETA                   │
-│                                                                          │
-│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌───────┐ │
-│  │ STAGE 0 │───>│ STAGE 1 │───>│ STAGE 2 │───>│ STAGE 3 │───>│STAGE 4│ │
-│  │Clearing │    │ Judul & │    │Bimbingan│    │ Seminar │    │Sidang │ │
-│  │ Luring  │    │Pembimb. │    │  TA     │    │Proposal │    │Skripsi│ │
-│  └─────────┘    └─────────┘    └─────────┘    └─────────┘    └───────┘ │
-│   (Offline)      (Online)       (Online)       (Online)      (Online)  │
-│                                                                          │
-│  Role Terlibat:                                                          │
-│  Mahasiswa ─── Admin Prodi ─── Dosen Pembimbing ─── Dosen Penguji       │
-│  Admin Fakultas ─── Pimpinan/Dekanat ─── Super Admin                    │
-└──────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph S0["STAGE 0: Clearing Nilai Luring (Kampus Offline)"]
+        A1["Mahasiswa Mengurus Clearing SKS & IPK di Kampus"] --> A2["Admin Prodi Verifikasi Syarat 110 SKS & IPK ≥ 2.00"]
+        A2 --> A3["Admin Prodi Aktifkan Akun SIPETA Mahasiswa"]
+    end
+
+    subgraph S1["STAGE 1: Usulan Judul & Cek Kemiripan (Online)"]
+        A3 --> B1["Mahasiswa Input Form Proposal & Abstrak Judul"]
+        B1 --> B2["System Run Similarity Checker Simulator"]
+        B2 -->|Similarity < 25%| B3["Judul Approved & Masuk Repositori"]
+        B2 -->|Similarity ≥ 25%| B1
+    end
+
+    subgraph S2["STAGE 2: Pembimbingan & Sesi Rutin (Online)"]
+        B3 --> C1["Mahasiswa Ajukan Dosen Pembimbing I & II"]
+        C1 --> C2["Admin Prodi & Dosen Konfirmasi Pembimbing"]
+        C2 --> C3["Sesi Bimbingan Rutin (Upload PDF & Thread Log)"]
+        C3 -->|Minimal 5 Sesi Terverifikasi| C4["Dosen Pembimbing Klik Tombol ACC Seminar"]
+    end
+
+    subgraph S3["STAGE 3: Seminar Proposal (Online)"]
+        C4 --> D1["Admin Prodi Penjadwalan Sempro & Plotting Tim Penguji"]
+        D1 --> D2["Pelaksanaan Seminar Proposal & Input Nilai Penguji"]
+        D2 --> D3["Mahasiswa Upload Revisi Sempro → Approval Penguji"]
+    end
+
+    subgraph S4["STAGE 4: Ujian Sidang Skripsi & Yudisium (Online)"]
+        D3 --> E1["Dosen Pembimbing Klik Tombol ACC Ujian Sidang"]
+        E1 --> E2["Admin Prodi Penjadwalan Ujian Sidang Skripsi"]
+        E2 --> E3["Pelaksanaan Sidang Skripsi & Input Nilai Komprehensif"]
+        E3 --> E4["Mahasiswa Upload Naskah Hardcover Final"]
+        E4 --> E5["Admin Fakultas Verifikasi Bebas Fakultas (Lab, Pustaka, SPP)"]
+        E5 --> E6["Penerbitan SK Dekan & Pengesahan Kelulusan Yudisium"]
+    end
 ```
 
 ### 7.2 Detail Alur Per Tahap
@@ -681,46 +714,115 @@ SIPETA menggunakan **15 tabel utama** dan **6 enum state** dalam skema basis dat
 
 ### 11.3 Entity-Relationship Diagram (ERD)
 
-```
-┌──────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│   FAKULTAS   │────>│      PRODI       │────>│       USER       │
-│  - kode      │     │  - kode          │     │  - nimNip         │
-│  - nama      │     │  - nama          │     │  - nama           │
-└──────────────┘     │  - fakultasId    │     │  - email          │
-                     └──────────────────┘     │  - role           │
-                                               │  - statusTa       │
-                                               │  - isVerified     │
-                                               └────────┬─────────┘
-                                                        │
-                              ┌──────────────────────────┼──────────────────────────┐
-                              │                          │                          │
-                    ┌─────────▼────────┐      ┌─────────▼─────────┐    ┌──────────▼──────────┐
-                    │  PROPOSAL JUDUL  │      │   BIMBINGAN LOG   │    │    NOTIFIKASI       │
-                    │  - judul         │      │  - catatanUser    │    │  - judul             │
-                    │  - abstrak       │      │  - catatanFeedback│    │  - pesan             │
-                    │  - skorKemiripan │      │  - fileAttachment │    │  - isRead            │
-                    │  - status        │      │  - isApproved     │    └─────────────────────┘
-                    └───────┬──────────┘      └───────────────────┘
-                            │
-              ┌─────────────┼─────────────────────┐
-              │             │                     │
-   ┌──────────▼──────┐  ┌──▼──────────────┐  ┌───▼──────────────┐
-   │PEMBIMBING ASSIGN│  │PERUBAHAN JUDUL  │  │    SEMINAR       │
-   │  - posisi (1/2) │  │  - judulLama    │  │  - tanggalSeminar│
-   └─────────────────┘  │  - judulBaru    │  │  - ruangan       │
-                        │  - alasan       │  │  - status        │
-                        └─────────────────┘  └───────┬──────────┘
-                                                     │
-                                           ┌─────────┼──────────┐
-                                           │                    │
-                                  ┌────────▼───────┐  ┌────────▼────────┐
-                                  │SEMINAR PENGUJI │  │ REVISI SEMINAR  │
-                                  │  - nilai       │  │  - fileRevisi   │
-                                  │  - catatan     │  │  - isDisetujui  │
-                                  └────────────────┘  └─────────────────┘
-```
+```mermaid
+erDiagram
+    FAKULTAS ||--|{ PRODI : "memiliki"
+    PRODI ||--|{ USER : "menaungi"
+    USER ||--o{ PROPOSAL_JUDUL : "mengajukan"
+    USER ||--o{ PEMBIMBING_ASSIGN : "ditugaskan_sebagai"
+    USER ||--o{ BIMBINGAN_LOG : "mencatat_log"
+    USER ||--o{ NOTIFIKASI : "menerima"
+    USER ||--o{ AUDIT_LOG : "melakukan_aksi"
+    
+    PROPOSAL_JUDUL ||--o{ PEMBIMBING_ASSIGN : "memiliki_pembimbing"
+    PROPOSAL_JUDUL ||--o{ PERUBAHAN_JUDUL : "mengajukan_perubahan"
+    PROPOSAL_JUDUL ||--o{ SEMINAR : "didaftarkan_ke"
+    PROPOSAL_JUDUL ||--o{ SIDANG : "didaftarkan_ke"
 
-> **Catatan:** Struktur yang sama berlaku untuk entitas `Sidang`, `SidangPenguji`, dan `RevisiSidang`.
+    SEMINAR ||--|{ SEMINAR_PENGUJI : "diuji_oleh"
+    SEMINAR ||--o{ REVISI_SEMINAR : "memiliki_revisi"
+
+    SIDANG ||--|{ SIDANG_PENGUJI : "diuji_oleh"
+    SIDANG ||--o{ REVISI_SIDANG : "memiliki_revisi"
+
+    FAKULTAS {
+        string id PK
+        string kode
+        string nama
+    }
+
+    PRODI {
+        string id PK
+        string fakultasId FK
+        string kode
+        string nama
+        string jenjang
+        string kaprodi
+    }
+
+    USER {
+        string id PK
+        string prodiId FK
+        string nimNip UK
+        string nama
+        string email
+        string password
+        enum role
+        enum statusTa
+        boolean isVerified
+    }
+
+    PROPOSAL_JUDUL {
+        string id PK
+        string mahasiswaId FK
+        string judul
+        string abstrak
+        string bidangKajian
+        float skorKemiripan
+        enum status
+    }
+
+    PEMBIMBING_ASSIGN {
+        string id PK
+        string proposalId FK
+        string dosenId FK
+        int posisi
+        boolean isApproved
+    }
+
+    BIMBINGAN_LOG {
+        string id PK
+        string mahasiswaId FK
+        string dosenId FK
+        string catatanMahasiswa
+        string catatanDosen
+        string fileAttachment
+        boolean isApproved
+        datetime createdAt
+    }
+
+    SEMINAR {
+        string id PK
+        string proposalId FK
+        datetime tanggalSeminar
+        string ruangan
+        enum status
+    }
+
+    SEMINAR_PENGUJI {
+        string id PK
+        string seminarId FK
+        string dosenId FK
+        float nilai
+        string catatan
+    }
+
+    SIDANG {
+        string id PK
+        string proposalId FK
+        datetime tanggalSidang
+        string ruangan
+        enum status
+    }
+
+    SIDANG_PENGUJI {
+        string id PK
+        string sidangId FK
+        string dosenId FK
+        float nilai
+        string catatan
+    }
+```
 
 ---
 
