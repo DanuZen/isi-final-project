@@ -7,7 +7,7 @@ import {
   GraduationCap, UserCheck, ShieldCheck, Building2,
   LayoutDashboard, Users, Lock, LogIn, User, Eye, EyeOff,
   ArrowRight, CheckCircle2, School, FileText, BookOpen,
-  FileCheck, Award, Sparkles, HelpCircle, X, Check
+  FileCheck, Award, Sparkles, HelpCircle, X
 } from "lucide-react";
 
 /* ─────────────────────────── DATA ROLES ─────────────────────────── */
@@ -39,36 +39,30 @@ const FAQ_ITEMS = [
 
 export default function LoginPage() {
   const router = useRouter();
-  const [activeRoleTab, setActiveRoleTab] = useState<"mahasiswa" | "dosen" | "admin">("mahasiswa");
-  const [username, setUsername]           = useState("20101152630045");
-  const [password, setPassword]           = useState("••••••••");
+  const [username, setUsername]         = useState("20101152630045");
+  const [password, setPassword]         = useState("••••••••");
   const [showPassword, setShowPassword]   = useState(false);
   const [loading, setLoading]             = useState(false);
-  const [targetPath, setTargetPath]       = useState("/");
   const [showFaqModal, setShowFaqModal]   = useState(false);
-
-  const handleTabSwitch = (tab: "mahasiswa" | "dosen" | "admin") => {
-    setActiveRoleTab(tab);
-    if (tab === "mahasiswa") {
-      setUsername("20101152630045");
-      setPassword("••••••••");
-      setTargetPath("/");
-    } else if (tab === "dosen") {
-      setUsername("1012057301");
-      setPassword("••••••••");
-      setTargetPath("/dosen/dashboard");
-    } else {
-      setUsername("198504122010122001");
-      setPassword("••••••••");
-      setTargetPath("/admin-prodi/dashboard");
-    }
-  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    let path = "/";
+    const val = username.trim().toLowerCase();
+    if (val.startsWith("10") || val.includes("dosen") || val.includes("fauzi")) {
+      path = "/dosen/dashboard";
+    } else if (val.startsWith("19") || val.includes("admin") || val.includes("prodi")) {
+      path = "/admin-prodi/dashboard";
+    } else if (val.includes("fakultas")) {
+      path = "/admin-fakultas/dashboard";
+    } else if (val.includes("dekan") || val.includes("pimpinan")) {
+      path = "/dekanat/dashboard";
+    } else if (val.includes("super")) {
+      path = "/super-admin/dashboard";
+    }
     setTimeout(() => {
-      router.push(targetPath);
+      router.push(path);
     }, 600);
   };
 
@@ -110,50 +104,8 @@ export default function LoginPage() {
               Selamat Datang
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              Pilih peran Anda dan masukkan kredensial akun SIPETA.
+              Masukkan kredensial akun SIPETA Anda untuk mengakses portal.
             </p>
-          </div>
-
-          {/* ── Segmented Role Switcher Pill ── */}
-          <div className="p-1.5 bg-slate-100 rounded-2xl grid grid-cols-3 gap-1 shadow-inner">
-            <button
-              type="button"
-              onClick={() => handleTabSwitch("mahasiswa")}
-              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
-                activeRoleTab === "mahasiswa"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              <GraduationCap className={`w-4 h-4 ${activeRoleTab === "mahasiswa" ? "text-emerald-600" : ""}`} />
-              <span>Mahasiswa</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleTabSwitch("dosen")}
-              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
-                activeRoleTab === "dosen"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              <UserCheck className={`w-4 h-4 ${activeRoleTab === "dosen" ? "text-[#C62828]" : ""}`} />
-              <span>Dosen</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleTabSwitch("admin")}
-              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer font-display ${
-                activeRoleTab === "admin"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              <Building2 className={`w-4 h-4 ${activeRoleTab === "admin" ? "text-blue-600" : ""}`} />
-              <span>Admin</span>
-            </button>
           </div>
 
           {/* ── Login Form Inputs ── */}
@@ -166,14 +118,14 @@ export default function LoginPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <label className="block text-[9.5px] font-bold text-slate-400 uppercase tracking-widest font-display">
-                  {activeRoleTab === "mahasiswa" ? "NIM Mahasiswa" : activeRoleTab === "dosen" ? "NIDN Dosen" : "NIP / Username"}
+                  NIM / NIDN / NIP / Username
                 </label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  placeholder="Masukkan kredensial..."
+                  placeholder="Masukkan NIM, NIDN, atau Username..."
                   className="w-full text-xs font-bold text-slate-900 bg-transparent focus:outline-none font-mono"
                 />
               </div>
