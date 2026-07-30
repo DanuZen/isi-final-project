@@ -40,6 +40,10 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
    - *Natural Page Scroll (`min-h-screen pb-16`)*: Diterapkan pada halaman analitik/statistik kaya data seperti `/dekanat/statistik` agar kartu dan grafik dapat mengembang secara alami.
 6. **Tidak Ada Badge Redundan**:
    - Penghapusan badge "Menunggu Verifikasi" pada antrean yang sudah didedikasikan khusus untuk barang yang butuh verifikasi.
+7. **Skeleton Loading UI System (`loading.tsx`)**:
+   - Terpasang pada seluruh 7 role portal di aplikasi SIPETA menggunakan komponen `PageSkeleton` beranimasi denyut halus (`animate-pulse bg-slate-200`) untuk memberikan masukan visual instan saat halaman dimuat.
+8. **Empty State UI System**:
+   - Apabila tabel atau histori data masih kosong, sistem wajib menampilkan visual Empty State berupa ikon terkait ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*).
 
 ---
 

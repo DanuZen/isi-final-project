@@ -623,6 +623,16 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 - Seluruh kartu statistik status/antrean di dashboard 7 role menggunakan aksen warna **Kuning Emas Amber Warm (`#D97706` / `bg-amber-500`)**
 - Tidak menggunakan warna ungu (`#7C3AED`) pada chart maupun indikator progres (menggunakan Teal `#0D9488`)
 
+#### Skeleton Loading UI System (`loading.tsx`)
+
+- Terpasang pada seluruh 7 role portal di aplikasi SIPETA via file `loading.tsx` App Router dan komponen `PageSkeleton`
+- Menggunakan animasi denyut halus (`animate-pulse bg-slate-200`) yang menyerupai arsitektur 3-layer flex SIPETA untuk impresi respon instan
+
+#### Empty State UI System
+
+- Ditampilkan otomatis apabila kontainer tabel atau thread bimbingan masih dalam kondisi kosong (0 data)
+- Dilengkapi dengan ikon kontekstual ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*)
+
 ### 10.3 Warna Akses & Palette Sistem
 
 | Elemen UI | Warna Utama | Kode Warna Tailwind |
