@@ -111,10 +111,6 @@ export default function LoginPage() {
         {/* Middle Hero Text Section */}
         <div className="relative z-10 my-auto py-8 space-y-6">
           <div className="space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/10 text-white backdrop-blur-md border border-white/15">
-              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" /> Portal Perjalanan &amp; Evaluasi Tugas Akhir
-            </span>
-
             <h1 className="text-3xl xl:text-4xl font-black text-white leading-tight font-display tracking-tight">
               Sistem Informasi Terintegrasi Skripsi &amp; Tugas Akhir
             </h1>
@@ -146,7 +142,6 @@ export default function LoginPage() {
         {/* Bottom Trust Footer */}
         <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between text-slate-400 text-xs font-medium">
           <p>© 2026 Universitas Putra Indonesia YPTK Padang</p>
-          <span className="text-[11px] text-emerald-400 font-bold font-mono">v1.4 Status: Operational</span>
         </div>
 
       </div>
