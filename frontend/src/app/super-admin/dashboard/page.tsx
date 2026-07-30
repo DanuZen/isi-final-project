@@ -19,9 +19,9 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Total User Aktif",      value: "412",  sub: "Seluruh Akun Aktif",    color: "#0F172A", bgIcon: "bg-slate-900", icon: Users },
-  { label: "Login Hari Ini",       value: "87",   sub: "Sesi Aktif Realtime",   color: "#059669", bgIcon: "bg-emerald-600",icon: CheckCircle2 },
-  { label: "Error Log 24 Jam",     value: "3",    sub: "Perlu Ditinjau",        color: "#C62828", bgIcon: "bg-[#C62828]",  icon: AlertTriangle },
+  { label: "Total User Aktif",      value: "412",  sub: "Seluruh Akun Aktif",    color: "#D97706", bgIcon: "bg-amber-500", icon: Users },
+  { label: "Login Hari Ini",       value: "87",   sub: "Sesi Aktif Realtime",   color: "#D97706", bgIcon: "bg-amber-500", icon: CheckCircle2 },
+  { label: "Error Log 24 Jam",     value: "3",    sub: "Perlu Ditinjau",        color: "#D97706", bgIcon: "bg-amber-500", icon: AlertTriangle },
   { label: "User Nonaktif",        value: "14",   sub: "Akun Suspended",        color: "#D97706", bgIcon: "bg-amber-500", icon: Clock },
 ];
 
