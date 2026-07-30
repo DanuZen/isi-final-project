@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  CheckCircle2, Search, UserCheck, ArrowRight
+  CheckCircle2, Search, UserCheck, ArrowRight, XCircle
 } from "lucide-react";
 
 const NAV = [
@@ -101,13 +101,6 @@ export default function AdminProdiAktivasiPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
-            {activatedSuccess && (
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2.5 shrink-0">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>{activatedSuccess}</span>
-              </div>
-            )}
-
             {/* Main Container */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
               <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
@@ -187,6 +180,21 @@ export default function AdminProdiAktivasiPage() {
           </main>
         </div>
       </div>
+
+      {/* Floating Toast Popup Notification (Non-layout-shifting) */}
+      {activatedSuccess && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-slate-800 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+              <CheckCircle2 className="w-4.5 h-4.5 text-white" />
+            </div>
+            <p className="text-xs font-bold font-display leading-tight">{activatedSuccess}</p>
+          </div>
+          <button onClick={() => setActivatedSuccess(null)} className="text-slate-400 hover:text-white cursor-pointer p-1">
+            <XCircle className="w-4 h-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

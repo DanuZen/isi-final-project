@@ -158,19 +158,6 @@ export default function AdminProdiDashboard() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
 
-            {/* Toast Alert Notice */}
-            {toastMessage && (
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center justify-between gap-3 shadow-xs animate-in fade-in shrink-0">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
-                  <span>{toastMessage}</span>
-                </div>
-                <button onClick={() => setToastMessage(null)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
-                  <XCircle className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
             {/* ── 4 Executive Stat Cards ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
               {STATS.map((s) => {
@@ -394,6 +381,21 @@ export default function AdminProdiDashboard() {
           </main>
         </div>
       </div>
+
+      {/* Floating Toast Popup Notification (Non-layout-shifting) */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-slate-800 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+              <CheckCircle2 className="w-4.5 h-4.5 text-white" />
+            </div>
+            <p className="text-xs font-bold font-display leading-tight">{toastMessage}</p>
+          </div>
+          <button onClick={() => setToastMessage(null)} className="text-slate-400 hover:text-white cursor-pointer p-1">
+            <XCircle className="w-4 h-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
