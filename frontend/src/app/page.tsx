@@ -52,9 +52,24 @@ const ACC_CHECKLIST = [
 ];
 
 const QUICK_ACTIONS = [
-  { label: "Ajukan Judul TA", href: "/proposal", icon: <FileText className="w-4 h-4" /> },
-  { label: "Pilih Pembimbing", href: "/pembimbing", icon: <User2 className="w-4 h-4" /> },
-  { label: "Lihat Kalender TA", href: "/kalender", icon: <CalendarDays className="w-4 h-4" /> },
+  {
+    label: "Ajukan Judul TA",
+    href: "/proposal",
+    icon: <FileText className="w-4 h-4" />,
+    btnClass: "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40",
+  },
+  {
+    label: "Pilih Pembimbing",
+    href: "/pembimbing",
+    icon: <User2 className="w-4 h-4" />,
+    btnClass: "bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 font-bold border border-amber-400/40 shadow-md shadow-amber-950/20",
+  },
+  {
+    label: "Lihat Kalender TA",
+    href: "/kalender",
+    icon: <CalendarDays className="w-4 h-4" />,
+    btnClass: "bg-white hover:bg-slate-100 text-slate-900 font-bold border border-slate-200 shadow-md",
+  },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -100,7 +115,7 @@ export default function DashboardPage() {
                     <Link
                       key={a.label}
                       href={a.href}
-                      className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-[#C62828] hover:border-[#C62828] transition-all active:scale-95 shadow-xs"
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${a.btnClass}`}
                     >
                       {a.icon}
                       <span>{a.label}</span>
