@@ -124,16 +124,6 @@ export default function AdminProdiAktivasiPage() {
                     Admin Prodi dapat menginputkan langsung data mahasiswa yang telah divalidasi clearing luringnya untuk langsung diaktifkan di portal SIPETA.
                   </p>
                 </div>
-
-                <div className="flex flex-wrap gap-2.5 shrink-0">
-                  <button
-                    onClick={() => setShowAddModal(true)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
-                  >
-                    <Plus className="w-4 h-4 text-white" />
-                    <span>Input Mahasiswa Baru</span>
-                  </button>
-                </div>
               </div>
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
             </div>
