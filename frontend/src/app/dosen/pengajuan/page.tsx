@@ -7,8 +7,7 @@ import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   CheckCircle2, XCircle, Clock, ArrowRight,
-  ShieldCheck, AlertCircle, Sparkles, X, History, FileText,
-  Award, MessageSquare, BookOpen, Check
+  ShieldCheck, AlertCircle, Sparkles, X, History, FileText
 } from "lucide-react";
 
 const DOSEN_NAV = [
@@ -24,8 +23,6 @@ interface PengajuanItem {
   prodi: string;
   judul: string;
   bidang: string;
-  ipk: number;
-  sks: number;
   tgl: string;
   pembimbing2: string;
   alasan: string;
@@ -38,8 +35,6 @@ const INITIAL_PENGAJUAN: Array<PengajuanItem> = [
     prodi: "Teknik Informatika",
     judul: "Sistem Monitoring Energi Listrik Berbasis IoT dan Dashboard Web Realtime",
     bidang: "IoT & Embedded Systems",
-    ipk: 3.72,
-    sks: 144,
     tgl: "30 Jul 2026",
     pembimbing2: "Rina Oktaviani, M.Kom.",
     alasan: "Saya sangat tertarik dengan rekam jejak penelitian Bapak di bidang sistem terdistribusi dan IoT. Besar harapan saya agar Bapak berkenan menjadi Dosen Pembimbing I saya.",
@@ -50,8 +45,6 @@ const INITIAL_PENGAJUAN: Array<PengajuanItem> = [
     prodi: "Sistem Informasi",
     judul: "Pengembangan Sistem Informasi Manajemen Apotek Berbasis Web Terintegrasi API BPJS",
     bidang: "Rekayasa Perangkat Lunak",
-    ipk: 3.61,
-    sks: 146,
     tgl: "28 Jul 2026",
     pembimbing2: "Sari Indah, M.T.",
     alasan: "Topik penelitian saya berfokus pada arsitektur sistem informasi manajemen. Saya membutuhkan bimbingan langsung dari Bapak dalam perancangan database dan metodologi.",
@@ -92,7 +85,6 @@ export default function DosenPengajuanPage() {
   };
 
   const handleDecision = (item: PengajuanItem, status: "Diterima" | "Ditolak") => {
-    // Remove from pending list
     const remaining = pengajuanList.filter((p) => p.nim !== item.nim);
     setPengajuanList(remaining);
     
@@ -100,7 +92,6 @@ export default function DosenPengajuanPage() {
       setSelectedNim(remaining[0].nim);
     }
     
-    // Add to history
     setRiwayatList((prev) => [
       {
         nim: item.nim,
@@ -153,7 +144,7 @@ export default function DosenPengajuanPage() {
                     Permohonan Pembimbing Masuk
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Tinjau kualifikasi IPK, SKS, rincian proposal, serta alasan mahasiswa memilih Anda sebagai Dosen Pembimbing I.
+                    Tinjau rincian proposal, topik skripsi, serta alasan mahasiswa memilih Anda sebagai Dosen Pembimbing I.
                   </p>
                 </div>
 
@@ -207,13 +198,13 @@ export default function DosenPengajuanPage() {
                           <div
                             key={p.nim}
                             onClick={() => setSelectedNim(p.nim)}
-                            className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2.5 ${
+                            className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                               isSelected
                                 ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
                                 : "bg-slate-50/50 border-slate-200/80 hover:bg-white hover:border-slate-300"
                             }`}
                           >
-                            <div className="flex items-start justify-between gap-3">
+                            <div className="flex items-center justify-between gap-3">
                               <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs font-display">
                                   {p.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
@@ -224,16 +215,9 @@ export default function DosenPengajuanPage() {
                                 </div>
                               </div>
 
-                              <div className="flex gap-2 text-center shrink-0">
-                                <div className="bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
-                                  <p className="text-xs font-black text-[#C62828] leading-none font-display">{p.ipk}</p>
-                                  <p className="text-[8.5px] text-slate-400 font-bold mt-0.5">IPK</p>
-                                </div>
-                                <div className="bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
-                                  <p className="text-xs font-black text-emerald-600 leading-none font-display">{p.sks}</p>
-                                  <p className="text-[8.5px] text-slate-400 font-bold mt-0.5">SKS</p>
-                                </div>
-                              </div>
+                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-50 text-blue-700 border border-blue-100 shrink-0">
+                                {p.bidang}
+                              </span>
                             </div>
 
                             <p className="text-xs text-slate-700 font-medium truncate">
@@ -306,29 +290,16 @@ export default function DosenPengajuanPage() {
                   <div className="flex-1 overflow-y-auto scrollbar-none p-5 space-y-4">
                     {/* Student Profile Header Box */}
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-sm flex items-center justify-center shrink-0 shadow-md font-display">
-                            {selectedMhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-                          </div>
-                          <div>
-                            <h3 className="text-base font-black text-slate-900 font-display leading-tight">
-                              {selectedMhs.nama}
-                            </h3>
-                            <p className="text-xs text-slate-500 font-medium">{selectedMhs.prodi}</p>
-                            <p className="text-[10.5px] font-mono text-slate-400 font-medium">NIM: {selectedMhs.nim}</p>
-                          </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-sm flex items-center justify-center shrink-0 shadow-md font-display">
+                          {selectedMhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                         </div>
-
-                        <div className="flex gap-2 text-center shrink-0">
-                          <div className="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                            <p className="text-sm font-black text-[#C62828] leading-none font-display">{selectedMhs.ipk}</p>
-                            <p className="text-[9px] text-slate-400 font-bold mt-0.5">IPK</p>
-                          </div>
-                          <div className="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                            <p className="text-sm font-black text-emerald-600 leading-none font-display">{selectedMhs.sks}</p>
-                            <p className="text-[9px] text-slate-400 font-bold mt-0.5">SKS</p>
-                          </div>
+                        <div>
+                          <h3 className="text-base font-black text-slate-900 font-display leading-tight">
+                            {selectedMhs.nama}
+                          </h3>
+                          <p className="text-xs text-slate-500 font-medium">{selectedMhs.prodi}</p>
+                          <p className="text-[10.5px] font-mono text-slate-400 font-medium">NIM: {selectedMhs.nim}</p>
                         </div>
                       </div>
                     </div>
@@ -346,11 +317,11 @@ export default function DosenPengajuanPage() {
                       </p>
                       <div className="pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-[10.5px] text-slate-500">
                         <div>
-                          <span className="block text-[9px] text-slate-400 font-bold uppercase">Calon Pembimbing II</span>
+                          <span className="block text-[9px] text-slate-400 font-bold uppercase font-display">Calon Pembimbing II</span>
                           <strong className="text-slate-800">{selectedMhs.pembimbing2}</strong>
                         </div>
                         <div>
-                          <span className="block text-[9px] text-slate-400 font-bold uppercase">Tgl Pengajuan</span>
+                          <span className="block text-[9px] text-slate-400 font-bold uppercase font-display">Tgl Pengajuan</span>
                           <strong className="text-slate-800">{selectedMhs.tgl}</strong>
                         </div>
                       </div>
