@@ -6,6 +6,8 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, User, LogOut, Menu, X } from "lucide-react";
 
+import { SplashScreen } from "@/components/ui/splash-screen";
+
 interface NavItem {
   label: string;
   href: string;
@@ -36,6 +38,7 @@ export function RoleLayout({
   const router   = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showPortalSplash, setShowPortalSplash] = useState(true);
   const dropRef = React.useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click
@@ -58,9 +61,59 @@ export function RoleLayout({
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden bg-[#F5F5F7]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
 
-        {/* ── Sidebar ── */}
+        {/* ── 1. Mobile Drawer View (< md) ── */}
+        {sidebarOpen && (
+          <div className="md:hidden">
+            <div
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/75 backdrop-blur-xs z-[9998] animate-fade-in-scale cursor-pointer"
+            />
+            <aside className="fixed inset-y-0 left-0 w-[270px] bg-[#1A1A1A] text-white flex flex-col z-[9999] shadow-2xl overflow-hidden border-r border-[#333333]">
+              <div className="flex items-center justify-between p-4 border-b border-[#333333] shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 relative shrink-0">
+                    <Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill className="object-contain" priority />
+                  </div>
+                  <div>
+                    <h1 className="font-black text-lg tracking-wider font-display text-white leading-none">SIPETA</h1>
+                    <p className="text-[8px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-0.5 leading-none">UPI YPTK PADANG</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto">
+                <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">Menu Utama</div>
+                {navItems.map((item) => {
+                  const active = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all ${
+                        active ? "text-white font-extrabold" : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
+                      }`}
+                      style={active ? { background: accentColor + "33", color: "white" } : {}}
+                    >
+                      <span style={active ? { color: accentColor } : {}}>{item.icon}</span>
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+            </aside>
+          </div>
+        )}
+
+        {/* ── 2. Desktop Permanent/Collapsible Sidebar (md:flex) ── */}
         <aside
-          className={`bg-[#1A1A1A] text-white flex flex-col h-screen sticky top-0 shrink-0 border-r border-[#333333] transition-all duration-300 z-30 overflow-hidden ${
+          className={`hidden md:flex flex-col h-screen sticky top-0 shrink-0 bg-[#1A1A1A] text-white border-r border-[#333333] transition-all duration-300 z-30 overflow-hidden ${
             sidebarOpen ? "w-[260px]" : "w-[64px]"
           }`}
         >
@@ -104,7 +157,6 @@ export function RoleLayout({
                   {sidebarOpen && (
                     <span className="text-[12.5px] truncate flex-1">{item.label}</span>
                   )}
-
                 </Link>
               );
             })}
@@ -129,12 +181,16 @@ export function RoleLayout({
           <header className="sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200">
             <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${accentColor}, #F59E0B, ${accentColor})` }} />
             <div className="h-12 px-5 flex items-center justify-between">
-              <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-500 transition-all md:hidden"
-              >
-                <Menu className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-2.5 md:hidden">
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-800 transition-all cursor-pointer shadow-2xs"
+                  title="Buka Menu"
+                >
+                  <Menu className="w-5 h-5 text-[#C62828]" />
+                </button>
+                <span className="font-black text-sm font-display text-slate-900 tracking-wider">SIPETA</span>
+              </div>
               <div className="flex-1" />
 
               {/* User dropdown */}
@@ -196,6 +252,17 @@ export function RoleLayout({
           </main>
         </div>
       </div>
+
+      {/* Portal Splash Transition */}
+      {showPortalSplash && (
+        <SplashScreen
+          isVisible={showPortalSplash}
+          message={`Portal ${userRole} — SIPETA`}
+          subMessage={`${userName} · ${userUnit}`}
+          duration={850}
+          onFinish={() => setShowPortalSplash(false)}
+        />
+      )}
     </div>
   );
 }
