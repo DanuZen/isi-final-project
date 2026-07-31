@@ -57,6 +57,13 @@ export const metadata: Metadata = {
     siteName: "SIPETA UPI YPTK",
     images: [
       {
+        url: "https://sipeta-upiyptk.vercel.app/og_image.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
+      },
+      {
         url: "https://sipeta-upiyptk.vercel.app/og_image.jpg",
         width: 1200,
         height: 630,
@@ -71,7 +78,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
     description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
-    images: ["https://sipeta-upiyptk.vercel.app/og_image.jpg"],
+    images: [
+      "https://sipeta-upiyptk.vercel.app/og_image.png",
+      "https://sipeta-upiyptk.vercel.app/og_image.jpg",
+    ],
   },
   robots: {
     index: true,
