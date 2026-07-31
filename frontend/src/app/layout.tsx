@@ -83,6 +83,10 @@ export const metadata: Metadata = {
       "https://sipeta-upiyptk.vercel.app/og_image.jpg",
     ],
   },
+  other: {
+    "image": "https://sipeta-upiyptk.vercel.app/og_image.png",
+    "og:image:secure_url": "https://sipeta-upiyptk.vercel.app/og_image.png",
+  },
   robots: {
     index: true,
     follow: true,
