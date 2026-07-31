@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import { TaStepper } from "@/components/ui/ta-stepper";
@@ -74,8 +75,31 @@ const QUICK_ACTIONS = [
 
 // ────────────────────────────────────────────────────────────
 
+import { SplashScreen } from "@/components/ui/splash-screen";
+
 export default function DashboardPage() {
+  const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
+  const [isCheckingAuth, setIsCheckingAuth] = React.useState(true);
+
+  React.useEffect(() => {
+    const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("sipeta_logged_in");
+    if (!isLoggedIn) {
+      router.replace("/login");
+    } else {
+      setIsCheckingAuth(false);
+    }
+  }, [router]);
+
+  if (isCheckingAuth) {
+    return (
+      <SplashScreen
+        message="Memverifikasi Autentikasi Sistem..."
+        subMessage="Universitas Putra Indonesia YPTK Padang"
+        duration={1000}
+      />
+    );
+  }
 
   const canAcc = ACC_CHECKLIST.every((c) => c.done);
 
@@ -85,7 +109,7 @@ export default function DashboardPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
 
@@ -154,7 +178,7 @@ export default function DashboardPage() {
                         {JUDUL.status}
                       </span>
                     ) : (
-                      <span className="shrink-0 px-3 py-1 rounded-full text-[10px] font-bold bg-slate-200 text-slate-500">
+                      <span className="shrink-0 px-3 py-1 rounded-full text-[10px] font-extrabold bg-amber-500 text-white shadow-xs">
                         Belum Diajukan
                       </span>
                     )}
@@ -196,13 +220,13 @@ export default function DashboardPage() {
                     </>
                   ) : (
                     /* Empty state — belum ada judul */
-                    <div className="flex-1 flex flex-col items-center justify-center gap-4 px-5 py-10 text-center">
-                      <div className="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center">
-                        <FileText className="w-7 h-7 text-slate-300" />
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3">
+                      <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#C62828] shadow-xs">
+                        <FileText className="w-7 h-7 text-[#C62828]" />
                       </div>
                       <div className="space-y-1">
-                        <p className="text-sm font-bold text-slate-700">Belum Ada Judul Diajukan</p>
-                        <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
+                        <h4 className="font-extrabold text-base font-display text-slate-900">Belum Ada Judul Diajukan</h4>
+                        <p className="text-xs text-slate-500 max-w-xs leading-relaxed font-medium">
                           Mulai perjalanan TA Anda dengan mengajukan usulan judul skripsi dan cek kemiripan (similarity).
                         </p>
                       </div>
@@ -211,7 +235,7 @@ export default function DashboardPage() {
                         className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
                       >
                         <BookOpen className="w-4 h-4" />
-                        Ajukan Usulan Judul Sekarang
+                        <span>Ajukan Usulan Judul Sekarang</span>
                       </Link>
                     </div>
                   )}

@@ -113,7 +113,11 @@ const DOSEN_LIST: Dosen[] = [
   },
 ];
 
+import { storePembimbing } from "@/lib/sipeta-store";
+import { useToast } from "@/components/ui/toast";
+
 export default function PengajuanPembimbingPage() {
+  const { showToast } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Search & Filter State
@@ -168,16 +172,26 @@ export default function PengajuanPembimbingPage() {
   const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedPembimbing1 || !selectedPembimbing2) {
-      alert("Harap pilih Dosen Pembimbing I dan Dosen Pembimbing II!");
+      showToast("Pilihan Belum Lengkap", "Harap pilih Dosen Pembimbing I dan Dosen Pembimbing II!", "warning");
       return;
     }
     setIsSubmitting(true);
     setTimeout(() => {
+      storePembimbing.saveRequest({
+        studentNim: "20101152630045",
+        studentNama: "Danu Zen",
+        prodi: "Teknik Informatika",
+        judul: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA) Berbasis Web di UPI YPTK Padang",
+        bidang: "Software Engineering (RPL)",
+        dosenId: selectedPembimbing1.id,
+        dosenNama: selectedPembimbing1.nama,
+        alasan: catatanAlasan || "Mengajukan bimbingan tugas akhir skripsi",
+      });
       setIsSubmitting(false);
       setSubmissionStatus("SUBMITTED");
       setShowFormModal(false);
-      alert("Pengajuan Dosen Pembimbing berhasil dikirim ke Admin Prodi!");
-    }, 1000);
+      showToast("Permohonan Berhasil Dikirim!", "Permohonan Dosen Pembimbing I & II telah tersimpan dan terhubung ke portal Dosen.", "success");
+    }, 800);
   };
 
   return (
@@ -186,7 +200,7 @@ export default function PengajuanPembimbingPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
             {/* ── Welcome Banner ── */}
@@ -223,7 +237,7 @@ export default function PengajuanPembimbingPage() {
             </div>
 
             {/* Main 12-Column Grid (Flush Bottom Baseline Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
               {/* Left Column (8/12): Dosen Directory Table List */}
               <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
                 <div className="bg-white rounded-xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">

@@ -23,6 +23,7 @@ import {
   FileUp
 } from "lucide-react";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
+import { BIDANG_KAJIAN_PER_PRODI } from "@/constants/upiyptk";
 
 interface FileDetails {
   name: string;
@@ -32,9 +33,10 @@ interface FileDetails {
 
 export default function ProposalJudulPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedProdi, setSelectedProdi] = useState("Teknik Informatika");
   const [judulInput, setJudulInput] = useState("");
   const [abstrakInput, setAbstrakInput] = useState("");
-  const [bidangKajian, setBidangKajian] = useState("Software Engineering & Web Architecture");
+  const [bidangKajian, setBidangKajian] = useState("RPL");
 
   const [similarityScore, setSimilarityScore] = useState<number | null>(null);
   const [isChecking, setIsChecking] = useState(false);
@@ -114,7 +116,7 @@ export default function ProposalJudulPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-5 overflow-hidden shell-body flex flex-col min-h-0 relative">
             
@@ -149,11 +151,11 @@ export default function ProposalJudulPage() {
             </div>
 
             {/* Main 12-Column Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
               
               {/* Left Column (8/12): Form Pengajuan Judul */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
-                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden">
+                <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-visible lg:overflow-hidden">
                   <div className="space-y-4 overflow-y-auto scrollbar-none pr-1">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                       <div className="flex items-center gap-2.5">
@@ -185,28 +187,18 @@ export default function ProposalJudulPage() {
                         />
                       </div>
 
-                      {/* Bidang Kajian */}
+                      {/* Bidang Kajian (Dinamis Berdasarkan Prodi Mahasiswa) */}
                       <CustomDropdown
-                        label="Bidang Kajian Keahlian:"
+                        label="Bidang Kajian Keahlian (Sesuai Program Studi):"
                         value={bidangKajian}
                         onChange={(val) => setBidangKajian(val)}
-                        options={[
-                          {
-                            id: "Software Engineering & Web Architecture",
-                            label: "Software Engineering & Web Architecture (RPL)",
-                            badge: "RPL",
-                          },
-                          {
-                            id: "Artificial Intelligence & Machine Learning",
-                            label: "Artificial Intelligence & Machine Learning (AI)",
-                            badge: "AI",
-                          },
-                          {
-                            id: "Computer Network & Cybersecurity",
-                            label: "Computer Network & Cybersecurity (Jaringan)",
-                            badge: "JARINGAN",
-                          },
-                        ]}
+                        options={
+                          BIDANG_KAJIAN_PER_PRODI[selectedProdi] || [
+                            { id: "RPL", label: "Software Engineering & Web Architecture (RPL)", badge: "RPL" },
+                            { id: "AI", label: "Artificial Intelligence & Machine Learning (AI)", badge: "AI" },
+                            { id: "JARINGAN", label: "Computer Network & Cybersecurity (Jaringan)", badge: "JARINGAN" },
+                          ]
+                        }
                       />
 
                       {/* Draf Abstrak */}

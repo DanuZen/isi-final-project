@@ -17,6 +17,8 @@ import {
   Download,
 } from "lucide-react";
 
+import { storeJadwal } from "@/lib/sipeta-store";
+
 export default function UjianSidangPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<"SEMPRO" | "SIDANG">("SIDANG");
@@ -25,6 +27,16 @@ export default function UjianSidangPage() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [revisiSemproFile, setRevisiSemproFile] = useState<string | null>(null);
   const [isSemproUploaded, setIsSemproUploaded] = useState(false);
+
+  const [jadwalList, setJadwalList] = useState(storeJadwal.getAll());
+
+  React.useEffect(() => {
+    const sync = () => setJadwalList(storeJadwal.getAll());
+    window.addEventListener("storage_sipeta", sync);
+    return () => window.removeEventListener("storage_sipeta", sync);
+  }, []);
+
+  const currentExam = jadwalList.find((j) => activeTab === "SEMPRO" ? j.jenis === "Seminar" : j.jenis === "Sidang");
 
   const handleUploadNaskah = (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,107 +109,105 @@ export default function UjianSidangPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
               {/* Left Column (8/12): Schedule Details & Board of Examiners */}
               <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
-                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
-                  <div>
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                          {activeTab === "SEMPRO" ? (
-                            <Calendar className="w-4 h-4" />
-                          ) : (
-                            <GraduationCap className="w-4 h-4" />
-                          )}
-                        </div>
-                        <h3 className="font-bold text-sm text-slate-900 font-display">
-                          {activeTab === "SEMPRO"
-                            ? "Jadwal Pelaksanaan Seminar Proposal Skripsi (Sempro)"
-                            : "Jadwal Pelaksanaan Ujian Sidang Skripsi (Final)"}
-                        </h3>
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        {activeTab === "SEMPRO" ? (
+                          <Calendar className="w-4 h-4" />
+                        ) : (
+                          <GraduationCap className="w-4 h-4" />
+                        )}
                       </div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        {activeTab === "SEMPRO"
+                          ? "Jadwal Pelaksanaan Seminar Proposal Skripsi (Sempro)"
+                          : "Jadwal Pelaksanaan Ujian Sidang Skripsi (Final)"}
+                      </h3>
+                    </div>
+                    {currentExam ? (
                       <span className="px-3 py-1 text-xs font-bold bg-emerald-600 text-white shadow-xs rounded-full">
                         Terjadwal Resmi
                       </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
-                        </div>
-                        <p className="font-bold text-slate-900">
-                          {activeTab === "SEMPRO" ? "Kamis, 20 Agustus 2026" : "Kamis, 25 September 2026"}
-                        </p>
-                      </div>
-
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <Clock className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Ujian</span>
-                        </div>
-                        <p className="font-bold text-slate-900">
-                          {activeTab === "SEMPRO" ? "09:00 - 10:30 WIB" : "13:00 - 14:30 WIB"}
-                        </p>
-                      </div>
-
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Ujian</span>
-                        </div>
-                        <p className="font-bold text-slate-900">
-                          {activeTab === "SEMPRO" ? "Ruang 302" : "Aula Utama FIK UPI YPTK"}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Examiners List */}
-                    <div className="space-y-3 pt-5">
-                      <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
-                        <Users className="w-4 h-4 text-[#C62828]" />{" "}
-                        {activeTab === "SEMPRO"
-                          ? "Susunan Dewan Penguji Seminar Proposal:"
-                          : "Majelis Dewan Penguji Sidang Skripsi:"}
-                      </h4>
-
-                      <div className="overflow-x-auto rounded-xl border border-slate-200">
-                        <table className="w-full text-left text-xs">
-                          <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
-                            <tr>
-                              <th className="py-3 px-4 font-bold">Jabatan Majelis</th>
-                              <th className="py-3 px-4 font-bold">Nama Dosen Penguji</th>
-                              <th className="py-3 px-4 font-bold">Status Konfirmasi</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100 text-slate-800">
-                            <tr>
-                              <td className="py-3 px-4 font-bold text-[#C62828]">Ketua Penguji Ujian</td>
-                              <td className="py-3 px-4 font-medium">
-                                {activeTab === "SEMPRO"
-                                  ? "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc."
-                                  : "Prof. Dr. Agus Defit, S.Kom., M.Kom."}
-                              </td>
-                              <td className="py-3 px-4 text-[#2F8F5B] font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2.5 px-3 font-bold text-amber-700">Penguji Utama (I)</td>
-                              <td className="py-2.5 px-3 font-medium">
-                                {activeTab === "SEMPRO"
-                                  ? "Dr. Yanto, S.Kom., M.Kom."
-                                  : "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc."}
-                              </td>
-                              <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2.5 px-3 font-bold text-slate-600">Penguji Pendamping (II)</td>
-                              <td className="py-2.5 px-3 font-medium">Dr. Jasmir, S.Kom., M.Kom.</td>
-                              <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                    ) : (
+                      <span className="px-3 py-1 text-xs font-extrabold bg-amber-500 text-white shadow-xs rounded-full">
+                        Belum Ada Jadwal
+                      </span>
+                    )}
                   </div>
+
+                  {currentExam ? (
+                    <div className="flex-1 flex flex-col justify-between overflow-y-auto scrollbar-none space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{currentExam.hari}, {currentExam.tglNum}</p>
+                        </div>
+
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <Clock className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Pelaksanaan</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{currentExam.waktu}</p>
+                        </div>
+
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Ujian</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{currentExam.ruang}</p>
+                        </div>
+                      </div>
+
+                      {/* Examiners Table */}
+                      <div className="space-y-3 pt-2">
+                        <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
+                          <Users className="w-4 h-4 text-[#C62828]" /> Susunan Dewan Penguji Ujian:
+                        </h4>
+
+                        <div className="overflow-x-auto rounded-xl border border-slate-200">
+                          <table className="w-full text-left text-xs">
+                            <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
+                              <tr>
+                                <th className="py-3 px-4 font-bold">Jabatan Dewan Penguji</th>
+                                <th className="py-3 px-4 font-bold">Nama Dosen Penguji</th>
+                                <th className="py-3 px-4 font-bold">Status Hadir</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 text-slate-800 font-medium">
+                              <tr>
+                                <td className="py-2.5 px-3 font-bold text-[#C62828]">Ketua Dewan Penguji</td>
+                                <td className="py-2.5 px-3">Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.</td>
+                                <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
+                              </tr>
+                              <tr>
+                                <td className="py-2.5 px-3 font-bold text-amber-700">Penguji Utama (I)</td>
+                                <td className="py-2.5 px-3">Dr. Jasmir, S.Kom., M.Kom.</td>
+                                <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3">
+                      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
+                        {activeTab === "SEMPRO" ? <Calendar className="w-7 h-7" /> : <GraduationCap className="w-7 h-7" />}
+                      </div>
+                      <h4 className="font-extrabold text-base font-display text-slate-900">
+                        Belum Ada Jadwal {activeTab === "SEMPRO" ? "Seminar Proposal" : "Ujian Sidang"}
+                      </h4>
+                      <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed font-medium">
+                        Jadwal pelaksanaan ujian beserta susunan dewan penguji akan muncul secara otomatis di sini setelah ditetapkan oleh Sekretariat Admin Prodi.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
 

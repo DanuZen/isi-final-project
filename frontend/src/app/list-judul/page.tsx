@@ -17,6 +17,7 @@ import {
   PieChart,
 } from "lucide-react";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
+import { storeProposal } from "@/lib/sipeta-store";
 
 interface JudulItem {
   no: number;
@@ -30,118 +31,7 @@ interface JudulItem {
   tahun: string;
 }
 
-const SAMPLE_DATA: JudulItem[] = [
-  {
-    no: 1,
-    nim: "20101152630012",
-    namaMahasiswa: "Adam Surya",
-    judulTA: "Rancang Bangun Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA) Berbasis Web di UPI YPTK Padang",
-    bidangKajian: "Rekayasa Perangkat Lunak",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
-    status: "Disetujui",
-    tahun: "2026",
-  },
-  {
-    no: 2,
-    nim: "20101152630015",
-    namaMahasiswa: "Afdal Riandy",
-    judulTA: "Penerapan Algoritma Convolutional Neural Network (CNN) untuk Klasifikasi Penyakit Daun Sawit",
-    bidangKajian: "Kecerdasan Buatan",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Yanto, S.Kom., M.Kom.",
-    status: "Selesai",
-    tahun: "2025",
-  },
-  {
-    no: 3,
-    nim: "20101152630018",
-    namaMahasiswa: "Afiq Izaan Salman",
-    judulTA: "Pengembangan System Monitoring Infrastruktur Jaringan Kampus Berbasis SNMP dan Telegram Bot Gateway",
-    bidangKajian: "Jaringan Komputer",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Jasmir, S.Kom., M.Kom.",
-    status: "Disetujui",
-    tahun: "2026",
-  },
-  {
-    no: 4,
-    nim: "20101152630022",
-    namaMahasiswa: "Aisyah Marbun",
-    judulTA: "Implementasi Framework Laravel dan ReactJS pada Sistem Manajemen Presensi Asisten Laboratorium Komputer",
-    bidangKajian: "Rekayasa Perangkat Lunak",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Ir. Muhammad Adri, S.Pd., M.T.",
-    status: "Selesai",
-    tahun: "2025",
-  },
-  {
-    no: 5,
-    nim: "20101152630025",
-    namaMahasiswa: "Alfajar Yusuffa",
-    judulTA: "Analisis Sentimen Opini Publik terhadap Layanan Akademik Menggunakan Naive Bayes Classifier",
-    bidangKajian: "Kecerdasan Buatan",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Syukhri, S.T., M.CIO.",
-    status: "Selesai",
-    tahun: "2025",
-  },
-  {
-    no: 6,
-    nim: "20101152630030",
-    namaMahasiswa: "Alifia Athiqa Erlin",
-    judulTA: "Rancang Bangun Application Programming Interface (API) Gateway Berbasis Microservices untuk Sistem Akademik",
-    bidangKajian: "Rekayasa Perangkat Lunak",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Geovanne Farell, S.Pd., M.Pd.T.",
-    status: "Disetujui",
-    tahun: "2026",
-  },
-  {
-    no: 7,
-    nim: "20101152630034",
-    namaMahasiswa: "Amalia Sagita S Rangkuti",
-    judulTA: "Pengembangan Game Edukasi Interaktif Algoritma Pemrograman Berbasis Android pada FIK UPI YPTK",
-    bidangKajian: "Kecerdasan Buatan",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Vera Irma Delianti, M.Pd.T.",
-    status: "Selesai",
-    tahun: "2025",
-  },
-  {
-    no: 8,
-    nim: "20101152630040",
-    namaMahasiswa: "Amirah Ulfah Sakinah",
-    judulTA: "Rancang Bangun Marketplace Kuliner Lokal Berbasis Web Geographic Information System (GIS) Kota Padang",
-    bidangKajian: "Rekayasa Perangkat Lunak",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Dr. Syukhri, S.T., M.CIO.",
-    status: "Disetujui",
-    tahun: "2026",
-  },
-  {
-    no: 9,
-    nim: "20101152630045",
-    namaMahasiswa: "Ananda Boersasi Dalfa",
-    judulTA: "Rancang Bangun Sistem Keamanan Jaringan Menggunakan Intrusion Prevention System (IPS) Snort",
-    bidangKajian: "Jaringan Komputer",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Winda Agustiarmi, S.Pd., M.Pd.T.",
-    status: "Selesai",
-    tahun: "2025",
-  },
-  {
-    no: 10,
-    nim: "20101152630050",
-    namaMahasiswa: "Anisa Risma",
-    judulTA: "Pengembangan Sistem Informasi Manajemen Operasional Laboratorium Komputer FIK UPI YPTK Padang",
-    bidangKajian: "Rekayasa Perangkat Lunak",
-    jenisTA: "Tugas Akhir Skripsi",
-    pembimbing: "Hadi Kurnia Saputra, S.Pd., M.Kom.",
-    status: "Disetujui",
-    tahun: "2026",
-  },
-];
+const SAMPLE_DATA: JudulItem[] = [];
 
 export default function ListJudulPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -150,8 +40,32 @@ export default function ListJudulPage() {
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [, setCurrentPage] = useState(1);
 
+  const [judulList, setJudulList] = useState<JudulItem[]>([]);
+
+  const syncJudul = React.useCallback(() => {
+    const prop = storeProposal.get();
+    const stored: JudulItem[] = prop ? [{
+      no: 1,
+      nim: "20101152630045",
+      namaMahasiswa: "Danu Zen",
+      judulTA: prop.judul,
+      bidangKajian: prop.bidangKajian,
+      jenisTA: "Tugas Akhir Skripsi",
+      pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
+      status: "Disetujui",
+      tahun: "2026",
+    }] : [];
+    setJudulList(stored);
+  }, []);
+
+  React.useEffect(() => {
+    syncJudul();
+    window.addEventListener("storage_sipeta", syncJudul);
+    return () => window.removeEventListener("storage_sipeta", syncJudul);
+  }, [syncJudul]);
+
   // Filter Logic
-  const filteredData = SAMPLE_DATA.filter((item) => {
+  const filteredData = judulList.filter((item) => {
     const matchesSearch =
       item.judulTA.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.namaMahasiswa.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -275,38 +189,54 @@ export default function ListJudulPage() {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 text-slate-800">
-                          {filteredData.map((item) => (
-                            <tr key={item.no} className="hover:bg-slate-50/80 transition-colors">
-                              <td className="py-3 px-3.5 text-center font-mono-data font-bold text-slate-500">
-                                {item.no}
-                              </td>
-                              <td className="py-3 px-3.5 font-bold text-slate-900">
-                                <p className="font-bold text-slate-900">{item.namaMahasiswa}</p>
-                                <p className="text-[10px] font-mono-data text-slate-500 font-medium">NIM: {item.nim}</p>
-                              </td>
-                              <td className="py-3 px-3.5">
-                                <p className="font-bold text-slate-900 leading-snug">
-                                  {item.judulTA}
-                                </p>
-                                <div className="flex items-center gap-2 mt-1.5">
-                                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                                    {item.bidangKajian}
+                          {filteredData.length > 0 ? (
+                            filteredData.map((item) => (
+                              <tr key={item.no} className="hover:bg-slate-50/80 transition-colors">
+                                <td className="py-3 px-3.5 text-center font-mono-data font-bold text-slate-500">
+                                  {item.no}
+                                </td>
+                                <td className="py-3 px-3.5 font-bold text-slate-900">
+                                  <p className="font-bold text-slate-900">{item.namaMahasiswa}</p>
+                                  <p className="text-[10px] font-mono-data text-slate-500 font-medium">NIM: {item.nim}</p>
+                                </td>
+                                <td className="py-3 px-3.5">
+                                  <p className="font-bold text-slate-900 leading-snug">
+                                    {item.judulTA}
+                                  </p>
+                                  <div className="flex items-center gap-2 mt-1.5">
+                                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                                      {item.bidangKajian}
+                                    </span>
+                                    <span className="text-[10px] font-bold text-emerald-600">
+                                      ✓ Status: {item.status} ({item.tahun})
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-3.5 font-semibold text-slate-700">
+                                  <span className="px-3 py-1 rounded-full text-[10px] font-extrabold bg-slate-800 text-white shadow-xs">
+                                    {item.jenisTA}
                                   </span>
-                                  <span className="text-[10px] font-bold text-emerald-600">
-                                    ✓ Status: {item.status} ({item.tahun})
-                                  </span>
+                                </td>
+                                <td className="py-3 px-3.5 font-medium text-slate-700">
+                                  <span className="text-[11px] font-bold text-slate-800">{item.pembimbing}</span>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan={5} className="py-28 text-center text-slate-500">
+                                <div className="flex flex-col items-center justify-center space-y-3 max-w-sm mx-auto">
+                                  <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
+                                    <BookOpen className="w-7 h-7" />
+                                  </div>
+                                  <p className="font-extrabold text-sm font-display text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
+                                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                                    Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
+                                  </p>
                                 </div>
                               </td>
-                              <td className="py-3 px-3.5 font-semibold text-slate-700">
-                                <span className="px-3 py-1 rounded-full text-[10px] font-extrabold bg-slate-800 text-white shadow-xs">
-                                  {item.jenisTA}
-                                </span>
-                              </td>
-                              <td className="py-3 px-3.5 font-medium text-slate-700">
-                                <span className="text-[11px] font-bold text-slate-800">{item.pembimbing}</span>
-                              </td>
                             </tr>
-                          ))}
+                          )}
                         </tbody>
                       </table>
                     </div>

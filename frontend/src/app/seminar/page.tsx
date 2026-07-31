@@ -16,10 +16,22 @@ import {
   Download,
 } from "lucide-react";
 
+import { storeJadwal } from "@/lib/sipeta-store";
+
 export default function SeminarPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [revisiFile, setRevisiFile] = useState<string | null>(null);
   const [revisiSubmitted, setRevisiSubmitted] = useState(false);
+
+  const [jadwalList, setJadwalList] = useState(storeJadwal.getAll());
+
+  React.useEffect(() => {
+    const sync = () => setJadwalList(storeJadwal.getAll());
+    window.addEventListener("storage_sipeta", sync);
+    return () => window.removeEventListener("storage_sipeta", sync);
+  }, []);
+
+  const seminarExam = jadwalList.find((j) => j.jenis === "Seminar");
 
   const handleUploadRevisi = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,84 +86,99 @@ export default function SeminarPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               {/* Left Column (8/12): Schedule Details & Board of Examiners */}
               <div className="lg:col-span-8 flex flex-col justify-between space-y-6 h-full">
-                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                          <Calendar className="w-4 h-4" />
-                        </div>
-                        <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Detail Pelaksanaan Seminar Proposal
-                        </h3>
+                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <Calendar className="w-4 h-4" />
                       </div>
-                      <span className="px-3 py-1 text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full">
+                      <h3 className="font-bold text-sm text-slate-900 font-display">
+                        Detail Pelaksanaan Seminar Proposal
+                      </h3>
+                    </div>
+                    {seminarExam ? (
+                      <span className="px-3 py-1 text-xs font-extrabold bg-emerald-600 text-white shadow-xs rounded-full">
                         Terjadwal Resmi
                       </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
-                        </div>
-                        <p className="font-bold text-slate-900">Kamis, 20 Agustus 2026</p>
-                      </div>
-
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <Clock className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Pelaksanaan</span>
-                        </div>
-                        <p className="font-bold text-slate-900">09:00 - 10:30 WIB</p>
-                      </div>
-
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Seminar</span>
-                        </div>
-                        <p className="font-bold text-slate-900">Ruang 302</p>
-                      </div>
-                    </div>
-
-                    {/* Examiners Table */}
-                    <div className="space-y-3 pt-5">
-                      <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
-                        <Users className="w-4 h-4 text-[#C62828]" /> Susunan Dewan Penguji Seminar:
-                      </h4>
-
-                      <div className="overflow-x-auto rounded-xl border border-slate-200">
-                        <table className="w-full text-left text-xs">
-                          <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
-                            <tr>
-                              <th className="py-3 px-4 font-bold">Jabatan Penguji</th>
-                              <th className="py-3 px-4 font-bold">Nama Dosen Penguji</th>
-                              <th className="py-3 px-4 font-bold">Status Hadir</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100 text-slate-800">
-                            <tr>
-                              <td className="py-2.5 px-3 font-bold text-[#C62828]">Ketua Penguji</td>
-                              <td className="py-2.5 px-3 font-medium">Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.</td>
-                              <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2.5 px-3 font-bold text-amber-700">Penguji Utama (I)</td>
-                              <td className="py-2.5 px-3 font-medium">Dr. Yanto, S.Kom., M.Kom.</td>
-                              <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2.5 px-3 font-bold text-slate-600">Penguji Pendamping (II)</td>
-                              <td className="py-2.5 px-3 font-medium">Dr. Jasmir, S.Kom., M.Kom.</td>
-                              <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                    ) : (
+                      <span className="px-3 py-1 text-xs font-extrabold bg-amber-500 text-white shadow-xs rounded-full">
+                        Belum Ada Jadwal
+                      </span>
+                    )}
                   </div>
+
+                  {seminarExam ? (
+                    <div className="flex-1 flex flex-col justify-between overflow-y-auto scrollbar-none space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{seminarExam.hari}, {seminarExam.tglNum}</p>
+                        </div>
+
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <Clock className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Pelaksanaan</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{seminarExam.waktu}</p>
+                        </div>
+
+                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                          <div className="flex items-center gap-1.5 text-slate-500">
+                            <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
+                            <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Seminar</span>
+                          </div>
+                          <p className="font-bold text-slate-900">{seminarExam.ruang}</p>
+                        </div>
+                      </div>
+
+                      {/* Examiners Table */}
+                      <div className="space-y-3 pt-2">
+                        <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
+                          <Users className="w-4 h-4 text-[#C62828]" /> Susunan Dewan Penguji Seminar:
+                        </h4>
+
+                        <div className="overflow-x-auto rounded-xl border border-slate-200">
+                          <table className="w-full text-left text-xs">
+                            <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-display border-b border-slate-200">
+                              <tr>
+                                <th className="py-3 px-4 font-bold">Jabatan Penguji</th>
+                                <th className="py-3 px-4 font-bold">Nama Dosen Penguji</th>
+                                <th className="py-3 px-4 font-bold">Status Hadir</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 text-slate-800 font-medium">
+                              <tr>
+                                <td className="py-2.5 px-3 font-bold text-[#C62828]">Ketua Penguji</td>
+                                <td className="py-2.5 px-3">Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.</td>
+                                <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
+                              </tr>
+                              <tr>
+                                <td className="py-2.5 px-3 font-bold text-amber-700">Penguji Utama</td>
+                                <td className="py-2.5 px-3">Dr. Yanto, S.Kom., M.Kom.</td>
+                                <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3">
+                      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
+                        <Calendar className="w-7 h-7" />
+                      </div>
+                      <h4 className="font-extrabold text-base font-display text-slate-900">
+                        Belum Ada Jadwal Seminar Proposal
+                      </h4>
+                      <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed font-medium">
+                        Jadwal pelaksanaan Seminar Proposal beserta susunan dewan penguji akan muncul secara otomatis di sini setelah ditetapkan oleh Sekretariat Admin Prodi.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
 

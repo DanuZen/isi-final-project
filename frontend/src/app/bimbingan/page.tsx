@@ -80,7 +80,7 @@ export default function BimbinganPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-5 overflow-hidden shell-body flex flex-col min-h-0">
             {/* ── Welcome Banner ── */}
@@ -147,10 +147,10 @@ export default function BimbinganPage() {
             )}
 
             {/* Main Content Layout: Log Thread & ACC Requirements (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
               {/* Left Column (8/12): Interactive Log Thread */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
-                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden">
+                <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-visible lg:overflow-hidden">
                   <div className="flex flex-col h-full min-h-0 overflow-hidden">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 shrink-0">
                       <div className="flex items-center gap-2.5">

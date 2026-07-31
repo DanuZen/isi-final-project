@@ -35,125 +35,9 @@ interface CalendarEvent {
   status: string;
 }
 
-const EVENTS_DATA: CalendarEvent[] = [
-  {
-    id: "evt-1",
-    tgl: 3,
-    waktu: "09:00 - 10:30 WIB",
-    kategori: "BIMBINGAN",
-    judul: "Sesi Bimbingan Bab 1 - 3 (RPL)",
-    mahasiswa: "Danu Zen",
-    nim: "20101152630045",
-    pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
-    ruangan: "Ruang Dosen 402",
-    prodi: "Teknik Informatika",
-    status: "Disetujui Dosen",
-  },
-  {
-    id: "evt-2",
-    tgl: 7,
-    waktu: "13:30 - 15:00 WIB",
-    kategori: "BIMBINGAN",
-    judul: "Sesi Bimbingan Bab 4 Progress System",
-    mahasiswa: "Ahmad Fauzi",
-    nim: "20101152630012",
-    pembimbing: "Dr. Jasmir, S.Kom., M.Kom.",
-    ruangan: "Lab Software Engineering",
-    prodi: "Teknik Informatika",
-    status: "Disetujui Dosen",
-  },
-  {
-    id: "evt-3",
-    tgl: 12,
-    waktu: "08:30 - 10:00 WIB",
-    kategori: "SEMPRO",
-    judul: "Seminar Proposal: Sistem Rekomendasi Beasiswa AI",
-    mahasiswa: "Rina Kartika",
-    nim: "20101152630088",
-    pembimbing: "Prof. Dr. Julius Santony, S.Kom., M.Kom.",
-    ruangan: "Ruang Seminar 302 FIK",
-    prodi: "Teknik Informatika",
-    status: "Terjadwal",
-  },
-  {
-    id: "evt-4",
-    tgl: 15,
-    waktu: "10:00 - 11:30 WIB",
-    kategori: "BIMBINGAN",
-    judul: "Sesi Review Naskah Draf Akhir Skripsi",
-    mahasiswa: "Budi Santoso",
-    nim: "20101152630099",
-    pembimbing: "Dr. Yuhandri, S.Kom., M.Kom.",
-    ruangan: "Ruang Dosen 405",
-    prodi: "Sistem Informasi",
-    status: "Disetujui Dosen",
-  },
-  {
-    id: "evt-5",
-    tgl: 18,
-    waktu: "09:00 - 11:00 WIB",
-    kategori: "SIDANG",
-    judul: "Ujian Sidang Skripsi: Algoritma Fuzzy Logic pada IoT",
-    mahasiswa: "Danu Zen",
-    nim: "20101152630045",
-    pembimbing: "Dr. Eng. H. Sarjon Defit & Dr. Jasmir",
-    ruangan: "Aula Utama FIK Lantai 3",
-    prodi: "Teknik Informatika",
-    status: "ACC Sidang Final",
-  },
-  {
-    id: "evt-6",
-    tgl: 21,
-    waktu: "14:00 - 15:30 WIB",
-    kategori: "BIMBINGAN",
-    judul: "Sesi Bimbingan Pembuatan Pengajuan Pembimbing",
-    mahasiswa: "Siti Rahma",
-    nim: "20101152630102",
-    pembimbing: "Dr. Yanto, S.Kom., M.Kom.",
-    ruangan: "Ruang Dosen 301",
-    prodi: "Sistem Komputer",
-    status: "Disetujui Dosen",
-  },
-  {
-    id: "evt-7",
-    tgl: 25,
-    waktu: "09:00 - 10:30 WIB",
-    kategori: "SEMPRO",
-    judul: "Seminar Proposal: Klasifikasi Citra Medis CNN",
-    mahasiswa: "Nanda Pratama",
-    nim: "20101152630114",
-    pembimbing: "Dr. Yuhandri, S.Kom., M.Kom.",
-    ruangan: "Ruang Seminar 303 FIK",
-    prodi: "Teknik Informatika",
-    status: "Terjadwal",
-  },
-  {
-    id: "evt-8",
-    tgl: 28,
-    waktu: "13:00 - 14:30 WIB",
-    kategori: "BIMBINGAN",
-    judul: "Sesi Bimbingan Revisi Seminar Proposal",
-    mahasiswa: "Danu Zen",
-    nim: "20101152630045",
-    pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
-    ruangan: "Ruang Dosen 402",
-    prodi: "Teknik Informatika",
-    status: "Bimbingan Aktif",
-  },
-  {
-    id: "evt-9",
-    tgl: 31,
-    waktu: "23:59 WIB",
-    kategori: "DEADLINE",
-    judul: "Batas Akhir Upload Naskah Hardcover YUDISIUM",
-    mahasiswa: "Seluruh Mahasiswa FIK",
-    nim: "Angkatan 2022/2023",
-    pembimbing: "Sekretariat Dekanat FIK",
-    ruangan: "SIPETA System Online Portal",
-    prodi: "Fakultas Ilmu Komputer",
-    status: "Batas Akhir Akademik",
-  },
-];
+import { storeJadwal, storeBimbingan } from "@/lib/sipeta-store";
+
+const INITIAL_EVENTS: CalendarEvent[] = [];
 
 export default function KalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -165,11 +49,51 @@ export default function KalenderPage() {
   const [selectedProdi, setSelectedProdi] = useState<string>("ALL");
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
+  const [eventsList, setEventsList] = useState<CalendarEvent[]>([]);
+
+  const syncEvents = React.useCallback(() => {
+    const jadwal = storeJadwal.getAll().map((j, idx) => ({
+      id: "jdw-" + j.id,
+      tgl: 15 + (idx * 3),
+      waktu: j.waktu || "09:00 - 10:30 WIB",
+      kategori: (j.jenis === "Seminar" ? "SEMPRO" : "SIDANG") as CalendarEvent["kategori"],
+      judul: `${j.jenis === "Seminar" ? "Seminar Proposal" : "Ujian Sidang Skripsi"}: ${j.judul}`,
+      mahasiswa: j.studentNama,
+      nim: j.studentNim,
+      pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
+      ruangan: j.ruang || "Aula FIK UPI YPTK",
+      prodi: j.prodi,
+      status: j.status,
+    }));
+
+    const bimbingan = storeBimbingan.getAll().map((b, idx) => ({
+      id: "bmb-" + b.id,
+      tgl: 5 + (idx * 4),
+      waktu: "10:00 - 11:30 WIB",
+      kategori: "BIMBINGAN" as const,
+      judul: `Bimbingan TA: ${b.catatanMahasiswa}`,
+      mahasiswa: b.studentNama,
+      nim: b.studentNim,
+      pembimbing: b.dosenNama,
+      ruangan: "Ruang Dosen FIK",
+      prodi: "Teknik Informatika",
+      status: b.statusFeedback,
+    }));
+
+    setEventsList([...jadwal, ...bimbingan]);
+  }, []);
+
+  React.useEffect(() => {
+    syncEvents();
+    window.addEventListener("storage_sipeta", syncEvents);
+    return () => window.removeEventListener("storage_sipeta", syncEvents);
+  }, [syncEvents]);
+
   // Month state (Fixed to August 2026 for demo)
   const currentMonthName = "Agustus 2026";
 
   // Filter events
-  const filteredEvents = EVENTS_DATA.filter((evt) => {
+  const filteredEvents = eventsList.filter((evt) => {
     const matchCategory =
       activeCategory === "ALL" || evt.kategori === activeCategory;
     const matchProdi =
@@ -278,7 +202,7 @@ export default function KalenderPage() {
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  Semua ({EVENTS_DATA.length})
+                  Semua ({eventsList.length})
                 </button>
 
                 <button
@@ -290,7 +214,7 @@ export default function KalenderPage() {
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "BIMBINGAN" ? "bg-white" : "bg-[#D97706]"}`} />
-                  Bimbingan (5)
+                  Bimbingan ({eventsList.filter((e) => e.kategori === "BIMBINGAN").length})
                 </button>
 
                 <button
@@ -302,7 +226,7 @@ export default function KalenderPage() {
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "SEMPRO" ? "bg-white" : "bg-[#1D4ED8]"}`} />
-                  Seminar (2)
+                  Seminar ({eventsList.filter((e) => e.kategori === "SEMPRO").length})
                 </button>
 
                 <button
@@ -314,7 +238,7 @@ export default function KalenderPage() {
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "SIDANG" ? "bg-white" : "bg-[#15803D]"}`} />
-                  Sidang (1)
+                  Sidang ({eventsList.filter((e) => e.kategori === "SIDANG").length})
                 </button>
 
                 <button
@@ -560,33 +484,41 @@ export default function KalenderPage() {
                   </div>
 
                   <div className="space-y-2 flex-1 min-h-0 overflow-y-auto scrollbar-thin pr-1 mt-2.5">
-                    {EVENTS_DATA.slice(0, 4).map((evt) => (
-                      <div
-                        key={`upcoming-${evt.id}`}
-                        onClick={() => setSelectedEvent(evt)}
-                        className="p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200 transition-all cursor-pointer space-y-1"
-                      >
-                        <div className="flex items-center justify-between text-[10px] font-bold">
-                          <span
-                            className={`px-2 py-0.5 rounded-full ${getCategoryBadgeClass(
-                              evt.kategori
-                            )}`}
-                          >
-                            {evt.kategori}
-                          </span>
-                          <span className="text-slate-500 font-mono-data">
-                            {evt.tgl} Ags 2026
-                          </span>
+                    {eventsList.length > 0 ? (
+                      eventsList.slice(0, 4).map((evt) => (
+                        <div
+                          key={`upcoming-${evt.id}`}
+                          onClick={() => setSelectedEvent(evt)}
+                          className="p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200 transition-all cursor-pointer space-y-1"
+                        >
+                          <div className="flex items-center justify-between text-[10px] font-bold">
+                            <span
+                              className={`px-2 py-0.5 rounded-full ${getCategoryBadgeClass(
+                                evt.kategori
+                              )}`}
+                            >
+                              {evt.kategori}
+                            </span>
+                            <span className="text-slate-500 font-mono-data">
+                              {evt.tgl} Ags 2026
+                            </span>
+                          </div>
+                          <p className="text-xs font-bold text-slate-900 font-display truncate">
+                            {evt.judul}
+                          </p>
+                          <p className="text-[10px] text-slate-500 truncate">
+                            {evt.ruangan} • {evt.waktu}
+                          </p>
                         </div>
-                        <p className="text-xs font-bold text-slate-900 font-display truncate">
-                          {evt.judul}
-                        </p>
-                        <p className="text-[10px] text-slate-500 truncate">
-                          {evt.ruangan} • {evt.waktu}
-                        </p>
+                      ))
+                    ) : (
+                      <div className="py-8 text-center space-y-2 my-auto">
+                        <CalendarIcon className="w-8 h-8 text-slate-300 mx-auto" />
+                        <p className="text-xs font-bold text-slate-700">Belum Ada Agenda Terdekat</p>
+                        <p className="text-[10px] text-slate-400 font-medium">Jadwal seminar, sidang, atau bimbingan baru akan tampil di sini.</p>
                       </div>
-                    ))}
-                </div>
+                    )}
+                  </div>
               </div>
             </div>
           </div>
