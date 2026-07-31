@@ -12,7 +12,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   adjustFontFallback: false,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sipeta.upiyptk.ac.id";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://sipeta-upiyptk.vercel.app");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "SIPETA UPI YPTK",
     images: [
       {
-        url: "/og_image.png",
+        url: `${siteUrl}/og_image.png`,
         width: 1200,
         height: 630,
         alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
@@ -70,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
     description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
-    images: ["/og_image.png"],
+    images: [`${siteUrl}/og_image.png`],
   },
   robots: {
     index: true,
