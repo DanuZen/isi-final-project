@@ -28,85 +28,76 @@ interface PengajuanItem {
   alasan: string;
 }
 
-const INITIAL_PENGAJUAN: Array<PengajuanItem> = [
-  {
-    nim: "20101152630201",
-    nama: "Teguh Santoso",
-    prodi: "Teknik Informatika",
-    judul: "Sistem Monitoring Energi Listrik Berbasis IoT dan Dashboard Web Realtime",
-    bidang: "IoT & Embedded Systems",
-    tgl: "30 Jul 2026",
-    pembimbing2: "Rina Oktaviani, M.Kom.",
-    alasan: "Saya sangat tertarik dengan rekam jejak penelitian Bapak di bidang sistem terdistribusi dan IoT. Besar harapan saya agar Bapak berkenan menjadi Dosen Pembimbing I saya.",
-  },
-  {
-    nim: "20101152630215",
-    nama: "Dewi Ratnasari",
-    prodi: "Sistem Informasi",
-    judul: "Pengembangan Sistem Informasi Manajemen Apotek Berbasis Web Terintegrasi API BPJS",
-    bidang: "Rekayasa Perangkat Lunak",
-    tgl: "28 Jul 2026",
-    pembimbing2: "Sari Indah, M.T.",
-    alasan: "Topik penelitian saya berfokus pada arsitektur sistem informasi manajemen. Saya membutuhkan bimbingan langsung dari Bapak dalam perancangan database dan metodologi.",
-  },
-];
+const INITIAL_PENGAJUAN: Array<PengajuanItem> = [];
+const INITIAL_RIWAYAT: Array<{ nim: string; nama: string; judul: string; tgl: string; aksi: string }> = [];
 
-const INITIAL_RIWAYAT = [
-  {
-    nim: "20101152630178",
-    nama: "Wulandari Putri",
-    judul: "Deteksi Anomali Jaringan dengan Machine Learning",
-    tgl: "15 Jul 2026",
-    aksi: "Diterima",
-  },
-  {
-    nim: "20101152630055",
-    nama: "Rahmat Hidayat",
-    judul: "Aplikasi E-Commerce UMKM Kota Padang Berbasis Mobile",
-    tgl: "10 Jul 2026",
-    aksi: "Ditolak",
-  },
-];
+import { storePembimbing } from "@/lib/sipeta-store";
+import { useToast } from "@/components/ui/toast";
 
 export default function DosenPengajuanPage() {
+  const { showToast } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [pengajuanList, setPengajuanList] = useState<Array<PengajuanItem>>(INITIAL_PENGAJUAN);
-  const [selectedNim, setSelectedNim] = useState<string>("20101152630201");
-  const [riwayatList, setRiwayatList] = useState(INITIAL_RIWAYAT);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [pengajuanList, setPengajuanList] = useState<Array<PengajuanItem>>([]);
+  const [selectedNim, setSelectedNim] = useState<string>("");
+  const [riwayatList, setRiwayatList] = useState<Array<{ nim: string; nama: string; judul: string; tgl: string; aksi: string }>>([]);
+
+  const syncData = React.useCallback(() => {
+    const stored = storePembimbing.getAll();
+    const pending = stored
+      .filter((s) => s.status === "MENUNGGU")
+      .map((s) => ({
+        id: s.id,
+        nim: s.studentNim,
+        nama: s.studentNama,
+        prodi: s.prodi,
+        judul: s.judul,
+        bidang: s.bidang,
+        tgl: s.tgl,
+        pembimbing2: "Dosen Pendamping Prodi",
+        alasan: s.alasan,
+      }));
+
+    const history = stored
+      .filter((s) => s.status !== "MENUNGGU")
+      .map((s) => ({
+        nim: s.studentNim,
+        nama: s.studentNama,
+        judul: s.judul,
+        tgl: s.tgl,
+        aksi: s.status === "DITERIMA" ? "Diterima" : "Ditolak",
+      }));
+
+    setPengajuanList(pending);
+    setRiwayatList(history);
+    if (pending.length > 0 && !selectedNim) {
+      setSelectedNim(pending[0].nim);
+    }
+  }, [selectedNim]);
+
+  React.useEffect(() => {
+    syncData();
+    window.addEventListener("storage_sipeta", syncData);
+    return () => window.removeEventListener("storage_sipeta", syncData);
+  }, [syncData]);
 
   const selectedMhs = pengajuanList.find((p) => p.nim === selectedNim) || pengajuanList[0];
 
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 4000);
-  };
+  const handleDecision = (item: PengajuanItem & { id?: string }, status: "Diterima" | "Ditolak") => {
+    if (item.id) {
+      storePembimbing.updateStatus(item.id, status === "Diterima" ? "DITERIMA" : "DITOLAK");
+    }
 
-  const handleDecision = (item: PengajuanItem, status: "Diterima" | "Ditolak") => {
     const remaining = pengajuanList.filter((p) => p.nim !== item.nim);
     setPengajuanList(remaining);
     
     if (remaining.length > 0) {
       setSelectedNim(remaining[0].nim);
     }
-    
-    setRiwayatList((prev) => [
-      {
-        nim: item.nim,
-        nama: item.nama,
-        judul: item.judul,
-        tgl: "Hari Ini",
-        aksi: status,
-      },
-      ...prev,
-    ]);
 
     if (status === "Diterima") {
-      showToast(`Permohonan ${item.nama} (${item.nim}) berhasil DITERIMA sebagai mahasiswa bimbingan!`);
+      showToast("Permohonan Disetujui!", `Permohonan ${item.nama} (${item.nim}) berhasil DITERIMA sebagai mahasiswa bimbingan!`, "success");
     } else {
-      showToast(`Permohonan ${item.nama} (${item.nim}) telah DITOLAK.`);
+      showToast("Permohonan Ditolak", `Permohonan ${item.nama} (${item.nim}) telah DITOLAK.`, "warning");
     }
   };
 
@@ -116,21 +107,9 @@ export default function DosenPengajuanPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={DOSEN_NAV} roleName="Dosen Pembimbing" />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" userName="Dr. Sarjon Defit" userNim="NIDN: 1012057301" userRole="Dosen Pembimbing" prodiName="Teknik Informatika" />
+          <Header className="shell-header shrink-0" userName="Dr. Sarjon Defit" userNim="NIDN: 1012057301" userRole="Dosen Pembimbing" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
-            
-            {/* Toast Notification */}
-            {toastMessage && (
-              <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <p className="text-xs font-bold font-display">{toastMessage}</p>
-                <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white cursor-pointer">
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            )}
-
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">

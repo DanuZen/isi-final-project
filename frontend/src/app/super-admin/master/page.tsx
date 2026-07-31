@@ -30,9 +30,26 @@ interface MasterProdi {
 }
 
 const PRODI_LIST: MasterProdi[] = [
-  { kode: "IF", nama: "Teknik Informatika", jenjang: "S1", kaprodi: "Dr. Ratna Dewi, M.Kom.", nipKaprodi: "197804122005012003", totalMhs: 356, totalDosen: 22, akreditasi: "Unggul (A)", ruangUtama: "Aula FIK Lt. 2 & Ruang 302" },
-  { kode: "SI", nama: "Sistem Informasi", jenjang: "S1", kaprodi: "Dr. Suparman, M.Kom.", nipKaprodi: "198109152008031002", totalMhs: 280, totalDosen: 16, akreditasi: "Sangat Baik (B+)", ruangUtama: "Ruang Seminar 304" },
-  { kode: "SK", nama: "Sistem Komputer", jenjang: "S1", kaprodi: "Ir. Doni Hendra, M.T.", nipKaprodi: "197506202002121001", totalMhs: 142, totalDosen: 10, akreditasi: "Sangat Baik (B+)", ruangUtama: "Laboratorium Komputer 2" },
+  // FILKOM
+  { kode: "IF", nama: "Teknik Informatika (FILKOM)", jenjang: "S1", kaprodi: "Dr. Ratna Dewi, M.Kom.", nipKaprodi: "197804122005012003", totalMhs: 356, totalDosen: 22, akreditasi: "Unggul (A)", ruangUtama: "Aula FILKOM Lt. 2 & Ruang 302" },
+  { kode: "SI", nama: "Sistem Informasi (FILKOM)", jenjang: "S1", kaprodi: "Dr. Suparman, M.Kom.", nipKaprodi: "198109152008031002", totalMhs: 280, totalDosen: 16, akreditasi: "Sangat Baik (B+)", ruangUtama: "Ruang Seminar 304" },
+  { kode: "SK", nama: "Sistem Komputer (FILKOM)", jenjang: "S1", kaprodi: "Ir. Doni Hendra, M.T.", nipKaprodi: "197506202002121001", totalMhs: 142, totalDosen: 10, akreditasi: "Sangat Baik (B+)", ruangUtama: "Laboratorium Komputer 2" },
+  { kode: "RPL", nama: "Rekayasa Perangkat Lunak (FILKOM)", jenjang: "S1", kaprodi: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.", nipKaprodi: "1012057301", totalMhs: 110, totalDosen: 8, akreditasi: "Baik Sekali (B)", ruangUtama: "Lab Software Engineering" },
+  { kode: "MI", nama: "Manajemen Informatika (FILKOM)", jenjang: "D3", kaprodi: "Drs. Yanti Susanti, M.Kom.", nipKaprodi: "198302112009022005", totalMhs: 95, totalDosen: 6, akreditasi: "Baik (B)", ruangUtama: "Lab Aplikasi Web" },
+  // FEB
+  { kode: "MNJ", nama: "Manajemen (FEB)", jenjang: "S1", kaprodi: "Dr. Hj. Yulihasri, S.E., M.M.", nipKaprodi: "197203181998022001", totalMhs: 420, totalDosen: 25, akreditasi: "Unggul (A)", ruangUtama: "Gedung FEB Lt. 3" },
+  { kode: "AKT", nama: "Akuntansi (FEB)", jenjang: "S1", kaprodi: "Dr. Melalgritas, S.E., M.Si., Ak.", nipKaprodi: "197608142003121002", totalMhs: 310, totalDosen: 18, akreditasi: "Unggul (A)", ruangUtama: "Lab Auditing & SIA FEB" },
+  // FT
+  { kode: "TSP", nama: "Teknik Sipil (FT)", jenjang: "S1", kaprodi: "Ir. Ahmad Fauzi, M.T.", nipKaprodi: "197411052001121003", totalMhs: 210, totalDosen: 14, akreditasi: "Sangat Baik (B+)", ruangUtama: "Lab Bahan & Keairan FT" },
+  { kode: "TIND", nama: "Teknik Industri (FT)", jenjang: "S1", kaprodi: "Dr. Riko Saputra, M.T.", nipKaprodi: "198005122006041001", totalMhs: 180, totalDosen: 12, akreditasi: "Baik (B)", ruangUtama: "Lab Ergonomi FT" },
+  { kode: "TEL", nama: "Teknik Elektro (FT)", jenjang: "S1", kaprodi: "Ir. Hendra Saputra, M.T.", nipKaprodi: "197709252004011002", totalMhs: 165, totalDosen: 11, akreditasi: "Baik (B)", ruangUtama: "Lab Mechatronics FT" },
+  // FPsi
+  { kode: "PSI", nama: "Psikologi (FPsi)", jenjang: "S1", kaprodi: "Dr. Nida Ul Hasanah, S.Psi., M.Psi.", nipKaprodi: "198412012010012008", totalMhs: 250, totalDosen: 15, akreditasi: "Sangat Baik (B+)", ruangUtama: "Ruang Konseling & Lab Psikodiagnostik" },
+  // FDKV
+  { kode: "DKV", nama: "Desain Komunikasi Visual (FDKV)", jenjang: "S1", kaprodi: "Rian Hidayat, S.Ds., M.Sn.", nipKaprodi: "198807192015041003", totalMhs: 190, totalDosen: 13, akreditasi: "Sangat Baik (B+)", ruangUtama: "Studio Desain & Animasi FDKV" },
+  // FKIP
+  { kode: "PTI", nama: "Pendidikan Teknik Informatika (FKIP)", jenjang: "S1", kaprodi: "Dr. Rahmadini, M.Pd.", nipKaprodi: "198206142008012004", totalMhs: 175, totalDosen: 12, akreditasi: "Baik Sekali (B)", ruangUtama: "Lab Media Pembelajaran FKIP" },
+  { kode: "BK", nama: "Bimbingan dan Konseling (FKIP)", jenjang: "S1", kaprodi: "Dra. Elfi Rahmi, M.Pd.", nipKaprodi: "197304081999032002", totalMhs: 140, totalDosen: 9, akreditasi: "Baik (B)", ruangUtama: "Laboratorium Konseling FKIP" },
 ];
 
 export default function SuperAdminMasterPage() {

@@ -28,46 +28,44 @@ interface RepoItem {
   abstrak: string;
 }
 
-const REPO_DATA: RepoItem[] = [
-  {
-    id: "TA-2025-001",
-    judul: "Sistem Informasi Manajemen Gudang Berbasis Web Menggunakan Metode FIFO",
-    penulis: "Danu Zen", nim: "20101152630045", tahun: "2026",
-    bidang: "Rekayasa Perangkat Lunak", pembimbing: "Dr. Sarjon Defit",
-    abstrak: "Penelitian ini mengimplementasikan sistem manajemen inventaris gudang berbasis web dengan prinsip pencatatan FIFO untuk meningkatkan efisiensi stok barang."
-  },
-  {
-    id: "TA-2025-002",
-    judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes",
-    penulis: "Rafi Andika", nim: "20101152630089", tahun: "2026",
-    bidang: "Kecerdasan Buatan", pembimbing: "Dr. Sarjon Defit",
-    abstrak: "Pengaplikasian algoritma Naive Bayes classifier dalam mengklasifikasikan email spam dengan tingkat akurasi hingga 94.2%."
-  },
-  {
-    id: "TA-2025-003",
-    judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra Modified",
-    penulis: "Siti Rahayu", nim: "20101152630101", tahun: "2026",
-    bidang: "Jaringan & Keamanan", pembimbing: "Prof. Budi Santoso, Ph.D",
-    abstrak: "Studi modifikasi algoritma Dijkstra untuk menentukan rute terpendek dengan latency minimal pada infrastruktur jaringan enterprise."
-  },
-  {
-    id: "TA-2025-004",
-    judul: "Analisis Sentimen Review Produk Marketplace Online Menggunakan Algoritma BERT",
-    penulis: "Fajar Nugroho", nim: "20101152630133", tahun: "2025",
-    bidang: "Kecerdasan Buatan", pembimbing: "Prof. Budi Santoso, Ph.D",
-    abstrak: "Analisis Opini publik terhadap produk e-commerce berbasis pemrosesan bahasa alami transformer."
-  },
-];
+import { storeProposal, storeJadwal } from "@/lib/sipeta-store";
+
+const REPO_DATA: RepoItem[] = [];
 
 export default function AdminProdiRepositoriPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [filterBidang, setFilterBidang] = useState("Semua");
-  
-  // Default select 1st repository item
-  const [selectedId, setSelectedId] = useState<string>("TA-2025-001");
+  const [selectedId, setSelectedId] = useState<string>("");
 
-  const filtered = REPO_DATA.filter((r) => {
+  const [repoList, setRepoList] = useState<RepoItem[]>([]);
+
+  const syncRepo = React.useCallback(() => {
+    const prop = storeProposal.get();
+    const list: RepoItem[] = prop ? [{
+      id: "TA-2026-001",
+      judul: prop.judul,
+      penulis: "Danu Zen",
+      nim: "20101152630045",
+      tahun: "2026",
+      bidang: prop.bidangKajian,
+      pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
+      abstrak: prop.abstrak,
+    }] : [];
+
+    setRepoList(list);
+    if (list.length > 0 && !selectedId) {
+      setSelectedId(list[0].id);
+    }
+  }, [selectedId]);
+
+  React.useEffect(() => {
+    syncRepo();
+    window.addEventListener("storage_sipeta", syncRepo);
+    return () => window.removeEventListener("storage_sipeta", syncRepo);
+  }, [syncRepo]);
+
+  const filtered = repoList.filter((r) => {
     const matchSearch =
       r.judul.toLowerCase().includes(search.toLowerCase()) ||
       r.penulis.toLowerCase().includes(search.toLowerCase()) ||
@@ -76,7 +74,7 @@ export default function AdminProdiRepositoriPage() {
     return matchSearch && matchBidang;
   });
 
-  const selected = REPO_DATA.find((r) => r.id === selectedId) || filtered[0] || REPO_DATA[0];
+  const selected = repoList.find((r) => r.id === selectedId) || filtered[0];
 
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -159,43 +157,57 @@ export default function AdminProdiRepositoriPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {filtered.map((repo) => {
-                        const isSelected = selected?.id === repo.id;
-                        return (
-                          <tr
-                            key={repo.id}
-                            onClick={() => setSelectedId(repo.id)}
-                            className={`transition-all cursor-pointer select-none ${
-                              isSelected
-                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
-                                : "hover:bg-slate-50"
-                            }`}
-                          >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500 whitespace-nowrap">
-                              <span className="font-bold text-slate-700 block">{repo.id}</span>
-                              <span className="text-[10px] text-slate-400 font-semibold">{repo.tahun}</span>
-                            </td>
-                            <td className="px-4 py-3.5 max-w-sm space-y-0.5">
-                              <h3 className="font-bold text-slate-900 text-xs sm:text-sm font-display leading-snug">
-                                &ldquo;{repo.judul}&rdquo;
-                              </h3>
-                              <p className="text-[11px] text-slate-500 line-clamp-1 font-medium leading-relaxed">{repo.abstrak}</p>
-                            </td>
-                            <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1 font-display">
-                                <Tag className="w-2.5 h-2.5" /> {repo.bidang}
-                              </span>
-                            </td>
-                            <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="font-bold text-slate-900 block font-display">{repo.penulis}</span>
-                              <span className="text-[10.5px] font-mono text-slate-400">({repo.nim})</span>
-                            </td>
-                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">
-                              {repo.pembimbing}
-                            </td>
-                          </tr>
-                        );
-                      })}
+                      {filtered.length > 0 ? (
+                        filtered.map((repo) => {
+                          const isSelected = selected?.id === repo.id;
+                          return (
+                            <tr
+                              key={repo.id}
+                              onClick={() => setSelectedId(repo.id)}
+                              className={`transition-all cursor-pointer select-none ${
+                                isSelected
+                                  ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
+                                  : "hover:bg-slate-50"
+                              }`}
+                            >
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500 whitespace-nowrap">
+                                <span className="font-bold text-slate-700 block">{repo.id}</span>
+                                <span className="text-[10px] text-slate-400 font-semibold">{repo.tahun}</span>
+                              </td>
+                              <td className="px-4 py-3.5 max-w-sm space-y-0.5">
+                                <h3 className="font-bold text-slate-900 text-xs sm:text-sm font-display leading-snug">
+                                  &ldquo;{repo.judul}&rdquo;
+                                </h3>
+                                <p className="text-[11px] text-slate-500 line-clamp-1 font-medium leading-relaxed">{repo.abstrak}</p>
+                              </td>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1 font-display">
+                                  <Tag className="w-2.5 h-2.5" /> {repo.bidang}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className="font-bold text-slate-900 block font-display">{repo.penulis}</span>
+                                <span className="text-[10.5px] font-mono text-slate-400">({repo.nim})</span>
+                              </td>
+                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">
+                                {repo.pembimbing}
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="py-28 text-center text-slate-500">
+                            <div className="flex flex-col items-center justify-center space-y-3 max-w-sm mx-auto">
+                              <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
+                                <BookOpen className="w-7 h-7" />
+                              </div>
+                              <p className="font-extrabold text-sm font-display text-slate-900">Belum Ada Naskah Final di Repositori</p>
+                              <p className="text-xs text-slate-500 font-medium leading-relaxed">Naskah Tugas Akhir mahasiswa yang telah disahkan akan otomatis terarsip di sini.</p>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>

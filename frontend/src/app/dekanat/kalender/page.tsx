@@ -30,23 +30,45 @@ interface SidangItem {
   judul: string;
 }
 
-const KALENDER_SIDANG: SidangItem[] = [
-  { id: "SDG-001", tgl: "1 Agt 2026", waktu: "09:00 WIB", mhs: "Rafi Andika", nim: "20101152630089", prodi: "Teknik Informatika", jenis: "Ujian Sidang", ruang: "Aula FIK Lt. 2", ketua: "Dr. Ahmad Fauzi, M.T.", penguji2: "Prof. Budi Santoso, Ph.D", judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes" },
-  { id: "SDG-002", tgl: "3 Agt 2026", waktu: "10:00 WIB", mhs: "Siti Rahayu", nim: "20101152630101", prodi: "Teknik Informatika", jenis: "Seminar Proposal", ruang: "Ruang 302", ketua: "Prof. Budi Santoso, Ph.D", penguji2: "Sari Indah, M.T.", judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra Modified" },
-  { id: "SDG-003", tgl: "5 Agt 2026", waktu: "13:00 WIB", mhs: "Budi Prasetyo", nim: "20101152630112", prodi: "Sistem Informasi", jenis: "Ujian Sidang", ruang: "Aula FIK Lt. 2", ketua: "Dr. Sarjon Defit, M.Sc.", penguji2: "Dr. Hendra Saputra, M.T.", judul: "Aplikasi Mobile Absensi Mahasiswa Berbasis Geolocation dan Biometrik" },
-  { id: "SDG-004", tgl: "8 Agt 2026", waktu: "09:00 WIB", mhs: "Anisa Permatasari", nim: "20101152630144", prodi: "Teknik Informatika", jenis: "Seminar Proposal", ruang: "Ruang 302", ketua: "Dr. Ahmad Fauzi, M.T.", penguji2: "Rina Oktaviani, M.Kom.", judul: "Klasifikasi Citra Daun Tanaman Obat Menggunakan Convolutional Neural Network" },
-  { id: "SDG-005", tgl: "10 Agt 2026", waktu: "14:00 WIB", mhs: "Teguh Santoso", nim: "20101152630188", prodi: "Teknik Informatika", jenis: "Ujian Sidang", ruang: "Aula FIK Lt. 2", ketua: "Dr. Hendra Saputra, M.T.", penguji2: "Dr. Sarjon Defit, M.Sc.", judul: "Sistem Monitoring Konsumsi Energi Listrik Berbasis Internet of Things (IoT)" },
-];
+import { storeJadwal } from "@/lib/sipeta-store";
+
+const KALENDER_SIDANG: SidangItem[] = [];
 
 export default function DekanatKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [filterJenis, setFilterJenis] = useState("Semua");
-  
-  // Default select 1st session
-  const [selectedId, setSelectedId] = useState<string>("SDG-001");
+  const [selectedId, setSelectedId] = useState<string>("");
 
-  const filtered = KALENDER_SIDANG.filter((item) => {
+  const [sidangList, setSidangList] = useState<SidangItem[]>([]);
+
+  const syncData = React.useCallback(() => {
+    const list = storeJadwal.getAll().map((j) => ({
+      id: j.id,
+      tgl: j.tglNum ? `${j.tglNum} Agt 2026` : "Terjadwal",
+      waktu: j.waktu || "09:00 WIB",
+      mhs: j.studentNama,
+      nim: j.studentNim,
+      prodi: j.prodi,
+      jenis: (j.jenis === "Seminar" ? "Seminar Proposal" : "Ujian Sidang") as SidangItem["jenis"],
+      ruang: j.ruang || "Aula FIK Lt. 2",
+      ketua: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
+      penguji2: "Dr. Jasmir, S.Kom., M.Kom.",
+      judul: j.judul,
+    }));
+    setSidangList(list);
+    if (list.length > 0 && !selectedId) {
+      setSelectedId(list[0].id);
+    }
+  }, [selectedId]);
+
+  React.useEffect(() => {
+    syncData();
+    window.addEventListener("storage_sipeta", syncData);
+    return () => window.removeEventListener("storage_sipeta", syncData);
+  }, [syncData]);
+
+  const filtered = sidangList.filter((item) => {
     const matchSearch =
       item.mhs.toLowerCase().includes(search.toLowerCase()) ||
       item.nim.includes(search) ||
@@ -55,7 +77,7 @@ export default function DekanatKalenderPage() {
     return matchSearch && matchJenis;
   });
 
-  const selected = KALENDER_SIDANG.find((item) => item.id === selectedId) || filtered[0] || KALENDER_SIDANG[0];
+  const selected = sidangList.find((item) => item.id === selectedId) || filtered[0];
 
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">

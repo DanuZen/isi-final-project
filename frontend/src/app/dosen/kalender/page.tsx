@@ -32,55 +32,72 @@ interface EventItem {
   judul: string;
 }
 
-const EVENTS: Array<EventItem> = [
-  {
-    id: 1, hari: "Kamis", tglNum: "1", bulan: "Agustus 2026",
-    jenis: "Seminar", nama: "Danu Zen", nim: "20101152630045", prodi: "Teknik Informatika",
-    waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing I",
-    judul: "Sistem Informasi Manajemen Gudang Berbasis Web Berbasis Real-Time Data",
-  },
-  {
-    id: 2, hari: "Sabtu", tglNum: "3", bulan: "Agustus 2026",
-    jenis: "Sidang", nama: "Rafi Andika", nim: "20101152630089", prodi: "Teknik Informatika",
-    waktu: "10:00 - 11:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
-    judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes",
-  },
-  {
-    id: 3, hari: "Selasa", tglNum: "5", bulan: "Agustus 2026",
-    jenis: "Bimbingan", nama: "Siti Rahayu", nim: "20101152630101", prodi: "Sistem Informasi",
-    waktu: "13:00 - 14:00", ruang: "Ruang Dosen FIK", role: "Pembimbing I",
-    judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra",
-  },
-  {
-    id: 4, hari: "Jumat", tglNum: "8", bulan: "Agustus 2026",
-    jenis: "Sidang", nama: "Budi Prasetyo", nim: "20101152630022", prodi: "Teknik Informatika",
-    waktu: "14:00 - 15:30", ruang: "Aula Fakultas Komputer", role: "Pembimbing I",
-    judul: "Pengembangan Aplikasi Mobile Absensi Mahasiswa Berbasis Geolocation",
-  },
-  {
-    id: 5, hari: "Senin", tglNum: "12", bulan: "Agustus 2026",
-    jenis: "Seminar", nama: "Anisa Permatasari", nim: "20101152630067", prodi: "Teknik Informatika",
-    waktu: "09:00 - 10:30", ruang: "Ruang 302 (Lantai 3)", role: "Pembimbing II",
-    judul: "Klasifikasi Citra Daun Menggunakan Convolutional Neural Network (CNN)",
-  },
-];
+import { storeJadwal, storeBimbingan } from "@/lib/sipeta-store";
+
+const EVENTS: Array<EventItem> = [];
 
 const JENIS_SOLID: Record<string, { bg: string; text: string }> = {
   "Seminar":   { bg: "bg-blue-600",   text: "text-white" },
   "Sidang":    { bg: "bg-[#C62828]",  text: "text-white" },
-  "Bimbingan": { bg: "bg-indigo-600", text: "text-white" },
+  "Bimbingan": { bg: "bg-[#D97706]",  text: "text-white" },
 };
 
 export default function DosenKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filterJenis, setFilterJenis] = useState<string>("Semua");
-  const [selectedEventId, setSelectedEventId] = useState<number>(1);
+  const [selectedEventId, setSelectedEventId] = useState<number>(0);
   const [showBeritaAcaraModal, setShowBeritaAcaraModal] = useState(false);
   const [attendedMap, setAttendedMap] = useState<Record<number, boolean>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const filteredEvents = EVENTS.filter((ev) => filterJenis === "Semua" || ev.jenis === filterJenis);
-  const selectedEv = EVENTS.find((e) => e.id === selectedEventId) || EVENTS[0];
+  const [eventsList, setEventsList] = useState<EventItem[]>([]);
+
+  const syncEvents = React.useCallback(() => {
+    const jadwal = storeJadwal.getAll().map((j, idx) => ({
+      id: idx + 1,
+      hari: j.hari || "Kamis",
+      tglNum: j.tglNum || `${idx + 1}`,
+      bulan: "Agustus 2026",
+      jenis: j.jenis,
+      nama: j.studentNama,
+      nim: j.studentNim,
+      prodi: j.prodi,
+      waktu: j.waktu || "09:00 - 10:30 WIB",
+      ruang: j.ruang || "Aula FIK UPI YPTK",
+      role: "Dosen Penguji / Pembimbing",
+      judul: j.judul,
+    }));
+
+    const bimbingan = storeBimbingan.getAll().map((b, idx) => ({
+      id: idx + 100,
+      hari: "Senin",
+      tglNum: `${(idx + 1) * 3}`,
+      bulan: "Agustus 2026",
+      jenis: "Bimbingan" as const,
+      nama: b.studentNama,
+      nim: b.studentNim,
+      prodi: "Teknik Informatika",
+      waktu: "10:00 - 11:00 WIB",
+      ruang: "Ruang Dosen FIK",
+      role: "Pembimbing I",
+      judul: b.catatanMahasiswa,
+    }));
+
+    const all = [...jadwal, ...bimbingan];
+    setEventsList(all);
+    if (all.length > 0 && selectedEventId === 0) {
+      setSelectedEventId(all[0].id);
+    }
+  }, [selectedEventId]);
+
+  React.useEffect(() => {
+    syncEvents();
+    window.addEventListener("storage_sipeta", syncEvents);
+    return () => window.removeEventListener("storage_sipeta", syncEvents);
+  }, [syncEvents]);
+
+  const filteredEvents = eventsList.filter((ev) => filterJenis === "Semua" || ev.jenis === filterJenis);
+  const selectedEv = eventsList.find((e) => e.id === selectedEventId) || filteredEvents[0];
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
