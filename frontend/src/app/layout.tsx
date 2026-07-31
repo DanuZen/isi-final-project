@@ -15,7 +15,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sipeta-upiyptk.vercel.app";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL("https://sipeta-upiyptk.vercel.app"),
   title: {
     default: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
     template: "%s | SIPETA UPI YPTK",
@@ -53,21 +53,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
     description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
-    url: siteUrl,
+    url: "https://sipeta-upiyptk.vercel.app",
     siteName: "SIPETA UPI YPTK",
     images: [
       {
-        url: `${siteUrl}/og_image.jpg`,
+        url: "https://sipeta-upiyptk.vercel.app/og_image.jpg",
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
-      },
-      {
-        url: `${siteUrl}/og_image.webp`,
-        width: 1200,
-        height: 630,
-        type: "image/webp",
         alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
       },
     ],
@@ -78,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
     description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
-    images: [`${siteUrl}/og_image.jpg`, `${siteUrl}/og_image.webp`],
+    images: ["https://sipeta-upiyptk.vercel.app/og_image.jpg"],
   },
   robots: {
     index: true,
