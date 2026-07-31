@@ -65,7 +65,7 @@ export function ViewportFitGrid({
   }, [minScale]);
 
   useEffect(() => {
-    recalculate();
+    requestAnimationFrame(recalculate);
 
     const outer = outerRef.current;
     const inner = innerRef.current;
