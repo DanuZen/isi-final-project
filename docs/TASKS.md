@@ -13,10 +13,11 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 | **1. Portal Mahasiswa** | 11 Rute | ✅ Selesai | ✅ 11 Sub-Halaman Selesai & Terverifikasi |
 | **2. Portal Dosen Pembimbing** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
 | **3. Portal Dosen Penguji** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
-| **4. Portal Admin Prodi FIK** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
+| **4. Portal Admin Program Studi (Prodi)** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
 | **5. Portal Admin Fakultas** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
 | **6. Portal Pimpinan / Dekanat** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
 | **7. Portal Super Admin** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
+| **8. Backend Integration Guide** | — | ✅ Selesai | ✅ [BACKEND_INTEGRATION_GUIDE.md](file:///c:/Users/wira1/sipeta-upiyptk/docs/BACKEND_INTEGRATION_GUIDE.md) |
 | **TOTAL KESELURUHAN** | **38 Rute** | **✅ 100% Built** | **✅ 100% Audited & Polished** |
 
 ---
@@ -102,13 +103,64 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 
 ---
 
+## 💻 Roadmap Frontend Lanjutan (Client-Side Enhancements — SELESAI ✅)
+
+- [x] **Client-Side Form Validation & Toast Notifications**
+  - Menambahkan validasi input form di layar (validasi format NIM/NIDN, cek ukuran PDF maks 5MB, format draf naskah).
+  - Menambahkan notifikasi melayang (`ToastNotification` UI warna hijau/merah) saat tombol Simpan, ACC, atau Hapus diklik.
+- [x] **Client-Side State Persistence (`localStorage` / Mock State)**
+  - Membuat interaktivitas simulasi menggunakan `localStorage` agar sesi bimbingan & ACC tersimpan di browser.
+- [x] **Pratinjau Dokumen & Fitur Cetak PDF (Client-Side PDF Previewer & Print UI)**
+  - Membuat komponen modal pratinjau PDF (`PDFModalViewer`) ber-Kop Surat UPI YPTK Padang untuk SK Dekan, Berita Acara, & Lembar Revisi.
+  - Menambahkan fitur tombol "Cetak / Download PDF" menggunakan fungsi bawaan browser (`window.print()`).
+- [x] **Penyiapan Layer API Client Helper (`services/api.ts` / Fetcher Stubs)**
+  - Menyiapkan berkas `frontend/src/services/api.ts` yang berisi fungsi-fungsi fetcher terstruktur untuk 24 endpoint backend.
+- [x] **Penyempurnaan Responsif & Aksesibilitas Layar (Mobile & Tablet Refinement)**
+  - Memastikan seluruh 38 rute antarmuka tampil sempurna di layar Smartphone, Tablet, maupun Monitor Desktop.
+
+---
+
+## 📱 Roadmap Fokus Selanjutnya (Refinement Responsif & Interaktivitas Mobile < 768px)
+
+- [ ] **1. Perbaikan Navigasi Sidebar Mobile & Trigger Button**
+  - [ ] Memastikan tombol hamburger `≡ SIPETA` pada header seluruh 38 rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.
+  - [ ] Mengisolasi overlay mobile ke top-level z-index agar tidak terpotong oleh pembungkus `overflow-hidden`.
+- [ ] **2. Audit Interaktivitas & Target Sentuh (Touch Target Area)**
+  - [ ] Memastikan seluruh tombol aksi (ACC, Simpan, Cetak PDF, Hapus) dan dropdown memiliki ukuran sentuh minimal 44x44px (*touch-friendly*).
+  - [ ] Memperbaiki komponen yang bentrok/overlapping pada resolusi smartphone 360px, 390px, dan 414px.
+- [ ] **3. Form & Table Mobile View Stack**
+  - [ ] Mengubah tampilan tabel lebar menjadi *Mobile Card Stack* atau horizontal scroll yang halus tanpa merusak lebar halaman.
+- [ ] **Garansi:** Seluruh penyesuaian khusus mobile menggunakan pengkondisian Tailwind CSS (`md:`, `lg:`, `hidden md:flex`) tanpa merubah sedikit pun tampilan Desktop & Tablet yang sudah matang.
+
+---
+
+## ⚙️ Roadmap Development Backend (Server & Database Implementation)
+
+- [ ] **1. Basis Data & Environment Setup**
+  - [ ] Konfigurasi PostgreSQL Database Server & `.env` connection string (`DATABASE_URL`, `JWT_SECRET`).
+  - [ ] Inisialisasi skema tabel Prisma ORM mengacu pada [`docs/DATABASE.md`](file:///c:/Users/wira1/sipeta-upiyptk/docs/DATABASE.md).
+  - [ ] Jalankan migrasi basis data (`npx prisma migrate dev --name init_sipeta_db`).
+  - [ ] Jalankan seeder master data 6 Fakultas & 14 Program Studi resmi UPI YPTK Padang (`npx prisma db seed`).
+- [ ] **2. Modul Autentikasi & Authorization Guard (RBAC)**
+  - [ ] Implementasi Login Endpoint (`POST /api/v1/auth/login`) dengan hashing kata sandi (Bcrypt / Argon2).
+  - [ ] Implementasi Session Token / JWT & Cookie HTTP-Only.
+  - [ ] Implementasi Middleware Access Control Guard untuk 7 Role System.
+- [ ] **3. Endpoints Transactions Per-Modul**
+  - [ ] **Mahasiswa Endpoints:** Usulan Judul & Fuzzy Similarity Check, Request Pembimbing, Thread Log Bimbingan, Upload Revisi Sempro & Sidang.
+  - [ ] **Dosen Endpoints:** Approval Permohonan Pembimbing, Feedback Log Bimbingan, ACC Sempro/Sidang, Input Nilai Weighted, Verifikasi Lembar Revisi.
+  - [ ] **Admin Prodi Endpoints:** Aktivasi Kredensial Pasca Clearing Luring (SKS/IPK), Pengesahan Pembimbing, Penjadwalan Majelis Penguji.
+  - [ ] **Admin Fakultas Endpoints:** Generator SK Dekan per-Fakultas (PDF), Verifikasi 3-Kriteria Bebas Fakultas (Perpus, Lab, SPP).
+  - [ ] **Dekanat & Super Admin Endpoints:** Executive Dashboard Metrics, PDF Export Rekapitulasi Yudisium, Master Data Management, Audit Log HMAC SHA-256 Security.
+- [ ] **4. File Storage & Server PDF Generator Engine**
+  - [ ] Cloud Storage Integration (AWS S3 / Supabase Storage / Local MinIO) untuk penyimpanan fisik berkas PDF draf naskah.
+  - [ ] Server-Side PDF Rendering Engine (Puppeteer / PDFKit / React-PDF) untuk penerbitan dokumen resmi SK Dekan & Laporan Yudisium.
+
+---
+
 ## 📱 Roadmap Selanjutnya (Future Development)
 
-- [ ] **Fase 2 — Integrasi Backend & API**
-  - Setup NestJS / Express + PostgreSQL + Prisma ORM
-  - JWT Authentication + RBAC 7 Role Guard
-  - Endpoints REST API per modul
-- [ ] **Fase 3 — Fitur Realtime & Export**
+- [ ] **Fase Realtime & Production**
   - WebSocket (Socket.io) notifikasi realtime
-  - PDF Generator Server-side (SK Dekan, Laporan Eksekutif, Berita Acara)
-- [ ] **Fase 4 — Production & Deployment**
+  - CI/CD Deployment Pipeline & Production Server Setup
+
+

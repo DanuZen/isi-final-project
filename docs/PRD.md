@@ -1,6 +1,6 @@
 # PRD — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)
-**Instansi:** Fakultas Ilmu Komputer, UPI YPTK Padang  
-**Versi:** 1.3 (Penambahan Halaman Dedicated Kalender TA)  
+**Instansi:** Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)  
+**Versi:** 1.4 (Pembaruan Skala Multi-Fakultas & Multi-Prodi Civitas Akademika)  
 **Stack:** Next.js (Frontend) + Tailwind CSS + Lucide Icons  
 **Status:** Production-Ready Design  
 
@@ -8,12 +8,12 @@
 
 ## 1. Latar Belakang & Tujuan
 
-**SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** dirancang khusus untuk Fakultas Ilmu Komputer UPI YPTK Padang untuk memantau alur perjalanan tugas akhir mahasiswa secara visual, terstruktur, transparan, dan realtime.
+**SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** dirancang untuk **seluruh Civitas Akademika Universitas Putra Indonesia YPTK Padang** guna memantau alur perjalanan tugas akhir dan skripsi mahasiswa secara visual, terstruktur, transparan, dan realtime.
 
 - **Alur Fokus Tugas Akhir (4 Stage Core Workflow):** SIPETA berfokus secara ketat pada 4 tahapan aktif Tugas Akhir: `Usulan Judul, Similarity & Pengajuan Pembimbing → Bimbingan TA → ACC Seminar → Ujian Sidang Skripsi`.
 - **Prasyarat Clearing Nilai (Offline / Manual di Kampus):** Pengurusan clearing nilai SKS & IPK dilakukan mahasiswa secara **langsung / offline di kampus** melalui Bagian Akademik / Admin Prodi. Hasil clearing nilai **TIDAK diinput atau diproses di dalam aplikasi SIPETA**. Setelah mahasiswa menyelesaikan clearing nilai secara luring di kampus, Admin Prodi akan membuatkan/mengaktifkan akun SIPETA mahasiswa.
-- **Halaman Dedicated Kalender TA (`/kalender`):** Menyediakan halaman khusus kalender interaktif bulanan/mingguan/harian untuk memantau jadwal bimbingan, seminar proposal, ujian sidang, dan deadline akademik FIK.
-- **Repositori & Referensi Judul (`/list-judul`):** Menyediakan pencarian & penelusuran judul TA mahasiswa FIK UPI YPTK lengkap dengan filter bidang kajian (RPL, AI, Jaringan) dan analisis persentase domain.
+- **Halaman Dedicated Kalender TA (`/kalender`):** Menyediakan halaman khusus kalender interaktif bulanan/mingguan/harian untuk memantau jadwal bimbingan, seminar proposal, ujian sidang, dan deadline akademik seluruh fakultas.
+- **Repositori & Referensi Judul (`/list-judul`):** Menyediakan pencarian & penelusuran judul TA alumni UPI YPTK lengkap dengan filter bidang kajian dan analisis persentase domain.
 - **Tata Letak & Estetika Premium:** Brand identity UPI YPTK Padang dengan warna Deep Crimson Red (`#C62828`), Amber Gold (`#F59E0B`), font **Plus Jakarta Sans**, Centered Logo Brand Header, tombol Toggle Sidebar Navigasi, serta *Flush Bottom Baseline Alignment* di seluruh halaman.
 
 ---
@@ -25,10 +25,10 @@
 | **Mahasiswa** | Memperoleh akun dari Admin pasca clearing nilai manual di kampus, mengusulkan judul, cek kemiripan (similarity), memilih & mengajukan dosen pembimbing (Pembimbing I & II), bimbingan rutin, pengajuan perubahan judul, ACC seminar & sidang, serta memantau kalender jadwal. |
 | **Dosen Pembimbing** | Membimbing mahasiswa, mengonfirmasi pengajuan dosen pembimbing, mereview draft naskah, memberikan catatan & status revisi, approve pengajuan perubahan judul, serta memberikan ACC Seminar & Sidang. |
 | **Dosen Penguji** | Menguji seminar proposal & ujian sidang skripsi, memberikan nilai komprehensif, serta memverifikasi lembar perbaikan/revisi. |
-| **Admin Prodi FIK** | Membuatkan/mengaktifkan akun mahasiswa pasca verifikasi clearing nilai manual offline, mengonfirmasi pengajuan & assign pembimbing/penguji prodi, mengelola jadwal seminar/sidang, serta verifikasi repositori judul TA. |
-| **Admin Fakultas** | Pengelolaan administrasi data fakultas, penerbitan Surat Keputusan (SK) Dekan untuk Dosen Pembimbing & Penguji, serta verifikasi bebas fakultas/yudisium. |
-| **Pimpinan / Dekanat** | Akses *Executive Read-Only* ke kalender sidang, grafik distribusi bidang kajian (RPL, AI, Jaringan), rekapitulasi durasi masa studi, dan laporan kelulusan mahasiswa per angkatan. |
-| **Super Admin** | Administrator teknis untuk manajemen akun pengguna, master data fakultas/prodi, audit log keamanan, dan konfigurasi sistem. |
+| **Admin Prodi** | Membuatkan/mengaktifkan akun mahasiswa pasca verifikasi clearing nilai manual offline, mengonfirmasi pengajuan & assign pembimbing/penguji prodi, mengelola jadwal seminar/sidang, serta verifikasi repositori judul TA. |
+| **Admin Fakultas** | Pengelolaan administrasi data fakultas, penerbitan Surat Keputusan (SK) Dekan untuk Dosen Pembimbing & Penguji per-Fakultas, serta verifikasi 3-kriteria bebas fakultas/yudisium. |
+| **Pimpinan / Dekanat** | Akses *Executive Read-Only* ke kalender sidang, grafik komparasi prodi & fakultas, rekapitulasi durasi masa studi, dan laporan kelulusan mahasiswa per angkatan. |
+| **Super Admin** | Administrator teknis untuk manajemen akun pengguna multi-fakultas, master data fakultas/prodi, audit log keamanan (HMAC SHA-256), dan konfigurasi parameter sistem. |
 
 ---
 

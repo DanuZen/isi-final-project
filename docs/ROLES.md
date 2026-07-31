@@ -1,15 +1,15 @@
 # Dokumentasi Role, Hak Akses & Matriks Kewenangan — SIPETA UPI YPTK Padang
 
 **Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)**  
-Fakultas Ilmu Komputer, UPI YPTK Padang  
-*Versi Dokumentasi:* 1.3 (Rincian Justifikasi & Analisis 7 Role System)  
-*Tanggal:* 29 Juli 2026  
+Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)  
+*Versi Dokumentasi:* 1.4 (Pembaruan Skala Multi-Fakultas & Multi-Prodi Civitas Akademika)  
+*Tanggal:* 31 Juli 2026  
 
 ---
 
 ## 1. Pendahuluan
 
-Dokumen ini mendefinisikan secara menyeluruh seluruh **Role (Peran)**, **Hak Akses**, **Matriks Kewenangan**, dan **Alur Kerja Interaksi** pengguna dalam aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** Fakultas Ilmu Komputer (FIK) UPI YPTK Padang.
+Dokumen ini mendefinisikan secara menyeluruh seluruh **Role (Peran)**, **Hak Akses**, **Matriks Kewenangan**, dan **Alur Kerja Interaksi** pengguna dalam aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** untuk **seluruh Civitas Akademika Universitas Putra Indonesia YPTK Padang**.
 
 Dokumen ini disusun sebagai panduan pengembang (developer), administrator prodi & fakultas, serta dasar acuan dalam penerapan Role-Based Access Control (RBAC).
 
@@ -25,9 +25,9 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 | 2 | **`DOSEN` (Pembimbing)** | Evaluator & Pembimbing | Membimbing mahasiswa, mengonfirmasi pengajuan pembimbing, mereview draft naskah, approve perubahan judul, serta memberikan ACC Seminar & Ujian Sidang. |
 | 3 | **`DOSEN` (Penguji)** | Evaluator Ujian | Menguji pelaksanaan Seminar Proposal & Sidang Skripsi, menginput nilai komprehensif, dan memverifikasi perbaikan/revisi. |
 | 4 | **`ADMIN_PRODI`** | Pengelola Operasional Prodi | Memverifikasi bukti clearing nilai manual luring dari mahasiswa, mengaktifkan akun SIPETA, mengonfirmasi pengajuan & assign pembimbing/penguji prodi, mengelola jadwal di kalender, serta repositori judul. |
-| 5 | **`ADMIN_FAKULTAS`** | Administrator Fakultas | Pengelolaan administrasi data fakultas, penerbitan Surat Keputusan (SK) Dekan untuk Dosen Pembimbing & Penguji, serta verifikasi kelulusan tingkat fakultas. |
-| 6 | **`PIMPINAN`** | Executive Monitoring | Akses *Executive Read-Only* ke kalender sidang, grafik distribusi bidang kajian (RPL, AI, Jaringan), rekapitulasi masa studi, dan laporan kelulusan angkatan. |
-| 7 | **`SUPERADMIN`** | Administrator Teknis | Pengelolaan master data (Fakultas/Prodi), manajemen akun user, audit log keamanan, dan konfigurasi sistem. |
+| 5 | **`ADMIN_FAKULTAS`** | Administrator Fakultas | Pengelolaan administrasi data fakultas, penerbitan Surat Keputusan (SK) Dekan untuk Dosen Pembimbing & Penguji per-Fakultas, serta verifikasi 3-kriteria bebas fakultas/yudisium. |
+| 6 | **`PIMPINAN`** | Executive Monitoring | Akses *Executive Read-Only* ke kalender sidang, grafik komparasi antar-prodi & fakultas, rekapitulasi masa studi, dan laporan kelulusan angkatan. |
+| 7 | **`SUPERADMIN`** | Administrator Teknis | Pengelolaan master data multi-fakultas/prodi, manajemen akun user, audit log keamanan (HMAC SHA-256), dan konfigurasi parameter sistem. |
 
 ---
 

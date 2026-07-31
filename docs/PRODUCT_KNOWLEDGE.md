@@ -39,7 +39,7 @@
 
 ## 1. Ringkasan Eksekutif
 
-**SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** adalah platform digital terintegrasi yang dirancang khusus untuk Fakultas Ilmu Komputer (FIK) Universitas Putra Indonesia YPTK Padang guna **memantau, mengelola, dan mengevaluasi seluruh perjalanan Tugas Akhir (TA) mahasiswa** secara visual, terstruktur, transparan, dan realtime.
+**SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** adalah platform digital terintegrasi yang dirancang untuk **seluruh Civitas Akademika Universitas Putra Indonesia YPTK Padang** (mencakup seluruh Fakultas dan Program Pascasarjana) guna **memantau, mengelola, dan mengevaluasi seluruh perjalanan Tugas Akhir (TA) dan Skripsi mahasiswa** secara visual, terstruktur, transparan, dan realtime.
 
 Platform ini menghubungkan **7 peran pengguna (role)** dalam satu ekosistem digital terpadu:
 
@@ -48,7 +48,7 @@ Platform ini menghubungkan **7 peran pengguna (role)** dalam satu ekosistem digi
 | 1 | Mahasiswa | 11 Modul |
 | 2 | Dosen Pembimbing | 4 Modul |
 | 3 | Dosen Penguji | 4 Modul |
-| 4 | Admin Program Studi (Prodi) FIK | 5 Modul |
+| 4 | Admin Program Studi (Prodi) | 5 Modul |
 | 5 | Admin Fakultas | 4 Modul |
 | 6 | Pimpinan / Dekanat | 4 Modul |
 | 7 | Super Admin (Administrator Teknis) | 5 Modul |
@@ -62,14 +62,14 @@ SIPETA mengotomasi **4 tahapan inti Tugas Akhir**: Usulan Judul & Cek Kemiripan 
 
 ### 2.1 Kondisi Eksisting
 
-Pengelolaan Tugas Akhir di lingkungan Fakultas Ilmu Komputer UPI YPTK Padang selama ini masih mengandalkan proses manual dan semi-digital yang menimbulkan berbagai kendala operasional:
+Pengelolaan Tugas Akhir di lingkungan Universitas Putra Indonesia YPTK Padang selama ini masih mengandalkan proses manual dan semi-digital yang menimbulkan berbagai kendala operasional lintas fakultas:
 
 | No | Permasalahan | Dampak |
 |:---:|---|---|
 | 1 | Pencatatan log bimbingan menggunakan buku fisik | Rawan hilang, sulit diverifikasi, dan tidak terdokumentasi secara digital |
 | 2 | Penjadwalan seminar & sidang via grup WhatsApp | Informasi tidak terpusat, rawan terlewat, dan sulit dilacak riwayatnya |
 | 3 | Penerbitan SK Dekan secara manual | Proses lambat, berpotensi kesalahan ketik, dan sulit diarsipkan secara sistematis |
-| 4 | Tidak ada dashboard analitik bagi pimpinan | Dekan/Wakil Dekan tidak memiliki visibilitas realtime terhadap progres TA seluruh mahasiswa |
+| 4 | Tidak ada dashboard analitik bagi pimpinan | Dekan/Wakil Dekan/Rektorat tidak memiliki visibilitas realtime terhadap progres TA seluruh mahasiswa |
 | 5 | Pengecekan duplikasi judul dilakukan secara manual | Memakan waktu lama dan tidak akurat, berpotensi lolos plagiarisme judul |
 | 6 | Tidak ada pelacakan status progres TA per mahasiswa | Mahasiswa, dosen, dan admin sulit mengetahui posisi terkini dalam siklus TA |
 
@@ -80,7 +80,7 @@ Dibutuhkan sebuah **platform terpusat berbasis web** yang mampu:
 - Memetakan seluruh tahapan Tugas Akhir dalam satu sistem terintegrasi
 - Menghubungkan seluruh pemangku kepentingan (mahasiswa, dosen, admin, pimpinan) secara digital
 - Menyediakan fitur **cek kemiripan judul (similarity checker)** untuk pencegahan plagiarisme
-- Menghasilkan **laporan analitik eksekutif** bagi pimpinan fakultas
+- Menghasilkan **laporan analitik eksekutif** bagi pimpinan fakultas dan universitas
 - Menjaga jejak audit (*audit trail*) untuk akuntabilitas dan transparansi
 
 ---
@@ -89,7 +89,7 @@ Dibutuhkan sebuah **platform terpusat berbasis web** yang mampu:
 
 ### 3.1 Visi
 
-> Menjadi platform pengelolaan Tugas Akhir terdepan yang memberikan **transparansi, efisiensi, dan akuntabilitas** dalam setiap tahapan perjalanan akademik mahasiswa Fakultas Ilmu Komputer UPI YPTK Padang.
+> Menjadi platform pengelolaan Tugas Akhir terdepan yang memberikan **transparansi, efisiensi, dan akuntabilitas** dalam setiap tahapan perjalanan akademik mahasiswa di seluruh Fakultas Universitas Putra Indonesia YPTK Padang.
 
 ### 3.2 Misi
 
