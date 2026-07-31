@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { ToastProvider } from "@/components/ui/toast";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -14,6 +15,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
   description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir UPI YPTK Padang",
+  icons: {
+    icon: "/upiyptk_emblem.webp",
+    shortcut: "/upiyptk_emblem.webp",
+    apple: "/upiyptk_emblem.webp",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +33,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#FAFAFA] text-[#212121]">
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );
