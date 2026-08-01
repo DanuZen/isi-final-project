@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   Clock, MapPin, CheckCircle2, FileText, ArrowRight,
-  Sparkles, X, Filter, BookOpen, Check
+  Sparkles, X, Filter, BookOpen, Check, ChevronLeft, ChevronRight
 } from "lucide-react";
 
 interface EventItem {
@@ -163,111 +164,126 @@ export default function DosenKalenderPage() {
             {/* ── Split 2-Column Card Layout (7/12 & 5/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
-              {/* ── LEFT COLUMN (7/12): Main Agenda Card Container ── */}
+              {/* ── LEFT COLUMN (7/12): Interactive Calendar Month Grid Card ── */}
               <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
                 {/* Card Header + Filters */}
-                <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0">
+                <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <CalendarDays className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Agenda Bimbingan &amp; Sidang</h2>
-                      <p className="text-[10px] text-slate-400 font-medium">Klik agenda untuk melihat detail lokasi &amp; berita acara</p>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Kalender Agustus 2026</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">Klik tanggal untuk melihat daftar agenda pada hari tersebut</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 flex-wrap ml-auto">
-                    <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div className="flex items-center gap-1 p-1 bg-white border border-slate-200 rounded-xl shadow-2xs">
                       <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
                       {["Semua", "Seminar", "Sidang", "Bimbingan"].map((t) => (
                         <button
                           key={t}
                           onClick={() => setFilterJenis(t)}
-                          className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer font-display"
+                          className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer font-display active:scale-95"
                           style={filterJenis === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
                         >
                           {t}
                         </button>
                       ))}
                     </div>
-                    <span className="text-[10.5px] font-bold text-white bg-[#C62828] px-2.5 py-1 rounded-xl shadow-2xs font-display">
-                      Agustus 2026
-                    </span>
                   </div>
                 </div>
 
-                {/* Scrollable Agenda List Container */}
-                <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5">
-                  {filteredEvents.length === 0 ? (
-                    <div className="p-8 text-center text-slate-400 space-y-2">
-                      <CalendarDays className="w-8 h-8 mx-auto text-slate-300" />
-                      <p className="text-xs font-bold text-slate-700 font-display">Tidak ada agenda ditemukan</p>
-                    </div>
-                  ) : (
-                    filteredEvents.map((ev) => {
-                      const solidCfg = JENIS_SOLID[ev.jenis] ?? JENIS_SOLID["Bimbingan"];
-                      const isSelected = selectedEv && selectedEv.id === ev.id;
-                      const isAttended = attendedMap[ev.id];
+                {/* ── Month Calendar Grid Body ── */}
+                <div className="flex-1 p-4 overflow-y-auto scrollbar-none flex flex-col justify-between">
+                  {/* Days of Week Header (7 Cols) */}
+                  <div className="grid grid-cols-7 text-center border-b border-slate-100 pb-2 mb-2">
+                    {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((d, i) => (
+                      <span
+                        key={d}
+                        className={`text-[11px] font-extrabold uppercase font-display ${
+                          i === 0 ? "text-[#C62828]" : "text-slate-500"
+                        }`}
+                      >
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Date Cells Grid (7 Cols, August 2026 Starts on Sat) */}
+                  <div className="grid grid-cols-7 gap-1.5 flex-1 min-h-[320px]">
+                    {/* Empty Offset Cells (July 26 - July 31) */}
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                      <div
+                        key={`offset-${idx}`}
+                        className="p-2 rounded-xl bg-slate-50/40 border border-slate-100/50 text-slate-300 text-xs font-medium font-mono min-h-[52px] select-none"
+                      >
+                        <span className="opacity-40">{26 + idx}</span>
+                      </div>
+                    ))}
+
+                    {/* August Days (1 to 31) */}
+                    {Array.from({ length: 31 }, (_, idx) => {
+                      const dayNum = idx + 1;
+                      const dayEvents = filteredEvents.filter((ev) => parseInt(ev.tglNum) === dayNum);
+                      const hasEvents = dayEvents.length > 0;
+                      const isSelected = selectedEv && parseInt(selectedEv.tglNum) === dayNum;
 
                       return (
                         <div
-                          key={ev.id}
-                          onClick={() => setSelectedEventId(ev.id)}
-                          className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2.5 ${
+                          key={`day-${dayNum}`}
+                          onClick={() => {
+                            if (hasEvents) {
+                              setSelectedEventId(dayEvents[0].id);
+                            }
+                          }}
+                          className={`p-2 rounded-xl border transition-all cursor-pointer flex flex-col justify-between min-h-[52px] group ${
                             isSelected
-                              ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
-                              : "bg-slate-50/50 border-slate-200/80 hover:bg-white hover:border-slate-300"
+                              ? "bg-rose-50/80 border-[#C62828] ring-2 ring-[#C62828]/20 shadow-xs font-black"
+                              : hasEvents
+                              ? "bg-white border-slate-200 hover:border-slate-300 hover:shadow-2xs"
+                              : "bg-white border-slate-100/80 text-slate-400 hover:bg-slate-50"
                           }`}
                         >
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            {/* Sleek Minimal Date Info */}
-                            <div className="flex items-center gap-3 min-w-0 flex-1">
-                              <div className="flex flex-col shrink-0 min-w-[75px]">
-                                <span className="text-xs font-black text-slate-900 font-display leading-tight">
-                                  {ev.hari.slice(0, 3)}, {ev.tglNum} Agt
-                                </span>
-                                <span className="text-[10px] text-slate-500 font-mono font-medium">
-                                  {ev.waktu.split(" - ")[0]} WIB
-                                </span>
-                              </div>
+                          <div className="flex items-center justify-between">
+                            <span
+                              className={`text-xs font-mono font-bold ${
+                                isSelected
+                                  ? "text-[#C62828] font-black"
+                                  : hasEvents
+                                  ? "text-slate-900"
+                                  : "text-slate-400"
+                              }`}
+                            >
+                              {dayNum}
+                            </span>
+                            {hasEvents && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
+                            )}
+                          </div>
 
-                              <div className="space-y-0.5 min-w-0 flex-1 border-l border-slate-200/80 pl-3">
-                                <div className="flex items-center gap-2 flex-wrap">
-                                  <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display ${solidCfg.bg} text-white`}>
+                          {/* Event Type Badges / Indicators inside Calendar Cell */}
+                          {hasEvents && (
+                            <div className="flex items-center gap-1 flex-wrap mt-1">
+                              {dayEvents.map((ev) => {
+                                const solid = JENIS_SOLID[ev.jenis] ?? JENIS_SOLID["Bimbingan"];
+                                return (
+                                  <span
+                                    key={ev.id}
+                                    className={`px-1.5 py-0.5 rounded text-[8.5px] font-extrabold shadow-2xs font-display truncate max-w-full ${solid.bg} text-white`}
+                                    title={`${ev.jenis}: ${ev.nama}`}
+                                  >
                                     {ev.jenis}
                                   </span>
-                                  <span className="text-[9.5px] font-bold text-white bg-slate-900 px-2.5 py-0.5 rounded-full shadow-2xs font-mono">
-                                    {ev.role}
-                                  </span>
-                                </div>
-                                <h3 className="text-xs font-black text-slate-900 font-display truncate">{ev.nama}</h3>
-                                <p className="text-[11px] text-slate-600 font-medium truncate">&ldquo;{ev.judul}&rdquo;</p>
-                              </div>
+                                );
+                              })}
                             </div>
-
-                            {/* Location & Quick Action */}
-                            <div className="flex items-center gap-2 shrink-0 justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200/60">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleToggleAttendance(ev.id, ev.nama, ev.jenis);
-                                }}
-                                className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-2xs font-display ${
-                                  isAttended
-                                    ? "bg-emerald-600 text-white"
-                                    : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
-                                }`}
-                              >
-                                <CheckCircle2 className={`w-3.5 h-3.5 ${isAttended ? "text-white" : "text-emerald-600"}`} />
-                                {isAttended ? "Hadir" : "Absen"}
-                              </button>
-                            </div>
-                          </div>
+                          )}
                         </div>
                       );
-                    })
-                  )}
+                    })}
+                  </div>
                 </div>
               </div>
 
@@ -310,7 +326,7 @@ export default function DosenKalenderPage() {
 
                       <div className="pt-2 border-t border-slate-200/60 space-y-1.5 text-xs text-slate-700 font-medium">
                         <p className="flex items-center gap-2">
-                          <Clock className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Waktu:</strong> {selectedEv.waktu} WIB
+                          <Clock className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Waktu:</strong> {selectedEv.waktu}
                         </p>
                         <p className="flex items-center gap-2">
                           <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Lokasi:</strong> {selectedEv.ruang}
@@ -320,7 +336,7 @@ export default function DosenKalenderPage() {
 
                     {/* Student & Thesis Info Box */}
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Mahasiswa Teruji</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Mahasiswa Teruji / Terbimbing</span>
                       <div>
                         <h3 className="text-base font-black text-slate-900 font-display leading-tight">{selectedEv.nama}</h3>
                         <p className="text-xs text-slate-500 font-medium">{selectedEv.prodi} · NIM: <span className="font-mono">{selectedEv.nim}</span></p>
@@ -332,12 +348,29 @@ export default function DosenKalenderPage() {
                         </p>
                       </div>
                     </div>
+
+                    {/* Attendance Confirmation Toggle */}
+                    <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-3">
+                      <span className="text-xs font-bold text-slate-700 font-display">Konfirmasi Kehadiran Dosen:</span>
+                      <button
+                        onClick={() => handleToggleAttendance(selectedEv.id, selectedEv.nama, selectedEv.jenis)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs font-display active:scale-95 ${
+                          attendedMap[selectedEv.id]
+                            ? "bg-emerald-600 text-white"
+                            : "bg-white border border-slate-300 text-slate-700 hover:bg-slate-50"
+                        }`}
+                      >
+                        <CheckCircle2 className={`w-3.5 h-3.5 ${attendedMap[selectedEv.id] ? "text-white" : "text-emerald-600"}`} />
+                        {attendedMap[selectedEv.id] ? "Telah Konfirmasi Hadir" : "Konfirmasi Hadir"}
+                      </button>
+                    </div>
                   </div>
                 ) : (
-                  <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-slate-400 space-y-2">
-                    <CalendarDays className="w-8 h-8 text-slate-300" />
-                    <p className="text-xs font-bold text-slate-700 font-display">Pilih agenda untuk melihat detail</p>
-                  </div>
+                  <EmptyState
+                    icon={CalendarDays}
+                    title="Pilih Agenda di Kalender"
+                    description="Klik tanggal yang ditandai badge agenda pada kalender untuk melihat rincian lokasi & berita acara."
+                  />
                 )}
 
                 {/* Bottom Action Panel */}
