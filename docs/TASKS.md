@@ -119,7 +119,8 @@ Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 
 ## 📱 Audit Mobile Layout Per-Halaman — Sesi Aktif 🔄
 
-Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone.
+Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone & desktop.
+*(Catatan: Audit tampilan mobile sementara ditunda per instruksi user; seluruh perubahan sejauh ini 100% aman dan tidak merubah layout desktop)*.
 
 ### 🎓 Portal Mahasiswa (11 Halaman)
 - [x] `/mahasiswa/dashboard` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
@@ -135,13 +136,13 @@ Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone
 - [x] `/login` — ✅ Sesuai (Responsive Portal Selector & Glassmorphism Card, Desktop 100% Utuh)
 
 ### 👨‍🏫 Portal Dosen Terpadu (7 Halaman)
-- [x] `/dosen/dashboard` — ✅ Sesuai (Welcome Banner Benchmark, Responsif Card Bimbingan & Stat Grid, Desktop 100% Utuh)
-- [x] `/dosen/bimbingan` — ✅ Sesuai (Sleek Mobile Segmented Control Tab Switcher, Red & Gold Theme, Desktop 100% Utuh)
-- [x] `/dosen/pengajuan` — ✅ Sesuai (Fixed Riwayat Keputusan desktop height, Mobile Segmented Control Tab Switcher, Solid Red & Gold Theme)
-- [ ] `/penguji/jadwal` — 🔄 Belum dicek
-- [ ] `/penguji/nilai` — 🔄 Belum dicek
-- [ ] `/penguji/revisi` — 🔄 Belum dicek
-- [ ] `/dosen/kalender` — 🔄 Belum dicek
+- [x] `/dosen/dashboard` — ✅ Sesuai (Welcome Banner Benchmark, Solid Red & Gold Theme, Emerald ACC Button, Desktop 100% Utuh)
+- [x] `/dosen/bimbingan` — ✅ Sesuai (Dropdown Filter Animated, Navigasi HP 1-Tap `← Kembali`, Re-aligned Card Layout, Emerald Green ACC Buttons & Badges, Desktop 100% Utuh)
+- [x] `/dosen/pengajuan` — ✅ Sesuai (Equal Height Desktop Riwayat, Mobile Tab Switcher, Emerald Terima Button & Status Badge, Desktop 100% Utuh)
+- [ ] `/penguji/jadwal` — ⏸️ Ditunda sementara (Mobile Audit Pause)
+- [ ] `/penguji/nilai` — ⏸️ Ditunda sementara
+- [ ] `/penguji/revisi` — ⏸️ Ditunda sementara
+- [ ] `/dosen/kalender` — ⏸️ Ditunda sementara
 
 ### 🏛️ Portal Admin Prodi (6 Halaman)
 - [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek
