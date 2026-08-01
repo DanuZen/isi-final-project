@@ -17,7 +17,9 @@ import {
   FileEdit,
   MessageSquare,
   User2,
+  Sparkles
 } from "lucide-react";
+import { SplashScreen } from "@/components/ui/splash-screen";
 
 // ─── Mock Data ──────────────────────────────────────────────
 const STUDENT = {
@@ -73,10 +75,6 @@ const QUICK_ACTIONS = [
   },
 ];
 
-// ────────────────────────────────────────────────────────────
-
-import { SplashScreen } from "@/components/ui/splash-screen";
-
 export default function DashboardPage() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
@@ -111,19 +109,19 @@ export default function DashboardPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 md:p-6 space-y-3.5 md:space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
 
-            {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+            {/* ── Welcome Banner (Optimized for Mobile) ── */}
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-xs">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
+                  <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] md:text-[11px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Akun Terverifikasi Akademik
                     </span>
                   </div>
-                  <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Selamat Datang, {STUDENT.name}
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
@@ -133,7 +131,7 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                {/* Right: quick actions (hidden on mobile, visible on desktop) */}
+                {/* Right: quick actions for desktop */}
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   {QUICK_ACTIONS.map((a) => (
                     <Link
@@ -151,34 +149,60 @@ export default function DashboardPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Mobile Touch Action Row (Sleek 3-Column Shortcuts for Mobile <768px) ── */}
+            <div className="grid grid-cols-3 gap-2 md:hidden shrink-0">
+              <Link
+                href="/mahasiswa/proposal"
+                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-[#C62828] text-white shadow-2xs text-center active:scale-95 transition-all space-y-1"
+              >
+                <FileText className="w-4 h-4 text-white" />
+                <span className="text-[10.5px] font-bold leading-tight font-display">Ajukan Judul</span>
+              </Link>
+
+              <Link
+                href="/mahasiswa/pembimbing"
+                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-[#ffd01d] text-slate-950 shadow-2xs text-center active:scale-95 transition-all space-y-1"
+              >
+                <User2 className="w-4 h-4 text-slate-950" />
+                <span className="text-[10.5px] font-bold leading-tight font-display">Pembimbing</span>
+              </Link>
+
+              <Link
+                href="/mahasiswa/kalender"
+                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-2xs text-center active:scale-95 transition-all space-y-1"
+              >
+                <CalendarDays className="w-4 h-4 text-slate-700" />
+                <span className="text-[10.5px] font-bold leading-tight font-display">Kalender TA</span>
+              </Link>
+            </div>
+
             {/* ── TA Stepper ── */}
             <div className="shrink-0">
               <TaStepper />
             </div>
 
-            {/* ── Main Grid ── */}
+            {/* ── Main Grid (8/12 & 4/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0">
 
-              {/* LEFT: Judul TA (8/12) */}
+              {/* LEFT: Judul TA Card (8/12) */}
               <div className="lg:col-span-8 flex flex-col gap-4 min-h-0">
-                {/* Judul Card */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col flex-1 min-h-0 overflow-hidden">
                   {/* Card header */}
-                  <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
+                  <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 shrink-0">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                         <FileText className="w-4 h-4" />
                       </div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">
+                      <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
                         Judul Tugas Akhir
                       </h2>
                     </div>
                     {JUDUL ? (
-                      <span className="shrink-0 px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                      <span className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs">
                         {JUDUL.status}
                       </span>
                     ) : (
-                      <span className="shrink-0 px-3 py-1 rounded-full text-[10px] font-extrabold bg-amber-500 text-white shadow-xs">
+                      <span className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-500 text-white shadow-2xs">
                         Belum Diajukan
                       </span>
                     )}
@@ -187,11 +211,11 @@ export default function DashboardPage() {
                   {JUDUL ? (
                     <>
                       {/* Judul & abstrak */}
-                      <div className="px-5 py-4 space-y-2 flex-1 overflow-y-auto scrollbar-none">
+                      <div className="px-4 sm:px-5 py-4 space-y-2 flex-1 overflow-y-auto scrollbar-none">
                         <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
                           {JUDUL.bidang}
                         </span>
-                        <h3 className="text-sm font-extrabold text-slate-900 leading-snug font-display">
+                        <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug font-display">
                           &ldquo;{JUDUL.text}&rdquo;
                         </h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
@@ -201,7 +225,7 @@ export default function DashboardPage() {
                       </div>
 
                       {/* Pembimbing grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-5 pb-4 shrink-0">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-4 sm:px-5 pb-4 shrink-0">
                         {PEMBIMBING.map((p) => (
                           <div key={p.label} className="bg-slate-50 rounded-xl border border-slate-200 p-3.5 space-y-1">
                             <div className="flex items-center gap-1.5">
@@ -219,20 +243,20 @@ export default function DashboardPage() {
                       </div>
                     </>
                   ) : (
-                    /* Empty state — belum ada judul */
-                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3">
-                      <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#C62828] shadow-xs">
-                        <FileText className="w-7 h-7 text-[#C62828]" />
+                    /* Empty State — Belum ada judul diajukan */
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-5 sm:p-8 space-y-3.5">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#C62828] shadow-xs">
+                        <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#C62828]" />
                       </div>
-                      <div className="space-y-1">
-                        <h4 className="font-extrabold text-base font-display text-slate-900">Belum Ada Judul Diajukan</h4>
-                        <p className="text-xs text-slate-500 max-w-xs leading-relaxed font-medium">
+                      <div className="space-y-1 max-w-xs">
+                        <h4 className="font-extrabold text-sm sm:text-base font-display text-slate-900">Belum Ada Judul Diajukan</h4>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">
                           Mulai perjalanan TA Anda dengan mengajukan usulan judul skripsi dan cek kemiripan (similarity).
                         </p>
                       </div>
                       <Link
                         href="/mahasiswa/proposal"
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs w-full sm:w-auto font-display"
                       >
                         <FileText className="w-4 h-4" />
                         <span>Ajukan Judul Tugas Akhir</span>
@@ -242,22 +266,22 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* RIGHT: Checklist ACC + Kontak (4/12) */}
+              {/* RIGHT: Syarat ACC + Mini Kalender Widget (4/12) */}
               <div className="lg:col-span-4 flex flex-col gap-4 min-h-0">
-                {/* ACC Checklist */}
+                {/* ACC Checklist Card */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden shrink-0">
-                  <div className="flex items-center gap-2.5 px-5 py-4 border-b border-slate-100">
+                  <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3.5 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">
+                    <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
                       Syarat ACC Seminar
                     </h2>
                   </div>
 
                   <ul className="divide-y divide-slate-100">
                     {ACC_CHECKLIST.map((item) => (
-                      <li key={item.label} className="flex items-start gap-3 px-5 py-3.5">
+                      <li key={item.label} className="flex items-start gap-3 px-4 sm:px-5 py-3">
                         <div className="mt-0.5 shrink-0">
                           {item.done ? (
                             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
@@ -265,11 +289,11 @@ export default function DashboardPage() {
                             <Clock className="w-4 h-4 text-amber-500" />
                           )}
                         </div>
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <p className={`text-xs font-bold ${item.done ? "text-slate-700" : "text-slate-900"}`}>
                             {item.label}
                           </p>
-                          <p className={`text-[11px] mt-0.5 font-medium ${item.done ? "text-emerald-600" : "text-amber-600"}`}>
+                          <p className={`text-[10.5px] mt-0.5 font-medium ${item.done ? "text-emerald-600" : "text-amber-600"}`}>
                             {item.detail}
                           </p>
                         </div>
@@ -277,10 +301,10 @@ export default function DashboardPage() {
                     ))}
                   </ul>
 
-                  <div className="px-5 py-3 border-t border-slate-100">
+                  <div className="px-4 sm:px-5 py-3 border-t border-slate-100">
                     <button
                       disabled={!canAcc}
-                      className={`w-full py-2.5 rounded-xl text-xs font-bold transition-all ${
+                      className={`w-full py-2.5 min-h-[42px] rounded-xl text-xs font-bold transition-all font-display ${
                         canAcc
                           ? "bg-[#C62828] text-white hover:bg-[#B71C1C] active:scale-95 shadow-xs"
                           : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
@@ -299,13 +323,13 @@ export default function DashboardPage() {
                         <CalendarDays className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-xs text-slate-900 font-display">Kalender TA & Agenda</h3>
+                        <h3 className="font-bold text-xs text-slate-900 font-display">Kalender TA &amp; Agenda</h3>
                         <p className="text-[10px] text-slate-400 font-medium">Agustus 2026</p>
                       </div>
                     </div>
                     <Link
                       href="/mahasiswa/kalender"
-                      className="px-3 py-1.5 text-xs font-bold text-white bg-[#C62828] hover:bg-[#B71C1C] rounded-xl transition-all shadow-xs flex items-center gap-1 active:scale-95"
+                      className="px-3 py-1.5 text-xs font-bold text-white bg-[#C62828] hover:bg-[#B71C1C] rounded-xl transition-all shadow-xs flex items-center gap-1 active:scale-95 font-display"
                     >
                       Buka <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
@@ -320,7 +344,7 @@ export default function DashboardPage() {
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-900 truncate">Sesi 5 Bimbingan TA</span>
-                        <span className="text-[10px] font-bold text-[#C62828] bg-rose-50 px-1.5 py-0.5 rounded">Besok</span>
+                        <span className="text-[10px] font-bold text-[#C62828] bg-rose-50 px-1.5 py-0.5 rounded font-mono-data">Besok</span>
                       </div>
                       <p className="text-[11px] text-slate-500 font-medium">10:00 WIB · Ruang Dosen FIK 3</p>
                     </div>
@@ -328,7 +352,7 @@ export default function DashboardPage() {
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-900 truncate">Deadline Draft Sempro</span>
-                        <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">5 Agt</span>
+                        <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded font-mono-data">5 Agt</span>
                       </div>
                       <p className="text-[11px] text-slate-500 font-medium">Upload via Portal SIPETA</p>
                     </div>
@@ -336,14 +360,16 @@ export default function DashboardPage() {
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-900 truncate">Seminar Proposal FIK</span>
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">12 Agt</span>
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-mono-data">12 Agt</span>
                       </div>
                       <p className="text-[11px] text-slate-500 font-medium">Aula Seminar Lt. 2 FIK</p>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
+
           </main>
         </div>
       </div>
