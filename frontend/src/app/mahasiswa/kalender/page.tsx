@@ -303,14 +303,14 @@ export default function KalenderPage() {
                 {viewMode === "BULAN" && (
                   <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                     {/* Days Header */}
-                    <div className="grid grid-cols-7 gap-1.5 text-center pb-2 border-b border-slate-100 text-xs font-extrabold uppercase tracking-wider text-slate-400 shrink-0">
-                      <div>Minggu</div>
-                      <div>Senin</div>
-                      <div>Selasa</div>
-                      <div>Rabu</div>
-                      <div>Kamis</div>
-                      <div>Jumat</div>
-                      <div>Sabtu</div>
+                    <div className="grid grid-cols-7 gap-1 text-center pb-2 border-b border-slate-100 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-400 shrink-0 font-display">
+                      <div><span className="sm:hidden">Min</span><span className="hidden sm:inline">Minggu</span></div>
+                      <div><span className="sm:hidden">Sen</span><span className="hidden sm:inline">Senin</span></div>
+                      <div><span className="sm:hidden">Sel</span><span className="hidden sm:inline">Selasa</span></div>
+                      <div><span className="sm:hidden">Rab</span><span className="hidden sm:inline">Rabu</span></div>
+                      <div><span className="sm:hidden">Kam</span><span className="hidden sm:inline">Kamis</span></div>
+                      <div><span className="sm:hidden">Jum</span><span className="hidden sm:inline">Jumat</span></div>
+                      <div><span className="sm:hidden">Sab</span><span className="hidden sm:inline">Sabtu</span></div>
                     </div>
 
                     {/* Days Matrix (6 Rows x 7 Columns - Stretches 100% height) */}
