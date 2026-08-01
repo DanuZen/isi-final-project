@@ -15,6 +15,7 @@ import {
   X,
   User,
   LogOut,
+  ChevronRight,
 } from "lucide-react";
 import { ProfileModal } from "@/components/modals/profile-modal";
 
@@ -226,33 +227,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
               })}
             </nav>
 
-            {/* Bottom Footer: User Profile Card (Akun) + Solid Logout Button */}
+            {/* Bottom Footer: Clickable User Profile Card (Akun) + Solid Logout Button */}
             <div className="p-3 border-t border-[#333333] bg-[#202020] shrink-0 space-y-2">
-              {/* Compact Side-by-Side User Profile Card (Akun) */}
-              <div className="p-2.5 rounded-xl bg-[#282828] border border-[#3A3A3A] flex items-center justify-between gap-2">
+              {/* Entire Card Clickable to open Profile Modal */}
+              <button
+                onClick={() => {
+                  onToggle?.();
+                  setIsProfileModalOpen(true);
+                }}
+                className="w-full p-2.5 rounded-xl bg-[#282828] hover:bg-[#303030] active:bg-[#383838] border border-[#3A3A3A] hover:border-[#555555] transition-all cursor-pointer flex items-center justify-between gap-2.5 text-left group shadow-xs"
+                title="Klik untuk membuka Profil & Detail Akun Saya"
+              >
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs border border-white/10 font-display">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs border border-white/10 font-display group-hover:scale-105 transition-transform">
                     DZ
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold text-white truncate font-display">{userName}</p>
+                    <p className="text-xs font-bold text-white truncate font-display group-hover:text-[#ffd01d] transition-colors">{userName}</p>
                     <p className="text-[9.5px] text-[#A0A0A0] truncate">{roleName} · {prodiName}</p>
                     <p className="text-[9px] text-[#888888] font-mono mt-0.5 truncate">{userNim}</p>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => {
-                    onToggle?.();
-                    setIsProfileModalOpen(true);
-                  }}
-                  className="px-3 py-1.5 rounded-lg text-xs font-black bg-[#ffd01d] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-95 font-display flex items-center gap-1.5 shrink-0 whitespace-nowrap"
-                  title="Lihat Profil & Detail Akun Saya"
-                >
-                  <User className="w-3.5 h-3.5 text-slate-950 stroke-[2.5]" />
-                  <span>Profil</span>
-                </button>
-              </div>
+                <div className="w-7 h-7 rounded-lg bg-neutral-800 group-hover:bg-[#C62828] text-neutral-400 group-hover:text-white flex items-center justify-center shrink-0 transition-colors">
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </button>
 
               {/* Solid Color Logout Button */}
               <button
