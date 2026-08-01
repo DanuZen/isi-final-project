@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, User, LogOut, Menu, X } from "lucide-react";
 
 import { SplashScreen } from "@/components/ui/splash-screen";
+import { ProfileModal } from "@/components/modals/profile-modal";
 
 interface NavItem {
   label: string;
@@ -38,6 +39,7 @@ export function RoleLayout({
   const router   = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showPortalSplash, setShowPortalSplash] = useState(true);
   const dropRef = React.useRef<HTMLDivElement>(null);
 
@@ -68,27 +70,31 @@ export function RoleLayout({
               onClick={() => setSidebarOpen(false)}
               className="fixed inset-0 bg-black/75 backdrop-blur-xs z-[9998] animate-fade-in-scale cursor-pointer"
             />
-            <aside className="fixed inset-y-0 left-0 w-[270px] bg-[#1A1A1A] text-white flex flex-col z-[9999] shadow-2xl overflow-hidden border-r border-[#333333]">
-              <div className="flex items-center justify-between p-4 border-b border-[#333333] shrink-0">
+            {/* Full-Page Mobile Drawer from RIGHT */}
+            <aside className="fixed inset-0 w-full h-full bg-[#1A1A1A] text-white flex flex-col z-[9999] shadow-2xl overflow-hidden animate-slide-in-right">
+              {/* Top Header with emblem logo and close button */}
+              <div className="flex items-center justify-between p-4 md:p-5 border-b border-[#333333] shrink-0 bg-[#1A1A1A]">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 relative shrink-0">
-                    <Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill className="object-contain" priority />
+                    <Image src="/upiyptk_emblem.webp" alt="UPI YPTK" fill sizes="36px" className="object-contain" priority />
                   </div>
                   <div>
                     <h1 className="font-black text-lg tracking-wider font-display text-white leading-none">SIPETA</h1>
-                    <p className="text-[8px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-0.5 leading-none">UPI YPTK PADANG</p>
+                    <p className="text-[8.5px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-0.5 leading-none">UPI YPTK PADANG</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setSidebarOpen(false)}
-                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                  className="w-10 h-10 flex items-center justify-center rounded-full text-neutral-400 hover:text-white hover:bg-white/10 active:bg-white/20 transition-all cursor-pointer shrink-0"
+                  title="Tutup Menu"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
-              <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto">
-                <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">Menu Utama</div>
+              {/* Middle Section: Mobile Nav Links (Scrollable & Compact) */}
+              <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+                <div className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">Menu Utama</div>
                 {navItems.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -96,7 +102,7 @@ export function RoleLayout({
                       key={item.href}
                       href={item.href}
                       onClick={() => setSidebarOpen(false)}
-                      className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all ${
+                      className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-98 ${
                         active ? "text-white font-extrabold" : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
                       }`}
                       style={active ? { background: accentColor + "33", color: "white" } : {}}
@@ -107,6 +113,49 @@ export function RoleLayout({
                   );
                 })}
               </nav>
+
+              {/* Bottom Footer: User Profile Card (Akun) + Solid Logout Button */}
+              <div className="p-3 border-t border-[#333333] bg-[#202020] shrink-0 space-y-2">
+                {/* Compact User Profile Card (Akun) */}
+                <div className="p-2.5 rounded-xl bg-[#282828] border border-[#3A3A3A] space-y-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs border border-white/10 font-display">
+                      {initials}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-white truncate font-display">{userName}</p>
+                      <p className="text-[9.5px] text-[#A0A0A0] truncate">{userRole} · {userUnit}</p>
+                      <p className="text-[9px] text-[#888888] font-mono mt-0.5 truncate">{userCode}</p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setSidebarOpen(false);
+                      setIsProfileOpen(true);
+                    }}
+                    className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#F59E0B] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
+                  >
+                    <User className="w-3.5 h-3.5 text-slate-950 stroke-[2.5]" />
+                    <span>Profil &amp; Detail Akun Saya</span>
+                  </button>
+                </div>
+
+                {/* Solid Color Logout Button */}
+                <button
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    if (typeof window !== "undefined") {
+                      localStorage.removeItem("sipeta_logged_in");
+                    }
+                    router.push("/login");
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all cursor-pointer shadow-sm active:scale-98 font-display"
+                >
+                  <LogOut className="w-3.5 h-3.5 text-white" />
+                  <span>Keluar</span>
+                </button>
+              </div>
             </aside>
           </div>
         )}
@@ -180,24 +229,45 @@ export function RoleLayout({
           {/* Header */}
           <header className="sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200">
             <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${accentColor}, #F59E0B, ${accentColor})` }} />
-            <div className="h-12 px-5 flex items-center justify-between">
+            <div className="h-14 md:h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
+              {/* Mobile Brand (Left side on < md) */}
               <div className="flex items-center gap-2.5 md:hidden">
+                <div className="w-8 h-8 relative shrink-0">
+                  <Image
+                    src="/upiyptk_emblem.webp"
+                    alt="Emblem UPI YPTK"
+                    fill
+                    sizes="32px"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <div>
+                  <h1 className="font-black text-base tracking-wider font-display text-slate-900 leading-none">
+                    SIPETA
+                  </h1>
+                  <p className="text-[7.5px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-0.5 leading-none">
+                    UPI YPTK PADANG
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile Burger Button (Right side on < md) */}
+              <div className="md:hidden">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-800 transition-all cursor-pointer shadow-2xs"
-                  title="Buka Menu"
+                  className="flex items-center justify-center w-10 h-10 rounded-full text-slate-800 hover:text-[#C62828] hover:bg-slate-100 active:scale-95 transition-all cursor-pointer shrink-0"
+                  title="Buka Navigasi Menu &amp; Profil"
                 >
-                  <Menu className="w-5 h-5 text-[#C62828]" />
+                  <Menu className="w-6 h-6 text-[#C62828]" />
                 </button>
-                <span className="font-black text-sm font-display text-slate-900 tracking-wider">SIPETA</span>
               </div>
-              <div className="flex-1" />
 
-              {/* User dropdown */}
-              <div ref={dropRef} className="relative">
+              {/* Desktop Profile Trigger (Hidden on < md, Visible on ≥ md) */}
+              <div ref={dropRef} className="hidden md:block relative">
                 <button
                   onClick={() => setDropdownOpen((v) => !v)}
-                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-all group"
+                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-all group cursor-pointer"
                 >
                   <div
                     className="w-7 h-7 rounded-full text-white font-bold text-[11px] flex items-center justify-center shrink-0 select-none"
@@ -205,7 +275,7 @@ export function RoleLayout({
                   >
                     {initials}
                   </div>
-                  <div className="hidden sm:flex flex-col leading-tight text-left">
+                  <div className="flex flex-col leading-tight text-left">
                     <span className="text-xs font-semibold text-slate-700 group-hover:text-[#C62828] transition-colors">{userName}</span>
                     <span className="text-[10px] text-slate-400">{userRole}</span>
                   </div>
@@ -252,6 +322,9 @@ export function RoleLayout({
           </main>
         </div>
       </div>
+
+      {/* Profile Modal */}
+      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
 
       {/* Portal Splash Transition */}
       {showPortalSplash && (

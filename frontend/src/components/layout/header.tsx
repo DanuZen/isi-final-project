@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { ChevronDown, User, LogOut, Menu } from "lucide-react";
 import { ProfileModal } from "@/components/modals/profile-modal";
 
@@ -52,29 +53,50 @@ export const Header: React.FC<HeaderProps> = ({
       <header className={`sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200 ${className}`}>
         <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
 
-        <div className="h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
-          {/* Mobile Hamburger & Brand (< md) */}
+        <div className="h-14 md:h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
+          {/* Mobile Brand (Left side on < md) */}
           <div className="flex items-center gap-2.5 md:hidden">
-            <button
-              onClick={onToggleSidebar}
-              className="flex items-center justify-center w-9 h-9 rounded-xl text-slate-800 bg-slate-100 border border-slate-200 hover:bg-slate-200 active:scale-95 transition-all cursor-pointer shadow-2xs"
-              title="Buka Navigasi Menu"
-            >
-              <Menu className="w-5 h-5 text-[#C62828]" />
-            </button>
-            <span className="font-black text-sm font-display text-slate-900 tracking-wider">SIPETA</span>
+            <div className="w-8 h-8 relative shrink-0">
+              <Image
+                src="/upiyptk_emblem.webp"
+                alt="Emblem UPI YPTK"
+                fill
+                sizes="32px"
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div>
+              <h1 className="font-black text-base tracking-wider font-display text-slate-900 leading-none">
+                SIPETA
+              </h1>
+              <p className="text-[7.5px] font-bold text-[#C62828] font-display tracking-widest uppercase mt-0.5 leading-none">
+                UPI YPTK PADANG
+              </p>
+            </div>
           </div>
 
-          {/* Profile Trigger */}
-          <div ref={ref} className="relative">
+          {/* Mobile Burger Button (Right side on < md) */}
+          <div className="md:hidden">
+            <button
+              onClick={onToggleSidebar}
+              className="flex items-center justify-center w-10 h-10 rounded-full text-slate-800 hover:text-[#C62828] hover:bg-slate-100 active:scale-95 transition-all cursor-pointer shrink-0"
+              title="Buka Navigasi Menu &amp; Profil"
+            >
+              <Menu className="w-6 h-6 text-[#C62828]" />
+            </button>
+          </div>
+
+          {/* Desktop Profile Trigger (Hidden on < md, Visible on ≥ md) */}
+          <div ref={ref} className="hidden md:block relative">
             <button
               onClick={() => setOpen((v) => !v)}
-              className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-all group"
+              className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-all group cursor-pointer"
             >
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-bold text-[11px] flex items-center justify-center shrink-0 select-none">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-bold text-[11px] flex items-center justify-center shrink-0 select-none shadow-2xs">
                 DZ
               </div>
-              <div className="hidden sm:flex flex-col leading-tight text-left">
+              <div className="flex flex-col leading-tight text-left">
                 <span className="text-xs font-semibold text-slate-700 group-hover:text-[#C62828] transition-colors">
                   {userName}
                 </span>
