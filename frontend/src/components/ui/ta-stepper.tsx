@@ -50,20 +50,20 @@ const DEFAULT_STEPS: StepItem[] = [
 ];
 
 const getStepIcon = (key: string, status: StepItem["status"]) => {
-  if (status === "selesai") return <Check className="w-4 h-4 text-white stroke-[3]" />;
-  if (status === "terkunci") return <Lock className="w-3.5 h-3.5 text-slate-400" />;
+  if (status === "selesai") return <Check className="w-3.5 h-3.5 text-white stroke-[3]" />;
+  if (status === "terkunci") return <Lock className="w-3 h-3 text-slate-400" />;
 
   switch (key) {
     case "proposal":
-      return <FileText className="w-4 h-4 text-white" />;
+      return <FileText className="w-3.5 h-3.5 text-white" />;
     case "bimbingan":
-      return <BookOpen className="w-4 h-4 text-white" />;
+      return <BookOpen className="w-3.5 h-3.5 text-white" />;
     case "seminar":
-      return <FileCheck className="w-4 h-4 text-white" />;
+      return <FileCheck className="w-3.5 h-3.5 text-white" />;
     case "ujian":
-      return <GraduationCap className="w-4 h-4 text-white" />;
+      return <GraduationCap className="w-3.5 h-3.5 text-white" />;
     default:
-      return <BookOpen className="w-4 h-4 text-white" />;
+      return <BookOpen className="w-3.5 h-3.5 text-white" />;
   }
 };
 
@@ -72,10 +72,13 @@ export const TaStepper: React.FC<TaStepperProps> = ({
   onStepClick,
 }) => {
   const activeStep = steps.find((s) => s.status === "aktif");
+  const activeIndex = steps.findIndex((s) => s.status === "aktif");
 
   return (
-    <div className="w-full bg-white rounded-2xl border border-slate-200 p-5 shadow-xs">
-      <div className="text-center mb-5">
+    <div className="w-full bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-5 shadow-xs">
+      
+      {/* ── Desktop Header ── */}
+      <div className="hidden md:block text-center mb-5">
         <h3 className="text-sm font-bold text-slate-900 font-display">
           Progres Perjalanan Tugas Akhir
         </h3>
@@ -87,7 +90,17 @@ export const TaStepper: React.FC<TaStepperProps> = ({
         </p>
       </div>
 
-      {/* Desktop Stepper (Horizontal) */}
+      {/* ── Mobile Header (Sleek Compact Bar for <768px) ── */}
+      <div className="md:hidden flex items-center justify-between gap-2 mb-2.5">
+        <h3 className="text-xs font-extrabold text-slate-900 font-display">
+          Progres Tugas Akhir
+        </h3>
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200 font-display shrink-0">
+          Tahap {activeIndex + 1}/{steps.length}: {activeStep ? activeStep.title : "Selesai"}
+        </span>
+      </div>
+
+      {/* ── Desktop Stepper (Horizontal 4-Column Flow) ── */}
       <div className="hidden md:flex items-start justify-between relative py-2">
         {/* Connector Line Background */}
         <div className="absolute top-6 left-12 right-12 h-0.5 bg-slate-200 -z-0" />
@@ -146,49 +159,74 @@ export const TaStepper: React.FC<TaStepperProps> = ({
         })}
       </div>
 
-      {/* Mobile Stepper */}
-      <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-        {steps.map((step) => {
-          const isCompleted = step.status === "selesai";
-          const isActive = step.status === "aktif";
+      {/* ── Mobile Stepper (Sleek Thin 4-Segment Progress Bar + Compact 2x2 Grid) ── */}
+      <div className="md:hidden space-y-2.5">
+        {/* Thin 4-Segment Progress Bar */}
+        <div className="grid grid-cols-4 gap-1.5">
+          {steps.map((step, idx) => {
+            const isCompleted = step.status === "selesai";
+            const isActive = step.status === "aktif";
 
-          return (
-            <div
-              key={step.id}
-              className={`p-3 rounded-xl border flex items-center gap-3 ${
-                isCompleted
-                  ? "bg-emerald-50/60 border-emerald-200 text-slate-900"
-                  : isActive
-                  ? "bg-rose-50/60 border-rose-200 text-slate-900"
-                  : "bg-slate-50 border-slate-200 text-slate-500"
-              }`}
-            >
+            return (
               <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                key={step.id}
+                className={`h-1.5 rounded-full transition-all ${
                   isCompleted
-                    ? "bg-emerald-600 text-white"
+                    ? "bg-emerald-600"
                     : isActive
-                    ? "bg-[#C62828] text-white"
-                    : "bg-slate-200 text-slate-500"
+                    ? "bg-[#C62828]"
+                    : "bg-slate-200"
+                }`}
+              />
+            );
+          })}
+        </div>
+
+        {/* Compact 2x2 Grid Pills */}
+        <div className="grid grid-cols-2 gap-2 pt-0.5">
+          {steps.map((step) => {
+            const isCompleted = step.status === "selesai";
+            const isActive = step.status === "aktif";
+
+            return (
+              <div
+                key={step.id}
+                className={`p-2.5 rounded-xl border flex items-center gap-2 transition-all ${
+                  isCompleted
+                    ? "bg-emerald-50/70 border-emerald-200 text-emerald-950"
+                    : isActive
+                    ? "bg-rose-50/70 border-rose-200 text-slate-900 shadow-2xs"
+                    : "bg-slate-50/80 border-slate-200 text-slate-400"
                 }`}
               >
-                {getStepIcon(step.key, step.status)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
-                  <p className="text-xs font-bold truncate">{step.title}</p>
-                  {isCompleted && (
-                    <span className="text-[10px] font-bold text-emerald-700">
-                      {step.completedAt}
-                    </span>
-                  )}
+                <div
+                  className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                    isCompleted
+                      ? "bg-emerald-600 text-white"
+                      : isActive
+                      ? "bg-[#C62828] text-white"
+                      : "bg-slate-200 text-slate-400"
+                  }`}
+                >
+                  {getStepIcon(step.key, step.status)}
                 </div>
-                <p className="text-[11px] text-slate-500 truncate">{step.subtitle}</p>
+
+                <div className="min-w-0 flex-1">
+                  <p className={`text-[11px] font-bold truncate leading-tight font-display ${
+                    isCompleted ? "text-emerald-900" : isActive ? "text-[#C62828]" : "text-slate-500"
+                  }`}>
+                    {step.title}
+                  </p>
+                  <p className="text-[9.5px] text-slate-400 truncate leading-tight mt-0.5">
+                    {step.subtitle}
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
+
     </div>
   );
 };
