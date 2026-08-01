@@ -303,6 +303,21 @@ export default function KalenderPage() {
               <div className={`lg:col-span-8 flex-col h-full min-h-0 overflow-hidden ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
                 {viewMode === "BULAN" && (
                   <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                    {/* Card Header Heading */}
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3.5 shrink-0">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                          <CalendarIcon className="w-4 h-4" />
+                        </div>
+                        <h3 className="font-bold text-sm text-slate-900 font-display">
+                          Papan Kalender Akademik TA
+                        </h3>
+                      </div>
+                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+                        Agustus 2026
+                      </span>
+                    </div>
+
                     {/* Days Header */}
                     <div className="grid grid-cols-7 gap-1 text-center pb-2 border-b border-slate-100 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-400 shrink-0 font-display">
                       <div><span className="sm:hidden">Min</span><span className="hidden sm:inline">Minggu</span></div>
