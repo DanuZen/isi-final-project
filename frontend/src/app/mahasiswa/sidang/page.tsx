@@ -154,11 +154,11 @@ export default function UjianSidangPage() {
                       </h3>
                     </div>
                     {currentExam ? (
-                      <span className="px-3 py-1 text-xs font-bold bg-emerald-600 text-white shadow-xs rounded-full">
+                      <span className="hidden sm:inline-block px-3 py-1 text-xs font-bold bg-emerald-600 text-white shadow-xs rounded-full font-display">
                         Terjadwal Resmi
                       </span>
                     ) : (
-                      <span className="px-3 py-1 text-xs font-extrabold bg-amber-500 text-white shadow-xs rounded-full">
+                      <span className="hidden sm:inline-block px-3 py-1 text-xs font-extrabold bg-amber-500 text-white shadow-xs rounded-full font-display">
                         Belum Ada Jadwal
                       </span>
                     )}
