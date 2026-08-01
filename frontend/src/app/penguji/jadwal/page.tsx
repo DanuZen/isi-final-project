@@ -117,22 +117,20 @@ export default function PengujiJadwalPage() {
                     Daftar mahasiswa yang ditugaskan kepada Anda untuk diuji pada Seminar Proposal &amp; Ujian Sidang Skripsi.
                   </p>
                 </div>
-                {/* Combined Compact Stat Pill */}
-                <div className="flex items-center gap-3.5 px-4 py-2 rounded-xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
-                  {/* Stat 1: Perlu Dinilai */}
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#ffd01d] shrink-0 stroke-[2.2]" />
-                    <span className="text-base font-black text-[#ffd01d] leading-none">{perluDinilaiCount}</span>
-                    <span className="text-[10px] font-extrabold text-neutral-300 uppercase tracking-wider">Perlu Dinilai</span>
+                {/* Combined Solid Stat Pill Container */}
+                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
+                  {/* Stat 1: Perlu Dinilai (Solid Gold Pill) */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#ffd01d] text-slate-950 font-black shadow-2xs">
+                    <Clock className="w-4 h-4 text-slate-950 shrink-0 stroke-[2.5]" />
+                    <span className="text-sm font-black text-slate-950 leading-none">{perluDinilaiCount}</span>
+                    <span className="text-[10px] font-black text-slate-950 uppercase tracking-wider">Perlu Dinilai</span>
                   </div>
 
-                  <div className="w-px h-4 bg-neutral-700/80" />
-
-                  {/* Stat 2: Selesai */}
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 stroke-[2.2]" />
-                    <span className="text-base font-black text-emerald-400 leading-none">{selesaiCount}</span>
-                    <span className="text-[10px] font-extrabold text-neutral-300 uppercase tracking-wider">Selesai</span>
+                  {/* Stat 2: Selesai (Solid Emerald Pill) */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-black shadow-2xs">
+                    <CheckCircle2 className="w-4 h-4 text-white shrink-0 stroke-[2.5]" />
+                    <span className="text-sm font-black text-white leading-none">{selesaiCount}</span>
+                    <span className="text-[10px] font-black text-white uppercase tracking-wider">Selesai</span>
                   </div>
                 </div>
               </div>
