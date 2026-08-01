@@ -398,103 +398,111 @@ export default function DosenBimbinganPage() {
                               : "bg-white border-slate-200/80 hover:bg-slate-50/60 hover:border-slate-300"
                           }`}
                         >
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            {/* Left Info */}
-                            <div className="flex items-start gap-2.5 min-w-0 flex-1">
-                              <div
-                                className="w-9 h-9 rounded-xl text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs mt-0.5"
-                                style={{ background: tahapCfg.color }}
-                              >
-                                {mhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-                              </div>
+                          <div className="flex items-start gap-3">
+                            {/* Avatar */}
+                            <div
+                              className="w-10 h-10 rounded-2xl text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs mt-0.5 font-display"
+                              style={{ background: tahapCfg.bg }}
+                            >
+                              {mhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                            </div>
 
-                              <div className="space-y-0.5 min-w-0 flex-1">
-                                <div className="flex items-center gap-1.5 flex-wrap">
-                                  <span className="font-black text-xs text-slate-900 font-display">{mhs.nama}</span>
-                                  <span className="text-[10px] font-mono text-slate-400">({mhs.nim})</span>
+                            {/* Content Container */}
+                            <div className="space-y-1.5 min-w-0 flex-1">
+                              {/* Top Header Row: Name + NIM on Left, Badges on Right */}
+                              <div className="flex items-center justify-between gap-2 flex-wrap">
+                                <div className="flex items-center gap-1.5 min-w-0">
+                                  <span className="font-black text-xs text-slate-900 font-display truncate">{mhs.nama}</span>
+                                  <span className="text-[10px] font-mono text-slate-400 shrink-0">({mhs.nim})</span>
+                                </div>
+
+                                {/* Badges grouped together */}
+                                <div className="flex items-center gap-1.5 shrink-0">
                                   <span
-                                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold"
+                                    className="px-2 py-0.5 rounded-full text-[9px] font-extrabold shadow-2xs font-display"
+                                    style={{ background: tahapCfg.bg, color: tahapCfg.color }}
+                                  >
+                                    {mhs.tahap}
+                                  </span>
+                                  <span
+                                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-extrabold shadow-2xs"
                                     style={{ background: statusCfg.bg, color: statusCfg.color }}
                                   >
                                     <StatusIcon className="w-2.5 h-2.5" /> {mhs.status}
                                   </span>
                                 </div>
-                                <p className="text-[11px] text-slate-600 font-medium truncate">
-                                  &ldquo;{mhs.judul}&rdquo;
-                                </p>
                               </div>
-                            </div>
 
-                            {/* Right Progress & Buttons */}
-                            <div className="flex items-center gap-3 shrink-0 justify-between sm:justify-end">
-                              <div className="w-28 space-y-1">
-                                <div className="flex items-center justify-between text-[9px]">
-                                  <span
-                                    className="px-2 py-0.5 rounded-full font-extrabold shadow-2xs font-display"
-                                    style={{ background: tahapCfg.bg, color: tahapCfg.color }}
-                                  >
-                                    {mhs.tahap}
+                              {/* Skripsi Title */}
+                              <p className="text-[11px] text-slate-600 font-medium leading-snug line-clamp-1">
+                                &ldquo;{mhs.judul}&rdquo;
+                              </p>
+
+                              {/* Progress Bar & Desktop Action Buttons Row */}
+                              <div className="pt-1 flex items-center justify-between gap-3">
+                                <div className="flex-1 flex items-center gap-2.5 min-w-0">
+                                  <div className="flex-1 h-1.5 rounded-full bg-slate-200/80 overflow-hidden">
+                                    <div
+                                      className="h-full rounded-full transition-all"
+                                      style={{
+                                        width: `${sesiPct}%`,
+                                        background: sesiPct >= 100 ? "#ffd01d" : "#C62828",
+                                      }}
+                                    />
+                                  </div>
+                                  <span className="text-[10px] font-bold text-slate-500 font-mono shrink-0">
+                                    Sesi: <strong className="text-slate-900 font-black">{mhs.sesi}/{mhs.minSesi}</strong>
                                   </span>
-                                  <span className="font-bold text-slate-500">{mhs.sesi}/{mhs.minSesi}</span>
                                 </div>
-                                <div className="h-1.5 rounded-full bg-slate-200/80 overflow-hidden">
-                                  <div
-                                    className="h-1.5 rounded-full transition-all"
-                                    style={{
-                                      width: `${sesiPct}%`,
-                                      background: sesiPct >= 100 ? "#ffd01d" : "#C62828",
-                                    }}
-                                  />
-                                </div>
-                              </div>
 
-                              {/* Desktop Quick Action Buttons */}
-                              <div className="hidden lg:flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
-                                <button
-                                  onClick={() => {
-                                    setSelectedNim(mhs.nim);
-                                    setShowPdfModal(true);
-                                  }}
-                                  className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
-                                  title="Pratinjau Draf PDF Skripsi"
-                                >
-                                  <Eye className="w-3.5 h-3.5" />
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    setSelectedNim(mhs.nim);
-                                    setShowChatModal(true);
-                                  }}
-                                  className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
-                                  title="Catat Log / Chat"
-                                >
-                                  <MessageSquare className="w-3.5 h-3.5" />
-                                </button>
-                                {mhs.tahap !== "Selesai" && (
+                                {/* Desktop Quick Action Buttons */}
+                                <div className="hidden lg:flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
                                   <button
-                                    onClick={() => handleToggleAcc(mhs.nim, mhs.nama)}
-                                    className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-extrabold transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-xs font-display ${
-                                      isAccGranted
-                                        ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950"
-                                        : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
-                                    }`}
+                                    onClick={() => {
+                                      setSelectedNim(mhs.nim);
+                                      setShowPdfModal(true);
+                                    }}
+                                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
+                                    title="Pratinjau Draf PDF Skripsi"
                                   >
-                                    {isAccGranted ? (
-                                      <>
-                                        <Check className="w-3 h-3" /> ACC Done
-                                      </>
-                                    ) : (
-                                      <>
-                                        <FileText className="w-3 h-3" /> ACC
-                                      </>
-                                    )}
+                                    <Eye className="w-3.5 h-3.5" />
                                   </button>
-                                )}
-                              </div>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedNim(mhs.nim);
+                                      setShowChatModal(true);
+                                    }}
+                                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
+                                    title="Catat Log / Chat"
+                                  >
+                                    <MessageSquare className="w-3.5 h-3.5" />
+                                  </button>
+                                  {mhs.tahap !== "Selesai" && (
+                                    <button
+                                      onClick={() => handleToggleAcc(mhs.nim, mhs.nama)}
+                                      className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-extrabold transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-xs font-display ${
+                                        isAccGranted
+                                          ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950"
+                                          : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
+                                      }`}
+                                    >
+                                      {isAccGranted ? (
+                                        <>
+                                          <Check className="w-3 h-3" /> ACC Done
+                                        </>
+                                      ) : (
+                                        <>
+                                          <FileText className="w-3 h-3" /> ACC
+                                        </>
+                                      )}
+                                    </button>
+                                  )}
+                                </div>
 
-                              {/* Mobile Navigation Indicator Arrow */}
-                              <div className="lg:hidden flex items-center shrink-0 text-slate-400 pl-1">
-                                <ArrowRight className="w-4 h-4 text-slate-400" />
+                                {/* Mobile Navigation Indicator Arrow */}
+                                <div className="lg:hidden flex items-center shrink-0 text-slate-400 pl-1">
+                                  <ArrowRight className="w-4 h-4 text-slate-400" />
+                                </div>
                               </div>
                             </div>
                           </div>
