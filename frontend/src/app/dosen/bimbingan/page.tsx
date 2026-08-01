@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   BookOpen, CheckCircle2, Clock, AlertCircle, MessageSquare,
   FileText, Search, Filter, Eye, ArrowRight, X, Send, Award,
-  Sparkles, Check, ChevronDown
+  Sparkles, Check, ChevronDown, Download
 } from "lucide-react";
 
 type TahapKey = "Usulan" | "Bimbingan" | "Seminar" | "Sidang" | "Selesai";
@@ -201,6 +201,28 @@ export default function DosenBimbinganPage() {
     setChatInput("");
     showToast("Pesan catatan bimbingan berhasil terkirim!");
   };
+
+  // Lock shell & body background scrolling when modal is active
+  useEffect(() => {
+    if (showPdfModal || showChatModal) {
+      const containers = document.querySelectorAll(".shell-body, .viewport-shell, main");
+      containers.forEach((el) => {
+        (el as HTMLElement).style.overflow = "hidden";
+        (el as HTMLElement).style.touchAction = "none";
+      });
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+
+      return () => {
+        containers.forEach((el) => {
+          (el as HTMLElement).style.overflow = "";
+          (el as HTMLElement).style.touchAction = "";
+        });
+        document.body.style.overflow = "";
+        document.body.style.touchAction = "";
+      };
+    }
+  }, [showPdfModal, showChatModal]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -708,33 +730,39 @@ export default function DosenBimbinganPage() {
             )}
             {/* ── PDF Draft Preview Modal ── */}
             {showPdfModal && (
-              <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col h-[80vh] animate-in fade-in zoom-in-95">
+              <div
+                className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 touch-none"
+                onClick={() => setShowPdfModal(false)}
+              >
+                <div
+                  className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col h-[85vh] max-h-[700px] animate-in fade-in zoom-in-95"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {/* Modal Header */}
-                  <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                  <div className="p-3.5 sm:p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <FileText className="w-4 h-4 text-white" />
                       </div>
-                      <div>
-                        <h3 className="font-bold text-sm font-display text-white">Pratinjau Draf Naskah Skripsi</h3>
-                        <p className="text-[10px] text-neutral-400 font-mono">Draf_Skripsi_{selectedMhs.nim}.pdf · {selectedMhs.nama}</p>
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-xs sm:text-sm font-display text-white truncate">Pratinjau Draf Naskah Skripsi</h3>
+                        <p className="text-[10px] text-neutral-400 font-mono truncate">Draf_Skripsi_{selectedMhs.nim}.pdf · {selectedMhs.nama}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => setShowPdfModal(false)}
-                      className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer shrink-0"
                     >
                       <X className="w-4 h-4" />
                     </button>
                   </div>
 
                   {/* Document Toolbar */}
-                  <div className="px-4 py-2 bg-slate-100 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
-                    <div className="flex items-center gap-2 text-slate-600 font-medium">
+                  <div className="px-3 sm:px-4 py-2 bg-slate-100 border-b border-slate-200 flex items-center justify-between text-xs shrink-0 flex-wrap gap-2">
+                    <div className="flex items-center gap-2 text-slate-600 font-medium text-[11px] sm:text-xs">
                       <span>Halaman 1 / 48</span>
                       <span className="text-slate-300">|</span>
-                      <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                      <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 font-bold text-[10px] font-display">
                         Status Draf: {selectedMhs.tahap}
                       </span>
                     </div>
@@ -743,33 +771,33 @@ export default function DosenBimbinganPage() {
                         showToast(`Mengunduh Draf_Skripsi_${selectedMhs.nim}.pdf ...`);
                         setShowPdfModal(false);
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1 shadow-xs transition-all cursor-pointer"
+                      className="px-3 py-1.5 rounded-xl bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95 ml-auto sm:ml-0"
                     >
-                      <FileText className="w-3.5 h-3.5" /> Unduh PDF
+                      <Download className="w-3.5 h-3.5" /> Unduh PDF
                     </button>
                   </div>
 
                   {/* PDF Document Body Mockup */}
-                  <div className="flex-1 overflow-y-auto p-6 bg-slate-200/80 flex justify-center">
-                    <div className="bg-white rounded-lg shadow-md border border-slate-300 p-8 w-full max-w-lg space-y-6 text-slate-800 font-serif">
+                  <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-200/80 flex justify-center scrollbar-thin">
+                    <div className="bg-white rounded-xl shadow-lg border border-slate-300/90 p-5 sm:p-8 w-full max-w-lg space-y-4 sm:space-y-6 text-slate-800 font-serif my-auto">
                       <div className="text-center space-y-2 pb-4 border-b border-slate-200">
-                        <p className="text-xs uppercase font-bold tracking-widest text-slate-500 font-sans">
+                        <p className="text-[10px] sm:text-xs uppercase font-bold tracking-widest text-slate-500 font-sans">
                           UNIVERSITAS PUTRA INDONESIA YPTK PADANG
                         </p>
-                        <h2 className="text-sm font-bold uppercase leading-snug font-sans">
+                        <h2 className="text-xs sm:text-sm font-bold uppercase leading-relaxed font-sans text-slate-900">
                           {selectedMhs.judul}
                         </h2>
-                        <p className="text-[11px] font-sans text-slate-600 pt-2">
-                          Oleh: <strong>{selectedMhs.nama}</strong> ({selectedMhs.nim})
+                        <p className="text-[11px] font-sans text-slate-600 pt-1">
+                          Oleh: <strong className="text-slate-900">{selectedMhs.nama}</strong> ({selectedMhs.nim})
                         </p>
                       </div>
 
-                      <div className="space-y-3 text-xs leading-relaxed text-justify">
-                        <p className="font-bold font-sans text-slate-900">ABSTRAK</p>
-                        <p>
+                      <div className="space-y-2.5 text-[11px] sm:text-xs leading-relaxed text-justify">
+                        <p className="font-bold font-sans text-slate-900 text-xs">ABSTRAK</p>
+                        <p className="text-slate-700">
                           Penelitian ini bertujuan untuk merancang dan mengimplementasikan sistem informasi yang efisien berbasis web di lingkungan Fakultas Ilmu Komputer UPI YPTK Padang. Metodologi yang digunakan meliputi analisis kebutuhan, perancangan database ERD, implementasi arsitektur modular, dan pengujian blackbox.
                         </p>
-                        <p>
+                        <p className="text-slate-700">
                           Hasil pengujian menunjukkan bahwa sistem mampu meningkatkan efisiensi proses pemantauan tugas akhir hingga 85% dibandingkan proses manual sebelumnya.
                         </p>
                       </div>
