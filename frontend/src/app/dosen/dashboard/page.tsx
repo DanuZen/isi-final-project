@@ -126,6 +126,7 @@ export default function DosenDashboardPage() {
             userName={DOSEN.nama}
             userRole="Dosen Pembimbing"
             className="shell-header shrink-0"
+            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
           <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
