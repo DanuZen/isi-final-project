@@ -120,7 +120,63 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 
 ---
 
-## 📱 Roadmap Audit Responsif & Interaktivitas Mobile < 768px (SELESAI ✅)
+## 📱 Audit Mobile Layout Per-Halaman — Sesi Aktif 🔄
+
+Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone.
+
+### 🎓 Portal Mahasiswa (11 Halaman)
+- [x] `/mahasiswa/dashboard` — ✅ Sesuai (tombol banner disembunyikan di mobile, judul stepper diubah ke "Judul Tugas Akhir")
+- [x] `/mahasiswa/proposal` — ✅ Sesuai
+- [ ] `/mahasiswa/pembimbing` — 🔄 Belum dicek
+- [ ] `/mahasiswa/bimbingan` — 🔄 Belum dicek
+- [ ] `/mahasiswa/seminar` — 🔄 Belum dicek
+- [ ] `/mahasiswa/sidang` — 🔄 Belum dicek
+- [ ] `/mahasiswa/list-judul` — 🔄 Belum dicek
+- [ ] `/mahasiswa/kalender` — 🔄 Belum dicek
+- [ ] `/mahasiswa/profil` — 🔄 Belum dicek
+- [ ] `/mahasiswa/akun` — 🔄 Belum dicek
+
+### 👨‍🏫 Portal Dosen Pembimbing (4 Halaman)
+- [ ] `/dosen/dashboard` — 🔄 Belum dicek
+- [ ] `/dosen/bimbingan` — 🔄 Belum dicek
+- [ ] `/dosen/pengajuan` — 🔄 Belum dicek
+- [ ] `/dosen/kalender` — 🔄 Belum dicek
+
+### 📋 Portal Dosen Penguji (4 Halaman)
+- [ ] `/penguji/dashboard` — 🔄 Belum dicek
+- [ ] `/penguji/jadwal` — 🔄 Belum dicek
+- [ ] `/penguji/nilai` — 🔄 Belum dicek
+- [ ] `/penguji/revisi` — 🔄 Belum dicek
+
+### 🏛️ Portal Admin Prodi (5 Halaman)
+- [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek
+- [ ] `/admin-prodi/mahasiswa` — 🔄 Belum dicek
+- [ ] `/admin-prodi/aktivasi` — 🔄 Belum dicek
+- [ ] `/admin-prodi/jadwal` — 🔄 Belum dicek
+- [ ] `/admin-prodi/repositori` — 🔄 Belum dicek
+
+### 📑 Portal Admin Fakultas (4 Halaman)
+- [ ] `/admin-fakultas/dashboard` — 🔄 Belum dicek
+- [ ] `/admin-fakultas/sk` — 🔄 Belum dicek
+- [ ] `/admin-fakultas/bebas` — 🔄 Belum dicek
+- [ ] `/admin-fakultas/arsip` — 🔄 Belum dicek
+
+### 📊 Portal Dekanat (4 Halaman)
+- [ ] `/dekanat/dashboard` — 🔄 Belum dicek
+- [ ] `/dekanat/statistik` — 🔄 Belum dicek
+- [ ] `/dekanat/kalender` — 🔄 Belum dicek
+- [ ] `/dekanat/laporan` — 🔄 Belum dicek
+
+### ⚡ Portal Super Admin (5 Halaman)
+- [ ] `/super-admin/dashboard` — 🔄 Belum dicek
+- [ ] `/super-admin/users` — 🔄 Belum dicek
+- [ ] `/super-admin/audit` — 🔄 Belum dicek
+- [ ] `/super-admin/config` — 🔄 Belum dicek
+- [ ] `/super-admin/master` — 🔄 Belum dicek
+
+---
+
+## 📱 Penyempurnaan Responsif & Interaktivitas Mobile < 768px (SELESAI ✅)
 
 - [x] **1. Perbaikan Navigasi Sidebar Mobile & Trigger Button**
   - [x] Memastikan tombol hamburger `≡ SIPETA` (44x44px touch target) pada header seluruh rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.

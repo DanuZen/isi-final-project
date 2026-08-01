@@ -22,7 +22,7 @@ const DEFAULT_STEPS: StepItem[] = [
   {
     id: 1,
     key: "proposal",
-    title: "Usulan Judul",
+    title: "Judul Tugas Akhir",
     subtitle: "Review & Similarity",
     status: "aktif",
   },

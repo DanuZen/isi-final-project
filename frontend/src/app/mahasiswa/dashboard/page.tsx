@@ -26,7 +26,7 @@ const STUDENT = {
   prodi: "Teknik Informatika",
   sks: 144,
   ipk: 3.65,
-  tahapAktif: "Usulan Judul",
+  tahapAktif: "Judul Tugas Akhir",
   tahapIndex: 1,
 };
 
@@ -133,13 +133,13 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                {/* Right: quick actions */}
-                <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 shrink-0 w-full sm:w-auto">
+                {/* Right: quick actions (hidden on mobile, visible on desktop) */}
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   {QUICK_ACTIONS.map((a) => (
                     <Link
                       key={a.label}
                       href={a.href}
-                      className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer w-full sm:w-auto ${a.btnClass}`}
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${a.btnClass}`}
                     >
                       {a.icon}
                       <span>{a.label}</span>
@@ -234,8 +234,8 @@ export default function DashboardPage() {
                         href="/mahasiswa/proposal"
                         className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
                       >
-                        <BookOpen className="w-4 h-4" />
-                        <span>Ajukan Usulan Judul Sekarang</span>
+                        <FileText className="w-4 h-4" />
+                        <span>Ajukan Judul Tugas Akhir</span>
                       </Link>
                     </div>
                   )}
