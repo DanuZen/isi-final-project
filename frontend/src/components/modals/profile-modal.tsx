@@ -484,8 +484,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
 
           {/* TAB 3: UBAH SANDI */}
           {activeTab === "SANDI" && (
-            <div className="h-full flex flex-col justify-between animate-in fade-in duration-150">
-              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col h-full justify-between">
+            <div className="h-full flex flex-col animate-in fade-in duration-150">
+              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col h-full min-h-0">
                 <div className="px-4 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
@@ -505,51 +505,53 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                   </span>
                 </div>
 
-                <form onSubmit={handleChangePassword} className="space-y-3.5 text-xs max-w-md mx-auto my-auto w-full py-4">
-                  <div className="space-y-1">
-                    <label className="font-bold text-slate-700 uppercase text-[10px]">Kata Sandi Saat Ini</label>
-                    <input
-                      type="password"
-                      value={passForm.currentPass}
-                      onChange={(e) => setPassForm({ ...passForm, currentPass: e.target.value })}
-                      placeholder="••••••••"
-                      className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs"
-                      required
-                    />
-                  </div>
+                <div className="p-4 sm:p-5 overflow-y-auto scrollbar-none flex-1 min-h-0 flex flex-col items-center">
+                  <form onSubmit={handleChangePassword} className="space-y-3 text-xs max-w-sm w-full font-display">
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-700 uppercase text-[10px]">Kata Sandi Saat Ini</label>
+                      <input
+                        type="password"
+                        value={passForm.currentPass}
+                        onChange={(e) => setPassForm({ ...passForm, currentPass: e.target.value })}
+                        placeholder="••••••••"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        required
+                      />
+                    </div>
 
-                  <div className="space-y-1">
-                    <label className="font-bold text-slate-700 uppercase text-[10px]">Kata Sandi Baru</label>
-                    <input
-                      type="password"
-                      value={passForm.newPass}
-                      onChange={(e) => setPassForm({ ...passForm, newPass: e.target.value })}
-                      placeholder="Minimal 8 karakter"
-                      className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs"
-                      required
-                    />
-                  </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-700 uppercase text-[10px]">Kata Sandi Baru</label>
+                      <input
+                        type="password"
+                        value={passForm.newPass}
+                        onChange={(e) => setPassForm({ ...passForm, newPass: e.target.value })}
+                        placeholder="Minimal 8 karakter"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        required
+                      />
+                    </div>
 
-                  <div className="space-y-1">
-                    <label className="font-bold text-slate-700 uppercase text-[10px]">Konfirmasi Kata Sandi Baru</label>
-                    <input
-                      type="password"
-                      value={passForm.confirmPass}
-                      onChange={(e) => setPassForm({ ...passForm, confirmPass: e.target.value })}
-                      placeholder="Ulangi kata sandi baru"
-                      className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs"
-                      required
-                    />
-                  </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-700 uppercase text-[10px]">Konfirmasi Kata Sandi Baru</label>
+                      <input
+                        type="password"
+                        value={passForm.confirmPass}
+                        onChange={(e) => setPassForm({ ...passForm, confirmPass: e.target.value })}
+                        placeholder="Ulangi kata sandi baru"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        required
+                      />
+                    </div>
 
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 bg-[#C62828] hover:bg-[#B71C1C] text-white font-bold rounded-xl shadow-md shadow-[#C62828]/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-3"
-                  >
-                    <ShieldCheck className="w-4 h-4" />
-                    <span>Perbarui Kata Sandi Akun</span>
-                  </button>
-                </form>
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 bg-[#C62828] hover:bg-[#B71C1C] text-white font-extrabold rounded-xl shadow-md shadow-[#C62828]/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 active:scale-95"
+                    >
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Perbarui Kata Sandi Akun</span>
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           )}
