@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
-  Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award
+  Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award, ChevronDown, Check
 } from "lucide-react";
 
 const DEFAULT_JADWAL = [
@@ -78,6 +78,7 @@ const STATUS_CFG: Record<string, { bg: string; icon: React.ElementType }> = {
 export default function PengujiJadwalPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filter, setFilter] = useState("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [jadwalList] = useState(DEFAULT_JADWAL);
 
@@ -139,26 +140,11 @@ export default function PengujiJadwalPage() {
 
             {/* ── Table Card ── */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs flex-1 flex flex-col min-h-0 overflow-hidden">
-              {/* Filter bar */}
-              <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
-                <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
-                  {["Semua", "Seminar", "Sidang", "Menunggu", "Selesai"].map((tab) => (
-                    <button
-                      key={tab}
-                      onClick={() => setFilter(tab)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap font-display ${
-                        filter === tab
-                          ? "bg-[#C62828] text-white shadow-xs"
-                          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="relative w-full sm:w-64">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              {/* Filter & Search Bar (Aligned 1-Row) */}
+              <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0">
+                {/* Search Box */}
+                <div className="relative flex-1 min-w-0">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     type="text"
                     value={search}
@@ -166,6 +152,41 @@ export default function PengujiJadwalPage() {
                     placeholder="Cari mahasiswa / NIM..."
                     className="w-full pl-9 pr-3 py-1.5 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all font-semibold"
                   />
+                </div>
+
+                {/* Dropdown Filter */}
+                <div className="relative shrink-0 font-display">
+                  <button
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                  >
+                    <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>{filter}</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  </button>
+
+                  {isFilterOpen && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                      <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[140px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                        {["Semua", "Seminar", "Sidang", "Menunggu", "Selesai"].map((f) => (
+                          <button
+                            key={f}
+                            onClick={() => {
+                              setFilter(f);
+                              setIsFilterOpen(false);
+                            }}
+                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                              filter === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                            }`}
+                          >
+                            <span>{f}</span>
+                            {filter === f && <Check className="w-3.5 h-3.5 text-white" />}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
