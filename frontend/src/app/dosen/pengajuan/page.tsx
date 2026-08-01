@@ -215,8 +215,8 @@ export default function DosenPengajuanPage() {
                             }}
                             className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                               isSelected
-                                ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
-                                : "bg-slate-50/50 border-slate-200/80 hover:bg-white hover:border-slate-300"
+                                ? "bg-slate-50 border-slate-300 shadow-2xs"
+                                : "bg-white border-slate-200/80 hover:bg-slate-50/60 hover:border-slate-300"
                             }`}
                           >
                             <div className="flex items-center justify-between gap-3">
