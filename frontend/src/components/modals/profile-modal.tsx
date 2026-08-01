@@ -135,20 +135,41 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      syncTimeline();
+    const lockScroll = () => {
       document.body.style.overflow = "hidden";
       document.body.style.touchAction = "none";
       document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.touchAction = "none";
+
+      const scrollContainers = document.querySelectorAll(".shell-body, .viewport-shell, main");
+      scrollContainers.forEach((el) => {
+        (el as HTMLElement).style.overflow = "hidden";
+        (el as HTMLElement).style.touchAction = "none";
+      });
+    };
+
+    const unlockScroll = () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.touchAction = "";
+
+      const scrollContainers = document.querySelectorAll(".shell-body, .viewport-shell, main");
+      scrollContainers.forEach((el) => {
+        (el as HTMLElement).style.overflow = "";
+        (el as HTMLElement).style.touchAction = "";
+      });
+    };
+
+    if (isOpen) {
+      syncTimeline();
+      lockScroll();
     } else {
-      document.body.style.overflow = "";
-      document.body.style.touchAction = "";
-      document.documentElement.style.overflow = "";
+      unlockScroll();
     }
+
     return () => {
-      document.body.style.overflow = "";
-      document.body.style.touchAction = "";
-      document.documentElement.style.overflow = "";
+      unlockScroll();
     };
   }, [isOpen, syncTimeline]);
 
