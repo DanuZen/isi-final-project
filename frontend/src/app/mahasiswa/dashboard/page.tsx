@@ -210,7 +210,7 @@ export default function DashboardPage() {
             {/* ── Main Grid (8/12 & 4/12 on Desktop / Tabbed on Mobile) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0">
 
-              {/* Judul TA Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'judul') */}
+              {/* Judul TA Card (Desktop: Always Visible in 8/12 column, Mobile: Shown when activeMobileTab === 'judul') */}
               <div className={`lg:col-span-8 flex-col gap-4 min-h-0 ${activeMobileTab === "judul" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col flex-1 min-h-0 overflow-hidden">
                   {/* Card header */}
@@ -292,9 +292,10 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Syarat ACC Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'acc') */}
-              <div className={`lg:col-span-4 flex-col gap-4 min-h-0 ${activeMobileTab === "acc" ? "flex" : "hidden lg:flex"}`}>
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden shrink-0">
+              {/* RIGHT COLUMN (Desktop: Always 4/12 Column containing Syarat ACC & Kalender Cards, Mobile: Shows activeMobileTab) */}
+              <div className="lg:col-span-4 flex flex-col gap-4 min-h-0">
+                {/* Syarat ACC Card */}
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden shrink-0 ${activeMobileTab === "acc" ? "flex flex-col" : "hidden lg:flex lg:flex-col"}`}>
                   <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3.5 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <CheckCircle2 className="w-4 h-4" />
@@ -339,11 +340,9 @@ export default function DashboardPage() {
                     </button>
                   </div>
                 </div>
-              </div>
 
-              {/* Kalender TA Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'kalender') */}
-              <div className={`lg:col-span-4 flex-col gap-4 min-h-0 ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex flex-col gap-3 flex-1 min-h-0 overflow-hidden">
+                {/* Kalender TA Card */}
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex-col gap-3 flex-1 min-h-0 overflow-hidden ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
