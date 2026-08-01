@@ -762,7 +762,7 @@ export default function DosenBimbinganPage() {
                     <div className="flex items-center gap-2 text-slate-600 font-medium text-[11px] sm:text-xs">
                       <span>Halaman 1 / 48</span>
                       <span className="text-slate-300">|</span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 font-bold text-[10px] font-display">
+                      <span className="px-3 py-1 rounded-full bg-[#C62828] text-white font-extrabold text-[10.5px] font-display shadow-2xs">
                         Status Draf: {selectedMhs.tahap}
                       </span>
                     </div>
