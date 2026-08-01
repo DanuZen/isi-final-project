@@ -187,9 +187,9 @@ export default function PengujiRevisiPage() {
                 </div>
 
                 {/* Scrollable Revision List */}
-                <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5">
+                <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5 flex flex-col">
                   {filteredList.length === 0 ? (
-                    <div className="p-8 text-center text-slate-400 space-y-2">
+                    <div className="p-8 text-center text-slate-400 space-y-2 my-auto flex-1 flex flex-col items-center justify-center">
                       <FileEdit className="w-8 h-8 mx-auto text-slate-300" />
                       <p className="text-xs font-bold text-slate-700 font-display">Tidak ada berkas revisi ditemukan</p>
                     </div>

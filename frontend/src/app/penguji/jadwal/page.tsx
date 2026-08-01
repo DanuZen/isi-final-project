@@ -118,8 +118,8 @@ export default function PengujiJadwalPage() {
               </div>
 
               {/* Table Body */}
-              <div className="flex-1 overflow-y-auto overflow-x-auto scrollbar-none">
-                <table className="w-full text-left text-xs border-collapse">
+              <div className="flex-1 overflow-y-auto overflow-x-auto scrollbar-none flex flex-col">
+                <table className={`w-full text-left text-xs border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
                   <thead>
                     <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 font-bold uppercase text-[10px] font-display tracking-wider">
                       <th className="px-5 py-3">Tanggal</th>
@@ -132,11 +132,11 @@ export default function PengujiJadwalPage() {
                       <th className="px-5 py-3">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className={`divide-y divide-slate-100 ${filtered.length === 0 ? "h-full" : ""}`}>
                     {filtered.length === 0 ? (
-                      <tr>
-                        <td colSpan={8} className="px-5 py-12 text-center text-slate-400">
-                          <div className="flex flex-col items-center justify-center space-y-2">
+                      <tr className="h-full">
+                        <td colSpan={8} className="px-5 py-12 text-center text-slate-400 align-middle h-full">
+                          <div className="flex flex-col items-center justify-center space-y-2 max-w-sm mx-auto">
                             <Clock className="w-8 h-8 text-slate-300" />
                             <p className="text-xs font-bold text-slate-700 font-display">Belum Ada Jadwal Pengujian</p>
                             <p className="text-[11px] text-slate-400">Jadwal pengujian seminar &amp; sidang skripsi akan muncul setelah ditetapkan oleh Admin Prodi.</p>

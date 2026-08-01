@@ -144,11 +144,10 @@ export default function AdminProdiRepositoriPage() {
 
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
-              
-              {/* Table Container */}
+                     {/* Table Container */}
               <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
+                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col">
+                  <table className={`w-full text-xs min-w-[600px] lg:min-w-0 ${filtered.length === 0 ? "h-full" : ""}`}>
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["Kode / Tahun", "Judul Skripsi Alumni", "Bidang Kajian", "Penulis (Alumni)", "Dosen Pembimbing"].map((h) => (
@@ -156,7 +155,7 @@ export default function AdminProdiRepositoriPage() {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className={`divide-y divide-slate-100 ${filtered.length === 0 ? "h-full" : ""}`}>
                       {filtered.length > 0 ? (
                         filtered.map((repo) => {
                           const isSelected = selected?.id === repo.id;
@@ -191,8 +190,8 @@ export default function AdminProdiRepositoriPage() {
                           );
                         })
                       ) : (
-                        <tr>
-                          <td colSpan={5} className="py-28 text-center text-slate-500">
+                        <tr className="h-full">
+                          <td colSpan={5} className="py-12 px-4 text-center align-middle h-full text-slate-500">
                             <div className="flex flex-col items-center justify-center space-y-3 max-w-sm mx-auto">
                               <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
                                 <BookOpen className="w-7 h-7" />
