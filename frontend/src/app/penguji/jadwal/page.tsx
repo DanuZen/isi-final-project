@@ -118,7 +118,7 @@ export default function PengujiJadwalPage() {
                   </p>
                 </div>
                 {/* Combined Solid Stat Pill Container */}
-                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
+                <div className="hidden md:flex items-center gap-1.5 p-1 rounded-2xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
                   {/* Stat 1: Perlu Dinilai (Solid Gold Pill) */}
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#ffd01d] text-slate-950 font-black shadow-2xs">
                     <Clock className="w-4 h-4 text-slate-950 shrink-0 stroke-[2.5]" />
