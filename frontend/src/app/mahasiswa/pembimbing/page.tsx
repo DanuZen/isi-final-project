@@ -287,7 +287,7 @@ export default function PengajuanPembimbingPage() {
 
                   {/* Scrollable Dosen List Table */}
                   <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
-                    <table className="w-full text-left text-xs">
+                    <table className="w-full text-left text-xs min-w-[600px] lg:min-w-0">
                       <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
                         <tr>
                           <th className="py-3 px-3.5 w-10 text-center">No</th>

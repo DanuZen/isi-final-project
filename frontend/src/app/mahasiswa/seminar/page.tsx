@@ -45,7 +45,7 @@ export default function SeminarPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
             {/* Welcome Banner */}

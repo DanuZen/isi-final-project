@@ -134,12 +134,12 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Right: quick actions */}
-                <div className="flex flex-wrap gap-2.5 shrink-0">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 shrink-0 w-full sm:w-auto">
                   {QUICK_ACTIONS.map((a) => (
                     <Link
                       key={a.label}
                       href={a.href}
-                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${a.btnClass}`}
+                      className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer w-full sm:w-auto ${a.btnClass}`}
                     >
                       {a.icon}
                       <span>{a.label}</span>

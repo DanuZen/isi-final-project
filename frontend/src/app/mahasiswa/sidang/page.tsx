@@ -56,7 +56,7 @@ export default function UjianSidangPage() {
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" />
+          <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
           <main className="flex-1 p-5 md:p-6 space-y-5 overflow-hidden shell-body flex flex-col min-h-0">
             {/* ── Welcome Banner ── */}

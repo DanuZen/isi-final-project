@@ -102,17 +102,17 @@ export default function BimbinganPage() {
                 </div>
 
                 {/* Right: quick action buttons */}
-                <div className="flex flex-wrap gap-2.5 shrink-0">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 shrink-0 w-full sm:w-auto">
                   <button
                     onClick={() => setShowLogModal(true)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
                   >
                     <PlusCircle className="w-4 h-4" />
                     <span>Catat Sesi Bimbingan</span>
                   </button>
                   <button
                     onClick={() => setShowPerubahanJudulModal(true)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-md shadow-amber-950/20 transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-md shadow-amber-950/20 transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
                   >
                     <FileEdit className="w-4 h-4 text-slate-950" />
                     <span>Ajukan Perubahan Judul</span>
