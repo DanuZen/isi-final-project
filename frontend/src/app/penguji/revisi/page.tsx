@@ -100,7 +100,7 @@ export default function PengujiRevisiPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ahmad Fauzi, M.T." userNim="NIDN: 1012345678" userRole="Dosen Penguji" prodiName="Teknik Informatika" />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
 
             {/* Toast Notification */}
             {toastMessage && (

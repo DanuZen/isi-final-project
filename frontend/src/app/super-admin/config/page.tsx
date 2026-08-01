@@ -56,7 +56,7 @@ export default function SuperAdminConfigPage() {
         <div className="flex-1 flex flex-col min-w-0 min-h-screen">
           <Header className="shell-header shrink-0" userName="Irvan Syahputra, S.T." userNim="SA-001" userRole="Super Admin" prodiName="Sistem Utama SIPETA" />
 
-          <main className="flex-1 p-5 md:p-6 space-y-5 shell-body pb-16">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-5 shell-body pb-16">
 
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm">

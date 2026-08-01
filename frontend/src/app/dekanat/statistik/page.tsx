@@ -55,7 +55,7 @@ export default function DekanatStatistikPage() {
           <Header className="shell-header shrink-0" userName="Prof. Dr. H. Zulherman, M.T." userNim="NIP: 196508201990031001" userRole="Dekan FIK" prodiName="Fakultas Ilmu Komputer" />
 
           {/* Natural Scrolling Main Container */}
-          <main className="flex-1 p-5 md:p-6 space-y-5 shell-body pb-16">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-5 shell-body pb-16">
 
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm">

@@ -153,7 +153,7 @@ export default function AdminProdiDosenPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ratna Dewi, M.Kom." userRole="Admin Prodi" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">

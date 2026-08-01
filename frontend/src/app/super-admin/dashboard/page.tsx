@@ -107,7 +107,7 @@ export default function SuperAdminDashboard() {
             prodiName="Sistem Utama SIPETA"
           />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
             
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">

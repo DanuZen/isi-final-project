@@ -128,7 +128,7 @@ export default function DosenDashboardPage() {
             className="shell-header shrink-0"
           />
 
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 p-5 md:p-6 text-white shadow-xs shrink-0 relative overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
