@@ -173,27 +173,44 @@ export default function KalenderPage() {
             </div>
 
             {/* Controls Bar & Filter Legend */}
-            <div className="bg-white rounded-xl border border-slate-200 p-2.5 sm:p-3 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-2.5 shrink-0">
+            <div className="bg-white rounded-xl border border-slate-200 p-2 sm:p-3 shadow-xs flex flex-row items-center justify-between gap-2 shrink-0">
               {/* Month Nav Controls */}
-              <div className="flex items-center justify-center md:justify-start">
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+              <div className="flex items-center shrink-0">
+                <div className="flex items-center gap-0.5 sm:gap-1 bg-slate-100 p-1 rounded-xl">
                   <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all cursor-pointer">
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-3.5 h-3.5" />
                   </button>
-                  <span className="px-3 text-xs font-black font-display text-slate-900">
+                  <span className="px-1.5 sm:px-3 text-[11px] sm:text-xs font-black font-display text-slate-900 whitespace-nowrap">
                     {currentMonthName}
                   </span>
                   <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all cursor-pointer">
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
 
-              {/* Kategori Filters Badges (Horizontal Swipe Row on Mobile) */}
-              <div className="flex items-center gap-1.5 text-xs font-bold overflow-x-auto scrollbar-none whitespace-nowrap pb-0.5 md:pb-0">
+              {/* ── Mobile Category Filter Dropdown (<768px) ── */}
+              <div className="block md:hidden flex-1 min-w-0 z-20">
+                <CustomDropdown
+                  value={activeCategory}
+                  onChange={(val) => setActiveCategory(val)}
+                  options={[
+                    { id: "ALL", label: `Semua Kategori (${eventsList.length})`, badge: "ALL" },
+                    { id: "BIMBINGAN", label: `Bimbingan (${eventsList.filter((e) => e.kategori === "BIMBINGAN").length})` },
+                    { id: "SEMPRO", label: `Seminar Proposal (${eventsList.filter((e) => e.kategori === "SEMPRO").length})` },
+                    { id: "SIDANG", label: `Ujian Sidang Skripsi (${eventsList.filter((e) => e.kategori === "SIDANG").length})` },
+                    { id: "DEADLINE", label: "Deadline Akademik (1)" },
+                  ]}
+                  placeholder="Pilih Kategori..."
+                  className="w-full"
+                />
+              </div>
+
+              {/* ── Desktop Category Filters Badges (>=768px) ── */}
+              <div className="hidden md:flex items-center gap-1.5 text-xs font-bold">
                 <button
                   onClick={() => setActiveCategory("ALL")}
-                  className={`px-3 py-1 rounded-full border transition-all shrink-0 font-display ${
+                  className={`px-3 py-1 rounded-full border transition-all font-display ${
                     activeCategory === "ALL"
                       ? "bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -204,7 +221,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("BIMBINGAN")}
-                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all font-display ${
                     activeCategory === "BIMBINGAN"
                       ? "bg-[#D97706] text-white border-[#D97706] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -216,7 +233,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("SEMPRO")}
-                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all font-display ${
                     activeCategory === "SEMPRO"
                       ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -228,7 +245,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("SIDANG")}
-                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all font-display ${
                     activeCategory === "SIDANG"
                       ? "bg-[#15803D] text-white border-[#15803D] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -240,7 +257,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("DEADLINE")}
-                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all font-display ${
                     activeCategory === "DEADLINE"
                       ? "bg-[#C62828] text-white border-[#C62828] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
