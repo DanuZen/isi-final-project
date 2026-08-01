@@ -259,41 +259,41 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
         </div>
 
         {/* Modal Inner Navigation Tabs */}
-        <div className="bg-slate-100 border-b border-slate-200 px-4 py-2 flex items-center gap-2 shrink-0 overflow-x-auto scrollbar-none">
+        <div className="bg-slate-100 border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center gap-1.5 sm:gap-2 shrink-0 overflow-x-auto scrollbar-none whitespace-nowrap">
           <button
             onClick={() => setActiveTab("AKADEMIK")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "AKADEMIK"
                 ? "bg-[#C62828] text-white shadow-xs"
-                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>Data Akademik &amp; Profil</span>
+            <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+            <span><span className="sm:hidden">Profil</span><span className="hidden sm:inline">Data Akademik &amp; Profil</span></span>
           </button>
 
           <button
             onClick={() => setActiveTab("TIMELINE")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "TIMELINE"
                 ? "bg-[#C62828] text-white shadow-xs"
-                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
-            <span>Timeline Skripsi ({completedStepsCount}/5)</span>
+            <Layers className="w-3.5 h-3.5 shrink-0" />
+            <span><span className="sm:hidden">Timeline ({completedStepsCount}/5)</span><span className="hidden sm:inline">Timeline Skripsi ({completedStepsCount}/5)</span></span>
           </button>
 
           <button
             onClick={() => setActiveTab("SANDI")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "SANDI"
                 ? "bg-[#C62828] text-white shadow-xs"
-                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
-            <Lock className="w-3.5 h-3.5" />
-            <span>Ubah Kata Sandi</span>
+            <Lock className="w-3.5 h-3.5 shrink-0" />
+            <span><span className="sm:hidden">Kata Sandi</span><span className="hidden sm:inline">Ubah Kata Sandi</span></span>
           </button>
         </div>
 
