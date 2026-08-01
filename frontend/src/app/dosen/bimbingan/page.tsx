@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   BookOpen, CheckCircle2, Clock, AlertCircle, MessageSquare,
   FileText, Search, Filter, Eye, ArrowRight, X, Send, Award,
-  Sparkles, Check
+  Sparkles, Check, ChevronDown
 } from "lucide-react";
 
 type TahapKey = "Usulan" | "Bimbingan" | "Seminar" | "Sidang" | "Selesai";
@@ -305,29 +305,32 @@ export default function DosenBimbinganPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 flex-wrap ml-auto">
-                    <div className="relative">
+                  <div className="flex items-center gap-2 w-full sm:w-auto ml-auto">
+                    {/* Search Input Box */}
+                    <div className="relative flex-1 sm:w-44">
                       <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         type="text"
-                        placeholder="Cari nama atau NIM..."
+                        placeholder="Cari nama / NIM..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-36 sm:w-44 font-medium"
+                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all font-medium"
                       />
                     </div>
-                    <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
-                      <Filter className="w-3 h-3 text-slate-400 ml-1" />
-                      {["Semua", "Bimbingan", "Seminar", "Sidang"].map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => setFilterTahap(t)}
-                          className="px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer"
-                          style={filterTahap === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                        >
-                          {t}
-                        </button>
-                      ))}
+
+                    {/* Filter Dropdown */}
+                    <div className="relative shrink-0">
+                      <select
+                        value={filterTahap}
+                        onChange={(e) => setFilterTahap(e.target.value)}
+                        className="pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 font-bold text-slate-700 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="Semua">Semua Tahap</option>
+                        <option value="Bimbingan">Bimbingan</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Sidang">Sidang</option>
+                      </select>
+                      <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
                   </div>
                 </div>
