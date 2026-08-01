@@ -202,18 +202,18 @@ export default function PengajuanPembimbingPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Pembimbing Disetujui Prodi
                     </span>
                   </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Pengajuan &amp; Usulan Dosen Pembimbing TA
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
@@ -225,7 +225,7 @@ export default function PengajuanPembimbingPage() {
                 <div className="flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => setShowFormModal(true)}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <UserCheck className="w-4 h-4" />
                     <span>Form Usulan Pembimbing</span>
@@ -237,7 +237,7 @@ export default function PengajuanPembimbingPage() {
             </div>
 
             {/* Main 12-Column Grid (Flush Bottom Baseline Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left Column (8/12): Dosen Directory Table List */}
               <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
                 <div className="bg-white rounded-xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
