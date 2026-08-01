@@ -178,8 +178,8 @@ export default function ListJudulPage() {
                     </div>
 
                     {/* ── Table Container Always Present ── */}
-                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none relative">
-                      <table className="w-full text-left text-xs min-w-[650px]">
+                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none relative flex flex-col">
+                      <table className={`w-full text-left text-xs min-w-[650px] ${filteredData.length === 0 ? "h-full" : ""}`}>
                         <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
                           <tr>
                             <th className="py-3 px-3.5 w-12 text-center whitespace-nowrap">No</th>
@@ -189,7 +189,7 @@ export default function ListJudulPage() {
                             <th className="py-3 px-3.5 w-44 whitespace-nowrap">Dosen Pembimbing</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 text-slate-800">
+                        <tbody className={`divide-y divide-slate-100 text-slate-800 ${filteredData.length === 0 ? "h-full" : ""}`}>
                           {filteredData.length > 0 ? (
                             filteredData.map((item) => (
                               <tr key={item.no} className="hover:bg-slate-50/80 transition-colors">
@@ -224,9 +224,9 @@ export default function ListJudulPage() {
                               </tr>
                             ))
                           ) : (
-                            <tr>
-                              <td colSpan={5} className="py-24 text-center">
-                                <div className="sticky left-0 right-0 w-[calc(100vw-3.5rem)] md:w-full max-w-sm mx-auto flex flex-col items-center justify-center text-center space-y-3 font-display">
+                            <tr className="h-full">
+                              <td colSpan={5} className="py-12 px-4 text-center align-middle h-full">
+                                <div className="max-w-sm mx-auto flex flex-col items-center justify-center text-center space-y-3 font-display">
                                   <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
                                     <BookOpen className="w-7 h-7" />
                                   </div>
