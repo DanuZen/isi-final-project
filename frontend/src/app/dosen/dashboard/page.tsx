@@ -137,10 +137,10 @@ export default function DosenDashboardPage() {
                 <div className="space-y-1.5 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
-                      <ShieldCheck className="w-3.5 h-3.5 text-white" /> NIDN: {DOSEN.nidn}
+                      <UserCheck className="w-3.5 h-3.5 text-white" /> Portal Dosen
                     </span>
                     <span className="hidden sm:inline-block text-xs text-neutral-400 font-medium">
-                      {DOSEN.prodi}
+                      NIDN: {DOSEN.nidn} · {DOSEN.prodi}
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display tracking-wide text-white leading-tight">
