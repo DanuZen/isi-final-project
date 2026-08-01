@@ -289,9 +289,9 @@ export default function DosenDashboardPage() {
                           {m.perluAcc && !m.statusAcc && (
                             <button
                               onClick={() => handleGrantAcc(m.id)}
-                              className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 font-bold text-xs transition-all shadow-xs flex items-center justify-center gap-1 active:scale-95 flex-1 sm:flex-none"
+                              className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 font-bold text-xs transition-all shadow-xs flex items-center justify-center gap-1 active:scale-95 flex-1 sm:flex-none whitespace-nowrap font-display"
                             >
-                              <CheckCircle2 className="w-3.5 h-3.5" /> Beri ACC Seminar
+                              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> ACC
                             </button>
                           )}
                           <Link
