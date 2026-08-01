@@ -79,26 +79,28 @@ export default function UjianSidangPage() {
                 </div>
 
                 {/* Tab Controls */}
-                <div className="flex items-center gap-1.5 bg-[#141414] p-1.5 rounded-xl border border-neutral-700 shrink-0">
+                <div className="flex items-center gap-1.5 bg-[#141414] p-1.5 rounded-xl border border-neutral-700 w-full sm:w-auto">
                   <button
                     onClick={() => setActiveTab("SEMPRO")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 font-display ${
+                    className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
                       activeTab === "SEMPRO"
-                        ? "bg-[#C62828] text-white shadow-xs"
-                        : "text-neutral-400 hover:text-white"
+                        ? "bg-[#C62828] text-white shadow-xs font-extrabold"
+                        : "text-neutral-400 hover:text-white font-medium"
                     }`}
                   >
-                    <Calendar className="w-3.5 h-3.5" /> 1. Sempro
+                    <Calendar className="w-3.5 h-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">1. Sempro</span>
                   </button>
                   <button
                     onClick={() => setActiveTab("SIDANG")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 font-display ${
+                    className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
                       activeTab === "SIDANG"
-                        ? "bg-[#C62828] text-white shadow-xs"
-                        : "text-neutral-400 hover:text-white"
+                        ? "bg-[#C62828] text-white shadow-xs font-extrabold"
+                        : "text-neutral-400 hover:text-white font-medium"
                     }`}
                   >
-                    <GraduationCap className="w-3.5 h-3.5" /> 2. Sidang Skripsi
+                    <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">2. Sidang Skripsi</span>
                   </button>
                 </div>
               </div>
