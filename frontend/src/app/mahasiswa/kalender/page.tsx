@@ -173,14 +173,14 @@ export default function KalenderPage() {
             </div>
 
             {/* Controls Bar & Filter Legend */}
-            <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 shrink-0">
+            <div className="bg-white rounded-xl border border-slate-200 p-2.5 sm:p-3 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-2.5 shrink-0">
               {/* Month Nav Controls */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between md:justify-start gap-2">
                 <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
                   <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <span className="px-3 text-xs font-black font-display text-slate-900">
+                  <span className="px-2 sm:px-3 text-xs font-black font-display text-slate-900">
                     {currentMonthName}
                   </span>
                   <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
@@ -188,16 +188,16 @@ export default function KalenderPage() {
                   </button>
                 </div>
 
-                <button className="px-3 py-1 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all">
+                <button className="px-3 py-1 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all font-display">
                   Hari Ini
                 </button>
               </div>
 
-              {/* Kategori Filters Badges */}
-              <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+              {/* Kategori Filters Badges (Horizontal Swipe Row on Mobile) */}
+              <div className="flex items-center gap-1.5 text-xs font-bold overflow-x-auto scrollbar-none whitespace-nowrap pb-0.5 md:pb-0">
                 <button
                   onClick={() => setActiveCategory("ALL")}
-                  className={`px-3.5 py-1.5 rounded-full border transition-all ${
+                  className={`px-3 py-1 rounded-full border transition-all shrink-0 font-display ${
                     activeCategory === "ALL"
                       ? "bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -208,7 +208,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("BIMBINGAN")}
-                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
                     activeCategory === "BIMBINGAN"
                       ? "bg-[#D97706] text-white border-[#D97706] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -220,7 +220,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("SEMPRO")}
-                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
                     activeCategory === "SEMPRO"
                       ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -232,7 +232,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("SIDANG")}
-                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
                     activeCategory === "SIDANG"
                       ? "bg-[#15803D] text-white border-[#15803D] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -244,7 +244,7 @@ export default function KalenderPage() {
 
                 <button
                   onClick={() => setActiveCategory("DEADLINE")}
-                  className={`px-3.5 py-1.5 rounded-full border flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all shrink-0 font-display ${
                     activeCategory === "DEADLINE"
                       ? "bg-[#C62828] text-white border-[#C62828] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
