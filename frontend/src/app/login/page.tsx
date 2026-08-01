@@ -15,13 +15,14 @@ import { SplashScreen } from "@/components/ui/splash-screen";
 /* ─────────────────────────── DATA ROLES ─────────────────────────── */
 
 const QUICK_ROLES = [
-  { id: "mahasiswa",        label: "Mahasiswa",        path: "/mahasiswa/dashboard",      icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
-  { id: "dosen_pembimbing", label: "Pembimbing",       path: "/dosen/dashboard",          icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
-  { id: "dosen_penguji",    label: "Penguji",          path: "/penguji/dashboard",        icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
-  { id: "admin_prodi",      label: "Admin Prodi",      path: "/admin-prodi/dashboard",    icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
-  { id: "admin_fakultas",   label: "Admin Fakultas",   path: "/admin-fakultas/dashboard", icon: School,        bg: "bg-indigo-600", text: "text-white" },
-  { id: "pimpinan",         label: "Dekanat",          path: "/dekanat/dashboard",        icon: LayoutDashboard, bg: "bg-[#F59E0B]", text: "text-slate-950" },
-  { id: "super_admin",      label: "Super Admin",      path: "/super-admin/dashboard",    icon: Users,         bg: "bg-slate-900",  text: "text-white" },
+  { id: "mahasiswa",        label: "Mahasiswa",                    path: "/mahasiswa/dashboard",   icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
+  { id: "dosen_pembimbing", label: "Dosen Pembimbing",             path: "/dosen/dashboard",       icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
+  { id: "dosen_penguji",    label: "Dosen Penguji",                path: "/penguji/dashboard",     icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
+  { id: "dosen_dual",       label: "Dosen (Pembimbing & Penguji)", path: "/dosen/dashboard",       icon: Award,         bg: "bg-gradient-to-r from-[#C62828] via-amber-600 to-[#C62828]", text: "text-white" },
+  { id: "admin_prodi",      label: "Admin Prodi",                  path: "/admin-prodi/dashboard", icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
+  { id: "admin_fakultas",   label: "Admin Fakultas",               path: "/admin-fakultas/dashboard", icon: School,     bg: "bg-indigo-600", text: "text-white" },
+  { id: "pimpinan",         label: "Dekanat",                      path: "/dekanat/dashboard",     icon: LayoutDashboard, bg: "bg-[#F59E0B]", text: "text-slate-950" },
+  { id: "super_admin",      label: "Super Admin",                  path: "/super-admin/dashboard", icon: Users,         bg: "bg-slate-900",  text: "text-white" },
 ];
 
 const FAQ_ITEMS = [
