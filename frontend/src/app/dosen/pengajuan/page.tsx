@@ -30,6 +30,7 @@ import { useToast } from "@/components/ui/toast";
 export default function DosenPengajuanPage() {
   const { showToast } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"permohonan" | "detail" | "riwayat">("permohonan");
   const [pengajuanList, setPengajuanList] = useState<Array<PengajuanItem>>([]);
   const [selectedNim, setSelectedNim] = useState<string>("");
   const [riwayatList, setRiwayatList] = useState<Array<{ nim: string; nama: string; judul: string; tgl: string; aksi: string }>>([]);
@@ -133,6 +134,43 @@ export default function DosenPengajuanPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Mobile Segmented Control Switcher (<1024px) ── */}
+            <div className="flex lg:hidden items-center p-1 bg-slate-200/80 rounded-xl shrink-0">
+              <button
+                onClick={() => setActiveMobileTab("permohonan")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                  activeMobileTab === "permohonan"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>Permohonan ({pengajuanList.length})</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                  activeMobileTab === "detail"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Detail</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("riwayat")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                  activeMobileTab === "riwayat"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <HistoryIcon className="w-3.5 h-3.5" />
+                <span>Riwayat ({riwayatList.length})</span>
+              </button>
+            </div>
+
             {/* ── Split 2-Column Layout (6/12 & 6/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
@@ -140,7 +178,9 @@ export default function DosenPengajuanPage() {
               <div className="lg:col-span-6 flex flex-col gap-4 min-h-0 overflow-hidden">
                 
                 {/* Pending Requests List Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
+                  activeMobileTab === "permohonan" ? "flex" : "hidden lg:flex"
+                }`}>
                   <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
@@ -159,7 +199,7 @@ export default function DosenPengajuanPage() {
                   <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5">
                     {pengajuanList.length === 0 ? (
                       <div className="p-8 text-center text-slate-400 space-y-2">
-                        <CheckCircle2 className="w-8 h-8 mx-auto text-emerald-500" />
+                        <CheckCircle2 className="w-8 h-8 mx-auto text-[#C62828]" />
                         <p className="text-xs font-bold text-slate-700 font-display">Semua permohonan pembimbing telah ditinjau!</p>
                       </div>
                     ) : (
@@ -169,7 +209,10 @@ export default function DosenPengajuanPage() {
                         return (
                           <div
                             key={p.nim}
-                            onClick={() => setSelectedNim(p.nim)}
+                            onClick={() => {
+                              setSelectedNim(p.nim);
+                              setActiveMobileTab("detail");
+                            }}
                             className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                               isSelected
                                 ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
@@ -187,7 +230,7 @@ export default function DosenPengajuanPage() {
                                 </div>
                               </div>
 
-                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-600 text-white shadow-2xs shrink-0 font-display">
+                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-2xs shrink-0 font-display">
                                 {p.bidang}
                               </span>
                             </div>
@@ -202,46 +245,64 @@ export default function DosenPengajuanPage() {
                   </div>
                 </div>
 
-                {/* History Card */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 shrink-0">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                      <HistoryIcon className="w-4 h-4 text-white" />
+                {/* History Card (Equal Height & Spacious) */}
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
+                  activeMobileTab === "riwayat" ? "flex" : "hidden lg:flex"
+                }`}>
+                  <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                        <HistoryIcon className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-xs font-bold text-slate-800 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
+                        <p className="text-[10px] text-slate-400 font-medium">Histori pengajuan yang telah disetujui / ditolak</p>
+                      </div>
                     </div>
-                    <h2 className="text-xs font-bold text-slate-800 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 font-display">
+                      {riwayatList.length} Aksi
+                    </span>
                   </div>
 
-                  <div className="divide-y divide-slate-100 max-h-40 overflow-y-auto scrollbar-none">
-                    {riwayatList.map((r, i) => (
-                      <div key={i} className="flex items-center gap-3 py-2.5 first:pt-0 last:pb-0">
-                        <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 shadow-2xs font-bold ${
-                          r.aksi === "Diterima" ? "bg-emerald-600 text-white" : "bg-[#C62828] text-white"
-                        }`}>
-                          {r.aksi === "Diterima"
-                            ? <CheckCircle2 className="w-4 h-4 text-white" />
-                            : <XCircle className="w-4 h-4 text-white" />
-                          }
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-black text-slate-900 font-display">{r.nama} <span className="font-mono text-slate-400 text-[10px] font-normal">({r.nim})</span></p>
-                          <p className="text-[11px] text-slate-500 truncate font-medium">&ldquo;{r.judul}&rdquo;</p>
-                        </div>
-                        <div className="text-right shrink-0">
-                          <span className={`text-[9.5px] font-bold px-2.5 py-0.5 rounded-full font-display shadow-2xs text-white ${
-                            r.aksi === "Diterima" ? "bg-emerald-600" : "bg-[#C62828]"
-                          }`}>
-                            {r.aksi}
-                          </span>
-                        </div>
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2">
+                    {riwayatList.length === 0 ? (
+                      <div className="p-6 text-center text-slate-400 space-y-1">
+                        <p className="text-xs font-bold text-slate-600">Belum ada riwayat keputusan</p>
                       </div>
-                    ))}
+                    ) : (
+                      riwayatList.map((r, i) => (
+                        <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center gap-3">
+                          <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-2xs font-bold ${
+                            r.aksi === "Diterima" ? "bg-[#ffd01d] text-slate-950" : "bg-[#C62828] text-white"
+                          }`}>
+                            {r.aksi === "Diterima"
+                              ? <CheckCircle2 className="w-4 h-4 text-slate-950" />
+                              : <XCircle className="w-4 h-4 text-white" />
+                            }
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-black text-slate-900 font-display">{r.nama} <span className="font-mono text-slate-400 text-[10px] font-normal">({r.nim})</span></p>
+                            <p className="text-[11px] text-slate-500 truncate font-medium">&ldquo;{r.judul}&rdquo;</p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <span className={`text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full font-display shadow-2xs ${
+                              r.aksi === "Diterima" ? "bg-[#ffd01d] text-slate-950" : "bg-[#C62828] text-white"
+                            }`}>
+                              {r.aksi}
+                            </span>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
 
               </div>
 
               {/* ── RIGHT COLUMN (6/12): Detail & Decision Panel Card ── */}
-              <div className="lg:col-span-6 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-6 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Header Card Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
@@ -284,7 +345,7 @@ export default function DosenPengajuanPage() {
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Rencana Topik Skripsi</span>
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-600 text-white shadow-2xs font-display">
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                           {selectedMhs.bidang}
                         </span>
                       </div>
@@ -315,7 +376,7 @@ export default function DosenPengajuanPage() {
                   </div>
                 ) : (
                   <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-slate-400 space-y-2">
-                    <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+                    <CheckCircle2 className="w-10 h-10 text-[#C62828]" />
                     <p className="text-xs font-bold text-slate-700 font-display">Semua permohonan pembimbing telah ditinjau!</p>
                   </div>
                 )}
@@ -326,15 +387,15 @@ export default function DosenPengajuanPage() {
                     <div className="flex items-center gap-2.5">
                       <button
                         onClick={() => handleDecision(selectedMhs, "Diterima")}
-                        className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
+                        className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
                       >
                         <CheckCircle2 className="w-4 h-4 text-white" /> Terima Mahasiswa Bimbingan
                       </button>
                       <button
                         onClick={() => handleDecision(selectedMhs, "Ditolak")}
-                        className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
+                        className="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-800 transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
                       >
-                        <XCircle className="w-4 h-4 text-white" /> Tolak
+                        <XCircle className="w-4 h-4 text-slate-700" /> Tolak
                       </button>
                     </div>
                   </div>
