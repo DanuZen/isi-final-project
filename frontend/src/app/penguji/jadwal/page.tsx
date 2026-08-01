@@ -10,19 +10,60 @@ import {
   Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award
 } from "lucide-react";
 
-const JADWAL: Array<{
-  nim: string;
-  nama: string;
-  judul: string;
-  tanggal: string;
-  tglNum: string;
-  hari: string;
-  ruang: string;
-  waktu: string;
-  jenis: string;
-  status: string;
-  nilai: number | null;
-}> = [];
+const DEFAULT_JADWAL = [
+  {
+    nim: "20101152630045",
+    nama: "Danu Zen",
+    judul: "Sistem Informasi Manajemen Gudang Berbasis Web Berbasis Real-Time Data",
+    tanggal: "Kamis, 6 Agt 2026",
+    tglNum: "6",
+    hari: "Kamis",
+    ruang: "Ruang 302 FIK",
+    waktu: "09:00 - 10:30 WIB",
+    jenis: "Seminar",
+    status: "Menunggu",
+    nilai: null,
+  },
+  {
+    nim: "20101152630089",
+    nama: "Rafi Andika",
+    judul: "Implementasi Machine Learning untuk Deteksi Spam Email Menggunakan Naive Bayes",
+    tanggal: "Jumat, 7 Agt 2026",
+    tglNum: "7",
+    hari: "Jumat",
+    ruang: "Aula FIK YPTK",
+    waktu: "10:30 - 12:00 WIB",
+    jenis: "Sidang",
+    status: "Menunggu",
+    nilai: null,
+  },
+  {
+    nim: "20101152630101",
+    nama: "Siti Rahayu",
+    judul: "Optimisasi Algoritma Routing Jaringan Komputer Menggunakan Dijkstra",
+    tanggal: "Senin, 10 Agt 2026",
+    tglNum: "10",
+    hari: "Senin",
+    ruang: "Ruang Dosen FIK",
+    waktu: "13:00 - 14:30 WIB",
+    jenis: "Seminar",
+    status: "Nilai Masuk",
+    nilai: 85,
+  },
+  {
+    nim: "20101152630022",
+    nama: "Budi Prasetyo",
+    judul: "Pengembangan Aplikasi Mobile Absensi Mahasiswa Berbasis Geolocation",
+    tanggal: "Rabu, 12 Agt 2026",
+    tglNum: "12",
+    hari: "Rabu",
+    ruang: "Aula FIK YPTK",
+    waktu: "08:30 - 10:00 WIB",
+    jenis: "Sidang",
+    status: "Selesai",
+    nilai: 88,
+  },
+];
 
 const JENIS_CFG: Record<string, { color: string; bg: string }> = {
   "Seminar": { color: "#2563EB", bg: "#eff6ff" },
@@ -38,8 +79,12 @@ export default function PengujiJadwalPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filter, setFilter] = useState("Semua");
   const [search, setSearch] = useState("");
+  const [jadwalList] = useState(DEFAULT_JADWAL);
 
-  const filtered = JADWAL.filter((j) => {
+  const perluDinilaiCount = jadwalList.filter((j) => j.status === "Menunggu" || j.status === "Nilai Masuk").length;
+  const selesaiCount = jadwalList.filter((j) => j.status === "Selesai").length;
+
+  const filtered = jadwalList.filter((j) => {
     const matchSearch = j.nama.toLowerCase().includes(search.toLowerCase()) || j.nim.includes(search);
     const matchFilter = filter === "Semua" || j.jenis === filter || j.status === filter;
     return matchSearch && matchFilter;
@@ -57,29 +102,42 @@ export default function PengujiJadwalPage() {
 
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white">
+              <div className="p-5 md:p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-5">
+                <div className="space-y-1 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white font-display">
                       PENUGASAN PENGUJI
                     </span>
                     <span className="text-[11px] text-neutral-400 font-mono font-semibold">T.A. 2026/2027</span>
                   </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display tracking-wide">
+                  <h1 className="text-xl md:text-2xl font-black font-display tracking-wide leading-tight">
                     Jadwal Ujian &amp; Penilaian
                   </h1>
-                  <p className="text-xs text-neutral-400 font-medium">
+                  <p className="text-xs text-neutral-400 font-medium leading-relaxed max-w-2xl">
                     Daftar mahasiswa yang ditugaskan kepada Anda untuk diuji pada Seminar Proposal &amp; Ujian Sidang Skripsi.
                   </p>
                 </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-center">
-                    <p className="text-lg font-black text-[#ffd01d] font-display">{JADWAL.filter(j=>j.status==="Menunggu").length}</p>
-                    <p className="text-[10px] text-neutral-400 font-medium">Perlu Dinilai</p>
+                <div className="flex items-center gap-3 shrink-0 flex-wrap">
+                  {/* Stat Card 1: Perlu Dinilai */}
+                  <div className="bg-[#262626] border border-amber-500/30 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40">
+                    <div className="w-9 h-9 rounded-lg bg-amber-500/20 text-[#ffd01d] flex items-center justify-center font-bold shrink-0 border border-amber-500/40">
+                      <Clock className="w-5 h-5 text-[#ffd01d]" />
+                    </div>
+                    <div>
+                      <p className="text-xl font-black text-[#ffd01d] font-display leading-none">{perluDinilaiCount}</p>
+                      <p className="text-[10.5px] text-neutral-300 font-bold uppercase tracking-wider font-display mt-0.5">Perlu Dinilai</p>
+                    </div>
                   </div>
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-center">
-                    <p className="text-lg font-black text-emerald-400 font-display">{JADWAL.filter(j=>j.status==="Selesai").length}</p>
-                    <p className="text-[10px] text-neutral-400 font-medium">Selesai</p>
+
+                  {/* Stat Card 2: Selesai */}
+                  <div className="bg-[#262626] border border-emerald-500/30 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 border border-emerald-500/40">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    <div>
+                      <p className="text-xl font-black text-emerald-400 font-display leading-none">{selesaiCount}</p>
+                      <p className="text-[10.5px] text-neutral-300 font-bold uppercase tracking-wider font-display mt-0.5">Selesai</p>
+                    </div>
                   </div>
                 </div>
               </div>
