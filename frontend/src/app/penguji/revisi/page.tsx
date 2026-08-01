@@ -234,11 +234,7 @@ export default function PengujiRevisiPage() {
                             setSelectedNim(r.nim);
                             setActiveMobileTab("detail");
                           }}
-                          className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
-                            isSelected
-                              ? "bg-slate-50 border-slate-300 shadow-2xs"
-                              : "bg-white border-slate-200/80 hover:bg-slate-50/60 hover:border-slate-300"
-                          }`}
+                          className="p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50/60 hover:border-slate-300 transition-all cursor-pointer space-y-2"
                         >
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2.5 min-w-0">
