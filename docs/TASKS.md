@@ -75,9 +75,10 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 - [x] `/penguji/nilai` — Input Nilai (Form Skor Per Komponen, Range Slider, Weighted Auto Score)
 - [x] `/penguji/revisi` — Lembar Revisi (Catatan Revisi, Review Upload Mahasiswa, ACC Revisi)
 
-### 4. Portal Admin Prodi FIK (`/admin-prodi`) — 5 Sub-Halaman (SELESAI ✅)
+### 4. Portal Admin Prodi FIK (`/admin-prodi`) — 6 Sub-Halaman (SELESAI ✅)
 - [x] `/admin-prodi/dashboard` — Dashboard Prodi (Stats Grid Amber `#D97706`, Tabel Mahasiswa TA, Aktivasi Quick Panel)
 - [x] `/admin-prodi/mahasiswa` — Manajemen Mahasiswa TA (Tabel List Ringkas, Filter Tahap, Live Side Panel Detail)
+- [x] `/admin-prodi/dosen` — Penugasan Dosen (Bilah Pencarian/Filter Role, Live Toggle Akses Pembimbing & Penguji, Setting Kuota Bimbingan)
 - [x] `/admin-prodi/aktivasi` — Aktivasi Akun (Clearing 110 SKS & IPK 2.00, Trigger Generate Credential)
 - [x] `/admin-prodi/jadwal` — Kelola Jadwal (Penjadwalan Sempro/Sidang, Majelis Penguji, & Ruangan)
 - [x] `/admin-prodi/repositori` — Repositori Judul TA (List View tanpa Kolom AKSI + Live Side Panel Detail)

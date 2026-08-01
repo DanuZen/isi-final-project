@@ -15,6 +15,7 @@ import {
 const NAV = [
   { label: "Dashboard",          href: "/admin-prodi/dashboard",   icon: <LayoutDashboard className="w-4 h-4" /> },
   { label: "Manajemen Mahasiswa",href: "/admin-prodi/mahasiswa",   icon: <Users className="w-4 h-4" /> },
+  { label: "Penugasan Dosen",    href: "/admin-prodi/dosen",       icon: <UserCheck className="w-4 h-4" /> },
   { label: "Aktivasi Akun",      href: "/admin-prodi/aktivasi",    icon: <UserPlus className="w-4 h-4" /> },
   { label: "Jadwal Seminar",     href: "/admin-prodi/jadwal",      icon: <CalendarDays className="w-4 h-4" /> },
   { label: "Repositori Judul",   href: "/admin-prodi/repositori",  icon: <BookOpen className="w-4 h-4" /> },
