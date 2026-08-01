@@ -17,7 +17,8 @@ import {
   FileEdit,
   MessageSquare,
   User2,
-  Sparkles
+  Sparkles,
+  Layers
 } from "lucide-react";
 import { SplashScreen } from "@/components/ui/splash-screen";
 
@@ -79,7 +80,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
   const [isCheckingAuth, setIsCheckingAuth] = React.useState(true);
-  const [activeMobileTab, setActiveMobileTab] = useState<"judul" | "acc" | "kalender">("judul");
+  const [activeMobileTab, setActiveMobileTab] = useState<"tahapan" | "judul" | "acc" | "kalender">("tahapan");
 
   React.useEffect(() => {
     const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("sipeta_logged_in");
@@ -150,16 +151,23 @@ export default function DashboardPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── TA Stepper ── */}
-            <div className="shrink-0">
-              <TaStepper />
-            </div>
-
-            {/* ── Sleek Mobile Segmented Control Tab Switcher (<768px) ── */}
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
             <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs">
               <button
+                onClick={() => setActiveMobileTab("tahapan")}
+                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                  activeMobileTab === "tahapan"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Layers className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Tahapan</span>
+              </button>
+
+              <button
                 onClick={() => setActiveMobileTab("judul")}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                   activeMobileTab === "judul"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
@@ -171,7 +179,7 @@ export default function DashboardPage() {
 
               <button
                 onClick={() => setActiveMobileTab("acc")}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                   activeMobileTab === "acc"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
@@ -183,7 +191,7 @@ export default function DashboardPage() {
 
               <button
                 onClick={() => setActiveMobileTab("kalender")}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                   activeMobileTab === "kalender"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
@@ -192,6 +200,11 @@ export default function DashboardPage() {
                 <CalendarDays className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">Kalender</span>
               </button>
+            </div>
+
+            {/* ── TA Stepper (Desktop: Always Visible, Mobile: Visible when activeMobileTab === 'tahapan') ── */}
+            <div className={`shrink-0 ${activeMobileTab === "tahapan" ? "block" : "hidden lg:block"}`}>
+              <TaStepper />
             </div>
 
             {/* ── Main Grid (8/12 & 4/12 on Desktop / Tabbed on Mobile) ── */}
