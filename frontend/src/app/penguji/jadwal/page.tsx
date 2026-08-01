@@ -190,9 +190,9 @@ export default function PengujiJadwalPage() {
                 </div>
               </div>
 
-              {/* Table Body */}
+              {/* Table Body (Swipeable on Mobile) */}
               <div className="flex-1 overflow-y-auto overflow-x-auto scrollbar-none flex flex-col">
-                <table className={`w-full text-left text-xs border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
+                <table className={`w-full text-left text-xs border-collapse min-w-[750px] ${filtered.length === 0 ? "h-full" : ""}`}>
                   <thead>
                     <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 font-bold uppercase text-[10px] font-display tracking-wider">
                       <th className="px-5 py-3">Tanggal</th>
