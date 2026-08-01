@@ -228,9 +228,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             {/* Bottom Footer: User Profile Card (Akun) + Solid Logout Button */}
             <div className="p-3 border-t border-[#333333] bg-[#202020] shrink-0 space-y-2">
-              {/* Compact User Profile Card (Akun) */}
-              <div className="p-2.5 rounded-xl bg-[#282828] border border-[#3A3A3A] space-y-2">
-                <div className="flex items-center gap-2.5">
+              {/* Compact Side-by-Side User Profile Card (Akun) */}
+              <div className="p-2.5 rounded-xl bg-[#282828] border border-[#3A3A3A] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#C62828] to-[#8B0000] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs border border-white/10 font-display">
                     DZ
                   </div>
@@ -246,10 +246,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onToggle?.();
                     setIsProfileModalOpen(true);
                   }}
-                  className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#ffd01d] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
+                  className="px-3 py-1.5 rounded-lg text-xs font-black bg-[#ffd01d] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-95 font-display flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+                  title="Lihat Profil & Detail Akun Saya"
                 >
                   <User className="w-3.5 h-3.5 text-slate-950 stroke-[2.5]" />
-                  <span>Profil &amp; Detail Akun Saya</span>
+                  <span>Profil</span>
                 </button>
               </div>
 
