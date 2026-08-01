@@ -175,22 +175,18 @@ export default function KalenderPage() {
             {/* Controls Bar & Filter Legend */}
             <div className="bg-white rounded-xl border border-slate-200 p-2.5 sm:p-3 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-2.5 shrink-0">
               {/* Month Nav Controls */}
-              <div className="flex items-center justify-between md:justify-start gap-2">
+              <div className="flex items-center justify-center md:justify-start">
                 <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
+                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all cursor-pointer">
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <span className="px-2 sm:px-3 text-xs font-black font-display text-slate-900">
+                  <span className="px-3 text-xs font-black font-display text-slate-900">
                     {currentMonthName}
                   </span>
-                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all">
+                  <button className="p-1 rounded-lg text-slate-600 hover:bg-white hover:shadow-sm transition-all cursor-pointer">
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
-
-                <button className="px-3 py-1 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all font-display">
-                  Hari Ini
-                </button>
               </div>
 
               {/* Kategori Filters Badges (Horizontal Swipe Row on Mobile) */}
