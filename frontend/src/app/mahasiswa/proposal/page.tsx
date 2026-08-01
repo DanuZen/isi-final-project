@@ -147,7 +147,7 @@ export default function ProposalJudulPage() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* Main 12-Column Grid Layout */}
@@ -341,7 +341,7 @@ export default function ProposalJudulPage() {
                     disabled={isChecking}
                     className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-[#C62828] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95 font-display cursor-pointer"
                   >
-                    <Search className="w-3.5 h-3.5 text-[#F59E0B]" />
+                    <Search className="w-3.5 h-3.5 text-[#ffd01d]" />
                     {isChecking ? "Mengecek Database..." : "Cek Duplikasi Judul"}
                   </button>
                 </div>

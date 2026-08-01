@@ -203,7 +203,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 return (
                   <React.Fragment key={item.href}>
                     {showCategory && (
-                      <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">
+                      <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#ffd01d] font-display">
                         {categoryLabel}
                       </div>
                     )}
@@ -246,7 +246,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onToggle?.();
                     setIsProfileModalOpen(true);
                   }}
-                  className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#F59E0B] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
+                  className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#ffd01d] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
                 >
                   <User className="w-3.5 h-3.5 text-slate-950 stroke-[2.5]" />
                   <span>Profil &amp; Detail Akun Saya</span>
@@ -325,7 +325,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             return (
               <React.Fragment key={item.href}>
                 {isOpen && showCategory && (
-                  <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">
+                  <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#ffd01d] font-display">
                     {categoryLabel}
                   </div>
                 )}

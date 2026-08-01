@@ -95,7 +95,7 @@ export function SplashScreen({
           {/* Progress track */}
           <div className="w-48 sm:w-56 h-1.5 mx-auto bg-white/10 rounded-full overflow-hidden backdrop-blur-xs border border-white/10 relative">
             <div
-              className="h-full bg-gradient-to-r from-[#C62828] via-[#FF5722] to-[#F59E0B] rounded-full transition-all duration-75 ease-out"
+              className="h-full bg-gradient-to-r from-[#C62828] via-[#FF5722] to-[#ffd01d] rounded-full transition-all duration-75 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

@@ -19,7 +19,7 @@ export function PageSkeleton() {
   return (
     <div className="flex flex-col h-screen overflow-hidden viewport-shell bg-[#FAFAFA]">
       {/* Top Accent Line */}
-      <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828] shrink-0 animate-pulse" />
+      <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828] shrink-0 animate-pulse" />
 
       <div className="flex flex-1 min-h-0 overflow-hidden">
         

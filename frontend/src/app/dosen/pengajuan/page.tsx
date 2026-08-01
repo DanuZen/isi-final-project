@@ -108,7 +108,7 @@ export default function DosenPengajuanPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#F59E0B] text-slate-950 shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#ffd01d] text-slate-950 shadow-xs">
                       <UserCheck className="w-3.5 h-3.5 text-slate-950" /> {pengajuanList.length} Permohonan Pembimbing Menunggu Tinjauan
                     </span>
                   </div>
@@ -130,7 +130,7 @@ export default function DosenPengajuanPage() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* ── Split 2-Column Layout (6/12 & 6/12) ── */}
@@ -151,7 +151,7 @@ export default function DosenPengajuanPage() {
                         <p className="text-[10px] text-slate-400 font-medium">Klik permohonan untuk pratinjau detail</p>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-[10.5px] font-bold bg-[#F59E0B] text-slate-950 shadow-2xs font-display">
+                    <span className="px-3 py-1 rounded-full text-[10.5px] font-bold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                       {pengajuanList.length} Menunggu
                     </span>
                   </div>

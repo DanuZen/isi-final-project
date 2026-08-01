@@ -73,7 +73,7 @@ export default function PengujiJadwalPage() {
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-center">
-                    <p className="text-lg font-black text-[#F59E0B] font-display">{JADWAL.filter(j=>j.status==="Menunggu").length}</p>
+                    <p className="text-lg font-black text-[#ffd01d] font-display">{JADWAL.filter(j=>j.status==="Menunggu").length}</p>
                     <p className="text-[10px] text-neutral-400 font-medium">Perlu Dinilai</p>
                   </div>
                   <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-center">
@@ -82,7 +82,7 @@ export default function PengujiJadwalPage() {
                   </div>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* ── Table Card ── */}

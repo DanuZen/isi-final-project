@@ -145,7 +145,7 @@ export default function DosenDashboardPage() {
                     Selamat Datang, {DOSEN.nama}
                   </h1>
                   <p className="text-xs text-neutral-300">
-                    Anda memiliki <strong className="text-[#F59E0B]">{DOSEN.kuotaTerisi} dari {DOSEN.kuotaMaks} Mahasiswa Bimbingan Aktif</strong>. 
+                    Anda memiliki <strong className="text-[#ffd01d]">{DOSEN.kuotaTerisi} dari {DOSEN.kuotaMaks} Mahasiswa Bimbingan Aktif</strong>. 
                     Terdapat permohonan bimbingan baru yang membutuhkan konfirmasi Anda.
                   </p>
                 </div>
@@ -153,11 +153,11 @@ export default function DosenDashboardPage() {
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="p-3 bg-neutral-800/80 rounded-xl border border-neutral-700 text-center">
                     <p className="text-[10px] text-neutral-400 font-bold uppercase font-display">Kuota Bimbingan</p>
-                    <p className="text-lg font-black text-[#F59E0B] font-display">{DOSEN.kuotaTerisi} / {DOSEN.kuotaMaks}</p>
+                    <p className="text-lg font-black text-[#ffd01d] font-display">{DOSEN.kuotaTerisi} / {DOSEN.kuotaMaks}</p>
                   </div>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828] absolute bottom-0 left-0 right-0" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828] absolute bottom-0 left-0 right-0" />
             </div>
 
             {/* ── Quick Stats Grid ── */}
@@ -173,7 +173,7 @@ export default function DosenDashboardPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#F59E0B] text-slate-950 flex items-center justify-center font-bold shrink-0 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-[#ffd01d] text-slate-950 flex items-center justify-center font-bold shrink-0 shadow-xs">
                   <UserCheck className="w-5 h-5 text-slate-950" />
                 </div>
                 <div>

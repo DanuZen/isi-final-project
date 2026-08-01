@@ -5,7 +5,7 @@
 Aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** memadukan identitas resmi kampus **Fakultas Ilmu Komputer UPI YPTK Padang** dengan estetika UI modern berkelas tinggi.
 
 - **Signature Element:** **Progress Perjalanan Tugas Akhir (4-Stage Stepper)** — visual horizontal yang memadukan 4 tahapan inti: `Usulan Judul & Similarity Check → Bimbingan TA → ACC & Jadwal Seminar → Ujian Sidang Skripsi`.
-- **Identity Palette:** Deep Crimson Red (`#C62828`), Amber Gold (`#F59E0B`), Emerald Success (`#2F8F5B`), Dark Hero Charcoal (`#1A1A1A`), serta Clean Slate Background (`#FAFAFA`).
+- **Identity Palette:** Deep Crimson Red (`#C62828`), Amber Gold (`#ffd01d`), Emerald Success (`#2F8F5B`), Dark Hero Charcoal (`#1A1A1A`), serta Clean Slate Background (`#FAFAFA`).
 - **Typography Modern:** Font **Plus Jakarta Sans** untuk Display, Heading & Body text, dipadukan dengan **IBM Plex Mono / Font Mono** untuk NIM, kode dokumen, dan data statistik.
 
 ---
@@ -15,7 +15,7 @@ Aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** memaduk
 | Token | Hex / Class | Pemakaian |
 |---|---|---|
 | `brand-red` | `#C62828` / `#990000` | Warna utama signature UPI YPTK, active link pill, tombol primary gradient |
-| `brand-gold` | `#F59E0B` / `#FFC107` | Warna aksen akademik, highlight badge aktif, warning status, border aksen |
+| `brand-gold` | `#ffd01d` / `#FFC107` | Warna aksen akademik, highlight badge aktif, warning status, border aksen |
 | `dark-hero` | `#1A1A1A` / `#252525` | Background sidebar, dark hero card banner, header repositori |
 | `success-green` | `#2F8F5B` / `emerald-600` | Status disetujui, lulus, terverifikasi final |
 | `bg-main` | `#FAFAFA` | Background halaman utama |
@@ -44,7 +44,7 @@ Aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** memaduk
 ### 3.2 Header Bar dengan Toggle Sidebar
 - **No Search Input:** Search bar statis dihapus dari Header agar tampilan tetap bersih.
 - **Toggle Button `Sidebar Navigasi`:** Terletak di pojok kiri atas Header untuk membuka/menutup sidebar.
-- **Top Accent Line:** Garis aksen merah & emas khas UPI YPTK (`from-[#C62828] via-[#F59E0B] to-[#C62828]`).
+- **Top Accent Line:** Garis aksen merah & emas khas UPI YPTK (`from-[#C62828] via-[#ffd01d] to-[#C62828]`).
 
 ### 3.3 Progress Perjalanan TA (4-Stage Stepper)
 - 4 Node Utama: `Usulan Judul` → `Bimbingan TA` → `Jadwal Seminar` → `Ujian Sidang`.
@@ -128,7 +128,7 @@ Semua portal menggunakan banner standar:
 ```
 bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm
   → inner padding p-5 md:p-6
-  → bottom accent: h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]
+  → bottom accent: h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]
   → badge: solid color per role (lihat 5.1)
   → h1: text-xl md:text-2xl font-black font-display text-white
 ```

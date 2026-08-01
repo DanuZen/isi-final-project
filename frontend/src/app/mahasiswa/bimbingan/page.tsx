@@ -112,7 +112,7 @@ export default function BimbinganPage() {
                   </button>
                   <button
                     onClick={() => setShowPerubahanJudulModal(true)}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-md shadow-amber-950/20 transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-md shadow-amber-950/20 transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
                   >
                     <FileEdit className="w-4 h-4 text-slate-950" />
                     <span>Ajukan Perubahan Judul</span>
@@ -120,7 +120,7 @@ export default function BimbinganPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* Perubahan Judul Status Card (If Submitted) */}
@@ -222,7 +222,7 @@ export default function BimbinganPage() {
                             </div>
 
                             {/* Lecturer Response Bubble */}
-                            <div className="bg-white p-4 rounded-xl border border-amber-200 border-l-4 border-l-[#F59E0B] space-y-2 ml-3 shadow-xs">
+                            <div className="bg-white p-4 rounded-xl border border-amber-200 border-l-4 border-l-[#ffd01d] space-y-2 ml-3 shadow-xs">
                               <div className="flex items-center justify-between gap-2 flex-wrap">
                                 <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
                                   {log.dosenNama}
@@ -232,14 +232,14 @@ export default function BimbinganPage() {
                                     log.statusFeedback === "Disetujui Pembimbing"
                                       ? "bg-emerald-600"
                                       : log.statusFeedback === "Menunggu Review"
-                                      ? "bg-[#F59E0B]"
+                                      ? "bg-[#ffd01d]"
                                       : "bg-[#D97706]"
                                   }`}
                                 >
                                   {log.statusFeedback}
                                 </span>
                               </div>
-                              <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#F59E0B]">
+                              <p className="text-xs text-slate-800 leading-relaxed font-medium pl-3 border-l-2 border-l-[#ffd01d]">
                                 &ldquo;{log.catatanDosen}&rdquo;
                               </p>
                             </div>

@@ -612,7 +612,7 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 | Elemen | Spesifikasi |
 |---|---|
 | **Warna Utama (Primary)** | Deep Crimson Red `#C62828` — Warna khas UPI YPTK Padang |
-| **Warna Aksen (Accent)** | Amber Gold `#F59E0B` — Aksen akademik premium |
+| **Warna Aksen (Accent)** | Amber Gold `#ffd01d` — Aksen akademik premium |
 | **Warna Sukses (Success)** | Emerald Green `#2F8F5B` — Status disetujui/lulus |
 | **Background Utama** | Clean Slate `#FAFAFA` — Latar bersih dan profesional |
 | **Surface Card** | Pure White `#FFFFFF` — Kartu konten bersih |
@@ -636,7 +636,7 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 - Layout fit-viewport 100% atau natural page scroll yang responsif
 - Tombol toggle sidebar di pojok kiri
-- Garis aksen warna merah-emas di bagian atas (`#C62828` via `#F59E0B`)
+- Garis aksen warna merah-emas di bagian atas (`#C62828` via `#ffd01d`)
 - Indikator profil pengguna dengan nama, NIK/NIM, dan prodi
 
 #### Welcome Banner

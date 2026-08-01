@@ -63,7 +63,7 @@ const QUICK_ACTIONS = [
     label: "Pilih Pembimbing",
     href: "/mahasiswa/pembimbing",
     icon: <User2 className="w-4 h-4" />,
-    btnClass: "bg-[#F59E0B] hover:bg-[#d97706] text-slate-950 font-bold border border-amber-400/40 shadow-md shadow-amber-950/20",
+    btnClass: "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 font-bold border border-amber-400/40 shadow-md shadow-amber-950/20",
   },
   {
     label: "Lihat Kalender TA",
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Progres Tugas Akhir Anda saat ini berada pada tahap{" "}
-                    <strong className="text-[#F59E0B] font-bold">{STUDENT.tahapAktif}</strong>.
+                    <strong className="text-[#ffd01d] font-bold">{STUDENT.tahapAktif}</strong>.
                     Lanjutkan konsultasi rutin untuk memenuhi syarat pengajuan ACC Seminar Proposal.
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* ── TA Stepper ── */}

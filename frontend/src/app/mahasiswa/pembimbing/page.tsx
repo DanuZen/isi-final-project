@@ -233,7 +233,7 @@ export default function PengajuanPembimbingPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* Main 12-Column Grid (Flush Bottom Baseline Aligned) */}

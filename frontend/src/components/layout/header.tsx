@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <header className={`sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200 ${className}`}>
-        <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+        <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
 
         <div className="h-14 md:h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
           {/* Mobile Brand (Left side on < md) */}

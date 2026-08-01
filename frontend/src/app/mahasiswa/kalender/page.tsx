@@ -168,7 +168,7 @@ export default function KalenderPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* Controls Bar & Filter Legend */}
@@ -366,7 +366,7 @@ export default function KalenderPage() {
                             <div
                               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-black text-white ${
                                 evt.kategori === "BIMBINGAN"
-                                  ? "bg-[#F59E0B]"
+                                  ? "bg-[#ffd01d]"
                                   : evt.kategori === "SEMPRO"
                                   ? "bg-[#2563EB]"
                                   : evt.kategori === "SIDANG"
@@ -557,7 +557,7 @@ export default function KalenderPage() {
                 <span>Tanggal: {selectedEvent.tgl} Agustus 2026</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                <Clock className="w-4 h-4 text-[#F59E0B]" />
+                <Clock className="w-4 h-4 text-[#ffd01d]" />
                 <span>Waktu: {selectedEvent.waktu}</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 font-semibold">

@@ -101,7 +101,7 @@ export function RoleLayout({
 
               {/* Middle Section: Mobile Nav Links (Scrollable & Compact) */}
               <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-                <div className="px-3 pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">Menu Utama</div>
+                <div className="px-3 pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#ffd01d] font-display">Menu Utama</div>
                 {navItems.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -141,7 +141,7 @@ export function RoleLayout({
                       setSidebarOpen(false);
                       setIsProfileOpen(true);
                     }}
-                    className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#F59E0B] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
+                    className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-black bg-[#ffd01d] text-slate-950 hover:bg-[#D97706] transition-all cursor-pointer shadow-xs active:scale-98 font-display"
                   >
                     <User className="w-3.5 h-3.5 text-slate-950 stroke-[2.5]" />
                     <span>Profil &amp; Detail Akun Saya</span>
@@ -191,7 +191,7 @@ export function RoleLayout({
           {/* Nav items */}
           <nav className="flex-1 py-3 overflow-y-auto scrollbar-none space-y-0.5 px-2">
             {sidebarOpen && (
-              <div className="px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">Menu Utama</div>
+              <div className="px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#ffd01d] font-display">Menu Utama</div>
             )}
             {navItems.map((item) => {
               const active = pathname === item.href;
@@ -238,7 +238,7 @@ export function RoleLayout({
 
           {/* Header */}
           <header className="sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200">
-            <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${accentColor}, #F59E0B, ${accentColor})` }} />
+            <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${accentColor}, #ffd01d, ${accentColor})` }} />
             <div className="h-14 md:h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
               {/* Mobile Brand (Left side on < md) */}
               <div className="flex items-center gap-2.5 md:hidden">

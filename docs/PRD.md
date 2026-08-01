@@ -14,7 +14,7 @@
 - **Prasyarat Clearing Nilai (Offline / Manual di Kampus):** Pengurusan clearing nilai SKS & IPK dilakukan mahasiswa secara **langsung / offline di kampus** melalui Bagian Akademik / Admin Prodi. Hasil clearing nilai **TIDAK diinput atau diproses di dalam aplikasi SIPETA**. Setelah mahasiswa menyelesaikan clearing nilai secara luring di kampus, Admin Prodi akan membuatkan/mengaktifkan akun SIPETA mahasiswa.
 - **Halaman Dedicated Kalender TA (`/kalender`):** Menyediakan halaman khusus kalender interaktif bulanan/mingguan/harian untuk memantau jadwal bimbingan, seminar proposal, ujian sidang, dan deadline akademik seluruh fakultas.
 - **Repositori & Referensi Judul (`/list-judul`):** Menyediakan pencarian & penelusuran judul TA alumni UPI YPTK lengkap dengan filter bidang kajian dan analisis persentase domain.
-- **Tata Letak & Estetika Premium:** Brand identity UPI YPTK Padang dengan warna Deep Crimson Red (`#C62828`), Amber Gold (`#F59E0B`), font **Plus Jakarta Sans**, Centered Logo Brand Header, tombol Toggle Sidebar Navigasi, serta *Flush Bottom Baseline Alignment* di seluruh halaman.
+- **Tata Letak & Estetika Premium:** Brand identity UPI YPTK Padang dengan warna Deep Crimson Red (`#C62828`), Amber Gold (`#ffd01d`), font **Plus Jakarta Sans**, Centered Logo Brand Header, tombol Toggle Sidebar Navigasi, serta *Flush Bottom Baseline Alignment* di seluruh halaman.
 
 ---
 

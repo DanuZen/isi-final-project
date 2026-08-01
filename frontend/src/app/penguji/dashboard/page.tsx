@@ -22,7 +22,7 @@ const NAV = [
 const STATS = [
   { label: "Jadwal Seminar",       value: "5 Mahasiswa", sub: "Aktif bulan ini",    icon: CalendarDays, bg: "bg-blue-600", text: "text-white" },
   { label: "Ujian Sidang Aktif",   value: "3 Mahasiswa", sub: "Terjadwal",          icon: Award,        bg: "bg-[#C62828]",  text: "text-white" },
-  { label: "Lembar Revisi",        value: "8 Berkas",    sub: "Pending diserahkan", icon: FileEdit,     bg: "bg-[#F59E0B]",  text: "text-slate-950" },
+  { label: "Lembar Revisi",        value: "8 Berkas",    sub: "Pending diserahkan", icon: FileEdit,     bg: "bg-[#ffd01d]",  text: "text-slate-950" },
   { label: "Mahasiswa Dinilai",    value: "14 Selesai",  sub: "Total semester ini", icon: CheckCircle2, bg: "bg-emerald-600", text: "text-white" },
 ];
 
@@ -35,7 +35,7 @@ const JADWAL = [
 ];
 
 const STATUS_CONFIG = {
-  "Menunggu":    { bg: "bg-[#F59E0B] text-slate-950", icon: Clock },
+  "Menunggu":    { bg: "bg-[#ffd01d] text-slate-950", icon: Clock },
   "Nilai Masuk": { bg: "bg-emerald-600 text-white",   icon: CheckCircle2 },
   "Revisi":      { bg: "bg-[#C62828] text-white",     icon: AlertCircle },
 };
@@ -83,7 +83,7 @@ export default function PengujiDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#F59E0B] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
             {/* Stats Grid */}
@@ -178,7 +178,7 @@ export default function PengujiDashboard() {
                 {[
                   { label: "Rata-rata Nilai Seminar", value: "78.4", bg: "bg-blue-600", text: "text-white" },
                   { label: "Rata-rata Nilai Sidang",  value: "82.1", bg: "bg-emerald-600", text: "text-white" },
-                  { label: "Belum Dinilai",           value: "6 Mahasiswa", bg: "bg-[#F59E0B]", text: "text-slate-950" },
+                  { label: "Belum Dinilai",           value: "6 Mahasiswa", bg: "bg-[#ffd01d]", text: "text-slate-950" },
                 ].map((item) => (
                   <div key={item.label} className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center justify-between gap-3">
                     <div>
