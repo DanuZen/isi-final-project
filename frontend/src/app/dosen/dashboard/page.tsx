@@ -161,36 +161,44 @@ export default function DosenDashboardPage() {
             </div>
 
             {/* ── Quick Stats Grid ── */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 shrink-0">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 shrink-0">
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                  <Users className="w-5 h-5" />
+                  <Users className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Total Bimbingan</p>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Bimbingan Aktif</p>
                   <p className="text-lg font-black text-slate-900 font-display">{DOSEN.kuotaTerisi} Mahasiswa</p>
                 </div>
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#F59E0B] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                  <FileCheck className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl bg-[#F59E0B] text-slate-950 flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <UserCheck className="w-5 h-5 text-slate-950" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Menunggu ACC Seminar</p>
-                  <p className="text-lg font-black text-slate-900 font-display">
-                    {mahasiswaData.filter((m) => m.perluAcc).length} Mahasiswa
-                  </p>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Permohonan Masuk</p>
+                  <p className="text-lg font-black text-slate-900 font-display">{requestsData.length} Usulan</p>
                 </div>
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                  <UserCheck className="w-5 h-5 text-white" />
+                  <CalendarDays className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Permohonan Baru</p>
-                  <p className="text-lg font-black text-slate-900 font-display">{requestsData.length} Usulan</p>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Jadwal Menguji</p>
+                  <p className="text-lg font-black text-slate-900 font-display">5 Ujian</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <ShieldCheck className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display">Lembar Revisi</p>
+                  <p className="text-lg font-black text-slate-900 font-display">8 Berkas</p>
                 </div>
               </div>
             </div>
