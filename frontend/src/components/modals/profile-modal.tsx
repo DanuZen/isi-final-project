@@ -259,10 +259,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
         </div>
 
         {/* Modal Inner Navigation Tabs */}
-        <div className="bg-slate-100 border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center gap-1.5 sm:gap-2 shrink-0 overflow-x-auto scrollbar-none whitespace-nowrap">
+        <div className="bg-slate-100 border-b border-slate-200 px-2 sm:px-4 py-2 flex items-center justify-center gap-1 sm:gap-2 shrink-0 overflow-x-auto scrollbar-none whitespace-nowrap">
           <button
             onClick={() => setActiveTab("AKADEMIK")}
-            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "AKADEMIK"
                 ? "bg-[#C62828] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -274,7 +274,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
 
           <button
             onClick={() => setActiveTab("TIMELINE")}
-            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "TIMELINE"
                 ? "bg-[#C62828] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
@@ -286,7 +286,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
 
           <button
             onClick={() => setActiveTab("SANDI")}
-            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "SANDI"
                 ? "bg-[#C62828] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
