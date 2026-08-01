@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
@@ -228,10 +229,11 @@ export default function PengujiNilaiPage() {
                 {/* Scrollable Student List */}
                 <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5 flex flex-col">
                   {filteredMhs.length === 0 ? (
-                    <div className="p-8 text-center text-slate-400 space-y-2 my-auto flex-1 flex flex-col items-center justify-center">
-                      <UserCheck className="w-8 h-8 mx-auto text-slate-300" />
-                      <p className="text-xs font-bold text-slate-700 font-display">Tidak ada mahasiswa ditemukan</p>
-                    </div>
+                    <EmptyState
+                      icon={UserCheck}
+                      title="Tidak Ada Mahasiswa Ditemukan"
+                      description="Gunakan pencarian nama atau NIM untuk menemukan mahasiswa pengujian."
+                    />
                   ) : (
                     filteredMhs.map((m) => {
                       const isSelected = selectedMhs && selectedMhs.nim === m.nim;

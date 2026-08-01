@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
@@ -136,11 +137,11 @@ export default function PengujiJadwalPage() {
                     {filtered.length === 0 ? (
                       <tr className="h-full">
                         <td colSpan={8} className="px-5 py-12 text-center text-slate-400 align-middle h-full">
-                          <div className="flex flex-col items-center justify-center space-y-2 max-w-sm mx-auto">
-                            <Clock className="w-8 h-8 text-slate-300" />
-                            <p className="text-xs font-bold text-slate-700 font-display">Belum Ada Jadwal Pengujian</p>
-                            <p className="text-[11px] text-slate-400">Jadwal pengujian seminar &amp; sidang skripsi akan muncul setelah ditetapkan oleh Admin Prodi.</p>
-                          </div>
+                          <EmptyState
+                            icon={Clock}
+                            title="Belum Ada Jadwal Pengujian"
+                            description="Jadwal pengujian seminar & sidang skripsi akan muncul setelah ditetapkan oleh Admin Prodi."
+                          />
                         </td>
                       </tr>
                     ) : (

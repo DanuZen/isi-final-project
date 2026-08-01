@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
@@ -196,12 +197,13 @@ export default function DosenPengajuanPage() {
                     </span>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5">
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5 flex flex-col">
                     {pengajuanList.length === 0 ? (
-                      <div className="p-8 text-center text-slate-400 space-y-2">
-                        <CheckCircle2 className="w-8 h-8 mx-auto text-[#C62828]" />
-                        <p className="text-xs font-bold text-slate-700 font-display">Semua permohonan pembimbing telah ditinjau!</p>
-                      </div>
+                      <EmptyState
+                        icon={CheckCircle2}
+                        title="Semua Permohonan Telah Ditinjau"
+                        description="Belum ada permohonan pembimbing baru yang menunggu keputusan."
+                      />
                     ) : (
                       pengajuanList.map((p) => {
                         const isSelected = selectedMhs && selectedMhs.nim === p.nim;
@@ -264,11 +266,13 @@ export default function DosenPengajuanPage() {
                     </span>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2">
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2 flex flex-col">
                     {riwayatList.length === 0 ? (
-                      <div className="p-6 text-center text-slate-400 space-y-1">
-                        <p className="text-xs font-bold text-slate-600">Belum ada riwayat keputusan</p>
-                      </div>
+                      <EmptyState
+                        icon={HistoryIcon}
+                        title="Belum Ada Riwayat Keputusan"
+                        description="Histori permohonan yang Anda terima atau tolak akan tercatat otomatis di sini."
+                      />
                     ) : (
                       riwayatList.map((r, i) => (
                         <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center gap-3">
@@ -344,7 +348,7 @@ export default function DosenPengajuanPage() {
                     {/* Judul & Topik Proposal Box */}
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Rencana Topik Skripsi</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Proposed Skripsi</span>
                         <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                           {selectedMhs.bidang}
                         </span>
@@ -352,7 +356,7 @@ export default function DosenPengajuanPage() {
                       <p className="text-xs font-bold text-slate-800 leading-relaxed font-display">
                         &ldquo;{selectedMhs.judul}&rdquo;
                       </p>
-                      <div className="pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-[10.5px] text-slate-500">
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-500">
                         <div>
                           <span className="block text-[9px] text-slate-400 font-bold uppercase font-display">Calon Pembimbing II</span>
                           <strong className="text-slate-800">{selectedMhs.pembimbing2}</strong>
@@ -375,10 +379,11 @@ export default function DosenPengajuanPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-slate-400 space-y-2">
-                    <CheckCircle2 className="w-10 h-10 text-[#C62828]" />
-                    <p className="text-xs font-bold text-slate-700 font-display">Semua permohonan pembimbing telah ditinjau!</p>
-                  </div>
+                  <EmptyState
+                    icon={CheckCircle2}
+                    title="Semua Permohonan Telah Ditinjau"
+                    description="Tidak ada permohonan pembimbing yang memerlukan verifikasi."
+                  />
                 )}
 
                 {/* Bottom Action Panel */}

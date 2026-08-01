@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
@@ -192,13 +193,11 @@ export default function AdminProdiRepositoriPage() {
                       ) : (
                         <tr className="h-full">
                           <td colSpan={5} className="py-12 px-4 text-center align-middle h-full text-slate-500">
-                            <div className="flex flex-col items-center justify-center space-y-3 max-w-sm mx-auto">
-                              <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
-                                <BookOpen className="w-7 h-7" />
-                              </div>
-                              <p className="font-extrabold text-sm font-display text-slate-900">Belum Ada Naskah Final di Repositori</p>
-                              <p className="text-xs text-slate-500 font-medium leading-relaxed">Naskah Tugas Akhir mahasiswa yang telah disahkan akan otomatis terarsip di sini.</p>
-                            </div>
+                            <EmptyState
+                              icon={BookOpen}
+                              title="Belum Ada Naskah Final di Repositori"
+                              description="Naskah Tugas Akhir mahasiswa yang telah disahkan akan otomatis terarsip di sini."
+                            />
                           </td>
                         </tr>
                       )}

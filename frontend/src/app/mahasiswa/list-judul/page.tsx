@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import {
   Search,
   BookOpen,
@@ -226,15 +227,11 @@ export default function ListJudulPage() {
                           ) : (
                             <tr className="h-full">
                               <td colSpan={5} className="py-12 px-4 text-center align-middle h-full">
-                                <div className="max-w-sm mx-auto flex flex-col items-center justify-center text-center space-y-3 font-display">
-                                  <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
-                                    <BookOpen className="w-7 h-7" />
-                                  </div>
-                                  <p className="font-extrabold text-sm text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
-                                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                    Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
-                                  </p>
-                                </div>
+                                <EmptyState
+                                  icon={BookOpen}
+                                  title="Belum Ada Judul Terdaftar di Repositori"
+                                  description="Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini."
+                                />
                               </td>
                             </tr>
                           )}

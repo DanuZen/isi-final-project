@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   GraduationCap,
@@ -226,17 +227,12 @@ export default function UjianSidangPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3 my-auto min-h-[320px]">
-                      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
-                        {activeTab === "SEMPRO" ? <Calendar className="w-7 h-7" /> : <GraduationCap className="w-7 h-7" />}
-                      </div>
-                      <h4 className="font-extrabold text-base font-display text-slate-900">
-                        Belum Ada Jadwal {activeTab === "SEMPRO" ? "Seminar Proposal" : "Ujian Sidang"}
-                      </h4>
-                      <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed font-medium">
-                        Jadwal pelaksanaan ujian beserta susunan dewan penguji akan muncul secara otomatis di sini setelah ditetapkan oleh Sekretariat Admin Prodi.
-                      </p>
-                    </div>
+                    <EmptyState
+                      icon={activeTab === "SEMPRO" ? Calendar : GraduationCap}
+                      title={`Belum Ada Jadwal ${activeTab === "SEMPRO" ? "Seminar Proposal" : "Ujian Sidang"}`}
+                      description="Jadwal pelaksanaan ujian beserta susunan dewan penguji akan muncul secara otomatis di sini setelah ditetapkan oleh Sekretariat Admin Prodi."
+                      className="min-h-[320px]"
+                    />
                   )}
                 </div>
               </div>
