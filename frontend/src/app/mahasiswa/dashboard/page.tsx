@@ -152,53 +152,53 @@ export default function DashboardPage() {
             </div>
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
-            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs">
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
               <button
                 onClick={() => setActiveMobileTab("tahapan")}
-                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "tahapan"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 <Layers className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">Tahapan</span>
+                <span className="whitespace-nowrap">Tahapan</span>
               </button>
 
               <button
                 onClick={() => setActiveMobileTab("judul")}
-                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "judul"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 <FileText className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">Judul TA</span>
+                <span className="whitespace-nowrap">Judul TA</span>
               </button>
 
               <button
                 onClick={() => setActiveMobileTab("acc")}
-                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 min-w-[105px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "acc"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">Syarat ACC</span>
+                <span className="whitespace-nowrap">Syarat ACC</span>
               </button>
 
               <button
                 onClick={() => setActiveMobileTab("kalender")}
-                className={`flex-1 py-1.5 px-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "kalender"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">Kalender</span>
+                <span className="whitespace-nowrap">Kalender</span>
               </button>
             </div>
 
