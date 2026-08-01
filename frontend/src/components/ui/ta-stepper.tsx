@@ -85,7 +85,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
             Progres Perjalanan Tugas Akhir
           </h2>
         </div>
-        <span className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200 shadow-2xs font-display">
+        <span className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
           Tahap: {activeStep ? activeStep.title : "Selesai"}
         </span>
       </div>
