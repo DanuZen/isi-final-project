@@ -191,6 +191,22 @@ export default function SuperAdminUsersPage() {
                         </div>
                       </div>
 
+                      {selected.role.includes("Dosen") && (
+                        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Hak Penugasan Dosen (Admin Control):</span>
+                          <div className="space-y-2 pt-1">
+                            <label className="flex items-center justify-between text-xs font-bold text-slate-800 cursor-pointer">
+                              <span className="flex items-center gap-1.5"><UserCheck className="w-3.5 h-3.5 text-[#C62828]" /> Akses Dosen Pembimbing</span>
+                              <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#C62828] cursor-pointer" />
+                            </label>
+                            <label className="flex items-center justify-between text-xs font-bold text-slate-800 cursor-pointer">
+                              <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-blue-600" /> Akses Dosen Penguji</span>
+                              <input type="checkbox" defaultChecked className="w-4 h-4 accent-blue-600 cursor-pointer" />
+                            </label>
+                          </div>
+                        </div>
+                      )}
+
                       <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] font-semibold space-y-1">
                         <div className="flex items-center gap-1.5 font-bold text-emerald-800">
                           <Check className="w-3.5 h-3.5 text-emerald-700" />
