@@ -343,22 +343,23 @@ export default function PengujiRevisiPage() {
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Berkas Naskah Revisi Terunggah</span>
                       
                       {selectedR.filePdf ? (
-                        <div className="p-4 rounded-xl bg-blue-50/80 border border-blue-200 flex items-center justify-between gap-3 flex-wrap shadow-2xs">
-                          <div className="flex items-center gap-3">
+                        <div className="p-4 rounded-xl bg-blue-50/80 border border-blue-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+                          <div className="flex items-center gap-3 min-w-0 flex-1">
                             <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                               <FileText className="w-5 h-5 text-white" />
                             </div>
-                            <div>
-                              <p className="text-xs font-bold text-slate-900 font-display">{selectedR.filePdf}</p>
-                              <p className="text-[10.5px] text-blue-700 font-medium">{selectedR.revisiMasuk}</p>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs font-bold text-slate-900 font-display truncate">{selectedR.filePdf}</p>
+                              <p className="text-[10.5px] text-blue-700 font-medium truncate">{selectedR.revisiMasuk}</p>
                             </div>
                           </div>
 
                           <button
                             onClick={() => setShowPdfModal(true)}
-                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95"
+                            className="w-full sm:w-auto justify-center px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display active:scale-95 shrink-0"
                           >
-                            <Eye className="w-3.5 h-3.5 text-white" /> Pratinjau PDF
+                            <Eye className="w-3.5 h-3.5 text-white shrink-0" />
+                            <span className="whitespace-nowrap">Pratinjau PDF</span>
                           </button>
                         </div>
                       ) : (

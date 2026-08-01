@@ -260,14 +260,14 @@ export default function ProposalJudulPage() {
 
                         {fileDetails ? (
                           /* Uploaded State Box */
-                          <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 flex items-center justify-between gap-3 flex-wrap shadow-2xs">
-                            <div className="flex items-center gap-3">
+                          <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+                            <div className="flex items-center gap-3 min-w-0 flex-1">
                               <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                                 <FileText className="w-5 h-5 text-white" />
                               </div>
-                              <div>
-                                <p className="text-xs font-bold text-slate-900 font-display">{fileDetails.name}</p>
-                                <p className="text-[10.5px] text-emerald-700 font-medium">Terunggah ({fileDetails.size}) · {fileDetails.date}</p>
+                              <div className="min-w-0 flex-1">
+                                <p className="text-xs font-bold text-slate-900 font-display truncate">{fileDetails.name}</p>
+                                <p className="text-[10.5px] text-emerald-700 font-medium truncate">Terunggah ({fileDetails.size}) · {fileDetails.date}</p>
                               </div>
                             </div>
 
