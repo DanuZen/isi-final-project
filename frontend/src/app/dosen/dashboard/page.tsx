@@ -150,13 +150,6 @@ export default function DosenDashboardPage() {
                     Terdapat permohonan bimbingan baru yang membutuhkan konfirmasi Anda.
                   </p>
                 </div>
-
-                <div className="flex items-center gap-3 shrink-0">
-                  <div className="p-3 bg-neutral-800/80 rounded-xl border border-neutral-700 text-center w-full sm:w-auto">
-                    <p className="text-[10px] text-neutral-400 font-bold uppercase font-display">Kuota Bimbingan</p>
-                    <p className="text-lg font-black text-[#ffd01d] font-display">{DOSEN.kuotaTerisi} / {DOSEN.kuotaMaks}</p>
-                  </div>
-                </div>
               </div>
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828] absolute bottom-0 left-0 right-0" />
             </div>
@@ -169,7 +162,7 @@ export default function DosenDashboardPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Bimbingan Aktif</p>
-                  <p className="text-base sm:text-lg font-black text-slate-900 font-display truncate">{DOSEN.kuotaTerisi} Mhs</p>
+                  <p className="text-base sm:text-lg font-black text-slate-900 font-display truncate">{DOSEN.kuotaTerisi}/{DOSEN.kuotaMaks} Mhs</p>
                 </div>
               </div>
 
