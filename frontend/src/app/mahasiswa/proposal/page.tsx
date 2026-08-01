@@ -194,7 +194,7 @@ export default function ProposalJudulPage() {
                           Formulir Rincian Judul &amp; Abstrak Penelitian
                         </h3>
                       </div>
-                      <span className="text-xs font-mono text-slate-500 font-medium">
+                      <span className="hidden sm:inline-block text-xs font-mono text-slate-500 font-medium">
                         Semester Ganjil 2026/2027
                       </span>
                     </div>
