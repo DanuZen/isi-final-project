@@ -119,6 +119,7 @@ import { useToast } from "@/components/ui/toast";
 export default function PengajuanPembimbingPage() {
   const { showToast } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"katalog" | "usulan">("katalog");
 
   // Search & Filter State
   const [searchQuery, setSearchQuery] = useState("");
@@ -236,10 +237,37 @@ export default function PengajuanPembimbingPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("katalog")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "katalog"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Users className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Katalog Dosen</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("usulan")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "usulan"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Usulan Pembimbing</span>
+              </button>
+            </div>
+
             {/* Main 12-Column Grid (Flush Bottom Baseline Aligned) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left Column (8/12): Dosen Directory Table List */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "katalog" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                   {/* Table Header Controls */}
                   <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
@@ -385,7 +413,7 @@ export default function PengajuanPembimbingPage() {
               </div>
 
               {/* Right Column (4/12): Ringkasan Status & Form Modal Trigger */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-4 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "usulan" ? "flex" : "hidden lg:flex"}`}>
                 {/* Status Summary Card */}
                 <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-3.5 shrink-0">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
