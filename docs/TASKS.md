@@ -122,12 +122,12 @@ Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone.
 
 ### 🎓 Portal Mahasiswa (11 Halaman)
-- [x] `/mahasiswa/dashboard` — ✅ Sesuai (tombol banner disembunyikan di mobile, judul stepper diubah ke "Judul Tugas Akhir")
-- [x] `/mahasiswa/proposal` — ✅ Sesuai
-- [ ] `/mahasiswa/pembimbing` — 🔄 Belum dicek
-- [ ] `/mahasiswa/bimbingan` — 🔄 Belum dicek
-- [ ] `/mahasiswa/seminar` — 🔄 Belum dicek
-- [ ] `/mahasiswa/sidang` — 🔄 Belum dicek
+- [x] `/mahasiswa/dashboard` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
+- [x] `/mahasiswa/proposal` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Banner bersih tanpa tombol, Desktop 100% Utuh)
+- [x] `/mahasiswa/pembimbing` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
+- [x] `/mahasiswa/bimbingan` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
+- [x] `/mahasiswa/seminar` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
+- [x] `/mahasiswa/sidang` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
 - [ ] `/mahasiswa/list-judul` — 🔄 Belum dicek
 - [ ] `/mahasiswa/kalender` — 🔄 Belum dicek
 - [ ] `/mahasiswa/profil` — 🔄 Belum dicek
