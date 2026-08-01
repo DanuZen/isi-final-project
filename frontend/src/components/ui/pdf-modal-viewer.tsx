@@ -43,7 +43,7 @@ export function PDFModalViewer({
   };
 
   return (
-    <div className="fixed inset-[#000000] z-[9999] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4 md:p-6 overflow-y-auto">
       <div className="bg-white w-full max-w-4xl rounded-2xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-fade-in-scale">
         
         {/* Top Control Header (Non-Printable) */}
