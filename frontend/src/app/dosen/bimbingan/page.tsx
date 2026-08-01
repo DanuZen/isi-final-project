@@ -510,56 +510,56 @@ export default function DosenBimbinganPage() {
                 activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
               }`}>
                 {/* Header Card Detail */}
-                <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
-                  <div className="flex items-center gap-2.5">
+                <div className="p-3.5 sm:p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50 gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     {/* Mobile Back Button */}
                     <button
                       onClick={() => setActiveMobileTab("daftar")}
-                      className="lg:hidden p-1.5 rounded-xl bg-slate-200/80 text-slate-700 hover:bg-slate-300 transition-colors cursor-pointer shrink-0 flex items-center gap-1 text-xs font-bold font-display"
+                      className="lg:hidden p-1.5 px-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                       title="Kembali ke Daftar Mahasiswa"
                     >
-                      <ArrowLeft className="w-3.5 h-3.5 text-slate-800" />
-                      <span className="text-[11px]">Daftar</span>
+                      <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                      <span>Kembali</span>
                     </button>
 
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <UserCheck className="w-4 h-4 text-white" />
                     </div>
-                    <div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Detail &amp; Progres Mahasiswa</h2>
-                      <p className="text-[10px] text-slate-400 font-medium">Informasi lengkap &amp; histori log</p>
+                    <div className="min-w-0">
+                      <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display truncate">Detail Mahasiswa</h2>
+                      <p className="text-[10px] text-slate-400 font-medium truncate hidden sm:block">Informasi lengkap &amp; histori log</p>
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 font-mono">
+                  <span className="text-[10px] sm:text-[10.5px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 shrink-0">
                     {selectedMhs.nim}
                   </span>
                 </div>
 
                 {/* Content Area Detail */}
-                <div className="flex-1 overflow-y-auto scrollbar-none p-5 space-y-4">
+                <div className="flex-1 overflow-y-auto scrollbar-none p-4 sm:p-5 space-y-4">
                   {/* Student Profile Header Box */}
-                  <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
+                  <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 min-w-0">
                         <div
-                          className="w-12 h-12 rounded-2xl text-white font-black text-sm flex items-center justify-center shrink-0 shadow-md"
-                          style={{ background: TAHAP_COLOR[selectedMhs.tahap].color }}
+                          className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl text-white font-black text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-md font-display"
+                          style={{ background: TAHAP_COLOR[selectedMhs.tahap].bg }}
                         >
                           {selectedMhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                         </div>
-                        <div>
-                          <h3 className="text-base font-black text-slate-900 font-display leading-tight">
+                        <div className="min-w-0">
+                          <h3 className="text-sm sm:text-base font-black text-slate-900 font-display leading-tight truncate">
                             {selectedMhs.nama}
                           </h3>
-                          <p className="text-xs text-slate-500 font-medium">{selectedMhs.prodi}</p>
+                          <p className="text-xs text-slate-500 font-medium truncate">{selectedMhs.prodi}</p>
                           <p className="text-[10.5px] font-mono text-slate-400 font-medium">NIM: {selectedMhs.nim}</p>
                         </div>
                       </div>
 
-                      <div className="flex flex-col items-end gap-1.5">
+                      <div className="flex items-center gap-1.5 shrink-0 flex-wrap">
                         <span
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
+                          className="px-2.5 py-1 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
                           style={{
                             background: STATUS_COLOR[selectedMhs.status]?.bg,
                             color: STATUS_COLOR[selectedMhs.status]?.color,
@@ -568,7 +568,7 @@ export default function DosenBimbinganPage() {
                           {selectedMhs.status}
                         </span>
                         <span
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
+                          className="px-2.5 py-1 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
                           style={{
                             background: TAHAP_COLOR[selectedMhs.tahap].bg,
                             color: TAHAP_COLOR[selectedMhs.tahap].color,
