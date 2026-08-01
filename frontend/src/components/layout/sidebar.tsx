@@ -18,11 +18,12 @@ import {
 } from "lucide-react";
 import { ProfileModal } from "@/components/modals/profile-modal";
 
-interface NavItem {
+export interface NavItem {
   label: string;
   href: string;
   icon: React.ReactNode;
   badge?: string;
+  category?: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -68,36 +69,43 @@ export const DOSEN_NAV_ITEMS: NavItem[] = [
     label: "Dashboard Dosen",
     href: "/dosen/dashboard",
     icon: <LayoutDashboard className="w-4 h-4" />,
+    category: "Menu Utama",
   },
   {
     label: "Mahasiswa Bimbingan",
     href: "/dosen/bimbingan",
     icon: <UserCheck className="w-4 h-4" />,
+    category: "Tugas Pembimbing",
   },
   {
     label: "Permohonan Bimbingan",
     href: "/dosen/pengajuan",
     icon: <BookOpen className="w-4 h-4" />,
+    category: "Tugas Pembimbing",
   },
   {
     label: "Jadwal Pengujian",
     href: "/penguji/jadwal",
     icon: <CalendarDays className="w-4 h-4" />,
+    category: "Tugas Penguji",
   },
   {
     label: "Input Nilai Ujian",
     href: "/penguji/nilai",
     icon: <GraduationCap className="w-4 h-4" />,
+    category: "Tugas Penguji",
   },
   {
     label: "Verifikasi Revisi",
     href: "/penguji/revisi",
     icon: <FileSpreadsheet className="w-4 h-4" />,
+    category: "Tugas Penguji",
   },
   {
     label: "Kalender Saya",
     href: "/dosen/kalender",
     icon: <CalendarDays className="w-4 h-4" />,
+    category: "Agenda & Kalender",
   },
 ];
 
@@ -184,27 +192,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             {/* Middle Section: Mobile Nav Links (Scrollable & Compact) */}
             <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-              <div className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">
-                Menu Utama
-              </div>
-              {items.map((item) => {
+              {items.map((item, idx) => {
+                const showCategory =
+                  item.category
+                    ? idx === 0 || items[idx - 1].category !== item.category
+                    : idx === 0;
+                const categoryLabel = item.category || "Menu Utama";
                 const isActive = pathname === item.href;
+
                 return (
-                  <Link
-                    key={item.href}
-                    onClick={onToggle}
-                    href={item.href}
-                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-98 ${
-                      isActive
-                        ? "bg-[#C62828] text-white shadow-sm font-extrabold"
-                        : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
-                    }`}
-                  >
-                    <span className={isActive ? "text-white" : "text-[#888888]"}>
-                      {item.icon}
-                    </span>
-                    <span>{item.label}</span>
-                  </Link>
+                  <React.Fragment key={item.href}>
+                    {showCategory && (
+                      <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">
+                        {categoryLabel}
+                      </div>
+                    )}
+                    <Link
+                      onClick={onToggle}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-98 ${
+                        isActive
+                          ? "bg-[#C62828] text-white shadow-sm font-extrabold"
+                          : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
+                      }`}
+                    >
+                      <span className={isActive ? "text-white" : "text-[#888888]"}>
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                    </Link>
+                  </React.Fragment>
                 );
               })}
             </nav>
@@ -297,49 +314,55 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Navigation Links */}
         <nav className="flex-1 p-2 space-y-1 overflow-y-auto overflow-x-hidden">
-          {isOpen && (
-            <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">
-              Menu Utama
-            </div>
-          )}
-
-          {items.map((item) => {
+          {items.map((item, idx) => {
+            const showCategory =
+              item.category
+                ? idx === 0 || items[idx - 1].category !== item.category
+                : idx === 0;
+            const categoryLabel = item.category || "Menu Utama";
             const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                title={!isOpen ? item.label : undefined}
-                className={`flex items-center rounded-xl text-xs font-semibold transition-all duration-200 relative group ${
-                  isOpen
-                    ? "justify-between px-3.5 py-2.5"
-                    : "justify-center px-0 py-2.5 mx-auto w-10 h-10"
-                } ${
-                  isActive
-                    ? "bg-[#C62828] text-white shadow-xs font-bold"
-                    : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
-                }`}
-              >
-                <div
-                  className={`flex items-center ${isOpen ? "gap-3" : "justify-center"}`}
-                >
-                  <span
-                    className={
-                      isActive ? "text-white" : "text-[#888888] group-hover:text-white"
-                    }
-                  >
-                    {item.icon}
-                  </span>
-                  {isOpen && <span>{item.label}</span>}
-                </div>
 
-                {/* Tooltip on collapsed */}
-                {!isOpen && (
-                  <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-[#333333] text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
-                    {item.label}
-                  </span>
+            return (
+              <React.Fragment key={item.href}>
+                {isOpen && showCategory && (
+                  <div className="px-3 pt-3 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">
+                    {categoryLabel}
+                  </div>
                 )}
-              </Link>
+                <Link
+                  href={item.href}
+                  title={!isOpen ? item.label : undefined}
+                  className={`flex items-center rounded-xl text-xs font-semibold transition-all duration-200 relative group ${
+                    isOpen
+                      ? "justify-between px-3.5 py-2.5"
+                      : "justify-center px-0 py-2.5 mx-auto w-10 h-10"
+                  } ${
+                    isActive
+                      ? "bg-[#C62828] text-white shadow-xs font-bold"
+                      : "text-[#B0B0B0] hover:bg-[#252525] hover:text-white"
+                  }`}
+                >
+                  <div
+                    className={`flex items-center ${isOpen ? "gap-3" : "justify-center"}`}
+                  >
+                    <span
+                      className={
+                        isActive ? "text-white" : "text-[#888888] group-hover:text-white"
+                      }
+                    >
+                      {item.icon}
+                    </span>
+                    {isOpen && <span>{item.label}</span>}
+                  </div>
+
+                  {/* Tooltip on collapsed */}
+                  {!isOpen && (
+                    <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-[#333333] text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
+                      {item.label}
+                    </span>
+                  )}
+                </Link>
+              </React.Fragment>
             );
           })}
         </nav>
