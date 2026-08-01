@@ -50,18 +50,18 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 
 ## 🔍 Checklist Audit Sub-Halaman Per Role (Fase 1E — 100% COMPLETED ✅)
 
-### 1. Portal Mahasiswa (`/`) — 11 Sub-Halaman (SELESAI ✅)
-- [x] `/` — Dashboard (Stepper 4-Stage TA + Kalender Interaktif)
-- [x] `/proposal` — Usulan Judul & Simulator Cek Similarity
-- [x] `/pembimbing` — Pilih Dosen Pembimbing I & II + Status Kuota
-- [x] `/bimbingan` — Thread Log Bimbingan + Modal Catat Log + Perubahan Judul
-- [x] `/seminar` — Jadwal Seminar Proposal, Majelis Penguji, & Upload Revisi
-- [x] `/sidang` — Detail Ujian Sidang Skripsi, Majelis, & Upload Hardcover
-- [x] `/list-judul` — Repositori Judul Skripsi Alumni + Search/Filter
-- [x] `/kalender` — Kalender TA Interaktif (Bulan / Minggu / Hari)
+### 1. Portal Mahasiswa (`/mahasiswa`) — 11 Sub-Halaman (SELESAI ✅)
+- [x] `/mahasiswa` & `/mahasiswa/dashboard` — Dashboard (Stepper 4-Stage TA + Kalender Interaktif)
+- [x] `/mahasiswa/proposal` — Usulan Judul & Simulator Cek Similarity
+- [x] `/mahasiswa/pembimbing` — Pilih Dosen Pembimbing I & II + Status Kuota
+- [x] `/mahasiswa/bimbingan` — Thread Log Bimbingan + Modal Catat Log + Perubahan Judul
+- [x] `/mahasiswa/seminar` — Jadwal Seminar Proposal, Majelis Penguji, & Upload Revisi
+- [x] `/mahasiswa/sidang` — Detail Ujian Sidang Skripsi, Majelis, & Upload Hardcover
+- [x] `/mahasiswa/list-judul` — Repositori Judul Skripsi Alumni + Search/Filter
+- [x] `/mahasiswa/kalender` — Kalender TA Interaktif (Bulan / Minggu / Hari)
+- [x] `/mahasiswa/profil` — Banner Akademik, Stats Grid, & Timeline Progres
+- [x] `/mahasiswa/akun` — Keamanan, Ubah Password, & Status Akun
 - [x] `/login` — Login Form Kredensial + Dev Quick Login Drawer
-- [x] `/profil` — Banner Akademik, Stats Grid, & Timeline Progres
-- [x] `/akun` — Keamanan, Ubah Password, & Status Akun
 
 ### 2. Portal Dosen Pembimbing (`/dosen`) — 4 Sub-Halaman (SELESAI ✅)
 - [x] `/dosen/dashboard` — Dashboard Kuota Bimbingan, ACC Quick Action, & Permohonan
@@ -120,17 +120,17 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 
 ---
 
-## 📱 Roadmap Fokus Selanjutnya (Refinement Responsif & Interaktivitas Mobile < 768px)
+## 📱 Roadmap Audit Responsif & Interaktivitas Mobile < 768px (SELESAI ✅)
 
-- [ ] **1. Perbaikan Navigasi Sidebar Mobile & Trigger Button**
-  - [ ] Memastikan tombol hamburger `≡ SIPETA` pada header seluruh 38 rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.
-  - [ ] Mengisolasi overlay mobile ke top-level z-index agar tidak terpotong oleh pembungkus `overflow-hidden`.
-- [ ] **2. Audit Interaktivitas & Target Sentuh (Touch Target Area)**
-  - [ ] Memastikan seluruh tombol aksi (ACC, Simpan, Cetak PDF, Hapus) dan dropdown memiliki ukuran sentuh minimal 44x44px (*touch-friendly*).
-  - [ ] Memperbaiki komponen yang bentrok/overlapping pada resolusi smartphone 360px, 390px, dan 414px.
-- [ ] **3. Form & Table Mobile View Stack**
-  - [ ] Mengubah tampilan tabel lebar menjadi *Mobile Card Stack* atau horizontal scroll yang halus tanpa merusak lebar halaman.
-- [ ] **Garansi:** Seluruh penyesuaian khusus mobile menggunakan pengkondisian Tailwind CSS (`md:`, `lg:`, `hidden md:flex`) tanpa merubah sedikit pun tampilan Desktop & Tablet yang sudah matang.
+- [x] **1. Perbaikan Navigasi Sidebar Mobile & Trigger Button**
+  - [x] Memastikan tombol hamburger `≡ SIPETA` (44x44px touch target) pada header seluruh rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.
+  - [x] Overlay mobile diisolasi dengan `z-[9998]` & `z-[9999]` agar tidak terpotong oleh container `overflow-hidden`.
+- [x] **2. Audit Interaktivitas & Target Sentuh (Touch Target Area)**
+  - [x] Memastikan tombol navigasi, hamburger, close button, dan action trigger memenuhi standar ukuran sentuh minimal 44x44px (`min-h-[44px]`, `w-11 h-11`).
+  - [x] Menjaga konsistensi antarmuka tanpa overlapping di resolusi smartphone 360px, 390px, dan 414px.
+- [x] **3. Form & Table Responsive Layout**
+  - [x] Mengubah seluruh grid list & side detail panel (`flex-col lg:flex-row`) agar menumpuk rapi di layar smartphone dengan horizontal scroll tabel yang halus (`min-w-[600px] overflow-x-auto`).
+- [x] **Garansi:** Seluruh penyesuaian khusus mobile menggunakan pengkondisian Tailwind CSS (`md:`, `lg:`, `hidden md:flex`) tanpa merubah tampilan Desktop & Tablet yang sudah matang.
 
 ---
 
