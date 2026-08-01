@@ -96,6 +96,7 @@ const REQUESTS = [
 
 export default function DosenDashboardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"bimbingan" | "permohonan">("bimbingan");
   const [mahasiswaData, setMahasiswaData] = useState(MAHASISWA_LIST);
   const [requestsData, setRequestsData] = useState(REQUESTS);
 
@@ -197,10 +198,39 @@ export default function DosenDashboardPage() {
               </div>
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("bimbingan")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "bimbingan"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Bimbingan Aktif ({mahasiswaData.length})</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("permohonan")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "permohonan"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>Permohonan Masuk ({requestsData.length})</span>
+              </button>
+            </div>
+
             {/* ── Main Layout: 12 Columns ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               {/* Left Column (8/12): Daftar Mahasiswa Bimbingan */}
-              <div className="lg:col-span-8 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-8 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "bimbingan" ? "flex" : "hidden lg:flex"
+              }`}>
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs shrink-0">
@@ -278,7 +308,9 @@ export default function DosenDashboardPage() {
               </div>
 
               {/* Right Column (4/12): Permohonan Dosen Pembimbing Masuk */}
-              <div className="lg:col-span-4 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-4 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "permohonan" ? "flex" : "hidden lg:flex"
+              }`}>
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs shrink-0">
