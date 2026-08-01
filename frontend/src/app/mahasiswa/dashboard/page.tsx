@@ -119,7 +119,7 @@ export default function DashboardPage() {
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] md:text-[11px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-emerald-600 text-white shadow-xs font-display">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Akun Terverifikasi Akademik
                     </span>
                   </div>
