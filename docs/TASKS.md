@@ -135,14 +135,14 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/mahasiswa/akun` — ✅ Sesuai (Fixed Header, Responsive Modal Tab, Desktop 100% Utuh)
 - [x] `/login` — ✅ Sesuai (Responsive Portal Selector & Glassmorphism Card, Desktop 100% Utuh)
 
-### 👨‍🏫 Portal Dosen Terpadu (7 Halaman - 100% SELESAI ✅)
+### 👨‍🏫 Portal Dosen Terpadu (7 Halaman — 2/7 Audited 🔄)
 - [x] `/dosen/dashboard` — ✅ Sesuai (Welcome Banner Benchmark, Solid Red & Gold Theme, Emerald ACC Button, Desktop 100% Utuh)
 - [x] `/dosen/bimbingan` — ✅ Sesuai (Dropdown Filter Animated, Navigasi HP 1-Tap `← Kembali`, Re-aligned Card Layout, Emerald Green ACC Buttons & Badges, Desktop 100% Utuh)
-- [x] `/dosen/pengajuan` — ✅ Sesuai (Equal Height Desktop Riwayat, Mobile Tab Switcher, Emerald Terima Button & Status Badge, Desktop 100% Utuh)
-- [x] `/penguji/jadwal` — ✅ Sesuai (Pill Kapsul Solid Stat, Scrollable Table, Benchmark Red Header Date Tile, Desktop 100% Utuh)
-- [x] `/penguji/nilai` — ✅ Sesuai (Mobile Tab Switcher `[Mahasiswa | Rubrik]`, Navigasi HP 1-Tap `← Kembali`, Slider Weighted Score, Desktop 100% Utuh)
-- [x] `/penguji/revisi` — ✅ Sesuai (Mobile Tab Switcher `[List | Detail]`, Navigasi HP 1-Tap `← Kembali`, ACC Status Badges, Desktop 100% Utuh)
-- [x] `/dosen/kalender` — ✅ Sesuai (Kalender Bulanan Interaktif 7-Kolom, Event Dots Badges, Detail Side Panel, Desktop 100% Utuh)
+- [ ] `/dosen/pengajuan` — 🔄 Siap diaudit tampilan mobile
+- [ ] `/penguji/jadwal` — 🔄 Siap diaudit tampilan mobile
+- [ ] `/penguji/nilai` — 🔄 Siap diaudit tampilan mobile
+- [ ] `/penguji/revisi` — 🔄 Siap diaudit tampilan mobile
+- [ ] `/dosen/kalender` — 🔄 Siap diaudit tampilan mobile
 
 ### 🏛️ Portal Admin Prodi (6 Halaman)
 - [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek
