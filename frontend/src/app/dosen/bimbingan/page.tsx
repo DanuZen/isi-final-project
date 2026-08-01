@@ -136,17 +136,17 @@ const MAHASISWA: Array<MahasiswaItem> = [
 ];
 
 const TAHAP_COLOR: Record<TahapKey, { color: string; bg: string }> = {
-  "Usulan":   { color: "#b45309", bg: "#fffbeb" },
-  "Bimbingan":{ color: "#1d4ed8", bg: "#eff6ff" },
-  "Seminar":  { color: "#2563EB", bg: "#eff6ff" },
-  "Sidang":   { color: "#C62828", bg: "#fef2f2" },
-  "Selesai":  { color: "#059669", bg: "#ecfdf5" },
+  "Usulan":   { color: "#ffffff", bg: "#b45309" },
+  "Bimbingan":{ color: "#ffffff", bg: "#C62828" },
+  "Seminar":  { color: "#0f172a", bg: "#ffd01d" },
+  "Sidang":   { color: "#ffffff", bg: "#B71C1C" },
+  "Selesai":  { color: "#ffffff", bg: "#1e293b" },
 };
 
 const STATUS_COLOR: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
-  "On Track":        { color: "#059669", bg: "#ecfdf5", icon: CheckCircle2 },
-  "Perlu Perhatian": { color: "#b45309", bg: "#fffbeb", icon: AlertCircle },
-  "Lulus":           { color: "#475569", bg: "#f8fafc", icon: CheckCircle2 },
+  "On Track":        { color: "#ffffff", bg: "#C62828", icon: CheckCircle2 },
+  "Perlu Perhatian": { color: "#0f172a", bg: "#ffd01d", icon: AlertCircle },
+  "Lulus":           { color: "#ffffff", bg: "#1e293b", icon: CheckCircle2 },
 };
 
 export default function DosenBimbinganPage() {
@@ -565,7 +565,7 @@ export default function DosenBimbinganPage() {
 
                       <div className="flex flex-col items-end gap-1.5">
                         <span
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-bold"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
                           style={{
                             background: STATUS_COLOR[selectedMhs.status]?.bg,
                             color: STATUS_COLOR[selectedMhs.status]?.color,
@@ -574,7 +574,7 @@ export default function DosenBimbinganPage() {
                           {selectedMhs.status}
                         </span>
                         <span
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-bold"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold font-display shadow-2xs"
                           style={{
                             background: TAHAP_COLOR[selectedMhs.tahap].bg,
                             color: TAHAP_COLOR[selectedMhs.tahap].color,
@@ -590,7 +590,7 @@ export default function DosenBimbinganPage() {
                   <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Tugas Akhir</span>
-                      <span className="px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                      <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                         {selectedMhs.bidang}
                       </span>
                     </div>
@@ -599,7 +599,7 @@ export default function DosenBimbinganPage() {
                     </p>
                     <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-500">
                       <span>Pembimbing II: <strong className="text-slate-800">{selectedMhs.pembimbing2}</strong></span>
-                      <span className="font-bold text-emerald-600">Sesi: {selectedMhs.sesi}/{selectedMhs.minSesi}</span>
+                      <span className="font-black text-[#C62828]">Sesi: {selectedMhs.sesi}/{selectedMhs.minSesi}</span>
                     </div>
                   </div>
 
@@ -619,7 +619,13 @@ export default function DosenBimbinganPage() {
                         <div key={log.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
                           <div className="flex items-center justify-between text-[10.5px]">
                             <span className="font-bold text-slate-900 font-display">Sesi #{log.id} · {log.tgl}</span>
-                            <span className="text-[9.5px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span
+                              className={`text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full shadow-2xs font-display ${
+                                log.status.includes("ACC") || log.status.includes("Lulus")
+                                  ? "bg-[#ffd01d] text-slate-950"
+                                  : "bg-[#C62828] text-white"
+                              }`}
+                            >
                               {log.status}
                             </span>
                           </div>
@@ -638,7 +644,7 @@ export default function DosenBimbinganPage() {
                         onClick={() => handleToggleAcc(selectedMhs.nim, selectedMhs.nama)}
                         className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 ${
                           accGrantedMap[selectedMhs.nim]
-                            ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                            ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 font-extrabold"
                             : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
                         }`}
                       >
