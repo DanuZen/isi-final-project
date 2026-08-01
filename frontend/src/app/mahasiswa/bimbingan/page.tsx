@@ -195,13 +195,15 @@ export default function BimbinganPage() {
                           {logList.length} / 5 Sesi Recorded
                         </span>
 
-                        <button
-                          onClick={() => setShowLogModal(true)}
-                          className="md:hidden inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-[#C62828] text-white hover:bg-[#a81f1f] transition-all cursor-pointer font-display shrink-0"
-                        >
-                          <PlusCircle className="w-3.5 h-3.5" />
-                          <span>Catat Sesi</span>
-                        </button>
+                        {logList.length > 0 && (
+                          <button
+                            onClick={() => setShowLogModal(true)}
+                            className="md:hidden inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-[#C62828] text-white hover:bg-[#a81f1f] transition-all cursor-pointer font-display shrink-0"
+                          >
+                            <PlusCircle className="w-3.5 h-3.5" />
+                            <span>Tambah</span>
+                          </button>
+                        )}
                       </div>
                     </div>
 
