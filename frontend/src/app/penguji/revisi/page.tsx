@@ -408,24 +408,26 @@ export default function PengujiRevisiPage() {
                         <p className="text-xs font-bold text-white">Naskah Revisi Mahasiswa Telah DI-ACC &amp; Disetujui Sepenuhnya!</p>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-2.5">
+                      <div className="grid grid-cols-2 gap-2.5">
                         <button
                           onClick={() => handleAccRevisi(selectedR.nim, selectedR.nama)}
                           disabled={!selectedR.filePdf}
-                          className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 font-display active:scale-95 shadow-xs ${
+                          className={`py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-xs whitespace-nowrap ${
                             selectedR.filePdf
                               ? "bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
                               : "bg-slate-200 text-slate-400 cursor-not-allowed"
                           }`}
                         >
-                          <CheckCircle2 className="w-4 h-4 text-white" /> ACC Revisi Naskah
+                          <CheckCircle2 className="w-4 h-4 shrink-0 text-white" />
+                          <span>ACC</span>
                         </button>
 
                         <button
                           onClick={() => showToast(`Permintaan perbaikan ulang dikirim ke ${selectedR.nama}`)}
-                          className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] transition-all flex items-center justify-center gap-2 font-display active:scale-95 shadow-2xs cursor-pointer"
+                          className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] hover:border-rose-200 transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-2xs cursor-pointer whitespace-nowrap"
                         >
-                          <X className="w-4 h-4" /> Minta Perbaikan Ulang
+                          <X className="w-4 h-4 shrink-0 text-slate-400" />
+                          <span>Perbaiki</span>
                         </button>
                       </div>
                     )}

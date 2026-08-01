@@ -368,18 +368,20 @@ export default function DosenPengajuanPage() {
                 {/* Bottom Action Panel */}
                 {selectedMhs && (
                   <div className="p-4 border-t border-slate-100 bg-slate-50/80 shrink-0 space-y-2">
-                    <div className="flex items-center gap-2.5">
+                    <div className="grid grid-cols-2 gap-2.5">
                       <button
                         onClick={() => handleDecision(selectedMhs, "Diterima")}
-                        className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
+                        className="py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95 font-display whitespace-nowrap"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-white" /> Terima Mahasiswa Bimbingan
+                        <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+                        <span>ACC</span>
                       </button>
                       <button
                         onClick={() => handleDecision(selectedMhs, "Ditolak")}
-                        className="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-800 transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
+                        className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] hover:border-rose-200 transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer active:scale-95 font-display whitespace-nowrap"
                       >
-                        <XCircle className="w-4 h-4 text-slate-700" /> Tolak
+                        <XCircle className="w-4 h-4 text-slate-400 shrink-0" />
+                        <span>Tolak</span>
                       </button>
                     </div>
                   </div>
