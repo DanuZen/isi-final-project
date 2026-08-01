@@ -182,9 +182,9 @@ export default function DosenPengajuanPage() {
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
                   activeMobileTab === "permohonan" ? "flex" : "hidden lg:flex"
                 }`}>
-                  <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+                  <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <UserCheck className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -192,7 +192,7 @@ export default function DosenPengajuanPage() {
                         <p className="text-[10px] text-slate-400 font-medium">Klik permohonan untuk pratinjau detail</p>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-[10.5px] font-bold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
+                    <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                       {pengajuanList.length} Menunggu
                     </span>
                   </div>
@@ -251,17 +251,17 @@ export default function DosenPengajuanPage() {
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
                   activeMobileTab === "riwayat" ? "flex" : "hidden lg:flex"
                 }`}>
-                  <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+                  <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <HistoryIcon className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h2 className="text-xs font-bold text-slate-800 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
+                        <h2 className="font-bold text-sm text-slate-900 font-display">Riwayat Keputusan</h2>
                         <p className="text-[10px] text-slate-400 font-medium">Histori pengajuan yang telah disetujui / ditolak</p>
                       </div>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 font-display">
+                    <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-slate-100 text-slate-700 shadow-2xs font-display">
                       {riwayatList.length} Aksi
                     </span>
                   </div>
@@ -320,7 +320,7 @@ export default function DosenPengajuanPage() {
                   </div>
 
                   {selectedMhs && (
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
+                    <span className="text-[10.5px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
                       {selectedMhs.nim}
                     </span>
                   )}
