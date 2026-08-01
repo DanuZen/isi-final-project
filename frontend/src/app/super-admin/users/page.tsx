@@ -115,12 +115,12 @@ export default function SuperAdminUsersPage() {
             </div>
 
             {/* Grid Layout with Live Side Detail Panel Card */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["ID / NIM / NIDN", "Nama Pengguna", "Hak Akses / Role", "Unit Kerja", "Login Terakhir", "Status Akun"].map((h) => (
@@ -129,30 +129,32 @@ export default function SuperAdminUsersPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {filtered.map((u) => {
-                        const isSelected = selected?.id === u.id;
+                      {filtered.map((row) => {
+                        const isSelected = selected?.id === row.id;
                         return (
                           <tr
-                            key={u.id}
-                            onClick={() => setSelectedId(u.id)}
+                            key={row.id}
+                            onClick={() => setSelectedId(row.id)}
                             className={`transition-all cursor-pointer select-none ${
                               isSelected
                                 ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
                                 : "hover:bg-slate-50"
                             }`}
                           >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900">{u.id}</td>
-                            <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{u.nama}</td>
+                            <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900 whitespace-nowrap">{row.id}</td>
+                            <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
-                                {u.role}
+                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                                {row.role}
                               </span>
                             </td>
-                            <td className="px-4 py-3.5 text-slate-600 whitespace-nowrap font-medium">{u.unit}</td>
-                            <td className="px-4 py-3.5 text-slate-500 whitespace-nowrap font-mono">{u.lastLogin}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.unit}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-500 text-[11px] font-medium">{row.lastLogin}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${u.status === "Aktif" ? "bg-emerald-600" : "bg-slate-500"}`}>
-                                {u.status}
+                              <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-bold ${
+                                row.status === "Aktif" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"
+                              }`}>
+                                {row.status}
                               </span>
                             </td>
                           </tr>
@@ -165,7 +167,7 @@ export default function SuperAdminUsersPage() {
 
               {/* Live Side Detail Panel Card */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     
                     <div className="pb-3 border-b border-slate-100 space-y-2">

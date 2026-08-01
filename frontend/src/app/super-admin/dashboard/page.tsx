@@ -166,40 +166,33 @@ export default function SuperAdminDashboard() {
             </div>
 
             {/* ── Grid Content Section (Compact List + Live Side Panel) ── */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* User List Table (Flex-1) */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                      <Users className="w-4 h-4 text-white" />
+                      <Users className="w-4 h-4" />
                     </div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Manajemen Pengguna Terdaftar ({filtered.length})</h2>
-                  </div>
-                  <div className="relative">
-                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                    <input
-                      type="text"
-                      placeholder="Cari nama, ID, role..."
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all font-display"
-                    />
+                    <div>
+                      <h3 className="font-bold text-sm text-slate-900 font-display">Tabel Manajemen User Sistem</h3>
+                      <p className="text-[11px] text-slate-500 font-medium">Klik baris untuk melihat detail hak akses &amp; aksi cepat</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                <div className="overflow-y-auto flex-1 scrollbar-none pb-8">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
-                        {["ID / NIM / NIP", "Nama Pengguna", "Hak Akses / Role", "Unit Kerja", "Login Terakhir", "Status Akun"].map((h) => (
-                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                        {["NIM / NIDN / User ID", "Nama Pengguna", "Hak Akses (Role)", "Unit Kerja / Prodi", "Login Terakhir", "Status"].map((h) => (
+                          <th key={h} className="px-4 py-3 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {filtered.map((u) => {
+                      {USERS.map((u) => {
                         const isSelected = selected?.id === u.id;
                         return (
                           <tr
@@ -211,12 +204,14 @@ export default function SuperAdminDashboard() {
                                 : "hover:bg-slate-50"
                             }`}
                           >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900">{u.id}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap font-mono text-[11px] font-bold text-slate-900">{u.id}</td>
                             <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{u.nama}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">{u.role}</span>
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
+                                {u.role}
+                              </span>
                             </td>
-                            <td className="px-4 py-3.5 text-slate-600 font-medium">{u.unit}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-600 font-medium">{u.unit}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap text-slate-400 font-mono">{u.lastLogin}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
                               <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${u.status === "Aktif" ? "bg-emerald-600" : "bg-slate-500"}`}>
@@ -233,7 +228,7 @@ export default function SuperAdminDashboard() {
 
               {/* Side Detail Panel Card (Live Updates Based on Selected User) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     
                     <div className="pb-3 border-b border-slate-100 space-y-2">

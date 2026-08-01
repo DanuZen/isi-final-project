@@ -128,12 +128,12 @@ export default function SuperAdminMasterPage() {
             </div>
 
             {/* Grid Layout with Live Side Detail Panel Card */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["Kode", "Nama Program Studi", "Jenjang", "Ketua Prodi (Ka. Prodi)", "Status Akreditas", "Jumlah Mahasiswa TA"].map((h) => (
@@ -174,7 +174,7 @@ export default function SuperAdminMasterPage() {
 
               {/* Live Side Detail Panel Card */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     
                     <div className="pb-3 border-b border-slate-100 space-y-2">
