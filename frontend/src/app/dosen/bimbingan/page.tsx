@@ -452,7 +452,7 @@ export default function DosenBimbinganPage() {
                               <div className="w-28 space-y-1">
                                 <div className="flex items-center justify-between text-[9px]">
                                   <span
-                                    className="px-1.5 py-0.5 rounded-full font-bold"
+                                    className="px-2 py-0.5 rounded-full font-extrabold shadow-2xs font-display"
                                     style={{ background: tahapCfg.bg, color: tahapCfg.color }}
                                   >
                                     {mhs.tahap}
@@ -464,7 +464,7 @@ export default function DosenBimbinganPage() {
                                     className="h-1.5 rounded-full transition-all"
                                     style={{
                                       width: `${sesiPct}%`,
-                                      background: sesiPct >= 100 ? "#059669" : "#C62828",
+                                      background: sesiPct >= 100 ? "#ffd01d" : "#C62828",
                                     }}
                                   />
                                 </div>
@@ -494,9 +494,9 @@ export default function DosenBimbinganPage() {
                                 {mhs.tahap !== "Selesai" && (
                                   <button
                                     onClick={() => handleToggleAcc(mhs.nim, mhs.nama)}
-                                    className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-bold transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-xs ${
+                                    className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-extrabold transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-xs font-display ${
                                       isAccGranted
-                                        ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                                        ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950"
                                         : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
                                     }`}
                                   >
