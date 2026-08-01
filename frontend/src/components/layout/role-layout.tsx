@@ -101,7 +101,7 @@ export function RoleLayout({
 
               {/* Middle Section: Mobile Nav Links (Scrollable & Compact) */}
               <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-                <div className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#888888] font-display">Menu Utama</div>
+                <div className="px-3 pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">Menu Utama</div>
                 {navItems.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -190,6 +190,9 @@ export function RoleLayout({
 
           {/* Nav items */}
           <nav className="flex-1 py-3 overflow-y-auto scrollbar-none space-y-0.5 px-2">
+            {sidebarOpen && (
+              <div className="px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B] font-display">Menu Utama</div>
+            )}
             {navItems.map((item) => {
               const active = pathname === item.href;
               return (
