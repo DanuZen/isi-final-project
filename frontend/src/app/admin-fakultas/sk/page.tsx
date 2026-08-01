@@ -141,12 +141,12 @@ export default function AdminFakultasSkPage() {
             </div>
 
             {/* Grid layout with Detail Side Panel */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[700px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["No. SK Dekan", "Jenis SK", "Dosen Terlampir", "NIDN", "Mahasiswa TA", "NIM", "Tgl Pengajuan", "Status"].map((h) => (
@@ -185,7 +185,7 @@ export default function AdminFakultasSkPage() {
                                 </span>
                               ) : (
                                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-600 text-white shadow-2xs font-display">
-                                  <Clock className="w-3 h-3 text-white" /> Pending
+                                  Drafting SK
                                 </span>
                               )}
                             </td>
@@ -199,7 +199,7 @@ export default function AdminFakultasSkPage() {
 
               {/* Side Detail Panel Card (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     <div className="pb-3 border-b border-slate-100 space-y-1">
                       <div className="flex items-center justify-between gap-2">

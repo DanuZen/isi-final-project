@@ -143,12 +143,12 @@ export default function AdminProdiRepositoriPage() {
             </div>
 
             {/* Grid layout with Detail Side Panel */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["Kode / Tahun", "Judul Skripsi Alumni", "Bidang Kajian", "Penulis (Alumni)", "Dosen Pembimbing"].map((h) => (
@@ -170,23 +170,18 @@ export default function AdminProdiRepositoriPage() {
                                   : "hover:bg-slate-50"
                               }`}
                             >
-                              <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500 whitespace-nowrap">
-                                <span className="font-bold text-slate-700 block">{repo.id}</span>
-                                <span className="text-[10px] text-slate-400 font-semibold">{repo.tahun}</span>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className="font-mono text-[10.5px] font-bold text-slate-900">{repo.id}</span>
+                                <p className="text-[10px] text-slate-400 font-medium">{repo.tahun}</p>
                               </td>
-                              <td className="px-4 py-3.5 max-w-sm space-y-0.5">
-                                <h3 className="font-bold text-slate-900 text-xs sm:text-sm font-display leading-snug">
-                                  &ldquo;{repo.judul}&rdquo;
-                                </h3>
-                                <p className="text-[11px] text-slate-500 line-clamp-1 font-medium leading-relaxed">{repo.abstrak}</p>
+                              <td className="px-4 py-3.5 max-w-xs">
+                                <p className="text-slate-800 font-bold truncate text-[11.5px] font-display">&ldquo;{repo.judul}&rdquo;</p>
                               </td>
                               <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1 font-display">
-                                  <Tag className="w-2.5 h-2.5" /> {repo.bidang}
-                                </span>
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 font-display">{repo.bidang}</span>
                               </td>
                               <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="font-bold text-slate-900 block font-display">{repo.penulis}</span>
+                                <span className="font-bold text-slate-900 font-display">{repo.penulis}</span>{" "}
                                 <span className="text-[10.5px] font-mono text-slate-400">({repo.nim})</span>
                               </td>
                               <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">
@@ -215,7 +210,7 @@ export default function AdminProdiRepositoriPage() {
 
               {/* Side Detail Panel (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     <div className="pb-3 border-b border-slate-100 space-y-1">
                       <div className="flex items-center justify-between gap-2">

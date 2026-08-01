@@ -168,10 +168,10 @@ export default function AdminProdiMahasiswaPage() {
             </div>
 
             {/* Grid layout with Detail Side Panel */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
-              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex flex-col`}>
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto`}>
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK"].map((h) => (
@@ -213,7 +213,7 @@ export default function AdminProdiMahasiswaPage() {
 
               {/* Always Visible Detail Panel (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     <div className="pb-3 border-b border-slate-100">
                       <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa Selected</span>

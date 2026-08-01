@@ -156,12 +156,12 @@ export default function DekanatKalenderPage() {
             </div>
 
             {/* Grid layout with Detail Side Panel */}
-            <div className="flex gap-4 items-stretch flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
                 <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs">
+                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["Tanggal & Waktu", "Mahasiswa", "Prodi", "Jenis Ujian", "Ketua Penguji", "Ruangan"].map((h) => (
@@ -183,20 +183,20 @@ export default function DekanatKalenderPage() {
                             }`}
                           >
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="font-bold text-slate-900 block font-display">{row.tgl}</span>
-                              <span className="text-[10px] text-slate-400 font-mono font-semibold">{row.waktu}</span>
+                              <span className="font-bold text-slate-900 font-display block">{row.tgl}</span>
+                              <span className="text-[10px] text-slate-400 font-mono">{row.waktu}</span>
                             </td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="font-bold text-slate-900 block font-display">{row.mhs}</span>
-                              <span className="text-[10.5px] font-mono text-slate-400">({row.nim})</span>
+                              <span className="font-bold text-slate-900 font-display block">{row.mhs}</span>
+                              <span className="text-[10px] text-slate-400 font-mono">NIM: {row.nim}</span>
                             </td>
-                            <td className="px-4 py-3.5 text-slate-600 whitespace-nowrap font-medium">{row.prodi}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-600 font-medium">{row.prodi}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
+                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
                                 {row.jenis}
                               </span>
                             </td>
-                            <td className="px-4 py-3.5 text-slate-800 font-semibold whitespace-nowrap">{row.ketua}</td>
+                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.ketua}</td>
                             <td className="px-4 py-3.5 whitespace-nowrap font-bold text-[#C62828] font-display">{row.ruang}</td>
                           </tr>
                         );
@@ -208,7 +208,7 @@ export default function DekanatKalenderPage() {
 
               {/* Side Detail Panel Card (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
                     <div className="pb-3 border-b border-slate-100 space-y-1">
                       <div className="flex items-center justify-between gap-2">
