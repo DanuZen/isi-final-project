@@ -112,9 +112,8 @@ Setiap portal role (Dosen, Admin Prodi, Admin Fakultas, Dekanat, Super Admin) **
 | Role | Badge Color |
 |---|---|
 | Mahasiswa | `bg-emerald-600` |
-| Dosen Pembimbing | `bg-[#C62828]` (merah) |
-| Dosen Penguji | `bg-violet-600` |
-| Admin Prodi FIK | `bg-blue-700` |
+| Dosen | `bg-[#C62828]` (merah) |
+| Admin Prodi | `bg-blue-700` |
 | Admin Fakultas | `bg-indigo-700` |
 | Pimpinan / Dekanat | `bg-amber-600` |
 | Super Admin | `bg-slate-800` |

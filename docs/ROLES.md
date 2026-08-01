@@ -81,7 +81,7 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 
 ---
 
-### 3.4 Admin Prodi FIK (`ADMIN_PRODI`)
+### 3.4 Admin Program Studi / Admin Prodi (`ADMIN_PRODI`)
 * **Konteks Peran:** Pengelola administrasi akademik Tugas Akhir di tingkat Program Studi (Teknik Informatika, Sistem Informasi, dll.).
 * **Fungsi & Fitur Utama:**
   1. **Aktivasi Akun (Pasca Clearing Luring):** Memeriksa bukti fisik clearing nilai dari mahasiswa yang mengurus langsung ke kampus, lalu mengaktifkan akun SIPETA mahasiswa.

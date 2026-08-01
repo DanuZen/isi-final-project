@@ -83,13 +83,12 @@ Seluruh 38 rute aplikasi telah 100% mematuhi arsitektur Fit-Viewport Layout & Cl
 | Portal Role | Jumlah Rute | Mode Layout | Status Build |
 |---|:---:|---|:---:|
 | Mahasiswa | 11 Rute | Fit Viewport 100% | ✅ Pass |
-| Dosen Pembimbing | 4 Rute | Fit Viewport 100% | ✅ Pass |
-| Dosen Penguji | 4 Rute | Fit Viewport 100% | ✅ Pass |
-| Admin Prodi FIK | 5 Rute | Fit Viewport 100% (List + Side Panel) | ✅ Pass |
+| Dosen | 7 Rute | Fit Viewport 100% | ✅ Pass |
+| Admin Prodi | 6 Rute | Fit Viewport 100% (List + Side Panel) | ✅ Pass |
 | Admin Fakultas | 4 Rute | Fit Viewport 100% (List + Side Panel) | ✅ Pass |
 | Dekanat / Pimpinan | 4 Rute | 3 Fit Viewport + 1 Natural Scroll (`/statistik`) | ✅ Pass |
 | Super Admin | 5 Rute | Fit Viewport 100% (List + Side Panel) | ✅ Pass |
-| **TOTAL** | **38 Rute** | **100% Standardized** | **✅ Pass (`npm run build`)** |
+| **TOTAL** | **37 Rute** | **100% Standardized** | **✅ Pass (`npx next build`)** |
 
 ---
 

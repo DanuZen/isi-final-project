@@ -11,20 +11,19 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 | **Fondasi & System Design** | — | ✅ Selesai | ✅ Viewport Shell (`100dvh`) |
 | **Halaman Auth (Login)** | 1 Rute | ✅ Selesai | ✅ Form + Dev Quick Login Drawer |
 | **1. Portal Mahasiswa** | 11 Rute | ✅ Selesai | ✅ 11 Sub-Halaman Selesai & Terverifikasi |
-| **2. Portal Dosen Pembimbing** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
-| **3. Portal Dosen Penguji** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
-| **4. Portal Admin Program Studi (Prodi)** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
-| **5. Portal Admin Fakultas** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
-| **6. Portal Pimpinan / Dekanat** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
-| **7. Portal Super Admin** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
-| **8. Backend Integration Guide** | — | ✅ Selesai | ✅ [BACKEND_INTEGRATION_GUIDE.md](file:///c:/Users/wira1/sipeta-upiyptk/docs/BACKEND_INTEGRATION_GUIDE.md) |
-| **TOTAL KESELURUHAN** | **38 Rute** | **✅ 100% Built** | **✅ 100% Audited & Polished** |
+| **2. Portal Dosen** | 7 Rute | ✅ Selesai | ✅ 7 Sub-Halaman Selesai (Dashboard, Bimbingan, Permohonan, Jadwal Pengujian, Input Nilai, Revisi, Kalender) |
+| **3. Portal Admin Program Studi (Prodi)** | 6 Rute | ✅ Selesai | ✅ 6 Sub-Halaman Selesai & Terverifikasi |
+| **4. Portal Admin Fakultas** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
+| **5. Portal Pimpinan / Dekanat** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
+| **6. Portal Super Admin** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
+| **7. Backend Integration Guide** | — | ✅ Selesai | ✅ [BACKEND_INTEGRATION_GUIDE.md](file:///c:/Users/wira1/sipeta-upiyptk/docs/BACKEND_INTEGRATION_GUIDE.md) |
+| **TOTAL KESELURUHAN** | **37 Rute** | **✅ 100% Built** | **✅ 100% Audited & Polished** |
 
 ---
 
 ## 🎨 Standar Desain UI/UX & Pola Komponen (Design Pattern Guidelines)
 
-Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
+Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 
 1. **Warna Red Signature (`#C62828` / `bg-[#C62828]`)**:
    - Digunakan sebagai warna aksen utama, tombol primer, badge role penting, dan border aktif.
@@ -34,7 +33,7 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
    - Dilarang menggunakan warna ungu (`#7C3AED`) di mana pun. Indikator Seminar Proposal menggunakan warna Teal (`#0D9488`).
 4. **Pola Tabel Ringkas + Kartu Panel Detail Samping (Compact List + Side Detail Panel Card)**:
    - Kolom `AKSI` yang memakan tempat dihapus dari tabel utama.
-   - Mengklik baris tabel akan mengupdate secara *live* kartu panel detail di sebelah kanan (`w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between p-5`).
+   - Mengklik baris tabel akan mengupdate secara *live* kartu panel detail di sebelah kanan (`w-80 shrink-0 bg-[#FAFAFA] rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between p-5`).
    - Baris tabel yang dipilih ditandai dengan highlight `bg-rose-50/70 border-l-4 border-l-[#C62828]`.
 5. **Layout Fit to Viewport 100% vs Natural Page Scroll**:
    - *Fit to Viewport (`viewport-shell bg-[#FAFAFA]`)*: Diterapkan pada rute berorientasi tabel list & manajemen cepat agar tidak ada vertical scrolling di layar utama.
@@ -42,9 +41,9 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 6. **Tidak Ada Badge Redundan**:
    - Penghapusan badge "Menunggu Verifikasi" pada antrean yang sudah didedikasikan khusus untuk barang yang butuh verifikasi.
 7. **Skeleton Loading UI System (`loading.tsx`)**:
-   - Terpasang pada seluruh 7 role portal di aplikasi SIPETA menggunakan komponen `PageSkeleton` beranimasi denyut halus (`animate-pulse bg-slate-200`) untuk memberikan masukan visual instan saat halaman dimuat.
+   - Terpasang pada seluruh 6 role portal di aplikasi SIPETA menggunakan komponen `PageSkeleton` beranimasi denyut halus (`animate-pulse bg-slate-200`) untuk memberikan masukan visual instan saat halaman dimuat.
 8. **Empty State UI System**:
-   - Apabila tabel atau histori data masih kosong, sistem wajib menampilkan visual Empty State berupa ikon terkait ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*).
+   - Apabila tabel, histori data, bimbingan, atau jadwal ujian masih kosong, sistem wajib menampilkan visual Empty State berupa ikon terkait ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*).
 
 ---
 
@@ -63,19 +62,16 @@ Seluruh 38 rute di 7 role telah diselaraskan dengan standar berikut:
 - [x] `/mahasiswa/akun` — Keamanan, Ubah Password, & Status Akun
 - [x] `/login` — Login Form Kredensial + Dev Quick Login Drawer
 
-### 2. Portal Dosen Pembimbing (`/dosen`) — 4 Sub-Halaman (SELESAI ✅)
-- [x] `/dosen/dashboard` — Dashboard Kuota Bimbingan, ACC Quick Action, & Permohonan
-- [x] `/dosen/bimbingan` — Mahasiswa Bimbingan (Card Grid, Sesi Progress Bar, Action ACC)
-- [x] `/dosen/pengajuan` — Permohonan Pembimbing Masuk (Detail IPK/SKS, Alasan Toggle, Terima/Tolak)
-- [x] `/dosen/kalender` — Jadwal & Sidang (Timeline Date Block, Label Jenis, Presence Button)
-
-### 3. Portal Dosen Penguji (`/penguji`) — 4 Sub-Halaman (SELESAI ✅)
-- [x] `/penguji/dashboard` — Dashboard Penguji (Stats Grid 4-Metrik, Tabel Pengujian, Input Nilai Quick)
-- [x] `/penguji/jadwal` — Jadwal Pengujian (Tabel Sempro/Sidang, Date Block Visual, Search & Filter)
+### 2. Portal Dosen Terpadu (`/dosen` & `/penguji`) — 7 Sub-Halaman (SELESAI ✅)
+- [x] `/dosen/dashboard` — Dashboard Terpadu Dosen (Stats Grid 4-Metrik Bimbingan & Pengujian, Quick Action ACC)
+- [x] `/dosen/bimbingan` — Mahasiswa Bimbingan (Card Grid, Sesi Progress Bar, Action ACC, Empty State System)
+- [x] `/dosen/pengajuan` — Permohonan Pembimbing Masuk (Detail IPK/SKS, Terima/Tolak, Empty State System)
+- [x] `/penguji/jadwal` — Jadwal Pengujian (Tabel Sempro/Sidang, Date Block Visual, Search & Filter, Empty State System)
 - [x] `/penguji/nilai` — Input Nilai (Form Skor Per Komponen, Range Slider, Weighted Auto Score)
-- [x] `/penguji/revisi` — Lembar Revisi (Catatan Revisi, Review Upload Mahasiswa, ACC Revisi)
+- [x] `/penguji/revisi` — Lembar Revisi (Catatan Revisi, Review Upload Mahasiswa, ACC Revisi, Empty State System)
+- [x] `/dosen/kalender` — Kalender Saya (Timeline Date Block Bimbingan & Ujian, Label Jenis, Presence Button)
 
-### 4. Portal Admin Prodi FIK (`/admin-prodi`) — 6 Sub-Halaman (SELESAI ✅)
+### 3. Portal Admin Program Studi / Admin Prodi (`/admin-prodi`) — 6 Sub-Halaman (SELESAI ✅)
 - [x] `/admin-prodi/dashboard` — Dashboard Prodi (Stats Grid Amber `#D97706`, Tabel Mahasiswa TA, Aktivasi Quick Panel)
 - [x] `/admin-prodi/mahasiswa` — Manajemen Mahasiswa TA (Tabel List Ringkas, Filter Tahap, Live Side Panel Detail)
 - [x] `/admin-prodi/dosen` — Penugasan Dosen (Bilah Pencarian/Filter Role, Live Toggle Akses Pembimbing & Penguji, Setting Kuota Bimbingan)

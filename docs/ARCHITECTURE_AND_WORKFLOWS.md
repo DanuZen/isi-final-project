@@ -48,7 +48,7 @@ sipeta-upiyptk/
     │   │   ├── nilai/           # Form Input Nilai (Weighted Range Slider)
     │   │   └── revisi/          # Verification Lembar Revisi Ujian
     │   │
-    │   ├── admin-prodi/         # 🏫 Portal Admin Prodi FIK (5 Rute)
+    │   ├── admin-prodi/         # 🏫 Portal Admin Prodi (6 Rute)
     │   │   ├── dashboard/       # Dashboard Operasional Prodi
     │   │   ├── mahasiswa/       # Master Data Mahasiswa TA & Side Panel
     │   │   ├── aktivasi/        # Aktivasi Akun Pasca Clearing Luring
@@ -89,13 +89,12 @@ sipeta-upiyptk/
 |---|---|:---:|---|
 | **Auth** | Login & Akses | 1 Rute | `/login` |
 | **1. Mahasiswa** | Pengguna Akademik | 11 Rute | `/`, `/proposal`, `/pembimbing`, `/bimbingan`, `/seminar`, `/sidang`, `/list-judul`, `/kalender`, `/profil`, `/akun` |
-| **2. Dosen Pembimbing** | Evaluator & Pembimbing | 4 Rute | `/dosen/dashboard`, `/dosen/bimbingan`, `/dosen/pengajuan`, `/dosen/kalender` |
-| **3. Dosen Penguji** | Evaluator Ujian | 4 Rute | `/penguji/dashboard`, `/penguji/jadwal`, `/penguji/nilai`, `/penguji/revisi` |
-| **4. Admin Prodi FIK** | Pengelola Operasional | 5 Rute | `/admin-prodi/dashboard`, `/admin-prodi/mahasiswa`, `/admin-prodi/aktivasi`, `/admin-prodi/jadwal`, `/admin-prodi/repositori` |
-| **5. Admin Fakultas** | Administrator Fakultas | 4 Rute | `/admin-fakultas/dashboard`, `/admin-fakultas/sk`, `/admin-fakultas/bebas`, `/admin-fakultas/arsip` |
-| **6. Pimpinan / Dekanat**| Executive Monitoring | 4 Rute | `/dekanat/dashboard`, `/dekanat/statistik`, `/dekanat/kalender`, `/dekanat/laporan` |
-| **7. Super Admin** | Administrator Teknis | 5 Rute | `/super-admin/dashboard`, `/super-admin/users`, `/super-admin/audit`, `/super-admin/config`, `/super-admin/master` |
-| **TOTAL** | | **38 Rute** | **Seluruh Rute Berhasil Terkompilasi & Siap Diaudit** |
+| **2. Dosen** | Pembimbing & Penguji | 7 Rute | `/dosen/dashboard`, `/dosen/bimbingan`, `/dosen/pengajuan`, `/penguji/jadwal`, `/penguji/nilai`, `/penguji/revisi`, `/dosen/kalender` |
+| **3. Admin Prodi** | Pengelola Operasional Prodi | 6 Rute | `/admin-prodi/dashboard`, `/admin-prodi/mahasiswa`, `/admin-prodi/dosen`, `/admin-prodi/aktivasi`, `/admin-prodi/jadwal`, `/admin-prodi/repositori` |
+| **4. Admin Fakultas** | Administrator Fakultas | 4 Rute | `/admin-fakultas/dashboard`, `/admin-fakultas/sk`, `/admin-fakultas/bebas`, `/admin-fakultas/arsip` |
+| **5. Pimpinan / Dekanat**| Executive Monitoring | 4 Rute | `/dekanat/dashboard`, `/dekanat/statistik`, `/dekanat/kalender`, `/dekanat/laporan` |
+| **6. Super Admin** | Administrator Teknis | 5 Rute | `/super-admin/dashboard`, `/super-admin/users`, `/super-admin/audit`, `/super-admin/config`, `/super-admin/master` |
+| **TOTAL** | | **37 Rute** | **Seluruh Rute Berhasil Terkompilasi & Siap Diaudit** |
 
 ---
 

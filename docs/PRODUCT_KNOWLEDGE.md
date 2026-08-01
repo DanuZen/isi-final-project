@@ -533,7 +533,7 @@ Berikut adalah ringkasan hubungan dan pertukaran data antar 7 role dalam SIPETA:
 
 ---
 
-### 8.4 Portal Admin Prodi FIK — 5 Modul
+### 8.4 Portal Admin Program Studi (Admin Prodi) — 6 Modul
 
 | No | Rute | Nama Modul | Fitur Utama |
 |:---:|---|---|---|
