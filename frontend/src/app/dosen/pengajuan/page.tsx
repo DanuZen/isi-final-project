@@ -136,39 +136,39 @@ export default function DosenPengajuanPage() {
             </div>
 
             {/* ── Mobile Segmented Control Switcher (<1024px) ── */}
-            <div className="flex lg:hidden items-center p-1 bg-slate-200/80 rounded-xl shrink-0">
+            <div className="flex lg:hidden items-center p-1 bg-slate-200/70 rounded-xl shrink-0 gap-1 border border-slate-200/60 font-display">
               <button
                 onClick={() => setActiveMobileTab("permohonan")}
-                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
                   activeMobileTab === "permohonan"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                <UserCheck className="w-3.5 h-3.5" />
-                <span>Permohonan ({pengajuanList.length})</span>
+                <UserCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Masuk ({pengajuanList.length})</span>
               </button>
               <button
                 onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
                   activeMobileTab === "detail"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Detail</span>
+                <FileText className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Detail</span>
               </button>
               <button
                 onClick={() => setActiveMobileTab("riwayat")}
-                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
                   activeMobileTab === "riwayat"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                <HistoryIcon className="w-3.5 h-3.5" />
-                <span>Riwayat ({riwayatList.length})</span>
+                <HistoryIcon className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Riwayat ({riwayatList.length})</span>
               </button>
             </div>
 
