@@ -8,7 +8,7 @@ import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
   CheckCircle2, Save, Info, ArrowRight, ArrowLeft, ShieldCheck, Award,
-  Search, Filter, Sparkles, X, UserCheck
+  Search, Filter, Sparkles, X, UserCheck, ChevronDown, Check
 } from "lucide-react";
 
 interface KomponenNilai {
@@ -79,6 +79,7 @@ export default function PengujiNilaiPage() {
   const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
   const [search, setSearch] = useState("");
   const [filterJenis, setFilterJenis] = useState("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeMobileTab, setActiveMobileTab] = useState<"list" | "form">("list");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -232,7 +233,7 @@ export default function PengujiNilaiPage() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <div className="relative flex-1">
+                    <div className="relative flex-1 min-w-0">
                       <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         type="text" placeholder="Cari nama / NIM..."
@@ -240,17 +241,40 @@ export default function PengujiNilaiPage() {
                         className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-medium"
                       />
                     </div>
-                    <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl shrink-0">
-                      {["Semua", "Seminar", "Sidang"].map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => setFilterJenis(t)}
-                          className="px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer font-display"
-                          style={filterJenis === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                        >
-                          {t}
-                        </button>
-                      ))}
+
+                    {/* Custom Animated Dropdown Filter */}
+                    <div className="relative shrink-0 font-display">
+                      <button
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                      >
+                        <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                        <span>{filterJenis}</span>
+                        <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                      </button>
+
+                      {isFilterOpen && (
+                        <>
+                          <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                          <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[130px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                            {["Semua", "Seminar", "Sidang"].map((f) => (
+                              <button
+                                key={f}
+                                onClick={() => {
+                                  setFilterJenis(f);
+                                  setIsFilterOpen(false);
+                                }}
+                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                                  filterJenis === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                }`}
+                              >
+                                <span>{f}</span>
+                                {filterJenis === f && <Check className="w-3.5 h-3.5 text-white" />}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -330,9 +354,9 @@ export default function PengujiNilaiPage() {
                   <div className="flex items-center gap-2.5">
                     <button
                       onClick={() => setActiveMobileTab("list")}
-                      className="lg:hidden p-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer shrink-0"
+                      className="lg:hidden px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer shrink-0 text-xs font-bold font-display flex items-center gap-1"
                     >
-                      <ArrowLeft className="w-4 h-4" />
+                      <ArrowLeft className="w-3.5 h-3.5" /> Kembali
                     </button>
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Star className="w-4 h-4 text-white" />
