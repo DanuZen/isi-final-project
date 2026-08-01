@@ -295,7 +295,7 @@ export default function PengajuanPembimbingPage() {
                         { id: "JARINGAN", label: "Computer Network & Security", badge: "JARINGAN" },
                       ]}
                       placeholder="Filter Bidang..."
-                      className="w-56"
+                      className="w-full sm:w-56"
                     />
                   </div>
 
