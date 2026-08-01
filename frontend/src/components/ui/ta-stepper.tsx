@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Check, Lock, FileText, BookOpen, FileCheck, GraduationCap } from "lucide-react";
+import { Check, Lock, FileText, BookOpen, FileCheck, GraduationCap, Layers } from "lucide-react";
 
 export interface StepItem {
   id: number;
@@ -74,20 +74,24 @@ export const TaStepper: React.FC<TaStepperProps> = ({
   const activeStep = steps.find((s) => s.status === "aktif");
 
   return (
-    <div className="w-full bg-white rounded-2xl border border-slate-200 p-5 shadow-xs">
-      <div className="text-center mb-5">
-        <h3 className="text-sm font-bold text-slate-900 font-display">
-          Progres Perjalanan Tugas Akhir
-        </h3>
-        <p className="text-xs text-slate-500 font-medium mt-0.5">
-          Tahap Aktif:{" "}
-          <strong className="text-[#C62828]">
-            {activeStep ? activeStep.title : "Selesai"}
-          </strong>
-        </p>
+    <div className="w-full bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      {/* Card Header matching standard layout */}
+      <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 shrink-0">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Layers className="w-4 h-4" />
+          </div>
+          <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
+            Progres Perjalanan Tugas Akhir
+          </h2>
+        </div>
+        <span className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-50 text-[#C62828] border border-rose-200 shadow-2xs font-display">
+          Tahap: {activeStep ? activeStep.title : "Selesai"}
+        </span>
       </div>
 
-      {/* Desktop Stepper (Horizontal) */}
+      <div className="p-4 sm:p-5">
+        {/* Desktop Stepper (Horizontal) */}
       <div className="hidden md:flex items-start justify-between relative py-2">
         {/* Connector Line Background */}
         <div className="absolute top-6 left-12 right-12 h-0.5 bg-slate-200 -z-0" />
@@ -188,6 +192,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );
