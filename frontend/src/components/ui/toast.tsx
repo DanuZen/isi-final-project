@@ -21,6 +21,29 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const originalRemoveChild = Node.prototype.removeChild;
+      Node.prototype.removeChild = function <T extends Node>(child: T): T {
+        if (child.parentNode !== this) {
+          if (child.parentNode) {
+            return child.parentNode.removeChild(child) as T;
+          }
+          return child;
+        }
+        return originalRemoveChild.call(this, child) as T;
+      };
+
+      const originalInsertBefore = Node.prototype.insertBefore;
+      Node.prototype.insertBefore = function <T extends Node>(newNode: T, referenceNode: Node | null): T {
+        if (referenceNode && referenceNode.parentNode !== this) {
+          return originalInsertBefore.call(this, newNode, null) as T;
+        }
+        return originalInsertBefore.call(this, newNode, referenceNode) as T;
+      };
+    }
+  }, []);
+
   const showToast = useCallback((title: string, description?: string, type: ToastType = "success") => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast: ToastMessage = { id, title, description, type };
