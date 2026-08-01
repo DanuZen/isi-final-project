@@ -249,9 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   </div>
                 </div>
 
-                <div className="w-7 h-7 rounded-lg bg-neutral-800 group-hover:bg-[#C62828] text-neutral-400 group-hover:text-white flex items-center justify-center shrink-0 transition-colors">
-                  <ChevronRight className="w-4 h-4" />
-                </div>
+                <ChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors shrink-0" />
               </button>
 
               {/* Solid Color Logout Button */}
