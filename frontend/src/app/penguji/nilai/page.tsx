@@ -325,7 +325,7 @@ export default function PengujiNilaiPage() {
               }`}>
                 {/* Card Header Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
                     <button
                       onClick={() => setActiveMobileTab("list")}
                       className="lg:hidden px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer shrink-0 text-xs font-bold font-display flex items-center gap-1"
@@ -335,14 +335,14 @@ export default function PengujiNilaiPage() {
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Star className="w-4 h-4 text-white" />
                     </div>
-                    <div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Form Rubrik Penilaian Ujian</h2>
-                      <p className="text-[10px] text-slate-400 font-medium">Input angka skor 0 - 100 per komponen rubrik</p>
+                    <div className="min-w-0 flex-1">
+                      <h2 className="font-bold text-sm text-slate-900 font-display truncate">Form Rubrik Penilaian Ujian</h2>
+                      <p className="text-[10px] text-slate-400 font-medium truncate">Input angka skor 0 - 100 per komponen rubrik</p>
                     </div>
                   </div>
 
                   {selectedMhs && (
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
+                    <span className="hidden sm:inline-flex text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs shrink-0 ml-2">
                       {selectedMhs.nim}
                     </span>
                   )}
