@@ -1,21 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
   CheckCircle2, XCircle, Clock, ArrowRight,
-  ShieldCheck, AlertCircle, Sparkles, X, History, FileText
+  ShieldCheck, AlertCircle, Sparkles, X, History as HistoryIcon, FileText
 } from "lucide-react";
-
-const DOSEN_NAV = [
-  { label: "Dashboard Dosen",    href: "/dosen/dashboard",  icon: <LayoutDashboard className="w-4 h-4" /> },
-  { label: "Mahasiswa Bimbingan",href: "/dosen/bimbingan",  icon: <Users className="w-4 h-4" /> },
-  { label: "Permohonan Masuk",   href: "/dosen/pengajuan",  icon: <UserCheck className="w-4 h-4" /> },
-  { label: "Jadwal & Sidang",    href: "/dosen/kalender",   icon: <CalendarDays className="w-4 h-4" /> },
-];
 
 interface PengajuanItem {
   nim: string;
@@ -104,7 +97,7 @@ export default function DosenPengajuanPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#F5F5F7]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={DOSEN_NAV} roleName="Dosen Pembimbing" />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={DOSEN_NAV_ITEMS} roleName="Dosen" />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Sarjon Defit" userNim="NIDN: 1012057301" userRole="Dosen Pembimbing" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
@@ -213,7 +206,7 @@ export default function DosenPengajuanPage() {
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 space-y-3 shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                      <History className="w-4 h-4 text-white" />
+                      <HistoryIcon className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="text-xs font-bold text-slate-800 uppercase tracking-widest font-display">Riwayat Keputusan</h2>
                   </div>

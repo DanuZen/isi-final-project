@@ -63,6 +63,44 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+export const DOSEN_NAV_ITEMS: NavItem[] = [
+  {
+    label: "Dashboard Dosen",
+    href: "/dosen/dashboard",
+    icon: <LayoutDashboard className="w-4 h-4" />,
+  },
+  {
+    label: "Mahasiswa Bimbingan",
+    href: "/dosen/bimbingan",
+    icon: <UserCheck className="w-4 h-4" />,
+  },
+  {
+    label: "Permohonan Bimbingan",
+    href: "/dosen/pengajuan",
+    icon: <BookOpen className="w-4 h-4" />,
+  },
+  {
+    label: "Jadwal Pengujian",
+    href: "/penguji/jadwal",
+    icon: <CalendarDays className="w-4 h-4" />,
+  },
+  {
+    label: "Input Nilai Ujian",
+    href: "/penguji/nilai",
+    icon: <GraduationCap className="w-4 h-4" />,
+  },
+  {
+    label: "Verifikasi Revisi",
+    href: "/penguji/revisi",
+    icon: <FileSpreadsheet className="w-4 h-4" />,
+  },
+  {
+    label: "Kalender Saya",
+    href: "/dosen/kalender",
+    icon: <CalendarDays className="w-4 h-4" />,
+  },
+];
+
 interface SidebarProps {
   isOpen?: boolean;
   onToggle?: () => void;

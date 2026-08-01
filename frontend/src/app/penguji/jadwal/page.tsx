@@ -1,20 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
   Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award
 } from "lucide-react";
-
-const NAV = [
-  { label: "Dashboard Penguji", href: "/penguji/dashboard", icon: <ShieldCheck className="w-4 h-4" /> },
-  { label: "Jadwal Pengujian",  href: "/penguji/jadwal",    icon: <CalendarDays className="w-4 h-4" /> },
-  { label: "Input Nilai",       href: "/penguji/nilai",      icon: <Award className="w-4 h-4" /> },
-  { label: "Lembar Revisi",     href: "/penguji/revisi",    icon: <FileEdit className="w-4 h-4" /> },
-];
 
 const JADWAL: Array<{
   nim: string;
@@ -54,7 +47,7 @@ export default function PengujiJadwalPage() {
   return (
     <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#F5F5F7]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} roleName="Dosen Penguji" />
+        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={DOSEN_NAV_ITEMS} roleName="Dosen" />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ahmad Fauzi, M.T." userNim="NIDN: 1012345678" userRole="Dosen Penguji" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />

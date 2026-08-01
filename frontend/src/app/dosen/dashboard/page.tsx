@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
@@ -19,29 +19,6 @@ import {
   XCircle,
 } from "lucide-react";
 
-// Dosen Nav Items
-const DOSEN_NAV_ITEMS = [
-  {
-    label: "Dashboard Dosen",
-    href: "/dosen/dashboard",
-    icon: <LayoutDashboard className="w-4 h-4" />,
-  },
-  {
-    label: "Mahasiswa Bimbingan",
-    href: "/dosen/bimbingan",
-    icon: <Users className="w-4 h-4" />,
-  },
-  {
-    label: "Permohonan Masuk",
-    href: "/dosen/pengajuan",
-    icon: <UserCheck className="w-4 h-4" />,
-  },
-  {
-    label: "Jadwal & Sidang",
-    href: "/dosen/kalender",
-    icon: <CalendarDays className="w-4 h-4" />,
-  },
-];
 
 // Mock Data Dosen
 const DOSEN = {
