@@ -13,7 +13,7 @@ export default function ProfilAkademikPage() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    router.push("/");
+    router.push("/mahasiswa/dashboard");
   };
 
   return (

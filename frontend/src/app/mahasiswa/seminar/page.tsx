@@ -73,7 +73,7 @@ export default function SeminarPage() {
                     <Download className="w-4 h-4 text-[#A0A0A0]" /> Berita Acara Seminar (PDF)
                   </button>
                   <Link
-                    href="/sidang"
+                    href="/mahasiswa/sidang"
                     className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-1.5"
                   >
                     Lanjut ke Sidang <ArrowRight className="w-4 h-4" />

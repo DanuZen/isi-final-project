@@ -297,7 +297,7 @@ export default function BimbinganPage() {
                   </ul>
 
                   <Link
-                    href="/seminar"
+                    href="/mahasiswa/seminar"
                     className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all text-center block shadow-xs active:scale-95"
                   >
                     Lihat Status &amp; Jadwal Seminar

@@ -281,7 +281,7 @@ export default function DosenDashboardPage() {
                             </button>
                           )}
                           <Link
-                            href="/bimbingan"
+                            href="/dosen/bimbingan"
                             className="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-800 hover:bg-slate-300 font-bold text-xs transition-colors flex items-center gap-1"
                           >
                             Review Log <ArrowRight className="w-3.5 h-3.5" />

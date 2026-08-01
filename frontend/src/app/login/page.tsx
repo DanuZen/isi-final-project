@@ -15,7 +15,7 @@ import { SplashScreen } from "@/components/ui/splash-screen";
 /* ─────────────────────────── DATA ROLES ─────────────────────────── */
 
 const QUICK_ROLES = [
-  { id: "mahasiswa",        label: "Mahasiswa",        path: "/",                         icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
+  { id: "mahasiswa",        label: "Mahasiswa",        path: "/mahasiswa/dashboard",      icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
   { id: "dosen_pembimbing", label: "Pembimbing",       path: "/dosen/dashboard",          icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
   { id: "dosen_penguji",    label: "Penguji",          path: "/penguji/dashboard",        icon: ShieldCheck,   bg: "bg-[#C62828]",  text: "text-white" },
   { id: "admin_prodi",      label: "Admin Prodi",      path: "/admin-prodi/dashboard",    icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
@@ -67,7 +67,7 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    let path = "/";
+    let path = "/mahasiswa/dashboard";
     let roleName = "Mahasiswa";
     const val = username.trim().toLowerCase();
     if (val.startsWith("10") || val.includes("dosen") || val.includes("fauzi")) {

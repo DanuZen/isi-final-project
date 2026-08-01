@@ -6,13 +6,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/proposal",
-    "/pembimbing",
-    "/bimbingan",
-    "/kalender",
-    "/seminar",
-    "/sidang",
-    "/list-judul",
+    "/mahasiswa/dashboard",
+    "/mahasiswa/proposal",
+    "/mahasiswa/pembimbing",
+    "/mahasiswa/bimbingan",
+    "/mahasiswa/kalender",
+    "/mahasiswa/seminar",
+    "/mahasiswa/sidang",
+    "/mahasiswa/list-judul",
     "/login",
   ];
 
