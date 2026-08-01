@@ -119,10 +119,10 @@ Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 
 ## 📱 Audit Mobile Layout Per-Halaman — Sesi Aktif 🔄
 
-Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone & desktop.
-*(Catatan: Audit tampilan mobile sementara ditunda per instruksi user; seluruh perubahan sejauh ini 100% aman dan tidak merubah layout desktop)*.
+Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar smartphone (<768px) & desktop (≥1024px).
+*(Audit mobile kembali diaktifkan untuk memastikan seluruh 37 rute antarmuka tampil sempurna di layar HP tanpa merubah tampilan desktop)*.
 
-### 🎓 Portal Mahasiswa (11 Halaman)
+### 🎓 Portal Mahasiswa (11 Halaman - 100% SELESAI ✅)
 - [x] `/mahasiswa/dashboard` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
 - [x] `/mahasiswa/proposal` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Banner bersih tanpa tombol, Desktop 100% Utuh)
 - [x] `/mahasiswa/pembimbing` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
@@ -139,10 +139,10 @@ Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone
 - [x] `/dosen/dashboard` — ✅ Sesuai (Welcome Banner Benchmark, Solid Red & Gold Theme, Emerald ACC Button, Desktop 100% Utuh)
 - [x] `/dosen/bimbingan` — ✅ Sesuai (Dropdown Filter Animated, Navigasi HP 1-Tap `← Kembali`, Re-aligned Card Layout, Emerald Green ACC Buttons & Badges, Desktop 100% Utuh)
 - [x] `/dosen/pengajuan` — ✅ Sesuai (Equal Height Desktop Riwayat, Mobile Tab Switcher, Emerald Terima Button & Status Badge, Desktop 100% Utuh)
-- [ ] `/penguji/jadwal` — ⏸️ Ditunda sementara (Mobile Audit Pause)
-- [ ] `/penguji/nilai` — ⏸️ Ditunda sementara
-- [ ] `/penguji/revisi` — ⏸️ Ditunda sementara
-- [ ] `/dosen/kalender` — ⏸️ Ditunda sementara
+- [ ] `/penguji/jadwal` — 🔄 Dalam Proses Audit Mobile
+- [ ] `/penguji/nilai` — 🔄 Belum dicek
+- [ ] `/penguji/revisi` — 🔄 Belum dicek
+- [ ] `/dosen/kalender` — 🔄 Belum dicek
 
 ### 🏛️ Portal Admin Prodi (6 Halaman)
 - [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek
