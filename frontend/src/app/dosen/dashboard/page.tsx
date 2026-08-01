@@ -268,12 +268,12 @@ export default function DosenDashboardPage() {
                           </p>
                         </div>
                         <span
-                          className={`self-start shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold ${
+                          className={`self-start shrink-0 px-2.5 py-1 rounded-full text-[10px] font-extrabold font-display shadow-2xs ${
                             m.statusAcc
-                              ? "bg-amber-100 text-amber-800 border border-amber-300"
+                              ? "bg-[#ffd01d] text-slate-950"
                               : m.perluAcc
-                              ? "bg-rose-50 text-[#C62828] border border-rose-200 animate-pulse"
-                              : "bg-slate-100 text-slate-600 border border-slate-200"
+                              ? "bg-[#C62828] text-white animate-pulse"
+                              : "bg-slate-200 text-slate-800"
                           }`}
                         >
                           {m.tahap}
@@ -320,7 +320,7 @@ export default function DosenDashboardPage() {
                       Permohonan Masuk
                     </h2>
                   </div>
-                  <span className="hidden sm:inline-block text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300 shrink-0">
+                  <span className="hidden sm:inline-block text-[10.5px] font-extrabold text-slate-950 bg-[#ffd01d] px-2.5 py-0.5 rounded-full shadow-2xs font-display shrink-0">
                     {requestsData.length} Permohonan
                   </span>
                 </div>
@@ -336,11 +336,11 @@ export default function DosenDashboardPage() {
                     requestsData.map((req) => (
                       <div
                         key={req.id}
-                        className="p-3.5 rounded-xl border border-amber-200/80 bg-amber-50/30 space-y-2.5"
+                        className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5"
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-xs text-slate-900 font-display">{req.nama}</span>
-                          <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-extrabold text-white bg-[#C62828] px-2.5 py-0.5 rounded-full shadow-2xs font-display">
                             {req.peranUsulan}
                           </span>
                         </div>
