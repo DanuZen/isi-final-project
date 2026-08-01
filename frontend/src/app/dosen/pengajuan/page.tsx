@@ -135,43 +135,6 @@ export default function DosenPengajuanPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Segmented Control Switcher (<1024px) ── */}
-            <div className="flex lg:hidden items-center p-1 bg-slate-200/70 rounded-xl shrink-0 gap-1 border border-slate-200/60 font-display">
-              <button
-                onClick={() => setActiveMobileTab("permohonan")}
-                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
-                  activeMobileTab === "permohonan"
-                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <UserCheck className="w-3.5 h-3.5 shrink-0" />
-                <span className="whitespace-nowrap">Masuk ({pengajuanList.length})</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
-                  activeMobileTab === "detail"
-                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5 shrink-0" />
-                <span className="whitespace-nowrap">Detail</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("riwayat")}
-                className={`flex-1 py-2 text-[11px] font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap px-2.5 ${
-                  activeMobileTab === "riwayat"
-                    ? "bg-white text-[#C62828] shadow-xs font-black ring-1 ring-black/5"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <HistoryIcon className="w-3.5 h-3.5 shrink-0" />
-                <span className="whitespace-nowrap">Riwayat ({riwayatList.length})</span>
-              </button>
-            </div>
-
             {/* ── Split 2-Column Layout (6/12 & 6/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
