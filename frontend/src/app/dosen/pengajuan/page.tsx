@@ -286,7 +286,7 @@ export default function DosenPengajuanPage() {
                           </div>
                           <div className="text-right shrink-0">
                             <span className={`text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full font-display shadow-2xs ${
-                              r.aksi === "Diterima" ? "bg-[#ffd01d] text-slate-950" : "bg-[#C62828] text-white"
+                              r.aksi === "Diterima" ? "bg-emerald-600 text-white" : "bg-[#C62828] text-white"
                             }`}>
                               {r.aksi}
                             </span>
@@ -328,7 +328,7 @@ export default function DosenPengajuanPage() {
                     {/* Student Profile Header Box */}
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-sm flex items-center justify-center shrink-0 shadow-md font-display">
+                        <div className="w-12 h-12 rounded-2xl bg-[#C62828] text-white font-black text-sm flex items-center justify-center shrink-0 shadow-md font-display">
                           {selectedMhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                         </div>
                         <div>
@@ -387,7 +387,7 @@ export default function DosenPengajuanPage() {
                     <div className="flex items-center gap-2.5">
                       <button
                         onClick={() => handleDecision(selectedMhs, "Diterima")}
-                        className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
+                        className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 font-display"
                       >
                         <CheckCircle2 className="w-4 h-4 text-white" /> Terima Mahasiswa Bimbingan
                       </button>

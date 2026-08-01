@@ -482,17 +482,17 @@ export default function DosenBimbinganPage() {
                                       onClick={() => handleToggleAcc(mhs.nim, mhs.nama)}
                                       className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-extrabold transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-xs font-display ${
                                         isAccGranted
-                                          ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950"
-                                          : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
+                                          ? "bg-emerald-800 text-white"
+                                          : "bg-emerald-600 hover:bg-emerald-700 text-white"
                                       }`}
                                     >
                                       {isAccGranted ? (
                                         <>
-                                          <Check className="w-3 h-3" /> ACC Done
+                                          <Check className="w-3 h-3 text-white" /> ACC Done
                                         </>
                                       ) : (
                                         <>
-                                          <FileText className="w-3 h-3" /> ACC
+                                          <FileText className="w-3 h-3 text-white" /> ACC
                                         </>
                                       )}
                                     </button>
@@ -626,7 +626,7 @@ export default function DosenBimbinganPage() {
                             <span
                               className={`text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full shadow-2xs font-display ${
                                 log.status.includes("ACC") || log.status.includes("Lulus")
-                                  ? "bg-[#ffd01d] text-slate-950"
+                                  ? "bg-emerald-600 text-white"
                                   : "bg-[#C62828] text-white"
                               }`}
                             >
@@ -648,13 +648,13 @@ export default function DosenBimbinganPage() {
                         onClick={() => handleToggleAcc(selectedMhs.nim, selectedMhs.nama)}
                         className={`flex-1 py-2.5 rounded-xl text-xs font-bold font-display transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95 ${
                           accGrantedMap[selectedMhs.nim]
-                            ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 font-extrabold"
-                            : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
+                            ? "bg-emerald-800 text-white font-extrabold"
+                            : "bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                         }`}
                       >
                         {accGrantedMap[selectedMhs.nim] ? (
                           <>
-                            <Check className="w-4 h-4" /> ACC Done
+                            <Check className="w-4 h-4 text-white" /> ACC Done
                           </>
                         ) : (
                           <>
