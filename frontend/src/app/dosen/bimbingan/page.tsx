@@ -413,7 +413,10 @@ export default function DosenBimbinganPage() {
                       return (
                         <div
                           key={mhs.nim}
-                          onClick={() => setSelectedNim(mhs.nim)}
+                          onClick={() => {
+                            setSelectedNim(mhs.nim);
+                            setActiveMobileTab("detail");
+                          }}
                           className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2.5 ${
                             isSelected
                               ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
@@ -470,7 +473,8 @@ export default function DosenBimbinganPage() {
                                 </div>
                               </div>
 
-                              <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+                              {/* Desktop Quick Action Buttons */}
+                              <div className="hidden lg:flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
                                 <button
                                   onClick={() => {
                                     setSelectedNim(mhs.nim);
@@ -511,6 +515,11 @@ export default function DosenBimbinganPage() {
                                     )}
                                   </button>
                                 )}
+                              </div>
+
+                              {/* Mobile Navigation Indicator Arrow */}
+                              <div className="lg:hidden flex items-center shrink-0 text-slate-400 pl-1">
+                                <ArrowRight className="w-4 h-4 text-slate-400" />
                               </div>
                             </div>
                           </div>
