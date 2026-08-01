@@ -32,6 +32,7 @@ export default function BimbinganPage() {
     "Rancang Bangun Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA) Berbasis Web di UPI YPTK Padang"
   );
   const [judulBaru, setJudulBaru] = useState("");
+  const [activeMobileTab, setActiveMobileTab] = useState<"thread" | "syarat">("thread");
   const [alasanPerubahan, setAlasanPerubahan] = useState("");
   const [perubahanSubmitted, setPerubahanSubmitted] = useState(false);
 
@@ -146,10 +147,37 @@ export default function BimbinganPage() {
               </div>
             )}
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("thread")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "thread"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <MessageSquare className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Thread Bimbingan</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("syarat")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "syarat"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Syarat ACC Sempro</span>
+              </button>
+            </div>
+
             {/* Main Content Layout: Log Thread & ACC Requirements (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left Column (8/12): Interactive Log Thread */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden">
+              <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden ${activeMobileTab === "thread" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-visible lg:overflow-hidden">
                   <div className="flex flex-col h-full min-h-0 overflow-hidden">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 shrink-0">
@@ -252,7 +280,7 @@ export default function BimbinganPage() {
               </div>
 
               {/* Right Column (4/12): Requirements Checklist & Info */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-4 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "syarat" ? "flex" : "hidden lg:flex"}`}>
                 {/* Card 1: Syarat Pengajuan ACC Seminar (shrink-0) */}
                 {/* Card 1: Syarat Pengajuan ACC Seminar */}
                 <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-3 shrink-0">
