@@ -177,21 +177,21 @@ export default function ListJudulPage() {
                       </span>
                     </div>
 
-                    {/* ── Horizontally Scrollable Table Container ── */}
-                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
-                      <table className="w-full text-left text-xs min-w-[650px]">
-                        <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
-                          <tr>
-                            <th className="py-3 px-3.5 w-12 text-center whitespace-nowrap">No</th>
-                            <th className="py-3 px-3.5 w-44 whitespace-nowrap">Nama Mahasiswa</th>
-                            <th className="py-3 px-3.5 min-w-[260px] whitespace-nowrap">Judul Tugas Akhir / Skripsi</th>
-                            <th className="py-3 px-3.5 w-36 whitespace-nowrap">Jenis TA</th>
-                            <th className="py-3 px-3.5 w-44 whitespace-nowrap">Dosen Pembimbing</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100 text-slate-800">
-                          {filteredData.length > 0 ? (
-                            filteredData.map((item) => (
+                    {/* ── Data Present: Horizontally Scrollable Table Container ── */}
+                    {filteredData.length > 0 ? (
+                      <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
+                        <table className="w-full text-left text-xs min-w-[650px]">
+                          <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
+                            <tr>
+                              <th className="py-3 px-3.5 w-12 text-center whitespace-nowrap">No</th>
+                              <th className="py-3 px-3.5 w-44 whitespace-nowrap">Nama Mahasiswa</th>
+                              <th className="py-3 px-3.5 min-w-[260px] whitespace-nowrap">Judul Tugas Akhir / Skripsi</th>
+                              <th className="py-3 px-3.5 w-36 whitespace-nowrap">Jenis TA</th>
+                              <th className="py-3 px-3.5 w-44 whitespace-nowrap">Dosen Pembimbing</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 text-slate-800">
+                            {filteredData.map((item) => (
                               <tr key={item.no} className="hover:bg-slate-50/80 transition-colors">
                                 <td className="py-3 px-3.5 text-center font-mono-data font-bold text-slate-500">
                                   {item.no}
@@ -222,25 +222,22 @@ export default function ListJudulPage() {
                                   <span className="text-[11px] font-bold text-slate-800">{item.pembimbing}</span>
                                 </td>
                               </tr>
-                            ))
-                          ) : (
-                            <tr>
-                              <td colSpan={5} className="py-28 text-center text-slate-500">
-                                <div className="flex flex-col items-center justify-center space-y-3 max-w-sm mx-auto">
-                                  <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
-                                    <BookOpen className="w-7 h-7" />
-                                  </div>
-                                  <p className="font-extrabold text-sm font-display text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
-                                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                    Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
-                                  </p>
-                                </div>
-                              </td>
-                            </tr>
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      /* ── Data Empty: Perfectly Centered Empty State Container ── */
+                      <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3 font-display">
+                        <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
+                          <BookOpen className="w-7 h-7" />
+                        </div>
+                        <p className="font-extrabold text-sm text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-sm">
+                          Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Pagination Footer */}
