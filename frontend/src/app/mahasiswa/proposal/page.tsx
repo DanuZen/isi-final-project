@@ -38,6 +38,7 @@ export default function ProposalJudulPage() {
   const [abstrakInput, setAbstrakInput] = useState("");
   const [bidangKajian, setBidangKajian] = useState("RPL");
 
+  const [activeMobileTab, setActiveMobileTab] = useState<"form" | "duplikasi">("form");
   const [similarityScore, setSimilarityScore] = useState<number | null>(null);
   const [isChecking, setIsChecking] = useState(false);
 
@@ -150,11 +151,38 @@ export default function ProposalJudulPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("form")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "form"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Form Pengajuan</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("duplikasi")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "duplikasi"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Search className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Cek Duplikasi</span>
+              </button>
+            </div>
+
             {/* Main 12-Column Grid Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               
               {/* Left Column (8/12): Form Pengajuan Judul */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden">
+              <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden ${activeMobileTab === "form" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-visible lg:overflow-hidden">
                   <div className="space-y-4 overflow-y-auto scrollbar-none pr-1">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -297,7 +325,7 @@ export default function ProposalJudulPage() {
               </div>
 
               {/* Right Column (4/12): Similarity Checker & Verification Status */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-4 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "duplikasi" ? "flex" : "hidden lg:flex"}`}>
                 {/* Title Availability & Duplication Check Card */}
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">
