@@ -110,8 +110,8 @@ export default function DosenPengajuanPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#ffd01d] text-slate-950 shadow-xs">
-                      <UserCheck className="w-3.5 h-3.5 text-slate-950" /> {pengajuanList.length} Permohonan Pembimbing Menunggu Tinjauan
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-xs whitespace-nowrap">
+                      <UserCheck className="w-3.5 h-3.5 text-slate-950 shrink-0" /> {pengajuanList.length} Permohonan Pembimbing
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -194,7 +194,7 @@ export default function DosenPengajuanPage() {
                         <p className="text-[10px] text-slate-400 font-medium">Klik permohonan untuk pratinjau detail</p>
                       </div>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
+                    <span className="hidden lg:inline-flex px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
                       {pengajuanList.length} Menunggu
                     </span>
                   </div>
@@ -265,7 +265,7 @@ export default function DosenPengajuanPage() {
                         <p className="text-[10px] text-slate-400 font-medium">Histori pengajuan yang telah disetujui / ditolak</p>
                       </div>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-slate-100 text-slate-700 shadow-2xs font-display">
+                    <span className="hidden lg:inline-flex px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-slate-100 text-slate-700 shadow-2xs font-display">
                       {riwayatList.length} Aksi
                     </span>
                   </div>
@@ -326,7 +326,7 @@ export default function DosenPengajuanPage() {
                   </div>
 
                   {selectedMhs && (
-                    <span className="text-[10.5px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
+                    <span className="hidden lg:inline-flex text-[10.5px] font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono shadow-2xs">
                       {selectedMhs.nim}
                     </span>
                   )}
