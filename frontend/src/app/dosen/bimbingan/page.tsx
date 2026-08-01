@@ -634,11 +634,11 @@ export default function DosenBimbinganPage() {
 
                 {/* Bottom Fixed Action Panel */}
                 <div className="p-4 border-t border-slate-100 bg-slate-50/80 shrink-0 space-y-2">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     {selectedMhs.tahap !== "Selesai" && (
                       <button
                         onClick={() => handleToggleAcc(selectedMhs.nim, selectedMhs.nama)}
-                        className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-95 ${
+                        className={`flex-1 py-2.5 rounded-xl text-xs font-bold font-display transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95 ${
                           accGrantedMap[selectedMhs.nim]
                             ? "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 font-extrabold"
                             : "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30"
@@ -646,11 +646,11 @@ export default function DosenBimbinganPage() {
                       >
                         {accGrantedMap[selectedMhs.nim] ? (
                           <>
-                            <Check className="w-4 h-4" /> Persetujuan (ACC) Berhasil Diberikan
+                            <Check className="w-4 h-4" /> ACC Done
                           </>
                         ) : (
                           <>
-                            <Award className="w-4 h-4" /> Beri Persetujuan (ACC) Seminar/Sidang
+                            <Award className="w-4 h-4 text-white" /> Beri ACC
                           </>
                         )}
                       </button>
@@ -658,7 +658,7 @@ export default function DosenBimbinganPage() {
 
                     <button
                       onClick={() => setShowChatModal(true)}
-                      className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                      className="flex-1 py-2.5 rounded-xl text-xs font-bold font-display bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
                     >
                       <MessageSquare className="w-4 h-4 text-slate-950" /> Catat Log
                     </button>
