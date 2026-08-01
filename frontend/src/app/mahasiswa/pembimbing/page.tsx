@@ -313,8 +313,89 @@ export default function PengajuanPembimbingPage() {
                     </div>
                   </div>
 
-                  {/* Scrollable Dosen List Table */}
-                  <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
+                  {/* ── Mobile Responsive Card View (<768px) ── */}
+                  <div className="block md:hidden flex-1 min-h-0 overflow-y-auto scrollbar-none p-3.5 space-y-3">
+                    {filteredDosen.map((dosen) => {
+                      const isSelected1 = selectedPembimbing1?.id === dosen.id;
+                      const isSelected2 = selectedPembimbing2?.id === dosen.id;
+
+                      return (
+                        <div key={dosen.id} className="bg-slate-50/90 rounded-xl border border-slate-200/90 p-3.5 space-y-3 shadow-2xs font-display">
+                          <div className="flex items-start justify-between gap-2 border-b border-slate-200/60 pb-2.5">
+                            <div>
+                              <h4 className="text-xs font-extrabold text-slate-900 leading-snug">{dosen.nama}</h4>
+                              <p className="text-[10px] font-mono text-slate-500 font-medium">NIDN: {dosen.nidn}</p>
+                            </div>
+                            <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-[#C62828] bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full shrink-0">
+                              {dosen.jabatan}
+                            </span>
+                          </div>
+
+                          <div className="space-y-2">
+                            <div className="flex flex-wrap gap-1">
+                              {dosen.tags.map((tag) => (
+                                <span key={tag} className="px-2 py-0.5 text-[9px] font-semibold bg-white border border-slate-200 text-slate-700 rounded-md">
+                                  #{tag}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="p-2.5 bg-white rounded-lg border border-slate-200/80 space-y-1">
+                              <div className="flex justify-between text-[10px] font-bold">
+                                <span className="text-slate-600">Kuota Utama Bimbingan:</span>
+                                <span className={dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "text-rose-600 font-extrabold" : "text-emerald-600 font-extrabold"}>
+                                  {dosen.kuotaUtama}/{dosen.kuotaUtamaMax} {dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "(Penuh)" : "(Tersedia)"}
+                                </span>
+                              </div>
+                              <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${dosen.kuotaUtama >= dosen.kuotaUtamaMax ? "bg-rose-500" : "bg-emerald-500"}`}
+                                  style={{ width: `${(dosen.kuotaUtama / dosen.kuotaUtamaMax) * 100}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="pt-2 border-t border-slate-200/60 flex items-center gap-2">
+                            {isSelected1 ? (
+                              <span className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white shadow-xs flex items-center justify-center gap-1">
+                                ✓ Terpilih Pembimbing I
+                              </span>
+                            ) : isSelected2 ? (
+                              <span className="w-full py-2 rounded-xl text-xs font-bold bg-[#D97706] text-white shadow-xs flex items-center justify-center gap-1">
+                                ✓ Terpilih Pembimbing II
+                              </span>
+                            ) : (
+                              <>
+                                <button
+                                  type="button"
+                                  disabled={!dosen.isAvailable}
+                                  onClick={() => handleSelectPembimbing1(dosen)}
+                                  className={`flex-1 py-2 rounded-xl text-[11px] font-bold transition-all shadow-2xs ${
+                                    !dosen.isAvailable
+                                      ? "bg-slate-200 text-slate-400 cursor-not-allowed"
+                                      : "bg-[#C62828] text-white hover:bg-[#B71C1C] active:scale-95"
+                                  }`}
+                                >
+                                  Pilih Pembimbing I
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleSelectPembimbing2(dosen)}
+                                  className="flex-1 py-2 rounded-xl text-[11px] font-bold bg-[#ffd01d] text-slate-950 hover:bg-[#d97706] transition-all shadow-2xs active:scale-95"
+                                >
+                                  Pilih Pembimbing II
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* ── Desktop Dosen List Table (>=768px) ── */}
+                  <div className="hidden md:block flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
                     <table className="w-full text-left text-xs min-w-[600px] lg:min-w-0">
                       <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
                         <tr>

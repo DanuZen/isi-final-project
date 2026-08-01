@@ -172,12 +172,62 @@ export default function ListJudulPage() {
                           Daftar Judul Tugas Akhir Mahasiswa UPI YPTK
                         </h3>
                       </div>
-                      <span className="px-3 py-1 text-xs font-extrabold bg-[#C62828] text-white rounded-full shadow-xs">
+                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
                         {filteredData.length} Judul Ditemukan
                       </span>
                     </div>
 
-                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
+                    {/* ── Mobile Responsive Card View (<768px) ── */}
+                    <div className="block md:hidden flex-1 min-h-0 overflow-y-auto scrollbar-none p-3.5 space-y-3">
+                      {filteredData.length > 0 ? (
+                        filteredData.map((item) => (
+                          <div key={item.no} className="bg-slate-50/90 rounded-xl border border-slate-200/90 p-3.5 space-y-2.5 shadow-2xs font-display">
+                            <div className="flex items-center justify-between gap-2 border-b border-slate-200/60 pb-2">
+                              <span className="text-[10px] font-bold text-[#C62828] bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                                {item.jenisTA}
+                              </span>
+                              <span className="text-[10px] font-mono font-bold text-slate-500">
+                                NIM: {item.nim}
+                              </span>
+                            </div>
+
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-extrabold text-slate-900 leading-snug">
+                                &ldquo;{item.judulTA}&rdquo;
+                              </h4>
+                              <div className="flex items-center gap-2 pt-1 flex-wrap">
+                                <span className="text-[11px] font-bold text-slate-700">
+                                  Oleh: {item.namaMahasiswa}
+                                </span>
+                                <span className="text-[9.5px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-mono">
+                                  {item.bidangKajian}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10.5px]">
+                              <span className="text-slate-500 font-medium truncate">
+                                Pembimbing: <strong className="text-slate-800 font-bold">{item.pembimbing}</strong>
+                              </span>
+                              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded shrink-0">
+                                {item.status} ({item.tahun})
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center py-12 space-y-2.5">
+                          <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center mx-auto shadow-xs">
+                            <BookOpen className="w-6 h-6" />
+                          </div>
+                          <p className="text-xs font-bold text-slate-800 font-display">Belum Ada Judul Terdaftar</p>
+                          <p className="text-[11px] text-slate-400 font-medium max-w-xs mx-auto">Judul yang diajukan akan tersimpan otomatis di repositori ini.</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* ── Desktop Data Table (>=768px) ── */}
+                    <div className="hidden md:block flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
                       <table className="w-full text-left text-xs">
                         <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
                           <tr>
