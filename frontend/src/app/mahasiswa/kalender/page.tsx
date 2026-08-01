@@ -44,6 +44,7 @@ export default function KalenderPage() {
 
   // Filter States
   const [viewMode, setViewMode] = useState<"BULAN" | "MINGGU" | "HARI">("BULAN");
+  const [activeMobileTab, setActiveMobileTab] = useState<"kalender" | "agenda">("kalender");
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [selectedFakultas, setSelectedFakultas] = useState<string>("FILKOM");
   const [selectedProdi, setSelectedProdi] = useState<string>("ALL");
@@ -255,10 +256,37 @@ export default function KalenderPage() {
               </div>
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("kalender")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "kalender"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <CalendarIcon className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Grid Kalender</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("agenda")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "agenda"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Clock className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Agenda Terdekat</span>
+              </button>
+            </div>
+
             {/* Main 12-Column Grid (Fit to Viewport, Flush Bottom Alignment) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left 8 Columns: Interactive Calendar View */}
-              <div className="lg:col-span-8 flex flex-col h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-8 flex-col h-full min-h-0 overflow-hidden ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
                 {viewMode === "BULAN" && (
                   <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                     {/* Days Header */}
@@ -407,7 +435,7 @@ export default function KalenderPage() {
               </div>
 
               {/* Right Column (4/12): Agenda Terdekat & Filter Prodi */}
-              <div className="lg:col-span-4 flex flex-col h-full min-h-0 space-y-4">
+              <div className={`lg:col-span-4 flex-col h-full min-h-0 space-y-4 ${activeMobileTab === "agenda" ? "flex" : "hidden lg:flex"}`}>
                 {/* Card 1: Filter Fakultas & Program Studi */}
                 <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs space-y-3 shrink-0">
                   <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
