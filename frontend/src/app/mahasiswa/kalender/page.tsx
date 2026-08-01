@@ -48,6 +48,7 @@ export default function KalenderPage() {
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [selectedFakultas, setSelectedFakultas] = useState<string>("FILKOM");
   const [selectedProdi, setSelectedProdi] = useState<string>("ALL");
+  const [selectedDay, setSelectedDay] = useState<number>(28);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
   const [eventsList, setEventsList] = useState<CalendarEvent[]>([]);
@@ -328,13 +329,17 @@ export default function KalenderPage() {
                         const dayNum = idx + 1;
                         const dayEvents = getEventsForDay(dayNum);
                         const isToday = dayNum === 28;
+                        const isSelected = selectedDay === dayNum;
 
                         return (
                           <div
                             key={`day-${dayNum}`}
-                            className={`p-1.5 rounded-lg border transition-all flex flex-col justify-between min-h-0 h-full overflow-hidden ${
-                              isToday
-                                ? "bg-rose-50/40 border-[#C62828] shadow-xs"
+                            onClick={() => setSelectedDay(dayNum)}
+                            className={`p-1.5 rounded-lg border transition-all flex flex-col justify-between min-h-0 h-full overflow-hidden cursor-pointer ${
+                              isSelected
+                                ? "bg-rose-50/60 border-[#C62828] ring-2 ring-[#C62828]/40 shadow-xs"
+                                : isToday
+                                ? "bg-rose-50/30 border-rose-300 shadow-2xs"
                                 : "bg-white border-slate-200 hover:border-slate-300"
                             }`}
                           >
@@ -342,7 +347,7 @@ export default function KalenderPage() {
                             <div className="flex items-center justify-between shrink-0">
                               <span
                                 className={`text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center font-display ${
-                                  isToday
+                                  isSelected || isToday
                                     ? "bg-[#C62828] text-white shadow-xs"
                                     : "text-slate-700"
                                 }`}
@@ -350,7 +355,7 @@ export default function KalenderPage() {
                                 {dayNum}
                               </span>
                               {dayEvents.length > 0 && (
-                                <span className="text-[9px] font-bold text-slate-400">
+                                <span className="text-[9px] font-bold text-slate-500 bg-slate-100 px-1 rounded">
                                   {dayEvents.length}
                                 </span>
                               )}
@@ -361,7 +366,11 @@ export default function KalenderPage() {
                               {dayEvents.map((evt) => (
                                 <button
                                   key={evt.id}
-                                  onClick={() => setSelectedEvent(evt)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedDay(dayNum);
+                                    setSelectedEvent(evt);
+                                  }}
                                   className={`w-full text-left px-1.5 py-0.5 rounded border text-[9px] font-bold transition-all truncate block ${getCategoryBadgeClass(
                                     evt.kategori
                                   )}`}
@@ -380,6 +389,62 @@ export default function KalenderPage() {
                           </div>
                         );
                       })}
+                    </div>
+
+                    {/* ── Selected Day Detail Panel ── */}
+                    <div className="bg-slate-50/80 rounded-xl border border-slate-200/90 p-3.5 shadow-2xs space-y-2.5 shrink-0 mt-3 font-display">
+                      <div className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-black text-xs shadow-2xs">
+                            {selectedDay}
+                          </div>
+                          <h4 className="font-extrabold text-xs text-slate-900">
+                            Detail Agenda: {selectedDay} Agustus 2026
+                          </h4>
+                        </div>
+                        <span className="text-[10px] font-bold text-slate-600 bg-white px-2 py-0.5 rounded-full border border-slate-200">
+                          {getEventsForDay(selectedDay).length} Agenda
+                        </span>
+                      </div>
+
+                      {getEventsForDay(selectedDay).length > 0 ? (
+                        <div className="space-y-2">
+                          {getEventsForDay(selectedDay).map((evt) => (
+                            <div
+                              key={evt.id}
+                              onClick={() => setSelectedEvent(evt)}
+                              className="p-3 bg-white rounded-xl border border-slate-200 hover:border-[#C62828] transition-all cursor-pointer space-y-1.5 shadow-2xs"
+                            >
+                              <div className="flex items-center justify-between gap-2">
+                                <span
+                                  className={`px-2 py-0.5 rounded-full text-[9.5px] font-extrabold text-white shadow-2xs ${getCategoryBadgeClass(
+                                    evt.kategori
+                                  )}`}
+                                >
+                                  {evt.kategori}
+                                </span>
+                                <span className="text-[10px] font-mono text-slate-500 font-medium">
+                                  ⏱ {evt.waktu}
+                                </span>
+                              </div>
+
+                              <h5 className="text-xs font-black text-slate-900 leading-snug">
+                                {evt.judul}
+                              </h5>
+
+                              <div className="flex flex-wrap items-center justify-between text-[10.5px] text-slate-600 pt-1.5 border-t border-slate-100 gap-1">
+                                <span>Mahasiswa: <strong className="text-slate-900 font-bold">{evt.mahasiswa}</strong> ({evt.nim})</span>
+                                <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">📍 {evt.ruangan}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="p-3 bg-white rounded-xl border border-slate-200/80 text-center space-y-1 text-xs">
+                          <p className="font-bold text-slate-700 text-xs">Tidak ada agenda pada tanggal {selectedDay} Agustus 2026</p>
+                          <p className="text-[11px] text-slate-400 font-medium">Klik pada tanggal bermerek titik di kalender untuk melihat detail acara.</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
