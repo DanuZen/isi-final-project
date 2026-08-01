@@ -138,11 +138,17 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
     if (isOpen) {
       syncTimeline();
       document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+      document.documentElement.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+      document.documentElement.style.overflow = "";
     };
   }, [isOpen, syncTimeline]);
 
@@ -233,8 +239,20 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   const progressPct = Math.round((completedStepsCount / 5) * 100);
 
   return (
-    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-white rounded-2xl max-w-4xl w-full border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[92vh] h-[670px] animate-in fade-in zoom-in-95 duration-150">
+    <div
+      onClick={onClose}
+      onTouchMove={(e) => {
+        if (e.target === e.currentTarget) {
+          e.preventDefault();
+        }
+      }}
+      className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4 overscroll-none touch-none"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+        className="bg-white rounded-2xl max-w-4xl w-full border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[92vh] h-[670px] animate-in fade-in zoom-in-95 duration-150 touch-auto"
+      >
         {/* Header Banner */}
         <div className="bg-[#1A1A1A] text-white p-4 md:p-5 shrink-0 relative overflow-hidden">
           <div className="flex items-center justify-between gap-4 relative z-10">
