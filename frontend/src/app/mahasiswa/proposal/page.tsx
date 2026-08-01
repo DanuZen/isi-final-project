@@ -126,11 +126,11 @@ export default function ProposalJudulPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
                       <FileText className="w-3.5 h-3.5 text-white" /> Pengajuan Proposal Tugas Akhir
                     </span>
                   </div>
-                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Formulir Pengajuan &amp; Uji Duplikasi Judul TA
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">

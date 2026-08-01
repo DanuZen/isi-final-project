@@ -70,7 +70,7 @@ export default function UjianSidangPage() {
                       <CheckCircle2 className="w-3.5 h-3.5" /> ACC Ujian Akademik Disetujui
                     </span>
                   </div>
-                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Jadwal &amp; Ujian Akademik Tugas Akhir
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">

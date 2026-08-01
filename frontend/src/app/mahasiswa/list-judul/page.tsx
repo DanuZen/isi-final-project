@@ -97,11 +97,11 @@ export default function ListJudulPage() {
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
                       <BookOpen className="w-3.5 h-3.5" /> Repositori Resmi UPI YPTK
                     </span>
                   </div>
-                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Daftar &amp; Referensi Judul Tugas Akhir
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
