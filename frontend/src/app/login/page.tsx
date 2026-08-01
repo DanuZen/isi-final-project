@@ -18,7 +18,7 @@ const QUICK_ROLES = [
   { id: "mahasiswa",      label: "Mahasiswa",      path: "/mahasiswa/dashboard",   icon: GraduationCap, bg: "bg-emerald-600", text: "text-white" },
   { id: "dosen",          label: "Portal Dosen",   path: "/dosen/dashboard",       icon: UserCheck,     bg: "bg-[#C62828]",  text: "text-white" },
   { id: "admin_prodi",    label: "Admin Prodi",    path: "/admin-prodi/dashboard", icon: Building2,     bg: "bg-blue-600",   text: "text-white" },
-  { id: "admin_fakultas", label: "Admin Fakultas", path: "/admin-fakultas/dashboard", icon: School,     bg: "bg-indigo-600", text: "text-white" },
+  { id: "admin_fakultas", label: "Admin Fakultas", path: "/admin-fakultas/dashboard", icon: School,     bg: "bg-teal-600", text: "text-white" },
   { id: "pimpinan",       label: "Dekanat",        path: "/dekanat/dashboard",     icon: LayoutDashboard, bg: "bg-[#ffd01d]", text: "text-slate-950" },
   { id: "super_admin",    label: "Super Admin",    path: "/super-admin/dashboard", icon: Users,         bg: "bg-slate-900",  text: "text-white" },
 ];
