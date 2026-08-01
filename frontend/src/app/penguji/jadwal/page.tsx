@@ -117,27 +117,22 @@ export default function PengujiJadwalPage() {
                     Daftar mahasiswa yang ditugaskan kepada Anda untuk diuji pada Seminar Proposal &amp; Ujian Sidang Skripsi.
                   </p>
                 </div>
-                <div className="flex items-center gap-3 shrink-0 flex-wrap">
-                  {/* Stat Card 1: Perlu Dinilai (Solid Gold) */}
-                  <div className="bg-[#ffd01d] text-slate-950 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40 font-display border border-amber-300">
-                    <div className="w-9 h-9 rounded-xl bg-slate-950/15 text-slate-950 flex items-center justify-center font-black shrink-0">
-                      <Clock className="w-5 h-5 text-slate-950 stroke-[2.5]" />
-                    </div>
-                    <div>
-                      <p className="text-xl font-black text-slate-950 font-display leading-none">{perluDinilaiCount}</p>
-                      <p className="text-[10px] text-slate-950 font-black uppercase tracking-wider font-display mt-0.5">PERLU DINILAI</p>
-                    </div>
+                {/* Combined Compact Stat Pill */}
+                <div className="flex items-center gap-3.5 px-4 py-2 rounded-xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
+                  {/* Stat 1: Perlu Dinilai */}
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-[#ffd01d] shrink-0 stroke-[2.2]" />
+                    <span className="text-base font-black text-[#ffd01d] leading-none">{perluDinilaiCount}</span>
+                    <span className="text-[10px] font-extrabold text-neutral-300 uppercase tracking-wider">Perlu Dinilai</span>
                   </div>
 
-                  {/* Stat Card 2: Selesai (Solid Emerald Green) */}
-                  <div className="bg-emerald-600 text-white rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40 font-display border border-emerald-500">
-                    <div className="w-9 h-9 rounded-xl bg-white/20 text-white flex items-center justify-center font-black shrink-0">
-                      <CheckCircle2 className="w-5 h-5 text-white stroke-[2.5]" />
-                    </div>
-                    <div>
-                      <p className="text-xl font-black text-white font-display leading-none">{selesaiCount}</p>
-                      <p className="text-[10px] text-white font-black uppercase tracking-wider font-display mt-0.5">SELESAI</p>
-                    </div>
+                  <div className="w-px h-4 bg-neutral-700/80" />
+
+                  {/* Stat 2: Selesai */}
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 stroke-[2.2]" />
+                    <span className="text-base font-black text-emerald-400 leading-none">{selesaiCount}</span>
+                    <span className="text-[10px] font-extrabold text-neutral-300 uppercase tracking-wider">Selesai</span>
                   </div>
                 </div>
               </div>
