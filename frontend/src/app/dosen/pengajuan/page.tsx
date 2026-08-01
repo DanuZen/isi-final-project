@@ -120,7 +120,7 @@ export default function DosenPengajuanPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5 shrink-0">
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dosen/bimbingan"
                     className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer"

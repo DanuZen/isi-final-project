@@ -103,7 +103,7 @@ export default function BimbinganPage() {
                 </div>
 
                 {/* Right: quick action buttons */}
-                <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 shrink-0 w-full sm:w-auto">
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => setShowLogModal(true)}
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer w-full sm:w-auto"

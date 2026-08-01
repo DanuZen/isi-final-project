@@ -93,7 +93,7 @@ export default function SuperAdminMasterPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5 shrink-0">
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => alert("Membuka modal penambahan Program Studi baru...")}
                     className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
