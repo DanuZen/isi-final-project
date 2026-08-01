@@ -52,6 +52,13 @@ export function RoleLayout({
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
+  // Auto close mobile sidebar on route change
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  }, [pathname]);
+
   const initials = userName
     .split(" ")
     .map((w) => w[0])

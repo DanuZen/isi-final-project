@@ -86,6 +86,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const router = useRouter();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
+  // Auto close mobile drawer on route change
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768 && isOpen) {
+      onToggle?.();
+    }
+  }, [pathname]);
+
   const handleLogout = () => {
     onToggle?.();
     if (typeof window !== "undefined") {
