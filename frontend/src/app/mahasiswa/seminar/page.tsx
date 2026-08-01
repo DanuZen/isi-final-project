@@ -20,6 +20,7 @@ import { storeJadwal } from "@/lib/sipeta-store";
 
 export default function SeminarPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"detail" | "revisi">("detail");
   const [revisiFile, setRevisiFile] = useState<string | null>(null);
   const [revisiSubmitted, setRevisiSubmitted] = useState(false);
 
@@ -47,45 +48,74 @@ export default function SeminarPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
             {/* Welcome Banner */}
-            <div className="bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A] rounded-2xl border border-[#333333] p-6 text-white shadow-md relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-xs font-extrabold bg-[#2F8F5B] text-white flex items-center gap-1">
+            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
                       <CheckCircle2 className="w-3.5 h-3.5" /> ACC Seminar Proposal Disetujui
                     </span>
-                    <span className="text-xs font-mono-data text-[#A0A0A0]">
+                    <span className="hidden sm:inline-block text-xs font-mono text-neutral-400">
                       Ref ID: SM-2026-0914
                     </span>
                   </div>
-                  <h2 className="text-2xl font-black font-display text-white tracking-wide">
+                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Jadwal &amp; Pelaksanaan Seminar Proposal Skripsi
-                  </h2>
-                  <p className="text-xs text-[#CCCCCC] max-w-2xl leading-relaxed">
+                  </h1>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Informasi alokasi waktu seminar proposal, lokasi ruangan, dewan penguji, dan unggah revisi naskah pasca-seminar.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <button className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-[#2A2A2A] border border-[#444444] text-white hover:bg-[#333333] transition-all flex items-center gap-1.5 shadow-xs">
-                    <Download className="w-4 h-4 text-[#A0A0A0]" /> Berita Acara Seminar (PDF)
+                {/* Right: action buttons (Desktop only) */}
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
+                  <button className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all flex items-center gap-1.5 shadow-xs font-display">
+                    <Download className="w-4 h-4 text-neutral-300" /> Berita Acara Seminar (PDF)
                   </button>
                   <Link
                     href="/mahasiswa/sidang"
-                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#C62828] to-[#990000] text-white hover:from-[#B71C1C] hover:to-[#880000] transition-all shadow-md shadow-[#C62828]/20 flex items-center gap-1.5"
+                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all shadow-xs flex items-center gap-1.5 font-display"
                   >
                     Lanjut ke Sidang <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
+              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+            </div>
+
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "detail"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Detail Seminar</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("revisi")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "revisi"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Unggah Revisi</span>
+              </button>
             </div>
 
             {/* Grid Layout: Schedule & Revision Form (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left Column (8/12): Schedule Details & Board of Examiners */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-6 h-full">
+              <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden ${activeMobileTab === "detail" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
                     <div className="flex items-center gap-2.5">
@@ -183,7 +213,7 @@ export default function SeminarPage() {
               </div>
 
               {/* Right Column (4/12): Post-Seminar Revision Upload */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-6 h-full">
+              <div className={`lg:col-span-4 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "revisi" ? "flex" : "hidden lg:flex"}`}>
                 {/* Card 1: Upload Revisi */}
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">

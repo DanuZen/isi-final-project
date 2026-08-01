@@ -22,6 +22,7 @@ import { storeJadwal } from "@/lib/sipeta-store";
 export default function UjianSidangPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<"SEMPRO" | "SIDANG">("SIDANG");
+  const [activeMobileTab, setActiveMobileTab] = useState<"jadwal" | "berkas">("jadwal");
 
   const [naskahFinalFile, setNaskahFinalFile] = useState<string | null>(null);
   const [isUploaded, setIsUploaded] = useState(false);
@@ -58,18 +59,18 @@ export default function UjianSidangPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-5 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
             {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
                       <CheckCircle2 className="w-3.5 h-3.5" /> ACC Ujian Akademik Disetujui
                     </span>
                   </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Jadwal &amp; Ujian Akademik Tugas Akhir
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
@@ -81,23 +82,23 @@ export default function UjianSidangPage() {
                 <div className="flex items-center gap-1.5 bg-[#141414] p-1.5 rounded-xl border border-neutral-700 shrink-0">
                   <button
                     onClick={() => setActiveTab("SEMPRO")}
-                    className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 font-display ${
                       activeTab === "SEMPRO"
                         ? "bg-[#C62828] text-white shadow-xs"
                         : "text-neutral-400 hover:text-white"
                     }`}
                   >
-                    <Calendar className="w-3.5 h-3.5" /> 1. Seminar Proposal
+                    <Calendar className="w-3.5 h-3.5" /> 1. Sempro
                   </button>
                   <button
                     onClick={() => setActiveTab("SIDANG")}
-                    className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 font-display ${
                       activeTab === "SIDANG"
                         ? "bg-[#C62828] text-white shadow-xs"
                         : "text-neutral-400 hover:text-white"
                     }`}
                   >
-                    <GraduationCap className="w-3.5 h-3.5" /> 2. Ujian Sidang Skripsi
+                    <GraduationCap className="w-3.5 h-3.5" /> 2. Sidang Skripsi
                   </button>
                 </div>
               </div>
@@ -105,10 +106,37 @@ export default function UjianSidangPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("jadwal")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "jadwal"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Jadwal Ujian</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("berkas")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "berkas"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Upload className="w-3.5 h-3.5 shrink-0" />
+                <span className="whitespace-nowrap">Unggah Berkas</span>
+              </button>
+            </div>
+
             {/* Grid Layout: Schedule & Upload (Flush Bottom Aligned) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-0 lg:overflow-hidden">
               {/* Left Column (8/12): Schedule Details & Board of Examiners */}
-              <div className="lg:col-span-8 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden ${activeMobileTab === "jadwal" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
                     <div className="flex items-center gap-2.5">
@@ -212,7 +240,7 @@ export default function UjianSidangPage() {
               </div>
 
               {/* Right Column (4/12): Upload Form & Rules */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden">
+              <div className={`lg:col-span-4 flex-col justify-between space-y-4 h-full min-h-0 overflow-hidden ${activeMobileTab === "berkas" ? "flex" : "hidden lg:flex"}`}>
                 {/* Card 1: Upload Form */}
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">
