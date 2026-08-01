@@ -132,22 +132,21 @@ Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone
 - [ ] `/mahasiswa/kalender` — 🔄 Belum dicek
 - [ ] `/mahasiswa/profil` — 🔄 Belum dicek
 - [ ] `/mahasiswa/akun` — 🔄 Belum dicek
+- [ ] `/login` — 🔄 Belum dicek
 
-### 👨‍🏫 Portal Dosen Pembimbing (4 Halaman)
+### 👨‍🏫 Portal Dosen Terpadu (7 Halaman)
 - [ ] `/dosen/dashboard` — 🔄 Belum dicek
 - [ ] `/dosen/bimbingan` — 🔄 Belum dicek
 - [ ] `/dosen/pengajuan` — 🔄 Belum dicek
-- [ ] `/dosen/kalender` — 🔄 Belum dicek
-
-### 📋 Portal Dosen Penguji (4 Halaman)
-- [ ] `/penguji/dashboard` — 🔄 Belum dicek
 - [ ] `/penguji/jadwal` — 🔄 Belum dicek
 - [ ] `/penguji/nilai` — 🔄 Belum dicek
 - [ ] `/penguji/revisi` — 🔄 Belum dicek
+- [ ] `/dosen/kalender` — 🔄 Belum dicek
 
-### 🏛️ Portal Admin Prodi (5 Halaman)
+### 🏛️ Portal Admin Prodi (6 Halaman)
 - [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek
 - [ ] `/admin-prodi/mahasiswa` — 🔄 Belum dicek
+- [ ] `/admin-prodi/dosen` — 🔄 Belum dicek
 - [ ] `/admin-prodi/aktivasi` — 🔄 Belum dicek
 - [ ] `/admin-prodi/jadwal` — 🔄 Belum dicek
 - [ ] `/admin-prodi/repositori` — 🔄 Belum dicek
