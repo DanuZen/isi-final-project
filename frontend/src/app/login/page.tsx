@@ -93,15 +93,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white overflow-x-hidden font-sans">
+    <div className="h-dvh lg:min-h-screen lg:h-auto w-full flex flex-col lg:flex-row bg-white overflow-hidden lg:overflow-x-hidden font-sans">
       
       {/* ════════════════════════════════════════════════════════════
           LEFT COLUMN (50% Width): 100% Full-Screen Clean Form Panel
          ════════════════════════════════════════════════════════════ */}
-      <div className="w-full lg:w-1/2 min-h-screen p-8 sm:p-12 xl:p-16 flex flex-col justify-between bg-white z-10">
+      <div className="w-full lg:w-1/2 h-full lg:min-h-screen lg:h-auto p-6 sm:p-8 lg:p-12 xl:p-16 flex flex-col justify-between bg-white z-10 overflow-y-auto lg:overflow-visible">
         
         {/* Top Brand Header */}
-        <div className="flex items-center justify-between animate-fade-in-up delay-100">
+        <div className="flex items-center justify-center lg:justify-between animate-fade-in-up delay-100">
           <div className="flex items-center gap-3.5 group cursor-pointer">
             <div className="w-11 h-11 relative shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image src="/upiyptk_emblem.webp" alt="Emblem UPI YPTK" fill className="object-contain" />
@@ -114,7 +114,7 @@ export default function LoginPage() {
         </div>
 
         {/* Form Content Body */}
-        <div className="max-w-md w-full mx-auto my-auto space-y-6 py-8">
+        <div className="max-w-md w-full mx-auto my-auto space-y-5 lg:space-y-6 py-4 lg:py-8">
           
           {/* Title & Subtitle */}
           <div className="space-y-2 text-center animate-fade-in-up delay-200">
