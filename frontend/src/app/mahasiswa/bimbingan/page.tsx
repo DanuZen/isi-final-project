@@ -180,7 +180,7 @@ export default function BimbinganPage() {
               <div className={`lg:col-span-8 flex-col justify-between space-y-4 h-auto lg:h-full min-h-0 overflow-visible lg:overflow-hidden ${activeMobileTab === "thread" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs flex-1 flex flex-col justify-between min-h-0 overflow-visible lg:overflow-hidden">
                   <div className="flex flex-col h-full min-h-0 overflow-hidden">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 shrink-0">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 gap-2 shrink-0">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <MessageSquare className="w-4 h-4" />
@@ -189,9 +189,20 @@ export default function BimbinganPage() {
                           Riwayat Thread Sesi Bimbingan
                         </h3>
                       </div>
-                      <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
-                        {logList.length} / 5 Sesi Recorded
-                      </span>
+
+                      <div className="flex items-center gap-2">
+                        <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs font-display">
+                          {logList.length} / 5 Sesi Recorded
+                        </span>
+
+                        <button
+                          onClick={() => setShowLogModal(true)}
+                          className="md:hidden inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-[#C62828] text-white hover:bg-[#a81f1f] transition-all cursor-pointer font-display shrink-0"
+                        >
+                          <PlusCircle className="w-3.5 h-3.5" />
+                          <span>Catat Sesi</span>
+                        </button>
+                      </div>
                     </div>
 
                     {/* Thread Messages List (Internally Scrollable) */}
