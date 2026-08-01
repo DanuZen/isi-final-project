@@ -136,7 +136,7 @@ Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone
 
 ### 👨‍🏫 Portal Dosen Terpadu (7 Halaman)
 - [x] `/dosen/dashboard` — ✅ Sesuai (Welcome Banner Benchmark, Responsif Card Bimbingan & Stat Grid, Desktop 100% Utuh)
-- [ ] `/dosen/bimbingan` — 🔄 Belum dicek
+- [x] `/dosen/bimbingan` — ✅ Sesuai (Sleek Mobile Segmented Control Tab Switcher, Red & Gold Theme, Desktop 100% Utuh)
 - [ ] `/dosen/pengajuan` — 🔄 Belum dicek
 - [ ] `/penguji/jadwal` — 🔄 Belum dicek
 - [ ] `/penguji/nilai` — 🔄 Belum dicek

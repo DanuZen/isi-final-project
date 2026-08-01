@@ -151,6 +151,7 @@ const STATUS_COLOR: Record<string, { color: string; bg: string; icon: React.Elem
 
 export default function DosenBimbinganPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"daftar" | "detail">("daftar");
   const [search, setSearch] = useState("");
   const [filterTahap, setFilterTahap] = useState<string>("Semua");
   const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
@@ -233,8 +234,8 @@ export default function DosenBimbinganPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Portal Mahasiswa Bimbingan Active
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                      <UserCheck className="w-3.5 h-3.5" /> Mahasiswa Bimbingan Active
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -258,11 +259,40 @@ export default function DosenBimbinganPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+              <button
+                onClick={() => setActiveMobileTab("daftar")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "daftar"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>Daftar Mahasiswa ({filtered.length})</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                  activeMobileTab === "detail"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>Detail & Histori Log</span>
+              </button>
+            </div>
+
             {/* ── Split Layout (7/12 & 5/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* ── LEFT COLUMN (7/12): List Mahasiswa Bimbingan Card ── */}
-              <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "daftar" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Header Card + Search & Filter */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0">
                   <div className="flex items-center gap-2.5">
@@ -430,7 +460,9 @@ export default function DosenBimbinganPage() {
               </div>
 
               {/* ── RIGHT COLUMN (5/12): Detail Panel Card ── */}
-              <div className="lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Header Card Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
