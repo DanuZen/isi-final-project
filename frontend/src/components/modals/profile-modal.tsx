@@ -415,7 +415,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                       </p>
                     </div>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-600 text-white shadow-xs shrink-0">
+                  <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-600 text-white shadow-xs shrink-0 font-display">
                     {completedStepsCount}/5 Tahap Terpenuhi
                   </span>
                 </div>
@@ -500,7 +500,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                       </p>
                     </div>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-600 text-white shadow-xs shrink-0">
+                  <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-600 text-white shadow-xs shrink-0 font-display">
                     Enkripsi Aktif
                   </span>
                 </div>
