@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
@@ -79,6 +79,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
   const [isCheckingAuth, setIsCheckingAuth] = React.useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"judul" | "acc" | "kalender">("judul");
 
   React.useEffect(() => {
     const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("sipeta_logged_in");
@@ -111,7 +112,7 @@ export default function DashboardPage() {
 
           <main className="flex-1 p-4 md:p-6 space-y-3.5 md:space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
 
-            {/* ── Welcome Banner (Optimized for Mobile) ── */}
+            {/* ── Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-xs">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 {/* Left: greeting + status */}
@@ -149,43 +150,55 @@ export default function DashboardPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Touch Action Row (Sleek 3-Column Shortcuts for Mobile <768px) ── */}
-            <div className="grid grid-cols-3 gap-2 md:hidden shrink-0">
-              <Link
-                href="/mahasiswa/proposal"
-                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-[#C62828] text-white shadow-2xs text-center active:scale-95 transition-all space-y-1"
-              >
-                <FileText className="w-4 h-4 text-white" />
-                <span className="text-[10.5px] font-bold leading-tight font-display">Ajukan Judul</span>
-              </Link>
-
-              <Link
-                href="/mahasiswa/pembimbing"
-                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-[#ffd01d] text-slate-950 shadow-2xs text-center active:scale-95 transition-all space-y-1"
-              >
-                <User2 className="w-4 h-4 text-slate-950" />
-                <span className="text-[10.5px] font-bold leading-tight font-display">Pembimbing</span>
-              </Link>
-
-              <Link
-                href="/mahasiswa/kalender"
-                className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-2xs text-center active:scale-95 transition-all space-y-1"
-              >
-                <CalendarDays className="w-4 h-4 text-slate-700" />
-                <span className="text-[10.5px] font-bold leading-tight font-display">Kalender TA</span>
-              </Link>
-            </div>
-
             {/* ── TA Stepper ── */}
             <div className="shrink-0">
               <TaStepper />
             </div>
 
-            {/* ── Main Grid (8/12 & 4/12) ── */}
+            {/* ── Sleek Mobile Segmented Control Tab Switcher (<768px) ── */}
+            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs">
+              <button
+                onClick={() => setActiveMobileTab("judul")}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "judul"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Judul TA</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("acc")}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "acc"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Syarat ACC</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMobileTab("kalender")}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "kalender"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Kalender</span>
+              </button>
+            </div>
+
+            {/* ── Main Grid (8/12 & 4/12 on Desktop / Tabbed on Mobile) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0">
 
-              {/* LEFT: Judul TA Card (8/12) */}
-              <div className="lg:col-span-8 flex flex-col gap-4 min-h-0">
+              {/* Judul TA Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'judul') */}
+              <div className={`lg:col-span-8 flex-col gap-4 min-h-0 ${activeMobileTab === "judul" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col flex-1 min-h-0 overflow-hidden">
                   {/* Card header */}
                   <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 shrink-0">
@@ -266,9 +279,8 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* RIGHT: Syarat ACC + Mini Kalender Widget (4/12) */}
-              <div className="lg:col-span-4 flex flex-col gap-4 min-h-0">
-                {/* ACC Checklist Card */}
+              {/* Syarat ACC Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'acc') */}
+              <div className={`lg:col-span-4 flex-col gap-4 min-h-0 ${activeMobileTab === "acc" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden shrink-0">
                   <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3.5 border-b border-slate-100">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
@@ -314,8 +326,10 @@ export default function DashboardPage() {
                     </button>
                   </div>
                 </div>
+              </div>
 
-                {/* Mini Kalender TA Widget */}
+              {/* Kalender TA Card (Desktop: Always Visible, Mobile: Shown when activeMobileTab === 'kalender') */}
+              <div className={`lg:col-span-4 flex-col gap-4 min-h-0 ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex flex-col gap-3 flex-1 min-h-0 overflow-hidden">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
                     <div className="flex items-center gap-2.5">
@@ -366,8 +380,8 @@ export default function DashboardPage() {
                     </div>
                   </div>
                 </div>
-
               </div>
+
             </div>
 
           </main>
