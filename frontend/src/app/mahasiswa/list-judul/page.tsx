@@ -115,9 +115,9 @@ export default function ListJudulPage() {
 
 
             {/* Search & Filter Controls Bar */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+            <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row md:items-center justify-between gap-3 shrink-0">
               {/* Search Input */}
-              <div className="relative flex-1 max-w-md">
+              <div className="relative flex-1 min-w-0">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
@@ -129,7 +129,7 @@ export default function ListJudulPage() {
               </div>
 
               {/* Filter Dropdowns */}
-              <div className="flex items-center gap-3 text-xs z-20">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 text-xs z-20 w-full md:w-auto">
                 <CustomDropdown
                   value={selectedBidang}
                   onChange={(val) => setSelectedBidang(val)}
@@ -140,7 +140,7 @@ export default function ListJudulPage() {
                     { id: "Jaringan Komputer", label: "Jaringan Komputer" },
                   ]}
                   placeholder="Pilih Bidang..."
-                  className="w-56"
+                  className="flex-1 sm:w-56"
                 />
 
                 <CustomDropdown
@@ -152,7 +152,7 @@ export default function ListJudulPage() {
                     { id: "50", label: "50 data / hal" },
                   ]}
                   placeholder="Jumlah..."
-                  className="w-36"
+                  className="w-36 shrink-0"
                 />
               </div>
             </div>
@@ -177,21 +177,21 @@ export default function ListJudulPage() {
                       </span>
                     </div>
 
-                    {/* ── Data Present: Horizontally Scrollable Table Container ── */}
-                    {filteredData.length > 0 ? (
-                      <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none">
-                        <table className="w-full text-left text-xs min-w-[650px]">
-                          <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
-                            <tr>
-                              <th className="py-3 px-3.5 w-12 text-center whitespace-nowrap">No</th>
-                              <th className="py-3 px-3.5 w-44 whitespace-nowrap">Nama Mahasiswa</th>
-                              <th className="py-3 px-3.5 min-w-[260px] whitespace-nowrap">Judul Tugas Akhir / Skripsi</th>
-                              <th className="py-3 px-3.5 w-36 whitespace-nowrap">Jenis TA</th>
-                              <th className="py-3 px-3.5 w-44 whitespace-nowrap">Dosen Pembimbing</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100 text-slate-800">
-                            {filteredData.map((item) => (
+                    {/* ── Table Container Always Present ── */}
+                    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto scrollbar-none relative">
+                      <table className="w-full text-left text-xs min-w-[650px]">
+                        <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider font-display border-b border-slate-200/80 sticky top-0 z-10">
+                          <tr>
+                            <th className="py-3 px-3.5 w-12 text-center whitespace-nowrap">No</th>
+                            <th className="py-3 px-3.5 w-44 whitespace-nowrap">Nama Mahasiswa</th>
+                            <th className="py-3 px-3.5 min-w-[260px] whitespace-nowrap">Judul Tugas Akhir / Skripsi</th>
+                            <th className="py-3 px-3.5 w-36 whitespace-nowrap">Jenis TA</th>
+                            <th className="py-3 px-3.5 w-44 whitespace-nowrap">Dosen Pembimbing</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 text-slate-800">
+                          {filteredData.length > 0 ? (
+                            filteredData.map((item) => (
                               <tr key={item.no} className="hover:bg-slate-50/80 transition-colors">
                                 <td className="py-3 px-3.5 text-center font-mono-data font-bold text-slate-500">
                                   {item.no}
@@ -222,22 +222,25 @@ export default function ListJudulPage() {
                                   <span className="text-[11px] font-bold text-slate-800">{item.pembimbing}</span>
                                 </td>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    ) : (
-                      /* ── Data Empty: Perfectly Centered Empty State Container ── */
-                      <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3 font-display">
-                        <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
-                          <BookOpen className="w-7 h-7" />
-                        </div>
-                        <p className="font-extrabold text-sm text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
-                        <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-sm">
-                          Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
-                        </p>
-                      </div>
-                    )}
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan={5} className="py-24 text-center">
+                                <div className="sticky left-0 right-0 w-[calc(100vw-3.5rem)] md:w-full max-w-sm mx-auto flex flex-col items-center justify-center text-center space-y-3 font-display">
+                                  <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-[#C62828] flex items-center justify-center shadow-xs">
+                                    <BookOpen className="w-7 h-7" />
+                                  </div>
+                                  <p className="font-extrabold text-sm text-slate-900">Belum Ada Judul Terdaftar di Repositori</p>
+                                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                                    Usulan judul baru yang dikirimkan mahasiswa akan langsung tersimpan secara otomatis di sini.
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
 
                   {/* Pagination Footer */}
