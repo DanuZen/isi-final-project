@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
-  CheckCircle2, Save, Info, ArrowRight, ShieldCheck, Award,
+  CheckCircle2, Save, Info, ArrowRight, ArrowLeft, ShieldCheck, Award,
   Search, Filter, Sparkles, X, UserCheck
 } from "lucide-react";
 
@@ -79,6 +79,7 @@ export default function PengujiNilaiPage() {
   const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
   const [search, setSearch] = useState("");
   const [filterJenis, setFilterJenis] = useState("Semua");
+  const [activeMobileTab, setActiveMobileTab] = useState<"list" | "form">("list");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Scores state: Record<nim, number[]>
@@ -187,7 +188,9 @@ export default function PengujiNilaiPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* ── LEFT COLUMN (5/12): Student Teruji List Card Container ── */}
-              <div className="lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-5 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "list" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Header + Search + Filter */}
                 <div className="p-4 border-b border-slate-100 space-y-3 shrink-0">
                   <div className="flex items-center justify-between">
@@ -243,7 +246,10 @@ export default function PengujiNilaiPage() {
                       return (
                         <div
                           key={m.nim}
-                          onClick={() => setSelectedNim(m.nim)}
+                          onClick={() => {
+                            setSelectedNim(m.nim);
+                            setActiveMobileTab("form");
+                          }}
                           className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                             isSelected
                               ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
@@ -290,10 +296,18 @@ export default function PengujiNilaiPage() {
               </div>
 
               {/* ── RIGHT COLUMN (7/12): Form Rubrik Penilaian Card Container ── */}
-              <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-7 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "form" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Card Header Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
+                    <button
+                      onClick={() => setActiveMobileTab("list")}
+                      className="lg:hidden p-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer shrink-0"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Star className="w-4 h-4 text-white" />
                     </div>

@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, CalendarDays, Star, FileEdit,
-  CheckCircle2, Clock, Send, AlertCircle, ArrowRight, ShieldCheck, Award,
+  CheckCircle2, Clock, Send, AlertCircle, ArrowRight, ArrowLeft, ShieldCheck, Award,
   Sparkles, X, Search, Filter, FileText, Download, Eye
 } from "lucide-react";
 
@@ -60,6 +60,7 @@ export default function PengujiRevisiPage() {
   const [selectedNim, setSelectedNim] = useState<string>("20101152630067");
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("Semua");
+  const [activeMobileTab, setActiveMobileTab] = useState<"list" | "detail">("list");
   const [catatanBaru, setCatatanBaru] = useState<Record<string, string>>({});
   const [approved, setApproved] = useState<Record<string, boolean>>({
     "20101152630133": true,
@@ -148,7 +149,9 @@ export default function PengujiRevisiPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* ── LEFT COLUMN (5/12): Student Revision List Card Container ── */}
-              <div className="lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-5 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "list" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Header + Search + Filter */}
                 <div className="p-4 border-b border-slate-100 space-y-3 shrink-0">
                   <div className="flex items-center justify-between">
@@ -203,7 +206,10 @@ export default function PengujiRevisiPage() {
                       return (
                         <div
                           key={r.nim}
-                          onClick={() => setSelectedNim(r.nim)}
+                          onClick={() => {
+                            setSelectedNim(r.nim);
+                            setActiveMobileTab("detail");
+                          }}
                           className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                             isSelected
                               ? "bg-rose-50/40 border-[#C62828] shadow-xs ring-1 ring-[#C62828]/20"
@@ -246,10 +252,18 @@ export default function PengujiRevisiPage() {
               </div>
 
               {/* ── RIGHT COLUMN (7/12): Revision Verification Panel Card Container ── */}
-              <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-7 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Card Header Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
+                    <button
+                      onClick={() => setActiveMobileTab("list")}
+                      className="lg:hidden p-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer shrink-0"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <FileEdit className="w-4 h-4 text-white" />
                     </div>
