@@ -52,7 +52,7 @@ export default function SuperAdminAuditPage() {
   const selected = AUDIT_DATA.find((l) => l.id === selectedId) || filtered[0] || AUDIT_DATA[0];
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
+    <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
 

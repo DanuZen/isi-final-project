@@ -75,7 +75,7 @@ export default function AdminFakultasDashboard() {
   };
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
+    <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         
         {/* Unified Standard Sidebar */}

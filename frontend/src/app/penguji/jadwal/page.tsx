@@ -45,7 +45,7 @@ export default function PengujiJadwalPage() {
   });
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#F5F5F7]">
+    <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#F5F5F7]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={DOSEN_NAV_ITEMS} roleName="Dosen" />
 

@@ -65,7 +65,7 @@ export default function AdminFakultasSkPage() {
   const selected = list.find((item) => item.noSk === selectedNoSk) || filtered[0] || list[0];
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
+    <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
 

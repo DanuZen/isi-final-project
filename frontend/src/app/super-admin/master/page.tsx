@@ -67,7 +67,7 @@ export default function SuperAdminMasterPage() {
   const selected = PRODI_LIST.find((p) => p.kode === selectedKode) || filtered[0] || PRODI_LIST[0];
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
+    <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
 
