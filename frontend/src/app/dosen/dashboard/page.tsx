@@ -144,7 +144,7 @@ export default function DosenDashboardPage() {
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display tracking-wide text-white leading-tight">
-                    Selamat Datang, {DOSEN.nama}
+                    Selamat Datang
                   </h1>
                   <p className="text-xs text-neutral-300 leading-relaxed max-w-2xl font-medium">
                     Anda memiliki <strong className="text-[#ffd01d]">{DOSEN.kuotaTerisi} dari {DOSEN.kuotaMaks} Mahasiswa Bimbingan Aktif</strong>. 
@@ -162,7 +162,7 @@ export default function DosenDashboardPage() {
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Bimbingan Aktif</p>
+                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Bimbingan</p>
                   <p className="text-base sm:text-lg font-black text-slate-900 font-display truncate">{DOSEN.kuotaTerisi}/{DOSEN.kuotaMaks} Mhs</p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export default function DosenDashboardPage() {
                   <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Jadwal Menguji</p>
+                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Jadwal Ujian</p>
                   <p className="text-base sm:text-lg font-black text-slate-900 font-display truncate">5 Ujian</p>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function DosenDashboardPage() {
                   <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Lembar Revisi</p>
+                  <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Revisi</p>
                   <p className="text-base sm:text-lg font-black text-slate-900 font-display truncate">8 Berkas</p>
                 </div>
               </div>
