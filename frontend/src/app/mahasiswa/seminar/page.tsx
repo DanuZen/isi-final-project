@@ -197,7 +197,7 @@ export default function SeminarPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-3 my-auto min-h-[320px]">
                       <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
                         <Calendar className="w-7 h-7" />
                       </div>
