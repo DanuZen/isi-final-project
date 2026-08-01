@@ -176,10 +176,12 @@ export default function DosenPengajuanPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* ── LEFT COLUMN (6/12): List Permohonan & Riwayat ── */}
-              <div className="lg:col-span-6 flex flex-col gap-4 min-h-0 overflow-hidden">
+              <div className={`lg:col-span-6 flex-col gap-4 min-h-0 overflow-hidden ${
+                activeMobileTab === "detail" ? "hidden lg:flex" : "flex flex-1 h-full"
+              }`}>
                 
                 {/* Pending Requests List Card */}
-                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden w-full h-full ${
                   activeMobileTab === "permohonan" ? "flex" : "hidden lg:flex"
                 }`}>
                   <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
@@ -197,13 +199,15 @@ export default function DosenPengajuanPage() {
                     </span>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2.5 flex flex-col">
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-4 space-y-2.5 flex flex-col justify-center">
                     {pengajuanList.length === 0 ? (
-                      <EmptyState
-                        icon={CheckCircle2}
-                        title="Semua Permohonan Telah Ditinjau"
-                        description="Belum ada permohonan pembimbing baru yang menunggu keputusan."
-                      />
+                      <div className="my-auto">
+                        <EmptyState
+                          icon={CheckCircle2}
+                          title="Semua Permohonan Telah Ditinjau"
+                          description="Belum ada permohonan pembimbing baru yang menunggu keputusan."
+                        />
+                      </div>
                     ) : (
                       pengajuanList.map((p) => {
                         const isSelected = selectedMhs && selectedMhs.nim === p.nim;
@@ -248,7 +252,7 @@ export default function DosenPengajuanPage() {
                 </div>
 
                 {/* History Card (Equal Height & Spacious) */}
-                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden ${
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden w-full h-full ${
                   activeMobileTab === "riwayat" ? "flex" : "hidden lg:flex"
                 }`}>
                   <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
@@ -266,13 +270,15 @@ export default function DosenPengajuanPage() {
                     </span>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto scrollbar-none p-3 space-y-2 flex flex-col">
+                  <div className="flex-1 overflow-y-auto scrollbar-none p-4 space-y-2 flex flex-col justify-center">
                     {riwayatList.length === 0 ? (
-                      <EmptyState
-                        icon={HistoryIcon}
-                        title="Belum Ada Riwayat Keputusan"
-                        description="Histori permohonan yang Anda terima atau tolak akan tercatat otomatis di sini."
-                      />
+                      <div className="my-auto">
+                        <EmptyState
+                          icon={HistoryIcon}
+                          title="Belum Ada Riwayat Keputusan"
+                          description="Histori permohonan yang Anda terima atau tolak akan tercatat otomatis di sini."
+                        />
+                      </div>
                     ) : (
                       riwayatList.map((r, i) => (
                         <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center gap-3">
@@ -304,8 +310,8 @@ export default function DosenPengajuanPage() {
               </div>
 
               {/* ── RIGHT COLUMN (6/12): Detail & Decision Panel Card ── */}
-              <div className={`lg:col-span-6 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
-                activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
+              <div className={`lg:col-span-6 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden w-full h-full ${
+                activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
               }`}>
                 {/* Header Card Detail */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
@@ -379,11 +385,13 @@ export default function DosenPengajuanPage() {
                     </div>
                   </div>
                 ) : (
-                  <EmptyState
-                    icon={CheckCircle2}
-                    title="Semua Permohonan Telah Ditinjau"
-                    description="Tidak ada permohonan pembimbing yang memerlukan verifikasi."
-                  />
+                  <div className="flex-1 flex flex-col items-center justify-center p-4 my-auto">
+                    <EmptyState
+                      icon={CheckCircle2}
+                      title="Semua Permohonan Telah Ditinjau"
+                      description="Tidak ada permohonan pembimbing yang memerlukan verifikasi."
+                    />
+                  </div>
                 )}
 
                 {/* Bottom Action Panel */}
