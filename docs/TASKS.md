@@ -128,8 +128,8 @@ Progress audit tampilan dan layout per-halaman satu per satu di layar smartphone
 - [x] `/mahasiswa/bimbingan` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
 - [x] `/mahasiswa/seminar` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
 - [x] `/mahasiswa/sidang` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
-- [ ] `/mahasiswa/list-judul` — 🔄 Belum dicek
-- [ ] `/mahasiswa/kalender` — 🔄 Belum dicek
+- [x] `/mahasiswa/list-judul` — ✅ Sesuai (Fixed Header, Scrollable Table min-w-[650px], Badge disembunyikan di HP, Desktop 100% Utuh)
+- [x] `/mahasiswa/kalender` — ✅ Sesuai (Fixed Header, Mobile Tab Switcher, Desktop 100% Utuh)
 - [ ] `/mahasiswa/profil` — 🔄 Belum dicek
 - [ ] `/mahasiswa/akun` — 🔄 Belum dicek
 - [ ] `/login` — 🔄 Belum dicek
