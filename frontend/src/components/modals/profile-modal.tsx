@@ -243,7 +243,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
             </div>
 
             <div className="flex items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-xs">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-xs font-display">
                 <CheckCircle2 className="w-3.5 h-3.5" /> Mahasiswa Aktif TA
               </span>
               <button
