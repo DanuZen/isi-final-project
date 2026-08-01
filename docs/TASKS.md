@@ -142,7 +142,7 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/penguji/jadwal` — ✅ Sesuai (Horizontal Swipeable Table `min-w-[750px]`, Aligned Single-Row Dropdown Filter, Desktop 100% Utuh)
 - [x] `/penguji/nilai` — ✅ Sesuai (Single-Row Dropdown Filter, Mobile Segmented Switcher, 1-Tap `← Kembali`, Desktop 100% Utuh)
 - [x] `/penguji/revisi` — ✅ Sesuai (Single-Row Dropdown Filter, Mobile Segmented Switcher, 1-Tap `← Kembali`, Desktop 100% Utuh)
-- [ ] `/dosen/kalender` — 🔄 Siap diaudit tampilan mobile (Halaman Berikutnya)
+- [x] `/dosen/kalender` — ✅ Sesuai (Single-Row Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-optimized Calendar Grid, Desktop 100% Utuh)
 
 ### 🏛️ Portal Admin Prodi (6 Halaman)
 - [ ] `/admin-prodi/dashboard` — 🔄 Belum dicek

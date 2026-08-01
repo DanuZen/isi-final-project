@@ -7,8 +7,8 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserCheck, CalendarDays,
-  Clock, MapPin, CheckCircle2, FileText, ArrowRight,
-  Sparkles, X, Filter, BookOpen, Check, ChevronLeft, ChevronRight
+  Clock, MapPin, CheckCircle2, FileText, ArrowRight, ArrowLeft,
+  Sparkles, X, Filter, BookOpen, Check, ChevronLeft, ChevronRight, ChevronDown
 } from "lucide-react";
 
 interface EventItem {
@@ -39,6 +39,8 @@ const JENIS_SOLID: Record<string, { bg: string; text: string }> = {
 export default function DosenKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filterJenis, setFilterJenis] = useState<string>("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeMobileTab, setActiveMobileTab] = useState<"calendar" | "detail">("calendar");
   const [selectedEventId, setSelectedEventId] = useState<number>(0);
   const [showBeritaAcaraModal, setShowBeritaAcaraModal] = useState(false);
   const [attendedMap, setAttendedMap] = useState<Record<number, boolean>>({});
@@ -165,7 +167,9 @@ export default function DosenKalenderPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* ── LEFT COLUMN (7/12): Interactive Calendar Month Grid Card ── */}
-              <div className="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-7 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "calendar" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Card Header + Filters */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
@@ -178,20 +182,39 @@ export default function DosenKalenderPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 flex-wrap ml-auto">
-                    <div className="flex items-center gap-1 p-1 bg-white border border-slate-200 rounded-xl shadow-2xs">
-                      <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
-                      {["Semua", "Seminar", "Sidang", "Bimbingan"].map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => setFilterJenis(t)}
-                          className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer font-display active:scale-95"
-                          style={filterJenis === t ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
+                  {/* Custom Animated Dropdown Filter */}
+                  <div className="relative ml-auto font-display">
+                    <button
+                      onClick={() => setIsFilterOpen(!isFilterOpen)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-white hover:bg-slate-50 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                    >
+                      <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                      <span>{filterJenis}</span>
+                      <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                    </button>
+
+                    {isFilterOpen && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                        <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[140px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                          {["Semua", "Seminar", "Sidang", "Bimbingan"].map((f) => (
+                            <button
+                              key={f}
+                              onClick={() => {
+                                setFilterJenis(f);
+                                setIsFilterOpen(false);
+                              }}
+                              className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                                filterJenis === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                              }`}
+                            >
+                              <span>{f}</span>
+                              {filterJenis === f && <Check className="w-3.5 h-3.5 text-white" />}
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -236,11 +259,12 @@ export default function DosenKalenderPage() {
                           onClick={() => {
                             if (hasEvents) {
                               setSelectedEventId(dayEvents[0].id);
+                              setActiveMobileTab("detail");
                             }
                           }}
                           className={`p-2 rounded-xl border transition-all cursor-pointer flex flex-col justify-between min-h-[52px] group ${
                             isSelected
-                              ? "bg-rose-50/80 border-[#C62828] ring-2 ring-[#C62828]/20 shadow-xs font-black"
+                              ? "bg-slate-50 border-slate-300 shadow-2xs font-black"
                               : hasEvents
                               ? "bg-white border-slate-200 hover:border-slate-300 hover:shadow-2xs"
                               : "bg-white border-slate-100/80 text-slate-400 hover:bg-slate-50"
@@ -288,21 +312,35 @@ export default function DosenKalenderPage() {
               </div>
 
               {/* ── RIGHT COLUMN (5/12): Detail Agenda Card Panel ── */}
-              <div className="lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden">
+              <div className={`lg:col-span-5 flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+                activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* Card Header Detail */}
-                <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
-                  <div className="flex items-center gap-2.5">
+                <div className="p-3.5 sm:p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50 gap-2">
+                  {/* Mobile Back Button (ONLY on Mobile) */}
+                  <button
+                    onClick={() => setActiveMobileTab("calendar")}
+                    className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                    title="Kembali ke Kalender"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>Kembali</span>
+                  </button>
+
+                  {/* Desktop Title & Icon (Hidden on Mobile) */}
+                  <div className="hidden lg:flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <BookOpen className="w-4 h-4 text-white" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h2 className="font-bold text-sm text-slate-900 font-display">Detail Agenda &amp; Pengujian</h2>
                       <p className="text-[10px] text-slate-400 font-medium">Informasi pelaksanaan &amp; berita acara</p>
                     </div>
                   </div>
 
+                  {/* Jenis Badge (Always on Right) */}
                   {selectedEv && (
-                    <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display ${JENIS_SOLID[selectedEv.jenis]?.bg} text-white`}>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display shrink-0 ${JENIS_SOLID[selectedEv.jenis]?.bg} text-white`}>
                       {selectedEv.jenis}
                     </span>
                   )}
