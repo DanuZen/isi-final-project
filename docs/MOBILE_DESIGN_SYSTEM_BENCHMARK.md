@@ -14,6 +14,11 @@ Dokumen ini berisi rangkuman analisis lengkap dari seluruh aturan, pola komponen
   - Sizing responsif: `w-full sm:w-auto`, `flex-1 sm:flex-none`
   - Hiding elemen di mobile: `hidden sm:inline-block` atau `hidden sm:flex`
 
+### 1.1 🎨 Aturan Palet Warna Tema (Strict Red & Gold Theme)
+- **HANYA GUNAKAN WARNA TEMA RESMI**: **Merah Utama (`#C62828` / `#B71C1C`)** dan **Emas/Kuning Akses (`#ffd01d` / `amber-500` / `amber-600`)**.
+- **DILARANG MENGGUNAKAN WARNA LAIN** (seperti *Ungu*, *Hijau Emerald*, atau *Biru*) pada ikon box, tombol aksi, maupun aksen statistik di seluruh halaman web aplikasi ini.
+- Gunakan aksen Netral Slate/Abu-abu (`bg-slate-100`, `bg-slate-200`, `text-slate-700`) untuk elemen pendukung non-utama.
+
 ---
 
 ## 2. 🖤 Acuan Standar Welcome Banner (`#1A1A1A`)

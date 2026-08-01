@@ -178,7 +178,7 @@ export default function DosenDashboardPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-3.5 sm:p-4 shadow-xs flex items-center gap-3">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                   <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="min-w-0">
@@ -188,8 +188,8 @@ export default function DosenDashboardPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-slate-200 p-3.5 sm:p-4 shadow-xs flex items-center gap-3">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#ffd01d] text-slate-950 flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" />
                 </div>
                 <div className="min-w-0">
                   <p className="text-[9.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider font-display truncate">Lembar Revisi</p>
@@ -270,9 +270,9 @@ export default function DosenDashboardPage() {
                         <span
                           className={`self-start shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold ${
                             m.statusAcc
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                              ? "bg-amber-100 text-amber-800 border border-amber-300"
                               : m.perluAcc
-                              ? "bg-amber-50 text-amber-700 border border-amber-200 animate-pulse"
+                              ? "bg-rose-50 text-[#C62828] border border-rose-200 animate-pulse"
                               : "bg-slate-100 text-slate-600 border border-slate-200"
                           }`}
                         >
@@ -320,7 +320,7 @@ export default function DosenDashboardPage() {
                       Permohonan Masuk
                     </h2>
                   </div>
-                  <span className="hidden sm:inline-block text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200 shrink-0">
+                  <span className="hidden sm:inline-block text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300 shrink-0">
                     {requestsData.length} Permohonan
                   </span>
                 </div>
@@ -328,7 +328,7 @@ export default function DosenDashboardPage() {
                 <div className="flex-1 overflow-y-auto scrollbar-none p-4 space-y-3">
                   {requestsData.length === 0 ? (
                     <div className="p-6 text-center text-slate-400 space-y-2">
-                      <CheckCircle2 className="w-8 h-8 mx-auto text-emerald-500" />
+                      <CheckCircle2 className="w-8 h-8 mx-auto text-[#C62828]" />
                       <p className="text-xs font-bold text-slate-700">Semua Permohonan Selesai</p>
                       <p className="text-[11px]">Tidak ada usulan dosen pembimbing baru yang pending.</p>
                     </div>
@@ -340,7 +340,7 @@ export default function DosenDashboardPage() {
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-xs text-slate-900 font-display">{req.nama}</span>
-                          <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
                             {req.peranUsulan}
                           </span>
                         </div>
@@ -352,13 +352,13 @@ export default function DosenDashboardPage() {
                         <div className="flex items-center gap-2 pt-2 border-t border-amber-200/60">
                           <button
                             onClick={() => handleApproveRequest(req.id)}
-                            className="flex-1 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-1 shadow-xs"
+                            className="flex-1 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#B71C1C] text-white font-bold text-xs transition-colors flex items-center justify-center gap-1 shadow-xs"
                           >
                             <CheckCircle2 className="w-3.5 h-3.5" /> Setujui
                           </button>
                           <button
                             onClick={() => handleApproveRequest(req.id)}
-                            className="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-rose-100 hover:text-rose-700 text-slate-700 font-bold text-xs transition-colors flex items-center justify-center gap-1"
+                            className="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-rose-100 hover:text-[#C62828] text-slate-700 font-bold text-xs transition-colors flex items-center justify-center gap-1"
                           >
                             <XCircle className="w-3.5 h-3.5" /> Tolak
                           </button>
