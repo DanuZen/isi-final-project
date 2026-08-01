@@ -109,8 +109,9 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${plusJakartaSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#FAFAFA] text-[#212121]">
+      <body className="min-h-full flex flex-col font-sans bg-[#FAFAFA] text-[#212121]" suppressHydrationWarning>
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
