@@ -65,14 +65,14 @@ const DEFAULT_JADWAL = [
   },
 ];
 
-const JENIS_CFG: Record<string, { color: string; bg: string }> = {
-  "Seminar": { color: "#2563EB", bg: "#eff6ff" },
-  "Sidang":  { color: "#C62828", bg: "#fef2f2" },
+const JENIS_CFG: Record<string, { bg: string }> = {
+  "Seminar": { bg: "bg-blue-600 text-white" },
+  "Sidang":  { bg: "bg-[#C62828] text-white" },
 };
-const STATUS_CFG: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
-  "Menunggu":    { color: "#b45309", bg: "#fffbeb", icon: Clock },
-  "Nilai Masuk": { color: "#059669", bg: "#ecfdf5", icon: CheckCircle2 },
-  "Selesai":     { color: "#475569", bg: "#f8fafc", icon: CheckCircle2 },
+const STATUS_CFG: Record<string, { bg: string; icon: React.ElementType }> = {
+  "Menunggu":    { bg: "bg-[#ffd01d] text-slate-950 font-black", icon: Clock },
+  "Nilai Masuk": { bg: "bg-emerald-600 text-white font-bold",   icon: CheckCircle2 },
+  "Selesai":     { bg: "bg-emerald-600 text-white font-bold",   icon: CheckCircle2 },
 };
 
 export default function PengujiJadwalPage() {
@@ -118,25 +118,25 @@ export default function PengujiJadwalPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3 shrink-0 flex-wrap">
-                  {/* Stat Card 1: Perlu Dinilai */}
-                  <div className="bg-[#262626] border border-amber-500/30 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40">
-                    <div className="w-9 h-9 rounded-lg bg-amber-500/20 text-[#ffd01d] flex items-center justify-center font-bold shrink-0 border border-amber-500/40">
-                      <Clock className="w-5 h-5 text-[#ffd01d]" />
+                  {/* Stat Card 1: Perlu Dinilai (Solid Gold) */}
+                  <div className="bg-[#ffd01d] text-slate-950 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40 font-display border border-amber-300">
+                    <div className="w-9 h-9 rounded-xl bg-slate-950/15 text-slate-950 flex items-center justify-center font-black shrink-0">
+                      <Clock className="w-5 h-5 text-slate-950 stroke-[2.5]" />
                     </div>
                     <div>
-                      <p className="text-xl font-black text-[#ffd01d] font-display leading-none">{perluDinilaiCount}</p>
-                      <p className="text-[10.5px] text-neutral-300 font-bold uppercase tracking-wider font-display mt-0.5">Perlu Dinilai</p>
+                      <p className="text-xl font-black text-slate-950 font-display leading-none">{perluDinilaiCount}</p>
+                      <p className="text-[10px] text-slate-950 font-black uppercase tracking-wider font-display mt-0.5">PERLU DINILAI</p>
                     </div>
                   </div>
 
-                  {/* Stat Card 2: Selesai */}
-                  <div className="bg-[#262626] border border-emerald-500/30 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 border border-emerald-500/40">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  {/* Stat Card 2: Selesai (Solid Emerald Green) */}
+                  <div className="bg-emerald-600 text-white rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-md shadow-black/40 font-display border border-emerald-500">
+                    <div className="w-9 h-9 rounded-xl bg-white/20 text-white flex items-center justify-center font-black shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-white stroke-[2.5]" />
                     </div>
                     <div>
-                      <p className="text-xl font-black text-emerald-400 font-display leading-none">{selesaiCount}</p>
-                      <p className="text-[10.5px] text-neutral-300 font-bold uppercase tracking-wider font-display mt-0.5">Selesai</p>
+                      <p className="text-xl font-black text-white font-display leading-none">{selesaiCount}</p>
+                      <p className="text-[10px] text-white font-black uppercase tracking-wider font-display mt-0.5">SELESAI</p>
                     </div>
                   </div>
                 </div>
@@ -209,11 +209,15 @@ export default function PengujiJadwalPage() {
                         const SIcon = sCfg.icon;
                         return (
                           <tr key={row.nim} className="hover:bg-slate-50 transition-colors">
-                            <td className="px-5 py-4">
-                              <div className="text-center bg-slate-50 py-1.5 px-2 rounded-xl border border-slate-100 min-w-[54px]">
-                                <p className="text-[9px] font-bold text-slate-400 uppercase">{row.hari}</p>
-                                <p className="text-xl font-black leading-none my-0.5 font-display" style={{ color: jCfg.color }}>{row.tglNum}</p>
-                                <p className="text-[9px] text-slate-400">Agt</p>
+                            <td className="px-5 py-4 whitespace-nowrap">
+                              <div className="w-14 rounded-2xl bg-white border border-slate-200/80 shadow-2xs overflow-hidden text-center shrink-0 font-display">
+                                <div className="bg-[#C62828] text-white py-1 px-1 text-[9.5px] font-black uppercase tracking-wider leading-none">
+                                  {row.hari.slice(0, 3)}
+                                </div>
+                                <div className="py-1.5 px-1 bg-gradient-to-b from-white to-slate-50">
+                                  <p className="text-lg font-black text-slate-900 leading-tight">{row.tglNum}</p>
+                                  <p className="text-[9.5px] font-bold text-slate-400 font-mono uppercase leading-none">Agt</p>
+                                </div>
                               </div>
                             </td>
                             <td className="px-5 py-4">
@@ -225,25 +229,27 @@ export default function PengujiJadwalPage() {
                             </td>
                             <td className="px-5 py-4 whitespace-nowrap">
                               <p className="flex items-center gap-1 font-semibold text-slate-700"><MapPin className="w-3.5 h-3.5 text-slate-400" />{row.ruang}</p>
-                              <p className="flex items-center gap-1 text-slate-500 mt-0.5 font-medium"><Clock className="w-3.5 h-3.5 text-slate-300" />{row.waktu} WIB</p>
+                              <p className="flex items-center gap-1 text-slate-500 mt-0.5 font-medium"><Clock className="w-3.5 h-3.5 text-slate-300" />{row.waktu}</p>
                             </td>
-                            <td className="px-5 py-4">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: jCfg.bg, color: jCfg.color }}>{row.jenis}</span>
-                            </td>
-                            <td className="px-5 py-4">
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: sCfg.bg, color: sCfg.color }}>
-                                <SIcon className="w-2.5 h-2.5" /> {row.status}
+                            <td className="px-5 py-4 whitespace-nowrap">
+                              <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-2xs font-display ${jCfg.bg}`}>
+                                {row.jenis}
                               </span>
                             </td>
-                            <td className="px-5 py-4">
+                            <td className="px-5 py-4 whitespace-nowrap">
+                              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-2xs font-display ${sCfg.bg}`}>
+                                <SIcon className="w-3 h-3 stroke-[2.5]" /> {row.status}
+                              </span>
+                            </td>
+                            <td className="px-5 py-4 whitespace-nowrap">
                               {row.nilai !== null
-                                ? <span className="text-sm font-black font-display" style={{ color: row.nilai >= 80 ? "#059669" : "#b45309" }}>{row.nilai}</span>
+                                ? <span className="text-sm font-black font-display text-emerald-600">{row.nilai}</span>
                                 : <span className="text-slate-300 text-xs">—</span>
                               }
                             </td>
-                            <td className="px-5 py-4">
+                            <td className="px-5 py-4 whitespace-nowrap">
                               <Link href="/penguji/nilai"
-                                className="px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all inline-block active:scale-95 shadow-xs"
+                                className="px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all inline-block active:scale-95 shadow-xs font-display"
                                 style={row.status === "Menunggu" ? { background: "#C62828", color: "white" } : { background: "#f1f5f9", color: "#64748b" }}
                               >
                                 {row.status === "Menunggu" ? "Input Nilai" : "Lihat Nilai"}
