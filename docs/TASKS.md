@@ -144,11 +144,11 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/penguji/revisi` — ✅ Sesuai (Single-Row Dropdown Filter, Mobile Segmented Switcher, 1-Tap `← Kembali`, Desktop 100% Utuh)
 - [x] `/dosen/kalender` — ✅ Sesuai (Single-Row Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-optimized Calendar Grid, Desktop 100% Utuh)
 
-### 🏛️ Portal Admin Prodi (6 Halaman — 3/6 Audited 🔄)
+### 🏛️ Portal Admin Prodi (6 Halaman — 4/6 Audited 🔄)
 - [x] `/admin-prodi/dashboard` — ✅ Sesuai (Welcome Banner Selamat Datang, Uppercase Executive Stat Cards, Emerald ACC Button, Desktop 100% Utuh)
 - [x] `/admin-prodi/mahasiswa` — ✅ Sesuai (Descriptive Title, Integrated Table Card Header, Single-Row Filter, Desktop 100% Utuh)
 - [x] `/admin-prodi/dosen` — ✅ Sesuai (Descriptive Title, Single-Row Dropdown Filter, 1-Tap Mobile `← Kembali`, Desktop 100% Utuh)
-- [ ] `/admin-prodi/aktivasi` — 🔄 Belum dicek
+- [x] `/admin-prodi/aktivasi` — ✅ Sesuai (Single-Row Search & Icon Button, Horizontal Swipeable Table min-w-[850px], Desktop 100% Utuh)
 - [ ] `/admin-prodi/jadwal` — 🔄 Belum dicek
 - [ ] `/admin-prodi/repositori` — 🔄 Belum dicek
 

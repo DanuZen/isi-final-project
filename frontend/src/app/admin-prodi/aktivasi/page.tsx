@@ -130,8 +130,8 @@ export default function AdminProdiAktivasiPage() {
 
             {/* Main Container */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
-                <div className="flex items-center gap-2.5">
+              <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                <div className="flex items-center gap-2.5 shrink-0">
                   <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                     <UserCheck className="w-4 h-4 text-white" />
                   </div>
@@ -141,29 +141,34 @@ export default function AdminProdiAktivasiPage() {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-2 flex-wrap ml-auto">
-                  <div className="relative">
-                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                {/* 1-Row Controls: Search + Input Button */}
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <div className="relative flex-1 sm:w-48 min-w-0">
+                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type="text"
                       placeholder="Cari NIM atau Nama..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all"
+                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
                     />
                   </div>
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs cursor-pointer font-display"
+                    title="Input Mahasiswa Baru"
+                    className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                   >
-                    <Plus className="w-3.5 h-3.5 text-white" /> Input Mahasiswa
+                    <Plus className="w-4 h-4 text-white shrink-0" />
+                    <span className="hidden sm:inline">Input</span>
                   </button>
                 </div>
               </div>
 
-              <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
-                <table className="w-full text-xs">
-                  <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+              {/* Dedicated Mobile Touch-Swipe Table Container */}
+              <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
+                <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                  <table className="w-full text-xs min-w-[850px] border-collapse">
+                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                     <tr>
                       {["NIM", "Nama Mahasiswa", "Prodi", "Clearing Luring", "Petugas Verifikasi", "IPK / SKS", "Status", "Aksi"].map((h) => (
                         <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
@@ -213,7 +218,8 @@ export default function AdminProdiAktivasiPage() {
                 </table>
               </div>
             </div>
-          </main>
+          </div>
+        </main>
         </div>
       </div>
 
