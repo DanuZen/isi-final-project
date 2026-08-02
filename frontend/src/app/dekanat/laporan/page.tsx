@@ -80,7 +80,7 @@ export default function DekanatLaporanPage() {
   const [filterKat, setFilterKat] = useState("Semua");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>("LAP-2026-01");
-  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
+  const [showMobileDetail, setShowMobileDetail] = useState(false);
 
   const filtered = LAPORAN_LIST.filter((item) => {
     const matchSearch =
@@ -147,38 +147,12 @@ export default function DekanatLaporanPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
-              <button
-                onClick={() => setActiveMobileTab("table")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "table"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Tabel Laporan ({filtered.length})</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "detail"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Detail Laporan</span>
-              </button>
-            </div>
-
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
               <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
-                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+                showMobileDetail ? "hidden lg:flex" : "flex"
               }`}>
                 {/* Integrated Table Card Header + Controls */}
                 <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
@@ -261,7 +235,7 @@ export default function DekanatLaporanPage() {
                               key={row.id}
                               onClick={() => {
                                 setSelectedId(row.id);
-                                setActiveMobileTab("detail");
+                                setShowMobileDetail(true);
                               }}
                               className={`transition-all cursor-pointer select-none ${
                                 isSelected
@@ -291,25 +265,28 @@ export default function DekanatLaporanPage() {
               {/* Side Detail Panel (Strict 350px Width Lock on Desktop) */}
               {selected && (
                 <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
-                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                  showMobileDetail ? "flex flex-1" : "hidden lg:flex"
                 }`}>
                   <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
                     
+                    {/* Header (Matching Reference Design) */}
                     <div className="pb-3 border-b border-slate-100 space-y-2 min-w-0">
                       <div className="flex items-center justify-between gap-2">
-                        {/* Mobile Back Button */}
+                        {/* Mobile Back Button (Matching Reference Pill ← Kembali) */}
                         <button
-                          onClick={() => setActiveMobileTab("table")}
-                          className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                          onClick={() => setShowMobileDetail(false)}
+                          className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                         >
                           <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
                           <span>Kembali</span>
                         </button>
 
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#C62828] text-white font-display shadow-2xs">
                           {selected.kategori}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400 font-semibold ml-auto">{selected.id}</span>
+                        <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs ml-auto">
+                          {selected.id}
+                        </span>
                       </div>
                       <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words">{selected.nama}</h3>
                     </div>
@@ -332,12 +309,13 @@ export default function DekanatLaporanPage() {
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 text-[11px] font-semibold space-y-1 min-w-0">
+                      {/* Solid Amber Authorization Card */}
+                      <div className="p-3.5 rounded-xl bg-amber-500 text-white shadow-xs text-[11px] font-semibold space-y-1 min-w-0">
                         <div className="flex items-center gap-1.5 font-bold">
-                          <ShieldCheck className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                          <ShieldCheck className="w-4 h-4 text-white shrink-0" />
                           <span>Otorisasi Akses Dekanat</span>
                         </div>
-                        <p className="text-[10px] text-amber-800 font-medium leading-normal">Dokumen ini disahkan oleh Dekan FIK Prof. Dr. H. Zulherman, M.T. &amp; berstempel resmi digital.</p>
+                        <p className="text-[10.5px] text-white/90 font-medium leading-normal">Dokumen ini disahkan oleh Dekan FIK Prof. Dr. H. Zulherman, M.T. &amp; berstempel resmi digital.</p>
                       </div>
                     </div>
 
