@@ -136,9 +136,9 @@ export default function DekanatStatistikPage() {
                   </span>
                 </div>
 
-                <div className="space-y-3 my-auto py-2 overflow-y-auto scrollbar-thin">
+                <div className="space-y-3.5 pt-3.5 pb-2 overflow-y-auto flex-1 scrollbar-thin">
                   {TAHAP_TA.map((item) => (
-                    <div key={item.label} className="space-y-1.5 p-3 md:p-3.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100/70 transition-colors">
+                    <div key={item.label} className="space-y-1.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100/70 transition-colors">
                       <div className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-2 min-w-0">
                           <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: item.color }} />
@@ -152,6 +152,18 @@ export default function DekanatStatistikPage() {
                       </div>
                     </div>
                   ))}
+
+                  {/* Stage Insights Summary Pills */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                    <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/70 flex items-center justify-between text-[11px]">
+                      <span className="font-bold text-blue-950 font-display">Tahap Paling Aktif</span>
+                      <span className="font-extrabold font-mono text-blue-700">Proses Bimbingan (40%)</span>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/70 flex items-center justify-between text-[11px]">
+                      <span className="font-bold text-emerald-950 font-display">Tingkat Kelulusan</span>
+                      <span className="font-extrabold font-mono text-emerald-700">11% (28 Mhs)</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Footer Link to Komparasi Prodi */}
