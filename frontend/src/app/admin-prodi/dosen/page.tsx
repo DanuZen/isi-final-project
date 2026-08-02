@@ -319,8 +319,8 @@ export default function AdminProdiDosenPage() {
                 </div>
               </div>
 
-              {/* Right Column: Live Side Detail Panel Card (Fixed 350px Width on Desktop) */}
-              <div className={`w-full lg:w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden p-5 justify-between space-y-4 flex-col ${
+              {/* Right Column: Live Side Detail Panel Card (Strict 350px Width Lock on Desktop) */}
+              <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden p-5 justify-between space-y-4 flex-col ${
                 activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
               }`}>
                 <div className="space-y-4 overflow-y-auto scrollbar-none">

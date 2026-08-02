@@ -253,12 +253,12 @@ export default function AdminProdiMahasiswaPage() {
                 </div>
               </div>
 
-              {/* Always Visible Detail Panel (Fixed 350px Width on Desktop) */}
+              {/* Always Visible Detail Panel (Strict 350px Width Lock on Desktop) */}
               {selected && (
-                <div className={`w-full lg:w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
                   activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
                 }`}>
-                  <div className="space-y-4 overflow-y-auto scrollbar-none">
+                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
                     <div className="pb-3 border-b border-slate-100 flex items-center justify-between gap-2">
                       <button
                         onClick={() => setActiveMobileTab("table")}
@@ -268,7 +268,7 @@ export default function AdminProdiMahasiswaPage() {
                         <span>Kembali</span>
                       </button>
 
-                      <div className="hidden lg:block min-w-0">
+                      <div className="hidden lg:block min-w-0 flex-1">
                         <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa</span>
                         <h3 className="text-base font-black text-slate-900 font-display mt-0.5 truncate">{selected.nama}</h3>
                       </div>
@@ -278,10 +278,10 @@ export default function AdminProdiMahasiswaPage() {
                       </span>
                     </div>
 
-                    <div className="space-y-3">
-                      <div>
+                    <div className="space-y-3 min-w-0">
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Judul Penelitian</p>
-                        <p className="text-xs font-semibold text-slate-800 mt-0.5 leading-snug">&ldquo;{selected.judul}&rdquo;</p>
+                        <p className="text-xs font-semibold text-slate-800 mt-0.5 leading-snug break-words">&ldquo;{selected.judul}&rdquo;</p>
                       </div>
 
                       <div className="grid grid-cols-2 gap-2">
@@ -295,13 +295,13 @@ export default function AdminProdiMahasiswaPage() {
                         </div>
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Pembimbing I</p>
-                        <p className="text-xs font-semibold text-slate-700 mt-0.5">{selected.pembimbing1}</p>
+                        <p className="text-xs font-semibold text-slate-700 mt-0.5 break-words">{selected.pembimbing1}</p>
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Pembimbing II</p>
-                        <p className="text-xs font-semibold text-slate-700 mt-0.5">{selected.pembimbing2}</p>
+                        <p className="text-xs font-semibold text-slate-700 mt-0.5 break-words">{selected.pembimbing2}</p>
                       </div>
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Tanggal Pengajuan</p>

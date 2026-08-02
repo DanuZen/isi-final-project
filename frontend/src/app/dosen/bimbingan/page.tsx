@@ -515,8 +515,8 @@ export default function DosenBimbinganPage() {
                 </div>
               </div>
 
-              {/* ── RIGHT COLUMN: Detail Panel Card (Fixed 350px Width on Desktop) ── */}
-              <div className={`w-full lg:w-[350px] shrink-0 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+              {/* ── RIGHT COLUMN: Detail Panel Card (Strict 350px Width Lock on Desktop) ── */}
+              <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
                 activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
               }`}>
                 {/* Header Card Detail */}

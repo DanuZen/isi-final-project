@@ -162,7 +162,8 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
 
 ### F. Ukuran Panel Samping Desktop (*Desktop Side Panel Width*)
 - **Aturan Lebar Tetap (Fixed Width Standard)**:
-  - Panel Samping / Detail (`Side Detail Panel`) di tampilan Desktop MUST berukuran **tetap (fixed width `w-full lg:w-[350px] shrink-0`)**, sehingga tidak melar/terlalu lebar dan tidak mengerdilkan tabel utama.
+  - Panel Samping / Detail (`Side Detail Panel`) di tampilan Desktop MUST berukuran **tetap terkunci (`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0`)**, sehingga tidak akan pernah melar/berubah lebar saat mengklik baris data dengan judul/nama yang sangat panjang.
+  - Elemen teks di dalam panel samping harus dilengkapi `break-words` dan pembungkus `min-w-0` agar tidak mendorong batas kontainer.
   - Kartu Utama / Tabel di sebelah kiri berukuran **fleksibel penuh (`flex-1 min-w-0`)**, mengambil sisa ruang yang ada di layar desktop.
 
 ```tsx
