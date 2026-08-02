@@ -229,22 +229,22 @@ export default function DekanatProdiPage() {
                       <p className="text-[11px] text-slate-500 font-medium mt-0.5">Ketua Program Studi: <strong className="text-slate-800 font-bold">{selected.kaprodi}</strong></p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-[10.5px]">
-                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-0.5">
-                        <span className="text-[9px] text-slate-400 font-bold uppercase font-display">Total Mahasiswa TA</span>
-                        <p className="font-extrabold text-slate-900 font-mono text-sm">{selected.totalMhs} Mhs</p>
+                    <div className="grid grid-cols-2 gap-2.5 text-[10.5px]">
+                      <div className="p-3 rounded-xl bg-[#C62828] text-white shadow-xs space-y-0.5">
+                        <span className="text-[9px] text-white/80 font-bold uppercase font-display">Total Mahasiswa TA</span>
+                        <p className="font-extrabold text-white font-mono text-base">{selected.totalMhs} Mhs</p>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/70 space-y-0.5">
-                        <span className="text-[9px] text-emerald-700 font-bold uppercase font-display">Rata-Rata IPK</span>
-                        <p className="font-extrabold text-emerald-800 font-mono text-sm">{selected.ipk.toFixed(2)}</p>
+                      <div className="p-3 rounded-xl bg-emerald-600 text-white shadow-xs space-y-0.5">
+                        <span className="text-[9px] text-white/80 font-bold uppercase font-display">Rata-Rata IPK</span>
+                        <p className="font-extrabold text-white font-mono text-base">{selected.ipk.toFixed(2)}</p>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/70 space-y-0.5">
-                        <span className="text-[9px] text-blue-700 font-bold uppercase font-display">Tepat Waktu (≤ 8 Sem)</span>
-                        <p className="font-extrabold text-blue-800 font-mono text-sm">{selected.tepatWaktu}</p>
+                      <div className="p-3 rounded-xl bg-blue-600 text-white shadow-xs space-y-0.5">
+                        <span className="text-[9px] text-white/80 font-bold uppercase font-display">Tepat Waktu (≤ 8 Sem)</span>
+                        <p className="font-extrabold text-white font-mono text-base">{selected.tepatWaktu}</p>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-0.5">
-                        <span className="text-[9px] text-amber-700 font-bold uppercase font-display">Masa Studi Rata-Rata</span>
-                        <p className="font-extrabold text-amber-800 font-mono text-sm">{selected.durasi}</p>
+                      <div className="p-3 rounded-xl bg-amber-500 text-white shadow-xs space-y-0.5">
+                        <span className="text-[9px] text-white/80 font-bold uppercase font-display">Masa Studi Rata-Rata</span>
+                        <p className="font-extrabold text-white font-mono text-base">{selected.durasi}</p>
                       </div>
                     </div>
                   </div>
