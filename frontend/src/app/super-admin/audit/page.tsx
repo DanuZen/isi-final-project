@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, ClipboardList, Settings, Database,
-  Search, ArrowRight, ShieldCheck, CheckCircle2, XCircle, AlertTriangle, Activity, Terminal
+  Search, ArrowRight, ShieldCheck, CheckCircle2, XCircle, AlertTriangle, Activity, Terminal, ArrowLeft
 } from "lucide-react";
 
 const NAV = [
@@ -41,6 +41,7 @@ export default function SuperAdminAuditPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string>("LOG-1092");
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
 
   const filtered = AUDIT_DATA.filter(
     (log) =>
@@ -91,107 +92,130 @@ export default function SuperAdminAuditPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* Control Bar */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between gap-3 flex-wrap shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                  <ClipboardList className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="font-bold text-sm text-slate-900 font-display">Log Aktivitas Sistem ({filtered.length})</h2>
-              </div>
-
-              <div className="relative">
-                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  placeholder="Cari user, aksi, IP..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] w-56 transition-all font-display"
-                />
-              </div>
-            </div>
-
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                      <tr>
-                        {["Log ID", "Waktu", "Pengguna / User", "Role", "Aktivitas / Event", "Target Objek", "IP Address"].map((h) => (
-                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {filtered.map((log) => {
-                        const isSelected = selected?.id === log.id;
-                        return (
-                          <tr
-                            key={log.id}
-                            onClick={() => setSelectedId(log.id)}
-                            className={`transition-all cursor-pointer select-none ${
-                              isSelected
-                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
-                                : "hover:bg-slate-50"
-                            }`}
-                          >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900">{log.id}</td>
-                            <td className="px-4 py-3.5 text-slate-500 font-medium whitespace-nowrap font-mono text-[11px]">{log.time}</td>
-                            <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{log.user}</td>
-                            <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
-                                {log.role}
-                              </span>
-                            </td>
-                            <td className="px-4 py-3.5 font-semibold text-slate-800 whitespace-nowrap">{log.action}</td>
-                            <td className="px-4 py-3.5 text-slate-600 max-w-[200px] truncate font-medium">{log.target}</td>
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-400 font-semibold">{log.ip}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
+                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+              }`}>
+                {/* Integrated Table Card Header + Controls */}
+                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <ClipboardList className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Log Aktivitas Sistem</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">{filtered.length} Catatan Log</p>
+                    </div>
+                  </div>
+
+                  {/* 1-Row Controls: Search Input */}
+                  <div className="relative flex-1 sm:w-64 max-w-xs min-w-0">
+                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      placeholder="Cari user, aksi, IP..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                    />
+                  </div>
+                </div>
+
+                {/* Table with Touch-Pan-X Smooth Container */}
+                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[850px] border-collapse">
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["Log ID", "Waktu", "Pengguna / User", "Role", "Aktivitas / Event", "Target Objek", "IP Address"].map((h) => (
+                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filtered.map((log) => {
+                          const isSelected = selected?.id === log.id;
+                          return (
+                            <tr
+                              key={log.id}
+                              onClick={() => {
+                                setSelectedId(log.id);
+                                setActiveMobileTab("detail");
+                              }}
+                              className={`transition-all cursor-pointer select-none ${
+                                isSelected
+                                  ? "bg-slate-100 font-bold"
+                                  : "hover:bg-slate-50"
+                              }`}
+                            >
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900">{log.id}</td>
+                              <td className="px-4 py-3.5 text-slate-500 font-medium whitespace-nowrap font-mono text-[11px]">{log.time}</td>
+                              <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{log.user}</td>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
+                                  {log.role}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3.5 font-semibold text-slate-800 whitespace-nowrap">{log.action}</td>
+                              <td className="px-4 py-3.5 text-slate-600 max-w-[200px] truncate font-medium">{log.target}</td>
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-400 font-semibold">{log.ip}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
-              {/* Live Side Detail Panel Card */}
+              {/* Side Detail Panel (Strict 350px Width Lock on Desktop) */}
               {selected && (
-                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
-                  <div className="space-y-4 overflow-y-auto scrollbar-none">
+                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                }`}>
+                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
                     
-                    <div className="pb-3 border-b border-slate-100 space-y-2">
+                    <div className="pb-3 border-b border-slate-100 space-y-2 min-w-0">
                       <div className="flex items-center justify-between gap-2">
+                        {/* Mobile Back Button */}
+                        <button
+                          onClick={() => setActiveMobileTab("table")}
+                          className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                        >
+                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                          <span>Kembali</span>
+                        </button>
+
                         <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
                           {selected.role}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400 font-semibold">{selected.id}</span>
+                        <span className="text-[10px] font-mono text-slate-400 font-semibold ml-auto">{selected.id}</span>
                       </div>
-                      <h3 className="text-sm font-black text-slate-900 font-display">{selected.action}</h3>
+                      <h3 className="text-sm font-black text-slate-900 font-display break-words">{selected.action}</h3>
                     </div>
 
-                    <div className="space-y-3 text-xs">
+                    <div className="space-y-3 text-xs min-w-0">
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Aktor Pengguna</p>
-                        <p className="font-bold text-slate-900 mt-0.5 font-display">{selected.user}</p>
+                        <p className="font-bold text-slate-900 mt-0.5 font-display break-words">{selected.user}</p>
                         <p className="text-[10.5px] text-slate-400 font-mono">IP: {selected.ip}</p>
                       </div>
 
-                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 min-w-0">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Detail Objek Target:</span>
-                        <p className="text-slate-800 font-semibold leading-relaxed text-[11.5px]">{selected.target}</p>
+                        <p className="text-slate-800 font-semibold leading-relaxed text-[11.5px] break-words">{selected.target}</p>
                         <p className="text-[10px] font-mono text-slate-400 truncate pt-1 border-t border-slate-200">{selected.userAgent}</p>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-slate-900 text-white space-y-1">
+                      <div className="p-3 rounded-xl bg-slate-900 text-white space-y-1 min-w-0">
                         <div className="flex items-center gap-1.5 font-bold text-amber-400 text-[11px] font-display">
-                          <Terminal className="w-3.5 h-3.5" />
+                          <Terminal className="w-3.5 h-3.5 shrink-0" />
                           <span>Audit Trail Integrity</span>
                         </div>
-                        <p className="text-[10px] text-slate-300 font-medium">Log terenkripsi dengan hash HMAC SHA-256 &amp; tidak dapat dimanipulasi.</p>
+                        <p className="text-[10px] text-slate-300 font-medium leading-normal">Log terenkripsi dengan hash HMAC SHA-256 &amp; tidak dapat dimanipulasi.</p>
                       </div>
                     </div>
 
@@ -199,7 +223,7 @@ export default function SuperAdminAuditPage() {
 
                   <div className="pt-3 border-t border-slate-100">
                     <span className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 flex items-center justify-center gap-2 font-display">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" /> Log Terverifikasi Aman
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" /> Log Terverifikasi Aman
                     </span>
                   </div>
                 </div>
