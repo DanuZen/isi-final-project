@@ -281,11 +281,9 @@ export default function DekanatLaporanPage() {
                           <span>Kembali</span>
                         </button>
 
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#C62828] text-white font-display shadow-2xs">
+                        {/* Category Pill Badge on Right */}
+                        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
                           {selected.kategori}
-                        </span>
-                        <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs ml-auto">
-                          {selected.id}
                         </span>
                       </div>
                       <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words">{selected.nama}</h3>
