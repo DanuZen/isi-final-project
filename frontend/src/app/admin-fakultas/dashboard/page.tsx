@@ -167,8 +167,9 @@ export default function AdminFakultasDashboard() {
                   </span>
                 </div>
 
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
-                  <table className="w-full text-xs">
+                <div className="overflow-y-auto flex-1 scrollbar-none pb-10 flex flex-col min-h-0">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0">
+                    <table className="w-full text-xs min-w-[850px] border-collapse">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["No. SK", "Jenis", "Nama Dosen", "Untuk Mahasiswa", "Tanggal", "Status", "Aksi"].map((h) => (
@@ -210,6 +211,7 @@ export default function AdminFakultasDashboard() {
                     </tbody>
                   </table>
                 </div>
+              </div>
               </div>
 
               {/* Bebas Fakultas Panel (1/3) */}

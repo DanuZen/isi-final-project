@@ -152,8 +152,8 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/admin-prodi/jadwal` — ✅ Sesuai (Descriptive Title, Interactive Add/Edit/Delete Schedule Modal & Toast, Desktop 100% Utuh)
 - [x] `/admin-prodi/repositori` — ✅ Sesuai (Descriptive Title, Integrated Table Card Header, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Locked 350px Detail Panel, Desktop 100% Utuh)
 
-### 📑 Portal Admin Fakultas (4 Halaman)
-- [ ] `/admin-fakultas/dashboard` — 🔄 Belum dicek
+### 📑 Portal Admin Fakultas (4 Halaman — 1/4 Audited 🔄)
+- [x] `/admin-fakultas/dashboard` — ✅ Sesuai (Welcome Banner Selamat Datang, Uppercase Executive Stat Cards, Touch-Swipe SK Table min-w-[850px], Desktop 100% Utuh)
 - [ ] `/admin-fakultas/sk` — 🔄 Belum dicek
 - [ ] `/admin-fakultas/bebas` — 🔄 Belum dicek
 - [ ] `/admin-fakultas/arsip` — 🔄 Belum dicek
