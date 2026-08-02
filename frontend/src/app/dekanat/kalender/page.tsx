@@ -388,19 +388,17 @@ export default function DekanatKalenderPage() {
                       {/* Main Detail Card (Clean Light Theme) */}
                       <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3 relative overflow-hidden">
                         <div className="flex items-center justify-between gap-2">
-                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold font-display shadow-2xs ${
-                            selectedEv.jenis === "Ujian Sidang" ? "bg-[#C62828] text-white" : "bg-blue-600 text-white"
-                          }`}>
-                            {selectedEv.jenis}
+                          <span className="font-mono text-[10.5px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80">
+                            NIM: {selectedEv.nim}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-600 font-bold bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
-                            {selectedEv.hari}, {selectedEv.tglNum} Agt
+                          <span className="text-[10px] font-mono text-slate-600 font-bold bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80">
+                            {selectedEv.hari}, {selectedEv.tglNum} Agt 2026
                           </span>
                         </div>
 
                         <div>
                           <h4 className="text-base md:text-lg font-black text-slate-900 font-display leading-tight">{selectedEv.mhs}</h4>
-                          <p className="text-[11px] text-slate-500 font-mono mt-0.5">{selectedEv.nim} · {selectedEv.prodi}</p>
+                          <p className="text-[11px] text-slate-500 font-medium mt-0.5">Program Studi <strong className="text-slate-800 font-bold">{selectedEv.prodi}</strong></p>
                         </div>
 
                         <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
