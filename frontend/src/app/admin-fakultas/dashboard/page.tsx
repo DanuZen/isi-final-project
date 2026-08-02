@@ -212,8 +212,8 @@ export default function AdminFakultasDashboard() {
                   </div>
                 </div>
 
-                {/* 3B. Card Ringkasan Repositori Dokumen Terkini (Solid Color Cards & Taller Layout) */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4.5 md:p-5 flex flex-col justify-between flex-1 min-h-0 space-y-3.5">
+                {/* 3B. Card Ringkasan Repositori Dokumen Terkini (Rich Preview Cards) */}
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 md:p-5 flex flex-col space-y-3.5 shrink-0">
                   <div className="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
@@ -234,37 +234,76 @@ export default function AdminFakultasDashboard() {
                     </Link>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 flex-1 min-h-0 pt-0.5">
-                    <div className="p-4 rounded-2xl bg-[#C62828] text-white space-y-2 shadow-xs flex flex-col justify-between transition-all hover:shadow-md">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Card 1: SK Dekan Resmi */}
+                    <div className="p-4 rounded-2xl bg-[#C62828] text-white space-y-3 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-extrabold text-rose-100 uppercase tracking-wider font-display">SK Dekan Resmi</span>
-                        <FileText className="w-4 h-4 text-white" />
+                        <div className="flex items-center gap-1.5">
+                          <FileText className="w-4 h-4 text-white" />
+                          <span className="text-[10.5px] font-extrabold text-rose-100 uppercase tracking-wider font-display">SK Dekan Resmi</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-white/20 text-white font-mono">PDF</span>
                       </div>
-                      <div>
-                        <p className="text-xl md:text-2xl font-black text-white font-display">34 Berkas</p>
-                        <p className="text-[10.5px] text-rose-100 font-medium mt-0.5">Terverifikasi Cloud FIK</p>
+
+                      <div className="space-y-0.5">
+                        <p className="text-2xl font-black text-white font-display">34 <span className="text-xs font-normal text-rose-100 font-sans">Berkas</span></p>
+                        <p className="text-[10.5px] text-rose-100 font-medium">Terverifikasi Cloud FIK</p>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-black/20 border border-white/10 space-y-1 text-[10.5px]">
+                        <div className="flex items-center justify-between text-white font-medium">
+                          <span className="font-mono text-[10px] text-rose-200">SK-2026-0081</span>
+                          <span className="text-[9.5px] text-rose-200">29 Jul</span>
+                        </div>
+                        <p className="text-white font-bold truncate text-[11px]">Dr. Hendra Saputra</p>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-emerald-600 text-white space-y-2 shadow-xs flex flex-col justify-between transition-all hover:shadow-md">
+                    {/* Card 2: Berita Acara Sidang */}
+                    <div className="p-4 rounded-2xl bg-emerald-700 text-white space-y-3 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-extrabold text-emerald-100 uppercase tracking-wider font-display">Berita Acara Sidang</span>
-                        <FileCheck className="w-4 h-4 text-white" />
+                        <div className="flex items-center gap-1.5">
+                          <FileCheck className="w-4 h-4 text-white" />
+                          <span className="text-[10.5px] font-extrabold text-emerald-100 uppercase tracking-wider font-display">Berita Acara Sidang</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-white/20 text-white font-mono">DOC</span>
                       </div>
-                      <div>
-                        <p className="text-xl md:text-2xl font-black text-white font-display">10 Berkas</p>
-                        <p className="text-[10.5px] text-emerald-100 font-medium mt-0.5">Status Lengkap Lulus</p>
+
+                      <div className="space-y-0.5">
+                        <p className="text-2xl font-black text-white font-display">10 <span className="text-xs font-normal text-emerald-100 font-sans">Berkas</span></p>
+                        <p className="text-[10.5px] text-emerald-100 font-medium">Status Lengkap Lulus</p>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-black/20 border border-white/10 space-y-1 text-[10.5px]">
+                        <div className="flex items-center justify-between text-white font-medium">
+                          <span className="font-mono text-[10px] text-emerald-200">BA-IF-2026</span>
+                          <span className="text-[9.5px] text-emerald-200">28 Jul</span>
+                        </div>
+                        <p className="text-white font-bold truncate text-[11px]">Ujian Sidang Skripsi IF</p>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-2 shadow-xs flex flex-col justify-between transition-all hover:shadow-md">
+                    {/* Card 3: Transkrip Final TA */}
+                    <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-extrabold text-slate-300 uppercase tracking-wider font-display">Transkrip Final TA</span>
-                        <ShieldCheck className="w-4 h-4 text-white" />
+                        <div className="flex items-center gap-1.5">
+                          <ShieldCheck className="w-4 h-4 text-white" />
+                          <span className="text-[10.5px] font-extrabold text-slate-300 uppercase tracking-wider font-display">Transkrip Final TA</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-white/20 text-white font-mono">SSO</span>
                       </div>
-                      <div>
-                        <p className="text-xl md:text-2xl font-black text-white font-display">4 Berkas</p>
-                        <p className="text-[10.5px] text-slate-300 font-medium mt-0.5">Terenkripsi Digital SSO</p>
+
+                      <div className="space-y-0.5">
+                        <p className="text-2xl font-black text-white font-display">4 <span className="text-xs font-normal text-slate-300 font-sans">Berkas</span></p>
+                        <p className="text-[10.5px] text-slate-300 font-medium">Terenkripsi Digital</p>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-white/10 border border-white/10 space-y-1 text-[10.5px]">
+                        <div className="flex items-center justify-between text-white font-medium">
+                          <span className="font-mono text-[10px] text-slate-400">TRK-2026-004</span>
+                          <span className="text-[9.5px] text-slate-400">25 Jul</span>
+                        </div>
+                        <p className="text-white font-bold truncate text-[11px]">Transkrip Siti Rahayu</p>
                       </div>
                     </div>
                   </div>
