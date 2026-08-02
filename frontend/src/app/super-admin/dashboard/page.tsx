@@ -6,8 +6,8 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, ClipboardList, Settings, Database,
-  CheckCircle2, XCircle, Clock, AlertTriangle, Search,
-  ShieldCheck, Activity, UserCog, KeyRound, ShieldAlert, Check, ArrowLeft
+  CheckCircle2, AlertTriangle, Search, ShieldCheck, UserCog,
+  ArrowRight, HardDrive, RefreshCw, Activity, Lock, ArrowLeft, Terminal, Check
 } from "lucide-react";
 
 const NAV = [
@@ -19,50 +19,53 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Total User Aktif",      value: "412",  sub: "Seluruh Akun Aktif",    color: "#D97706", bgIcon: "bg-amber-500", icon: Users },
-  { label: "Login Hari Ini",       value: "87",   sub: "Sesi Aktif Realtime",   color: "#059669", bgIcon: "bg-emerald-600", icon: CheckCircle2 },
-  { label: "Error Log 24 Jam",     value: "3",    sub: "Perlu Ditinjau",        color: "#C62828", bgIcon: "bg-[#C62828]",  icon: AlertTriangle },
-  { label: "User Nonaktif",        value: "14",   sub: "Akun Suspended",        color: "#475569", bgIcon: "bg-slate-700",  icon: Clock },
+  { label: "Total User Sistem",    value: "412",    sub: "Akun Mahasiswa & Dosen",  bgIcon: "bg-amber-500",   icon: Users },
+  { label: "Master Program Studi", value: "14",     sub: "Prodi Reference Aktif",    bgIcon: "bg-blue-600",    icon: Database },
+  { label: "Audit Log 24 Jam",     value: "1,092",  sub: "Log Keamanan & Sesi",     bgIcon: "bg-[#C62828]",   icon: ClipboardList },
+  { label: "Status Server & DB",   value: "99.9%",  sub: "Core SIPETA Online",       bgIcon: "bg-emerald-600", icon: CheckCircle2 },
 ];
 
-type UserStatus = "Aktif" | "Nonaktif" | "Suspended";
-
-interface UserItem {
+interface AuditLogSummary {
   id: string;
-  nama: string;
-  email: string;
+  time: string;
+  user: string;
   role: string;
-  unit: string;
-  lastLogin: string;
-  status: UserStatus;
-  sks?: number;
-  ipk?: number;
+  action: string;
+  target: string;
+  ip: string;
+  status: "success" | "info" | "warning" | "error";
+  userAgent: string;
 }
 
-const USERS: UserItem[] = [
-  { id: "20101152630045", nama: "Danu Zen", email: "danuzen@upiyptk.ac.id", role: "Mahasiswa", unit: "Teknik Informatika", lastLogin: "Hari ini 10:23", status: "Aktif", sks: 138, ipk: 3.65 },
-  { id: "1012345678", nama: "Dr. Hendra Saputra, M.T.", email: "hendra@upiyptk.ac.id", role: "Dosen Pembimbing", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 09:15", status: "Aktif" },
-  { id: "1023456789", nama: "Dr. Ahmad Fauzi, M.T.", email: "ahmadfauzi@upiyptk.ac.id", role: "Dosen Penguji", unit: "Fakultas Ilmu Komputer", lastLogin: "Kemarin 16:40", status: "Aktif" },
-  { id: "ADMINP001", nama: "Dr. Ratna Dewi, M.Kom.", email: "ratnadewi@upiyptk.ac.id", role: "Admin Prodi", unit: "Teknik Informatika", lastLogin: "Hari ini 08:45", status: "Aktif" },
-  { id: "20101152630189", nama: "Hendro Wibowo", email: "hendro@upiyptk.ac.id", role: "Mahasiswa", unit: "Sistem Informasi", lastLogin: "5 hari lalu", status: "Nonaktif", sks: 110, ipk: 2.85 },
-  { id: "20101152630211", nama: "Putri Handayani", email: "putri@upiyptk.ac.id", role: "Mahasiswa", unit: "Teknik Informatika", lastLogin: "2 hari lalu", status: "Aktif", sks: 140, ipk: 3.80 },
-  { id: "ADMF001", nama: "Dra. Yanti Susanti", email: "yanti@upiyptk.ac.id", role: "Admin Fakultas", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 11:02", status: "Aktif" },
+const RECENT_LOGS: AuditLogSummary[] = [
+  { id: "LOG-1092", time: "13:41:05 WIB", user: "Dr. Ratna Dewi", role: "Admin Prodi", action: "Aktivasi Akun Mahasiswa", target: "20101152630201 (Teguh Santoso)", ip: "192.168.1.45", status: "success", userAgent: "Chrome 126.0 / Windows" },
+  { id: "LOG-1091", time: "13:22:12 WIB", user: "Danu Zen", role: "Mahasiswa", action: "Login Berhasil (SSO)", target: "Session Started (/)", ip: "180.252.12.8", status: "info", userAgent: "Mobile Safari / iOS 17.5" },
+  { id: "LOG-1090", time: "12:55:40 WIB", user: "Unknown Visitor", role: "Visitor", action: "Login Gagal (Password Salah 3x)", target: "Account: 20101152630999", ip: "103.111.42.10", status: "error", userAgent: "Python-urllib/3.10" },
+  { id: "LOG-1089", time: "11:30:19 WIB", user: "Dr. Sarjon Defit", role: "Dosen Pembimbing", action: "ACC Seminar Proposal", target: "Danu Zen (20101152630045)", ip: "192.168.1.12", status: "success", userAgent: "Safari 17.4 / MacOS" },
+  { id: "LOG-1088", time: "10:10:02 WIB", user: "Super Admin", role: "Super Admin", action: "Reset Password User", target: "20101152630189 (Hendro Wibowo)", ip: "127.0.0.1", status: "warning", userAgent: "Edge 126.0 / Windows" },
+];
+
+const USER_ROLES_RECAP = [
+  { role: "Mahasiswa", count: 310, percent: "75%", color: "bg-[#C62828]" },
+  { role: "Dosen Pembimbing & Penguji", count: 84, percent: "20%", color: "bg-blue-600" },
+  { role: "Admin Prodi & Fakultas", count: 12, percent: "3%", color: "bg-amber-500" },
+  { role: "Dekanat & Super Admin", count: 6, percent: "2%", color: "bg-emerald-600" },
 ];
 
 export default function SuperAdminDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
-  const [selectedId, setSelectedId] = useState<string>("20101152630045");
+  const [selectedLogId, setSelectedLogId] = useState<string>("LOG-1092");
   const [showMobileDetail, setShowMobileDetail] = useState(false);
 
-  const filtered = USERS.filter(
-    (u) =>
-      u.nama.toLowerCase().includes(search.toLowerCase()) ||
-      u.id.includes(search) ||
-      u.role.toLowerCase().includes(search.toLowerCase())
+  const filteredLogs = RECENT_LOGS.filter(
+    (log) =>
+      log.user.toLowerCase().includes(search.toLowerCase()) ||
+      log.action.toLowerCase().includes(search.toLowerCase()) ||
+      log.target.toLowerCase().includes(search.toLowerCase())
   );
 
-  const selected = USERS.find((u) => u.id === selectedId) || filtered[0] || USERS[0];
+  const selectedLog = RECENT_LOGS.find((l) => l.id === selectedLogId) || filteredLogs[0] || RECENT_LOGS[0];
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -91,22 +94,22 @@ export default function SuperAdminDashboard() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
             
-            {/* ── Welcome Banner ── */}
+            {/* ── 1. Welcome Banner ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
-                      <ShieldCheck className="w-3.5 h-3.5 text-white" /> Super Admin Control Center
+                      <ShieldCheck className="w-3.5 h-3.5 text-white" /> Executive Summary Control Center
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Panel Kontrol Utama Sistem SIPETA
+                    Rekapitulasi Utama Sistem SIPETA UPI YPTK
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Status sistem: <strong className="text-emerald-400 font-bold">Online Normal</strong>. Terdapat <strong className="text-[#C62828] font-bold">3 log insiden 24 jam terakhir</strong> yang perlu penanganan.
+                    Rangkuman performa sistem, rekapitulasi data pengguna, catatan jejak audit log, serta status kesehatan server &amp; database terpusat.
                   </p>
                 </div>
 
@@ -119,18 +122,18 @@ export default function SuperAdminDashboard() {
                     <span>Manajemen User</span>
                   </Link>
                   <Link
-                    href="/super-admin/audit"
+                    href="/super-admin/config"
                     className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 font-display"
                   >
-                    <ClipboardList className="w-4 h-4 text-white" />
-                    <span>Audit Log</span>
+                    <Settings className="w-4 h-4 text-white" />
+                    <span>Konfigurasi System</span>
                   </Link>
                 </div>
               </div>
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── 4 Executive Stat Cards ── */}
+            {/* ── 2. Executive Stat Cards (4 Cards) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-3 shrink-0">
               {STATS.map((s) => {
                 const IconComp = s.icon;
@@ -151,158 +154,221 @@ export default function SuperAdminDashboard() {
               })}
             </div>
 
-            {/* Grid Layout with Live Side Detail Panel Card */}
-            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
+            {/* ── 3. Split 2-Column Executive Summary Section (7/12 & 5/12) ── */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 items-stretch">
               
-              {/* Table Container */}
-              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
+              {/* ── LEFT COLUMN (7/12): Audit Log Realtime Summary Table ── */}
+              <div className={`lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
                 showMobileDetail ? "hidden lg:flex" : "flex"
               }`}>
-                {/* Integrated Table Card Header + Controls */}
-                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
-                  <div className="flex items-center gap-2.5 shrink-0">
+                {/* Header + Search */}
+                <div className="p-3.5 md:p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                      <Users className="w-4 h-4 text-white" />
+                      <ClipboardList className="w-4 h-4 text-white" />
                     </div>
-                    <div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Manajemen User Sistem</h2>
-                      <p className="text-[10px] text-slate-400 font-medium">{filtered.length} Pengguna Terdaftar</p>
+                    <div className="min-w-0">
+                      <h2 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Ringkasan Audit Log Terbaru</h2>
+                      <p className="text-[9.5px] md:text-[10px] text-slate-400 font-medium truncate">Rekap jejak aktivitas seluruh pengguna</p>
                     </div>
                   </div>
 
-                  {/* 1-Row Controls: Search Input */}
-                  <div className="relative flex-1 sm:w-64 max-w-xs min-w-0">
-                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                    <input
-                      type="text"
-                      placeholder="Cari user ID, nama, role..."
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
-                    />
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-48 min-w-0">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        placeholder="Cari log..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="pl-7 pr-2 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      />
+                    </div>
+                    <Link
+                      href="/super-admin/audit"
+                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all shrink-0 font-display flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Detail Audit</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                    </Link>
                   </div>
                 </div>
 
-                {/* Table with Touch-Pan-X Smooth Container */}
-                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
-                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
-                    <table className="w-full text-xs min-w-[850px] border-collapse">
-                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                        <tr>
-                          {["NIM / NIDN / User ID", "Nama Pengguna", "Hak Akses (Role)", "Unit Kerja / Prodi", "Login Terakhir", "Status"].map((h) => (
-                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {filtered.map((u) => {
-                          const isSelected = selected?.id === u.id;
-                          return (
-                            <tr
-                              key={u.id}
-                              onClick={() => {
-                                setSelectedId(u.id);
-                                setShowMobileDetail(true);
-                              }}
-                              className={`transition-all cursor-pointer select-none ${
-                                isSelected
-                                  ? "bg-slate-100 font-bold"
-                                  : "hover:bg-slate-50"
-                              }`}
-                            >
-                              <td className="px-4 py-3.5 whitespace-nowrap font-mono text-[11px] font-bold text-slate-900">{u.id}</td>
-                              <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{u.nama}</td>
-                              <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
-                                  {u.role}
-                                </span>
-                              </td>
-                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-600 font-medium">{u.unit}</td>
-                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-400 font-mono">{u.lastLogin}</td>
-                              <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${u.status === "Aktif" ? "bg-emerald-600" : "bg-slate-500"}`}>
-                                  {u.status}
-                                </span>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                {/* Log Table Container */}
+                <div className="overflow-y-auto flex-1 scrollbar-thin p-3.5 md:p-4 space-y-2">
+                  {filteredLogs.map((log) => {
+                    const isSelected = selectedLog?.id === log.id;
+                    return (
+                      <div
+                        key={log.id}
+                        onClick={() => {
+                          setSelectedLogId(log.id);
+                          setShowMobileDetail(true);
+                        }}
+                        className={`p-3 rounded-xl border text-xs transition-all cursor-pointer space-y-1.5 ${
+                          isSelected
+                            ? "bg-rose-50/90 border-[#C62828] shadow-2xs"
+                            : "bg-slate-50/80 border-slate-200/80 hover:bg-slate-100/80"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-[10px] font-bold text-slate-600 bg-slate-200/60 px-2 py-0.5 rounded-md border border-slate-200">
+                              {log.id}
+                            </span>
+                            <span className="text-[10px] font-mono text-slate-400 font-medium">{log.time}</span>
+                          </div>
+                          <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold text-white font-display ${
+                            log.role === "Super Admin" ? "bg-slate-900" : "bg-[#C62828]"
+                          }`}>
+                            {log.role}
+                          </span>
+                        </div>
+
+                        <div>
+                          <p className="font-extrabold text-slate-900 font-display">{log.action}</p>
+                          <p className="text-[10.5px] text-slate-500 font-medium truncate">Aktor: <strong className="text-slate-800">{log.user}</strong> · Target: {log.target}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Table Footer Link */}
+                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
+                  <span className="text-[10.5px] text-slate-500 font-medium">Menampilkan 5 log aktivitas terkini</span>
+                  <Link
+                    href="/super-admin/audit"
+                    className="text-[11px] font-extrabold text-[#C62828] hover:underline font-display flex items-center gap-1"
+                  >
+                    <span>Lihat Seluruh Log Keamanan</span>
+                    <ArrowRight className="w-3 h-3 text-[#C62828]" />
+                  </Link>
                 </div>
               </div>
 
-              {/* Side Detail Panel (Strict 350px Width Lock on Desktop) */}
-              {selected && (
-                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
-                  showMobileDetail ? "flex flex-1" : "hidden lg:flex"
-                }`}>
-                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
-                    
-                    <div className="pb-3 border-b border-slate-100 space-y-2 min-w-0">
-                      <div className="flex items-center justify-between gap-2">
-                        {/* Mobile Back Button (Matching Reference Pill ← Kembali) */}
-                        <button
-                          onClick={() => setShowMobileDetail(false)}
-                          className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
-                        >
-                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
-                          <span>Kembali</span>
-                        </button>
+              {/* ── RIGHT COLUMN (5/12): System Health & Master Recap ── */}
+              <div className={`lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
+                showMobileDetail ? "flex" : "hidden lg:flex"
+              }`}>
+                {/* Header */}
+                <div className="p-3.5 md:p-4 border-b border-slate-100 flex items-center justify-between gap-3 shrink-0 bg-white">
+                  {/* Mobile Back Button (Matching Reference Pill ← Kembali) */}
+                  <button
+                    onClick={() => setShowMobileDetail(false)}
+                    className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>Kembali</span>
+                  </button>
 
-                        {/* Category Pill Badge on Right */}
-                        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
-                          {selected.role}
+                  <div className="hidden lg:flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <Activity className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Status Rekapitulasi System</h3>
+                      <p className="text-[9.5px] md:text-[10px] text-slate-400 font-medium truncate">Ringkasan role &amp; konfigurasi server</p>
+                    </div>
+                  </div>
+
+                  <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
+                    SYSTEM OK
+                  </span>
+                </div>
+
+                {/* Right Column Body */}
+                <div className="p-3.5 md:p-4 overflow-y-auto flex-1 space-y-3.5 scrollbar-thin">
+                  
+                  {/* 1. Selected Log Quick Preview Card */}
+                  {selectedLog && (
+                    <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2 relative overflow-hidden">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-[10.5px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80">
+                          {selectedLog.id}
+                        </span>
+                        <span className="text-[10px] text-white font-extrabold bg-emerald-600 px-2.5 py-0.5 rounded-full shadow-2xs font-display">
+                          {selectedLog.status.toUpperCase()}
                         </span>
                       </div>
-                      <h3 className="text-base font-black text-slate-900 font-display break-words">{selected.nama}</h3>
-                      <p className="text-xs text-slate-500 font-medium truncate">{selected.email}</p>
-                    </div>
 
-                    <div className="space-y-3 text-xs min-w-0">
-                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 min-w-0">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Informasi Akun:</span>
-                        <div className="space-y-1 text-slate-700">
-                          <p><strong className="text-slate-900">User ID / NIM:</strong> {selected.id}</p>
-                          <p><strong className="text-slate-900">Unit / Prodi:</strong> {selected.unit}</p>
-                          <p><strong className="text-slate-900">Login Terakhir:</strong> {selected.lastLogin}</p>
-                          {selected.sks && <p><strong className="text-slate-900">Total SKS:</strong> {selected.sks} SKS</p>}
-                          {selected.ipk && <p><strong className="text-slate-900">IPK Kumulatif:</strong> {selected.ipk.toFixed(2)}</p>}
-                        </div>
+                      <div>
+                        <h4 className="text-sm font-black text-slate-900 font-display leading-snug">{selectedLog.action}</h4>
+                        <p className="text-[11px] text-slate-500 font-medium mt-0.5">Pengguna: <strong className="text-slate-800 font-bold">{selectedLog.user}</strong> ({selectedLog.role})</p>
                       </div>
 
-                      {/* Solid Emerald Auth Card */}
-                      <div className="p-3.5 rounded-xl bg-emerald-600 text-white shadow-xs text-[11px] font-semibold space-y-1 min-w-0">
-                        <div className="flex items-center gap-1.5 font-bold">
-                          <Check className="w-4 h-4 text-white shrink-0" />
-                          <span>Status Autentikasi Ok</span>
-                        </div>
-                        <p className="text-[10.5px] text-white/90 font-medium leading-normal">Akun terverifikasi dengan enkripsi SSO Universitas.</p>
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1 text-[11px]">
+                        <p className="text-[9.5px] uppercase font-bold text-slate-400 font-display">Target Objek &amp; Sesi</p>
+                        <p className="text-slate-800 font-bold leading-normal">{selectedLog.target}</p>
+                        <p className="text-[10px] text-slate-400 font-mono pt-1 border-t border-slate-200/80">{selectedLog.userAgent} · IP: {selectedLog.ip}</p>
                       </div>
                     </div>
+                  )}
 
+                  {/* 2. User Roles Distribution Recap */}
+                  <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                      <div className="flex items-center gap-1.5">
+                        <Users className="w-4 h-4 text-[#C62828]" />
+                        <h5 className="font-bold text-xs text-slate-900 font-display">Distribusi Akun per Role</h5>
+                      </div>
+                      <Link href="/super-admin/users" className="text-[10.5px] font-bold text-[#C62828] hover:underline font-display">
+                        Kelola →
+                      </Link>
+                    </div>
+
+                    <div className="space-y-2 text-xs">
+                      {USER_ROLES_RECAP.map((r) => (
+                        <div key={r.role} className="space-y-1">
+                          <div className="flex items-center justify-between text-[11px]">
+                            <span className="font-bold text-slate-700 font-display">{r.role}</span>
+                            <span className="font-bold text-slate-900 font-mono">{r.count} User ({r.percent})</span>
+                          </div>
+                          <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                            <div className={`h-full ${r.color} rounded-full`} style={{ width: r.percent }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 space-y-2">
-                    <button
-                      onClick={() => alert(`Mengirimkan tautan reset password untuk ${selected.nama}...`)}
-                      className="w-full py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
-                    >
-                      <KeyRound className="w-3.5 h-3.5 text-white" />
-                      <span>Reset Password Akun</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => alert(`Mengubah status penangguhan akun ${selected.nama}...`)}
-                      className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
-                    >
-                      <ShieldAlert className="w-3.5 h-3.5 text-white" />
-                      <span>Suspend / Nonaktifkan Akun</span>
-                    </button>
+                  {/* 3. System Health & Backup Status (Solid Colors) */}
+                  <div className="p-3.5 rounded-2xl bg-slate-900 text-white shadow-xs space-y-2.5">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                      <div className="flex items-center gap-1.5">
+                        <HardDrive className="w-4 h-4 text-emerald-400" />
+                        <h5 className="font-bold text-xs text-white font-display">Status Server &amp; Database</h5>
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded-full">
+                        ONLINE
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5 text-[11px] text-slate-300 font-medium">
+                      <div className="flex items-center justify-between p-2 rounded-xl bg-neutral-800/80 border border-neutral-700/80">
+                        <span className="text-[10px] text-neutral-400 font-bold font-display">Mode Maintenance</span>
+                        <span className="font-bold text-emerald-400 font-display">Nonaktif (Normal)</span>
+                      </div>
+                      <div className="flex items-center justify-between p-2 rounded-xl bg-neutral-800/80 border border-neutral-700/80">
+                        <span className="text-[10px] text-neutral-400 font-bold font-display">Backup Terakhir</span>
+                        <span className="font-bold text-white font-mono text-[10.5px]">Hari ini 00:00 WIB</span>
+                      </div>
+                    </div>
                   </div>
+
                 </div>
-              )}
+
+                {/* Footer Link */}
+                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
+                  <Link
+                    href="/super-admin/config"
+                    className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
+                  >
+                    <Settings className="w-3.5 h-3.5 text-white" />
+                    <span>Buka Konfigurasi Master System</span>
+                  </Link>
+                </div>
+              </div>
 
             </div>
 
