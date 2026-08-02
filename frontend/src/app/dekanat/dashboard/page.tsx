@@ -140,25 +140,25 @@ export default function DekanatDashboard() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── 2. 4 Stat Cards ── */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-3 shrink-0">
+            {/* ── 2. 4 Stat Cards (Statistik TA Design System) ── */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 shrink-0">
               {STATS.map((s) => {
                 const IconComp = s.icon;
                 return (
-                  <div key={s.label} className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3 md:p-3.5 flex items-center justify-between space-x-2 md:space-x-3 hover:shadow-md transition-all">
-                    <div className="space-y-0.5 min-w-0 flex-1">
-                      <p className="text-[9px] md:text-[9.5px] font-bold uppercase tracking-wider text-slate-400 font-display truncate">{s.label}</p>
-                      <div className="flex items-baseline space-x-1.5 md:space-x-2">
-                        <span className="text-lg md:text-xl font-black font-display tracking-tight text-slate-900">{s.value}</span>
-                        <span className={`text-[9.5px] md:text-[10px] font-bold flex items-center gap-0.5 ${s.trend.startsWith("+") ? "text-emerald-600" : "text-[#C62828]"}`}>
-                          {s.trend.startsWith("+") ? <TrendingUp className="w-2.5 h-2.5" /> : <TrendingDown className="w-2.5 h-2.5" />}
+                  <div key={s.label} className="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between space-x-3 hover:shadow-md transition-all">
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-slate-500 font-display leading-tight">{s.label}</p>
+                      <div className="flex items-baseline space-x-2">
+                        <span className="text-2xl sm:text-3xl font-black font-display tracking-tight" style={{ color: s.color }}>{s.value}</span>
+                        <span className={`text-[10px] font-bold flex items-center gap-0.5 ${s.trend.startsWith("+") ? "text-emerald-600" : "text-[#C62828]"}`}>
+                          {s.trend.startsWith("+") ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                           {s.trend}
                         </span>
                       </div>
-                      <p className="text-[9.5px] text-slate-400 font-medium truncate hidden sm:block">{s.sub}</p>
+                      <p className="text-[10px] text-slate-400 font-semibold truncate">{s.sub}</p>
                     </div>
-                    <div className={`w-8 h-8 md:w-9 md:h-9 rounded-xl md:rounded-2xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs`}>
-                      <IconComp className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />
+                    <div className={`w-11 h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
+                      <IconComp className="w-5 h-5 text-white" />
                     </div>
                   </div>
                 );
