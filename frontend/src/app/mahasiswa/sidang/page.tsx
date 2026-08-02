@@ -29,6 +29,7 @@ export default function UjianSidangPage() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [revisiSemproFile, setRevisiSemproFile] = useState<string | null>(null);
   const [isSemproUploaded, setIsSemproUploaded] = useState(false);
+  const [isBebasSubmitted, setIsBebasSubmitted] = useState(false);
 
   const [jadwalList, setJadwalList] = useState(storeJadwal.getAll());
 
@@ -317,32 +318,84 @@ export default function UjianSidangPage() {
                   )}
                 </div>
 
-                {/* Card 2: Rules & Guidelines */}
-                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-3 flex-1 flex flex-col justify-between">
+                {/* Card 2: Pengajuan Bebas Fakultas (SKBF) Section */}
+                <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                        <CheckCircle2 className="w-4 h-4" />
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                          <FileCheck className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-sm text-slate-900 font-display">
+                            {activeTab === "SEMPRO" ? "Tata Tertib Presentasi Sempro" : "Surat Keterangan Bebas Fakultas (SKBF)"}
+                          </h3>
+                          <p className="text-[10.5px] text-slate-400 font-medium">
+                            {activeTab === "SEMPRO" ? "Ketentuan wajib peserta seminar" : "Syarat resmi pendaftaran Yudisium"}
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="font-bold text-sm text-slate-900 font-display">
-                        {activeTab === "SEMPRO" ? "Tata Tertib Presentasi Sempro" : "Prasyarat Ujian Sidang Skripsi"}
-                      </h3>
                     </div>
 
-                    <ul className="space-y-2.5 text-xs text-slate-600 font-medium mt-3">
-                      <li className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
-                        <span>Memakai kemeja putih &amp; Jas Almamater UPI YPTK</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
-                        <span>Hadir 15 menit sebelum alokasi waktu ujian</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
-                        <span>Membawa draf naskah 3 rangkap untuk penguji</span>
-                      </li>
-                    </ul>
+                    {activeTab === "SEMPRO" ? (
+                      <ul className="space-y-2.5 text-xs text-slate-600 font-medium mt-3">
+                        <li className="flex items-center gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
+                          <span>Memakai kemeja putih &amp; Jas Almamater UPI YPTK</span>
+                        </li>
+                        <li className="flex items-center gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
+                          <span>Hadir 15 menit sebelum alokasi waktu ujian</span>
+                        </li>
+                        <li className="flex items-center gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
+                          <span>Membawa draf naskah 3 rangkap untuk penguji</span>
+                        </li>
+                      </ul>
+                    ) : (
+                      <div className="space-y-3 mt-3 text-xs">
+                        {isBebasSubmitted ? (
+                          <div className="space-y-3">
+                            <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-2 text-amber-900 font-bold">
+                                <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                                <span>Pengajuan SKBF Sedang Diverifikasi Fakultas</span>
+                              </div>
+                              <span className="px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-amber-600 text-white font-display">Pending</span>
+                            </div>
+
+                            <div className="space-y-1.5 text-[11px] font-medium text-slate-700">
+                              <p className="font-bold text-slate-900 text-xs font-display">Pengecekan Otomatis 3 Prasyarat Sistem Kampus:</p>
+                              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                                <span>1. Perpus (Bebas Pinjaman &amp; Denda Buku)</span>
+                                <span className="font-bold text-emerald-600">✓ Clear Lunas</span>
+                              </div>
+                              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                                <span>2. Lab Komputer (Inventaris &amp; Modul)</span>
+                                <span className="font-bold text-emerald-600">✓ Clear Dikembalikan</span>
+                              </div>
+                              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                                <span>3. Keuangan (Pelunasan SPP s/d Sem 8)</span>
+                                <span className="font-bold text-emerald-600">✓ Clear Lunas</span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="space-y-3">
+                            <p className="text-slate-600 leading-relaxed text-[11px] font-medium">
+                              Setelah menyelesaikan Ujian Sidang Skripsi, ajukan verifikasi 3 prasyarat (Bebas Perpus, Lab, &amp; SPP) untuk mendapatkan Surat Keterangan Bebas Fakultas (SKBF).
+                            </p>
+                            <button
+                              onClick={() => setIsBebasSubmitted(true)}
+                              className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95 cursor-pointer font-display"
+                            >
+                              <FileCheck className="w-4 h-4 text-white" />
+                              <span>Ajukan Bebas Fakultas (SKBF) Sekarang</span>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
