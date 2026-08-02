@@ -168,7 +168,7 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/super-admin/dashboard` — ✅ Sesuai (Welcome Banner, Uppercase Stat Cards, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Role Badge, Solid Emerald Auth Card, Desktop 100% Utuh)
 - [x] `/super-admin/users` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Role Badge, Solid Emerald Auth Card, Desktop 100% Utuh)
 - [x] `/super-admin/audit` — ✅ Sesuai (Welcome Banner, Single-Row Search, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Log ID Badge, Desktop 100% Utuh)
-- [x] `/super-admin/config` — ✅ Sesuai (Welcome Banner, Multi-Section Settings Grid, Realtime Save & Backup Progress, Desktop 100% Utuh)
+- [x] `/super-admin/config` — ✅ Sesuai (Welcome Banner, 4-Card Nav Pill Switcher: Syarat Akademik, Repositori, Backup Keamanan, Infrastructure, Desktop 100% Utuh)
 - [x] `/super-admin/master` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Kode Badge, Desktop 100% Utuh)
 
 ---
