@@ -189,10 +189,11 @@ export default function AdminProdiMahasiswaPage() {
 
                 <button
                   onClick={() => setShowAddModal(true)}
-                  className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs whitespace-nowrap shrink-0 active:scale-95"
+                  title="Input Mahasiswa TA Baru"
+                  className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                 >
-                  <Plus className="w-3.5 h-3.5 text-white shrink-0" />
-                  <span>Input</span>
+                  <Plus className="w-4 h-4 text-white shrink-0" />
+                  <span className="hidden sm:inline">Input</span>
                 </button>
               </div>
             </div>
