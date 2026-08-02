@@ -87,35 +87,36 @@ export default function AdminFakultasDashboard() {
           <main className="flex-1 p-3 md:p-5 space-y-3 md:space-y-4 overflow-hidden shell-body flex flex-col min-h-0 justify-between">
             
             {/* ── 1. Welcome Banner (Compact) ── */}
+            {/* ── 1. Welcome Banner (Standard Page Banner) ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-5 relative">
-                <div className="space-y-1 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10.5px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
                       <FileText className="w-3.5 h-3.5 text-white" /> Executive Summary Portal Fakultas Ilmu Komputer
                     </span>
                   </div>
-                  <h1 className="text-lg md:text-xl font-black font-display text-white tracking-wide leading-tight">
+                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Dashboard Administrasi &amp; Analitik Fakultas
                   </h1>
-                  <p className="text-[11.5px] text-neutral-400 leading-relaxed max-w-2xl font-medium">
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Selamat datang, Ibu Yanti. Terdapat <strong className="text-[#C62828] font-bold">9 SK Dekan</strong> menunggu penerbitan dari total <strong className="text-white font-bold">5 Program Studi</strong> FIK.
                   </p>
                 </div>
 
-                <div className="hidden md:flex flex-wrap gap-2 shrink-0">
+                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-fakultas/sk"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
                   >
-                    <FileText className="w-3.5 h-3.5 text-white" />
+                    <FileText className="w-4 h-4 text-white" />
                     <span>Kelola SK Dekan</span>
                   </Link>
                   <Link
                     href="/admin-fakultas/arsip"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 font-display"
                   >
-                    <Archive className="w-3.5 h-3.5 text-white" />
+                    <Archive className="w-4 h-4 text-white" />
                     <span>Arsip Dokumen</span>
                   </Link>
                 </div>
