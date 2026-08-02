@@ -372,21 +372,22 @@ export default function PengujiRevisiPage() {
 
                     {/* Tambah Catatan Tambahan Box */}
                     {!approved[selectedR.nim] && (
-                      <div className="space-y-2 pt-2 border-t border-slate-100">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Tambah Catatan Revisi Tambahan</span>
-                        <div className="flex gap-2">
-                          <textarea
-                            rows={2}
-                            placeholder="Ketik catatan perbaikan tambahan untuk mahasiswa jika ada..."
+                      <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Catatan Revisi</span>
+                        <div className="flex gap-2 items-center">
+                          <input
+                            type="text"
+                            placeholder="Catatan revisi tambahan..."
                             value={catatanBaru[selectedR.nim] ?? ""}
                             onChange={(e) => setCatatanBaru((prev) => ({ ...prev, [selectedR.nim]: e.target.value }))}
-                            className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 font-medium resize-none focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs"
+                            className="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 font-medium focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs"
                           />
                           <button
                             onClick={() => handleSendNote(selectedR.nim, selectedR.nama)}
-                            className="px-4 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-xs shrink-0 font-display cursor-pointer"
+                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-xs shrink-0 font-display cursor-pointer"
                           >
-                            <Send className="w-3.5 h-3.5 text-white" /> Kirim
+                            <Send className="w-3.5 h-3.5 text-white" />
+                            <span>Kirim</span>
                           </button>
                         </div>
                       </div>

@@ -420,16 +420,16 @@ export default function PengujiNilaiPage() {
                       </div>
                     </div>
 
-                    {/* Catatan / Masukan Penguji Box */}
-                    <div className="space-y-1.5">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Catatan / Masukan Revisi Penguji</span>
+                    {/* Catatan / Masukan Field */}
+                    <div className="space-y-1.5 pt-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Catatan Revisi</span>
                       <textarea
-                        rows={3}
+                        rows={2}
                         disabled={saved[selectedMhs.nim]}
-                        placeholder="Tuliskan catatan perbaikan naskah atau masukan penguji untuk mahasiswa..."
+                        placeholder="Catatan atau masukan revisi penguji..."
                         value={catatanState[selectedMhs.nim] || ""}
                         onChange={(e) => setCatatanState((prev) => ({ ...prev, [selectedMhs.nim]: e.target.value }))}
-                        className="w-full p-3 rounded-xl border border-slate-200 text-xs bg-white text-slate-800 font-medium focus:outline-none focus:border-[#C62828] transition-all resize-none shadow-2xs"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-slate-800 font-medium focus:outline-none focus:border-[#C62828] transition-all resize-none shadow-2xs"
                       />
                     </div>
                   </div>
