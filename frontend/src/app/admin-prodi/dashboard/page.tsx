@@ -22,10 +22,10 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Mahasiswa TA Aktif",    value: "124", sub: "Semester Genap 2026", color: "#C62828", bgIcon: "bg-[#C62828]", icon: Users },
-  { label: "Aktivasi Pending",      value: "7",   sub: "Clearing SKS & IPK",   color: "#D97706", bgIcon: "bg-amber-500", icon: UserPlus },
-  { label: "Proposal Masuk",        value: "11",  sub: "Menunggu Verifikasi",  color: "#C62828", bgIcon: "bg-rose-700",   icon: FileText },
-  { label: "Ujian Terjadwal",       value: "18",  sub: "Seminar & Sidang",     color: "#059669", bgIcon: "bg-emerald-600",icon: CalendarDays },
+  { label: "MAHASISWA TA",   value: "124", sub: "Semester Genap 2026", color: "#C62828", bgIcon: "bg-[#C62828]", icon: Users },
+  { label: "AKTIVASI PENDING", value: "7",   sub: "Clearing SKS & IPK",   color: "#D97706", bgIcon: "bg-amber-500", icon: UserPlus },
+  { label: "PROPOSAL MASUK",   value: "11",  sub: "Menunggu Verifikasi",  color: "#C62828", bgIcon: "bg-rose-700",   icon: FileText },
+  { label: "UJIAN TERJADWAL",  value: "18",  sub: "Seminar & Sidang",     color: "#059669", bgIcon: "bg-emerald-600",icon: CalendarDays },
 ];
 
 const PROPOSAL_MASUK = [
@@ -118,10 +118,10 @@ export default function AdminProdiDashboard() {
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Dashboard Admin Program Studi
+                    Selamat Datang
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Selamat datang kembali, Ibu Hafizah. Terdapat <strong className="text-[#C62828] font-bold">{proposalList.length} proposal judul</strong> baru yang memerlukan verifikasi dan persetujuan hari ini.
+                    Portal utama program studi. Terdapat <strong className="text-[#ffd01d] font-bold">{proposalList.length} proposal judul</strong> baru yang memerlukan verifikasi hari ini.
                   </p>
                 </div>
 
@@ -201,7 +201,7 @@ export default function AdminProdiDashboard() {
                           key={p.id}
                           className={`rounded-2xl border transition-all overflow-hidden ${
                             isExpanded
-                              ? "bg-white border-[#C62828] shadow-md"
+                              ? "bg-slate-50 border-slate-300 shadow-2xs"
                               : "bg-white border-slate-200 hover:border-slate-300 shadow-2xs"
                           }`}
                         >
@@ -285,13 +285,13 @@ export default function AdminProdiDashboard() {
                                   <ChevronUp className="w-3.5 h-3.5" /> Tutup Detail
                                 </button>
 
-                                <button
-                                  onClick={() => handleApproveProposal(p.id, p.nama)}
-                                  className="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
-                                >
-                                  <CheckCircle2 className="w-4 h-4 text-white" />
-                                  <span>Setujui Proposal &amp; Usulan Pembimbing</span>
-                                </button>
+                                  <button
+                                    onClick={() => handleApproveProposal(p.id, p.nama)}
+                                    className="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-xs cursor-pointer font-display active:scale-95 whitespace-nowrap"
+                                  >
+                                    <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+                                    <span>ACC</span>
+                                  </button>
                               </div>
 
                             </div>
