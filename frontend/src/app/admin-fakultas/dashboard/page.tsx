@@ -51,7 +51,7 @@ const RECENT_LOGS = [
 
 export default function AdminFakultasDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [mobileTab, setMobileTab] = useState<"all" | "rekap" | "repositori" | "komposisi" | "aktivitas">("all");
+  const [mobileTab, setMobileTab] = useState<"rekap" | "repositori" | "komposisi" | "aktivitas">("rekap");
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -138,10 +138,9 @@ export default function AdminFakultasDashboard() {
               })}
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Segmented Control Design) ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto scrollbar-none shrink-0 lg:hidden touch-pan-x">
+            {/* ── Mobile Section Navigation Pills (Swipeable Segmented Control, No 'Semua') ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto touch-pan-x scrollbar-none shrink-0 lg:hidden">
               {[
-                { id: "all", label: "Semua", icon: Layers },
                 { id: "rekap", label: "Rekap Prodi", icon: BarChart3 },
                 { id: "repositori", label: "Arsip Repositori", icon: Archive },
                 { id: "komposisi", label: "Komposisi SK", icon: PieChart },
@@ -174,7 +173,7 @@ export default function AdminFakultasDashboard() {
                 
                 {/* 3A. Card Rekapitulasi SK & Bar Chart Per Prodi */}
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between ${
-                  mobileTab === "all" || mobileTab === "rekap" ? "block" : "hidden lg:flex"
+                  mobileTab === "rekap" ? "block" : "hidden lg:flex"
                 }`}>
                   <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
@@ -238,7 +237,7 @@ export default function AdminFakultasDashboard() {
 
                 {/* 3B. Card Ringkasan Repositori Dokumen Terkini (Rich Preview Cards) */}
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-5 flex flex-col space-y-3 md:space-y-3.5 shrink-0 ${
-                  mobileTab === "all" || mobileTab === "repositori" ? "block" : "hidden lg:flex"
+                  mobileTab === "repositori" ? "block" : "hidden lg:flex"
                 }`}>
                   <div className="flex items-center justify-between pb-2.5 md:pb-3 border-b border-slate-100 shrink-0 gap-2 min-w-0">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
@@ -342,7 +341,7 @@ export default function AdminFakultasDashboard() {
                 
                 {/* 3C. Donut/Pie Analytics Widget */}
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 shrink-0 ${
-                  mobileTab === "all" || mobileTab === "komposisi" ? "block" : "hidden lg:block"
+                  mobileTab === "komposisi" ? "block" : "hidden lg:block"
                 }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
                     <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
@@ -393,7 +392,7 @@ export default function AdminFakultasDashboard() {
 
                 {/* 3D. Activity Log Stream */}
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 flex-1 min-h-0 flex flex-col justify-between ${
-                  mobileTab === "all" || mobileTab === "aktivitas" ? "block" : "hidden lg:flex"
+                  mobileTab === "aktivitas" ? "block" : "hidden lg:flex"
                 }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100 shrink-0">
                     <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
