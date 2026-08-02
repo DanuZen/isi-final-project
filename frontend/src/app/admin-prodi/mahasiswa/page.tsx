@@ -122,7 +122,7 @@ export default function AdminProdiMahasiswaPage() {
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Selamat Datang
+                    Manajemen Data Mahasiswa
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Database &amp; manajemen data mahasiswa Tugas Akhir prodi. Input data clearing, pantau alur pendaftaran, hingga kelulusan.
@@ -203,47 +203,56 @@ export default function AdminProdiMahasiswaPage() {
               <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex-col min-w-0 ${
                 activeMobileTab === "table" ? "flex" : "hidden lg:flex"
               }`}>
-                <div className="overflow-y-auto overflow-x-auto flex-1 scrollbar-none pb-10">
-                  <table className="w-full text-xs min-w-[750px]">
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                      <tr>
-                        {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK"].map((h) => (
-                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {filtered.map((row) => {
-                        const tc = TAHAP_CFG[row.tahap];
-                        const isSelected = selected?.nim === row.nim;
-                        return (
-                          <tr
-                            key={row.nim}
-                            onClick={() => {
-                              setSelectedNim(row.nim);
-                              setActiveMobileTab("detail");
-                            }}
-                            className={`transition-all cursor-pointer select-none ${
-                              isSelected
-                                ? "bg-slate-100 font-bold"
-                                : "hover:bg-slate-50/60"
-                            }`}
-                          >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500">{row.nim}</td>
-                            <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
-                            <td className="px-4 py-3.5 max-w-[220px]">
-                              <p className="text-slate-600 truncate text-[11.5px] font-medium">&ldquo;{row.judul}&rdquo;</p>
-                            </td>
-                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.pembimbing1}</td>
-                            <td className="px-4 py-3.5">
-                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${tc.bg}`}>{row.tahap}</span>
-                            </td>
-                            <td className="px-4 py-3.5 font-black text-slate-900 font-display">{row.ipk}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                {/* Dedicated Mobile Touch-Swipe Container */}
+                <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
+                  {/* Swipe Hint Indicator on Mobile */}
+                  <div className="sm:hidden px-4 py-1.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-bold font-display shrink-0">
+                    <span>Geser tabel ke samping</span>
+                    <span className="font-mono text-[9px] bg-slate-200/70 px-1.5 py-0.5 rounded text-slate-600">← →</span>
+                  </div>
+
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[750px] border-collapse">
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK"].map((h) => (
+                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filtered.map((row) => {
+                          const tc = TAHAP_CFG[row.tahap];
+                          const isSelected = selected?.nim === row.nim;
+                          return (
+                            <tr
+                              key={row.nim}
+                              onClick={() => {
+                                setSelectedNim(row.nim);
+                                setActiveMobileTab("detail");
+                              }}
+                              className={`transition-all cursor-pointer select-none ${
+                                isSelected
+                                  ? "bg-slate-100 font-bold"
+                                  : "hover:bg-slate-50/60"
+                              }`}
+                            >
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500 whitespace-nowrap">{row.nim}</td>
+                              <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
+                              <td className="px-4 py-3.5 min-w-[240px] max-w-[320px]">
+                                <p className="text-slate-600 truncate text-[11.5px] font-medium">&ldquo;{row.judul}&rdquo;</p>
+                              </td>
+                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.pembimbing1}</td>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${tc.bg}`}>{row.tahap}</span>
+                              </td>
+                              <td className="px-4 py-3.5 font-black text-slate-900 font-display whitespace-nowrap">{row.ipk}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 

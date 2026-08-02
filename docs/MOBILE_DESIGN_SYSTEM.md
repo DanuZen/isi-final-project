@@ -27,7 +27,9 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
 ## 📐 2. Komponen UI Standard Per Pola Tampilan
 
 ### A. Welcome Banner Command Center
-- **Aturan Judul Welcome**: Judul banner pembuka harus sederhana **`Selamat Datang`** (Tanpa nama pengguna di judul h1).
+- **Aturan Judul Banner**:
+  - Halaman **Dashboard Utama** (`/dashboard`): Gunakan judul **`Selamat Datang`** (tanpa nama pengguna).
+  - Halaman **Fitur / Inner Sub-pages** (`/mahasiswa`, `/bimbingan`, `/jadwal`, dll): Gunakan **Judul Deskriptif Halaman** (contoh: `Manajemen Data Mahasiswa`, `Jadwal Pengujian`, `Bimbingan Tugas Akhir`).
 - **Sub-judul**: Maksimal 2 baris ringkas yang menjelaskan fungsi halaman.
 - **Visual Accent**: Di bagian bawah banner terdapat garis aksen gradasi `h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]`.
 
