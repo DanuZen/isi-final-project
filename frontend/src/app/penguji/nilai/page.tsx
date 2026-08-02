@@ -220,10 +220,12 @@ export default function PengujiNilaiPage() {
                     <div className="relative shrink-0 font-display">
                       <button
                         onClick={() => setIsFilterOpen(!isFilterOpen)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                        className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                       >
-                        <Filter className="w-3.5 h-3.5 text-[#C62828]" />
-                        <span>{filterJenis}</span>
+                        <div className="flex items-center gap-2">
+                          <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                          <span>{filterJenis}</span>
+                        </div>
                         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                       </button>
 
