@@ -6,8 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, BarChart2, CalendarDays, FileDown, Building2,
-  TrendingUp, TrendingDown, Users, Award, FileText, CheckCircle2, Clock,
-  ChevronDown, Check
+  TrendingUp, TrendingDown, Users, Award, FileText, CheckCircle2, Clock
 } from "lucide-react";
 
 const NAV = [
@@ -79,20 +78,9 @@ function DonutChart() {
   );
 }
 
-const FAKULTAS_LIST = [
-  { kode: "FIK",  nama: "Fakultas Ilmu Komputer" },
-  { kode: "FEB",  nama: "Fakultas Ekonomi & Bisnis" },
-  { kode: "FT",   nama: "Fakultas Teknik" },
-  { kode: "FPSI", nama: "Fakultas Psikologi" },
-  { kode: "FDKV", nama: "Fakultas Desain Komunikasi Visual" },
-  { kode: "FK",   nama: "Fakultas Kedokteran" },
-];
-
 export default function DekanatDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [mobileTab, setMobileTab] = useState<"rekap" | "bidang" | "sidang">("rekap");
-  const [selectedFakultas, setSelectedFakultas] = useState(FAKULTAS_LIST[0]);
-  const [isFakultasDropdownOpen, setIsFakultasDropdownOpen] = useState(false);
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -105,8 +93,8 @@ export default function DekanatDashboard() {
           items={NAV}
           userName="Prof. Dr. H. Zulherman, M.T."
           userNim="NIP: 196508201990031001"
-          roleName={`Dekan ${selectedFakultas.kode}`}
-          prodiName={selectedFakultas.nama}
+          roleName="Dekan FIK"
+          prodiName="Fakultas Ilmu Komputer"
         />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
@@ -116,8 +104,8 @@ export default function DekanatDashboard() {
             className="shell-header shrink-0"
             userName="Prof. Dr. H. Zulherman, M.T."
             userNim="NIP: 196508201990031001"
-            userRole={`Dekan ${selectedFakultas.kode}`}
-            prodiName={selectedFakultas.nama}
+            userRole="Dekan FIK"
+            prodiName="Fakultas Ilmu Komputer"
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
@@ -128,47 +116,15 @@ export default function DekanatDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    {/* Interactive Faculty Switcher Dropdown */}
-                    <div className="relative font-display">
-                      <button
-                        onClick={() => setIsFakultasDropdownOpen(!isFakultasDropdownOpen)}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs cursor-pointer hover:bg-[#B71C1C] transition-all"
-                      >
-                        <Award className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" />
-                        <span>Pimpinan / Dekanat {selectedFakultas.kode}</span>
-                        <ChevronDown className="w-3 h-3 text-white/80" />
-                      </button>
-
-                      {isFakultasDropdownOpen && (
-                        <>
-                          <div className="fixed inset-0 z-40" onClick={() => setIsFakultasDropdownOpen(false)} />
-                          <div className="absolute left-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-xl p-1.5 min-w-[250px] space-y-0.5 text-slate-900 font-display animate-in fade-in zoom-in-95">
-                            <p className="px-3 py-1 text-[9.5px] font-bold text-slate-400 uppercase tracking-wider">Pilih Fakultas (UPI YPTK)</p>
-                            {FAKULTAS_LIST.map((f) => (
-                              <button
-                                key={f.kode}
-                                onClick={() => {
-                                  setSelectedFakultas(f);
-                                  setIsFakultasDropdownOpen(false);
-                                }}
-                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                  selectedFakultas.kode === f.kode ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
-                                }`}
-                              >
-                                <span>{f.kode} — {f.nama}</span>
-                                {selectedFakultas.kode === f.kode && <Check className="w-3.5 h-3.5 text-white" />}
-                              </button>
-                            ))}
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                      <Award className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Pimpinan / Dekanat FIK
+                    </span>
                   </div>
                   <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Dashboard Eksekutif — {selectedFakultas.kode} UPI YPTK
+                    Dashboard Eksekutif — FIK UPI YPTK
                   </h1>
                   <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Ringkasan performa Tugas Akhir {selectedFakultas.nama} semester 2025/2026 Genap. Tingkat kelulusan bulan ini: <strong className="text-emerald-400 font-bold">94%</strong>.
+                    Ringkasan performa Tugas Akhir Fakultas Ilmu Komputer semester 2025/2026 Genap. Tingkat kelulusan bulan ini: <strong className="text-emerald-400 font-bold">94%</strong>.
                   </p>
                 </div>
 
