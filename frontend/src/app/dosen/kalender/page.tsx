@@ -42,6 +42,7 @@ export default function DosenKalenderPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeMobileTab, setActiveMobileTab] = useState<"calendar" | "detail">("calendar");
   const [selectedEventId, setSelectedEventId] = useState<number>(0);
+  const [selectedDayNum, setSelectedDayNum] = useState<number>(1);
   const [showBeritaAcaraModal, setShowBeritaAcaraModal] = useState(false);
   const [attendedMap, setAttendedMap] = useState<Record<number, boolean>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -251,20 +252,20 @@ export default function DosenKalenderPage() {
                       const dayNum = idx + 1;
                       const dayEvents = filteredEvents.filter((ev) => parseInt(ev.tglNum) === dayNum);
                       const hasEvents = dayEvents.length > 0;
-                      const isSelected = selectedEv && parseInt(selectedEv.tglNum) === dayNum;
+                      const isDaySelected = selectedDayNum === dayNum;
 
                       return (
                         <div
                           key={`day-${dayNum}`}
                           onClick={() => {
+                            setSelectedDayNum(dayNum);
                             if (hasEvents) {
                               setSelectedEventId(dayEvents[0].id);
-                              setActiveMobileTab("detail");
                             }
                           }}
                           className={`p-2 rounded-xl border transition-all cursor-pointer flex flex-col justify-between min-h-[52px] group ${
-                            isSelected
-                              ? "bg-slate-50 border-slate-300 shadow-2xs font-black"
+                            isDaySelected
+                              ? "bg-slate-50 border-slate-300 shadow-2xs font-black ring-1 ring-slate-300"
                               : hasEvents
                               ? "bg-white border-slate-200 hover:border-slate-300 hover:shadow-2xs"
                               : "bg-white border-slate-100/80 text-slate-400 hover:bg-slate-50"
@@ -273,7 +274,7 @@ export default function DosenKalenderPage() {
                           <div className="flex items-center justify-between">
                             <span
                               className={`text-xs font-mono font-bold ${
-                                isSelected
+                                isDaySelected
                                   ? "text-[#C62828] font-black"
                                   : hasEvents
                                   ? "text-slate-900"
@@ -307,6 +308,80 @@ export default function DosenKalenderPage() {
                         </div>
                       );
                     })}
+                  </div>
+
+                  {/* ── Selected Day Agenda List Section ── */}
+                  <div className="mt-4 pt-3.5 border-t border-slate-100 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+                        <h3 className="text-xs font-bold text-slate-800 font-display">
+                          Agenda {selectedDayNum} Agustus 2026
+                        </h3>
+                      </div>
+                      <span className="text-[10.5px] font-bold text-slate-400 font-display">
+                        {eventsList.filter((e) => parseInt(e.tglNum) === selectedDayNum && (filterJenis === "Semua" || e.jenis === filterJenis)).length} Agenda
+                      </span>
+                    </div>
+
+                    {(() => {
+                      const dayEvs = eventsList.filter((e) => parseInt(e.tglNum) === selectedDayNum && (filterJenis === "Semua" || e.jenis === filterJenis));
+                      if (dayEvs.length === 0) {
+                        return (
+                          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 text-center text-xs text-slate-400 font-medium">
+                            Tidak ada agenda akademik pada tanggal ini.
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <div className="space-y-2">
+                          {dayEvs.map((ev) => {
+                            const isCurEv = selectedEv && selectedEv.id === ev.id;
+                            const solid = JENIS_SOLID[ev.jenis] ?? JENIS_SOLID["Bimbingan"];
+
+                            return (
+                              <div
+                                key={ev.id}
+                                onClick={() => {
+                                  setSelectedEventId(ev.id);
+                                  setActiveMobileTab("detail");
+                                }}
+                                className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                                  isCurEv
+                                    ? "bg-slate-50 border-slate-300 shadow-2xs"
+                                    : "bg-white border-slate-200/80 hover:bg-slate-50/60 hover:border-slate-300"
+                                }`}
+                              >
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                    <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-bold text-white shadow-2xs font-display ${solid.bg}`}>
+                                      {ev.jenis}
+                                    </span>
+                                    <span className="text-[10px] font-bold text-slate-500 font-mono">
+                                      {ev.waktu} · {ev.ruang}
+                                    </span>
+                                  </div>
+                                  <h4 className="text-xs font-bold text-slate-900 font-display truncate">
+                                    {ev.nama} <span className="text-slate-400 font-mono text-[10.5px]">({ev.nim})</span>
+                                  </h4>
+                                  <p className="text-[11px] text-slate-500 font-medium truncate">
+                                    &ldquo;{ev.judul}&rdquo;
+                                  </p>
+                                </div>
+
+                                <button
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold font-display shrink-0 flex items-center gap-1 active:scale-95 cursor-pointer"
+                                >
+                                  <span>Detail</span>
+                                  <ChevronRight className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
