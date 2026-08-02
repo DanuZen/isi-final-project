@@ -284,11 +284,11 @@ export default function DosenBimbinganPage() {
 
 
 
-            {/* ── Split Layout (7/12 & 5/12) ── */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
+            {/* ── Split Layout (Flex-1 List & Fixed 350px Detail Panel) ── */}
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
-              {/* ── LEFT COLUMN (7/12): List Mahasiswa Bimbingan Card ── */}
-              <div className={`lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+              {/* ── LEFT COLUMN: List Mahasiswa Bimbingan Card (Flex-1) ── */}
+              <div className={`flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden flex-1 min-w-0 ${
                 activeMobileTab === "daftar" ? "flex" : "hidden lg:flex"
               }`}>
                 {/* Header Card + Search & Filter */}
@@ -515,8 +515,8 @@ export default function DosenBimbinganPage() {
                 </div>
               </div>
 
-              {/* ── RIGHT COLUMN (5/12): Detail Panel Card ── */}
-              <div className={`lg:col-span-5 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
+              {/* ── RIGHT COLUMN: Detail Panel Card (Fixed 350px Width on Desktop) ── */}
+              <div className={`w-full lg:w-[350px] shrink-0 flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs min-h-0 overflow-hidden ${
                 activeMobileTab === "detail" ? "flex" : "hidden lg:flex"
               }`}>
                 {/* Header Card Detail */}

@@ -253,9 +253,9 @@ export default function AdminProdiMahasiswaPage() {
                 </div>
               </div>
 
-              {/* Always Visible Detail Panel (Updates Live Based on Selected Row) */}
+              {/* Always Visible Detail Panel (Fixed 350px Width on Desktop) */}
               {selected && (
-                <div className={`w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                <div className={`w-full lg:w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
                   activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
                 }`}>
                   <div className="space-y-4 overflow-y-auto scrollbar-none">

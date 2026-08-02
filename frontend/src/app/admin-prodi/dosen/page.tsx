@@ -244,11 +244,11 @@ export default function AdminProdiDosenPage() {
               </div>
             </div>
 
-            {/* ── Main Split View (8/12 & 4/12) ── */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
+            {/* ── Main Split View (Flex-1 List & Fixed 350px Detail Panel) ── */}
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
-              {/* Left Column (8/12): Compact List View Dosen */}
-              <div className={`lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden flex-col ${
+              {/* Left Column: Compact List View Dosen (Flex-1) */}
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden flex-col flex-1 min-w-0 ${
                 activeMobileTab === "list" ? "flex" : "hidden lg:flex"
               }`}>
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
@@ -319,8 +319,8 @@ export default function AdminProdiDosenPage() {
                 </div>
               </div>
 
-              {/* Right Column (4/12): Live Side Detail Panel Card */}
-              <div className={`lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden p-5 justify-between space-y-4 flex-col ${
+              {/* Right Column: Live Side Detail Panel Card (Fixed 350px Width on Desktop) */}
+              <div className={`w-full lg:w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden p-5 justify-between space-y-4 flex-col ${
                 activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
               }`}>
                 <div className="space-y-4 overflow-y-auto scrollbar-none">

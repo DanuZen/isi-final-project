@@ -158,6 +158,13 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
   - Judul & Sub-judul kartu disembunyikan di HP (`hidden lg:flex`) agar header tidak tertekan atau terlipat menjadi 4 baris.
   - Sisi kanan header selalu berisi Badge NIM / Status (`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700`).
 
+---
+
+### F. Ukuran Panel Samping Desktop (*Desktop Side Panel Width*)
+- **Aturan Lebar Tetap (Fixed Width Standard)**:
+  - Panel Samping / Detail (`Side Detail Panel`) di tampilan Desktop MUST berukuran **tetap (fixed width `w-full lg:w-[350px] shrink-0`)**, sehingga tidak melar/terlalu lebar dan tidak mengerdilkan tabel utama.
+  - Kartu Utama / Tabel di sebelah kiri berukuran **fleksibel penuh (`flex-1 min-w-0`)**, mengambil sisa ruang yang ada di layar desktop.
+
 ```tsx
 <div className="p-3.5 sm:p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50 gap-2">
   {/* Mobile Back Button (ONLY on Mobile <1024px) */}
