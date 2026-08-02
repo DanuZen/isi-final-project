@@ -224,7 +224,7 @@ export default function AdminProdiJadwalPage() {
                     <CalendarDays className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Jadwal Terdaftar (Agustus 2026)</h2>
+                    <h2 className="font-bold text-sm text-slate-900 font-display">Jadwal Terdaftar</h2>
                     <p className="text-[10px] text-slate-400 font-medium">{filtered.length} Sesi Terjadwal</p>
                   </div>
                 </div>
