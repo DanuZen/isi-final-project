@@ -50,6 +50,7 @@ export default function DekanatProdiPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedKode, setSelectedKode] = useState<string>("IF");
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
 
   const filteredProdi = PRODI_LIST.filter(
     (p) =>
@@ -116,6 +117,32 @@ export default function DekanatProdiPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Mobile Tab Navigation Pill Bar (Tabel vs Detail Prodi) ── */}
+            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
+              <button
+                onClick={() => setActiveMobileTab("table")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                  activeMobileTab === "table"
+                    ? "bg-[#C62828] text-white shadow-xs"
+                    : "bg-white text-slate-600 border border-slate-200"
+                }`}
+              >
+                <Building2 className="w-3.5 h-3.5" />
+                <span>Tabel Komparasi</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                  activeMobileTab === "detail"
+                    ? "bg-[#C62828] text-white shadow-xs"
+                    : "bg-white text-slate-600 border border-slate-200"
+                }`}
+              >
+                <Award className="w-3.5 h-3.5" />
+                <span>Detail {selected.kode}</span>
+              </button>
+            </div>
+
             {/* ── 2. Overview Metric Cards ── */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 shrink-0">
               {METRICS.map((m) => {
@@ -139,7 +166,9 @@ export default function DekanatProdiPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 flex-1 min-h-0 items-stretch">
               
               {/* Left Column (7/12 Width): Comprehensive Comparison Table */}
-              <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between">
+              <div className={`lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between ${
+                activeMobileTab === "table" ? "block" : "hidden lg:flex"
+              }`}>
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 min-w-0 flex-1">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
@@ -176,7 +205,12 @@ export default function DekanatProdiPage() {
                       {filteredProdi.map((p) => (
                         <tr
                           key={p.kode}
-                          onClick={() => setSelectedKode(p.kode)}
+                          onClick={() => {
+                            setSelectedKode(p.kode);
+                            if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                              setActiveMobileTab("detail");
+                            }
+                          }}
                           className={`cursor-pointer transition-colors ${
                             selected.kode === p.kode ? "bg-rose-50/60 font-bold" : "hover:bg-slate-50"
                           }`}
@@ -200,8 +234,19 @@ export default function DekanatProdiPage() {
               </div>
 
               {/* Right Column (5/12 Width): Selected Prodi Detail Panel */}
-              <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden">
+              <div className={`lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
+                activeMobileTab === "detail" ? "block" : "hidden lg:flex"
+              }`}>
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
+                  {/* Mobile Back Button */}
+                  <button
+                    onClick={() => setActiveMobileTab("table")}
+                    className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>Tabel</span>
+                  </button>
+
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Award className="w-4 h-4 text-white" />

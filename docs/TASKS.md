@@ -157,10 +157,11 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/admin-fakultas/sk` — ✅ Sesuai (+ Draft SK Button & Modal Form dengan Simpan/Draft, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 - [x] `/admin-fakultas/arsip` — ✅ Sesuai (+ Unggah Button & Modal Upload, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 
-### 📊 Portal Dekanat (4 Halaman — 4/4 Full Audited ✅)
-- [x] `/dekanat/dashboard` — ✅ Sesuai (Welcome Banner, Solid Icon Cards, Touch-Swipe Rekap Table min-w-[850px], Ringkasan Sidang, Desktop 100% Utuh)
-- [x] `/dekanat/statistik` — ✅ Sesuai (Descriptive Title, Tahap TA Progress Bar, Touch-Swipe Komparasi Prodi min-w-[850px], Desktop 100% Utuh)
-- [x] `/dekanat/kalender` — ✅ Sesuai (Single-Row Controls, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
+### 📊 Portal Dekanat (5 Halaman — 5/5 Full Audited ✅)
+- [x] `/dekanat/dashboard` — ✅ Sesuai (Welcome Banner, KPI Stat Cards Statistik TA System, Mobile Segmented Control navigation, Fixed Header `pt-16 md:pt-5` fix, Touch-Swipe Rekap Table min-w-[850px], Desktop 100% Utuh)
+- [x] `/dekanat/statistik` — ✅ Sesuai (Descriptive Title, 4 KPI Stat Cards, Tahap TA Top-Aligned Progress Bar with Stage Insights, Solid Red Total Badge, Fit to Layout 7/12 & 5/12 split, Desktop 100% Utuh)
+- [x] `/dekanat/prodi` — ✅ Sesuai (Halaman Baru: Dedicated Komparasi Performa Program Studi FIK, 4 Solid Metric Cards, Tabel 5 Prodi & Detail Panel, Desktop 100% Utuh)
+- [x] `/dekanat/kalender` — ✅ Sesuai (Grid Kalender Bulanan Interaktif + Panel Detail Agenda, Animated Dropdown Filter, Clean Light Theme, Mobile Tab Switcher, Desktop 100% Utuh)
 - [x] `/dekanat/laporan` — ✅ Sesuai (Single-Row Controls, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 
 ### ⚡ Portal Super Admin (5 Halaman — 5/5 Full Audited ✅)
