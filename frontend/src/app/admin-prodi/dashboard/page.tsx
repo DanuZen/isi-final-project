@@ -104,6 +104,7 @@ export default function AdminProdiDashboard() {
             userNim="NIP: 198504122010122001"
             userRole="Admin Prodi"
             prodiName="Teknik Informatika"
+            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
           <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
