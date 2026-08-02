@@ -115,7 +115,7 @@ export function SplashScreen({
 
       {/* Footer Branding */}
       <div className="absolute bottom-6 z-10 text-[10px] text-slate-400 font-display tracking-widest uppercase">
-        Fakultas Ilmu Komputer · 2026
+        UNIVERSITAS PUTRA INDONESIA YPTK · 2026
       </div>
     </div>
   );
