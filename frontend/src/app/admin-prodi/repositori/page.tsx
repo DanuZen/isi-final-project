@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  Search, Filter, FileText, Tag, ArrowRight, Download
+  Search, Filter, FileText, Tag, ArrowRight, Download, ChevronDown, Check
 } from "lucide-react";
 
 const NAV = [
@@ -68,6 +68,7 @@ export default function AdminProdiRepositoriPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [filterBidang, setFilterBidang] = useState("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>("TA-2026-001");
   const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
 
@@ -137,48 +138,73 @@ export default function AdminProdiRepositoriPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* Control & Filter Bar */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between gap-3 flex-wrap shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                  <BookOpen className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Repositori Terpublikasi ({filtered.length})</h2>
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap ml-auto">
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    type="text"
-                    placeholder="Cari judul, penulis, NIM..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all font-display"
-                  />
-                </div>
-                <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
-                  <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
-                  {["Semua", "Rekayasa Perangkat Lunak", "Kecerdasan Buatan", "Jaringan & Keamanan"].map((b) => (
-                    <button
-                      key={b}
-                      onClick={() => setFilterBidang(b)}
-                      className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all font-display cursor-pointer"
-                      style={filterBidang === b ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                    >
-                      {b}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               {/* Table Container (Flex-1) */}
               <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
                 activeMobileTab === "table" ? "flex" : "hidden lg:flex"
               }`}>
+                {/* Integrated Table Card Header + Controls */}
+                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <BookOpen className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Repositori Terpublikasi</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">{filtered.length} Naskah Skripsi</p>
+                    </div>
+                  </div>
+
+                  {/* 1-Row Controls: Search Input + Custom Dropdown Filter */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-48 min-w-0">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        placeholder="Cari judul, penulis, NIM..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      />
+                    </div>
+
+                    {/* Custom Animated Dropdown Filter */}
+                    <div className="relative shrink-0 font-display">
+                      <button
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        className="px-3 py-2 rounded-xl text-xs font-bold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs active:scale-95"
+                      >
+                        <Filter className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                        <span className="truncate max-w-[100px] sm:max-w-[140px]">{filterBidang}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 shrink-0 ${isFilterOpen ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {isFilterOpen && (
+                        <>
+                          <div className="fixed inset-0 z-20" onClick={() => setIsFilterOpen(false)} />
+                          <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl border border-slate-200 shadow-xl z-30 p-1.5 space-y-1 animate-in fade-in zoom-in-95 duration-150">
+                            {["Semua", "Rekayasa Perangkat Lunak", "Kecerdasan Buatan", "Jaringan & Keamanan"].map((b) => (
+                              <button
+                                key={b}
+                                onClick={() => {
+                                  setFilterBidang(b);
+                                  setIsFilterOpen(false);
+                                }}
+                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                                  filterBidang === b ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                }`}
+                              >
+                                <span>{b}</span>
+                                {filterBidang === b && <Check className="w-3.5 h-3.5 text-white" />}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
                 <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col">
                   <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0">
                     <table className={`w-full text-xs min-w-[700px] border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
