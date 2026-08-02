@@ -280,13 +280,13 @@ export default function DekanatKalenderPage() {
                           }}
                           className={`p-1.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer relative min-h-[46px] md:min-h-[52px] ${
                             isSelected
-                              ? "bg-slate-900 text-white border-slate-900 ring-2 ring-slate-900/20 shadow-xs"
+                              ? "bg-rose-100/90 border-[#C62828] ring-2 ring-[#C62828]/30 shadow-2xs font-extrabold"
                               : eventsOnDay.length > 0
                               ? "bg-rose-50/50 border-rose-200 text-slate-900 hover:bg-rose-100/60"
                               : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
                           }`}
                         >
-                          <span className={`text-[10.5px] md:text-xs font-black font-mono ${isSelected ? "text-white" : "text-slate-800"}`}>
+                          <span className={`text-[10.5px] md:text-xs font-black font-mono ${isSelected ? "text-[#C62828]" : "text-slate-800"}`}>
                             {dayNum}
                           </span>
 
@@ -356,37 +356,37 @@ export default function DekanatKalenderPage() {
 
                   {selectedEv ? (
                     <div className="space-y-3">
-                      {/* Main Detail Card */}
-                      <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3 shadow-sm border border-slate-800 relative overflow-hidden">
+                      {/* Main Detail Card (Clean Light Theme) */}
+                      <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3 relative overflow-hidden">
                         <div className="flex items-center justify-between gap-2">
                           <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold font-display shadow-2xs ${
                             selectedEv.jenis === "Ujian Sidang" ? "bg-[#C62828] text-white" : "bg-blue-600 text-white"
                           }`}>
                             {selectedEv.jenis}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-300 font-bold bg-white/10 px-2 py-0.5 rounded-md">
+                          <span className="text-[10px] font-mono text-slate-600 font-bold bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
                             {selectedEv.hari}, {selectedEv.tglNum} Agt
                           </span>
                         </div>
 
                         <div>
-                          <h4 className="text-base md:text-lg font-black text-white font-display leading-tight">{selectedEv.mhs}</h4>
-                          <p className="text-[11px] text-slate-300 font-mono mt-0.5">{selectedEv.nim} · {selectedEv.prodi}</p>
+                          <h4 className="text-base md:text-lg font-black text-slate-900 font-display leading-tight">{selectedEv.mhs}</h4>
+                          <p className="text-[11px] text-slate-500 font-mono mt-0.5">{selectedEv.nim} · {selectedEv.prodi}</p>
                         </div>
 
-                        <div className="p-2.5 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
                           <p className="text-[9.5px] uppercase font-bold text-slate-400 font-display">Judul Skripsi / TA</p>
-                          <p className="text-xs text-white font-medium leading-relaxed italic">&ldquo;{selectedEv.judul}&rdquo;</p>
+                          <p className="text-xs text-slate-800 font-bold leading-relaxed italic">&ldquo;{selectedEv.judul}&rdquo;</p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2 text-[10.5px]">
-                          <div className="p-2 rounded-xl bg-white/5 border border-white/5 space-y-0.5">
-                            <span className="text-[9px] text-slate-400 font-bold flex items-center gap-1"><Clock className="w-3 h-3 text-amber-400" /> Waktu</span>
-                            <p className="font-bold text-white font-mono">{selectedEv.waktu}</p>
+                          <div className="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-0.5">
+                            <span className="text-[9px] text-amber-700 font-bold flex items-center gap-1"><Clock className="w-3 h-3 text-amber-600" /> Waktu</span>
+                            <p className="font-extrabold text-slate-900 font-mono">{selectedEv.waktu}</p>
                           </div>
-                          <div className="p-2 rounded-xl bg-white/5 border border-white/5 space-y-0.5">
-                            <span className="text-[9px] text-slate-400 font-bold flex items-center gap-1"><MapPin className="w-3 h-3 text-rose-400" /> Lokasi</span>
-                            <p className="font-bold text-white truncate">{selectedEv.ruang}</p>
+                          <div className="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200/70 space-y-0.5">
+                            <span className="text-[9px] text-rose-700 font-bold flex items-center gap-1"><MapPin className="w-3 h-3 text-rose-600" /> Lokasi</span>
+                            <p className="font-extrabold text-slate-900 truncate">{selectedEv.ruang}</p>
                           </div>
                         </div>
                       </div>
