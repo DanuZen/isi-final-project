@@ -29,12 +29,12 @@ interface AktivasiItem {
 }
 
 const PENDING_LIST: AktivasiItem[] = [
-  { nim: "20101152630201", nama: "Teguh Santoso", prodi: "Teknik Informatika", clearingDate: "30 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.72, sks: 144, status: "Pending" },
+  { nim: "20101152630201", nama: "Teguh Santoso", prodi: "Teknik Informatika", clearingDate: "30 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.72, sks: 144, status: "Aktif" },
   { nim: "20101152630215", nama: "Dewi Ratnasari", prodi: "Sistem Informasi", clearingDate: "30 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.61, sks: 146, status: "Pending" },
-  { nim: "20101152630198", nama: "Eko Wijayanto", prodi: "Teknik Informatika", clearingDate: "29 Jul 2026", petugasClearing: "Siti Aminah, A.Md.", ipk: 3.50, sks: 144, status: "Pending" },
+  { nim: "20101152630198", nama: "Eko Wijayanto", prodi: "Teknik Informatika", clearingDate: "29 Jul 2026", petugasClearing: "Siti Aminah, A.Md.", ipk: 3.50, sks: 144, status: "Aktif" },
   { nim: "20101152630222", nama: "Rina Melati", prodi: "Sistem Informasi", clearingDate: "29 Jul 2026", petugasClearing: "Siti Aminah, A.Md.", ipk: 3.68, sks: 145, status: "Pending" },
-  { nim: "20101152630230", nama: "Fauzan Azhim", prodi: "Teknik Informatika", clearingDate: "28 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.55, sks: 144, status: "Pending" },
-  { nim: "20101152630241", nama: "Nadia Utami", prodi: "Teknik Informatika", clearingDate: "28 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.80, sks: 148, status: "Pending" },
+  { nim: "20101152630230", nama: "Fauzan Azhim", prodi: "Teknik Informatika", clearingDate: "28 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.55, sks: 144, status: "Aktif" },
+  { nim: "20101152630241", nama: "Nadia Utami", prodi: "Teknik Informatika", clearingDate: "28 Jul 2026", petugasClearing: "Budianto, S.Kom.", ipk: 3.80, sks: 148, status: "Aktif" },
   { nim: "20101152630255", nama: "Hendra Wijaya", prodi: "Sistem Informasi", clearingDate: "27 Jul 2026", petugasClearing: "Siti Aminah, A.Md.", ipk: 3.48, sks: 144, status: "Pending" },
 ];
 
@@ -42,7 +42,7 @@ export default function AdminProdiAktivasiPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [list, setList] = useState<AktivasiItem[]>(PENDING_LIST);
   const [search, setSearch] = useState("");
-  const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
+  const [selectedNim, setSelectedNim] = useState<string>("20101152630201");
   const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
   const [activatedSuccess, setActivatedSuccess] = useState<string | null>(null);
 
