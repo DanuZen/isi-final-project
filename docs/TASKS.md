@@ -152,10 +152,9 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/admin-prodi/jadwal` — ✅ Sesuai (Descriptive Title, Interactive Add/Edit/Delete Schedule Modal & Toast, Desktop 100% Utuh)
 - [x] `/admin-prodi/repositori` — ✅ Sesuai (Descriptive Title, Integrated Table Card Header, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Locked 350px Detail Panel, Desktop 100% Utuh)
 
-### 📑 Portal Admin Fakultas (4 Halaman — 4/4 Full Audited ✅)
-- [x] `/admin-fakultas/dashboard` — ✅ Sesuai (Welcome Banner Selamat Datang, Uppercase Executive Stat Cards, Touch-Swipe SK Table min-w-[850px], Fixed 350px Side Panel, Desktop 100% Utuh)
-- [x] `/admin-fakultas/sk` — ✅ Sesuai (+ Draft SK Button & Modal Form, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
-- [x] `/admin-fakultas/bebas` — ✅ Sesuai (Alur Otomatis dari Pengajuan Mahasiswa, 3-Prerequisite Verification, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
+### 📑 Portal Admin Fakultas (3 Halaman Utama — Full Audited ✅)
+- [x] `/admin-fakultas/dashboard` — ✅ Sesuai (Welcome Banner, Uppercase Stat Cards, Full-Width Touch-Swipe SK Table min-w-[850px], Desktop 100% Utuh)
+- [x] `/admin-fakultas/sk` — ✅ Sesuai (+ Draft SK Button & Modal Form dengan Simpan/Draft, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 - [x] `/admin-fakultas/arsip` — ✅ Sesuai (+ Unggah Button & Modal Upload, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 
 ### 📊 Portal Dekanat (4 Halaman)
