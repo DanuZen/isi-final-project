@@ -151,14 +151,14 @@ export default function AdminProdiDashboard() {
               {STATS.map((s) => {
                 const IconComp = s.icon;
                 return (
-                  <div key={s.label} className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex items-center justify-between space-x-3 hover:shadow-md transition-all">
-                    <div className="space-y-1 min-w-0">
-                      <p className="text-[11px] font-bold text-slate-500 font-display leading-tight">{s.label}</p>
-                      <p className="text-2xl sm:text-3xl font-black font-display" style={{ color: s.color }}>{s.value}</p>
-                      <p className="text-[10px] text-slate-400 font-semibold truncate">{s.sub}</p>
+                  <div key={s.label} className="bg-white rounded-2xl border border-slate-200 shadow-2xs p-3.5 sm:p-4 flex items-center justify-between space-x-2.5 hover:shadow-xs transition-all">
+                    <div className="space-y-0.5 min-w-0 flex-1">
+                      <p className="text-[10.5px] font-bold text-slate-500 font-display leading-tight">{s.label}</p>
+                      <p className="text-2xl sm:text-3xl font-black font-display leading-none py-0.5" style={{ color: s.color }}>{s.value}</p>
+                      <p className="text-[9.5px] text-slate-400 font-semibold leading-tight line-clamp-1">{s.sub}</p>
                     </div>
-                    <div className={`w-11 h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
-                      <IconComp className="w-5 h-5 text-white" />
+                    <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-2xs font-bold`}>
+                      <IconComp className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white" />
                     </div>
                   </div>
                 );
@@ -169,19 +169,19 @@ export default function AdminProdiDashboard() {
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0 flex-1">
               
               {/* Clean Focused Header */}
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-100 bg-slate-50/80 flex-wrap gap-3 shrink-0">
-                <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 bg-slate-50/80 gap-3 shrink-0">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                     <FileText className="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Verifikasi Proposal Judul &amp; Usulan Pembimbing</h2>
-                    <p className="text-[10px] text-slate-400 font-medium">{proposalList.length} Proposal Menunggu Persetujuan</p>
+                  <div className="min-w-0">
+                    <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display truncate">Verifikasi Proposal Judul &amp; Pembimbing</h2>
+                    <p className="text-[10px] text-slate-400 font-medium truncate">{proposalList.length} Proposal Menunggu Persetujuan</p>
                   </div>
                 </div>
 
-                <span className="text-xs font-mono text-slate-400 font-semibold">
-                  Tahun Akademik 2026/2027 — UPI YPTK
+                <span className="hidden sm:inline-block text-[10.5px] font-mono text-slate-500 font-bold px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 shrink-0">
+                  TA 2026/2027
                 </span>
               </div>
 
@@ -237,7 +237,7 @@ export default function AdminProdiDashboard() {
                               
                               <button className={`p-1.5 rounded-xl border transition-all ${
                                 isExpanded
-                                  ? "bg-rose-50 border-rose-200 text-[#C62828]"
+                                  ? "bg-slate-100 border-slate-300 text-slate-700"
                                   : "bg-slate-50 border-slate-200 text-slate-500"
                               }`}>
                                 {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -265,8 +265,8 @@ export default function AdminProdiDashboard() {
                                 </div>
                               </div>
 
-                              {/* Usulan Pembimbing Box with Left Red Signature Accent */}
-                              <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-[#C62828] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs shadow-2xs">
+                              {/* Usulan Pembimbing Box with Left Neutral Accent */}
+                              <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-slate-400 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs shadow-2xs">
                                 <div>
                                   <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing I:</span>
                                   <span className="font-bold text-slate-900 mt-0.5 block">{p.usulanPembimbing1}</span>
