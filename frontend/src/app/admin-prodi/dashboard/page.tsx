@@ -213,18 +213,19 @@ export default function AdminProdiDashboard() {
                             className="p-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/70 transition-colors select-none"
                           >
                             <div className="flex items-center gap-3 min-w-0 flex-1">
-                              <span className="px-2.5 py-1 rounded-full text-[10.5px] font-black bg-[#C62828] text-white font-display shrink-0 shadow-2xs">
-                                {p.id}
-                              </span>
+                              {/* Clean Student Avatar Initials */}
+                              <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-bold flex items-center justify-center shrink-0 text-xs font-display shadow-2xs">
+                                {p.nama.split(" ").map(n => n[0]).slice(0, 2).join("")}
+                              </div>
                               
                               <div className="min-w-0 flex-1 space-y-0.5">
-                                <div className="flex items-center gap-2 flex-wrap">
+                                <div className="flex items-center gap-1.5 flex-wrap">
                                   <h3 className="font-bold text-xs sm:text-sm text-slate-900 font-display truncate">
                                     {p.nama}
                                   </h3>
-                                  <span className="text-[11px] font-mono text-slate-400 shrink-0">({p.nim})</span>
+                                  <span className="text-[10.5px] font-mono text-slate-400 shrink-0">({p.nim})</span>
                                 </div>
-                                <p className="text-xs font-semibold text-slate-600 truncate">
+                                <p className="text-xs font-medium text-slate-600 truncate">
                                   &ldquo;{p.judul}&rdquo;
                                 </p>
                               </div>
