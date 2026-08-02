@@ -246,54 +246,61 @@ export default function AdminProdiDashboard() {
                             </div>
                           </div>
 
-                          {/* EXPANDED DETAILS BODY (REVEALED WHEN EXPANDED) */}
+                          {/* EXPANDED DETAILS BODY (COMPACT & SLEEK) */}
                           {isExpanded && (
-                            <div className="px-5 pb-5 pt-2 border-t border-slate-100 bg-slate-50/40 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                            <div className="p-3.5 border-t border-slate-100 bg-slate-50/50 space-y-3 animate-in fade-in slide-in-from-top-1 duration-200">
                               
-                              {/* Full Title & Bidang Kajian */}
-                              <div className="space-y-1.5 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Lengkap Proposal:</span>
-                                <p className="text-xs sm:text-sm font-black text-slate-900 leading-relaxed font-display">
-                                  &ldquo;{p.judul}&rdquo;
-                                </p>
-                                <div className="pt-2 flex items-center justify-between gap-2 flex-wrap text-xs">
-                                  <span className="text-[11px] font-semibold text-slate-600">
+                              {/* Unified Info Card */}
+                              <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs space-y-2.5">
+                                {/* Title & Similarity Badge */}
+                                <div className="space-y-1">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Judul Lengkap Proposal</span>
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white font-display shrink-0">
+                                      Kemiripan: {p.similarity}
+                                    </span>
+                                  </div>
+                                  <p className="text-xs sm:text-sm font-bold text-slate-900 leading-snug font-display">
+                                    &ldquo;{p.judul}&rdquo;
+                                  </p>
+                                </div>
+
+                                <div className="pt-2 border-t border-slate-100 text-[11px] space-y-1.5">
+                                  <p className="text-slate-600 font-medium">
                                     Bidang Kajian: <strong className="text-slate-900 font-bold">{p.bidang}</strong>
-                                  </span>
-                                  <span className="text-[10.5px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-display">
-                                    Uji Kemiripan: {p.similarity}
-                                  </span>
+                                  </p>
+
+                                  {/* Usulan Pembimbing Grid */}
+                                  <div className="pt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs border-t border-slate-100">
+                                    <div>
+                                      <span className="block text-[9.5px] font-bold text-slate-400 uppercase font-display">Usulan Pembimbing I:</span>
+                                      <span className="font-bold text-slate-900 block leading-tight">{p.usulanPembimbing1}</span>
+                                    </div>
+                                    <div>
+                                      <span className="block text-[9.5px] font-bold text-slate-400 uppercase font-display">Usulan Pembimbing II:</span>
+                                      <span className="font-bold text-slate-900 block leading-tight">{p.usulanPembimbing2}</span>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
 
-                              {/* Usulan Pembimbing Box with Left Neutral Accent */}
-                              <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-slate-400 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs shadow-2xs">
-                                <div>
-                                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing I:</span>
-                                  <span className="font-bold text-slate-900 mt-0.5 block">{p.usulanPembimbing1}</span>
-                                </div>
-                                <div>
-                                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Usulan Pembimbing II:</span>
-                                  <span className="font-bold text-slate-900 mt-0.5 block">{p.usulanPembimbing2}</span>
-                                </div>
-                              </div>
-
-                              {/* Action Bar */}
-                              <div className="flex items-center justify-between gap-3 pt-2 flex-wrap">
+                              {/* Action Bar: 50% - 50% Grid on Mobile */}
+                              <div className="grid grid-cols-2 gap-2.5 pt-0.5">
                                 <button
                                   onClick={() => toggleExpandProposal(p.id)}
-                                  className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1 cursor-pointer font-display"
+                                  className="px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-1 cursor-pointer font-display active:scale-95 shadow-2xs"
                                 >
-                                  <ChevronUp className="w-3.5 h-3.5" /> Tutup Detail
+                                  <ChevronUp className="w-3.5 h-3.5 text-slate-500" />
+                                  <span>Tutup Detail</span>
                                 </button>
 
-                                  <button
-                                    onClick={() => handleApproveProposal(p.id, p.nama)}
-                                    className="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-xs cursor-pointer font-display active:scale-95 whitespace-nowrap"
-                                  >
-                                    <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
-                                    <span>ACC</span>
-                                  </button>
+                                <button
+                                  onClick={() => handleApproveProposal(p.id, p.nama)}
+                                  className="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer font-display active:scale-95"
+                                >
+                                  <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+                                  <span>ACC</span>
+                                </button>
                               </div>
 
                             </div>
