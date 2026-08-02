@@ -46,44 +46,11 @@ export default function AdminFakultasBebasPage() {
   const [selectedNim, setSelectedNim] = useState<string>("20101152630133");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Form Modal State
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [formNim, setFormNim] = useState("");
-  const [formNama, setFormNama] = useState("");
-  const [formProdi, setFormProdi] = useState("Teknik Informatika");
-  const [formPustaka, setFormPustaka] = useState(true);
-  const [formLab, setFormLab] = useState(true);
-  const [formSpp, setFormSpp] = useState(true);
-
   const handleVerify = (nim: string, nama: string) => {
     setList((prev) =>
       prev.map((item) => (item.nim === nim ? { ...item, status: "Lulus Verifikasi" } : item))
     );
     setToastMessage(`Surat Keterangan Bebas Fakultas (SKBF) atas nama ${nama} BERHASIL DITERBITKAN!`);
-    setTimeout(() => setToastMessage(null), 5000);
-  };
-
-  const handleAddPemohon = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formNim.trim() || !formNama.trim()) return;
-
-    const newItem: BebasItem = {
-      nim: formNim,
-      nama: formNama,
-      prodi: formProdi,
-      tglPengajuan: "2 Agu 2026",
-      bebasPustaka: formPustaka,
-      bebasLab: formLab,
-      bebasSPP: formSpp,
-      status: "Pending",
-    };
-
-    setList([newItem, ...list]);
-    setSelectedNim(formNim);
-    setShowAddModal(false);
-    setFormNim("");
-    setFormNama("");
-    setToastMessage(`Permohonan Bebas Fakultas untuk ${formNama} (${formNim}) BERHASIL DITAMBAHKAN!`);
     setTimeout(() => setToastMessage(null), 5000);
   };
 
@@ -155,28 +122,16 @@ export default function AdminFakultasBebasPage() {
                     </div>
                   </div>
 
-                  {/* 1-Row Controls: Search Input + Red + Button */}
-                  <div className="flex items-center gap-2 w-full sm:w-auto">
-                    <div className="relative flex-1 sm:w-52 min-w-0">
-                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        type="text"
-                        placeholder="Cari NIM atau Nama..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
-                      />
-                    </div>
-
-                    {/* + Input Pemohon Button */}
-                    <button
-                      onClick={() => setShowAddModal(true)}
-                      title="Input Permohonan Bebas Fakultas Manual"
-                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
-                    >
-                      <Plus className="w-4 h-4 text-white shrink-0" />
-                      <span>Pemohon</span>
-                    </button>
+                  {/* 1-Row Controls: Search Input */}
+                  <div className="relative flex-1 sm:w-64 max-w-xs min-w-0">
+                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      placeholder="Cari NIM atau Nama..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                    />
                   </div>
                 </div>
 
@@ -358,123 +313,6 @@ export default function AdminFakultasBebasPage() {
           </main>
         </div>
       </div>
-
-      {/* MODAL INPUT PEMOHON BEBAS FAKULTAS MANUAL */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200 font-display">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
-            {/* Header Modal */}
-            <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm font-display text-white">Input Pemohon Bebas Fakultas</h3>
-                  <p className="text-[10.5px] text-slate-400 font-medium">Registrasi manual permohonan bebas fakultas</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Form Modal Body */}
-            <form onSubmit={handleAddPemohon} className="p-6 space-y-4 text-xs">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-700 uppercase text-[10px] tracking-wider">NIM Mahasiswa</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Contoh: 20101152630088"
-                    value={formNim}
-                    onChange={(e) => setFormNim(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-700 uppercase text-[10px] tracking-wider">Program Studi</label>
-                  <select
-                    value={formProdi}
-                    onChange={(e) => setFormProdi(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-bold text-slate-800 cursor-pointer"
-                  >
-                    <option value="Teknik Informatika">Teknik Informatika</option>
-                    <option value="Sistem Informasi">Sistem Informasi</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-slate-700 uppercase text-[10px] tracking-wider">Nama Lengkap Mahasiswa</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: Rizky Pratama"
-                  value={formNama}
-                  onChange={(e) => setFormNama(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828]"
-                />
-              </div>
-
-              <div className="space-y-2 pt-2 border-t border-slate-100">
-                <label className="font-bold text-slate-700 uppercase text-[10px] tracking-wider block">Status Initial 3 Prasyarat:</label>
-                
-                <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={formPustaka}
-                    onChange={(e) => setFormPustaka(e.target.checked)}
-                    className="rounded text-[#C62828] focus:ring-[#C62828]"
-                  />
-                  <span>Bebas Pinjaman &amp; Denda Perpustakaan</span>
-                </label>
-
-                <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={formLab}
-                    onChange={(e) => setFormLab(e.target.checked)}
-                    className="rounded text-[#C62828] focus:ring-[#C62828]"
-                  />
-                  <span>Bebas Inventaris &amp; Alat Lab Komputer</span>
-                </label>
-
-                <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={formSpp}
-                    onChange={(e) => setFormSpp(e.target.checked)}
-                    className="rounded text-[#C62828] focus:ring-[#C62828]"
-                  />
-                  <span>Lunas SPP / Keuangan s/d Semester 8</span>
-                </label>
-              </div>
-
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all cursor-pointer"
-                >
-                  Batal
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4 text-white" />
-                  <span>Simpan Permohonan</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Floating Toast Popup Notification */}
       {toastMessage && (
