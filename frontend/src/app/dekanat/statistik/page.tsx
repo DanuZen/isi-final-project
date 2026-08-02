@@ -182,27 +182,30 @@ export default function DekanatStatistikPage() {
                     </div>
                   ))}
 
-                  {/* Stage Insights Summary Pills */}
+                  {/* Stage Insights Summary Pills (Solid Colors) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
-                    <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/70 flex items-center justify-between text-[11px]">
-                      <span className="font-bold text-blue-950 font-display">Tahap Paling Aktif</span>
-                      <span className="font-extrabold font-mono text-blue-700">Proses Bimbingan (40%)</span>
+                    <div className="p-2.5 rounded-xl bg-blue-600 text-white shadow-xs flex items-center justify-between text-[11px]">
+                      <span className="font-bold text-white/90 font-display">Tahap Paling Aktif</span>
+                      <span className="font-black font-mono text-white">Proses Bimbingan (40%)</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/70 flex items-center justify-between text-[11px]">
-                      <span className="font-bold text-emerald-950 font-display">Tingkat Kelulusan</span>
-                      <span className="font-extrabold font-mono text-emerald-700">11% (28 Mhs)</span>
+                    <div className="p-2.5 rounded-xl bg-emerald-600 text-white shadow-xs flex items-center justify-between text-[11px]">
+                      <span className="font-bold text-white/90 font-display">Tingkat Kelulusan</span>
+                      <span className="font-black font-mono text-white">11% (28 Mhs)</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Footer Link to Komparasi Prodi */}
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between shrink-0">
-                  <span className="text-[11px] text-slate-500 font-medium">Lihat evaluasi perbandingan antar prodi?</span>
+                {/* Footer Link to Komparasi Prodi (Concise Mobile Text) */}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between shrink-0 gap-2">
+                  <span className="text-[11px] text-slate-500 font-medium truncate">
+                    <span className="hidden sm:inline">Lihat evaluasi perbandingan antar prodi?</span>
+                    <span className="sm:hidden">Evaluasi prodi?</span>
+                  </span>
                   <Link
                     href="/dekanat/prodi"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C62828] hover:underline font-display"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C62828] hover:underline font-display shrink-0 whitespace-nowrap"
                   >
-                    <span>Komparasi Performa Prodi</span>
+                    <span>Komparasi Prodi</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
