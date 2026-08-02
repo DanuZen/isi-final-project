@@ -391,7 +391,7 @@ export default function DekanatKalenderPage() {
                           <span className="font-mono text-[10.5px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80">
                             NIM: {selectedEv.nim}
                           </span>
-                          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                          <span className="text-[10px] text-white font-extrabold bg-emerald-600 px-2.5 py-0.5 rounded-full shadow-2xs font-display">
                             Status Terjadwal
                           </span>
                         </div>
@@ -407,23 +407,23 @@ export default function DekanatKalenderPage() {
                         </div>
 
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10.5px]">
-                          <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/70 space-y-0.5 col-span-2 sm:col-span-1">
-                            <span className="text-[9px] text-blue-700 font-bold flex items-center gap-1">
-                              <CalendarDays className="w-3 h-3 text-blue-600" /> Tanggal
+                          <div className="p-2.5 rounded-xl bg-blue-600 text-white shadow-xs space-y-0.5 col-span-2 sm:col-span-1">
+                            <span className="text-[9px] text-white/80 font-bold flex items-center gap-1">
+                              <CalendarDays className="w-3 h-3 text-white" /> Tanggal
                             </span>
-                            <p className="font-extrabold text-slate-900 font-display truncate">{selectedEv.hari}, {selectedEv.tglNum} Agt 2026</p>
+                            <p className="font-extrabold text-white font-display truncate">{selectedEv.hari}, {selectedEv.tglNum} Agt 2026</p>
                           </div>
-                          <div className="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-0.5">
-                            <span className="text-[9px] text-amber-700 font-bold flex items-center gap-1">
-                              <Clock className="w-3 h-3 text-amber-600" /> Waktu
+                          <div className="p-2.5 rounded-xl bg-amber-500 text-white shadow-xs space-y-0.5">
+                            <span className="text-[9px] text-white/80 font-bold flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-white" /> Waktu
                             </span>
-                            <p className="font-extrabold text-slate-900 font-mono">{selectedEv.waktu}</p>
+                            <p className="font-extrabold text-white font-mono">{selectedEv.waktu}</p>
                           </div>
-                          <div className="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200/70 space-y-0.5">
-                            <span className="text-[9px] text-rose-700 font-bold flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-rose-600" /> Lokasi
+                          <div className="p-2.5 rounded-xl bg-[#C62828] text-white shadow-xs space-y-0.5">
+                            <span className="text-[9px] text-white/80 font-bold flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-white" /> Lokasi
                             </span>
-                            <p className="font-extrabold text-slate-900 truncate">{selectedEv.ruang}</p>
+                            <p className="font-extrabold text-white truncate">{selectedEv.ruang}</p>
                           </div>
                         </div>
                       </div>
