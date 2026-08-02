@@ -31,34 +31,64 @@ interface RepoItem {
 
 import { storeProposal, storeJadwal } from "@/lib/sipeta-store";
 
-const REPO_DATA: RepoItem[] = [];
+const REPO_DEFAULT: RepoItem[] = [
+  {
+    id: "TA-2026-001",
+    judul: "Sistem Informasi Manajemen Gudang Berbasis Web",
+    penulis: "Danu Zen",
+    nim: "20101152630045",
+    tahun: "2026",
+    bidang: "Rekayasa Perangkat Lunak",
+    pembimbing: "Dr. Sarjon Defit",
+    abstrak: "Penelitian ini mengimplementasikan sistem informasi berbasis web untuk tata kelola pergudangan dan inventaris secara real-time dengan efisiensi tracking barang hingga 94%."
+  },
+  {
+    id: "TA-2026-002",
+    judul: "Implementasi ML untuk Deteksi Spam Email",
+    penulis: "Rafi Andika",
+    nim: "20101152630089",
+    tahun: "2026",
+    bidang: "Kecerdasan Buatan",
+    pembimbing: "Dr. Sarjon Defit",
+    abstrak: "Aplikasi klasifikasi email masukan menggunakan algoritma Naive Bayes dan SVM untuk memfilter spam berbahaya dengan akurasi 98.2%."
+  },
+  {
+    id: "TA-2026-003",
+    judul: "Optimisasi Algoritma Routing Jaringan Komputer",
+    penulis: "Siti Rahayu",
+    nim: "20101152630101",
+    tahun: "2026",
+    bidang: "Jaringan & Keamanan",
+    pembimbing: "Prof. Budi Santoso, Ph.D",
+    abstrak: "Studi perbandingan performa routing dinamis OSPF dan BGP pada jaringan skala luas dengan simulasi GNS3."
+  }
+];
 
 export default function AdminProdiRepositoriPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [filterBidang, setFilterBidang] = useState("Semua");
-  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedId, setSelectedId] = useState<string>("TA-2026-001");
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
 
-  const [repoList, setRepoList] = useState<RepoItem[]>([]);
+  const [repoList, setRepoList] = useState<RepoItem[]>(REPO_DEFAULT);
 
   const syncRepo = React.useCallback(() => {
     const prop = storeProposal.get();
-    const list: RepoItem[] = prop ? [{
-      id: "TA-2026-001",
-      judul: prop.judul,
-      penulis: "Danu Zen",
-      nim: "20101152630045",
-      tahun: "2026",
-      bidang: prop.bidangKajian,
-      pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
-      abstrak: prop.abstrak,
-    }] : [];
-
-    setRepoList(list);
-    if (list.length > 0 && !selectedId) {
-      setSelectedId(list[0].id);
+    if (prop) {
+      const liveItem: RepoItem = {
+        id: "TA-2026-001",
+        judul: prop.judul,
+        penulis: "Danu Zen",
+        nim: "20101152630045",
+        tahun: "2026",
+        bidang: prop.bidangKajian || "Rekayasa Perangkat Lunak",
+        pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
+        abstrak: prop.abstrak || "Abstrak penelitian tugas akhir.",
+      };
+      setRepoList([liveItem, ...REPO_DEFAULT.filter(r => r.id !== "TA-2026-001")]);
     }
-  }, [selectedId]);
+  }, []);
 
   React.useEffect(() => {
     syncRepo();
@@ -145,96 +175,114 @@ export default function AdminProdiRepositoriPage() {
 
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
-                     {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
+              {/* Table Container (Flex-1) */}
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
+                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+              }`}>
                 <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col">
-                  <table className={`w-full text-xs min-w-[600px] lg:min-w-0 ${filtered.length === 0 ? "h-full" : ""}`}>
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                      <tr>
-                        {["Kode / Tahun", "Judul Skripsi Alumni", "Bidang Kajian", "Penulis (Alumni)", "Dosen Pembimbing"].map((h) => (
-                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className={`divide-y divide-slate-100 ${filtered.length === 0 ? "h-full" : ""}`}>
-                      {filtered.length > 0 ? (
-                        filtered.map((repo) => {
-                          const isSelected = selected?.id === repo.id;
-                          return (
-                            <tr
-                              key={repo.id}
-                              onClick={() => setSelectedId(repo.id)}
-                              className={`transition-all cursor-pointer select-none ${
-                                isSelected
-                                  ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
-                                  : "hover:bg-slate-50"
-                              }`}
-                            >
-                              <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="font-mono text-[10.5px] font-bold text-slate-900">{repo.id}</span>
-                                <p className="text-[10px] text-slate-400 font-medium">{repo.tahun}</p>
-                              </td>
-                              <td className="px-4 py-3.5 max-w-xs">
-                                <p className="text-slate-800 font-bold truncate text-[11.5px] font-display">&ldquo;{repo.judul}&rdquo;</p>
-                              </td>
-                              <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 font-display">{repo.bidang}</span>
-                              </td>
-                              <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="font-bold text-slate-900 font-display">{repo.penulis}</span>{" "}
-                                <span className="text-[10.5px] font-mono text-slate-400">({repo.nim})</span>
-                              </td>
-                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">
-                                {repo.pembimbing}
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <tr className="h-full">
-                          <td colSpan={5} className="py-12 px-4 text-center align-middle h-full text-slate-500">
-                            <EmptyState
-                              icon={BookOpen}
-                              title="Belum Ada Naskah Final di Repositori"
-                              description="Naskah Tugas Akhir mahasiswa yang telah disahkan akan otomatis terarsip di sini."
-                            />
-                          </td>
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0">
+                    <table className={`w-full text-xs min-w-[700px] border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["Kode / Tahun", "Judul Skripsi Alumni", "Bidang Kajian", "Penulis (Alumni)", "Dosen Pembimbing"].map((h) => (
+                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
                         </tr>
-                      )}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className={`divide-y divide-slate-100 ${filtered.length === 0 ? "h-full" : ""}`}>
+                        {filtered.length > 0 ? (
+                          filtered.map((repo) => {
+                            const isSelected = selected?.id === repo.id;
+                            return (
+                              <tr
+                                key={repo.id}
+                                onClick={() => {
+                                  setSelectedId(repo.id);
+                                  setActiveMobileTab("detail");
+                                }}
+                                className={`transition-all cursor-pointer select-none ${
+                                  isSelected
+                                    ? "bg-slate-100 font-bold"
+                                    : "hover:bg-slate-50/60"
+                                }`}
+                              >
+                                <td className="px-4 py-3.5 whitespace-nowrap">
+                                  <span className="font-mono text-[10.5px] font-bold text-slate-900">{repo.id}</span>
+                                  <p className="text-[10px] text-slate-400 font-medium">{repo.tahun}</p>
+                                </td>
+                                <td className="px-4 py-3.5 max-w-xs">
+                                  <p className="text-slate-800 font-bold truncate text-[11.5px] font-display">&ldquo;{repo.judul}&rdquo;</p>
+                                </td>
+                                <td className="px-4 py-3.5 whitespace-nowrap">
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 font-display">{repo.bidang}</span>
+                                </td>
+                                <td className="px-4 py-3.5 whitespace-nowrap">
+                                  <span className="font-bold text-slate-900 font-display">{repo.penulis}</span>{" "}
+                                  <span className="text-[10.5px] font-mono text-slate-400">({repo.nim})</span>
+                                </td>
+                                <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">
+                                  {repo.pembimbing}
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <tr className="h-full">
+                            <td colSpan={5} className="py-12 px-4 text-center align-middle h-full text-slate-500">
+                              <EmptyState
+                                icon={BookOpen}
+                                title="Belum Ada Naskah Final di Repositori"
+                                description="Naskah Tugas Akhir mahasiswa yang telah disahkan akan otomatis terarsip di sini."
+                              />
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
-              {/* Side Detail Panel (Updates Live Based on Selected Row) */}
+              {/* Side Detail Panel (Strict 350px Width Lock on Desktop) */}
               {selected && (
-                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
-                  <div className="space-y-4 overflow-y-auto scrollbar-none">
-                    <div className="pb-3 border-b border-slate-100 space-y-1">
+                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                }`}>
+                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
+                    <div className="pb-3 border-b border-slate-100 space-y-2 min-w-0">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-rose-50 text-rose-700 border border-rose-200 font-display">
+                        <button
+                          onClick={() => setActiveMobileTab("table")}
+                          className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                        >
+                          <span>← Kembali</span>
+                        </button>
+
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-slate-100 text-slate-700 border border-slate-200 font-display">
                           {selected.bidang}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400 font-semibold">{selected.tahun}</span>
+                        <span className="text-[10px] font-mono text-slate-400 font-semibold shrink-0 ml-auto">{selected.tahun}</span>
                       </div>
-                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display block pt-1">{selected.id}</span>
-                      <h3 className="text-sm font-black text-slate-900 font-display leading-snug">&ldquo;{selected.judul}&rdquo;</h3>
+                      <div>
+                        <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display block pt-1">{selected.id}</span>
+                        <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words mt-0.5">&ldquo;{selected.judul}&rdquo;</h3>
+                      </div>
                     </div>
 
-                    <div className="space-y-3 text-xs">
-                      <div>
+                    <div className="space-y-3 text-xs min-w-0">
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Penulis / Alumni</p>
-                        <p className="font-bold text-slate-900 mt-0.5 font-display">{selected.penulis} <span className="text-slate-400 text-[10.5px] font-mono">({selected.nim})</span></p>
+                        <p className="font-bold text-slate-900 mt-0.5 font-display break-words">{selected.penulis} <span className="text-slate-400 text-[10.5px] font-mono">({selected.nim})</span></p>
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Dosen Pembimbing</p>
-                        <p className="font-semibold text-slate-800 mt-0.5">{selected.pembimbing}</p>
+                        <p className="font-semibold text-slate-800 mt-0.5 break-words">{selected.pembimbing}</p>
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display mb-1">Abstrak Penelitian</p>
-                        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-[11.5px] text-slate-700 leading-relaxed font-medium max-h-48 overflow-y-auto scrollbar-none">
+                        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-[11.5px] text-slate-700 leading-relaxed font-medium max-h-48 overflow-y-auto scrollbar-none break-words">
                           {selected.abstrak}
                         </div>
                       </div>
