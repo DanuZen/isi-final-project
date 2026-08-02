@@ -373,9 +373,11 @@ export default function DekanatKalenderPage() {
                     </div>
                   </div>
 
-                  {/* Code Badge on Right (Matching Reference Pill) */}
-                  <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
-                    {selectedEv?.nim || "AGENDA"}
+                  {/* Type Badge on Right (Solid Pill Badge) */}
+                  <span className={`text-[10.5px] font-extrabold text-white px-3 py-1 rounded-full shrink-0 shadow-2xs font-display ${
+                    selectedEv?.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                  }`}>
+                    {selectedEv?.jenis || "Ujian Sidang"}
                   </span>
                 </div>
 
