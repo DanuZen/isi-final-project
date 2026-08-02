@@ -131,24 +131,50 @@ export default function SuperAdminDashboard() {
             </div>
 
             {/* ── 4 Executive Stat Cards ── */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-3 shrink-0">
               {STATS.map((s) => {
                 const IconComp = s.icon;
                 return (
-                  <div key={s.label} className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex items-center justify-between space-x-3 hover:shadow-md transition-all">
-                    <div className="space-y-1 min-w-0">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-display truncate">{s.label}</p>
-                      <div className="flex items-baseline space-x-2">
-                        <span className="text-2xl font-black font-display tracking-tight text-slate-900">{s.value}</span>
-                        <span className="text-[10.5px] text-slate-500 font-medium truncate">{s.sub}</span>
+                  <div key={s.label} className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3 md:p-4 flex items-center justify-between space-x-2 md:space-x-3 hover:shadow-md transition-all">
+                    <div className="space-y-0.5 md:space-y-1 min-w-0 flex-1">
+                      <p className="text-[10px] md:text-[11px] font-bold text-slate-500 font-display leading-tight truncate">{s.label}</p>
+                      <div className="flex items-baseline space-x-1.5 md:space-x-2">
+                        <span className="text-xl sm:text-2xl font-black font-display tracking-tight text-slate-900">{s.value}</span>
+                        <span className="text-[9.5px] md:text-[10px] text-slate-400 font-semibold truncate">{s.sub}</span>
                       </div>
                     </div>
-                    <div className={`w-10 h-10 rounded-2xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs`}>
-                      <IconComp className="w-5 h-5 text-white" />
+                    <div className={`w-9 h-9 md:w-10 md:h-10 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
+                      <IconComp className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                   </div>
                 );
               })}
+            </div>
+
+            {/* ── Mobile Section Navigation Pills (Swipeable Segmented Control) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto touch-pan-x scrollbar-none shrink-0 lg:hidden">
+              <button
+                onClick={() => setActiveMobileTab("table")}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 font-display ${
+                  activeMobileTab === "table"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 font-medium"
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>Tabel User ({filtered.length})</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 font-display ${
+                  activeMobileTab === "detail"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 font-medium"
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Detail User ({selected.nama})</span>
+              </button>
             </div>
 
             {/* Grid Layout with Live Side Detail Panel Card */}

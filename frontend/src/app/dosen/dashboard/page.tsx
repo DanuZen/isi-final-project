@@ -199,13 +199,13 @@ export default function DosenDashboardPage() {
             </div>
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
-            <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto touch-pan-x scrollbar-none shrink-0 lg:hidden">
               <button
                 onClick={() => setActiveMobileTab("bimbingan")}
-                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer font-display ${
                   activeMobileTab === "bimbingan"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
                 <BookOpen className="w-3.5 h-3.5" />
@@ -214,10 +214,10 @@ export default function DosenDashboardPage() {
 
               <button
                 onClick={() => setActiveMobileTab("permohonan")}
-                className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer font-display ${
                   activeMobileTab === "permohonan"
                     ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
