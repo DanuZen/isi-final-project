@@ -40,6 +40,7 @@ const TOP_DOSEN = [
 
 export default function DekanatStatistikPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState<"tahap" | "kpi">("tahap");
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -97,6 +98,32 @@ export default function DekanatStatistikPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Mobile Tab Navigation Pill Bar (Tahap TA vs KPI & Dosen) ── */}
+            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
+              <button
+                onClick={() => setActiveMobileTab("tahap")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                  activeMobileTab === "tahap"
+                    ? "bg-[#C62828] text-white shadow-xs"
+                    : "bg-white text-slate-600 border border-slate-200"
+                }`}
+              >
+                <BarChart2 className="w-3.5 h-3.5" />
+                <span>Tahap TA (248 Mhs)</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("kpi")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                  activeMobileTab === "kpi"
+                    ? "bg-[#C62828] text-white shadow-xs"
+                    : "bg-white text-slate-600 border border-slate-200"
+                }`}
+              >
+                <Target className="w-3.5 h-3.5" />
+                <span>KPI &amp; Dosen Top</span>
+              </button>
+            </div>
+
             {/* ── 2. 4 Top Overview Cards (2 Cols on Mobile) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4 shrink-0">
               {METRICS.map((m) => {
@@ -120,7 +147,9 @@ export default function DekanatStatistikPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 flex-1 min-h-0 items-stretch">
               
               {/* Left Column (7/12): Stage Progress Card */}
-              <div className="lg:col-span-7 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden">
+              <div className={`lg:col-span-7 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
+                activeMobileTab === "tahap" ? "block" : "hidden lg:flex"
+              }`}>
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
@@ -180,7 +209,9 @@ export default function DekanatStatistikPage() {
               </div>
 
               {/* Right Column (5/12): KPI & Top Supervisor Card */}
-              <div className="lg:col-span-5 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden">
+              <div className={`lg:col-span-5 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
+                activeMobileTab === "kpi" ? "block" : "hidden lg:flex"
+              }`}>
                 <div className="space-y-3.5 overflow-y-auto scrollbar-thin">
                   
                   {/* KPI Target Header */}
@@ -215,7 +246,7 @@ export default function DekanatStatistikPage() {
                       {TOP_DOSEN.map((d, idx) => (
                         <div key={d.nama} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-2.5">
                           <div className="flex items-center gap-2 min-w-0">
-                            <span className="w-5 h-5 rounded-full bg-[#C62828] text-white text-[10px] font-bold flex items-center justify-center shrink-0 font-display shadow-2xs">
+                            <span className="w-5 h-5 rounded-full bg-[#C62828] text-[#FFFFFF] text-[10px] font-bold flex items-center justify-center shrink-0 font-display shadow-2xs">
                               {idx + 1}
                             </span>
                             <div className="min-w-0">
