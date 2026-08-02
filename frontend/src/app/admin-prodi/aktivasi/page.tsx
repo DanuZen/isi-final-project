@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  CheckCircle2, Search, UserCheck, ArrowRight, XCircle, Plus, X, User
+  CheckCircle2, Search, UserCheck, ArrowRight, XCircle, Plus, X, User, ArrowLeft, FileText
 } from "lucide-react";
 
 const NAV = [
@@ -42,6 +42,8 @@ export default function AdminProdiAktivasiPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [list, setList] = useState<AktivasiItem[]>(PENDING_LIST);
   const [search, setSearch] = useState("");
+  const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
   const [activatedSuccess, setActivatedSuccess] = useState<string | null>(null);
 
   // Form Input Modal State
@@ -96,6 +98,7 @@ export default function AdminProdiAktivasiPage() {
       item.nim.includes(search)
   );
 
+  const selected = list.find((i) => i.nim === selectedNim) || filtered[0] || list[0];
   const pendingCount = list.filter((i) => i.status === "Pending").length;
 
   return (
@@ -113,8 +116,9 @@ export default function AdminProdiAktivasiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
-                      <UserPlus className="w-3.5 h-3.5 text-white" /> Input &amp; Aktivasi Mahasiswa Clearing
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs max-w-full truncate">
+                      <UserCheck className="w-3.5 h-3.5 text-white shrink-0" />
+                      <span className="truncate">Prodi Teknik Informatika</span>
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -128,98 +132,189 @@ export default function AdminProdiAktivasiPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* Main Container */}
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
-              <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                    <UserCheck className="w-4 h-4 text-white" />
+            {/* ── Grid Split View (Flex-1 Table & Fixed 350px Detail Side Panel) ── */}
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
+              
+              {/* Left Column: Table List (Flex-1) */}
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex-col min-h-0 min-w-0 ${
+                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+              }`}>
+                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <UserCheck className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Antrean Clearing &amp; Mahasiswa Aktif</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">{pendingCount} Mahasiswa Menunggu Aktivasi</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Antrean Clearing &amp; Mahasiswa Aktif</h2>
-                    <p className="text-[10px] text-slate-400 font-medium">{pendingCount} Mahasiswa Menunggu Aktivasi</p>
+                  
+                  {/* 1-Row Controls: Search + Input Button */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-48 min-w-0">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        placeholder="Cari NIM atau Nama..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      />
+                    </div>
+                    <button
+                      onClick={() => setShowAddModal(true)}
+                      title="Input Mahasiswa Baru"
+                      className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                    >
+                      <Plus className="w-4 h-4 text-white shrink-0" />
+                      <span className="hidden sm:inline">Input</span>
+                    </button>
                   </div>
                 </div>
-                
-                {/* 1-Row Controls: Search + Input Button */}
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <div className="relative flex-1 sm:w-48 min-w-0">
-                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                    <input
-                      type="text"
-                      placeholder="Cari NIM atau Nama..."
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
-                    />
+
+                {/* Dedicated Mobile Touch-Swipe Table Container */}
+                <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[750px] border-collapse">
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["NIM", "Nama Mahasiswa", "Prodi", "Clearing Luring", "Petugas", "IPK / SKS", "Status"].map((h) => (
+                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filtered.map((row) => {
+                          const isSelected = selected?.nim === row.nim;
+                          return (
+                            <tr
+                              key={row.nim}
+                              onClick={() => {
+                                setSelectedNim(row.nim);
+                                setActiveMobileTab("detail");
+                              }}
+                              className={`transition-all cursor-pointer select-none ${
+                                isSelected
+                                  ? "bg-slate-100 font-bold"
+                                  : "hover:bg-slate-50/60"
+                              }`}
+                            >
+                              <td className="px-4 py-3 font-mono text-[10.5px] text-slate-500 whitespace-nowrap">{row.nim}</td>
+                              <td className="px-4 py-3 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
+                              <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{row.prodi}</td>
+                              <td className="px-4 py-3 text-slate-600 whitespace-nowrap font-mono">{row.clearingDate}</td>
+                              <td className="px-4 py-3 text-slate-500 whitespace-nowrap font-semibold">{row.petugasClearing}</td>
+                              <td className="px-4 py-3 whitespace-nowrap font-bold text-slate-700">{row.ipk} / {row.sks} SKS</td>
+                              <td className="px-4 py-3 whitespace-nowrap">
+                                {row.status === "Aktif" ? (
+                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
+                                    Aktif
+                                  </span>
+                                ) : (
+                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-600 text-white shadow-2xs font-display">
+                                    Belum Aktif
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
-                  <button
-                    onClick={() => setShowAddModal(true)}
-                    title="Input Mahasiswa Baru"
-                    className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
-                  >
-                    <Plus className="w-4 h-4 text-white shrink-0" />
-                    <span className="hidden sm:inline">Input</span>
-                  </button>
                 </div>
               </div>
 
-              {/* Dedicated Mobile Touch-Swipe Table Container */}
-              <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
-                <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
-                  <table className="w-full text-xs min-w-[850px] border-collapse">
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                    <tr>
-                      {["NIM", "Nama Mahasiswa", "Prodi", "Clearing Luring", "Petugas Verifikasi", "IPK / SKS", "Status", "Aksi"].map((h) => (
-                        <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {filtered.map((row) => (
-                      <tr key={row.nim} className="hover:bg-slate-50 transition-colors">
-                        <td className="px-4 py-3 font-mono text-[10.5px] text-slate-500">{row.nim}</td>
-                        <td className="px-4 py-3 font-bold text-slate-800 whitespace-nowrap font-display">{row.nama}</td>
-                        <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{row.prodi}</td>
-                        <td className="px-4 py-3 text-slate-600 whitespace-nowrap font-mono">{row.clearingDate}</td>
-                        <td className="px-4 py-3 text-slate-500 whitespace-nowrap font-semibold">{row.petugasClearing}</td>
-                        <td className="px-4 py-3 whitespace-nowrap font-bold text-slate-700">{row.ipk} / {row.sks} SKS</td>
-                        <td className="px-4 py-3">
-                          {row.status === "Aktif" ? (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-2xs font-display">
-                              Aktif
+              {/* Right Column: Detail Side Panel Card (Strict 350px Width Lock on Desktop) */}
+              {selected && (
+                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                }`}>
+                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
+                    <div className="pb-3 border-b border-slate-100 flex items-center justify-between gap-2">
+                      <button
+                        onClick={() => setActiveMobileTab("table")}
+                        className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                      >
+                        <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                        <span>Kembali</span>
+                      </button>
+
+                      <div className="hidden lg:block min-w-0 flex-1">
+                        <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Clearing Akun</span>
+                        <h3 className="text-base font-black text-slate-900 font-display mt-0.5 truncate">{selected.nama}</h3>
+                      </div>
+
+                      <span className="text-[10px] sm:text-[10.5px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 shrink-0 ml-auto">
+                        {selected.nim}
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 min-w-0">
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Program Studi</p>
+                        <p className="text-xs font-semibold text-slate-800 mt-0.5 break-words">{selected.prodi}</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                          <p className="text-xl font-black text-[#C62828] font-display">{selected.ipk}</p>
+                          <p className="text-[9px] text-slate-400 font-bold font-display">IPK Terakhir</p>
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                          <p className="text-xl font-black text-emerald-600 font-display">{selected.sks}</p>
+                          <p className="text-[9px] text-slate-400 font-bold font-display">Total SKS</p>
+                        </div>
+                      </div>
+
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Tanggal Clearing Luring</p>
+                        <p className="text-xs font-semibold text-slate-700 mt-0.5 font-mono">{selected.clearingDate}</p>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Petugas Verifikasi Clearing</p>
+                        <p className="text-xs font-semibold text-slate-700 mt-0.5 break-words">{selected.petugasClearing}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display">Status Aktivasi SIPETA</p>
+                        <div className="mt-1">
+                          {selected.status === "Aktif" ? (
+                            <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-emerald-600 text-white shadow-2xs font-display inline-flex items-center gap-1">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-white" /> Akun Aktif (Terverifikasi)
                             </span>
                           ) : (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-600 text-white shadow-2xs font-display">
-                              Belum Aktif
+                            <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-amber-600 text-white shadow-2xs font-display inline-flex items-center gap-1">
+                              Belum Aktif (Antrean Clearing)
                             </span>
                           )}
-                        </td>
-                        <td className="px-4 py-3">
-                          {row.status === "Pending" ? (
-                            <button
-                              onClick={() => handleActivate(row.nim)}
-                              className="px-3.5 py-1.5 rounded-xl text-[11px] font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 active:scale-95 shadow-xs cursor-pointer font-display"
-                            >
-                              <UserPlus className="w-3.5 h-3.5" /> Aktifkan Akun
-                            </button>
-                          ) : (
-                            <button
-                              disabled
-                              className="px-3 py-1.5 rounded-xl text-[10.5px] font-bold bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed flex items-center gap-1 font-display"
-                            >
-                              <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Terverifikasi
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 space-y-2">
+                    {selected.status === "Pending" ? (
+                      <button
+                        onClick={() => handleActivate(selected.nim)}
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                      >
+                        <UserPlus className="w-4 h-4 text-white" /> Aktifkan Akun SIPETA
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed flex items-center justify-center gap-1.5 font-display"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Terverifikasi &amp; Aktif
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
             </div>
-          </div>
-        </main>
+          </main>
         </div>
       </div>
 
