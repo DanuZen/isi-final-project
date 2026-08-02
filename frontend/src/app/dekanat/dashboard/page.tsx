@@ -85,7 +85,15 @@ export default function DekanatDashboard() {
       <div className="flex flex-1 min-h-0 overflow-hidden">
         
         {/* Unified Standard Sidebar */}
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+          items={NAV}
+          userName="Prof. Dr. H. Zulherman, M.T."
+          userNim="NIP: 196508201990031001"
+          roleName="Dekan FIK"
+          prodiName="Fakultas Ilmu Komputer"
+        />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           
@@ -96,6 +104,7 @@ export default function DekanatDashboard() {
             userNim="NIP: 196508201990031001"
             userRole="Dekan FIK"
             prodiName="Fakultas Ilmu Komputer"
+            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
           <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">

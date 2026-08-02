@@ -49,10 +49,25 @@ export default function DekanatStatistikPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0">
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+          items={NAV}
+          userName="Prof. Dr. H. Zulherman, M.T."
+          userNim="NIP: 196508201990031001"
+          roleName="Dekan FIK"
+          prodiName="Fakultas Ilmu Komputer"
+        />
 
         <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-          <Header className="shell-header shrink-0" userName="Prof. Dr. H. Zulherman, M.T." userNim="NIP: 196508201990031001" userRole="Dekan FIK" prodiName="Fakultas Ilmu Komputer" />
+          <Header
+            className="shell-header shrink-0"
+            userName="Prof. Dr. H. Zulherman, M.T."
+            userNim="NIP: 196508201990031001"
+            userRole="Dekan FIK"
+            prodiName="Fakultas Ilmu Komputer"
+            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+          />
 
           {/* Natural Scrolling Main Container */}
           <main className="flex-1 p-4 pt-16 md:p-6 space-y-5 shell-body pb-16">

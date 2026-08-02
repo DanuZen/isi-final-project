@@ -70,10 +70,25 @@ export default function SuperAdminMasterPage() {
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
       <div className="flex flex-1 min-h-0 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} items={NAV} />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+          items={NAV}
+          userName="Irvan Syahputra, S.T."
+          userNim="SA-001"
+          roleName="Super Admin"
+          prodiName="Sistem Utama SIPETA"
+        />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-          <Header className="shell-header shrink-0" userName="Irvan Syahputra, S.T." userNim="SA-001" userRole="Super Admin" prodiName="Sistem Utama SIPETA" />
+          <Header
+            className="shell-header shrink-0"
+            userName="Irvan Syahputra, S.T."
+            userNim="SA-001"
+            userRole="Super Admin"
+            prodiName="Sistem Utama SIPETA"
+            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+          />
 
           <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
 
