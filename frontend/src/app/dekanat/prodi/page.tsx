@@ -50,7 +50,7 @@ export default function DekanatProdiPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedKode, setSelectedKode] = useState<string>("IF");
-  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
+  const [showMobileDetail, setShowMobileDetail] = useState(false);
 
   const filteredProdi = PRODI_LIST.filter(
     (p) =>
@@ -136,38 +136,12 @@ export default function DekanatProdiPage() {
               })}
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
-              <button
-                onClick={() => setActiveMobileTab("table")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "table"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <Building2 className="w-3.5 h-3.5" />
-                <span>Tabel Komparasi</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "detail"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <Award className="w-3.5 h-3.5" />
-                <span>Detail {selected.kode}</span>
-              </button>
-            </div>
-
             {/* ── 3. Main Split View: Table (Left 7/12) + Selected Detail Card (Right 5/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 flex-1 min-h-0 items-stretch">
               
               {/* Left Column (7/12 Width): Comprehensive Comparison Table */}
               <div className={`lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between ${
-                activeMobileTab === "table" ? "block" : "hidden lg:flex"
+                showMobileDetail ? "hidden lg:flex" : "flex"
               }`}>
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 min-w-0 flex-1">
@@ -207,9 +181,7 @@ export default function DekanatProdiPage() {
                           key={p.kode}
                           onClick={() => {
                             setSelectedKode(p.kode);
-                            if (typeof window !== "undefined" && window.innerWidth < 1024) {
-                              setActiveMobileTab("detail");
-                            }
+                            setShowMobileDetail(true);
                           }}
                           className={`cursor-pointer transition-colors ${
                             selected.kode === p.kode ? "bg-rose-50/60 font-bold" : "hover:bg-slate-50"
@@ -235,12 +207,12 @@ export default function DekanatProdiPage() {
 
               {/* Right Column (5/12 Width): Selected Prodi Detail Panel */}
               <div className={`lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
-                activeMobileTab === "detail" ? "block" : "hidden lg:flex"
+                showMobileDetail ? "flex" : "hidden lg:flex"
               }`}>
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                   {/* Mobile Back Button */}
                   <button
-                    onClick={() => setActiveMobileTab("table")}
+                    onClick={() => setShowMobileDetail(false)}
                     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                   >
                     <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
