@@ -229,11 +229,8 @@ export default function SuperAdminMasterPage() {
                           <span>Kembali</span>
                         </button>
 
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
-                          {selected.jenjang}
-                        </span>
-                        <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs ml-auto">
-                          {selected.kode}
+                        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
+                          KODE: {selected.kode}
                         </span>
                       </div>
                       <h3 className="text-base font-black text-slate-900 font-display break-words">{selected.nama}</h3>
