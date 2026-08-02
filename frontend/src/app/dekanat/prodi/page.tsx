@@ -209,54 +209,44 @@ export default function DekanatProdiPage() {
               <div className={`lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
                 showMobileDetail ? "flex" : "hidden lg:flex"
               }`}>
-                <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    {/* Mobile Back Button */}
-                    <button
-                      onClick={() => setShowMobileDetail(false)}
-                      className="lg:hidden p-1.5 px-3 rounded-xl bg-rose-50 border border-rose-200 text-[#C62828] hover:bg-rose-100 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
-                    >
-                      <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
-                      <span>Kembali</span>
-                    </button>
+                {/* Top Bar of Detail Panel */}
+                <div className="p-3.5 md:p-4 border-b border-slate-100 flex items-center justify-between gap-3 shrink-0 bg-white">
+                  {/* Mobile Back Button (Matching Reference Pill ← Kembali) */}
+                  <button
+                    onClick={() => setShowMobileDetail(false)}
+                    className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>Kembali</span>
+                  </button>
 
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
-                        <Award className="w-4 h-4 text-white" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Detail Performa {selected.kode}</h3>
-                        <p className="text-[10px] text-slate-400 font-medium truncate hidden sm:block">{selected.nama}</p>
-                      </div>
+                  {/* Desktop Title Header */}
+                  <div className="hidden lg:flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Detail Performa Prodi</h3>
+                      <p className="text-[10px] text-slate-400 font-medium truncate">{selected.nama}</p>
                     </div>
                   </div>
 
-                  <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-xs shrink-0">
-                    {selected.akreditasi}
+                  {/* Code Badge on Right (Matching Reference 20101152630045 Pill) */}
+                  <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
+                    {selected.kode}
                   </span>
                 </div>
 
                 <div className="p-4 overflow-y-auto flex-1 space-y-3.5 scrollbar-thin">
                   
-                  {/* Selected Header Card */}
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-xs">
-                          {selected.akreditasi}
-                        </span>
-                        <span className="font-mono text-xs font-black text-slate-400">PRODI {selected.kode}</span>
-                      </div>
-                      <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                        Status Aktif
-                      </span>
-                    </div>
-
-                    <div>
+                  {/* Selected Header Hero Card (Matching Reference Layout) */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3.5">
+                    <div className="space-y-1">
+                      <p className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Program Studi FIK</p>
                       <h4 className="text-base md:text-lg font-black text-slate-900 font-display leading-tight">{selected.nama}</h4>
-                      <p className="text-[11px] text-slate-500 font-medium mt-1">Ketua Program Studi: <strong className="text-slate-800 font-bold">{selected.kaprodi}</strong></p>
                     </div>
 
+                    {/* 4 Solid Stat Metric Boxes */}
                     <div className="grid grid-cols-2 gap-2.5 text-[10.5px]">
                       <div className="p-3 rounded-xl bg-[#C62828] text-white shadow-xs space-y-0.5">
                         <span className="text-[9px] text-white/80 font-bold uppercase font-display">Total Mahasiswa TA</span>
@@ -273,6 +263,26 @@ export default function DekanatProdiPage() {
                       <div className="p-3 rounded-xl bg-amber-500 text-white shadow-xs space-y-0.5">
                         <span className="text-[9px] text-white/80 font-bold uppercase font-display">Masa Studi Rata-Rata</span>
                         <p className="font-extrabold text-white font-mono text-base">{selected.durasi}</p>
+                      </div>
+                    </div>
+
+                    {/* Key-Value Details (Matching Reference Format) */}
+                    <div className="pt-2.5 border-t border-slate-100 space-y-2.5 text-xs">
+                      <div className="space-y-0.5">
+                        <p className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Ketua Program Studi</p>
+                        <p className="font-bold text-slate-800 font-display">{selected.kaprodi}</p>
+                      </div>
+                      <div className="flex items-center justify-between pt-1">
+                        <div className="space-y-0.5">
+                          <p className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Akreditasi BAN-PT</p>
+                          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                            {selected.akreditasi}
+                          </span>
+                        </div>
+                        <div className="space-y-0.5 text-right">
+                          <p className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Kelulusan Tahun Ini</p>
+                          <span className="font-extrabold font-mono text-emerald-700 text-xs">{selected.lulusTahunIni} Mahasiswa</span>
+                        </div>
                       </div>
                     </div>
                   </div>
