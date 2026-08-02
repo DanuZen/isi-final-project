@@ -19,7 +19,7 @@ const NAV = [
 
 export default function SuperAdminConfigPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState<"semua" | "akademik" | "repositori" | "keamanan" | "infra">("semua");
+  const [activeTab, setActiveTab] = useState<"akademik" | "repositori" | "keamanan" | "infra">("akademik");
 
   const [maintenance, setMaintenance] = useState(false);
   const [ssoEnforced, setSsoEnforced] = useState(true);
@@ -105,20 +105,8 @@ export default function SuperAdminConfigPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── 2. Card Section Navigation Pills (Matching Reference Style) ── */}
+            {/* ── 2. Card Section Navigation Pills (Direct 4 Cards Switcher) ── */}
             <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto scrollbar-none shrink-0 font-display touch-pan-x">
-              <button
-                onClick={() => setActiveTab("semua")}
-                className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
-                  activeTab === "semua"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <Settings className={`w-3.5 h-3.5 ${activeTab === "semua" ? "text-[#C62828]" : "text-slate-500"}`} />
-                <span>Semua Konfigurasi</span>
-              </button>
-
               <button
                 onClick={() => setActiveTab("akademik")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
@@ -172,11 +160,12 @@ export default function SuperAdminConfigPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               
               {/* Left Column (2/3): Academic, Repository, & Security Cards */}
-              <div className={`space-y-5 ${activeTab === "infra" ? "hidden lg:block lg:col-span-2" : "lg:col-span-2"}`}>
+              <div className="lg:col-span-2 space-y-5">
                 
                 {/* 1. Academic Rules Card */}
-                {(activeTab === "semua" || activeTab === "akademik") && (
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5 ${
+                  activeTab === "akademik" ? "block" : "hidden lg:block"
+                }`}>
                     <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <Settings className="w-4 h-4 text-white" />
@@ -226,107 +215,105 @@ export default function SuperAdminConfigPage() {
                       </div>
                     </div>
                   </div>
-                )}
 
                 {/* 2. Repository & Plagiarism Rules Card */}
-                {(activeTab === "semua" || activeTab === "repositori") && (
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
-                    <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                        <FileCheck className="w-4 h-4 text-white" />
-                      </div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">2. Pengaturan Repositori &amp; Similarity Checker</h2>
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5 ${
+                  activeTab === "repositori" ? "block" : "hidden lg:block"
+                }`}>
+                  <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <FileCheck className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className="font-bold text-sm text-slate-900 font-display">2. Pengaturan Repositori &amp; Similarity Checker</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 font-display">Batas Maksimal Plagiarisme / Similarity (%)</label>
+                      <input
+                        type="number"
+                        value={similarityThreshold}
+                        onChange={(e) => setSimilarityThreshold(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                      />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 font-display">Batas Maksimal Plagiarisme / Similarity (%)</label>
-                        <input
-                          type="number"
-                          value={similarityThreshold}
-                          onChange={(e) => setSimilarityThreshold(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
-                        />
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 font-display">Maksimal Ukuran Berkas Upload (MB)</label>
-                        <input
-                          type="number"
-                          value={maxFileSize}
-                          onChange={(e) => setMaxFileSize(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
-                        />
-                      </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 font-display">Maksimal Ukuran Berkas Upload (MB)</label>
+                      <input
+                        type="number"
+                        value={maxFileSize}
+                        onChange={(e) => setMaxFileSize(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                      />
                     </div>
                   </div>
-                )}
+                </div>
 
                 {/* 3. Automated Backup & Security Toggles Card */}
-                {(activeTab === "semua" || activeTab === "keamanan") && (
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
-                    <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                        <HardDrive className="w-4 h-4 text-white" />
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5 ${
+                  activeTab === "keamanan" ? "block" : "hidden lg:block"
+                }`}>
+                  <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <HardDrive className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className="font-bold text-sm text-slate-900 font-display">3. Backup Database &amp; Keamanan Server</h2>
+                  </div>
+
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 border border-slate-200 flex-wrap sm:flex-nowrap">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 font-display">Jadwal Backup Otomatis Database</p>
+                        <p className="text-[11px] text-slate-500 font-medium">{backupFreq}</p>
                       </div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">3. Backup Database &amp; Keamanan Server</h2>
+                      <button
+                        onClick={handleRunBackup}
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all flex items-center gap-1.5 shrink-0 font-display cursor-pointer"
+                      >
+                        <RefreshCw className={`w-3.5 h-3.5 text-white ${backupProgress ? "animate-spin" : ""}`} />
+                        <span>{backupProgress ? "Proses..." : "Backup Sekarang"}</span>
+                      </button>
                     </div>
 
-                    <div className="space-y-3.5">
-                      <div className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 border border-slate-200 flex-wrap sm:flex-nowrap">
-                        <div>
-                          <p className="text-xs font-bold text-slate-800 font-display">Jadwal Backup Otomatis Database</p>
-                          <p className="text-[11px] text-slate-500 font-medium">{backupFreq}</p>
-                        </div>
-                        <button
-                          onClick={handleRunBackup}
-                          className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all flex items-center gap-1.5 shrink-0 font-display cursor-pointer"
-                        >
-                          <RefreshCw className={`w-3.5 h-3.5 text-white ${backupProgress ? "animate-spin" : ""}`} />
-                          <span>{backupProgress ? "Proses..." : "Backup Sekarang"}</span>
-                        </button>
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 font-display">Mode Maintenance Sistem</p>
+                        <p className="text-[11px] text-slate-500 font-medium">Kunci akses publik aplikasi hanya untuk Super Admin</p>
                       </div>
+                      <button onClick={() => setMaintenance(!maintenance)} className="cursor-pointer">
+                        {maintenance ? <ToggleRight className="w-8 h-8 text-[#C62828]" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                      </button>
+                    </div>
 
-                      <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <div>
-                          <p className="text-xs font-bold text-slate-800 font-display">Mode Maintenance Sistem</p>
-                          <p className="text-[11px] text-slate-500 font-medium">Kunci akses publik aplikasi hanya untuk Super Admin</p>
-                        </div>
-                        <button onClick={() => setMaintenance(!maintenance)} className="cursor-pointer">
-                          {maintenance ? <ToggleRight className="w-8 h-8 text-[#C62828]" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                        </button>
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 font-display">Otentikasi SSO Terenkripsi</p>
+                        <p className="text-[11px] text-slate-500 font-medium">Wajibkan SSO login universitas untuk seluruh role</p>
                       </div>
+                      <button onClick={() => setSsoEnforced(!ssoEnforced)} className="cursor-pointer">
+                        {ssoEnforced ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                      </button>
+                    </div>
 
-                      <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <div>
-                          <p className="text-xs font-bold text-slate-800 font-display">Otentikasi SSO Terenkripsi</p>
-                          <p className="text-[11px] text-slate-500 font-medium">Wajibkan SSO login universitas untuk seluruh role</p>
-                        </div>
-                        <button onClick={() => setSsoEnforced(!ssoEnforced)} className="cursor-pointer">
-                          {ssoEnforced ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                        </button>
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 font-display">Notifikasi Email Otomatis</p>
+                        <p className="text-[11px] text-slate-500 font-medium">Kirim email otomatis saat terjadi perubahan status TA / SK</p>
                       </div>
-
-                      <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <div>
-                          <p className="text-xs font-bold text-slate-800 font-display">Notifikasi Email Otomatis</p>
-                          <p className="text-[11px] text-slate-500 font-medium">Kirim email otomatis saat terjadi perubahan status TA / SK</p>
-                        </div>
-                        <button onClick={() => setEmailNotif(!emailNotif)} className="cursor-pointer">
-                          {emailNotif ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                        </button>
-                      </div>
+                      <button onClick={() => setEmailNotif(!emailNotif)} className="cursor-pointer">
+                        {emailNotif ? <ToggleRight className="w-8 h-8 text-emerald-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                      </button>
                     </div>
                   </div>
-                )}
+                </div>
 
               </div>
 
               {/* Right Column (1/3): Summary & Status Card */}
-              {(activeTab === "semua" || activeTab === "infra") && (
-                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-6 flex flex-col justify-between space-y-5 ${
-                  activeTab === "infra" ? "lg:col-span-3" : "lg:col-span-1"
-                }`}>
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-6 flex flex-col justify-between space-y-5 lg:col-span-1 ${
+                activeTab === "infra" ? "block" : "hidden lg:flex"
+              }`}>
                   <div className="space-y-4">
                     
                     {/* Status Server Box */}
@@ -388,7 +375,6 @@ export default function SuperAdminConfigPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100">
                     <button
                       onClick={handleSave}
                       className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
@@ -396,9 +382,7 @@ export default function SuperAdminConfigPage() {
                       <Save className="w-4 h-4 text-white" />
                       <span>{savedSuccess ? "Berhasil Disimpan!" : "Simpan Semua Pengaturan"}</span>
                     </button>
-                  </div>
                 </div>
-              )}
 
             </div>
 
