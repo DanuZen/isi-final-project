@@ -149,13 +149,7 @@ export default function DekanatDashboard() {
                   <div key={s.label} className="bg-white p-3 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between space-x-2 md:space-x-3 hover:shadow-md transition-all">
                     <div className="space-y-0.5 md:space-y-1 min-w-0 flex-1">
                       <p className="text-[10px] md:text-[11px] font-bold text-slate-500 font-display leading-tight truncate">{s.label}</p>
-                      <div className="flex items-baseline space-x-1.5 md:space-x-2">
-                        <span className="text-xl sm:text-3xl font-black font-display tracking-tight" style={{ color: s.color }}>{s.value}</span>
-                        <span className={`text-[9.5px] md:text-[10px] font-bold flex items-center gap-0.5 ${s.trend.startsWith("+") ? "text-emerald-600" : "text-[#C62828]"}`}>
-                          {s.trend.startsWith("+") ? <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3" /> : <TrendingDown className="w-2.5 h-2.5 md:w-3 md:h-3" />}
-                          {s.trend}
-                        </span>
-                      </div>
+                      <p className="text-xl sm:text-3xl font-black font-display tracking-tight" style={{ color: s.color }}>{s.value}</p>
                       <p className="text-[9.5px] md:text-[10px] text-slate-400 font-semibold truncate">{s.sub}</p>
                     </div>
                     <div className={`w-9 h-9 md:w-11 md:h-11 rounded-xl ${s.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
