@@ -98,32 +98,6 @@ export default function DekanatStatistikPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Tab Navigation Pill Bar (Tahap TA vs KPI & Dosen) ── */}
-            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
-              <button
-                onClick={() => setActiveMobileTab("tahap")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
-                  activeMobileTab === "tahap"
-                    ? "bg-[#C62828] text-white shadow-xs"
-                    : "bg-white text-slate-600 border border-slate-200"
-                }`}
-              >
-                <BarChart2 className="w-3.5 h-3.5" />
-                <span>Tahap TA (248 Mhs)</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("kpi")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
-                  activeMobileTab === "kpi"
-                    ? "bg-[#C62828] text-white shadow-xs"
-                    : "bg-white text-slate-600 border border-slate-200"
-                }`}
-              >
-                <Target className="w-3.5 h-3.5" />
-                <span>KPI &amp; Dosen Top</span>
-              </button>
-            </div>
-
             {/* ── 2. 4 Top Overview Cards (2 Cols on Mobile) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4 shrink-0">
               {METRICS.map((m) => {
@@ -141,6 +115,32 @@ export default function DekanatStatistikPage() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
+              <button
+                onClick={() => setActiveMobileTab("tahap")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "tahap"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
+                }`}
+              >
+                <BarChart2 className="w-3.5 h-3.5" />
+                <span>Tahap TA (248 Mhs)</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("kpi")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "kpi"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
+                }`}
+              >
+                <Target className="w-3.5 h-3.5" />
+                <span>KPI &amp; Dosen Top</span>
+              </button>
             </div>
 
             {/* ── 3. Split 2-Column Grid (Fit To Layout 7/12 & 5/12) ── */}

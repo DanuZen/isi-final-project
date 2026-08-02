@@ -166,8 +166,8 @@ export default function DekanatDashboard() {
               })}
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Swipeable Segmented Control) ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto touch-pan-x scrollbar-none shrink-0 lg:hidden">
+            {/* ── Mobile Section Navigation Pills (Equal Width Segmented Control) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
               {[
                 { id: "rekap", label: "Rekap Angkatan", icon: Users },
                 { id: "bidang", label: "Bidang Kajian", icon: BarChart2 },
@@ -179,9 +179,9 @@ export default function DekanatDashboard() {
                   <button
                     key={tab.id}
                     onClick={() => setMobileTab(tab.id as any)}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold font-display whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer shrink-0 active:scale-95 ${
+                    className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-bold font-display whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${
                       isActive
-                        ? "bg-white text-[#C62828] shadow-xs"
+                        ? "bg-white text-[#C62828] shadow-xs font-extrabold"
                         : "text-slate-600 hover:text-slate-900 font-medium"
                     }`}
                   >
