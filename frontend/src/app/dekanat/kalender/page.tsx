@@ -275,9 +275,6 @@ export default function DekanatKalenderPage() {
                             if (eventsOnDay.length > 0) {
                               setSelectedEventId(eventsOnDay[0].id);
                             }
-                            if (typeof window !== "undefined" && window.innerWidth < 1024) {
-                              setActiveMobileTab("detail");
-                            }
                           }}
                           className={`p-1.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer relative min-h-[46px] md:min-h-[52px] ${
                             isSelected
@@ -312,6 +309,68 @@ export default function DekanatKalenderPage() {
                         </button>
                       );
                     })}
+                  </div>
+
+                  {/* ── Selected Day Agenda Quick List (Below Calendar Grid) ── */}
+                  <div className="mt-3 pt-3 border-t border-slate-100 space-y-2 shrink-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+                        <h3 className="font-bold text-xs text-slate-900 font-display">
+                          Agenda Tanggal {selectedDayNum} Agustus 2026
+                        </h3>
+                      </div>
+                      <span className="text-[10.5px] font-bold text-slate-500 font-mono">
+                        {dayEvents.length} Acara
+                      </span>
+                    </div>
+
+                    {dayEvents.length === 0 ? (
+                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center text-slate-400 text-xs font-medium">
+                        Tidak ada jadwal sidang / seminar pada tanggal ini.
+                      </div>
+                    ) : (
+                      <div className="space-y-2 max-h-[200px] overflow-y-auto scrollbar-thin">
+                        {dayEvents.map((ev) => {
+                          const isEvSelected = selectedEv?.id === ev.id;
+                          return (
+                            <div
+                              key={ev.id}
+                              onClick={() => {
+                                setSelectedEventId(ev.id);
+                                if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                                  setActiveMobileTab("detail");
+                                }
+                              }}
+                              className={`p-3 rounded-xl border text-xs transition-all cursor-pointer space-y-1.5 ${
+                                isEvSelected
+                                  ? "bg-rose-50/90 border-[#C62828] shadow-2xs"
+                                  : "bg-slate-50/80 border-slate-200/80 hover:bg-slate-100/80"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between gap-2">
+                                <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-extrabold text-white font-display ${
+                                  ev.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                                }`}>
+                                  {ev.jenis}
+                                </span>
+                                <span className="text-[10px] font-bold font-mono text-slate-500 flex items-center gap-1">
+                                  <Clock className="w-3 h-3 text-slate-400" />
+                                  {ev.waktu}
+                                </span>
+                              </div>
+
+                              <div className="space-y-0.5">
+                                <p className="font-extrabold text-slate-900 font-display">{ev.mhs} ({ev.nim})</p>
+                                <p className="text-[10.5px] text-slate-500 font-medium truncate">Prodi {ev.prodi} — <span className="font-semibold text-slate-700">{ev.ruang}</span></p>
+                              </div>
+
+                              <p className="text-[10.5px] text-slate-600 italic font-medium line-clamp-1">"{ev.judul}"</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
