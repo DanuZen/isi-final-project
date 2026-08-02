@@ -45,7 +45,7 @@ export default function DekanatKalenderPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filterJenis, setFilterJenis] = useState<string>("Semua");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [activeMobileTab, setActiveMobileTab] = useState<"calendar" | "detail">("calendar");
+  const [showMobileDetail, setShowMobileDetail] = useState<boolean>(false);
   const [selectedDayNum, setSelectedDayNum] = useState<number>(5);
   const [selectedEventId, setSelectedEventId] = useState<string>("");
 
@@ -152,38 +152,12 @@ export default function DekanatKalenderPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
-              <button
-                onClick={() => setActiveMobileTab("calendar")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "calendar"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <CalendarDays className="w-3.5 h-3.5" />
-                <span>Grid Kalender</span>
-              </button>
-              <button
-                onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  activeMobileTab === "detail"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
-                    : "text-slate-600 hover:text-slate-900 font-medium"
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Detail Agenda ({dayEvents.length})</span>
-              </button>
-            </div>
-
             {/* ── 2. Split 2-Column Card Layout (7/12 & 5/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 flex-1 min-h-0 items-stretch">
               
               {/* ── LEFT COLUMN (7/12): Month Calendar Grid ── */}
               <div className={`lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
-                activeMobileTab === "calendar" ? "block" : "hidden lg:flex"
+                showMobileDetail ? "hidden lg:flex" : "flex"
               }`}>
                 {/* Header + Dropdown Filter */}
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
@@ -338,9 +312,7 @@ export default function DekanatKalenderPage() {
                               key={ev.id}
                               onClick={() => {
                                 setSelectedEventId(ev.id);
-                                if (typeof window !== "undefined" && window.innerWidth < 1024) {
-                                  setActiveMobileTab("detail");
-                                }
+                                setShowMobileDetail(true);
                               }}
                               className={`p-3 rounded-xl border text-xs transition-all cursor-pointer space-y-1.5 ${
                                 isEvSelected
@@ -377,19 +349,34 @@ export default function DekanatKalenderPage() {
 
               {/* ── RIGHT COLUMN (5/12): Event Detail Panel ── */}
               <div className={`lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs flex-1 min-h-0 flex flex-col justify-between overflow-hidden ${
-                activeMobileTab === "detail" ? "block" : "hidden lg:flex"
+                showMobileDetail ? "flex" : "hidden lg:flex"
               }`}>
-                {/* Header */}
-                <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
-                  <div className="flex items-center gap-2.5 min-w-0">
+                {/* Header (Matching Reference Design) */}
+                <div className="p-3.5 md:p-4 border-b border-slate-100 flex items-center justify-between gap-3 shrink-0 bg-white">
+                  {/* Mobile Back Button (Matching Reference Pill ← Kembali) */}
+                  <button
+                    onClick={() => setShowMobileDetail(false)}
+                    className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <span>Kembali</span>
+                  </button>
+
+                  {/* Desktop Title Header */}
+                  <div className="hidden lg:flex items-center gap-2.5 min-w-0">
                     <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <FileText className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Agenda {selectedDayNum} Agustus 2026</h3>
-                      <p className="text-[9.5px] md:text-[10px] text-slate-400 font-medium truncate">{dayEvents.length} Jadwal Terdaftar</p>
+                      <h3 className="font-bold text-xs md:text-sm text-slate-900 font-display truncate">Detail Agenda Sidang</h3>
+                      <p className="text-[9.5px] md:text-[10px] text-slate-400 font-medium truncate">Tanggal {selectedDayNum} Agustus 2026</p>
                     </div>
                   </div>
+
+                  {/* Code Badge on Right (Matching Reference Pill) */}
+                  <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
+                    {selectedEv?.nim || "AGENDA"}
+                  </span>
                 </div>
 
                 {/* Day Events Selector List + Detailed Preview Card */}
