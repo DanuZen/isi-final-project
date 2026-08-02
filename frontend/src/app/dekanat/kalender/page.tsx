@@ -381,26 +381,6 @@ export default function DekanatKalenderPage() {
 
                 {/* Day Events Selector List + Detailed Preview Card */}
                 <div className="p-3.5 md:p-4 overflow-y-auto flex-1 space-y-3 scrollbar-thin">
-                  
-                  {/* Event selector pills if multiple on same day */}
-                  {dayEvents.length > 0 && (
-                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-                      {dayEvents.map((ev) => (
-                        <button
-                          key={ev.id}
-                          onClick={() => setSelectedEventId(ev.id)}
-                          className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-display whitespace-nowrap transition-all cursor-pointer ${
-                            selectedEv?.id === ev.id
-                              ? "bg-[#C62828] text-white shadow-2xs"
-                              : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                          }`}
-                        >
-                          {ev.mhs} ({ev.jenis})
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
                   {selectedEv ? (
                     <div className="space-y-3">
                       {/* Main Detail Card (Clean Light Theme) */}
