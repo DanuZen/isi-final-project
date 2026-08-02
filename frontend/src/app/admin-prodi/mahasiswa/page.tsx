@@ -194,15 +194,6 @@ export default function AdminProdiMahasiswaPage() {
                         </>
                       )}
                     </div>
-
-                    <button
-                      onClick={() => setShowAddModal(true)}
-                      title="Input Mahasiswa TA Baru"
-                      className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
-                    >
-                      <Plus className="w-4 h-4 text-white shrink-0" />
-                      <span className="hidden sm:inline">Input</span>
-                    </button>
                   </div>
                 </div>
 
@@ -324,108 +315,6 @@ export default function AdminProdiMahasiswaPage() {
           </main>
         </div>
       </div>
-
-      {/* MODAL INPUT MAHASISWA BARU */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
-                  <Plus className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm font-display text-white">Input Mahasiswa TA Baru</h3>
-                  <p className="text-[10.5px] text-slate-400 font-medium">Validasi &amp; Input Mandiri oleh Admin Prodi</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleCreateStudent} className="p-6 space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">NIM (Nomor Induk Mahasiswa) <span className="text-[#C62828]">*</span></label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: 20101152630310"
-                  value={formNim}
-                  onChange={(e) => setFormNim(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">Nama Lengkap Mahasiswa <span className="text-[#C62828]">*</span></label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: Muhammad Rizky"
-                  value={formNama}
-                  onChange={(e) => setFormNama(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">Judul Usulan Penelitian (Opsional)</label>
-                <input
-                  type="text"
-                  placeholder="Contoh: Sistem Informasi Monitoring Kinerja Dosen..."
-                  value={formJudul}
-                  onChange={(e) => setFormJudul(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">IPK Terakhir</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={formIpk}
-                    onChange={(e) => setFormIpk(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Total SKS Lulus</label>
-                  <input
-                    type="number"
-                    value={formSks}
-                    onChange={(e) => setFormSks(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all font-display cursor-pointer"
-                >
-                  Batal
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-white" />
-                  <span>Simpan Data Mahasiswa</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Floating Toast Notification */}
       {toastMessage && (
