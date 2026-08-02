@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  Search, Filter, Download, FileText, ArrowRight,
+  Search, Filter, Download, FileText, ArrowRight, ArrowLeft, ChevronDown, Check,
   CheckCircle2, Plus, X, XCircle
 } from "lucide-react";
 
@@ -50,6 +50,8 @@ export default function AdminProdiMahasiswaPage() {
   const [mahasiswaList, setMahasiswaList] = useState<MahasiswaItem[]>(INITIAL_MAHASISWA);
   const [search, setSearch] = useState("");
   const [filterTahap, setFilterTahap] = useState("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
   
   // Default selected 1st student
   const [selectedNim, setSelectedNim] = useState<string>("20101152630045");
@@ -120,10 +122,10 @@ export default function AdminProdiMahasiswaPage() {
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Manajemen Data Mahasiswa Tugas Akhir
+                    Selamat Datang
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Inputkan data mahasiswa baru hasil validasi clearing luring, pantau alur pendaftaran, penetapan pembimbing, hingga kelulusan.
+                    Database &amp; manajemen data mahasiswa Tugas Akhir prodi. Input data clearing, pantau alur pendaftaran, hingga kelulusan.
                   </p>
                 </div>
               </div>
@@ -142,36 +144,65 @@ export default function AdminProdiMahasiswaPage() {
               <div className="flex items-center gap-2 flex-wrap ml-auto">
                 <div className="relative">
                   <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input type="text" placeholder="Cari NIM, nama, judul..."
+                  <input type="text" placeholder="Cari NIM, nama..."
                     value={search} onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-48 font-display"
+                    className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-36 sm:w-48 font-display"
                   />
                 </div>
-                <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
-                  <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
-                  {["Semua", "Usulan", "Bimbingan", "Seminar", "Sidang", "Selesai"].map((f) => (
-                    <button key={f} onClick={() => setFilterTahap(f)}
-                      className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all font-display cursor-pointer"
-                      style={filterTahap === f ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                    >
-                      {f}
-                    </button>
-                  ))}
+
+                {/* Dropdown Filter */}
+                <div className="relative shrink-0 font-display">
+                  <button
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                    className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                      <span>{filterTahap}</span>
+                    </div>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  </button>
+
+                  {isFilterOpen && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                      <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[140px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                        {["Semua", "Usulan", "Bimbingan", "Seminar", "Sidang", "Selesai"].map((f) => (
+                          <button
+                            key={f}
+                            onClick={() => {
+                              setFilterTahap(f);
+                              setIsFilterOpen(false);
+                            }}
+                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                              filterTahap === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                            }`}
+                          >
+                            <span>{f}</span>
+                            {filterTahap === f && <Check className="w-3.5 h-3.5 text-white" />}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
+
                 <button
                   onClick={() => setShowAddModal(true)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs whitespace-nowrap active:scale-95"
                 >
-                  <Plus className="w-3.5 h-3.5 text-white" /> Input Mahasiswa
+                  <Plus className="w-3.5 h-3.5 text-white" /> Input
                 </button>
               </div>
             </div>
 
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
-              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto`}>
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
-                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex-col min-w-0 ${
+                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+              }`}>
+                <div className="overflow-y-auto overflow-x-auto flex-1 scrollbar-none pb-10">
+                  <table className="w-full text-xs min-w-[750px]">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["NIM", "Nama Mahasiswa", "Judul TA", "Pembimbing I", "Tahap", "IPK"].map((h) => (
@@ -186,11 +217,14 @@ export default function AdminProdiMahasiswaPage() {
                         return (
                           <tr
                             key={row.nim}
-                            onClick={() => setSelectedNim(row.nim)}
+                            onClick={() => {
+                              setSelectedNim(row.nim);
+                              setActiveMobileTab("detail");
+                            }}
                             className={`transition-all cursor-pointer select-none ${
                               isSelected
-                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
-                                : "hover:bg-slate-50"
+                                ? "bg-slate-100 font-bold"
+                                : "hover:bg-slate-50/60"
                             }`}
                           >
                             <td className="px-4 py-3.5 font-mono text-[10.5px] text-slate-500">{row.nim}</td>
@@ -213,12 +247,27 @@ export default function AdminProdiMahasiswaPage() {
 
               {/* Always Visible Detail Panel (Updates Live Based on Selected Row) */}
               {selected && (
-                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
+                <div className={`w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                }`}>
                   <div className="space-y-4 overflow-y-auto scrollbar-none">
-                    <div className="pb-3 border-b border-slate-100">
-                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa Selected</span>
-                      <h3 className="text-base font-black text-slate-900 font-display mt-0.5">{selected.nama}</h3>
-                      <p className="text-xs font-mono text-slate-400">{selected.nim}</p>
+                    <div className="pb-3 border-b border-slate-100 flex items-center justify-between gap-2">
+                      <button
+                        onClick={() => setActiveMobileTab("table")}
+                        className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                      >
+                        <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                        <span>Kembali</span>
+                      </button>
+
+                      <div className="hidden lg:block min-w-0">
+                        <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Mahasiswa</span>
+                        <h3 className="text-base font-black text-slate-900 font-display mt-0.5 truncate">{selected.nama}</h3>
+                      </div>
+
+                      <span className="text-[10px] sm:text-[10.5px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 shrink-0 ml-auto">
+                        {selected.nim}
+                      </span>
                     </div>
 
                     <div className="space-y-3">
