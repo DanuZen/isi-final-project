@@ -272,8 +272,8 @@ export default function SuperAdminDashboard() {
                     </div>
                   </div>
 
-                  <span className="font-mono text-xs font-black text-slate-600 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
-                    SYSTEM OK
+                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
+                    {selectedLog ? selectedLog.role : "Super Admin"}
                   </span>
                 </div>
 
