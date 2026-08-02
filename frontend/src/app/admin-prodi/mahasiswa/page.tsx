@@ -141,12 +141,12 @@ export default function AdminProdiMahasiswaPage() {
                 <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Mahasiswa Active ({filtered.length})</h2>
               </div>
 
-              <div className="flex items-center gap-2 flex-wrap ml-auto">
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input type="text" placeholder="Cari NIM, nama..."
+              <div className="flex items-center gap-2 w-full sm:w-auto ml-auto">
+                <div className="relative flex-1 min-w-0">
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input type="text" placeholder="Cari..."
                     value={search} onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-[12px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-36 sm:w-48 font-display"
+                    className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
                   />
                 </div>
 
@@ -154,13 +154,13 @@ export default function AdminProdiMahasiswaPage() {
                 <div className="relative shrink-0 font-display">
                   <button
                     onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                    className="flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                   >
-                    <div className="flex items-center gap-2">
-                      <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                    <div className="flex items-center gap-1.5">
+                      <Filter className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
                       <span>{filterTahap}</span>
                     </div>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                    <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
                   </button>
 
                   {isFilterOpen && (
@@ -189,9 +189,10 @@ export default function AdminProdiMahasiswaPage() {
 
                 <button
                   onClick={() => setShowAddModal(true)}
-                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs whitespace-nowrap active:scale-95"
+                  className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs whitespace-nowrap shrink-0 active:scale-95"
                 >
-                  <Plus className="w-3.5 h-3.5 text-white" /> Input
+                  <Plus className="w-3.5 h-3.5 text-white shrink-0" />
+                  <span>Input</span>
                 </button>
               </div>
             </div>
