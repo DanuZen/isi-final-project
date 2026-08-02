@@ -138,27 +138,32 @@ export default function AdminFakultasDashboard() {
               })}
             </div>
 
-            {/* ── Mobile Section Navigation Pills (Only on Mobile < lg) ── */}
-            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
+            {/* ── Mobile Section Navigation Pills (Segmented Control Design) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto scrollbar-none shrink-0 lg:hidden touch-pan-x">
               {[
-                { id: "all", label: "Semua Kartu" },
-                { id: "rekap", label: "Rekap Prodi" },
-                { id: "repositori", label: "Arsip Repositori" },
-                { id: "komposisi", label: "Komposisi SK" },
-                { id: "aktivitas", label: "Aktivitas" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setMobileTab(tab.id as any)}
-                  className={`px-3 py-1.5 rounded-full text-[11px] font-bold font-display whitespace-nowrap transition-all active:scale-95 cursor-pointer ${
-                    mobileTab === tab.id
-                      ? "bg-[#C62828] text-white shadow-2xs"
-                      : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+                { id: "all", label: "Semua", icon: Layers },
+                { id: "rekap", label: "Rekap Prodi", icon: BarChart3 },
+                { id: "repositori", label: "Arsip Repositori", icon: Archive },
+                { id: "komposisi", label: "Komposisi SK", icon: PieChart },
+                { id: "aktivitas", label: "Aktivitas", icon: Activity },
+              ].map((tab) => {
+                const IconComp = tab.icon;
+                const isActive = mobileTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setMobileTab(tab.id as any)}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold font-display whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer shrink-0 active:scale-95 ${
+                      isActive
+                        ? "bg-white text-[#C62828] shadow-xs"
+                        : "text-slate-600 hover:text-slate-900 font-medium"
+                    }`}
+                  >
+                    <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-[#C62828]" : "text-slate-500"}`} />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* ── 3. Main Content Grid ── */}
