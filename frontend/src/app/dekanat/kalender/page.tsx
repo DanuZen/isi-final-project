@@ -94,7 +94,7 @@ export default function DekanatKalenderPage() {
 
   const filteredEvents = sidangList.filter((ev) => filterJenis === "Semua" || ev.jenis === filterJenis);
   const dayEvents = filteredEvents.filter((ev) => ev.tglNum === selectedDayNum);
-  const selectedEv = sidangList.find((e) => e.id === selectedEventId) || dayEvents[0] || filteredEvents[0];
+  const selectedEv = dayEvents.find((e) => e.id === selectedEventId) || dayEvents[0];
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -373,12 +373,18 @@ export default function DekanatKalenderPage() {
                     </div>
                   </div>
 
-                  {/* Type Badge on Right (Solid Pill Badge) */}
-                  <span className={`text-[10.5px] font-extrabold text-white px-3 py-1 rounded-full shrink-0 shadow-2xs font-display ${
-                    selectedEv?.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
-                  }`}>
-                    {selectedEv?.jenis || "Ujian Sidang"}
-                  </span>
+                  {/* Type Badge on Right (Solid Pill Badge or 0 Agenda) */}
+                  {selectedEv ? (
+                    <span className={`text-[10.5px] font-extrabold text-white px-3 py-1 rounded-full shrink-0 shadow-2xs font-display ${
+                      selectedEv.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                    }`}>
+                      {selectedEv.jenis}
+                    </span>
+                  ) : (
+                    <span className="font-mono text-xs font-bold text-slate-400 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shrink-0 shadow-2xs">
+                      0 AGENDA
+                    </span>
+                  )}
                 </div>
 
                 {/* Day Events Selector List + Detailed Preview Card */}
@@ -448,10 +454,16 @@ export default function DekanatKalenderPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200 space-y-2">
-                      <CalendarDays className="w-8 h-8 text-slate-300 mx-auto" />
-                      <p className="text-xs font-bold text-slate-600 font-display">Tidak Ada Agenda pada Tanggal Ini</p>
-                      <p className="text-[10.5px] text-slate-400 font-medium max-w-xs mx-auto">Pilih tanggal bertanda merah/biru pada kalender untuk melihat detail jadwal.</p>
+                    <div className="p-8 text-center bg-slate-50/80 rounded-2xl border border-dashed border-slate-200 space-y-2.5 my-auto flex flex-col items-center justify-center min-h-[300px]">
+                      <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center shadow-2xs">
+                        <CalendarDays className="w-6 h-6 text-slate-400" />
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="font-bold text-sm text-slate-800 font-display">Tidak Ada Agenda Sidang</h4>
+                        <p className="text-xs text-slate-400 font-medium max-w-xs leading-relaxed">
+                          Tidak terdapat jadwal Ujian Sidang maupun Seminar Proposal pada tanggal <strong className="text-slate-700">{selectedDayNum} Agustus 2026</strong>.
+                        </p>
+                      </div>
                     </div>
                   )}
 
