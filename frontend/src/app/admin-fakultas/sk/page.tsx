@@ -64,7 +64,7 @@ export default function AdminFakultasSkPage() {
     setTimeout(() => setToastMessage(null), 5000);
   };
 
-  const handleAddSk = (e: React.FormEvent) => {
+  const handleAddSk = (e: React.FormEvent, statusTarget: "Pending" | "Diterbitkan" = "Diterbitkan") => {
     e.preventDefault();
     if (!formDosen.trim() || !formMahasiswa.trim()) return;
 
@@ -77,7 +77,7 @@ export default function AdminFakultasSkPage() {
       mahasiswa: formMahasiswa,
       nim: formNim || "20101152630099",
       tglPengajuan: "2 Agu 2026",
-      status: "Pending",
+      status: statusTarget,
     };
 
     setList([newItem, ...list]);
@@ -87,7 +87,11 @@ export default function AdminFakultasSkPage() {
     setFormNidn("");
     setFormMahasiswa("");
     setFormNim("");
-    setToastMessage(`Draft SK Baru ${newNoSk} atas nama ${formDosen} BERHASIL DIBUAT!`);
+    setToastMessage(
+      statusTarget === "Diterbitkan"
+        ? `SK Dekan ${newNoSk} atas nama ${formDosen} BERHASIL DITERBITKAN!`
+        : `Draft SK ${newNoSk} BERHASIL DISIMPAN SEBAGAI DRAFT!`
+    );
     setTimeout(() => setToastMessage(null), 5000);
   };
 
@@ -456,20 +460,28 @@ export default function AdminFakultasSkPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 flex-wrap">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all cursor-pointer"
+                  className="px-3.5 py-2.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all cursor-pointer font-display"
                 >
                   Batal
                 </button>
                 <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5"
+                  type="button"
+                  onClick={(e) => handleAddSk(e, "Pending")}
+                  className="px-4 py-2.5 rounded-xl font-bold bg-slate-800 text-white hover:bg-slate-900 transition-all cursor-pointer font-display shadow-xs active:scale-95 flex items-center gap-1.5"
                 >
-                  <Plus className="w-4 h-4 text-white" />
-                  <span>Simpan Draft SK Baru</span>
+                  <FileText className="w-3.5 h-3.5 text-white" />
+                  <span>Simpan Draft</span>
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5 font-display"
+                >
+                  <Check className="w-4 h-4 text-white" />
+                  <span>Simpan</span>
                 </button>
               </div>
             </form>
