@@ -105,17 +105,17 @@ export default function SuperAdminConfigPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── 2. Card Section Navigation Pills ── */}
-            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1.5 overflow-x-auto scrollbar-none shrink-0 font-display touch-pan-x">
+            {/* ── 2. Card Section Navigation Pills (Matching Reference Style) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto scrollbar-none shrink-0 font-display touch-pan-x">
               <button
                 onClick={() => setActiveTab("semua")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "semua"
-                    ? "bg-[#C62828] text-white shadow-xs font-extrabold"
-                    : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/60 font-medium"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <Settings className="w-3.5 h-3.5" />
+                <Settings className={`w-3.5 h-3.5 ${activeTab === "semua" ? "text-[#C62828]" : "text-slate-500"}`} />
                 <span>Semua Konfigurasi</span>
               </button>
 
@@ -123,48 +123,48 @@ export default function SuperAdminConfigPage() {
                 onClick={() => setActiveTab("akademik")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "akademik"
-                    ? "bg-[#C62828] text-white shadow-xs font-extrabold"
-                    : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/60 font-medium"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <FileCheck className="w-3.5 h-3.5" />
-                <span>1. Syarat Akademik</span>
+                <FileCheck className={`w-3.5 h-3.5 ${activeTab === "akademik" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <span>Syarat Akademik</span>
               </button>
 
               <button
                 onClick={() => setActiveTab("repositori")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "repositori"
-                    ? "bg-[#C62828] text-white shadow-xs font-extrabold"
-                    : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/60 font-medium"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <Database className="w-3.5 h-3.5" />
-                <span>2. Repositori &amp; Similarity</span>
+                <Database className={`w-3.5 h-3.5 ${activeTab === "repositori" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <span>Repositori &amp; Similarity</span>
               </button>
 
               <button
                 onClick={() => setActiveTab("keamanan")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "keamanan"
-                    ? "bg-[#C62828] text-white shadow-xs font-extrabold"
-                    : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/60 font-medium"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <HardDrive className="w-3.5 h-3.5" />
-                <span>3. Backup &amp; Keamanan</span>
+                <HardDrive className={`w-3.5 h-3.5 ${activeTab === "keamanan" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <span>Backup &amp; Keamanan</span>
               </button>
 
               <button
                 onClick={() => setActiveTab("infra")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "infra"
-                    ? "bg-[#C62828] text-white shadow-xs font-extrabold"
-                    : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/60 font-medium"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <Cpu className="w-3.5 h-3.5" />
-                <span>4. Infrastructure &amp; Status</span>
+                <Cpu className={`w-3.5 h-3.5 ${activeTab === "infra" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <span>Status Infrastructure</span>
               </button>
             </div>
 
