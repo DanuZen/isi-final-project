@@ -281,26 +281,6 @@ export default function AdminFakultasDashboard() {
                   </div>
                 </div>
 
-                {/* Side Panel 2: E-Signature Integrity Card */}
-                <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 text-white space-y-3 shadow-xs">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs font-bold text-emerald-400 font-display uppercase tracking-wider">Status Integrasi Dekan</span>
-                  </div>
-
-                  <div className="space-y-1">
-                    <h4 className="font-extrabold text-sm text-white font-display">Tanda Tangan Digital Aktif</h4>
-                    <p className="text-[11px] text-slate-300 font-medium leading-relaxed">
-                      Sistem terhubung secara otomatis ke portal pengesahan Dekan FIK (Prof. Dr. H. Zulherman).
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
-                    <span className="text-slate-400 font-medium">Versi Enkripsi:</span>
-                    <span className="font-mono font-bold text-white">SHA-256 Validated</span>
-                  </div>
-                </div>
-
               </div>
 
             </div>
