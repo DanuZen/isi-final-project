@@ -100,7 +100,7 @@ export default function AdminFakultasDashboard() {
                     Dashboard Administrasi &amp; Analitik Fakultas
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Selamat datang, Ibu Yanti. Terdapat <strong className="text-[#C62828] font-bold">9 SK Dekan</strong> menunggu penerbitan dari total <strong className="text-white font-bold">5 Program Studi</strong> FIK.
+                    Selamat datang, Ibu Yanti. Terdapat <strong className="text-[#C62828] font-bold">9 usulan SK</strong> dari <strong className="text-white font-bold">5 Program Studi</strong> FIK yang siap diverifikasi untuk penetapan Surat Keputusan (SK) Dekan.
                   </p>
                 </div>
 
