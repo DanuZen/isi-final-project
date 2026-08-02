@@ -165,11 +165,11 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/dekanat/laporan` — ✅ Sesuai (Single-Row Controls, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Category Badge, Solid Amber Otorisasi Card, Desktop 100% Utuh)
 
 ### ⚡ Portal Super Admin (5 Halaman — 5/5 Full Audited ✅)
-- [x] `/super-admin/dashboard` — ✅ Sesuai (Welcome Banner, Uppercase Stat Cards, Single-Row Controls, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
-- [x] `/super-admin/users` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
-- [x] `/super-admin/audit` — ✅ Sesuai (Welcome Banner, Single-Row Search, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
+- [x] `/super-admin/dashboard` — ✅ Sesuai (Welcome Banner, Uppercase Stat Cards, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Role Badge, Solid Emerald Auth Card, Desktop 100% Utuh)
+- [x] `/super-admin/users` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Role Badge, Solid Emerald Auth Card, Desktop 100% Utuh)
+- [x] `/super-admin/audit` — ✅ Sesuai (Welcome Banner, Single-Row Search, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Log ID Badge, Desktop 100% Utuh)
 - [x] `/super-admin/config` — ✅ Sesuai (Welcome Banner, Multi-Section Settings Grid, Realtime Save & Backup Progress, Desktop 100% Utuh)
-- [x] `/super-admin/master` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
+- [x] `/super-admin/master` — ✅ Sesuai (Welcome Banner, Integrated Header Controls, Row-Click Detail Trigger, Top-Left `← Kembali` Pill & Top-Right Kode Badge, Desktop 100% Utuh)
 
 ---
 
