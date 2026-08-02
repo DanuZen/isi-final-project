@@ -97,19 +97,19 @@ export default function DekanatStatistikPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── 2. 4 Top Overview Cards ── */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 shrink-0">
+            {/* ── 2. 4 Top Overview Cards (2 Cols on Mobile) ── */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4 shrink-0">
               {METRICS.map((m) => {
                 const IconComp = m.icon;
                 return (
-                  <div key={m.label} className="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between space-x-3 hover:shadow-md transition-all">
-                    <div className="space-y-1 min-w-0 flex-1">
-                      <p className="text-[11px] font-bold text-slate-500 font-display leading-tight">{m.label}</p>
-                      <p className="text-2xl sm:text-3xl font-black font-display tracking-tight" style={{ color: m.color }}>{m.value}</p>
-                      <p className="text-[10px] text-slate-400 font-semibold truncate">{m.sub}</p>
+                  <div key={m.label} className="bg-white p-3 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between space-x-2 md:space-x-3 hover:shadow-md transition-all">
+                    <div className="space-y-0.5 md:space-y-1 min-w-0 flex-1">
+                      <p className="text-[10px] md:text-[11px] font-bold text-slate-500 font-display leading-tight truncate">{m.label}</p>
+                      <p className="text-xl sm:text-3xl font-black font-display tracking-tight" style={{ color: m.color }}>{m.value}</p>
+                      <p className="text-[9.5px] md:text-[10px] text-slate-400 font-semibold truncate">{m.sub}</p>
                     </div>
-                    <div className={`w-11 h-11 rounded-xl ${m.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
-                      <IconComp className="w-5 h-5 text-white" />
+                    <div className={`w-9 h-9 md:w-11 md:h-11 rounded-xl ${m.bgIcon} text-white flex items-center justify-center shrink-0 shadow-xs font-bold`}>
+                      <IconComp className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                   </div>
                 );
