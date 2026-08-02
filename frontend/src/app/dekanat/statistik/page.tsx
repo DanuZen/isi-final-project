@@ -12,6 +12,7 @@ import {
 const NAV = [
   { label: "Dashboard Eksekutif",href: "/dekanat/dashboard",   icon: <LayoutDashboard className="w-4 h-4" /> },
   { label: "Statistik TA",       href: "/dekanat/statistik",   icon: <BarChart2 className="w-4 h-4" /> },
+  { label: "Komparasi Prodi",    href: "/dekanat/prodi",       icon: <Building2 className="w-4 h-4" /> },
   { label: "Kalender Sidang",    href: "/dekanat/kalender",    icon: <CalendarDays className="w-4 h-4" /> },
   { label: "Laporan Eksekutif",  href: "/dekanat/laporan",     icon: <FileDown className="w-4 h-4" /> },
 ];
@@ -139,7 +140,7 @@ export default function DekanatStatistikPage() {
                         <p className="text-[10px] text-slate-400 font-medium truncate">Persentase &amp; Progres Pengerjaan Tugas Akhir Mahasiswa FIK</p>
                       </div>
                     </div>
-                    <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-rose-50 text-[#C62828] border border-rose-200 font-display">
+                    <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-[#C62828] text-white font-display shadow-xs">
                       Total: 248 Mahasiswa
                     </span>
                   </div>
@@ -212,23 +213,31 @@ export default function DekanatStatistikPage() {
                 <div className="space-y-4">
                   
                   {/* KPI Target Header */}
-                  <div className="pb-3 border-b border-slate-100 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
-                        <Target className="w-3.5 h-3.5 text-white" />
+                  <div className="pb-3 border-b border-slate-100 space-y-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <Target className="w-4 h-4 text-white" />
                       </div>
-                      <h3 className="text-sm font-black text-slate-900 font-display">Target KPI Yudisium FIK</h3>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-bold text-slate-900 font-display truncate">Target KPI Yudisium FIK</h3>
+                        <p className="text-[10px] text-slate-400 font-medium truncate">Pencapaian &amp; Performa Dosen Pembimbing</p>
+                      </div>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                      Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-[#C62828] font-bold">92% dari target universitas</strong>.
-                    </p>
+                    <div className="p-3 rounded-xl bg-rose-50/70 border border-rose-200/80">
+                      <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                        Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-[#C62828] font-bold">92% dari target universitas</strong>.
+                      </p>
+                    </div>
                   </div>
 
                   {/* Top Supervisor List */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Pembimbing Terproduktif:</span>
-                      <span className="text-[10px] font-bold text-[#C62828] font-display">Top 3 FIK</span>
+                      <span className="text-[11px] font-bold text-slate-700 font-display flex items-center gap-1.5">
+                        <Award className="w-3.5 h-3.5 text-[#C62828]" />
+                        <span>Dosen Pembimbing Terproduktif</span>
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-[#C62828] border border-rose-200 font-display">Top 3 FIK</span>
                     </div>
 
                     <div className="space-y-2.5">

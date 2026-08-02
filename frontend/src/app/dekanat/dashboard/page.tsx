@@ -5,13 +5,14 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
-  LayoutDashboard, BarChart2, CalendarDays, FileDown,
+  LayoutDashboard, BarChart2, CalendarDays, FileDown, Building2,
   TrendingUp, TrendingDown, Users, Award, FileText, CheckCircle2, Clock
 } from "lucide-react";
 
 const NAV = [
   { label: "Dashboard Eksekutif",href: "/dekanat/dashboard",   icon: <LayoutDashboard className="w-4 h-4" /> },
   { label: "Statistik TA",       href: "/dekanat/statistik",   icon: <BarChart2 className="w-4 h-4" /> },
+  { label: "Komparasi Prodi",    href: "/dekanat/prodi",       icon: <Building2 className="w-4 h-4" /> },
   { label: "Kalender Sidang",    href: "/dekanat/kalender",    icon: <CalendarDays className="w-4 h-4" /> },
   { label: "Laporan Eksekutif",  href: "/dekanat/laporan",     icon: <FileDown className="w-4 h-4" /> },
 ];
