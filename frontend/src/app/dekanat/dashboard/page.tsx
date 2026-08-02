@@ -165,42 +165,44 @@ export default function DekanatDashboard() {
                   <h2 className="font-bold text-sm text-slate-900 font-display">Rekapitulasi Kelulusan per Angkatan</h2>
                 </div>
 
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-10">
-                  <table className="w-full text-xs">
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                      <tr>
-                        {["Angkatan", "Total TA", "Lulus", "Tingkat Lulus", "Rata-rata IPK", "Rata-rata Durasi"].map((h) => (
-                          <th key={h} className="px-5 py-3 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {REKAPITULASI.map((row) => {
-                        const pct = row.total > 0 ? Math.round((row.lulus / row.total) * 100) : 0;
-                        return (
-                          <tr key={row.angkatan} className="hover:bg-slate-50 transition-colors">
-                            <td className="px-5 py-3 font-black text-slate-900 font-display">{row.angkatan}</td>
-                            <td className="px-5 py-3 font-semibold text-slate-700">{row.total}</td>
-                            <td className="px-5 py-3 font-bold text-emerald-700">{row.lulus > 0 ? row.lulus : "—"}</td>
-                            <td className="px-5 py-3">
-                              {row.lulus > 0 ? (
-                                <div className="flex items-center gap-2">
-                                  <div className="flex-1 h-1.5 rounded-full bg-slate-100 max-w-[80px]">
-                                    <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${pct}%` }} />
+                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[850px] border-collapse">
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["Angkatan", "Total TA", "Lulus", "Tingkat Lulus", "Rata-rata IPK", "Rata-rata Durasi"].map((h) => (
+                            <th key={h} className="px-5 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {REKAPITULASI.map((row) => {
+                          const pct = row.total > 0 ? Math.round((row.lulus / row.total) * 100) : 0;
+                          return (
+                            <tr key={row.angkatan} className="hover:bg-slate-50 transition-colors">
+                              <td className="px-5 py-3.5 font-black text-slate-900 font-display">{row.angkatan}</td>
+                              <td className="px-5 py-3.5 font-semibold text-slate-700">{row.total}</td>
+                              <td className="px-5 py-3.5 font-bold text-emerald-700">{row.lulus > 0 ? row.lulus : "—"}</td>
+                              <td className="px-5 py-3.5">
+                                {row.lulus > 0 ? (
+                                  <div className="flex items-center gap-2">
+                                    <div className="flex-1 h-1.5 rounded-full bg-slate-100 max-w-[80px]">
+                                      <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${pct}%` }} />
+                                    </div>
+                                    <span className="font-bold text-emerald-700 text-[10.5px]">{pct}%</span>
                                   </div>
-                                  <span className="font-bold text-emerald-700 text-[10.5px]">{pct}%</span>
-                                </div>
-                              ) : (
-                                <span className="text-slate-400 font-medium">Dalam proses</span>
-                              )}
-                            </td>
-                            <td className="px-5 py-3 font-semibold text-slate-700">{row.ipkRata > 0 ? row.ipkRata.toFixed(2) : "—"}</td>
-                            <td className="px-5 py-3 text-slate-600">{row.durRata}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                                ) : (
+                                  <span className="text-slate-400 font-medium">Dalam proses</span>
+                                )}
+                              </td>
+                              <td className="px-5 py-3.5 font-semibold text-slate-700">{row.ipkRata > 0 ? row.ipkRata.toFixed(2) : "—"}</td>
+                              <td className="px-5 py-3.5 text-slate-600 font-mono">{row.durRata}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 

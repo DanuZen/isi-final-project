@@ -6,7 +6,8 @@ import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import {
   LayoutDashboard, BarChart2, CalendarDays, FileDown,
-  Download, FileText, ArrowRight, Search, Filter, ShieldCheck, CheckCircle2, Building2
+  Download, FileText, ArrowRight, Search, Filter, ShieldCheck, CheckCircle2, Building2,
+  ChevronDown, Check, ArrowLeft
 } from "lucide-react";
 
 const NAV = [
@@ -30,7 +31,7 @@ interface LaporanItem {
 const LAPORAN_LIST: LaporanItem[] = [
   {
     id: "LAP-2026-01",
-    nama: "Laporan Rekapitulasi Kelulusan TA Semester Genap 2025/2026",
+    nama: "Laporan Rekapitulasi Kelulusan TA Genap 2025/2026",
     kategori: "Kelulusan",
     periode: "Semester Genap 2025/2026",
     tgl: "28 Jul 2026",
@@ -38,7 +39,7 @@ const LAPORAN_LIST: LaporanItem[] = [
     deskripsi: "Rekapitulasi resmi tingkat kelulusan, rata-rata IPK kelulusan, serta persentase masa studi mahasiswa TA Fakultas Ilmu Komputer.",
     ringkasan: [
       "Total Lulusan Periode Ini: 89 Mahasiswa",
-      "Rata-rata IPK Kelulusan: 3.58 (Predikat Sangat Memuaskan & Cumlaude)",
+      "Rata-rata IPK Kelulusan: 3.58 (Cumlaude)",
       "Persentase Tepat Waktu (≤ 8 sem): 82.4%"
     ]
   },
@@ -52,22 +53,22 @@ const LAPORAN_LIST: LaporanItem[] = [
     deskripsi: "Laporan distribusional beban bimbingan dosen pembimbing 1 & 2 serta rasio kelulusan per dosen pembimbing.",
     ringkasan: [
       "Total Dosen Pembimbing Aktif: 42 Dosen",
-      "Rata-Rata Bimbingan per Dosen: 6.2 Mahasiswa",
-      "Dosen Terproduktif: Dr. Sarjon Defit, M.Sc. (12 Lulusan)"
+      "Rata-Rata Bimbingan: 6.2 Mahasiswa/Dosen",
+      "Dosen Terproduktif: Dr. Sarjon Defit (12 Lulusan)"
     ]
   },
   {
     id: "LAP-2025-04",
-    nama: "Laporan Evaluasi Rata-Rata Masalah Studi Mahasiswa TA 2025",
+    nama: "Laporan Evaluasi Rata-Rata Masalah Studi Mahasiswa 2025",
     kategori: "Evaluasi Studi",
     periode: "Tahun Akademik 2024/2025",
     tgl: "15 Des 2025",
     ukuran: "4.1 MB",
     deskripsi: "Evaluasi hambatan utama mahasiswa TA (revisi berulang, kendala biaya, kelengkapan berkas bebas fakultas).",
     ringkasan: [
-      "Faktor Utama Kendala: Keterlambatan Verifikasi Berkas Manual",
-      "Solusi Strategis Dekanat: Penerapan Bebas Fakultas & SK Dekan Digital",
-      "Prospek Efisiensi: Mempercepat Masa Studi 1.2 Bulan"
+      "Faktor Utama Kendala: Verifikasi Berkas Manual",
+      "Solusi Strategis: SK Dekan Digital Online",
+      "Prospek Efisiensi: Mempercepat Studi 1.2 Bulan"
     ]
   },
 ];
@@ -76,7 +77,9 @@ export default function DekanatLaporanPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [filterKat, setFilterKat] = useState("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>("LAP-2026-01");
+  const [activeMobileTab, setActiveMobileTab] = useState<"table" | "detail">("table");
 
   const filtered = LAPORAN_LIST.filter((item) => {
     const matchSearch =
@@ -128,126 +131,171 @@ export default function DekanatLaporanPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* Control Bar */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between gap-3 flex-wrap shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                  <FileText className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="font-bold text-sm text-slate-900 font-display">Arsip Laporan Eksekutif ({filtered.length})</h2>
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap ml-auto">
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    type="text"
-                    placeholder="Cari laporan..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] w-52 transition-all font-display"
-                  />
-                </div>
-                <div className="flex items-center gap-1 p-1 bg-slate-50 border border-slate-200 rounded-xl">
-                  <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5" />
-                  {["Semua", "Kelulusan", "Kinerja Dosen", "Evaluasi Studi"].map((k) => (
-                    <button
-                      key={k}
-                      onClick={() => setFilterKat(k)}
-                      className="px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all font-display cursor-pointer"
-                      style={filterKat === k ? { background: "#C62828", color: "white" } : { color: "#64748b" }}
-                    >
-                      {k}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
               {/* Table Container */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col min-w-0 overflow-x-auto">
-                <div className="overflow-y-auto flex-1 scrollbar-none pb-12">
-                  <table className="w-full text-xs min-w-[600px] lg:min-w-0">
-                    <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
-                      <tr>
-                        {["Kode", "Judul Laporan Eksekutif", "Kategori Laporan", "Program Studi", "Tgl Terbit", "Status SK/Dok"].map((h) => (
-                          <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {filtered.map((row) => {
-                        const isSelected = selected?.id === row.id;
-                        return (
-                          <tr
-                            key={row.id}
-                            onClick={() => setSelectedId(row.id)}
-                            className={`transition-all cursor-pointer select-none ${
-                              isSelected
-                                ? "bg-rose-50/70 border-l-4 border-l-[#C62828]"
-                                : "hover:bg-slate-50"
-                            }`}
-                          >
-                            <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900 whitespace-nowrap">{row.id}</td>
-                            <td className="px-4 py-3.5 font-bold text-slate-900 font-display max-w-xs">{row.nama}</td>
-                            <td className="px-4 py-3.5 whitespace-nowrap">
-                              <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
-                                {row.kategori}
-                              </span>
-                            </td>
-                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.periode}</td>
-                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-500 font-mono text-[11px] font-semibold">{row.ukuran}</td>
-                            <td className="px-4 py-3.5 whitespace-nowrap text-slate-500 text-[11px] font-medium">{row.tgl}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+              <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex-col min-w-0 ${
+                activeMobileTab === "table" ? "flex" : "hidden lg:flex"
+              }`}>
+                {/* Integrated Table Card Header + Controls */}
+                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-sm text-slate-900 font-display">Arsip Laporan Eksekutif</h2>
+                      <p className="text-[10px] text-slate-400 font-medium">{filtered.length} Dokumen Tersedia</p>
+                    </div>
+                  </div>
+
+                  {/* 1-Row Controls: Search Input + Animated Dropdown Filter */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-52 min-w-0">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        placeholder="Cari laporan..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      />
+                    </div>
+
+                    {/* Custom Animated Dropdown Filter */}
+                    <div className="relative shrink-0 font-display">
+                      <button
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        className="px-3 py-2 rounded-xl text-xs font-bold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs active:scale-95"
+                      >
+                        <Filter className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                        <span className="truncate max-w-[90px] sm:max-w-[120px]">{filterKat}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 shrink-0 ${isFilterOpen ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {isFilterOpen && (
+                        <>
+                          <div className="fixed inset-0 z-20" onClick={() => setIsFilterOpen(false)} />
+                          <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl border border-slate-200 shadow-xl z-30 p-1.5 space-y-1 animate-in fade-in zoom-in-95 duration-150">
+                            {["Semua", "Kelulusan", "Kinerja Dosen", "Evaluasi Studi"].map((k) => (
+                              <button
+                                key={k}
+                                onClick={() => {
+                                  setFilterKat(k);
+                                  setIsFilterOpen(false);
+                                }}
+                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                                  filterKat === k ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                }`}
+                              >
+                                <span>{k}</span>
+                                {filterKat === k && <Check className="w-3.5 h-3.5 text-white" />}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Table with Touch-Pan-X Smooth Container */}
+                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[850px] border-collapse">
+                      <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
+                        <tr>
+                          {["Kode", "Judul Laporan Eksekutif", "Kategori Laporan", "Periode Akademik", "Ukuran PDF", "Tgl Terbit"].map((h) => (
+                            <th key={h} className="px-4 py-3.5 text-left font-bold text-slate-500 text-[10.5px] uppercase tracking-wide whitespace-nowrap font-display">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filtered.map((row) => {
+                          const isSelected = selected?.id === row.id;
+                          return (
+                            <tr
+                              key={row.id}
+                              onClick={() => {
+                                setSelectedId(row.id);
+                                setActiveMobileTab("detail");
+                              }}
+                              className={`transition-all cursor-pointer select-none ${
+                                isSelected
+                                  ? "bg-slate-100 font-bold"
+                                  : "hover:bg-slate-50"
+                              }`}
+                            >
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900 whitespace-nowrap">{row.id}</td>
+                              <td className="px-4 py-3.5 font-bold text-slate-900 font-display">{row.nama}</td>
+                              <td className="px-4 py-3.5 whitespace-nowrap">
+                                <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                                  {row.kategori}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-700 font-medium">{row.periode}</td>
+                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-500 font-mono text-[11px] font-semibold">{row.ukuran}</td>
+                              <td className="px-4 py-3.5 whitespace-nowrap text-slate-500 text-[11px] font-medium">{row.tgl}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
-              {/* Live Side Detail Panel Card */}
+              {/* Side Detail Panel (Strict 350px Width Lock on Desktop) */}
               {selected && (
-                <div className="w-full lg:w-80 shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150">
-                  <div className="space-y-4 overflow-y-auto scrollbar-none">
+                <div className={`w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-col justify-between p-5 space-y-4 animate-in fade-in duration-150 ${
+                  activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+                }`}>
+                  <div className="space-y-4 overflow-y-auto scrollbar-none min-w-0">
                     
-                    <div className="pb-3 border-b border-slate-100 space-y-2">
+                    <div className="pb-3 border-b border-slate-100 space-y-2 min-w-0">
                       <div className="flex items-center justify-between gap-2">
+                        {/* Mobile Back Button */}
+                        <button
+                          onClick={() => setActiveMobileTab("table")}
+                          className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                        >
+                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                          <span>Kembali</span>
+                        </button>
+
                         <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
                           {selected.kategori}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400 font-semibold">{selected.id}</span>
+                        <span className="text-[10px] font-mono text-slate-400 font-semibold ml-auto">{selected.id}</span>
                       </div>
-                      <h3 className="text-sm font-black text-slate-900 font-display leading-snug">{selected.nama}</h3>
+                      <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words">{selected.nama}</h3>
                     </div>
 
-                    <div className="space-y-3 text-xs">
+                    <div className="space-y-3 text-xs min-w-0">
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide font-display mb-1">Deskripsi Dokumen</p>
                         <p className="text-slate-600 leading-relaxed font-medium">{selected.deskripsi}</p>
                       </div>
 
-                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 min-w-0">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Ringkasan Analitik PDF:</span>
                         <div className="space-y-1.5">
                           {selected.ringkasan.map((r, idx) => (
                             <div key={idx} className="flex items-start gap-2 text-[11px] text-slate-800 font-semibold leading-tight">
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                              <span>{r}</span>
+                              <span className="break-words">{r}</span>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 text-[11px] font-semibold space-y-1">
+                      <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 text-[11px] font-semibold space-y-1 min-w-0">
                         <div className="flex items-center gap-1.5 font-bold">
-                          <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
+                          <ShieldCheck className="w-3.5 h-3.5 text-amber-700 shrink-0" />
                           <span>Otorisasi Akses Dekanat</span>
                         </div>
-                        <p className="text-[10px] text-amber-800 font-medium">Dokumen ini disahkan oleh Dekan FIK Prof. Dr. H. Zulherman, M.T. &amp; berstempel resmi digital.</p>
+                        <p className="text-[10px] text-amber-800 font-medium leading-normal">Dokumen ini disahkan oleh Dekan FIK Prof. Dr. H. Zulherman, M.T. &amp; berstempel resmi digital.</p>
                       </div>
                     </div>
 

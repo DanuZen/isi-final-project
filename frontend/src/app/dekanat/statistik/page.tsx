@@ -156,8 +156,8 @@ export default function DekanatStatistikPage() {
                     </div>
                   </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs">
+                  <div className="overflow-x-auto w-full touch-pan-x min-w-0 scrollbar-thin">
+                    <table className="w-full text-xs min-w-[850px] border-collapse">
                       <thead className="bg-slate-50 border-b border-slate-100">
                         <tr>
                           {["Program Studi", "Total Mahasiswa TA", "Rata-Rata IPK", "Kelulusan Tepat Waktu", "Akreditasi / Predikat"].map((h) => (

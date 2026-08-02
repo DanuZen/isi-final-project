@@ -157,11 +157,11 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 - [x] `/admin-fakultas/sk` — ✅ Sesuai (+ Draft SK Button & Modal Form dengan Simpan/Draft, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 - [x] `/admin-fakultas/arsip` — ✅ Sesuai (+ Unggah Button & Modal Upload, Single-Row Filter Dropdown, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 
-### 📊 Portal Dekanat (4 Halaman)
-- [ ] `/dekanat/dashboard` — 🔄 Belum dicek
-- [ ] `/dekanat/statistik` — 🔄 Belum dicek
-- [ ] `/dekanat/kalender` — 🔄 Belum dicek
-- [ ] `/dekanat/laporan` — 🔄 Belum dicek
+### 📊 Portal Dekanat (4 Halaman — 4/4 Full Audited ✅)
+- [x] `/dekanat/dashboard` — ✅ Sesuai (Welcome Banner, Solid Icon Cards, Touch-Swipe Rekap Table min-w-[850px], Ringkasan Sidang, Desktop 100% Utuh)
+- [x] `/dekanat/statistik` — ✅ Sesuai (Descriptive Title, Tahap TA Progress Bar, Touch-Swipe Komparasi Prodi min-w-[850px], Desktop 100% Utuh)
+- [x] `/dekanat/kalender` — ✅ Sesuai (Single-Row Controls, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
+- [x] `/dekanat/laporan` — ✅ Sesuai (Single-Row Controls, Animated Dropdown Filter, 1-Tap Mobile `← Kembali`, Touch-Swipe min-w-[850px], Locked 350px Panel)
 
 ### ⚡ Portal Super Admin (5 Halaman)
 - [ ] `/super-admin/dashboard` — 🔄 Belum dicek
