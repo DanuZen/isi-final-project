@@ -130,11 +130,14 @@ export default function DekanatStatistikPage() {
                 {/* 1. Stage Progress Card */}
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <BarChart2 className="w-4 h-4 text-white" />
                       </div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Distribusi Mahasiswa Menurut Tahap TA</h2>
+                      <div className="min-w-0">
+                        <h2 className="font-bold text-sm text-slate-900 font-display truncate">Distribusi Mahasiswa Menurut Tahap TA</h2>
+                        <p className="text-[10px] text-slate-400 font-medium truncate">Persentase &amp; Progres Pengerjaan Tugas Akhir Mahasiswa FIK</p>
+                      </div>
                     </div>
                     <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-rose-50 text-[#C62828] border border-rose-200 font-display">
                       Total: 248 Mahasiswa
@@ -163,11 +166,14 @@ export default function DekanatStatistikPage() {
                 {/* 2. Program Studi Performance Comparison Table */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
                   <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <Building2 className="w-4 h-4 text-white" />
                       </div>
-                      <h2 className="font-bold text-sm text-slate-900 font-display">Komparasi Performa per Program Studi</h2>
+                      <div className="min-w-0">
+                        <h2 className="font-bold text-sm text-slate-900 font-display truncate">Komparasi Performa per Program Studi</h2>
+                        <p className="text-[10px] text-slate-400 font-medium truncate">Evaluasi Perbandingan IPK, Masa Studi &amp; Akreditasi Prodi</p>
+                      </div>
                     </div>
                   </div>
 
@@ -208,13 +214,13 @@ export default function DekanatStatistikPage() {
                   {/* KPI Target Header */}
                   <div className="pb-3 border-b border-slate-100 space-y-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold shadow-xs">
+                      <div className="w-7 h-7 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
                         <Target className="w-3.5 h-3.5 text-white" />
                       </div>
                       <h3 className="text-sm font-black text-slate-900 font-display">Target KPI Yudisium FIK</h3>
                     </div>
                     <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                      Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-emerald-700 font-bold">92% dari target universitas</strong>.
+                      Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-[#C62828] font-bold">92% dari target universitas</strong>.
                     </p>
                   </div>
 
