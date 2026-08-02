@@ -150,11 +150,11 @@ export default function AdminFakultasDashboard() {
               })}
             </div>
 
-            {/* ── Grid Content Section ── */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1 min-h-0 overflow-hidden">
+            {/* ── Main Split View (Flex-1 SK Table & Fixed 350px Side Panel) ── */}
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
-              {/* Tabel SK Dekan (2/3) */}
-              <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0">
+              {/* Tabel SK Dekan (Flex-1) */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0 flex-1 min-w-0">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
@@ -214,8 +214,8 @@ export default function AdminFakultasDashboard() {
               </div>
               </div>
 
-              {/* Bebas Fakultas Panel (1/3) */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0">
+              {/* Bebas Fakultas Panel (Strict 350px Width Lock on Desktop) */}
+              <div className="w-full lg:w-[350px] lg:min-w-[350px] lg:max-w-[350px] shrink-0 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col min-h-0">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
