@@ -152,14 +152,14 @@ export default function DekanatKalenderPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* ── Mobile Tab Navigation Pill Bar (Kalender vs Detail Agenda) ── */}
-            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
+            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
               <button
                 onClick={() => setActiveMobileTab("calendar")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeMobileTab === "calendar"
-                    ? "bg-[#C62828] text-white shadow-xs"
-                    : "bg-white text-slate-600 border border-slate-200"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
                 <CalendarDays className="w-3.5 h-3.5" />
@@ -167,10 +167,10 @@ export default function DekanatKalenderPage() {
               </button>
               <button
                 onClick={() => setActiveMobileTab("detail")}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-display flex items-center justify-center gap-1.5 transition-all ${
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeMobileTab === "detail"
-                    ? "bg-[#C62828] text-white shadow-xs"
-                    : "bg-white text-slate-600 border border-slate-200"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
                 <FileText className="w-3.5 h-3.5" />

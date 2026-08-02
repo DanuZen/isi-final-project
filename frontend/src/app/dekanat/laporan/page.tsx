@@ -147,6 +147,32 @@ export default function DekanatLaporanPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
+            {/* ── Mobile Section Navigation Pills (Equal 50% Width) ── */}
+            <div className="bg-slate-100/90 border border-slate-200/80 p-1.5 rounded-2xl flex items-center gap-1 shrink-0 lg:hidden font-display">
+              <button
+                onClick={() => setActiveMobileTab("table")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "table"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Tabel Laporan ({filtered.length})</span>
+              </button>
+              <button
+                onClick={() => setActiveMobileTab("detail")}
+                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeMobileTab === "detail"
+                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900 font-medium"
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Detail Laporan</span>
+              </button>
+            </div>
+
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               
