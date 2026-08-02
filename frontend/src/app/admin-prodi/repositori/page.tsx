@@ -296,11 +296,11 @@ export default function AdminProdiRepositoriPage() {
                         </span>
                       </div>
 
-                      <div className="space-y-1.5 pt-1 min-w-0">
-                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 font-display">
-                          {selected.bidang}
-                        </span>
+                      <div className="space-y-1 pt-1 min-w-0">
                         <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words">&ldquo;{selected.judul}&rdquo;</h3>
+                        <p className="text-[11px] font-semibold text-slate-500 font-display pt-0.5">
+                          Bidang Kajian: <span className="text-slate-800 font-bold">{selected.bidang}</span>
+                        </p>
                       </div>
                     </div>
 
