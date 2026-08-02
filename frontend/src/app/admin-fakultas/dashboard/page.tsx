@@ -151,16 +151,15 @@ export default function AdminFakultasDashboard() {
 
                 <Link
                   href="/admin-fakultas/sk"
-                  className="px-3 py-1.5 rounded-xl text-xs font-bold text-[#C62828] bg-rose-50 hover:bg-rose-100 transition-colors font-display flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all font-display flex items-center gap-1 cursor-pointer shrink-0 shadow-2xs active:scale-95 whitespace-nowrap"
                 >
-                  <span>Lihat Semua SK</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Semua SK</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-white" />
                 </Link>
               </div>
 
-              <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
-                <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
-                  <table className="w-full text-xs min-w-[850px] border-collapse">
+              <div className="overflow-x-auto overflow-y-auto w-full touch-pan-x flex-1 min-h-0 min-w-0 scrollbar-thin">
+                <table className="w-full text-xs min-w-[850px] border-collapse">
                     <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                       <tr>
                         {["No SK", "Jenis SK", "Nama Dosen", "NIDN", "Peruntukan Mahasiswa", "Tgl Pengajuan", "Status", "Aksi"].map((h) => (
@@ -213,7 +212,6 @@ export default function AdminFakultasDashboard() {
                   </table>
                 </div>
               </div>
-            </div>
 
           </main>
         </div>
