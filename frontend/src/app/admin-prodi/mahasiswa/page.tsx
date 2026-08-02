@@ -132,85 +132,82 @@ export default function AdminProdiMahasiswaPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
             </div>
 
-            {/* Control Bar */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs flex items-center justify-between gap-3 flex-wrap shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
-                  <Users className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Mahasiswa Active ({filtered.length})</h2>
-              </div>
-
-              <div className="flex items-center gap-2 w-full sm:w-auto ml-auto">
-                <div className="relative flex-1 min-w-0">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input type="text" placeholder="Cari..."
-                    value={search} onChange={(e) => setSearch(e.target.value)}
-                    className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
-                  />
-                </div>
-
-                {/* Dropdown Filter */}
-                <div className="relative shrink-0 font-display">
-                  <button
-                    onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    className="flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <Filter className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
-                      <span>{filterTahap}</span>
-                    </div>
-                    <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
-                  </button>
-
-                  {isFilterOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
-                      <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[140px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
-                        {["Semua", "Usulan", "Bimbingan", "Seminar", "Sidang", "Selesai"].map((f) => (
-                          <button
-                            key={f}
-                            onClick={() => {
-                              setFilterTahap(f);
-                              setIsFilterOpen(false);
-                            }}
-                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                              filterTahap === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
-                            }`}
-                          >
-                            <span>{f}</span>
-                            {filterTahap === f && <Check className="w-3.5 h-3.5 text-white" />}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => setShowAddModal(true)}
-                  title="Input Mahasiswa TA Baru"
-                  className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4 text-white shrink-0" />
-                  <span className="hidden sm:inline">Input</span>
-                </button>
-              </div>
-            </div>
-
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
               <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all flex-1 min-h-0 flex-col min-w-0 ${
                 activeMobileTab === "table" ? "flex" : "hidden lg:flex"
               }`}>
-                {/* Dedicated Mobile Touch-Swipe Container */}
-                <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
-                  {/* Swipe Hint Indicator on Mobile */}
-                  <div className="sm:hidden px-4 py-1.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-bold font-display shrink-0">
-                    <span>Geser tabel ke samping</span>
-                    <span className="font-mono text-[9px] bg-slate-200/70 px-1.5 py-0.5 rounded text-slate-600">← →</span>
+                
+                {/* ── Integrated Table Card Header & Controls ── */}
+                <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
+                  {/* Table Title + Icon */}
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <Users className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className="font-bold text-sm text-slate-900 font-display">Tabel Mahasiswa Active ({filtered.length})</h2>
                   </div>
 
+                  {/* 1-Row Controls: Search + Filter + Input */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-44 min-w-0">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input type="text" placeholder="Cari..."
+                        value={search} onChange={(e) => setSearch(e.target.value)}
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      />
+                    </div>
+
+                    {/* Dropdown Filter */}
+                    <div className="relative shrink-0 font-display">
+                      <button
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        className="flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <Filter className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
+                          <span>{filterTahap}</span>
+                        </div>
+                        <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
+                      </button>
+
+                      {isFilterOpen && (
+                        <>
+                          <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                          <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[140px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                            {["Semua", "Usulan", "Bimbingan", "Seminar", "Sidang", "Selesai"].map((f) => (
+                              <button
+                                key={f}
+                                onClick={() => {
+                                  setFilterTahap(f);
+                                  setIsFilterOpen(false);
+                                }}
+                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                                  filterTahap === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                }`}
+                              >
+                                <span>{f}</span>
+                                {filterTahap === f && <Check className="w-3.5 h-3.5 text-white" />}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => setShowAddModal(true)}
+                      title="Input Mahasiswa TA Baru"
+                      className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                    >
+                      <Plus className="w-4 h-4 text-white shrink-0" />
+                      <span className="hidden sm:inline">Input</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Dedicated Mobile Touch-Swipe Container */}
+                <div className="overflow-y-auto flex-1 flex flex-col min-h-0 scrollbar-none">
                   <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
                     <table className="w-full text-xs min-w-[750px] border-collapse">
                       <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">

@@ -5,7 +5,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import {
   LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  UserCheck, ShieldCheck, Search, Filter, CheckCircle2,
+  UserCheck, ShieldCheck, Search, Filter, CheckCircle2, ChevronDown, Check, ArrowLeft,
   Sparkles, X, Save, Edit3, Award, FileText
 } from "lucide-react";
 
@@ -93,6 +93,8 @@ export default function AdminProdiDosenPage() {
   const [dosenList, setDosenList] = useState<DosenItem[]>(INITIAL_DOSEN);
   const [search, setSearch] = useState("");
   const [filterRole, setFilterRole] = useState<string>("Semua");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeMobileTab, setActiveMobileTab] = useState<"list" | "detail">("list");
   const [selectedNidn, setSelectedNidn] = useState<string>("1012057301");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -186,31 +188,59 @@ export default function AdminProdiDosenPage() {
               <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828] absolute bottom-0 left-0 right-0" />
             </div>
 
-            {/* ── Filter Bar ── */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs shrink-0">
-              <div className="relative flex-1">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            {/* ── Filter Bar (Single Row Alignment) ── */}
+            <div className="flex items-center justify-between gap-2.5 bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs shrink-0">
+              <div className="relative flex-1 min-w-0">
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Cari Dosen berdasarkan Nama, NIDN, atau Bidang Keahlian..."
-                  className="w-full pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#C62828] font-display"
+                  placeholder="Cari NIDN, nama, bidang..."
+                  className="w-full pl-8 pr-3 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#C62828] font-display"
                 />
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-xs font-bold text-slate-500 font-display hidden sm:inline">Filter Role:</span>
-                <select
-                  value={filterRole}
-                  onChange={(e) => setFilterRole(e.target.value)}
-                  className="px-3 py-2 text-xs font-bold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#C62828] font-display cursor-pointer"
+              {/* Custom Animated Dropdown Filter */}
+              <div className="relative shrink-0 font-display">
+                <button
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className="flex items-center justify-between gap-2 px-3 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                 >
-                  <option value="Semua">Semua Penugasan</option>
-                  <option value="Pembimbing">Hanya Pembimbing</option>
-                  <option value="Penguji">Hanya Penguji</option>
-                  <option value="Dual">Pembimbing &amp; Penguji (Dual)</option>
-                </select>
+                  <div className="flex items-center gap-1.5">
+                    <Filter className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
+                    <span>{filterRole === "Semua" ? "Semua Penugasan" : filterRole}</span>
+                  </div>
+                  <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
+                </button>
+
+                {isFilterOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)} />
+                    <div className="absolute right-0 top-full mt-1.5 z-50 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 min-w-[160px] space-y-0.5 font-display animate-in fade-in zoom-in-95 duration-150">
+                      {[
+                        { label: "Semua Penugasan", val: "Semua" },
+                        { label: "Hanya Pembimbing", val: "Pembimbing" },
+                        { label: "Hanya Penguji", val: "Penguji" },
+                        { label: "Pembimbing & Penguji", val: "Dual" },
+                      ].map((opt) => (
+                        <button
+                          key={opt.val}
+                          onClick={() => {
+                            setFilterRole(opt.val);
+                            setIsFilterOpen(false);
+                          }}
+                          className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
+                            filterRole === opt.val ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                          }`}
+                        >
+                          <span>{opt.label}</span>
+                          {filterRole === opt.val && <Check className="w-3.5 h-3.5 text-white" />}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -218,7 +248,9 @@ export default function AdminProdiDosenPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
               
               {/* Left Column (8/12): Compact List View Dosen */}
-              <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col min-h-0 overflow-hidden">
+              <div className={`lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden flex-col ${
+                activeMobileTab === "list" ? "flex" : "hidden lg:flex"
+              }`}>
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
@@ -244,17 +276,20 @@ export default function AdminProdiDosenPage() {
                       return (
                         <div
                           key={d.nidn}
-                          onClick={() => setSelectedNidn(d.nidn)}
+                          onClick={() => {
+                            setSelectedNidn(d.nidn);
+                            setActiveMobileTab("detail");
+                          }}
                           className={`p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
                             isSelected
-                              ? "bg-rose-50/70 border-l-4 border-l-[#C62828] border-rose-200 shadow-2xs"
-                              : "bg-white border-slate-200/80 hover:bg-slate-50"
+                              ? "bg-slate-50 border-slate-300 shadow-2xs"
+                              : "bg-white border-slate-200/80 hover:bg-slate-50/60"
                           }`}
                         >
                           <div className="space-y-1 min-w-0 flex-1">
                             <div className="flex items-center gap-2 flex-wrap">
                               <h3 className="font-bold text-xs text-slate-900 font-display truncate">{d.nama}</h3>
-                              <span className="text-[10px] font-mono-data text-slate-400 font-semibold">({d.nidn})</span>
+                              <span className="text-[10px] font-mono text-slate-400 font-semibold">({d.nidn})</span>
                             </div>
                             <p className="text-[11px] text-slate-500 font-medium truncate">{d.jabatan} · {d.bidang}</p>
                           </div>
@@ -285,18 +320,28 @@ export default function AdminProdiDosenPage() {
               </div>
 
               {/* Right Column (4/12): Live Side Detail Panel Card */}
-              <div className="lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col min-h-0 overflow-hidden p-5 justify-between space-y-4">
+              <div className={`lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-2xs min-h-0 overflow-hidden p-5 justify-between space-y-4 flex-col ${
+                activeMobileTab === "detail" ? "flex flex-1" : "hidden lg:flex"
+              }`}>
                 <div className="space-y-4 overflow-y-auto scrollbar-none">
                   {/* Header Detail */}
-                  <div className="border-b border-slate-100 pb-3 space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display">
-                        NIDN: {selected.nidn}
-                      </span>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase font-display">{selected.jabatan}</span>
+                  <div className="border-b border-slate-100 pb-3 flex items-center justify-between gap-2">
+                    <button
+                      onClick={() => setActiveMobileTab("list")}
+                      className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                      <span>Kembali</span>
+                    </button>
+
+                    <div className="hidden lg:block space-y-0.5 min-w-0">
+                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Penugasan Dosen</span>
+                      <h2 className="text-sm font-black text-slate-900 font-display leading-tight truncate">{selected.nama}</h2>
                     </div>
-                    <h2 className="text-sm font-black text-slate-900 font-display leading-tight">{selected.nama}</h2>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{selected.bidang}</p>
+
+                    <span className="text-[10px] sm:text-[10.5px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-200/70 text-slate-700 shrink-0 ml-auto">
+                      NIDN: {selected.nidn}
+                    </span>
                   </div>
 
                   {/* ── Interactive Role Toggle Switches (Admin Control) ── */}
