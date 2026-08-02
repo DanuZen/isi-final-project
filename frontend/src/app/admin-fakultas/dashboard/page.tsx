@@ -287,35 +287,38 @@ export default function AdminFakultasDashboard() {
                     </div>
                   </div>
 
-                  {/* Donut Chart Visual Representation */}
-                  <div className="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="relative w-20 h-20 shrink-0 flex items-center justify-center">
+                  {/* Donut Chart Visual Representation (Centered Big Chart on Top, Legend Below) */}
+                  <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <div className="relative w-36 h-36 flex items-center justify-center my-1 shrink-0">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                        <path className="text-slate-200" strokeWidth="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <path className="text-[#C62828]" strokeDasharray="60, 100" strokeWidth="4" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <path className="text-blue-600" strokeDasharray="25, 100" strokeDashoffset="-60" strokeWidth="4" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path className="text-slate-200" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path className="text-[#C62828]" strokeDasharray="60, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path className="text-blue-600" strokeDasharray="25, 100" strokeDashoffset="-60" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       </svg>
-                      <span className="absolute font-black text-xs text-slate-900 font-mono">43 SK</span>
+                      <div className="absolute text-center">
+                        <p className="font-black text-xl text-slate-900 font-mono leading-none">43</p>
+                        <p className="text-[9.5px] font-bold text-slate-400 font-display uppercase tracking-widest mt-0.5">Total SK</p>
+                      </div>
                     </div>
 
-                    <div className="space-y-1.5 text-[11px] flex-1">
+                    <div className="w-full space-y-2 text-xs pt-2 border-t border-slate-200/70">
                       <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                          <span className="w-2 h-2 rounded-full bg-[#C62828]" /> SK Pembimbing
+                        <span className="flex items-center gap-2 font-bold text-slate-700">
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#C62828]" /> SK Pembimbing
                         </span>
-                        <strong className="font-mono text-slate-900">60%</strong>
+                        <strong className="font-mono text-slate-900 font-extrabold">60% <span className="text-[10.5px] text-slate-400 font-medium">(26 SK)</span></strong>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                          <span className="w-2 h-2 rounded-full bg-blue-600" /> SK Penguji
+                        <span className="flex items-center gap-2 font-bold text-slate-700">
+                          <span className="w-2.5 h-2.5 rounded-full bg-blue-600" /> SK Penguji
                         </span>
-                        <strong className="font-mono text-slate-900">25%</strong>
+                        <strong className="font-mono text-slate-900 font-extrabold">25% <span className="text-[10.5px] text-slate-400 font-medium">(11 SK)</span></strong>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                          <span className="w-2 h-2 rounded-full bg-slate-300" /> Draft SK
+                        <span className="flex items-center gap-2 font-bold text-slate-700">
+                          <span className="w-2.5 h-2.5 rounded-full bg-slate-300" /> Draft SK Concept
                         </span>
-                        <strong className="font-mono text-slate-900">15%</strong>
+                        <strong className="font-mono text-slate-900 font-extrabold">15% <span className="text-[10.5px] text-slate-400 font-medium">(6 SK)</span></strong>
                       </div>
                     </div>
                   </div>
