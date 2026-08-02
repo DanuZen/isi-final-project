@@ -165,10 +165,10 @@ export default function AdminProdiAktivasiPage() {
                     <button
                       onClick={() => setShowAddModal(true)}
                       title="Input Mahasiswa Baru"
-                      className="p-2.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                     >
                       <Plus className="w-4 h-4 text-white shrink-0" />
-                      <span className="hidden sm:inline">Input</span>
+                      <span>Tambah</span>
                     </button>
                   </div>
                 </div>
