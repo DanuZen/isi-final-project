@@ -205,9 +205,9 @@ export default function AdminProdiRepositoriPage() {
                     </div>
                   </div>
                 </div>
-                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col">
-                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0">
-                    <table className={`w-full text-xs min-w-[700px] border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
+                <div className="overflow-y-auto flex-1 scrollbar-none flex flex-col min-h-0">
+                  <div className="overflow-x-auto w-full touch-pan-x flex-1 min-w-0 scrollbar-thin">
+                    <table className={`w-full text-xs min-w-[850px] border-collapse ${filtered.length === 0 ? "h-full" : ""}`}>
                       <thead className="sticky top-0 bg-slate-50 border-b border-slate-100 z-10">
                         <tr>
                           {["Kode / Tahun", "Judul Skripsi Alumni", "Bidang Kajian", "Penulis (Alumni)", "Dosen Pembimbing"].map((h) => (
