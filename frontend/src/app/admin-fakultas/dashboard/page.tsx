@@ -51,6 +51,7 @@ const RECENT_LOGS = [
 
 export default function AdminFakultasDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [mobileTab, setMobileTab] = useState<"all" | "rekap" | "repositori" | "komposisi" | "aktivitas">("all");
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -137,14 +138,39 @@ export default function AdminFakultasDashboard() {
               })}
             </div>
 
-            {/* ── 3. Main Content (Responsive: Scrollable on Mobile, Fit-to-Layout on Desktop) ── */}
+            {/* ── Mobile Section Navigation Pills (Only on Mobile < lg) ── */}
+            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5 shrink-0 lg:hidden touch-pan-x">
+              {[
+                { id: "all", label: "Semua Kartu" },
+                { id: "rekap", label: "Rekap Prodi" },
+                { id: "repositori", label: "Arsip Repositori" },
+                { id: "komposisi", label: "Komposisi SK" },
+                { id: "aktivitas", label: "Aktivitas" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setMobileTab(tab.id as any)}
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-bold font-display whitespace-nowrap transition-all active:scale-95 cursor-pointer ${
+                    mobileTab === tab.id
+                      ? "bg-[#C62828] text-white shadow-2xs"
+                      : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* ── 3. Main Content Grid ── */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 flex-1 min-h-0 items-stretch">
               
               {/* Left Column (2/3 Width on Desktop): Rekap Table + Rich Repository Cards */}
               <div className="lg:col-span-2 flex flex-col justify-between space-y-3.5 min-h-0 flex-1">
                 
                 {/* 3A. Card Rekapitulasi SK & Bar Chart Per Prodi */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 min-h-0 flex flex-col justify-between ${
+                  mobileTab === "all" || mobileTab === "rekap" ? "block" : "hidden lg:flex"
+                }`}>
                   <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
                       <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
@@ -206,7 +232,9 @@ export default function AdminFakultasDashboard() {
                 </div>
 
                 {/* 3B. Card Ringkasan Repositori Dokumen Terkini (Rich Preview Cards) */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-5 flex flex-col space-y-3 md:space-y-3.5 shrink-0">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-5 flex flex-col space-y-3 md:space-y-3.5 shrink-0 ${
+                  mobileTab === "all" || mobileTab === "repositori" ? "block" : "hidden lg:flex"
+                }`}>
                   <div className="flex items-center justify-between pb-2.5 md:pb-3 border-b border-slate-100 shrink-0 gap-2 min-w-0">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
                       <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
@@ -308,7 +336,9 @@ export default function AdminFakultasDashboard() {
               <div className="flex flex-col justify-between space-y-3.5 min-h-0 flex-1">
                 
                 {/* 3C. Donut/Pie Analytics Widget */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 shrink-0">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 shrink-0 ${
+                  mobileTab === "all" || mobileTab === "komposisi" ? "block" : "hidden lg:block"
+                }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
                     <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                       <PieChart className="w-3.5 h-3.5 text-white" />
@@ -357,7 +387,9 @@ export default function AdminFakultasDashboard() {
                 </div>
 
                 {/* 3D. Activity Log Stream */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 flex-1 min-h-0 flex flex-col justify-between">
+                <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 md:p-4 space-y-3 flex-1 min-h-0 flex flex-col justify-between ${
+                  mobileTab === "all" || mobileTab === "aktivitas" ? "block" : "hidden lg:flex"
+                }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100 shrink-0">
                     <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                       <Activity className="w-3.5 h-3.5 text-white" />
