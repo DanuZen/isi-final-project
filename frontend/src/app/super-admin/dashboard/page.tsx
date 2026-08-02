@@ -331,31 +331,6 @@ export default function SuperAdminDashboard() {
                       ))}
                     </div>
                   </div>
-
-                  {/* 3. System Health & Backup Status (Solid Colors) */}
-                  <div className="p-3.5 rounded-2xl bg-slate-900 text-white shadow-xs space-y-2.5">
-                    <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
-                      <div className="flex items-center gap-1.5">
-                        <HardDrive className="w-4 h-4 text-emerald-400" />
-                        <h5 className="font-bold text-xs text-white font-display">Status Server &amp; Database</h5>
-                      </div>
-                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded-full">
-                        ONLINE
-                      </span>
-                    </div>
-
-                    <div className="space-y-1.5 text-[11px] text-slate-300 font-medium">
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-neutral-800/80 border border-neutral-700/80">
-                        <span className="text-[10px] text-neutral-400 font-bold font-display">Mode Maintenance</span>
-                        <span className="font-bold text-emerald-400 font-display">Nonaktif (Normal)</span>
-                      </div>
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-neutral-800/80 border border-neutral-700/80">
-                        <span className="text-[10px] text-neutral-400 font-bold font-display">Backup Terakhir</span>
-                        <span className="font-bold text-white font-mono text-[10.5px]">Hari ini 00:00 WIB</span>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
 
                 {/* Footer Link */}
