@@ -78,7 +78,7 @@ export default function AdminFakultasDashboard() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-3 md:p-5 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
+          <main className="flex-1 px-3 py-3 md:p-5 pt-16 md:pt-5 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
             
             {/* ── 1. Welcome Banner (Standard Page Banner) ── */}
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
