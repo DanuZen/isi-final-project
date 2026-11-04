@@ -135,7 +135,7 @@ export default function AdminFakultasSkPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <FileText className="w-3.5 h-3.5 text-white" /> Generasi SK Dekan Resmi
                     </span>
                   </div>
@@ -150,14 +150,14 @@ export default function AdminFakultasSkPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-fakultas/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Dashboard Dekanat</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* Grid layout with Detail Side Panel */}
@@ -170,7 +170,7 @@ export default function AdminFakultasSkPage() {
                 {/* Integrated Table Card Header + Controls */}
                 <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 shrink-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <FileText className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -188,7 +188,7 @@ export default function AdminFakultasSkPage() {
                         placeholder="Cari No SK, Dosen, Mahasiswa..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all w-full font-display"
                       />
                     </div>
 
@@ -215,7 +215,7 @@ export default function AdminFakultasSkPage() {
                                   setIsFilterOpen(false);
                                 }}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                  filterJenis === j ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                  filterJenis === j ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                                 }`}
                               >
                                 <span>{j}</span>
@@ -231,7 +231,7 @@ export default function AdminFakultasSkPage() {
                     <button
                       onClick={() => setShowAddModal(true)}
                       title="Input Draft SK Baru"
-                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                     >
                       <Plus className="w-4 h-4 text-white shrink-0" />
                       <span>Draft SK</span>
@@ -266,9 +266,9 @@ export default function AdminFakultasSkPage() {
                                   : "hover:bg-slate-50"
                               }`}
                             >
-                              <td className="px-4 py-3.5 font-mono font-bold text-[#C62828] whitespace-nowrap">{row.noSk}</td>
+                              <td className="px-4 py-3.5 font-mono font-bold text-[#2563eb] whitespace-nowrap">{row.noSk}</td>
                               <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white shadow-2xs font-display">
+                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2563eb] text-white shadow-2xs font-display">
                                   {row.jenis}
                                 </span>
                               </td>
@@ -310,16 +310,16 @@ export default function AdminFakultasSkPage() {
                           onClick={() => setActiveMobileTab("table")}
                           className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                         >
-                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                          <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>Kembali</span>
                         </button>
 
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#2563eb] text-white font-display shadow-2xs">
                           {selected.jenis}
                         </span>
                         <span className="text-[10px] font-mono text-slate-400 font-semibold ml-auto">{selected.tglPengajuan}</span>
                       </div>
-                      <span className="text-xs font-mono font-black text-[#C62828] block pt-1">{selected.noSk}</span>
+                      <span className="text-xs font-mono font-black text-[#2563eb] block pt-1">{selected.noSk}</span>
                       <h3 className="text-sm font-black text-slate-900 font-display leading-snug">Dokumen Surat Keputusan Dekan</h3>
                     </div>
 
@@ -340,10 +340,10 @@ export default function AdminFakultasSkPage() {
                       <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 min-w-0">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Legalitas Penandatangan:</span>
                         <div className="flex items-center gap-2">
-                          <Building2 className="w-4 h-4 text-[#C62828] shrink-0" />
+                          <Building2 className="w-4 h-4 text-[#2563eb] shrink-0" />
                           <span className="font-bold text-slate-800 text-[11px] font-display">Dr. H. Jasmir, M.Kom.</span>
                         </div>
-                        <p className="text-[10px] text-slate-500 font-medium">Dekan Fakultas Ilmu Komputer UPI YPTK</p>
+                        <p className="text-[10px] text-slate-500 font-medium">Dekan Fakultas Ilmu Komputer PT MBOIS</p>
                       </div>
 
                       <div>
@@ -365,7 +365,7 @@ export default function AdminFakultasSkPage() {
                     {selected.status === "Pending" ? (
                       <button
                         onClick={() => handleGenerate(selected.noSk, selected.dosen, selected.mahasiswa)}
-                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
                       >
                         <FileCheck className="w-4 h-4 text-white" />
                         <span>Generate &amp; Terbitkan SK Dekan</span>
@@ -396,7 +396,7 @@ export default function AdminFakultasSkPage() {
             {/* Header Modal */}
             <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                   <FileText className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -419,7 +419,7 @@ export default function AdminFakultasSkPage() {
                 <select
                   value={formJenis}
                   onChange={(e) => setFormJenis(e.target.value as "SK Pembimbing" | "SK Penguji")}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-bold text-slate-800 cursor-pointer"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb] font-bold text-slate-800 cursor-pointer"
                 >
                   <option value="SK Pembimbing">SK Pembimbing Tugas Akhir</option>
                   <option value="SK Penguji">SK Penguji Seminar/Sidang</option>
@@ -435,7 +435,7 @@ export default function AdminFakultasSkPage() {
                     placeholder="Contoh: Dr. Sarjon Defit"
                     value={formDosen}
                     onChange={(e) => setFormDosen(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828]"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -445,7 +445,7 @@ export default function AdminFakultasSkPage() {
                     placeholder="Contoh: 1098765432"
                     value={formNidn}
                     onChange={(e) => setFormNidn(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono"
                   />
                 </div>
               </div>
@@ -459,7 +459,7 @@ export default function AdminFakultasSkPage() {
                     placeholder="Contoh: Danu Zen"
                     value={formMahasiswa}
                     onChange={(e) => setFormMahasiswa(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828]"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -469,7 +469,7 @@ export default function AdminFakultasSkPage() {
                     placeholder="Contoh: 20101152630045"
                     value={formNim}
                     onChange={(e) => setFormNim(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono"
                   />
                 </div>
               </div>
@@ -492,7 +492,7 @@ export default function AdminFakultasSkPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5 font-display"
+                  className="px-5 py-2.5 rounded-xl font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5 font-display"
                 >
                   <Check className="w-4 h-4 text-white" />
                   <span>Simpan</span>

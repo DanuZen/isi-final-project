@@ -21,8 +21,8 @@ const NAV = [
 const STATS = [
   { label: "Total User Sistem",    value: "412",    sub: "Akun Mahasiswa & Dosen",  bgIcon: "bg-amber-500",   icon: Users },
   { label: "Master Program Studi", value: "14",     sub: "Prodi Reference Aktif",    bgIcon: "bg-blue-600",    icon: Database },
-  { label: "Audit Log 24 Jam",     value: "1,092",  sub: "Log Keamanan & Sesi",     bgIcon: "bg-[#C62828]",   icon: ClipboardList },
-  { label: "Status Server & DB",   value: "99.9%",  sub: "Core SIPETA Online",       bgIcon: "bg-emerald-600", icon: CheckCircle2 },
+  { label: "Audit Log 24 Jam",     value: "1,092",  sub: "Log Keamanan & Sesi",     bgIcon: "bg-[#2563eb]",   icon: ClipboardList },
+  { label: "Status Server & DB",   value: "99.9%",  sub: "Core Final Project Online",       bgIcon: "bg-emerald-600", icon: CheckCircle2 },
 ];
 
 interface AuditLogSummary {
@@ -46,7 +46,7 @@ const RECENT_LOGS: AuditLogSummary[] = [
 ];
 
 const USER_ROLES_RECAP = [
-  { role: "Mahasiswa", count: 310, percent: "75%", color: "bg-[#C62828]" },
+  { role: "Mahasiswa", count: 310, percent: "75%", color: "bg-[#2563eb]" },
   { role: "Dosen Pembimbing & Penguji", count: 84, percent: "20%", color: "bg-blue-600" },
   { role: "Admin Prodi & Fakultas", count: 12, percent: "3%", color: "bg-amber-500" },
   { role: "Dekanat & Super Admin", count: 6, percent: "2%", color: "bg-emerald-600" },
@@ -79,7 +79,7 @@ export default function SuperAdminDashboard() {
           userName="Irvan Syahputra, S.T."
           userNim="SA-001"
           roleName="Super Admin"
-          prodiName="Sistem Utama SIPETA"
+          prodiName="PT MBOIS - Final Project"
         />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
@@ -90,7 +90,7 @@ export default function SuperAdminDashboard() {
             userName="Irvan Syahputra, S.T."
             userNim="SA-001"
             userRole="Super Admin"
-            prodiName="Sistem Utama SIPETA"
+            prodiName="PT MBOIS - Final Project"
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
@@ -101,12 +101,12 @@ export default function SuperAdminDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <ShieldCheck className="w-3.5 h-3.5 text-white" /> Executive Summary Control Center
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Rekapitulasi Utama Sistem SIPETA UPI YPTK
+                    Rekapitulasi Utama PT MBOIS - Final Project PT MBOIS
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Rangkuman performa sistem, rekapitulasi data pengguna, catatan jejak audit log, serta status kesehatan server &amp; database terpusat.
@@ -116,7 +116,7 @@ export default function SuperAdminDashboard() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/super-admin/users"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <UserCog className="w-4 h-4 text-white" />
                     <span>Manajemen User</span>
@@ -130,7 +130,7 @@ export default function SuperAdminDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. Executive Stat Cards (4 Cards) ── */}
@@ -164,7 +164,7 @@ export default function SuperAdminDashboard() {
                 {/* Header + Search */}
                 <div className="p-3.5 md:p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <ClipboardList className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -181,7 +181,7 @@ export default function SuperAdminDashboard() {
                         placeholder="Cari log..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-7 pr-2 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                        className="pl-7 pr-2 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all w-full font-display"
                       />
                     </div>
                     <Link
@@ -207,7 +207,7 @@ export default function SuperAdminDashboard() {
                         }}
                         className={`p-3 rounded-xl border text-xs transition-all cursor-pointer space-y-1.5 ${
                           isSelected
-                            ? "bg-rose-50/90 border-[#C62828] shadow-2xs"
+                            ? "bg-blue-50/90 border-[#2563eb] shadow-2xs"
                             : "bg-slate-50/80 border-slate-200/80 hover:bg-slate-100/80"
                         }`}
                       >
@@ -219,7 +219,7 @@ export default function SuperAdminDashboard() {
                             <span className="text-[10px] font-mono text-slate-400 font-medium">{log.time}</span>
                           </div>
                           <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold text-white font-display ${
-                            log.role === "Super Admin" ? "bg-slate-900" : "bg-[#C62828]"
+                            log.role === "Super Admin" ? "bg-slate-900" : "bg-[#2563eb]"
                           }`}>
                             {log.role}
                           </span>
@@ -239,10 +239,10 @@ export default function SuperAdminDashboard() {
                   <span className="text-[10.5px] text-slate-500 font-medium">Menampilkan 5 log aktivitas terkini</span>
                   <Link
                     href="/super-admin/audit"
-                    className="text-[11px] font-extrabold text-[#C62828] hover:underline font-display flex items-center gap-1"
+                    className="text-[11px] font-extrabold text-[#2563eb] hover:underline font-display flex items-center gap-1"
                   >
                     <span>Lihat Seluruh Log Keamanan</span>
-                    <ArrowRight className="w-3 h-3 text-[#C62828]" />
+                    <ArrowRight className="w-3 h-3 text-[#2563eb]" />
                   </Link>
                 </div>
               </div>
@@ -258,12 +258,12 @@ export default function SuperAdminDashboard() {
                     onClick={() => setShowMobileDetail(false)}
                     className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Activity className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -272,7 +272,7 @@ export default function SuperAdminDashboard() {
                     </div>
                   </div>
 
-                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
+                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#2563eb] text-white font-display shadow-2xs ml-auto">
                     {selectedLog ? selectedLog.role : "Super Admin"}
                   </span>
                 </div>
@@ -309,10 +309,10 @@ export default function SuperAdminDashboard() {
                   <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5">
                     <div className="flex items-center justify-between pb-1.5 border-b border-slate-100">
                       <div className="flex items-center gap-1.5">
-                        <Users className="w-4 h-4 text-[#C62828]" />
+                        <Users className="w-4 h-4 text-[#2563eb]" />
                         <h5 className="font-bold text-xs text-slate-900 font-display">Distribusi Akun per Role</h5>
                       </div>
-                      <Link href="/super-admin/users" className="text-[10.5px] font-bold text-[#C62828] hover:underline font-display">
+                      <Link href="/super-admin/users" className="text-[10.5px] font-bold text-[#2563eb] hover:underline font-display">
                         Kelola →
                       </Link>
                     </div>
@@ -337,7 +337,7 @@ export default function SuperAdminDashboard() {
                 <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
                   <Link
                     href="/super-admin/config"
-                    className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
+                    className="w-full py-2 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
                   >
                     <Settings className="w-3.5 h-3.5 text-white" />
                     <span>Buka Konfigurasi Master System</span>

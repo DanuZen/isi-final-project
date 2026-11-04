@@ -78,14 +78,14 @@ export const TaStepper: React.FC<TaStepperProps> = ({
       {/* Card Header matching standard layout */}
       <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 shrink-0">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
             <Layers className="w-4 h-4" />
           </div>
           <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
             Progres Perjalanan Tugas Akhir
           </h2>
         </div>
-        <span className="hidden sm:inline-block shrink-0 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+        <span className="hidden sm:inline-block shrink-0 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#2563eb] text-white shadow-xs font-display">
           Tahap: {activeStep ? activeStep.title : "Selesai"}
         </span>
       </div>
@@ -116,7 +116,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
                   isCompleted
                     ? "bg-emerald-600 text-white shadow-xs ring-4 ring-emerald-50"
                     : isActive
-                    ? "bg-[#C62828] text-white font-bold shadow-md ring-4 ring-rose-100 scale-105"
+                    ? "bg-[#2563eb] text-white font-bold shadow-md ring-4 ring-blue-100 scale-105"
                     : "bg-slate-100 border border-slate-300 text-slate-400"
                 }`}
               >
@@ -130,7 +130,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
                     isCompleted
                       ? "text-emerald-700 font-display"
                       : isActive
-                      ? "text-[#C62828] font-display"
+                      ? "text-[#2563eb] font-display"
                       : "text-slate-500 font-medium"
                   }`}
                 >
@@ -163,7 +163,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
                 isCompleted
                   ? "bg-emerald-50/60 border-emerald-200 text-slate-900"
                   : isActive
-                  ? "bg-rose-50/60 border-rose-200 text-slate-900"
+                  ? "bg-blue-50/60 border-blue-200 text-slate-900"
                   : "bg-slate-50 border-slate-200 text-slate-500"
               }`}
             >
@@ -172,7 +172,7 @@ export const TaStepper: React.FC<TaStepperProps> = ({
                   isCompleted
                     ? "bg-emerald-600 text-white"
                     : isActive
-                    ? "bg-[#C62828] text-white"
+                    ? "bg-[#2563eb] text-white"
                     : "bg-slate-200 text-slate-500"
                 }`}
               >

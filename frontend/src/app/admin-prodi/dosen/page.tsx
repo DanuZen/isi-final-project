@@ -159,7 +159,7 @@ export default function AdminProdiDosenPage() {
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#ffd01d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#38bdf8] shrink-0" />
                 <p className="text-xs font-bold font-display">{toastMessage}</p>
                 <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white cursor-pointer">
                   <X className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ export default function AdminProdiDosenPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                 <div className="space-y-1.5 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white border border-rose-600 font-display">
+                    <span className="px-3 py-0.5 rounded-full text-[10px] font-bold bg-[#2563eb] text-white border border-rose-600 font-display">
                       PENETAPAN HAK AKSES DOSEN
                     </span>
                     <span className="text-xs text-neutral-400 font-medium">Program Studi Teknik Informatika</span>
@@ -185,7 +185,7 @@ export default function AdminProdiDosenPage() {
                   </p>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828] absolute bottom-0 left-0 right-0" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb] absolute bottom-0 left-0 right-0" />
             </div>
 
             {/* ── Filter Bar (Single Row Alignment) ── */}
@@ -197,7 +197,7 @@ export default function AdminProdiDosenPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Cari NIDN, nama, bidang..."
-                  className="w-full pl-8 pr-3 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#C62828] font-display"
+                  className="w-full pl-8 pr-3 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#2563eb] font-display"
                 />
               </div>
 
@@ -208,7 +208,7 @@ export default function AdminProdiDosenPage() {
                   className="flex items-center justify-between gap-2 px-3 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                 >
                   <div className="flex items-center gap-1.5">
-                    <Filter className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
+                    <Filter className="w-3.5 h-3.5 text-[#2563eb] shrink-0" />
                     <span>{filterRole === "Semua" ? "Semua Penugasan" : filterRole}</span>
                   </div>
                   <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
@@ -231,7 +231,7 @@ export default function AdminProdiDosenPage() {
                             setIsFilterOpen(false);
                           }}
                           className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                            filterRole === opt.val ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                            filterRole === opt.val ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                           }`}
                         >
                           <span>{opt.label}</span>
@@ -253,7 +253,7 @@ export default function AdminProdiDosenPage() {
               }`}>
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                       <UserCheck className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">Daftar Dosen Program Studi</h2>
@@ -297,7 +297,7 @@ export default function AdminProdiDosenPage() {
                           <div className="flex items-center gap-2 shrink-0">
                             {/* Role Badges */}
                             {d.isPembimbing && (
-                              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-100 text-[#C62828] border border-rose-200 flex items-center gap-1 font-display">
+                              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-[#2563eb] border border-blue-200 flex items-center gap-1 font-display">
                                 <UserCheck className="w-3 h-3" /> Pembimbing ({d.kuotaTerisi}/{d.kuotaMaks})
                               </span>
                             )}
@@ -330,12 +330,12 @@ export default function AdminProdiDosenPage() {
                       onClick={() => setActiveMobileTab("list")}
                       className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                     >
-                      <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                      <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                       <span>Kembali</span>
                     </button>
 
                     <div className="hidden lg:block space-y-0.5 min-w-0">
-                      <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Penugasan Dosen</span>
+                      <span className="text-[10px] font-bold text-[#2563eb] uppercase tracking-widest font-display">Penugasan Dosen</span>
                       <h2 className="text-sm font-black text-slate-900 font-display leading-tight truncate">{selected.nama}</h2>
                     </div>
 
@@ -353,7 +353,7 @@ export default function AdminProdiDosenPage() {
                     {/* Toggle Akses Pembimbing */}
                     <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
                       <div className="flex items-center gap-2">
-                        <UserCheck className={`w-4 h-4 ${selected.isPembimbing ? "text-[#C62828]" : "text-slate-400"}`} />
+                        <UserCheck className={`w-4 h-4 ${selected.isPembimbing ? "text-[#2563eb]" : "text-slate-400"}`} />
                         <div>
                           <p className="text-xs font-bold text-slate-800 font-display">Peran Dosen Pembimbing</p>
                           <p className="text-[10px] text-slate-400">Bisa menerima &amp; membimbing TA</p>
@@ -362,7 +362,7 @@ export default function AdminProdiDosenPage() {
                       <button
                         onClick={() => handleToggleRole(selected.nidn, "pembimbing")}
                         className={`w-11 h-6 rounded-full transition-colors p-0.5 cursor-pointer flex items-center ${
-                          selected.isPembimbing ? "bg-[#C62828] justify-end" : "bg-slate-300 justify-start"
+                          selected.isPembimbing ? "bg-[#2563eb] justify-end" : "bg-slate-300 justify-start"
                         }`}
                       >
                         <div className="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform" />
@@ -410,7 +410,7 @@ export default function AdminProdiDosenPage() {
                         </button>
                         <button
                           onClick={() => handleUpdateKuota(selected.nidn, 1)}
-                          className="flex-1 py-1.5 rounded-lg bg-[#ffd01d] text-slate-950 font-bold text-xs hover:bg-[#D97706] transition-all cursor-pointer shadow-2xs font-display"
+                          className="flex-1 py-1.5 rounded-lg bg-[#38bdf8] text-slate-950 font-bold text-xs hover:bg-[#D97706] transition-all cursor-pointer shadow-2xs font-display"
                         >
                           + Tambah Kuota
                         </button>

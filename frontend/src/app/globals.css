@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-900: #1A1A1A;
-  --color-primary-700: #D32F2F;
-  --color-primary-500: #FF5722;
-  --color-primary-100: #FBE9E7;
+  --color-primary-900: #0f172a;
+  --color-primary-700: #1d4ed8;
+  --color-primary-500: #2563eb;
+  --color-primary-100: #eff6ff;
 
-  --color-accent-500: #FFC107;
-  --color-accent-100: #FFF8E1;
+  --color-accent-500: #3b82f6;
+  --color-accent-100: #dbeafe;
 
-  --color-success-500: #2F8F5B;
-  --color-success-100: #E3F3EA;
+  --color-success-500: #10b981;
+  --color-success-100: #d1fae5;
 
-  --color-warning-500: #C77B1E;
-  --color-warning-100: #FBEEDD;
+  --color-warning-500: #f59e0b;
+  --color-warning-100: #fef3c7;
 
-  --color-danger-500: #C6403C;
-  --color-danger-100: #FBE7E6;
+  --color-danger-500: #ef4444;
+  --color-danger-100: #fee2e2;
 
-  --color-neutral-900: #212121;
-  --color-neutral-600: #616161;
-  --color-neutral-300: #E0E0E0;
-  --color-neutral-100: #FAFAFA;
+  --color-neutral-900: #0f172a;
+  --color-neutral-600: #475569;
+  --color-neutral-300: #e2e8f0;
+  --color-neutral-100: #ffffff;
 
   --font-display: var(--font-plus-jakarta), sans-serif;
   --font-sans: var(--font-plus-jakarta), sans-serif;
@@ -30,8 +30,8 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #FAFAFA;
-  color: #212121;
+  background-color: #f8fafc;
+  color: #0f172a;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,16 +49,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAFA;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E0E0E0;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #616161;
+  background: #94a3b8;
 }
 
 /* Hide scrollbar utility */
@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Subtle thin scrollbar utility */
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: #CBD5E1 transparent;
+  scrollbar-color: #cbd5e1 transparent;
 }
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;
@@ -83,11 +83,11 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #E2E8F0;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #94a3b8;
 }
 
 /* Fit-Viewport Layout Utilities */
@@ -242,5 +242,55 @@ h1, h2, h3, h4, h5, h6 {
   );
 }
 
+/* Micro-interaction & Input Field Animations */
+@keyframes iconPopSpring {
+  0% {
+    transform: scale(0.85) rotate(-8deg);
+  }
+  50% {
+    transform: scale(1.18) rotate(4deg);
+  }
+  75% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
 
+.group:focus-within .animate-icon-pop {
+  animation: iconPopSpring 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
 
+@keyframes popInBouncy {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-20deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.animate-pop-in {
+  animation: popInBouncy 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes laserShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-laser {
+  background-size: 200% 100%;
+  animation: laserShimmer 2s linear infinite;
+}

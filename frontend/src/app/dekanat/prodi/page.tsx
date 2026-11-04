@@ -40,7 +40,7 @@ const PRODI_LIST: ProdiDetail[] = [
 ];
 
 const METRICS = [
-  { label: "Total Program Studi",   value: "5 Prodi", sub: "Fakultas Ilmu Komputer", color: "#C62828", bgIcon: "bg-[#C62828]", icon: Building2 },
+  { label: "Total Program Studi",   value: "5 Prodi", sub: "Fakultas Ilmu Komputer", color: "#2563eb", bgIcon: "bg-[#2563eb]", icon: Building2 },
   { label: "Prodi IPK Tertinggi",  value: "3.60",    sub: "Teknik Informatika",      color: "#059669", bgIcon: "bg-emerald-600",icon: Award },
   { label: "Rata-Rata IPK Fakultas",value: "3.53",    sub: "+0.05 vs Tahun Lalu",     color: "#2563EB", bgIcon: "bg-blue-600",   icon: TrendingUp },
   { label: "Status Akreditasi",     value: "100%",    sub: "Terakreditasi BAN-PT",    color: "#D97706", bgIcon: "bg-amber-500",  icon: ShieldCheck },
@@ -92,7 +92,7 @@ export default function DekanatProdiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <Building2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Evaluasi Komparasi Program Studi FIK
                     </span>
                   </div>
@@ -107,14 +107,14 @@ export default function DekanatProdiPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dekanat/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <span>Kembali ke Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. Overview Metric Cards (2 Cols on Mobile) ── */}
@@ -145,7 +145,7 @@ export default function DekanatProdiPage() {
               }`}>
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Building2 className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -161,7 +161,7 @@ export default function DekanatProdiPage() {
                       placeholder="Cari prodi..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:border-[#C62828] focus:outline-none transition-all font-medium"
+                      className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:border-[#2563eb] focus:outline-none transition-all font-medium"
                     />
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export default function DekanatProdiPage() {
                             setShowMobileDetail(true);
                           }}
                           className={`cursor-pointer transition-colors ${
-                            selected.kode === p.kode ? "bg-rose-50/60 font-bold" : "hover:bg-slate-50"
+                            selected.kode === p.kode ? "bg-blue-50/60 font-bold" : "hover:bg-slate-50"
                           }`}
                         >
                           <td className="px-3.5 py-3 font-mono font-black text-slate-900">{p.kode}</td>
@@ -194,7 +194,7 @@ export default function DekanatProdiPage() {
                           <td className="px-3.5 py-3 font-bold text-emerald-700 font-mono">{p.ipk.toFixed(2)}</td>
                           <td className="px-3.5 py-3 font-bold text-slate-800 font-mono">{p.tepatWaktu}</td>
                           <td className="px-3.5 py-3 whitespace-nowrap">
-                            <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                            <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                               {p.akreditasi}
                             </span>
                           </td>
@@ -216,13 +216,13 @@ export default function DekanatProdiPage() {
                     onClick={() => setShowMobileDetail(false)}
                     className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title Header */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Award className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -248,7 +248,7 @@ export default function DekanatProdiPage() {
 
                     {/* 4 Solid Stat Metric Boxes */}
                     <div className="grid grid-cols-2 gap-2.5 text-[10.5px]">
-                      <div className="p-3 rounded-xl bg-[#C62828] text-white shadow-xs space-y-0.5">
+                      <div className="p-3 rounded-xl bg-[#2563eb] text-white shadow-xs space-y-0.5">
                         <span className="text-[9px] text-white/80 font-bold uppercase font-display">Total Mahasiswa TA</span>
                         <p className="font-extrabold text-white font-mono text-base">{selected.totalMhs} Mhs</p>
                       </div>
@@ -275,7 +275,7 @@ export default function DekanatProdiPage() {
                       <div className="flex items-center justify-between pt-1">
                         <div className="space-y-0.5">
                           <p className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display">Akreditasi BAN-PT</p>
-                          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2563eb] text-white font-display shadow-2xs">
                             {selected.akreditasi}
                           </span>
                         </div>
@@ -290,7 +290,7 @@ export default function DekanatProdiPage() {
                   {/* Summary Box */}
                   <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 text-xs">
                     <h5 className="font-bold text-slate-900 font-display flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-[#C62828]" />
+                      <ShieldCheck className="w-4 h-4 text-[#2563eb]" />
                       <span>Rekomendasi Dekanat untuk {selected.nama}</span>
                     </h5>
                     <p className="text-[11px] text-slate-600 leading-relaxed font-medium">

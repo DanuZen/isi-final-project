@@ -28,7 +28,7 @@ export default function ProfilAkademikPage() {
             {/* Background Preview Shell */}
             <div className="flex-1 rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-xs flex items-center justify-center p-6 text-center">
               <div className="space-y-2 max-w-sm">
-                <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#C62828] flex items-center justify-center mx-auto shadow-xs font-bold text-lg">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#2563eb] flex items-center justify-center mx-auto shadow-xs font-bold text-lg">
                   DZ
                 </div>
                 <h3 className="text-sm font-extrabold text-slate-900 font-display">Profil &amp; Detail Akun Saya</h3>
@@ -37,7 +37,7 @@ export default function ProfilAkademikPage() {
                 </p>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="px-4 py-2 bg-[#C62828] text-white text-xs font-bold rounded-xl shadow-md hover:bg-[#B71C1C] transition-all cursor-pointer"
+                  className="px-4 py-2 bg-[#2563eb] text-white text-xs font-bold rounded-xl shadow-md hover:bg-[#1d4ed8] transition-all cursor-pointer"
                 >
                   Buka Modal Profil
                 </button>

@@ -18,7 +18,7 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#C62828", bgIcon: "bg-[#C62828]",   trend: "+12%", icon: Users },
+  { label: "Total Mahasiswa TA",    value: "248", sub: "Semester 2025/2026",      color: "#2563eb", bgIcon: "bg-[#2563eb]",   trend: "+12%", icon: Users },
   { label: "Selesai Tahun Ini",     value: "89",  sub: "s.d. Juli 2026",          color: "#059669", bgIcon: "bg-emerald-600", trend: "+8%",  icon: CheckCircle2 },
   { label: "Rata-rata Durasi Studi",value: "1.8", sub: "Semester (≈ 10 bulan)",   color: "#2563EB", bgIcon: "bg-blue-600",    trend: "-0.2", icon: Clock },
   { label: "Tingkat Kelulusan",     value: "94%", sub: "Semester ini",            color: "#D97706", bgIcon: "bg-amber-500",   trend: "+2%",  icon: Award },
@@ -42,7 +42,7 @@ const SIDANG_BULAN = [
 ];
 
 const BIDANG = [
-  { label: "Rekayasa Perangkat Lunak", pct: 42, color: "#C62828" },
+  { label: "Rekayasa Perangkat Lunak", pct: 42, color: "#2563eb" },
   { label: "Kecerdasan Buatan",         pct: 31, color: "#059669" },
   { label: "Jaringan & Keamanan",       pct: 27, color: "#2563EB" },
 ];
@@ -116,12 +116,12 @@ export default function DekanatDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <Award className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Pimpinan / Dekanat FIK
                     </span>
                   </div>
                   <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Dashboard Eksekutif — FIK UPI YPTK
+                    Dashboard Eksekutif — FIK PT MBOIS
                   </h1>
                   <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Ringkasan performa Tugas Akhir Fakultas Ilmu Komputer semester 2025/2026 Genap. Tingkat kelulusan bulan ini: <strong className="text-emerald-400 font-bold">94%</strong>.
@@ -131,14 +131,14 @@ export default function DekanatDashboard() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dekanat/laporan"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <FileDown className="w-4 h-4 text-white" />
                     <span>Laporan Eksekutif</span>
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. 4 Stat Cards (Statistik TA Design System - 2 Cols on Mobile) ── */}
@@ -175,11 +175,11 @@ export default function DekanatDashboard() {
                     onClick={() => setMobileTab(tab.id as any)}
                     className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-bold font-display whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${
                       isActive
-                        ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                        ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                         : "text-slate-600 hover:text-slate-900 font-medium"
                     }`}
                   >
-                    <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-[#C62828]" : "text-slate-500"}`} />
+                    <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-[#2563eb]" : "text-slate-500"}`} />
                     <span>{tab.label}</span>
                   </button>
                 );
@@ -194,7 +194,7 @@ export default function DekanatDashboard() {
                 mobileTab === "rekap" ? "block" : "hidden lg:flex"
               }`}>
                 <div className="flex items-center gap-2.5 p-3 md:p-3.5 border-b border-slate-100 shrink-0 bg-white">
-                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                     <Users className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -250,7 +250,7 @@ export default function DekanatDashboard() {
                   mobileTab === "bidang" ? "block" : "hidden lg:block"
                 }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <BarChart2 className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -281,7 +281,7 @@ export default function DekanatDashboard() {
                   mobileTab === "sidang" ? "block" : "hidden lg:flex"
                 }`}>
                   <div className="flex items-center gap-2 p-3 md:p-3.5 border-b border-slate-100 shrink-0 bg-white">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <CalendarDays className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -294,7 +294,7 @@ export default function DekanatDashboard() {
                       <div key={s.nama} className="flex items-center gap-3 px-3.5 py-2.5 hover:bg-slate-50 transition-colors">
                         <div className="w-9 text-center shrink-0">
                           <p className="text-[8.5px] text-slate-400 uppercase font-bold">{s.tgl.split(" ")[1]}</p>
-                          <p className="text-sm md:text-base font-black text-[#C62828] leading-tight font-display">{s.tgl.split(" ")[0]}</p>
+                          <p className="text-sm md:text-base font-black text-[#2563eb] leading-tight font-display">{s.tgl.split(" ")[0]}</p>
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-slate-800 truncate font-display">{s.nama}</p>

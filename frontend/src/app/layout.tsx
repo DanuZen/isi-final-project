@@ -12,63 +12,51 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   adjustFontFallback: false,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sipeta-upiyptk.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sipeta-upiyptk.vercel.app"),
+  metadataBase: new URL("https://final-project.mbois.id"),
   title: {
-    default: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
-    template: "%s | SIPETA UPI YPTK",
+    default: "PT MBOIS - Final Project",
+    template: "%s | PT MBOIS - Final Project",
   },
-  description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang. Memantau bimbingan, usulan judul, similarity check, seminar proposal, dan sidang skripsi.",
-  applicationName: "SIPETA UPI YPTK",
-  authors: [{ name: "Universitas Putra Indonesia YPTK Padang", url: "https://upiyptk.ac.id" }],
+  description: "PT MBOIS - Final Project. Platform Terpadu Manajemen Pembelajaran, Bimbingan, dan Evaluasi Tugas Akhir & Proyek.",
+  applicationName: "PT MBOIS - Final Project",
+  authors: [{ name: "PT MBOIS", url: "https://mbois.id" }],
   generator: "Next.js",
   keywords: [
-    "SIPETA",
-    "SIPETA UPI YPTK",
-    "UPI YPTK Padang",
+    "PT MBOIS",
+    "Final Project",
+    "PT MBOIS - Final Project",
     "Tugas Akhir",
-    "Skripsi",
-    "Fakultas Ilmu Komputer",
-    "FIK UPI YPTK",
-    "Bimbingan Skripsi",
-    "Usulan Judul",
-    "Similarity Check",
-    "Seminar Proposal",
-    "Ujian Sidang Skripsi",
-    "Sistem Informasi Tugas Akhir",
+    "Bimbingan Proyek",
+    "Evaluasi",
+    "Learning Management",
   ],
-  creator: "Universitas Putra Indonesia YPTK Padang",
-  publisher: "Universitas Putra Indonesia YPTK Padang",
+  creator: "PT MBOIS",
+  publisher: "PT MBOIS",
   category: "Education",
   icons: {
-    icon: "/upiyptk_emblem.webp",
-    shortcut: "/upiyptk_emblem.webp",
-    apple: "/upiyptk_emblem.webp",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/mbois_white.png", type: "image/png" },
+    ],
+    shortcut: "/mbois_white.png",
+    apple: "/mbois_white.png",
   },
   alternates: {
     canonical: "./",
   },
   openGraph: {
-    title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
-    description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
-    url: "https://sipeta-upiyptk.vercel.app",
-    siteName: "SIPETA UPI YPTK",
+    title: "PT MBOIS - Final Project",
+    description: "Platform Terpadu Manajemen Pembelajaran, Bimbingan, dan Evaluasi Proyek",
+    url: "https://final-project.mbois.id",
+    siteName: "PT MBOIS - Final Project",
     images: [
       {
-        url: "https://sipeta-upiyptk.vercel.app/og_image.png",
+        url: "/og_image.png",
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
-      },
-      {
-        url: "https://sipeta-upiyptk.vercel.app/og_image.jpg",
-        width: 1200,
-        height: 630,
-        type: "image/jpeg",
-        alt: "SIPETA UPI YPTK Padang — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
+        alt: "PT MBOIS - Final Project",
       },
     ],
     locale: "id_ID",
@@ -76,16 +64,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SIPETA UPI YPTK — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir",
-    description: "Sistem Informasi Perjalanan & Evaluasi Tugas Akhir Universitas Putra Indonesia YPTK Padang",
+    title: "PT MBOIS - Final Project",
+    description: "Platform Terpadu Manajemen Pembelajaran, Bimbingan, dan Evaluasi Proyek",
     images: [
-      "https://sipeta-upiyptk.vercel.app/og_image.png",
-      "https://sipeta-upiyptk.vercel.app/og_image.jpg",
+      "/og_image.png",
     ],
   },
   other: {
-    "image": "https://sipeta-upiyptk.vercel.app/og_image.png",
-    "og:image:secure_url": "https://sipeta-upiyptk.vercel.app/og_image.png",
+    "image": "/og_image.png",
+    "og:image:secure_url": "/og_image.png",
   },
   robots: {
     index: true,
@@ -111,7 +98,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#FAFAFA] text-[#212121]" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col font-sans bg-[#F8FAFC] text-slate-900" suppressHydrationWarning>
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

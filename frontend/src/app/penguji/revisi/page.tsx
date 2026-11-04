@@ -108,7 +108,7 @@ export default function PengujiRevisiPage() {
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#ffd01d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#38bdf8] shrink-0" />
                 <p className="text-xs font-bold font-display">{toastMessage}</p>
                 <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white cursor-pointer">
                   <X className="w-3.5 h-3.5" />
@@ -121,7 +121,7 @@ export default function PengujiRevisiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <FileEdit className="w-3.5 h-3.5 text-white" /> Monitoring Lembar Revisi Active
                     </span>
                   </div>
@@ -136,14 +136,14 @@ export default function PengujiRevisiPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/penguji/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Dashboard Penguji</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Split 2-Column Layout (5/12 & 7/12) ── */}
@@ -157,7 +157,7 @@ export default function PengujiRevisiPage() {
                 <div className="p-4 border-b border-slate-100 space-y-3 shrink-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <FileEdit className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -173,7 +173,7 @@ export default function PengujiRevisiPage() {
                       <input
                         type="text" placeholder="Cari nama / NIM..."
                         value={search} onChange={(e) => setSearch(e.target.value)}
-                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-medium"
+                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-medium"
                       />
                     </div>
 
@@ -184,7 +184,7 @@ export default function PengujiRevisiPage() {
                         className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                       >
                         <div className="flex items-center gap-2">
-                          <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                          <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>{filterStatus}</span>
                         </div>
                         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -202,7 +202,7 @@ export default function PengujiRevisiPage() {
                                   setIsFilterOpen(false);
                                 }}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                  filterStatus === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                  filterStatus === f ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                                 }`}
                               >
                                 <span>{f}</span>
@@ -240,7 +240,7 @@ export default function PengujiRevisiPage() {
                         >
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2.5 min-w-0">
-                              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs font-display">
+                              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563eb] to-[#991B1B] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs font-display">
                                 {r.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                               </div>
                               <div className="min-w-0">
@@ -254,7 +254,7 @@ export default function PengujiRevisiPage() {
                                 ? "bg-emerald-600"
                                 : r.status === "Menunggu Review"
                                 ? "bg-blue-600"
-                                : "bg-[#ffd01d] text-slate-950"
+                                : "bg-[#38bdf8] text-slate-950"
                             }`}>
                               {isApproved ? "ACC / Selesai" : r.status}
                             </span>
@@ -285,13 +285,13 @@ export default function PengujiRevisiPage() {
                     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                     title="Kembali ke Daftar Mahasiswa"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title & Icon (Hidden on Mobile) */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <FileEdit className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -315,7 +315,7 @@ export default function PengujiRevisiPage() {
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display text-white ${
-                          selectedR.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                          selectedR.jenis === "Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                         }`}>
                           {selectedR.jenis} Tugas Akhir
                         </span>
@@ -334,7 +334,7 @@ export default function PengujiRevisiPage() {
                       <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1 text-xs text-slate-800 font-medium leading-relaxed">
                         {selectedR.catatan.split("\n").map((line, idx) => (
                           <p key={idx} className="flex items-start gap-1.5">
-                            <span className="text-[#C62828] font-bold">•</span> {line}
+                            <span className="text-[#2563eb] font-bold">•</span> {line}
                           </p>
                         ))}
                       </div>
@@ -382,11 +382,11 @@ export default function PengujiRevisiPage() {
                             placeholder="Catatan revisi tambahan..."
                             value={catatanBaru[selectedR.nim] ?? ""}
                             onChange={(e) => setCatatanBaru((prev) => ({ ...prev, [selectedR.nim]: e.target.value }))}
-                            className="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 font-medium focus:outline-none focus:border-[#C62828] focus:bg-white transition-all shadow-2xs"
+                            className="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 font-medium focus:outline-none focus:border-[#2563eb] focus:bg-white transition-all shadow-2xs"
                           />
                           <button
                             onClick={() => handleSendNote(selectedR.nim, selectedR.nama)}
-                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-xs shrink-0 font-display cursor-pointer"
+                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-xs shrink-0 font-display cursor-pointer"
                           >
                             <Send className="w-3.5 h-3.5 text-white" />
                             <span>Kirim</span>
@@ -427,7 +427,7 @@ export default function PengujiRevisiPage() {
 
                         <button
                           onClick={() => showToast(`Permintaan perbaikan ulang dikirim ke ${selectedR.nama}`)}
-                          className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] hover:border-rose-200 transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-2xs cursor-pointer whitespace-nowrap"
+                          className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-blue-50 hover:text-[#2563eb] hover:border-blue-200 transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-2xs cursor-pointer whitespace-nowrap"
                         >
                           <X className="w-4 h-4 shrink-0 text-slate-400" />
                           <span>Perbaiki</span>
@@ -448,7 +448,7 @@ export default function PengujiRevisiPage() {
                   {/* Modal Header */}
                   <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold">
                         <FileText className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -472,7 +472,7 @@ export default function PengujiRevisiPage() {
                         showToast(`Mengunduh berkas ${selectedR.filePdf}...`);
                         setShowPdfModal(false);
                       }}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
                     >
                       <Download className="w-3.5 h-3.5" /> Download Naskah PDF
                     </button>
@@ -485,7 +485,7 @@ export default function PengujiRevisiPage() {
                         <h2 className="text-sm font-black uppercase tracking-wider font-sans text-slate-900">
                           {selectedR.judul}
                         </h2>
-                        <p className="text-xs font-bold font-sans text-[#C62828]">
+                        <p className="text-xs font-bold font-sans text-[#2563eb]">
                           NASKAH HASIL REVISI {selectedR.jenis.toUpperCase()} TUGAS AKHIR
                         </p>
                         <p className="text-[11px] font-mono text-slate-600 font-sans">

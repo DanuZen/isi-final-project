@@ -147,7 +147,7 @@ export default function PengujiNilaiPage() {
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#ffd01d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#38bdf8] shrink-0" />
                 <p className="text-xs font-bold font-display">{toastMessage}</p>
                 <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white cursor-pointer">
                   <X className="w-3.5 h-3.5" />
@@ -160,7 +160,7 @@ export default function PengujiNilaiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <Star className="w-3.5 h-3.5 text-white" /> Form Penilaian Ujian Active
                     </span>
                   </div>
@@ -175,14 +175,14 @@ export default function PengujiNilaiPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/penguji/jadwal"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer font-display"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white border border-blue-500/30 shadow-md shadow-blue-950/20 transition-all active:scale-95 cursor-pointer font-display"
                   >
                     <span>Lihat Jadwal Pengujian</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Split 2-Column Layout (5/12 & 7/12) ── */}
@@ -196,7 +196,7 @@ export default function PengujiNilaiPage() {
                 <div className="p-4 border-b border-slate-100 space-y-3 shrink-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <Award className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -212,7 +212,7 @@ export default function PengujiNilaiPage() {
                       <input
                         type="text" placeholder="Cari nama / NIM..."
                         value={search} onChange={(e) => setSearch(e.target.value)}
-                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-medium"
+                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-[11px] bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-medium"
                       />
                     </div>
 
@@ -223,7 +223,7 @@ export default function PengujiNilaiPage() {
                         className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                       >
                         <div className="flex items-center gap-2">
-                          <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                          <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>{filterJenis}</span>
                         </div>
                         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -241,7 +241,7 @@ export default function PengujiNilaiPage() {
                                   setIsFilterOpen(false);
                                 }}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                  filterJenis === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                  filterJenis === f ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                                 }`}
                               >
                                 <span>{f}</span>
@@ -280,7 +280,7 @@ export default function PengujiNilaiPage() {
                         >
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2.5 min-w-0">
-                              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C62828] to-[#991B1B] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs font-display">
+                              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563eb] to-[#991B1B] text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs font-display">
                                 {m.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                               </div>
                               <div className="min-w-0">
@@ -290,7 +290,7 @@ export default function PengujiNilaiPage() {
                             </div>
 
                             <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold shadow-2xs font-display text-white shrink-0 ${
-                              m.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                              m.jenis === "Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                             }`}>
                               {m.jenis}
                             </span>
@@ -329,13 +329,13 @@ export default function PengujiNilaiPage() {
                     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                     title="Kembali ke Daftar Mahasiswa"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title & Icon (Hidden on Mobile) */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <Star className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -359,7 +359,7 @@ export default function PengujiNilaiPage() {
                     <div className="p-4 rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-rose-50/20 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display text-white ${
-                          selectedMhs.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                          selectedMhs.jenis === "Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                         }`}>
                           {selectedMhs.jenis} Tugas Akhir
                         </span>
@@ -401,7 +401,7 @@ export default function PengujiNilaiPage() {
                                     next[idx] = Number(e.target.value);
                                     setNilaiState((prev) => ({ ...prev, [selectedMhs.nim]: next }));
                                   }}
-                                  className="flex-1 accent-[#C62828] cursor-pointer"
+                                  className="flex-1 accent-[#2563eb] cursor-pointer"
                                 />
 
                                 <input
@@ -413,7 +413,7 @@ export default function PengujiNilaiPage() {
                                     next[idx] = Math.min(100, Math.max(0, Number(e.target.value)));
                                     setNilaiState((prev) => ({ ...prev, [selectedMhs.nim]: next }));
                                   }}
-                                  className="w-14 h-9 rounded-xl border-2 border-slate-200 bg-white text-center font-black text-sm text-slate-900 focus:outline-none focus:border-[#C62828] font-display"
+                                  className="w-14 h-9 rounded-xl border-2 border-slate-200 bg-white text-center font-black text-sm text-slate-900 focus:outline-none focus:border-[#2563eb] font-display"
                                 />
                               </div>
                             </div>
@@ -431,7 +431,7 @@ export default function PengujiNilaiPage() {
                         placeholder="Catatan atau masukan revisi penguji..."
                         value={catatanState[selectedMhs.nim] || ""}
                         onChange={(e) => setCatatanState((prev) => ({ ...prev, [selectedMhs.nim]: e.target.value }))}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-slate-800 font-medium focus:outline-none focus:border-[#C62828] transition-all resize-none shadow-2xs"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-slate-800 font-medium focus:outline-none focus:border-[#2563eb] transition-all resize-none shadow-2xs"
                       />
                     </div>
                   </div>
@@ -469,7 +469,7 @@ export default function PengujiNilaiPage() {
                         ) : (
                           <button
                             onClick={() => handleSaveScore(selectedMhs.nim, selectedMhs.nama)}
-                            className="px-4 py-2.5 rounded-xl bg-[#C62828] hover:bg-[#a81f1f] text-white text-xs font-bold transition-all active:scale-95 shadow-xs flex items-center gap-1.5 font-display cursor-pointer shrink-0 whitespace-nowrap"
+                            className="px-4 py-2.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold transition-all active:scale-95 shadow-xs flex items-center gap-1.5 font-display cursor-pointer shrink-0 whitespace-nowrap"
                           >
                             <Save className="w-4 h-4 text-white shrink-0" />
                             <span>Simpan</span>

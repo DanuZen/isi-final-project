@@ -30,7 +30,7 @@ const ARSIP_DATA: ArsipItem[] = [
   { id: "DOC-2026-001", namaDokumen: "SK Dekan Pembimbing TA Semester Genap 2025/2026.pdf", kategori: "SK Dekan", tahun: "2026", ukuran: "2.4 MB", tglUpload: "15 Jan 2026", deskripsi: "Surat Keputusan Dekan FIK mengenai penetapan Dosen Pembimbing I dan II Skripsi mahasiswa semester genap 2025/2026." },
   { id: "DOC-2026-002", namaDokumen: "SK Dekan Penguji Seminar & Sidang TA FIK 2025/2026.pdf", kategori: "SK Dekan", tahun: "2026", ukuran: "3.1 MB", tglUpload: "20 Jan 2026", deskripsi: "Surat Penugasan Tim Majelis Penguji Seminar Proposal dan Ujian Sidang Skripsi Fakultas Ilmu Komputer." },
   { id: "DOC-2025-099", namaDokumen: "Rekapitulasi Kelulusan Yudisium FIK Periode I 2025.pdf", kategori: "Yudisium", tahun: "2025", ukuran: "1.8 MB", tglUpload: "10 Des 2025", deskripsi: "Laporan rekapitulasi data mahasiswa lulusan Yudisium FIK Periode I Tahun Ajaran 2025/2026." },
-  { id: "DOC-2025-088", namaDokumen: "Pedoman Tata Tulis Tugas Akhir FIK UPI YPTK v2.1.pdf", kategori: "Pedoman TA", tahun: "2025", ukuran: "4.5 MB", tglUpload: "01 Sep 2025", deskripsi: "Panduan format penulisan skripsi, tata cara pengutipan, dan templat resmi Tugas Akhir FIK UPI YPTK." },
+  { id: "DOC-2025-088", namaDokumen: "Pedoman Tata Tulis Tugas Akhir FIK PT MBOIS v2.1.pdf", kategori: "Pedoman TA", tahun: "2025", ukuran: "4.5 MB", tglUpload: "01 Sep 2025", deskripsi: "Panduan format penulisan skripsi, tata cara pengutipan, dan templat resmi Tugas Akhir FIK PT MBOIS." },
 ];
 
 export default function AdminFakultasArsipPage() {
@@ -116,7 +116,7 @@ export default function AdminFakultasArsipPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <Archive className="w-3.5 h-3.5 text-white" /> Repository Digital Fakultas
                     </span>
                   </div>
@@ -131,14 +131,14 @@ export default function AdminFakultasArsipPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-fakultas/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Dashboard Admin</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* Grid layout with Detail Side Panel */}
@@ -151,7 +151,7 @@ export default function AdminFakultasArsipPage() {
                 {/* Integrated Table Card Header + Controls */}
                 <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 shrink-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <Archive className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -169,7 +169,7 @@ export default function AdminFakultasArsipPage() {
                         placeholder="Cari nama arsip dokumen..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all w-full font-display"
                       />
                     </div>
 
@@ -196,7 +196,7 @@ export default function AdminFakultasArsipPage() {
                                   setIsFilterOpen(false);
                                 }}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                  filterKategori === k ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                  filterKategori === k ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                                 }`}
                               >
                                 <span>{k}</span>
@@ -212,7 +212,7 @@ export default function AdminFakultasArsipPage() {
                     <button
                       onClick={() => setShowUploadModal(true)}
                       title="Unggah Dokumen Arsip Baru"
-                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                     >
                       <Plus className="w-4 h-4 text-white shrink-0" />
                       <span>Unggah</span>
@@ -247,7 +247,7 @@ export default function AdminFakultasArsipPage() {
                                   : "hover:bg-slate-50"
                               }`}
                             >
-                              <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-[#C62828] whitespace-nowrap">{doc.id}</td>
+                              <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-[#2563eb] whitespace-nowrap">{doc.id}</td>
                               <td className="px-4 py-3.5 max-w-sm space-y-0.5">
                                 <h3 className="font-bold text-slate-900 text-xs sm:text-sm font-display leading-snug">
                                   {doc.namaDokumen}
@@ -255,7 +255,7 @@ export default function AdminFakultasArsipPage() {
                                 <p className="text-[11px] text-slate-500 line-clamp-1 font-medium">{doc.deskripsi}</p>
                               </td>
                               <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1 font-display">
+                                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 inline-flex items-center gap-1 font-display">
                                   <Tag className="w-2.5 h-2.5" /> {doc.kategori}
                                 </span>
                               </td>
@@ -284,16 +284,16 @@ export default function AdminFakultasArsipPage() {
                           onClick={() => setActiveMobileTab("table")}
                           className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                         >
-                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                          <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>Kembali</span>
                         </button>
 
-                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-rose-50 text-rose-700 border border-rose-200 font-display">
+                        <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-blue-50 text-blue-700 border border-blue-200 font-display">
                           {selected.kategori}
                         </span>
                         <span className="text-[10px] font-mono text-slate-400 font-semibold ml-auto">{selected.tahun}</span>
                       </div>
-                      <span className="text-[10px] font-bold text-[#C62828] font-mono block pt-1">{selected.id}</span>
+                      <span className="text-[10px] font-bold text-[#2563eb] font-mono block pt-1">{selected.id}</span>
                       <h3 className="text-sm font-black text-slate-900 font-display leading-snug break-words">{selected.namaDokumen}</h3>
                     </div>
 
@@ -306,10 +306,10 @@ export default function AdminFakultasArsipPage() {
                       <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1 min-w-0">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Penerbit Dokumen:</span>
                         <div className="flex items-center gap-2">
-                          <Building2 className="w-4 h-4 text-[#C62828] shrink-0" />
+                          <Building2 className="w-4 h-4 text-[#2563eb] shrink-0" />
                           <span className="font-bold text-slate-800 text-[11px] font-display">Fakultas Ilmu Komputer</span>
                         </div>
-                        <p className="text-[10px] text-slate-500 font-medium">Universitas Putra Indonesia YPTK Padang</p>
+                        <p className="text-[10px] text-slate-500 font-medium">PT MBOIS - Final Project</p>
                       </div>
 
                       <div className="min-w-0">
@@ -324,7 +324,7 @@ export default function AdminFakultasArsipPage() {
                   <div className="pt-3 border-t border-slate-100">
                     <button
                       onClick={() => alert(`Mengunduh berkas arsip resmi ${selected.namaDokumen}...`)}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
                     >
                       <Download className="w-4 h-4 text-white" />
                       <span>Unduh Berkas Arsip PDF</span>
@@ -346,7 +346,7 @@ export default function AdminFakultasArsipPage() {
             {/* Header Modal */}
             <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                   <Archive className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -372,7 +372,7 @@ export default function AdminFakultasArsipPage() {
                   placeholder="Contoh: Berita Acara Yudisium FIK Periode II 2026.pdf"
                   value={formNama}
                   onChange={(e) => setFormNama(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb]"
                 />
               </div>
 
@@ -382,7 +382,7 @@ export default function AdminFakultasArsipPage() {
                   <select
                     value={formKategori}
                     onChange={(e) => setFormKategori(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-bold text-slate-800 cursor-pointer"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb] font-bold text-slate-800 cursor-pointer"
                   >
                     <option value="SK Dekan">SK Dekan</option>
                     <option value="Yudisium">Yudisium</option>
@@ -397,7 +397,7 @@ export default function AdminFakultasArsipPage() {
                     placeholder="2026"
                     value={formTahun}
                     onChange={(e) => setFormTahun(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono"
                   />
                 </div>
               </div>
@@ -409,7 +409,7 @@ export default function AdminFakultasArsipPage() {
                   placeholder="Tuliskan ringkasan singkat perihal dokumen arsip..."
                   value={formDeskripsi}
                   onChange={(e) => setFormDeskripsi(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#C62828]"
+                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-[#2563eb]"
                 />
               </div>
 
@@ -423,7 +423,7 @@ export default function AdminFakultasArsipPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5"
+                  className="px-5 py-2.5 rounded-xl font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5"
                 >
                   <Plus className="w-4 h-4 text-white" />
                   <span>Unggah Arsip Now</span>

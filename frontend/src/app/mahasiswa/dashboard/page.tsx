@@ -60,13 +60,13 @@ const QUICK_ACTIONS = [
     label: "Ajukan Judul TA",
     href: "/mahasiswa/proposal",
     icon: <FileText className="w-4 h-4" />,
-    btnClass: "bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40",
+    btnClass: "bg-[#2563eb] hover:bg-[#1d4ed8] text-white border border-blue-500/30 shadow-md shadow-blue-950/20",
   },
   {
     label: "Pilih Pembimbing",
     href: "/mahasiswa/pembimbing",
     icon: <User2 className="w-4 h-4" />,
-    btnClass: "bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 font-bold border border-amber-400/40 shadow-md shadow-amber-950/20",
+    btnClass: "bg-[#38bdf8] hover:bg-[#d97706] text-slate-950 font-bold border border-amber-400/40 shadow-md shadow-amber-950/20",
   },
   {
     label: "Lihat Kalender TA",
@@ -83,7 +83,7 @@ export default function DashboardPage() {
   const [activeMobileTab, setActiveMobileTab] = useState<"tahapan" | "judul" | "acc" | "kalender">("tahapan");
 
   React.useEffect(() => {
-    const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("sipeta_logged_in");
+    const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("mbois_logged_in");
     if (!isLoggedIn) {
       router.replace("/login");
     } else {
@@ -95,7 +95,7 @@ export default function DashboardPage() {
     return (
       <SplashScreen
         message="Memverifikasi Autentikasi Sistem..."
-        subMessage="Universitas Putra Indonesia YPTK Padang"
+        subMessage="PT MBOIS - Final Project"
         duration={1000}
       />
     );
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Progres Tugas Akhir Anda saat ini berada pada tahap{" "}
-                    <strong className="text-[#ffd01d] font-bold">{STUDENT.tahapAktif}</strong>.
+                    <strong className="text-[#38bdf8] font-bold">{STUDENT.tahapAktif}</strong>.
                     Lanjutkan konsultasi rutin untuk memenuhi syarat pengajuan ACC Seminar Proposal.
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
@@ -157,7 +157,7 @@ export default function DashboardPage() {
                 onClick={() => setActiveMobileTab("tahapan")}
                 className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "tahapan"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                 onClick={() => setActiveMobileTab("judul")}
                 className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "judul"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -181,7 +181,7 @@ export default function DashboardPage() {
                 onClick={() => setActiveMobileTab("acc")}
                 className={`flex-1 min-w-[105px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "acc"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -193,7 +193,7 @@ export default function DashboardPage() {
                 onClick={() => setActiveMobileTab("kalender")}
                 className={`flex-1 min-w-[95px] py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "kalender"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -216,7 +216,7 @@ export default function DashboardPage() {
                   {/* Card header */}
                   <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 shrink-0">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                         <FileText className="w-4 h-4" />
                       </div>
                       <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
@@ -271,8 +271,8 @@ export default function DashboardPage() {
                   ) : (
                     /* Empty State — Belum ada judul diajukan */
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-5 sm:p-8 space-y-3.5">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#C62828] shadow-xs">
-                        <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#C62828]" />
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563eb] shadow-xs">
+                        <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#2563eb]" />
                       </div>
                       <div className="space-y-1 max-w-xs">
                         <h4 className="font-extrabold text-sm sm:text-base font-display text-slate-900">Belum Ada Judul Diajukan</h4>
@@ -282,7 +282,7 @@ export default function DashboardPage() {
                       </div>
                       <Link
                         href="/mahasiswa/proposal"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs w-full sm:w-auto font-display"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs w-full sm:w-auto font-display"
                       >
                         <FileText className="w-4 h-4" />
                         <span>Ajukan Judul Tugas Akhir</span>
@@ -297,7 +297,7 @@ export default function DashboardPage() {
                 {/* Syarat ACC Card */}
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden shrink-0 ${activeMobileTab === "acc" ? "flex flex-col" : "hidden lg:flex lg:flex-col"}`}>
                   <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3.5 border-b border-slate-100">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <h2 className="font-bold text-xs sm:text-sm text-slate-900 font-display">
@@ -332,7 +332,7 @@ export default function DashboardPage() {
                       disabled={!canAcc}
                       className={`w-full py-2.5 min-h-[42px] rounded-xl text-xs font-bold transition-all font-display ${
                         canAcc
-                          ? "bg-[#C62828] text-white hover:bg-[#B71C1C] active:scale-95 shadow-xs"
+                          ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8] active:scale-95 shadow-xs"
                           : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
                       }`}
                     >
@@ -345,7 +345,7 @@ export default function DashboardPage() {
                 <div className={`bg-white rounded-2xl border border-slate-200 shadow-xs p-4 flex-col gap-3 flex-1 min-h-0 overflow-hidden ${activeMobileTab === "kalender" ? "flex" : "hidden lg:flex"}`}>
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <CalendarDays className="w-4 h-4" />
                       </div>
                       <div>
@@ -355,7 +355,7 @@ export default function DashboardPage() {
                     </div>
                     <Link
                       href="/mahasiswa/kalender"
-                      className="px-3 py-1.5 text-xs font-bold text-white bg-[#C62828] hover:bg-[#B71C1C] rounded-xl transition-all shadow-xs flex items-center gap-1 active:scale-95 font-display"
+                      className="px-3 py-1.5 text-xs font-bold text-white bg-[#2563eb] hover:bg-[#1d4ed8] rounded-xl transition-all shadow-xs flex items-center gap-1 active:scale-95 font-display"
                     >
                       Buka <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
@@ -370,7 +370,7 @@ export default function DashboardPage() {
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-900 truncate">Sesi 5 Bimbingan TA</span>
-                        <span className="text-[10px] font-bold text-[#C62828] bg-rose-50 px-1.5 py-0.5 rounded font-mono-data">Besok</span>
+                        <span className="text-[10px] font-bold text-[#2563eb] bg-blue-50 px-1.5 py-0.5 rounded font-mono-data">Besok</span>
                       </div>
                       <p className="text-[11px] text-slate-500 font-medium">10:00 WIB · Ruang Dosen FIK 3</p>
                     </div>
@@ -380,7 +380,7 @@ export default function DashboardPage() {
                         <span className="font-bold text-slate-900 truncate">Deadline Draft Sempro</span>
                         <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded font-mono-data">5 Agt</span>
                       </div>
-                      <p className="text-[11px] text-slate-500 font-medium">Upload via Portal SIPETA</p>
+                      <p className="text-[11px] text-slate-500 font-medium">Upload via Portal PT MBOIS - Final Project</p>
                     </div>
 
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">

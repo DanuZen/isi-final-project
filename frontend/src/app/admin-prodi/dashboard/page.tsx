@@ -22,9 +22,9 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "MAHASISWA TA",     value: "124", sub: "Genap 2026",     color: "#C62828", bgIcon: "bg-[#C62828]", icon: Users },
+  { label: "MAHASISWA TA",     value: "124", sub: "Genap 2026",     color: "#2563eb", bgIcon: "bg-[#2563eb]", icon: Users },
   { label: "AKTIVASI PENDING", value: "7",   sub: "Clearing SKS",   color: "#D97706", bgIcon: "bg-amber-500", icon: UserPlus },
-  { label: "PROPOSAL MASUK",   value: "11",  sub: "Verifikasi",     color: "#C62828", bgIcon: "bg-rose-700",   icon: FileText },
+  { label: "PROPOSAL MASUK",   value: "11",  sub: "Verifikasi",     color: "#2563eb", bgIcon: "bg-rose-700",   icon: FileText },
   { label: "UJIAN TERJADWAL",  value: "18",  sub: "Sempro & Sidang",color: "#059669", bgIcon: "bg-emerald-600",icon: CalendarDays },
 ];
 
@@ -34,7 +34,7 @@ const PROPOSAL_MASUK = [
     nim: "20101152630045",
     nama: "Danu Zen",
     prodi: "Teknik Informatika",
-    judul: "Sistem Informasi Manajemen Perjalanan & Evaluasi Tugas Akhir (SIPETA) Berbasis Web",
+    judul: "Sistem Informasi Manajemen Perjalanan & Evaluasi Tugas Akhir (Final Project) Berbasis Web",
     bidang: "Software Engineering & Web Architecture",
     similarity: "8%",
     usulanPembimbing1: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
@@ -114,7 +114,7 @@ export default function AdminProdiDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs max-w-full truncate">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
                       <Building2 className="w-3.5 h-3.5 text-white shrink-0" />
                       <span className="truncate">Prodi Teknik Informatika</span>
                     </span>
@@ -123,14 +123,14 @@ export default function AdminProdiDashboard() {
                     Selamat Datang
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Portal utama program studi. Terdapat <strong className="text-[#ffd01d] font-bold">{proposalList.length} proposal judul</strong> baru yang memerlukan verifikasi hari ini.
+                    Portal utama program studi. Terdapat <strong className="text-[#38bdf8] font-bold">{proposalList.length} proposal judul</strong> baru yang memerlukan verifikasi hari ini.
                   </p>
                 </div>
 
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-prodi/aktivasi"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <UserPlus className="w-4 h-4 text-white" />
                     <span>Aktivasi Akun Clearing</span>
@@ -144,7 +144,7 @@ export default function AdminProdiDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 4 Executive Stat Cards ── */}
@@ -172,7 +172,7 @@ export default function AdminProdiDashboard() {
               {/* Clean Focused Header */}
               <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-slate-100 bg-slate-50/80 gap-3 shrink-0">
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                     <FileText className="w-4 h-4 text-white" />
                   </div>
                   <div className="min-w-0">

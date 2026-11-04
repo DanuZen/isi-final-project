@@ -30,7 +30,7 @@ export function PDFModalViewer({
   title,
   docNumber,
   docType,
-  studentName = "Mahasiswa UPI YPTK",
+  studentName = "Mahasiswa PT MBOIS",
   studentNim = "20101152630001",
   prodiName = "Teknik Informatika",
   fakultasName = "Fakultas Ilmu Komputer",
@@ -49,7 +49,7 @@ export function PDFModalViewer({
         {/* Top Control Header (Non-Printable) */}
         <div className="bg-[#1A1A1A] p-4 text-white flex items-center justify-between shrink-0 border-b border-neutral-800 print:hidden">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
               <FileText className="w-5 h-5" />
             </div>
             <div>
@@ -61,7 +61,7 @@ export function PDFModalViewer({
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#a81f1f] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Cetak / Download PDF</span>
@@ -79,22 +79,22 @@ export function PDFModalViewer({
         <div className="flex-1 overflow-y-auto p-6 md:p-10 bg-slate-50 font-sans print:p-0 print:bg-white print:overflow-visible">
           <div className="bg-white p-8 md:p-12 rounded-xl border border-slate-200 shadow-sm max-w-3xl mx-auto space-y-6 text-slate-900 leading-relaxed print:border-none print:shadow-none print:p-0">
             
-            {/* Kop Surat Resmi UPI YPTK */}
-            <div className="flex items-center gap-4 pb-4 border-b-4 border-b-[#C62828] relative">
+            {/* Kop Surat Resmi PT MBOIS */}
+            <div className="flex items-center gap-4 pb-4 border-b-4 border-b-[#2563eb] relative">
               <Image
-                src="/upiyptk_emblem.webp"
-                alt="Emblem UPI YPTK"
+                src="/mbois_blue.png"
+                alt="Emblem PT MBOIS"
                 width={70}
                 height={70}
                 className="w-16 h-16 object-contain shrink-0"
               />
               <div className="text-center flex-1 space-y-0.5">
                 <h2 className="text-base md:text-lg font-black tracking-wider font-display uppercase text-slate-950">
-                  UNIVERSITAS PUTRA INDONESIA &ldquo;YPTK&rdquo; PADANG
+                  PT MBOIS - FINAL PROJECT
                 </h2>
-                <p className="text-xs font-bold uppercase text-[#C62828] tracking-widest">{fakultasName}</p>
+                <p className="text-xs font-bold uppercase text-[#2563eb] tracking-widest">{fakultasName}</p>
                 <p className="text-[10px] text-slate-500 font-medium">
-                  Jl. Raya Lubuk Begalung, Kota Padang, Sumatera Barat 25221 • Telp: (0751) 776677
+                  Gedung PT MBOIS • Divisi Final Project • contact@mbois.id
                 </p>
               </div>
             </div>
@@ -127,7 +127,7 @@ export function PDFModalViewer({
             {docType === "SK_DEKAN" && (
               <div className="space-y-4 text-xs text-slate-800">
                 <p>
-                  Dekan {fakultasName} Universitas Putra Indonesia YPTK Padang menetapkan Dosen Pembimbing dan Dosen Penguji Skripsi untuk mahasiswa di atas dengan rincian susunan majelis sebagai berikut:
+                  Dekan {fakultasName} PT MBOIS - Final Project menetapkan Dosen Pembimbing dan Dosen Penguji Skripsi untuk mahasiswa di atas dengan rincian susunan majelis sebagai berikut:
                 </p>
                 <div className="border border-slate-200 rounded-xl overflow-hidden">
                   <table className="w-full text-left text-xs border-collapse">
@@ -187,7 +187,7 @@ export function PDFModalViewer({
             <div className="pt-4 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-400 font-medium">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Dokumen Resmi Terverifikasi Digital SIPETA UPI YPTK</span>
+                <span>Dokumen Resmi Terverifikasi Digital PT MBOIS - Final Project PT MBOIS</span>
               </div>
               <span className="font-mono">HMAC SHA-256 Verified</span>
             </div>

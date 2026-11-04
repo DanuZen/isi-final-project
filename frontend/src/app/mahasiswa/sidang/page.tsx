@@ -18,7 +18,7 @@ import {
   Download,
 } from "lucide-react";
 
-import { storeJadwal } from "@/lib/sipeta-store";
+import { storeJadwal } from "@/lib/final-project-store";
 
 export default function UjianSidangPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -75,7 +75,7 @@ export default function UjianSidangPage() {
                     Jadwal &amp; Ujian Akademik Tugas Akhir
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Pusat informasi alokasi ujian Seminar Proposal (Sempro) dan Ujian Sidang Akhir Skripsi mahasiswa UPI YPTK Padang.
+                    Pusat informasi alokasi ujian Seminar Proposal (Sempro) dan Ujian Sidang Akhir Skripsi mahasiswa PT MBOIS.
                   </p>
                 </div>
 
@@ -85,7 +85,7 @@ export default function UjianSidangPage() {
                     onClick={() => setActiveTab("SEMPRO")}
                     className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
                       activeTab === "SEMPRO"
-                        ? "bg-[#C62828] text-white shadow-xs font-extrabold"
+                        ? "bg-[#2563eb] text-white shadow-xs font-extrabold"
                         : "text-neutral-400 hover:text-white font-medium"
                     }`}
                   >
@@ -96,7 +96,7 @@ export default function UjianSidangPage() {
                     onClick={() => setActiveTab("SIDANG")}
                     className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
                       activeTab === "SIDANG"
-                        ? "bg-[#C62828] text-white shadow-xs font-extrabold"
+                        ? "bg-[#2563eb] text-white shadow-xs font-extrabold"
                         : "text-neutral-400 hover:text-white font-medium"
                     }`}
                   >
@@ -106,7 +106,7 @@ export default function UjianSidangPage() {
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
@@ -115,7 +115,7 @@ export default function UjianSidangPage() {
                 onClick={() => setActiveMobileTab("jadwal")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "jadwal"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -127,7 +127,7 @@ export default function UjianSidangPage() {
                 onClick={() => setActiveMobileTab("berkas")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "berkas"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -143,7 +143,7 @@ export default function UjianSidangPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         {activeTab === "SEMPRO" ? (
                           <Calendar className="w-4 h-4" />
                         ) : (
@@ -172,7 +172,7 @@ export default function UjianSidangPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                         <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                           <div className="flex items-center gap-1.5 text-slate-500">
-                            <Calendar className="w-3.5 h-3.5 text-[#C62828]" />
+                            <Calendar className="w-3.5 h-3.5 text-[#2563eb]" />
                             <span className="font-bold uppercase tracking-wider text-[10px]">Hari &amp; Tanggal</span>
                           </div>
                           <p className="font-bold text-slate-900">{currentExam.hari}, {currentExam.tglNum}</p>
@@ -180,7 +180,7 @@ export default function UjianSidangPage() {
 
                         <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                           <div className="flex items-center gap-1.5 text-slate-500">
-                            <Clock className="w-3.5 h-3.5 text-[#C62828]" />
+                            <Clock className="w-3.5 h-3.5 text-[#2563eb]" />
                             <span className="font-bold uppercase tracking-wider text-[10px]">Waktu Pelaksanaan</span>
                           </div>
                           <p className="font-bold text-slate-900">{currentExam.waktu}</p>
@@ -188,7 +188,7 @@ export default function UjianSidangPage() {
 
                         <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                           <div className="flex items-center gap-1.5 text-slate-500">
-                            <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#2563eb]" />
                             <span className="font-bold uppercase tracking-wider text-[10px]">Ruangan Ujian</span>
                           </div>
                           <p className="font-bold text-slate-900">{currentExam.ruang}</p>
@@ -198,7 +198,7 @@ export default function UjianSidangPage() {
                       {/* Examiners Table */}
                       <div className="space-y-3 pt-2">
                         <h4 className="font-bold text-xs text-slate-900 font-display flex items-center gap-2">
-                          <Users className="w-4 h-4 text-[#C62828]" /> Susunan Dewan Penguji Ujian:
+                          <Users className="w-4 h-4 text-[#2563eb]" /> Susunan Dewan Penguji Ujian:
                         </h4>
 
                         <div className="overflow-x-auto rounded-xl border border-slate-200">
@@ -212,7 +212,7 @@ export default function UjianSidangPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-100 text-slate-800 font-medium">
                               <tr>
-                                <td className="py-2.5 px-3 font-bold text-[#C62828]">Ketua Dewan Penguji</td>
+                                <td className="py-2.5 px-3 font-bold text-[#2563eb]">Ketua Dewan Penguji</td>
                                 <td className="py-2.5 px-3">Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.</td>
                                 <td className="py-2.5 px-3 text-emerald-600 font-bold">✓ Konfirmasi Hadir</td>
                               </tr>
@@ -243,7 +243,7 @@ export default function UjianSidangPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <FileCheck className="w-4 h-4" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -274,12 +274,12 @@ export default function UjianSidangPage() {
                           type="file"
                           required
                           onChange={(e) => setRevisiSemproFile(e.target.files?.[0]?.name || "Draft_Proposal_Skripsi.pdf")}
-                          className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#C62828] file:text-white hover:file:bg-[#B71C1C] cursor-pointer"
+                          className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#2563eb] file:text-white hover:file:bg-[#1d4ed8] cursor-pointer"
                         />
 
                         <button
                           type="submit"
-                          className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95"
+                          className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95"
                         >
                           <Upload className="w-4 h-4" /> Unggah Draft Proposal
                         </button>
@@ -304,12 +304,12 @@ export default function UjianSidangPage() {
                         type="file"
                         required
                         onChange={(e) => setNaskahFinalFile(e.target.files?.[0]?.name || "Naskah_Skripsi_Final_DanuZen.pdf")}
-                        className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#C62828] file:text-white hover:file:bg-[#B71C1C] cursor-pointer"
+                        className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#2563eb] file:text-white hover:file:bg-[#1d4ed8] cursor-pointer"
                       />
 
                       <button
                         type="submit"
-                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95"
                       >
                         <Upload className="w-4 h-4" /> Unggah Naskah Skripsi Final
                       </button>
@@ -321,7 +321,7 @@ export default function UjianSidangPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-3 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <CheckCircle2 className="w-4 h-4 text-white" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -332,7 +332,7 @@ export default function UjianSidangPage() {
                     <ul className="space-y-2.5 text-xs text-slate-600 font-medium mt-3">
                       <li className="flex items-center gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />
-                        <span>Memakai kemeja putih &amp; Jas Almamater UPI YPTK</span>
+                        <span>Memakai kemeja putih &amp; Jas Almamater PT MBOIS</span>
                       </li>
                       <li className="flex items-center gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#2F8F5B] shrink-0" />

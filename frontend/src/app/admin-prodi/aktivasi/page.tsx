@@ -61,7 +61,7 @@ export default function AdminProdiAktivasiPage() {
       prev.map((item) => (item.nim === nim ? { ...item, status: "Aktif" } : item))
     );
     const mhs = list.find((i) => i.nim === nim);
-    setActivatedSuccess(`Akun SIPETA ${mhs?.nama} (${nim}) telah berhasil DIAKTIFKAN!`);
+    setActivatedSuccess(`Akun PT MBOIS ${mhs?.nama} (${nim}) telah berhasil DIAKTIFKAN!`);
     setTimeout(() => setActivatedSuccess(null), 5000);
   };
 
@@ -116,7 +116,7 @@ export default function AdminProdiAktivasiPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs max-w-full truncate">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
                       <UserCheck className="w-3.5 h-3.5 text-white shrink-0" />
                       <span className="truncate">Prodi Teknik Informatika</span>
                     </span>
@@ -129,7 +129,7 @@ export default function AdminProdiAktivasiPage() {
                   </p>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Grid Split View (Flex-1 Table & Fixed 350px Detail Side Panel) ── */}
@@ -141,7 +141,7 @@ export default function AdminProdiAktivasiPage() {
               }`}>
                 <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
                   <div className="flex items-center gap-2.5 shrink-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <UserCheck className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -159,13 +159,13 @@ export default function AdminProdiAktivasiPage() {
                         placeholder="Cari NIM atau Nama..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                        className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all w-full font-display"
                       />
                     </div>
                     <button
                       onClick={() => setShowAddModal(true)}
                       title="Input Mahasiswa Baru"
-                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+                      className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
                     >
                       <Plus className="w-4 h-4 text-white shrink-0" />
                       <span>Tambah</span>
@@ -237,12 +237,12 @@ export default function AdminProdiAktivasiPage() {
                         onClick={() => setActiveMobileTab("table")}
                         className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                       >
-                        <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                        <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                         <span>Kembali</span>
                       </button>
 
                       <div className="hidden lg:block min-w-0 flex-1">
-                        <span className="text-[10px] font-bold text-[#C62828] uppercase tracking-widest font-display">Detail Clearing Akun</span>
+                        <span className="text-[10px] font-bold text-[#2563eb] uppercase tracking-widest font-display">Detail Clearing Akun</span>
                         <h3 className="text-base font-black text-slate-900 font-display mt-0.5 truncate">{selected.nama}</h3>
                       </div>
 
@@ -259,7 +259,7 @@ export default function AdminProdiAktivasiPage() {
 
                       <div className="grid grid-cols-2 gap-2">
                         <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                          <p className="text-xl font-black text-[#C62828] font-display">{selected.ipk}</p>
+                          <p className="text-xl font-black text-[#2563eb] font-display">{selected.ipk}</p>
                           <p className="text-[9px] text-slate-400 font-bold font-display">IPK Terakhir</p>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
@@ -297,9 +297,9 @@ export default function AdminProdiAktivasiPage() {
                     {selected.status === "Pending" ? (
                       <button
                         onClick={() => handleActivate(selected.nim)}
-                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
                       >
-                        <UserPlus className="w-4 h-4 text-white" /> Aktifkan Akun SIPETA
+                        <UserPlus className="w-4 h-4 text-white" /> Aktifkan Akun PT MBOIS
                       </button>
                     ) : (
                       <button
@@ -325,7 +325,7 @@ export default function AdminProdiAktivasiPage() {
             {/* Modal Header */}
             <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                   <UserPlus className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -344,26 +344,26 @@ export default function AdminProdiAktivasiPage() {
             {/* Modal Body Form */}
             <form onSubmit={handleCreateStudent} className="p-6 space-y-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">NIM (Nomor Induk Mahasiswa) <span className="text-[#C62828]">*</span></label>
+                <label className="text-xs font-bold text-slate-700 font-display">NIM (Nomor Induk Mahasiswa) <span className="text-[#2563eb]">*</span></label>
                 <input
                   type="text"
                   required
                   placeholder="Contoh: 20101152630299"
                   value={formNim}
                   onChange={(e) => setFormNim(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono transition-all"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">Nama Lengkap Mahasiswa <span className="text-[#C62828]">*</span></label>
+                <label className="text-xs font-bold text-slate-700 font-display">Nama Lengkap Mahasiswa <span className="text-[#2563eb]">*</span></label>
                 <input
                   type="text"
                   required
                   placeholder="Contoh: Budi Gunawan"
                   value={formNama}
                   onChange={(e) => setFormNama(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                 />
               </div>
 
@@ -373,7 +373,7 @@ export default function AdminProdiAktivasiPage() {
                   <select
                     value={formProdi}
                     onChange={(e) => setFormProdi(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   >
                     <option value="Teknik Informatika">Teknik Informatika</option>
                     <option value="Sistem Informasi">Sistem Informasi</option>
@@ -387,7 +387,7 @@ export default function AdminProdiAktivasiPage() {
                     type="text"
                     value={formPetugas}
                     onChange={(e) => setFormPetugas(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
               </div>
@@ -400,7 +400,7 @@ export default function AdminProdiAktivasiPage() {
                     step="0.01"
                     value={formIpk}
                     onChange={(e) => setFormIpk(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono transition-all"
                   />
                 </div>
 
@@ -410,21 +410,21 @@ export default function AdminProdiAktivasiPage() {
                     type="number"
                     value={formSks}
                     onChange={(e) => setFormSks(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono transition-all"
                   />
                 </div>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-bold text-amber-900 font-display">Langsung Aktifkan Akun SIPETA?</p>
+                  <p className="text-xs font-bold text-amber-900 font-display">Langsung Aktifkan Akun PT MBOIS?</p>
                   <p className="text-[10px] text-amber-700 font-medium">Password default otomatis dikirim ke akun mahasiswa</p>
                 </div>
                 <input
                   type="checkbox"
                   checked={autoActivate}
                   onChange={(e) => setAutoActivate(e.target.checked)}
-                  className="w-4 h-4 accent-[#C62828] cursor-pointer"
+                  className="w-4 h-4 accent-[#2563eb] cursor-pointer"
                 />
               </div>
 
@@ -439,7 +439,7 @@ export default function AdminProdiAktivasiPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
+                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
                 >
                   <CheckCircle2 className="w-4 h-4 text-white" />
                   <span>Simpan &amp; Input Mahasiswa</span>

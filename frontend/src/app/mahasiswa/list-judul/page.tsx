@@ -18,7 +18,7 @@ import {
   PieChart,
 } from "lucide-react";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
-import { storeProposal } from "@/lib/sipeta-store";
+import { storeProposal } from "@/lib/final-project-store";
 
 interface JudulItem {
   no: number;
@@ -98,20 +98,20 @@ export default function ListJudulPage() {
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
-                      <BookOpen className="w-3.5 h-3.5" /> Repositori Resmi UPI YPTK
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
+                      <BookOpen className="w-3.5 h-3.5" /> Repositori Resmi PT MBOIS
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
                     Daftar &amp; Referensi Judul Tugas Akhir
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Database repositori naskah Skripsi / Tugas Akhir seluruh mahasiswa Universitas UPI YPTK Padang. Gunakan pencarian untuk mengecek ketersediaan judul atau mencari referensi topik.
+                    Database repositori naskah Skripsi / Tugas Akhir seluruh mahasiswa Universitas PT MBOIS. Gunakan pencarian untuk mengecek ketersediaan judul atau mencari referensi topik.
                   </p>
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
 
@@ -125,7 +125,7 @@ export default function ListJudulPage() {
                   placeholder="Cari judul, nama mahasiswa, NIM, atau dosen..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-xs font-medium text-slate-900 focus:outline-none focus:bg-white focus:border-[#C62828] transition-all"
+                  className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-xs font-medium text-slate-900 focus:outline-none focus:bg-white focus:border-[#2563eb] transition-all"
                 />
               </div>
 
@@ -166,14 +166,14 @@ export default function ListJudulPage() {
                   <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
                     <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <FileText className="w-4 h-4" />
                         </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
-                          Daftar Judul Tugas Akhir Mahasiswa UPI YPTK
+                          Daftar Judul Tugas Akhir Mahasiswa PT MBOIS
                         </h3>
                       </div>
-                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#2563eb] text-white shadow-xs font-display">
                         {filteredData.length} Judul Ditemukan
                       </span>
                     </div>
@@ -250,7 +250,7 @@ export default function ListJudulPage() {
                       <button className="px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-slate-500 hover:bg-slate-50 flex items-center gap-1 text-[11px]">
                         <ChevronLeft className="w-3.5 h-3.5" /> Sebelumnya
                       </button>
-                      <button className="w-7 h-7 rounded-lg bg-gradient-to-r from-[#C62828] to-[#990000] text-white flex items-center justify-center text-[11px] shadow-xs">
+                      <button className="w-7 h-7 rounded-lg bg-gradient-to-r from-[#2563eb] to-[#990000] text-white flex items-center justify-center text-[11px] shadow-xs">
                         1
                       </button>
                       <button className="w-7 h-7 rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 flex items-center justify-center text-[11px]">
@@ -276,7 +276,7 @@ export default function ListJudulPage() {
                 {/* Card 1: Distribusi Domain Penelitian */}
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <PieChart className="w-4 h-4" />
                     </div>
                     <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -288,10 +288,10 @@ export default function ListJudulPage() {
                     <div>
                       <div className="flex justify-between font-bold text-slate-800 mb-1">
                         <span>Rekayasa Perangkat Lunak (RPL)</span>
-                        <span className="text-[#C62828]">52% (58 Judul)</span>
+                        <span className="text-[#2563eb]">52% (58 Judul)</span>
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-2">
-                        <div className="bg-[#C62828] h-2 rounded-full w-[52%]" />
+                        <div className="bg-[#2563eb] h-2 rounded-full w-[52%]" />
                       </div>
                     </div>
 
@@ -321,7 +321,7 @@ export default function ListJudulPage() {
                 <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <CheckCircle2 className="w-4 h-4" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -336,7 +336,7 @@ export default function ListJudulPage() {
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>Skor similarity maksimal 25% pada sistem SIPETA</span>
+                        <span>Skor similarity maksimal 25% pada sistem PT MBOIS - Final Project</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -347,7 +347,7 @@ export default function ListJudulPage() {
 
                   <div className="pt-3 border-t border-slate-100">
                     <button className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors flex items-center justify-center gap-2">
-                      <Download className="w-3.5 h-3.5 text-[#C62828]" /> Unduh Pedoman Judul Skripsi.pdf
+                      <Download className="w-3.5 h-3.5 text-[#2563eb]" /> Unduh Pedoman Judul Skripsi.pdf
                     </button>
                   </div>
                 </div>

@@ -21,14 +21,14 @@ const METRICS = [
   { label: "Rata-Rata IPK Kelulusan", value: "3.58", sub: "+0.04 vs Semester Lalu", color: "#D97706", bgIcon: "bg-amber-500", icon: Award },
   { label: "Tepat Waktu (≤ 8 Sem)",   value: "82.4%",sub: "+3.1% Kenaikan Efisiensi",color: "#059669", bgIcon: "bg-emerald-600",icon: TrendingUp },
   { label: "Publikasi Jurnal / Scopus",value:"45 Artikel",sub: "Karya Mahasiswa & Dosen",color: "#2563EB", bgIcon: "bg-blue-600", icon: BookOpen },
-  { label: "Predikat Cumlaude",        value: "64 Mhs",  sub: "72% Lulusan Cumlaude",  color: "#C62828", bgIcon: "bg-[#C62828]",  icon: Sparkles },
+  { label: "Predikat Cumlaude",        value: "64 Mhs",  sub: "72% Lulusan Cumlaude",  color: "#2563eb", bgIcon: "bg-[#2563eb]",  icon: Sparkles },
 ];
 
 const TAHAP_TA = [
   { label: "Usulan Judul & Topik",    count: 45, color: "#D97706", pct: 18, desc: "Review komisi etik & prodi" },
   { label: "Proses Bimbingan SK",     count: 98, color: "#2563EB", pct: 40, desc: "Penyusunan Bab 1 s.d. 5" },
   { label: "Seminar Proposal",        count: 42, color: "#0D9488", pct: 17, desc: "Presentasi kelayakan riset" },
-  { label: "Ujian Sidang Skripsi",    count: 35, color: "#C62828", pct: 14, desc: "Ujian komprehensif 4 Penguji" },
+  { label: "Ujian Sidang Skripsi",    count: 35, color: "#2563eb", pct: 14, desc: "Ujian komprehensif 4 Penguji" },
   { label: "Lulus & Terverifikasi",  count: 28, color: "#059669", pct: 11, desc: "Bebas Fakultas & wisuda" },
 ];
 
@@ -73,7 +73,7 @@ export default function DekanatStatistikPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <BarChart2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Eksekutif Statistik FIK Active
                     </span>
                   </div>
@@ -88,14 +88,14 @@ export default function DekanatStatistikPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dekanat/laporan"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <FileDown className="w-4 h-4 text-white" />
                     <span>Unduh Analisis Laporan PDF</span>
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. 4 Top Overview Cards (2 Cols on Mobile) ── */}
@@ -123,7 +123,7 @@ export default function DekanatStatistikPage() {
                 onClick={() => setActiveMobileTab("tahap")}
                 className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeMobileTab === "tahap"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
@@ -134,7 +134,7 @@ export default function DekanatStatistikPage() {
                 onClick={() => setActiveMobileTab("kpi")}
                 className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeMobileTab === "kpi"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
@@ -152,7 +152,7 @@ export default function DekanatStatistikPage() {
               }`}>
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <BarChart2 className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -160,7 +160,7 @@ export default function DekanatStatistikPage() {
                       <p className="text-[10px] text-slate-400 font-medium truncate">Persentase &amp; Progres Pengerjaan Tugas Akhir Mahasiswa FIK</p>
                     </div>
                   </div>
-                  <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-[#C62828] text-white font-display shadow-xs shrink-0">
+                  <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-[#2563eb] text-white font-display shadow-xs shrink-0">
                     Total: 248 Mahasiswa
                   </span>
                 </div>
@@ -203,7 +203,7 @@ export default function DekanatStatistikPage() {
                   </span>
                   <Link
                     href="/dekanat/prodi"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C62828] hover:underline font-display shrink-0 whitespace-nowrap"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563eb] hover:underline font-display shrink-0 whitespace-nowrap"
                   >
                     <span>Komparasi Prodi</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -220,7 +220,7 @@ export default function DekanatStatistikPage() {
                   {/* KPI Target Header */}
                   <div className="pb-3 border-b border-slate-100 space-y-2">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <Target className="w-4 h-4 text-white" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -228,9 +228,9 @@ export default function DekanatStatistikPage() {
                         <p className="text-[10px] text-slate-400 font-medium truncate">Pencapaian &amp; Performa Dosen Pembimbing</p>
                       </div>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200/80">
+                    <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80">
                       <p className="text-xs text-slate-700 font-medium leading-relaxed">
-                        Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-[#C62828] font-bold">92% dari target universitas</strong>.
+                        Pencapaian kelulusan tepat waktu FIK mencapai <strong className="text-[#2563eb] font-bold">92% dari target universitas</strong>.
                       </p>
                     </div>
                   </div>
@@ -239,17 +239,17 @@ export default function DekanatStatistikPage() {
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] font-bold text-slate-700 font-display flex items-center gap-1.5">
-                        <Award className="w-3.5 h-3.5 text-[#C62828]" />
+                        <Award className="w-3.5 h-3.5 text-[#2563eb]" />
                         <span>Dosen Pembimbing Terproduktif</span>
                       </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-[#C62828] border border-rose-200 font-display">Top 3 FIK</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#2563eb] border border-blue-200 font-display">Top 3 FIK</span>
                     </div>
 
                     <div className="space-y-2">
                       {TOP_DOSEN.map((d, idx) => (
                         <div key={d.nama} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-2.5">
                           <div className="flex items-center gap-2 min-w-0">
-                            <span className="w-5 h-5 rounded-full bg-[#C62828] text-[#FFFFFF] text-[10px] font-bold flex items-center justify-center shrink-0 font-display shadow-2xs">
+                            <span className="w-5 h-5 rounded-full bg-[#2563eb] text-[#FFFFFF] text-[10px] font-bold flex items-center justify-center shrink-0 font-display shadow-2xs">
                               {idx + 1}
                             </span>
                             <div className="min-w-0">
@@ -281,7 +281,7 @@ export default function DekanatStatistikPage() {
                 <div className="pt-3 border-t border-slate-100 shrink-0 mt-2">
                   <button
                     onClick={() => alert("Mengunduh berkas Laporan Analitik Eksekutif Fakultas PDF...")}
-                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <FileDown className="w-4 h-4 text-white" />
                     <span>Unduh Laporan Analitik PDF</span>

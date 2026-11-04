@@ -18,7 +18,7 @@ import {
   Building2,
   GraduationCap,
 } from "lucide-react";
-import { UPI_YPTK_FAKULTAS, PROGRAM_PASCASARJANA } from "@/constants/upiyptk";
+import { UPI_YPTK_FAKULTAS, PROGRAM_PASCASARJANA } from "@/constants/academic";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
 
 interface CalendarEvent {
@@ -35,7 +35,7 @@ interface CalendarEvent {
   status: string;
 }
 
-import { storeJadwal, storeBimbingan } from "@/lib/sipeta-store";
+import { storeJadwal, storeBimbingan } from "@/lib/final-project-store";
 
 const INITIAL_EVENTS: CalendarEvent[] = [];
 
@@ -63,7 +63,7 @@ export default function KalenderPage() {
       mahasiswa: j.studentNama,
       nim: j.studentNim,
       pembimbing: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.",
-      ruangan: j.ruang || "Aula FIK UPI YPTK",
+      ruangan: j.ruang || "Aula FIK PT MBOIS",
       prodi: j.prodi,
       status: j.status,
     }));
@@ -121,7 +121,7 @@ export default function KalenderPage() {
       case "SIDANG":
         return "bg-[#15803D] text-white border-[#15803D] hover:bg-[#166534]";
       case "DEADLINE":
-        return "bg-[#C62828] text-white border-[#C62828] hover:bg-[#B71C1C]";
+        return "bg-[#2563eb] text-white border-[#2563eb] hover:bg-[#1d4ed8]";
       default:
         return "bg-slate-700 text-white border-slate-700";
     }
@@ -136,7 +136,7 @@ export default function KalenderPage() {
       case "SIDANG":
         return "bg-[#15803D]";
       case "DEADLINE":
-        return "bg-[#C62828]";
+        return "bg-[#2563eb]";
       default:
         return "bg-slate-400";
     }
@@ -157,7 +157,7 @@ export default function KalenderPage() {
                 {/* Left: greeting + status */}
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs">
                       <CalendarDays className="w-3.5 h-3.5" /> Kalender Akademik Universitas
                     </span>
                   </div>
@@ -165,12 +165,12 @@ export default function KalenderPage() {
                     Kalender Interaktif TA &amp; Sidang Skripsi
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Jadwal alokasi bimbingan rutin, seminar proposal, ujian sidang skripsi, dan batas akhir akademik mahasiswa UPI YPTK Padang.
+                    Jadwal alokasi bimbingan rutin, seminar proposal, ujian sidang skripsi, dan batas akhir akademik mahasiswa PT MBOIS.
                   </p>
                 </div>
               </div>
               {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* Controls Bar & Filter Legend */}
@@ -260,11 +260,11 @@ export default function KalenderPage() {
                   onClick={() => setActiveCategory("DEADLINE")}
                   className={`px-3 py-1 rounded-full border flex items-center gap-1.5 transition-all font-display ${
                     activeCategory === "DEADLINE"
-                      ? "bg-[#C62828] text-white border-[#C62828] shadow-xs font-extrabold"
+                      ? "bg-[#2563eb] text-white border-[#2563eb] shadow-xs font-extrabold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:text-slate-900 font-bold"
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "DEADLINE" ? "bg-white" : "bg-[#C62828]"}`} />
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${activeCategory === "DEADLINE" ? "bg-white" : "bg-[#2563eb]"}`} />
                   Deadline (1)
                 </button>
               </div>
@@ -276,7 +276,7 @@ export default function KalenderPage() {
                 onClick={() => setActiveMobileTab("kalender")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "kalender"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -288,7 +288,7 @@ export default function KalenderPage() {
                 onClick={() => setActiveMobileTab("agenda")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "agenda"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -306,14 +306,14 @@ export default function KalenderPage() {
                     {/* Card Header Heading */}
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3.5 shrink-0">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <CalendarIcon className="w-4 h-4" />
                         </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
                           Papan Kalender Akademik TA
                         </h3>
                       </div>
-                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs font-display">
+                      <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#2563eb] text-white shadow-xs font-display">
                         Agustus 2026
                       </span>
                     </div>
@@ -352,9 +352,9 @@ export default function KalenderPage() {
                             onClick={() => setSelectedDay(dayNum)}
                             className={`p-1.5 rounded-lg border transition-all flex flex-col justify-between min-h-0 h-full overflow-hidden cursor-pointer ${
                               isSelected
-                                ? "bg-rose-50/60 border-[#C62828] ring-2 ring-[#C62828]/40 shadow-xs"
+                                ? "bg-blue-50/60 border-[#2563eb] ring-2 ring-[#2563eb]/40 shadow-xs"
                                 : isToday
-                                ? "bg-rose-50/30 border-rose-300 shadow-2xs"
+                                ? "bg-blue-50/30 border-blue-300 shadow-2xs"
                                 : "bg-white border-slate-200 hover:border-slate-300"
                             }`}
                           >
@@ -363,7 +363,7 @@ export default function KalenderPage() {
                               <span
                                 className={`text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center font-display ${
                                   isSelected || isToday
-                                    ? "bg-[#C62828] text-white shadow-xs"
+                                    ? "bg-[#2563eb] text-white shadow-xs"
                                     : "text-slate-700"
                                 }`}
                               >
@@ -410,7 +410,7 @@ export default function KalenderPage() {
                     <div className="bg-slate-50/80 rounded-xl border border-slate-200/90 p-3.5 shadow-2xs space-y-2.5 shrink-0 mt-3 font-display">
                       <div className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-black text-xs shadow-2xs">
+                          <div className="w-6 h-6 rounded-lg bg-[#2563eb] text-white flex items-center justify-center font-black text-xs shadow-2xs">
                             {selectedDay}
                           </div>
                           <h4 className="font-extrabold text-xs text-slate-900">
@@ -428,7 +428,7 @@ export default function KalenderPage() {
                             <div
                               key={evt.id}
                               onClick={() => setSelectedEvent(evt)}
-                              className="p-3 bg-white rounded-xl border border-slate-200 hover:border-[#C62828] transition-all cursor-pointer space-y-1.5 shadow-2xs"
+                              className="p-3 bg-white rounded-xl border border-slate-200 hover:border-[#2563eb] transition-all cursor-pointer space-y-1.5 shadow-2xs"
                             >
                               <div className="flex items-center justify-between gap-2">
                                 <span
@@ -471,7 +471,7 @@ export default function KalenderPage() {
                       <h3 className="font-bold text-sm text-slate-900 font-display">
                         Tampilan Agenda List ({viewMode})
                       </h3>
-                      <span className="text-xs font-bold text-[#C62828]">
+                      <span className="text-xs font-bold text-[#2563eb]">
                         {filteredEvents.length} Acara Terdaftar
                       </span>
                     </div>
@@ -481,18 +481,18 @@ export default function KalenderPage() {
                         <div
                           key={evt.id}
                           onClick={() => setSelectedEvent(evt)}
-                          className="p-3.5 rounded-xl border border-slate-200 hover:border-[#C62828] bg-slate-50/50 hover:bg-white transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-3"
+                          className="p-3.5 rounded-xl border border-slate-200 hover:border-[#2563eb] bg-slate-50/50 hover:bg-white transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-3"
                         >
                           <div className="flex items-start gap-3">
                             <div
                               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-black text-white ${
                                 evt.kategori === "BIMBINGAN"
-                                  ? "bg-[#ffd01d]"
+                                  ? "bg-[#38bdf8]"
                                   : evt.kategori === "SEMPRO"
                                   ? "bg-[#2563EB]"
                                   : evt.kategori === "SIDANG"
                                   ? "bg-[#10B981]"
-                                  : "bg-[#C62828]"
+                                  : "bg-[#2563eb]"
                               }`}
                             >
                               {evt.tgl} Ags
@@ -532,7 +532,7 @@ export default function KalenderPage() {
                 {/* Card 1: Filter Fakultas & Program Studi */}
                 <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs space-y-3 shrink-0">
                   <div className="flex items-center gap-2.5 border-b border-slate-100 pb-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Filter className="w-4 h-4" />
                     </div>
                     <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -542,14 +542,14 @@ export default function KalenderPage() {
 
                   {/* Dropdown Pilihan Fakultas */}
                   <CustomDropdown
-                    label="Fakultas (UPI YPTK Padang):"
+                    label="Fakultas (PT MBOIS):"
                     value={selectedFakultas}
                     onChange={(val) => {
                       setSelectedFakultas(val);
                       setSelectedProdi("ALL");
                     }}
                     options={[
-                      { id: "ALL", label: "Semua Fakultas UPI YPTK", badge: "ALL" },
+                      { id: "ALL", label: "Semua Fakultas PT MBOIS", badge: "ALL" },
                       ...UPI_YPTK_FAKULTAS.map((fak) => ({
                         id: fak.id,
                         label: `${fak.nama} (${fak.singkatan})`,
@@ -568,7 +568,7 @@ export default function KalenderPage() {
                     options={[
                       {
                         id: "ALL",
-                        label: `Semua Prodi ${selectedFakultas !== "ALL" ? selectedFakultas : "UPI YPTK"}`,
+                        label: `Semua Prodi ${selectedFakultas !== "ALL" ? selectedFakultas : "PT MBOIS"}`,
                         badge: "ALL",
                       },
                       ...(selectedFakultas === "ALL"
@@ -592,7 +592,7 @@ export default function KalenderPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 shrink-0">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <CalendarDays className="w-4 h-4" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -674,11 +674,11 @@ export default function KalenderPage() {
 
             <div className="space-y-2.5 text-xs">
               <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                <CalendarIcon className="w-4 h-4 text-[#C62828]" />
+                <CalendarIcon className="w-4 h-4 text-[#2563eb]" />
                 <span>Tanggal: {selectedEvent.tgl} Agustus 2026</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                <Clock className="w-4 h-4 text-[#ffd01d]" />
+                <Clock className="w-4 h-4 text-[#38bdf8]" />
                 <span>Waktu: {selectedEvent.waktu}</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 font-semibold">
@@ -702,7 +702,7 @@ export default function KalenderPage() {
                   alert("Jadwal berhasil diekspor ke format Google Calendar / .ics!");
                   setSelectedEvent(null);
                 }}
-                className="flex-1 py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                className="flex-1 py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <Download className="w-3.5 h-3.5" /> Ekspor ke Kalender (.ics)
               </button>

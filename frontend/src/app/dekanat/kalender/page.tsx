@@ -9,7 +9,7 @@ import {
   MapPin, Clock, ArrowRight, ArrowLeft, Filter, Check, ChevronDown,
   Building2, Users, FileText, UserCheck, Sparkles, X, ShieldCheck
 } from "lucide-react";
-import { storeJadwal } from "@/lib/sipeta-store";
+import { storeJadwal } from "@/lib/final-project-store";
 
 const NAV = [
   { label: "Dashboard Eksekutif",href: "/dekanat/dashboard",   icon: <LayoutDashboard className="w-4 h-4" /> },
@@ -36,8 +36,8 @@ interface SidangEvent {
 }
 
 const JENIS_COLOR: Record<string, { bg: string; text: string; border: string }> = {
-  "Ujian Sidang font-bold":     { bg: "bg-[#C62828]", text: "text-white", border: "border-red-600" },
-  "Ujian Sidang":            { bg: "bg-[#C62828]", text: "text-white", border: "border-red-600" },
+  "Ujian Sidang font-bold":     { bg: "bg-[#2563eb]", text: "text-white", border: "border-red-600" },
+  "Ujian Sidang":            { bg: "bg-[#2563eb]", text: "text-white", border: "border-red-600" },
   "Seminar Proposal":        { bg: "bg-blue-600",  text: "text-white", border: "border-blue-600" },
 };
 
@@ -76,7 +76,7 @@ export default function DekanatKalenderPage() {
         { id: "3", tglNum: 5,  hari: "Rabu",   bulan: "Agustus 2026", waktu: "13:00 WIB", mhs: "Budi Prasetyo",     nim: "20101152630089", prodi: "Teknik Informatika",      jenis: "Ujian Sidang",     ruang: "Aula FIK Lt. 2", ketua: "Dr. Eng. Sarjon Defit", penguji2: "Dr. Ahmad Fauzi", judul: "Aplikasi Mobile Absensi Mahasiswa" },
         { id: "4", tglNum: 8,  hari: "Sabtu",  bulan: "Agustus 2026", waktu: "09:00 WIB", mhs: "Anisa Permatasari", nim: "20101152630104", prodi: "Sistem Komputer",         jenis: "Seminar Proposal", ruang: "Ruang 301",      ketua: "Dr. Jasmir", penguji2: "Dr. Hendra Saputra", judul: "Klasifikasi Citra Daun dengan CNN" },
         { id: "5", tglNum: 10, hari: "Senin",  bulan: "Agustus 2026", waktu: "14:00 WIB", mhs: "Teguh Santoso",     nim: "20101152630122", prodi: "Rekayasa Perangkat Lunak", jenis: "Ujian Sidang",     ruang: "Aula FIK Lt. 2", ketua: "Prof. Dr. H. Zulherman", penguji2: "Dr. Ahmad Fauzi", judul: "Sistem Monitoring Energi Listrik IoT" },
-        { id: "6", tglNum: 15, hari: "Sabtu",  bulan: "Agustus 2026", waktu: "09:00 WIB", mhs: "Danu Zen",          nim: "20101152630045", prodi: "Teknik Informatika",      jenis: "Ujian Sidang",     ruang: "Aula FIK Lt. 2", ketua: "Dr. Eng. Sarjon Defit", penguji2: "Dr. Hendra Saputra", judul: "Pengembangan Sistem Informasi Tugas Akhir (SIPETA)" },
+        { id: "6", tglNum: 15, hari: "Sabtu",  bulan: "Agustus 2026", waktu: "09:00 WIB", mhs: "Danu Zen",          nim: "20101152630045", prodi: "Teknik Informatika",      jenis: "Ujian Sidang",     ruang: "Aula FIK Lt. 2", ketua: "Dr. Eng. Sarjon Defit", penguji2: "Dr. Hendra Saputra", judul: "Pengembangan Sistem Informasi Tugas Akhir (Final Project)" },
       ];
       setSidangList(mockList);
       if (!selectedEventId) setSelectedEventId(mockList[2].id);
@@ -127,12 +127,12 @@ export default function DekanatKalenderPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <CalendarDays className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Agenda Akademik Dekanat FIK
                     </span>
                   </div>
                   <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Kalender Sidang &amp; Seminar FIK UPI YPTK
+                    Kalender Sidang &amp; Seminar FIK PT MBOIS
                   </h1>
                   <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Jadwal terintegrasi pelaksanaan Ujian Sidang Skripsi dan Seminar Proposal seluruh Program Studi di Fakultas Ilmu Komputer.
@@ -142,14 +142,14 @@ export default function DekanatKalenderPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dekanat/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <span>Kembali ke Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. Split 2-Column Card Layout (7/12 & 5/12) ── */}
@@ -162,7 +162,7 @@ export default function DekanatKalenderPage() {
                 {/* Header + Dropdown Filter */}
                 <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                   <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
-                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <CalendarDays className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -177,7 +177,7 @@ export default function DekanatKalenderPage() {
                       onClick={() => setIsFilterOpen(!isFilterOpen)}
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer shadow-2xs"
                     >
-                      <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                      <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
                       <span className="text-[11px] md:text-xs">{filterJenis}</span>
                       <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                     </button>
@@ -194,7 +194,7 @@ export default function DekanatKalenderPage() {
                                 setIsFilterOpen(false);
                               }}
                               className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                filterJenis === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                filterJenis === f ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                               }`}
                             >
                               <span>{f}</span>
@@ -215,7 +215,7 @@ export default function DekanatKalenderPage() {
                       <span
                         key={d}
                         className={`text-[10px] md:text-[11px] font-extrabold uppercase font-display ${
-                          i === 0 ? "text-[#C62828]" : "text-slate-500"
+                          i === 0 ? "text-[#2563eb]" : "text-slate-500"
                         }`}
                       >
                         {d}
@@ -252,13 +252,13 @@ export default function DekanatKalenderPage() {
                           }}
                           className={`p-1.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer relative min-h-[46px] md:min-h-[52px] ${
                             isSelected
-                              ? "bg-rose-100/90 border-[#C62828] ring-2 ring-[#C62828]/30 shadow-2xs font-extrabold"
+                              ? "bg-blue-100/90 border-[#2563eb] ring-2 ring-[#2563eb]/30 shadow-2xs font-extrabold"
                               : eventsOnDay.length > 0
-                              ? "bg-rose-50/50 border-rose-200 text-slate-900 hover:bg-rose-100/60"
+                              ? "bg-blue-50/50 border-blue-200 text-slate-900 hover:bg-blue-100/60"
                               : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
                           }`}
                         >
-                          <span className={`text-[10.5px] md:text-xs font-black font-mono ${isSelected ? "text-[#C62828]" : "text-slate-800"}`}>
+                          <span className={`text-[10.5px] md:text-xs font-black font-mono ${isSelected ? "text-[#2563eb]" : "text-slate-800"}`}>
                             {dayNum}
                           </span>
 
@@ -269,7 +269,7 @@ export default function DekanatKalenderPage() {
                                 key={ev.id}
                                 className={`text-[8.5px] md:text-[9px] font-extrabold px-1 py-0.5 rounded-md truncate font-display ${
                                   ev.jenis === "Ujian Sidang"
-                                    ? "bg-[#C62828] text-white"
+                                    ? "bg-[#2563eb] text-white"
                                     : "bg-blue-600 text-white"
                                 }`}
                               >
@@ -289,7 +289,7 @@ export default function DekanatKalenderPage() {
                   <div className="mt-3 pt-3 border-t border-slate-100 space-y-2 shrink-0">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+                        <span className="w-2 h-2 rounded-full bg-[#2563eb]" />
                         <h3 className="font-bold text-xs text-slate-900 font-display">
                           Agenda Tanggal {selectedDayNum} Agustus 2026
                         </h3>
@@ -316,13 +316,13 @@ export default function DekanatKalenderPage() {
                               }}
                               className={`p-3 rounded-xl border text-xs transition-all cursor-pointer space-y-1.5 ${
                                 isEvSelected
-                                  ? "bg-rose-50/90 border-[#C62828] shadow-2xs"
+                                  ? "bg-blue-50/90 border-[#2563eb] shadow-2xs"
                                   : "bg-slate-50/80 border-slate-200/80 hover:bg-slate-100/80"
                               }`}
                             >
                               <div className="flex items-center justify-between gap-2">
                                 <span className={`px-2 py-0.5 rounded-full text-[9.5px] font-extrabold text-white font-display ${
-                                  ev.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                                  ev.jenis === "Ujian Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                                 }`}>
                                   {ev.jenis}
                                 </span>
@@ -358,13 +358,13 @@ export default function DekanatKalenderPage() {
                     onClick={() => setShowMobileDetail(false)}
                     className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title Header */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <FileText className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -376,7 +376,7 @@ export default function DekanatKalenderPage() {
                   {/* Type Badge on Right (Solid Pill Badge or 0 Agenda) */}
                   {selectedEv ? (
                     <span className={`text-[10.5px] font-extrabold text-white px-3 py-1 rounded-full shrink-0 shadow-2xs font-display ${
-                      selectedEv.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                      selectedEv.jenis === "Ujian Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                     }`}>
                       {selectedEv.jenis}
                     </span>
@@ -425,7 +425,7 @@ export default function DekanatKalenderPage() {
                             </span>
                             <p className="font-extrabold text-white font-mono">{selectedEv.waktu}</p>
                           </div>
-                          <div className="p-2.5 rounded-xl bg-[#C62828] text-white shadow-xs space-y-0.5">
+                          <div className="p-2.5 rounded-xl bg-[#2563eb] text-white shadow-xs space-y-0.5">
                             <span className="text-[9px] text-white/80 font-bold flex items-center gap-1">
                               <MapPin className="w-3 h-3 text-white" /> Lokasi
                             </span>
@@ -437,7 +437,7 @@ export default function DekanatKalenderPage() {
                       {/* Board of Examiners Card */}
                       <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2">
                         <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100">
-                          <UserCheck className="w-4 h-4 text-[#C62828]" />
+                          <UserCheck className="w-4 h-4 text-[#2563eb]" />
                           <h5 className="font-bold text-xs text-slate-900 font-display">Susunan Majelis Penguji</h5>
                         </div>
 

@@ -21,7 +21,7 @@ const NAV = [
 const STATS = [
   { label: "SK Pending",              value: "9",  sub: "Menunggu Ttd Dekan",         color: "#D97706", bgIcon: "bg-amber-500", icon: Clock },
   { label: "SK Diterbitkan",          value: "34", sub: "Bulan Agustus 2026",          color: "#059669", bgIcon: "bg-emerald-600",icon: CheckCircle2 },
-  { label: "Dokumen Terarsip",        value: "48", sub: "Terverifikasi Repositori",    color: "#C62828", bgIcon: "bg-[#C62828]",  icon: Archive },
+  { label: "Dokumen Terarsip",        value: "48", sub: "Terverifikasi Repositori",    color: "#2563eb", bgIcon: "bg-[#2563eb]",  icon: Archive },
   { label: "Prodi FIK",               value: "5",  sub: "Program Studi Aktif",        color: "#3B82F6", bgIcon: "bg-blue-600",   icon: Building2 },
 ];
 
@@ -85,7 +85,7 @@ export default function AdminFakultasDashboard() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
                 <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
                       <FileText className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Executive Summary Portal Fakultas Ilmu Komputer
                     </span>
                   </div>
@@ -93,14 +93,14 @@ export default function AdminFakultasDashboard() {
                     Dashboard Administrasi &amp; Analitik Fakultas
                   </h1>
                   <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Selamat datang, Ibu Yanti. Terdapat <strong className="text-[#C62828] font-bold">9 usulan SK</strong> dari <strong className="text-white font-bold">5 Program Studi</strong> FIK yang siap diverifikasi untuk penetapan Surat Keputusan (SK) Dekan.
+                    Selamat datang, Ibu Yanti. Terdapat <strong className="text-[#2563eb] font-bold">9 usulan SK</strong> dari <strong className="text-white font-bold">5 Program Studi</strong> FIK yang siap diverifikasi untuk penetapan Surat Keputusan (SK) Dekan.
                   </p>
                 </div>
 
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/admin-fakultas/sk"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <FileText className="w-4 h-4 text-white" />
                     <span>Kelola SK Dekan</span>
@@ -114,7 +114,7 @@ export default function AdminFakultasDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. KPI Stat Cards (Mobile Optimized Grid) ── */}
@@ -154,11 +154,11 @@ export default function AdminFakultasDashboard() {
                     onClick={() => setMobileTab(tab.id as any)}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold font-display whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer shrink-0 active:scale-95 ${
                       isActive
-                        ? "bg-white text-[#C62828] shadow-xs"
+                        ? "bg-white text-[#2563eb] shadow-xs"
                         : "text-slate-600 hover:text-slate-900 font-medium"
                     }`}
                   >
-                    <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-[#C62828]" : "text-slate-500"}`} />
+                    <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-[#2563eb]" : "text-slate-500"}`} />
                     <span>{tab.label}</span>
                   </button>
                 );
@@ -177,7 +177,7 @@ export default function AdminFakultasDashboard() {
                 }`}>
                   <div className="p-3 md:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2.5 shrink-0 bg-white">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
-                      <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <BarChart3 className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -188,7 +188,7 @@ export default function AdminFakultasDashboard() {
 
                     <Link
                       href="/admin-fakultas/sk"
-                      className="px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all font-display flex items-center gap-1 cursor-pointer shrink-0 shadow-2xs active:scale-95 whitespace-nowrap"
+                      className="px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all font-display flex items-center gap-1 cursor-pointer shrink-0 shadow-2xs active:scale-95 whitespace-nowrap"
                     >
                       <span>Semua SK</span>
                       <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" />
@@ -223,7 +223,7 @@ export default function AdminFakultasDashboard() {
                             <td className="px-3 md:px-3.5 py-2.5 whitespace-nowrap">
                               <div className="flex items-center gap-2">
                                 <div className="w-24 md:w-32 bg-slate-100 h-2 md:h-2.5 rounded-full overflow-hidden">
-                                  <div className="bg-[#C62828] h-full rounded-full transition-all duration-500" style={{ width: `${row.rate}%` }} />
+                                  <div className="bg-[#2563eb] h-full rounded-full transition-all duration-500" style={{ width: `${row.rate}%` }} />
                                 </div>
                                 <span className="font-bold text-[10px] md:text-[10.5px] text-slate-800 font-mono">{row.rate}%</span>
                               </div>
@@ -241,7 +241,7 @@ export default function AdminFakultasDashboard() {
                 }`}>
                   <div className="flex items-center justify-between pb-2.5 md:pb-3 border-b border-slate-100 shrink-0 gap-2 min-w-0">
                     <div className="flex items-center gap-2 md:gap-2.5 min-w-0 flex-1">
-                      <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+                      <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                         <Archive className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -252,7 +252,7 @@ export default function AdminFakultasDashboard() {
 
                     <Link
                       href="/admin-fakultas/arsip"
-                      className="px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all font-display flex items-center gap-1 cursor-pointer shrink-0 shadow-2xs active:scale-95 whitespace-nowrap"
+                      className="px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all font-display flex items-center gap-1 cursor-pointer shrink-0 shadow-2xs active:scale-95 whitespace-nowrap"
                     >
                       <span>Lihat Arsip</span>
                       <ArrowRight className="w-3.5 h-3.5 text-white" />
@@ -261,7 +261,7 @@ export default function AdminFakultasDashboard() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 md:gap-3">
                     {/* Card 1: SK Dekan Resmi */}
-                    <div className="p-3.5 md:p-4 rounded-2xl bg-[#C62828] text-white space-y-2.5 md:space-y-3 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between">
+                    <div className="p-3.5 md:p-4 rounded-2xl bg-[#2563eb] text-white space-y-2.5 md:space-y-3 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1.5">
                           <FileText className="w-3.5 h-3.5 text-white" />
@@ -344,7 +344,7 @@ export default function AdminFakultasDashboard() {
                   mobileTab === "komposisi" ? "block" : "hidden lg:block"
                 }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+                    <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                       <PieChart className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -358,7 +358,7 @@ export default function AdminFakultasDashboard() {
                     <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 flex items-center justify-center my-0.5 shrink-0">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                         <path className="text-slate-200" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <path className="text-[#C62828]" strokeDasharray="60, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path className="text-[#2563eb]" strokeDasharray="60, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         <path className="text-blue-600" strokeDasharray="25, 100" strokeDashoffset="-60" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       </svg>
                       <div className="absolute text-center">
@@ -370,7 +370,7 @@ export default function AdminFakultasDashboard() {
                     <div className="w-full space-y-2 text-xs pt-2 border-t border-slate-200/70">
                       <div className="flex items-center justify-between">
                         <span className="flex items-center gap-2 font-bold text-slate-700 text-[11px] md:text-xs">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#C62828]" /> SK Pembimbing
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#2563eb]" /> SK Pembimbing
                         </span>
                         <strong className="font-mono text-slate-900 font-extrabold text-[11px] md:text-xs">60% <span className="text-[9.5px] md:text-[10.5px] text-slate-400 font-medium">(26 SK)</span></strong>
                       </div>
@@ -395,7 +395,7 @@ export default function AdminFakultasDashboard() {
                   mobileTab === "aktivitas" ? "block" : "hidden lg:flex"
                 }`}>
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100 shrink-0">
-                    <div className="w-7 h-7 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+                    <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                       <Activity className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -407,7 +407,7 @@ export default function AdminFakultasDashboard() {
                   <div className="space-y-2.5 overflow-y-auto flex-1 scrollbar-none pr-1 max-h-56 lg:max-h-none">
                     {RECENT_LOGS.map((log) => (
                       <div key={log.id} className="flex gap-2.5 text-xs min-w-0 border-b border-slate-50 pb-2 last:border-none">
-                        <div className="w-2 h-2 rounded-full bg-[#C62828] mt-1.5 shrink-0" />
+                        <div className="w-2 h-2 rounded-full bg-[#2563eb] mt-1.5 shrink-0" />
                         <div className="space-y-0.5 min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-1">
                             <h4 className="font-bold text-slate-900 font-display truncate text-[11px]">{log.title}</h4>

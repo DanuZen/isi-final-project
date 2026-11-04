@@ -189,7 +189,7 @@ export default function AdminProdiJadwalPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#C62828] text-white font-display shadow-xs max-w-full truncate">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
                       <CalendarDays className="w-3.5 h-3.5 text-white shrink-0" />
                       <span className="truncate">Penjadwalan Majelis Penguji FIK</span>
                     </span>
@@ -206,21 +206,21 @@ export default function AdminProdiJadwalPage() {
                   <button
                     onClick={handleOpenAddModal}
                     title="Buat Jadwal Baru"
-                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer flex items-center gap-2"
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer flex items-center gap-2"
                   >
                     <Plus className="w-4 h-4 text-white shrink-0" />
                     <span>Buat Jadwal Baru</span>
                   </button>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Main Card Table ── */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
               <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 flex-wrap gap-3 shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                  <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                     <CalendarDays className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -237,7 +237,7 @@ export default function AdminProdiJadwalPage() {
                     placeholder="Cari Mahasiswa / Judul..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] w-full transition-all font-display"
+                    className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] w-full transition-all font-display"
                   />
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function AdminProdiJadwalPage() {
                     <div key={item.id} className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors">
                       <div className="space-y-2 flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${item.jenis === "Ujian Sidang" ? "bg-[#C62828]" : "bg-amber-600"}`}>
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-2xs font-display ${item.jenis === "Ujian Sidang" ? "bg-[#2563eb]" : "bg-amber-600"}`}>
                             {item.jenis}
                           </span>
                           <span className="text-[11px] font-mono text-slate-400 font-semibold">{item.id}</span>
@@ -272,26 +272,26 @@ export default function AdminProdiJadwalPage() {
 
                       <div className="flex flex-col md:items-end gap-2.5 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
                         <div className="flex items-center gap-3 text-xs text-slate-700 font-bold font-display">
-                          <span className="flex items-center gap-1"><CalendarIcon className="w-3.5 h-3.5 text-[#C62828]" /> {item.tanggal}</span>
+                          <span className="flex items-center gap-1"><CalendarIcon className="w-3.5 h-3.5 text-[#2563eb]" /> {item.tanggal}</span>
                           <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-amber-500" /> {item.jam}</span>
                         </div>
                         <div className="flex items-center gap-1 text-xs text-slate-600 font-semibold font-display">
-                          <MapPin className="w-3.5 h-3.5 text-rose-500" /> {item.ruangan}
+                          <MapPin className="w-3.5 h-3.5 text-blue-500" /> {item.ruangan}
                         </div>
                         
                         {/* Interactive Action Buttons */}
                         <div className="flex items-center gap-2 mt-1">
                           <button
                             onClick={() => handleOpenEditModal(item)}
-                            className="px-3 py-1.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-700 hover:border-[#C62828] hover:text-[#C62828] transition-all bg-white shadow-2xs flex items-center gap-1.5 cursor-pointer font-display active:scale-95"
+                            className="px-3 py-1.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-700 hover:border-[#2563eb] hover:text-[#2563eb] transition-all bg-white shadow-2xs flex items-center gap-1.5 cursor-pointer font-display active:scale-95"
                           >
-                            <Edit3 className="w-3.5 h-3.5 text-slate-500 hover:text-[#C62828]" />
+                            <Edit3 className="w-3.5 h-3.5 text-slate-500 hover:text-[#2563eb]" />
                             <span>Edit Jadwal</span>
                           </button>
                           <button
                             onClick={() => handleDeleteJadwal(item.id, item.nama)}
                             title="Hapus Jadwal"
-                            className="p-1.5 rounded-xl border border-slate-200 text-slate-400 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50 transition-all cursor-pointer active:scale-95 shadow-2xs"
+                            className="p-1.5 rounded-xl border border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-300 hover:bg-blue-50 transition-all cursor-pointer active:scale-95 shadow-2xs"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -312,7 +312,7 @@ export default function AdminProdiJadwalPage() {
           <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 my-8">
             <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                   <CalendarDays className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -333,87 +333,87 @@ export default function AdminProdiJadwalPage() {
             <form onSubmit={handleSaveJadwal} className="p-6 space-y-4 max-h-[80vh] overflow-y-auto scrollbar-none">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">NIM Mahasiswa <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">NIM Mahasiswa <span className="text-[#2563eb]">*</span></label>
                   <input
                     type="text"
                     required
                     placeholder="Contoh: 20101152630045"
                     value={formNim}
                     onChange={(e) => setFormNim(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-mono transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-mono transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Nama Mahasiswa <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">Nama Mahasiswa <span className="text-[#2563eb]">*</span></label>
                   <input
                     type="text"
                     required
                     placeholder="Contoh: Danu Zen"
                     value={formNama}
                     onChange={(e) => setFormNama(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 font-display">Judul Penelitian / TA <span className="text-[#C62828]">*</span></label>
+                <label className="text-xs font-bold text-slate-700 font-display">Judul Penelitian / TA <span className="text-[#2563eb]">*</span></label>
                 <textarea
                   required
                   rows={2}
                   placeholder="Judul penelitian mahasiswa..."
                   value={formJudul}
                   onChange={(e) => setFormJudul(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Jenis Seminar <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">Jenis Seminar <span className="text-[#2563eb]">*</span></label>
                   <select
                     value={formJenis}
                     onChange={(e) => setFormJenis(e.target.value as "Seminar Proposal" | "Ujian Sidang")}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   >
                     <option value="Seminar Proposal">Seminar Proposal</option>
                     <option value="Ujian Sidang">Ujian Sidang</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Tanggal Pelaksanaan <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">Tanggal Pelaksanaan <span className="text-[#2563eb]">*</span></label>
                   <input
                     type="text"
                     required
                     placeholder="Contoh: 10 Agt 2026"
                     value={formTanggal}
                     onChange={(e) => setFormTanggal(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Waktu / Jam <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">Waktu / Jam <span className="text-[#2563eb]">*</span></label>
                   <input
                     type="text"
                     required
                     placeholder="Contoh: 09:00 - 10:30 WIB"
                     value={formJam}
                     onChange={(e) => setFormJam(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 font-display">Ruangan / Tempat <span className="text-[#C62828]">*</span></label>
+                  <label className="text-xs font-bold text-slate-700 font-display">Ruangan / Tempat <span className="text-[#2563eb]">*</span></label>
                   <input
                     type="text"
                     required
                     placeholder="Contoh: Ruang 302 / Aula FIK"
                     value={formRuangan}
                     onChange={(e) => setFormRuangan(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
               </div>
@@ -425,7 +425,7 @@ export default function AdminProdiJadwalPage() {
                   placeholder="Contoh: Dr. Sarjon Defit"
                   value={formPembimbing}
                   onChange={(e) => setFormPembimbing(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                 />
               </div>
 
@@ -437,7 +437,7 @@ export default function AdminProdiJadwalPage() {
                     placeholder="Contoh: Dr. Ahmad Fauzi, M.T."
                     value={formPenguji1}
                     onChange={(e) => setFormPenguji1(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -447,7 +447,7 @@ export default function AdminProdiJadwalPage() {
                     placeholder="Contoh: Prof. Budi Santoso, Ph.D"
                     value={formPenguji2}
                     onChange={(e) => setFormPenguji2(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] font-display transition-all"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] font-display transition-all"
                   />
                 </div>
               </div>
@@ -462,7 +462,7 @@ export default function AdminProdiJadwalPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
+                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all flex items-center gap-1.5 shadow-xs font-display cursor-pointer active:scale-95"
                 >
                   <CheckCircle2 className="w-4 h-4 text-white" />
                   <span>{editItem ? "Simpan Perubahan" : "Buat Jadwal Baru"}</span>

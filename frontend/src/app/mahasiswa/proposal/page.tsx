@@ -23,7 +23,7 @@ import {
   FileUp
 } from "lucide-react";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
-import { BIDANG_KAJIAN_PER_PRODI } from "@/constants/upiyptk";
+import { BIDANG_KAJIAN_PER_PRODI } from "@/constants/academic";
 
 interface FileDetails {
   name: string;
@@ -126,7 +126,7 @@ export default function ProposalJudulPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <FileText className="w-3.5 h-3.5 text-white" /> Pengajuan Proposal Tugas Akhir
                     </span>
                   </div>
@@ -141,14 +141,14 @@ export default function ProposalJudulPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/mahasiswa/pembimbing"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
                   >
                     <span>Lanjut ke Usulan Pembimbing</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
@@ -157,7 +157,7 @@ export default function ProposalJudulPage() {
                 onClick={() => setActiveMobileTab("form")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "form"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -169,7 +169,7 @@ export default function ProposalJudulPage() {
                 onClick={() => setActiveMobileTab("duplikasi")}
                 className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeMobileTab === "duplikasi"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -187,7 +187,7 @@ export default function ProposalJudulPage() {
                   <div className="space-y-4 overflow-y-auto scrollbar-none pr-1">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                           <FileText className="w-4 h-4 text-white" />
                         </div>
                         <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -211,7 +211,7 @@ export default function ProposalJudulPage() {
                           value={judulInput}
                           onChange={(e) => setJudulInput(e.target.value)}
                           placeholder="Ketikkan usulan judul skripsi / tugas akhir Anda di sini..."
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#C62828] transition-all leading-relaxed shadow-2xs"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#2563eb] transition-all leading-relaxed shadow-2xs"
                         />
                       </div>
 
@@ -239,7 +239,7 @@ export default function ProposalJudulPage() {
                           value={abstrakInput}
                           onChange={(e) => setAbstrakInput(e.target.value)}
                           placeholder="Tuliskan draf ringkasan latar belakang masalah, tujuan, dan metodologi penelitian..."
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#C62828] transition-all leading-relaxed shadow-2xs"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#2563eb] transition-all leading-relaxed shadow-2xs"
                         />
                       </div>
 
@@ -282,7 +282,7 @@ export default function ProposalJudulPage() {
                               <button
                                 type="button"
                                 onClick={handleRemoveFile}
-                                className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-rose-200 text-rose-600 hover:bg-rose-50 transition-all flex items-center gap-1 cursor-pointer font-display"
+                                className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-blue-200 text-blue-600 hover:bg-blue-50 transition-all flex items-center gap-1 cursor-pointer font-display"
                               >
                                 <Trash2 className="w-3.5 h-3.5" /> Ganti
                               </button>
@@ -297,19 +297,19 @@ export default function ProposalJudulPage() {
                             onClick={() => fileInputRef.current?.click()}
                             className={`p-6 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center text-center space-y-2 cursor-pointer ${
                               isDragging
-                                ? "border-[#C62828] bg-rose-50/50 ring-4 ring-[#C62828]/10"
-                                : "border-slate-300 bg-slate-50/60 hover:bg-white hover:border-[#C62828]"
+                                ? "border-[#2563eb] bg-blue-50/50 ring-4 ring-[#2563eb]/10"
+                                : "border-slate-300 bg-slate-50/60 hover:bg-white hover:border-[#2563eb]"
                             }`}
                           >
-                            <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-[#C62828] flex items-center justify-center shadow-xs">
-                              <FileUp className="w-6 h-6 text-[#C62828]" />
+                            <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-[#2563eb] flex items-center justify-center shadow-xs">
+                              <FileUp className="w-6 h-6 text-[#2563eb]" />
                             </div>
                             <div className="space-y-1">
                               <p className="text-xs font-bold text-slate-800 font-display">
                                 Tarik &amp; Lepas berkas Outline Proposal (PDF) di sini
                               </p>
                               <p className="text-[11px] text-slate-400 font-medium">
-                                atau <span className="text-[#C62828] font-bold underline">Klik di sini untuk memilih berkas</span>
+                                atau <span className="text-[#2563eb] font-bold underline">Klik di sini untuk memilih berkas</span>
                               </p>
                             </div>
                             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-slate-200/80 text-slate-600 font-mono">
@@ -330,7 +330,7 @@ export default function ProposalJudulPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <Search className="w-4 h-4 text-white" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -367,9 +367,9 @@ export default function ProposalJudulPage() {
                   <button
                     onClick={handleCheckSimilarity}
                     disabled={isChecking}
-                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-[#C62828] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95 font-display cursor-pointer"
+                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-[#2563eb] transition-all flex items-center justify-center gap-2 shadow-xs active:scale-95 font-display cursor-pointer"
                   >
-                    <Search className="w-3.5 h-3.5 text-[#ffd01d]" />
+                    <Search className="w-3.5 h-3.5 text-[#38bdf8]" />
                     {isChecking ? "Mengecek Database..." : "Cek Duplikasi Judul"}
                   </button>
                 </div>
@@ -378,7 +378,7 @@ export default function ProposalJudulPage() {
                 <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-3 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <BookOpen className="w-4 h-4 text-white" />
                       </div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
@@ -413,7 +413,7 @@ export default function ProposalJudulPage() {
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col h-[85vh] animate-in fade-in zoom-in-95">
                   <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold">
                         <FileText className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -436,7 +436,7 @@ export default function ProposalJudulPage() {
                         alert(`Mengunduh berkas ${fileDetails.name}...`);
                         setShowPdfModal(false);
                       }}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#C62828] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs hover:bg-[#B71C1C] transition-all cursor-pointer font-display"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#2563eb] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs hover:bg-[#1d4ed8] transition-all cursor-pointer font-display"
                     >
                       <Download className="w-3.5 h-3.5" /> Download PDF
                     </button>
@@ -448,7 +448,7 @@ export default function ProposalJudulPage() {
                         <h2 className="text-sm font-black uppercase tracking-wider font-sans text-slate-900">
                           OUTLINE PROPOSAL TUGAS AKHIR
                         </h2>
-                        <p className="text-xs font-bold font-sans text-[#C62828]">
+                        <p className="text-xs font-bold font-sans text-[#2563eb]">
                           UNIVERSITAS PUTRA INDONESIA YPTK PADANG
                         </p>
                       </div>

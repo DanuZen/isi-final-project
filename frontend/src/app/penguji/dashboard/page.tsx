@@ -21,8 +21,8 @@ const NAV = [
 /* ── Mock Data ── */
 const STATS = [
   { label: "Jadwal Seminar",       value: "5 Mahasiswa", sub: "Aktif bulan ini",    icon: CalendarDays, bg: "bg-blue-600", text: "text-white" },
-  { label: "Ujian Sidang Aktif",   value: "3 Mahasiswa", sub: "Terjadwal",          icon: Award,        bg: "bg-[#C62828]",  text: "text-white" },
-  { label: "Lembar Revisi",        value: "8 Berkas",    sub: "Pending diserahkan", icon: FileEdit,     bg: "bg-[#ffd01d]",  text: "text-slate-950" },
+  { label: "Ujian Sidang Aktif",   value: "3 Mahasiswa", sub: "Terjadwal",          icon: Award,        bg: "bg-[#2563eb]",  text: "text-white" },
+  { label: "Lembar Revisi",        value: "8 Berkas",    sub: "Pending diserahkan", icon: FileEdit,     bg: "bg-[#38bdf8]",  text: "text-slate-950" },
   { label: "Mahasiswa Dinilai",    value: "14 Selesai",  sub: "Total semester ini", icon: CheckCircle2, bg: "bg-emerald-600", text: "text-white" },
 ];
 
@@ -35,9 +35,9 @@ const JADWAL = [
 ];
 
 const STATUS_CONFIG = {
-  "Menunggu":    { bg: "bg-[#ffd01d] text-slate-950", icon: Clock },
+  "Menunggu":    { bg: "bg-[#38bdf8] text-slate-950", icon: Clock },
   "Nilai Masuk": { bg: "bg-emerald-600 text-white",   icon: CheckCircle2 },
-  "Revisi":      { bg: "bg-[#C62828] text-white",     icon: AlertCircle },
+  "Revisi":      { bg: "bg-[#2563eb] text-white",     icon: AlertCircle },
 };
 
 export default function PengujiDashboard() {
@@ -57,7 +57,7 @@ export default function PengujiDashboard() {
             <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                     <Star className="w-3.5 h-3.5 text-white" /> Dosen Penguji Aktif
                   </span>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
@@ -71,7 +71,7 @@ export default function PengujiDashboard() {
                 <div className="flex gap-2.5 shrink-0 flex-wrap">
                   <Link
                     href="/penguji/jadwal"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white shadow-xs transition-all active:scale-95 cursor-pointer font-display"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-xs transition-all active:scale-95 cursor-pointer font-display"
                   >
                     <CalendarDays className="w-4 h-4 text-white" /> Lihat Jadwal
                   </Link>
@@ -83,7 +83,7 @@ export default function PengujiDashboard() {
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* Stats Grid */}
@@ -108,12 +108,12 @@ export default function PengujiDashboard() {
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">
               <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shadow-xs font-bold">
+                  <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-xs font-bold">
                     <CalendarDays className="w-4 h-4 text-white" />
                   </div>
                   <h2 className="font-bold text-sm text-slate-900 font-display">Jadwal Pengujian Aktif</h2>
                 </div>
-                <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-[#C62828] text-white shadow-2xs font-display">
+                <span className="text-[10.5px] font-bold px-3 py-1 rounded-full bg-[#2563eb] text-white shadow-2xs font-display">
                   Agustus 2026
                 </span>
               </div>
@@ -140,7 +140,7 @@ export default function PengujiDashboard() {
                           <td className="px-4 py-3 whitespace-nowrap text-slate-600 font-medium">{row.ruang}</td>
                           <td className="px-4 py-3">
                             <span className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-bold shadow-2xs font-display text-white ${
-                              row.jenis === "Sidang" ? "bg-[#C62828]" : "bg-blue-600"
+                              row.jenis === "Sidang" ? "bg-[#2563eb]" : "bg-blue-600"
                             }`}>
                               {row.jenis}
                             </span>
@@ -153,7 +153,7 @@ export default function PengujiDashboard() {
                           <td className="px-4 py-3">
                             <Link
                               href="/penguji/nilai"
-                              className="px-3 py-1.5 rounded-lg text-[11px] font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all shadow-xs inline-flex items-center gap-1 font-display active:scale-95"
+                              className="px-3 py-1.5 rounded-lg text-[11px] font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all shadow-xs inline-flex items-center gap-1 font-display active:scale-95"
                             >
                               Input Nilai <ArrowRight className="w-3 h-3 text-white" />
                             </Link>
@@ -169,7 +169,7 @@ export default function PengujiDashboard() {
             {/* Rekap nilai mini */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 shrink-0 space-y-3">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shadow-xs font-bold">
+                <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-xs font-bold">
                   <TrendingUp className="w-4 h-4 text-white" />
                 </div>
                 <h2 className="font-bold text-sm text-slate-900 font-display">Rekap Nilai Semester Ini</h2>
@@ -178,7 +178,7 @@ export default function PengujiDashboard() {
                 {[
                   { label: "Rata-rata Nilai Seminar", value: "78.4", bg: "bg-blue-600", text: "text-white" },
                   { label: "Rata-rata Nilai Sidang",  value: "82.1", bg: "bg-emerald-600", text: "text-white" },
-                  { label: "Belum Dinilai",           value: "6 Mahasiswa", bg: "bg-[#ffd01d]", text: "text-slate-950" },
+                  { label: "Belum Dinilai",           value: "6 Mahasiswa", bg: "bg-[#38bdf8]", text: "text-slate-950" },
                 ].map((item) => (
                   <div key={item.label} className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center justify-between gap-3">
                     <div>

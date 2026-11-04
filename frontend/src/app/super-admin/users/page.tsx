@@ -29,13 +29,13 @@ interface UserItem {
 }
 
 const INITIAL_USERS: UserItem[] = [
-  { id: "20101152630045", nama: "Danu Zen", email: "danuzen@upiyptk.ac.id", role: "Mahasiswa", unit: "Teknik Informatika", lastLogin: "Hari ini 10:23", status: "Aktif", registeredDate: "12 Sep 2022" },
-  { id: "1012345678", nama: "Dr. Hendra Saputra, M.T.", email: "hendra@upiyptk.ac.id", role: "Dosen Pembimbing", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 09:15", status: "Aktif", registeredDate: "05 Mar 2018" },
-  { id: "1023456789", nama: "Dr. Ahmad Fauzi, M.T.", email: "ahmadfauzi@upiyptk.ac.id", role: "Dosen Penguji", unit: "Fakultas Ilmu Komputer", lastLogin: "Kemarin 16:40", status: "Aktif", registeredDate: "10 Jan 2019" },
-  { id: "ADMINP001", nama: "Dr. Ratna Dewi, M.Kom.", email: "ratnadewi@upiyptk.ac.id", role: "Admin Prodi", unit: "Teknik Informatika", lastLogin: "Hari ini 08:45", status: "Aktif", registeredDate: "14 Agu 2020" },
-  { id: "ADMF001", nama: "Dra. Yanti Susanti", email: "yanti@upiyptk.ac.id", role: "Admin Fakultas", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 11:02", status: "Aktif", registeredDate: "01 Feb 2021" },
-  { id: "DEKAN001", nama: "Prof. Dr. H. Zulherman, M.T.", email: "zulherman@upiyptk.ac.id", role: "Pimpinan", unit: "Fakultas Ilmu Komputer", lastLogin: "2 hari lalu", status: "Aktif", registeredDate: "15 Mei 2017" },
-  { id: "20101152630189", nama: "Hendro Wibowo", email: "hendro@upiyptk.ac.id", role: "Mahasiswa", unit: "Sistem Informasi", lastLogin: "5 hari lalu", status: "Nonaktif", registeredDate: "20 Sep 2023" },
+  { id: "20101152630045", nama: "Danu Zen", email: "danuzen@mbois.id", role: "Mahasiswa", unit: "Teknik Informatika", lastLogin: "Hari ini 10:23", status: "Aktif", registeredDate: "12 Sep 2022" },
+  { id: "1012345678", nama: "Dr. Hendra Saputra, M.T.", email: "hendra@mbois.id", role: "Dosen Pembimbing", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 09:15", status: "Aktif", registeredDate: "05 Mar 2018" },
+  { id: "1023456789", nama: "Dr. Ahmad Fauzi, M.T.", email: "ahmadfauzi@mbois.id", role: "Dosen Penguji", unit: "Fakultas Ilmu Komputer", lastLogin: "Kemarin 16:40", status: "Aktif", registeredDate: "10 Jan 2019" },
+  { id: "ADMINP001", nama: "Dr. Ratna Dewi, M.Kom.", email: "ratnadewi@mbois.id", role: "Admin Prodi", unit: "Teknik Informatika", lastLogin: "Hari ini 08:45", status: "Aktif", registeredDate: "14 Agu 2020" },
+  { id: "ADMF001", nama: "Dra. Yanti Susanti", email: "yanti@mbois.id", role: "Admin Fakultas", unit: "Fakultas Ilmu Komputer", lastLogin: "Hari ini 11:02", status: "Aktif", registeredDate: "01 Feb 2021" },
+  { id: "DEKAN001", nama: "Prof. Dr. H. Zulherman, M.T.", email: "zulherman@mbois.id", role: "Pimpinan", unit: "Fakultas Ilmu Komputer", lastLogin: "2 hari lalu", status: "Aktif", registeredDate: "15 Mei 2017" },
+  { id: "20101152630189", nama: "Hendro Wibowo", email: "hendro@mbois.id", role: "Mahasiswa", unit: "Sistem Informasi", lastLogin: "5 hari lalu", status: "Nonaktif", registeredDate: "20 Sep 2023" },
 ];
 
 export default function SuperAdminUsersPage() {
@@ -64,7 +64,7 @@ export default function SuperAdminUsersPage() {
           userName="Irvan Syahputra, S.T."
           userNim="SA-001"
           roleName="Super Admin"
-          prodiName="Sistem Utama SIPETA"
+          prodiName="PT MBOIS - Final Project"
         />
 
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
@@ -73,7 +73,7 @@ export default function SuperAdminUsersPage() {
             userName="Irvan Syahputra, S.T."
             userNim="SA-001"
             userRole="Super Admin"
-            prodiName="Sistem Utama SIPETA"
+            prodiName="PT MBOIS - Final Project"
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
@@ -84,12 +84,12 @@ export default function SuperAdminUsersPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <Users className="w-3.5 h-3.5 text-white" /> Manajemen User &amp; Otorisasi
                     </span>
                   </div>
                   <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Pengelolaan Akun Pengguna Sistem SIPETA
+                    Pengelolaan Akun Pengguna PT MBOIS - Final Project
                   </h1>
                   <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
                     Kelola pendaftaran akun baru, reset kata sandi, pengaturan perizinan role, serta penguncian akses pengguna secara terpusat.
@@ -99,14 +99,14 @@ export default function SuperAdminUsersPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={() => alert("Membuka form pembuatan akun user baru...")}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <Plus className="w-4 h-4 text-white" />
                     <span>Tambah User Baru</span>
                   </button>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* Grid Layout with Live Side Detail Panel Card */}
@@ -120,7 +120,7 @@ export default function SuperAdminUsersPage() {
                 <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 bg-white">
                   <div className="flex items-center justify-between sm:justify-start gap-2.5 shrink-0 w-full sm:w-auto">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <Users className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -132,7 +132,7 @@ export default function SuperAdminUsersPage() {
                     {/* Mobile Only Action Button */}
                     <button
                       onClick={() => alert("Membuka form pembuatan akun user baru...")}
-                      className="sm:hidden px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-2xs font-display flex items-center gap-1 cursor-pointer"
+                      className="sm:hidden px-3 py-1.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-2xs font-display flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Tambah</span>
@@ -147,7 +147,7 @@ export default function SuperAdminUsersPage() {
                       placeholder="Cari ID, nama, role..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all w-full font-display"
+                      className="pl-7 pr-2 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all w-full font-display"
                     />
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export default function SuperAdminUsersPage() {
                               <td className="px-4 py-3.5 font-mono text-[10.5px] font-bold text-slate-900 whitespace-nowrap">{row.id}</td>
                               <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap font-display">{row.nama}</td>
                               <td className="px-4 py-3.5 whitespace-nowrap">
-                                <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#C62828] text-white font-display shadow-2xs">
+                                <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-bold bg-[#2563eb] text-white font-display shadow-2xs">
                                   {row.role}
                                 </span>
                               </td>
@@ -218,12 +218,12 @@ export default function SuperAdminUsersPage() {
                           onClick={() => setShowMobileDetail(false)}
                           className="lg:hidden px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                         >
-                          <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                          <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>Kembali</span>
                         </button>
 
                         {/* Role Pill Badge on Right */}
-                        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#C62828] text-white font-display shadow-2xs ml-auto">
+                        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-[#2563eb] text-white font-display shadow-2xs ml-auto">
                           {selected.role}
                         </span>
                       </div>
@@ -247,8 +247,8 @@ export default function SuperAdminUsersPage() {
                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">Hak Penugasan Dosen:</span>
                           <div className="space-y-2 pt-1">
                             <label className="flex items-center justify-between text-xs font-bold text-slate-800 cursor-pointer">
-                              <span className="flex items-center gap-1.5"><UserCheck className="w-3.5 h-3.5 text-[#C62828]" /> Dosen Pembimbing</span>
-                              <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#C62828] cursor-pointer" />
+                              <span className="flex items-center gap-1.5"><UserCheck className="w-3.5 h-3.5 text-[#2563eb]" /> Dosen Pembimbing</span>
+                              <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#2563eb] cursor-pointer" />
                             </label>
                             <label className="flex items-center justify-between text-xs font-bold text-slate-800 cursor-pointer">
                               <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-blue-600" /> Dosen Penguji</span>
@@ -281,7 +281,7 @@ export default function SuperAdminUsersPage() {
                     
                     <button
                       onClick={() => alert(`Mengubah status penangguhan akun ${selected.nama}...`)}
-                      className="w-full py-2 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
+                      className="w-full py-2 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 font-display cursor-pointer"
                     >
                       <ShieldAlert className="w-3.5 h-3.5 text-white" />
                       <span>Suspend / Nonaktifkan Akun</span>

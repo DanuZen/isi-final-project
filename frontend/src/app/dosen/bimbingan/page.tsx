@@ -33,7 +33,7 @@ const MAHASISWA: Array<MahasiswaItem> = [
     nim: "20101152630045",
     nama: "Danu Zen",
     prodi: "Teknik Informatika",
-    judul: "Rancang Bangun Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA) Berbasis Web di UPI YPTK Padang",
+    judul: "Rancang Bangun Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (Final Project) Berbasis Web di PT MBOIS",
     bidang: "Rekayasa Perangkat Lunak",
     tahap: "Bimbingan",
     sesi: 4,
@@ -137,15 +137,15 @@ const MAHASISWA: Array<MahasiswaItem> = [
 
 const TAHAP_COLOR: Record<TahapKey, { color: string; bg: string }> = {
   "Usulan":   { color: "#ffffff", bg: "#b45309" },
-  "Bimbingan":{ color: "#ffffff", bg: "#C62828" },
-  "Seminar":  { color: "#0f172a", bg: "#ffd01d" },
-  "Sidang":   { color: "#ffffff", bg: "#B71C1C" },
+  "Bimbingan":{ color: "#ffffff", bg: "#2563eb" },
+  "Seminar":  { color: "#0f172a", bg: "#38bdf8" },
+  "Sidang":   { color: "#ffffff", bg: "#1d4ed8" },
   "Selesai":  { color: "#ffffff", bg: "#1e293b" },
 };
 
 const STATUS_COLOR: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
-  "On Track":        { color: "#ffffff", bg: "#C62828", icon: CheckCircle2 },
-  "Perlu Perhatian": { color: "#0f172a", bg: "#ffd01d", icon: AlertCircle },
+  "On Track":        { color: "#ffffff", bg: "#2563eb", icon: CheckCircle2 },
+  "Perlu Perhatian": { color: "#0f172a", bg: "#38bdf8", icon: AlertCircle },
   "Lulus":           { color: "#ffffff", bg: "#1e293b", icon: CheckCircle2 },
 };
 
@@ -244,7 +244,7 @@ export default function DosenBimbinganPage() {
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#ffd01d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#38bdf8] shrink-0" />
                 <p className="text-xs font-bold font-display">{toastMessage}</p>
                 <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white">
                   <X className="w-3.5 h-3.5" />
@@ -257,7 +257,7 @@ export default function DosenBimbinganPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <UserCheck className="w-3.5 h-3.5" /> Mahasiswa Bimbingan Active
                     </span>
                   </div>
@@ -272,14 +272,14 @@ export default function DosenBimbinganPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dosen/pengajuan"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white border border-blue-500/30 shadow-md shadow-blue-950/20 transition-all active:scale-95 cursor-pointer"
                   >
                     <span>Permohonan Masuk</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
 
@@ -294,7 +294,7 @@ export default function DosenBimbinganPage() {
                 {/* Header Card + Search & Filter */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <Users className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -312,7 +312,7 @@ export default function DosenBimbinganPage() {
                         placeholder="Cari nama / NIM..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all font-medium"
+                        className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] focus:bg-white transition-all font-medium"
                       />
                     </div>
 
@@ -320,13 +320,13 @@ export default function DosenBimbinganPage() {
                     <div className="relative shrink-0">
                       <button
                         onClick={() => setIsFilterOpen(!isFilterOpen)}
-                        className="px-4 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-white font-bold text-slate-700 hover:text-slate-900 focus:outline-none focus:border-[#C62828] transition-all flex items-center justify-between gap-2.5 min-w-[125px] cursor-pointer shadow-2xs font-display whitespace-nowrap"
+                        className="px-4 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-white font-bold text-slate-700 hover:text-slate-900 focus:outline-none focus:border-[#2563eb] transition-all flex items-center justify-between gap-2.5 min-w-[125px] cursor-pointer shadow-2xs font-display whitespace-nowrap"
                       >
                         <div className="flex items-center gap-2">
-                          <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                          <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
                           <span>{filterTahap === "Semua" ? "Semua Tahap" : filterTahap}</span>
                         </div>
-                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${isFilterOpen ? "rotate-180 text-[#C62828]" : ""}`} />
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${isFilterOpen ? "rotate-180 text-[#2563eb]" : ""}`} />
                       </button>
 
                       {isFilterOpen && (
@@ -355,12 +355,12 @@ export default function DosenBimbinganPage() {
                                   }}
                                   className={`w-full text-left px-3.5 py-2 text-xs font-bold font-display flex items-center justify-between transition-colors cursor-pointer ${
                                     isSelected
-                                      ? "bg-rose-50 text-[#C62828]"
+                                      ? "bg-blue-50 text-[#2563eb]"
                                       : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                                   }`}
                                 >
                                   <span>{opt.label}</span>
-                                  {isSelected && <Check className="w-3.5 h-3.5 text-[#C62828]" />}
+                                  {isSelected && <Check className="w-3.5 h-3.5 text-[#2563eb]" />}
                                 </button>
                               );
                             })}
@@ -448,7 +448,7 @@ export default function DosenBimbinganPage() {
                                       className="h-full rounded-full transition-all"
                                       style={{
                                         width: `${sesiPct}%`,
-                                        background: sesiPct >= 100 ? "#ffd01d" : "#C62828",
+                                        background: sesiPct >= 100 ? "#38bdf8" : "#2563eb",
                                       }}
                                     />
                                   </div>
@@ -527,13 +527,13 @@ export default function DosenBimbinganPage() {
                     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                     title="Kembali ke Daftar Mahasiswa"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title & Icon (Hidden on Mobile) */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <UserCheck className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -596,7 +596,7 @@ export default function DosenBimbinganPage() {
                   <div className="p-4 rounded-xl border border-slate-200/80 bg-white space-y-2.5 shadow-2xs">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">Judul Tugas Akhir</span>
-                      <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#ffd01d] text-slate-950 shadow-2xs font-display">
+                      <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-extrabold bg-[#38bdf8] text-slate-950 shadow-2xs font-display">
                         {selectedMhs.bidang}
                       </span>
                     </div>
@@ -605,7 +605,7 @@ export default function DosenBimbinganPage() {
                     </p>
                     <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-500">
                       <span>Pembimbing II: <strong className="text-slate-800">{selectedMhs.pembimbing2}</strong></span>
-                      <span className="font-black text-[#C62828]">Sesi: {selectedMhs.sesi}/{selectedMhs.minSesi}</span>
+                      <span className="font-black text-[#2563eb]">Sesi: {selectedMhs.sesi}/{selectedMhs.minSesi}</span>
                     </div>
                   </div>
 
@@ -613,7 +613,7 @@ export default function DosenBimbinganPage() {
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <h4 className="text-xs font-bold text-slate-800 font-display flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-[#C62828]" /> Histori Bimbingan Terakhir
+                        <Clock className="w-3.5 h-3.5 text-[#2563eb]" /> Histori Bimbingan Terakhir
                       </h4>
                       <span className="text-[10px] font-bold text-slate-400">
                         {selectedMhs.logHistory.length} Catatan
@@ -629,7 +629,7 @@ export default function DosenBimbinganPage() {
                               className={`text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full shadow-2xs font-display ${
                                 log.status.includes("ACC") || log.status.includes("Lulus")
                                   ? "bg-emerald-600 text-white"
-                                  : "bg-[#C62828] text-white"
+                                  : "bg-[#2563eb] text-white"
                               }`}
                             >
                               {log.status}
@@ -668,7 +668,7 @@ export default function DosenBimbinganPage() {
 
                     <button
                       onClick={() => setShowChatModal(true)}
-                      className="flex-1 py-2.5 rounded-xl text-xs font-bold font-display bg-[#ffd01d] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                      className="flex-1 py-2.5 rounded-xl text-xs font-bold font-display bg-[#38bdf8] hover:bg-[#d97706] text-slate-950 border border-amber-400/40 shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
                     >
                       <MessageSquare className="w-4 h-4 text-slate-950" /> Catat Log
                     </button>
@@ -684,7 +684,7 @@ export default function DosenBimbinganPage() {
                   {/* Modal Header */}
                   <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[#C62828] text-white font-bold text-xs flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-xl bg-[#2563eb] text-white font-bold text-xs flex items-center justify-center">
                         {selectedMhs.nama.split(" ").map((w) => w[0]).slice(0, 2).join("")}
                       </div>
                       <div>
@@ -710,7 +710,7 @@ export default function DosenBimbinganPage() {
                         <div
                           className={`max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${
                             msg.sender === "dosen"
-                              ? "bg-[#C62828] text-white rounded-br-none"
+                              ? "bg-[#2563eb] text-white rounded-br-none"
                               : "bg-white text-slate-800 border border-slate-200 rounded-bl-none shadow-2xs"
                           }`}
                         >
@@ -728,11 +728,11 @@ export default function DosenBimbinganPage() {
                       placeholder="Tulis catatan atau instruksi revisi..."
                       value={chatInput}
                       onChange={(e) => setChatInput(e.target.value)}
-                      className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#C62828] bg-slate-50"
+                      className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#2563eb] bg-slate-50"
                     />
                     <button
                       type="submit"
-                      className="px-4 py-2.5 rounded-xl bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" /> Kirim
                     </button>
@@ -753,7 +753,7 @@ export default function DosenBimbinganPage() {
                   {/* Modal Header */}
                   <div className="p-3.5 sm:p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                         <FileText className="w-4 h-4 text-white" />
                       </div>
                       <div className="min-w-0">
@@ -774,7 +774,7 @@ export default function DosenBimbinganPage() {
                     <div className="flex items-center gap-1.5 sm:gap-2 text-slate-600 font-medium text-[10.5px] sm:text-xs shrink-0">
                       <span className="font-bold text-slate-700">Hal 1/48</span>
                       <span className="text-slate-300">|</span>
-                      <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#C62828] text-white font-extrabold text-[9.5px] sm:text-[10.5px] font-display shadow-2xs">
+                      <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#2563eb] text-white font-extrabold text-[9.5px] sm:text-[10.5px] font-display shadow-2xs">
                         Status Draf: {selectedMhs.tahap}
                       </span>
                     </div>
@@ -783,7 +783,7 @@ export default function DosenBimbinganPage() {
                         showToast(`Mengunduh Draf_Skripsi_${selectedMhs.nim}.pdf ...`);
                         setShowPdfModal(false);
                       }}
-                      className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[10px] sm:text-[11px] flex items-center gap-1 sm:gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95 shrink-0"
+                      className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[10px] sm:text-[11px] flex items-center gap-1 sm:gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95 shrink-0"
                     >
                       <Download className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> <span>Unduh PDF</span>
                     </button>
@@ -807,7 +807,7 @@ export default function DosenBimbinganPage() {
                       <div className="space-y-2.5 text-[11px] sm:text-xs leading-relaxed text-justify">
                         <p className="font-bold font-sans text-slate-900 text-xs">ABSTRAK</p>
                         <p className="text-slate-700">
-                          Penelitian ini bertujuan untuk merancang dan mengimplementasikan sistem informasi yang efisien berbasis web di lingkungan Fakultas Ilmu Komputer UPI YPTK Padang. Metodologi yang digunakan meliputi analisis kebutuhan, perancangan database ERD, implementasi arsitektur modular, dan pengujian blackbox.
+                          Penelitian ini bertujuan untuk merancang dan mengimplementasikan sistem informasi yang efisien berbasis web di lingkungan Fakultas Ilmu Komputer PT MBOIS. Metodologi yang digunakan meliputi analisis kebutuhan, perancangan database ERD, implementasi arsitektur modular, dan pengujian blackbox.
                         </p>
                         <p className="text-slate-700">
                           Hasil pengujian menunjukkan bahwa sistem mampu meningkatkan efisiensi proses pemantauan tugas akhir hingga 85% dibandingkan proses manual sebelumnya.

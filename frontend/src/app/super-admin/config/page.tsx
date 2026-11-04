@@ -46,7 +46,7 @@ export default function SuperAdminConfigPage() {
     setBackupProgress(true);
     setTimeout(() => {
       setBackupProgress(false);
-      alert("Pencadangan database sipeta_db (248 MB) berhasil dibuat dan tersimpan aman di Cloud Storage UPI YPTK!");
+      alert("Pencadangan database sipeta_db (248 MB) berhasil dibuat dan tersimpan aman di Cloud Storage PT MBOIS!");
     }, 1500);
   };
 
@@ -60,7 +60,7 @@ export default function SuperAdminConfigPage() {
           userName="Irvan Syahputra, S.T."
           userNim="SA-001"
           roleName="Super Admin"
-          prodiName="Sistem Utama SIPETA"
+          prodiName="PT MBOIS - Final Project"
         />
 
         <div className="flex-1 flex flex-col min-w-0 min-h-screen">
@@ -69,7 +69,7 @@ export default function SuperAdminConfigPage() {
             userName="Irvan Syahputra, S.T."
             userNim="SA-001"
             userRole="Super Admin"
-            prodiName="Sistem Utama SIPETA"
+            prodiName="PT MBOIS - Final Project"
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
@@ -80,7 +80,7 @@ export default function SuperAdminConfigPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <Settings className="w-3.5 h-3.5 text-white" /> Konfigurasi Global Sistem
                     </span>
                   </div>
@@ -95,14 +95,14 @@ export default function SuperAdminConfigPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <button
                     onClick={handleSave}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
                   >
                     <Save className="w-4 h-4 text-white" />
                     <span>{savedSuccess ? "Tersimpan!" : "Simpan Konfigurasi"}</span>
                   </button>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── 2. Card Section Navigation Pills (Direct 4 Cards Switcher) ── */}
@@ -111,11 +111,11 @@ export default function SuperAdminConfigPage() {
                 onClick={() => setActiveTab("akademik")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "akademik"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <FileCheck className={`w-3.5 h-3.5 ${activeTab === "akademik" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <FileCheck className={`w-3.5 h-3.5 ${activeTab === "akademik" ? "text-[#2563eb]" : "text-slate-500"}`} />
                 <span>Syarat Akademik</span>
               </button>
 
@@ -123,11 +123,11 @@ export default function SuperAdminConfigPage() {
                 onClick={() => setActiveTab("repositori")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "repositori"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <Database className={`w-3.5 h-3.5 ${activeTab === "repositori" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <Database className={`w-3.5 h-3.5 ${activeTab === "repositori" ? "text-[#2563eb]" : "text-slate-500"}`} />
                 <span>Repositori &amp; Similarity</span>
               </button>
 
@@ -135,11 +135,11 @@ export default function SuperAdminConfigPage() {
                 onClick={() => setActiveTab("keamanan")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "keamanan"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <HardDrive className={`w-3.5 h-3.5 ${activeTab === "keamanan" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <HardDrive className={`w-3.5 h-3.5 ${activeTab === "keamanan" ? "text-[#2563eb]" : "text-slate-500"}`} />
                 <span>Backup &amp; Keamanan</span>
               </button>
 
@@ -147,11 +147,11 @@ export default function SuperAdminConfigPage() {
                 onClick={() => setActiveTab("infra")}
                 className={`py-2 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
                   activeTab === "infra"
-                    ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+                    ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900 font-medium"
                 }`}
               >
-                <Cpu className={`w-3.5 h-3.5 ${activeTab === "infra" ? "text-[#C62828]" : "text-slate-500"}`} />
+                <Cpu className={`w-3.5 h-3.5 ${activeTab === "infra" ? "text-[#2563eb]" : "text-slate-500"}`} />
                 <span>Status Infrastructure</span>
               </button>
             </div>
@@ -167,7 +167,7 @@ export default function SuperAdminConfigPage() {
                   activeTab === "akademik" ? "block" : "hidden lg:block"
                 }`}>
                     <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                         <Settings className="w-4 h-4 text-white" />
                       </div>
                       <h2 className="font-bold text-sm text-slate-900 font-display">1. Aturan &amp; Syarat Akademik Aktivasi TA</h2>
@@ -180,7 +180,7 @@ export default function SuperAdminConfigPage() {
                           type="text"
                           value={tahunAkademik}
                           onChange={(e) => setTahunAkademik(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-display"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-display"
                         />
                       </div>
 
@@ -190,7 +190,7 @@ export default function SuperAdminConfigPage() {
                           type="number"
                           value={maxKuota}
                           onChange={(e) => setMaxKuota(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-mono"
                         />
                       </div>
 
@@ -200,7 +200,7 @@ export default function SuperAdminConfigPage() {
                           type="number"
                           value={minSks}
                           onChange={(e) => setMinSks(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-mono"
                         />
                       </div>
 
@@ -210,7 +210,7 @@ export default function SuperAdminConfigPage() {
                           type="text"
                           value={minIpk}
                           onChange={(e) => setMinIpk(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-mono"
                         />
                       </div>
                     </div>
@@ -221,7 +221,7 @@ export default function SuperAdminConfigPage() {
                   activeTab === "repositori" ? "block" : "hidden lg:block"
                 }`}>
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <FileCheck className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">2. Pengaturan Repositori &amp; Similarity Checker</h2>
@@ -234,7 +234,7 @@ export default function SuperAdminConfigPage() {
                         type="number"
                         value={similarityThreshold}
                         onChange={(e) => setSimilarityThreshold(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-mono"
                       />
                     </div>
 
@@ -244,7 +244,7 @@ export default function SuperAdminConfigPage() {
                         type="number"
                         value={maxFileSize}
                         onChange={(e) => setMaxFileSize(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#C62828] transition-all font-mono"
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 focus:outline-none focus:border-[#2563eb] transition-all font-mono"
                       />
                     </div>
                   </div>
@@ -255,7 +255,7 @@ export default function SuperAdminConfigPage() {
                   activeTab === "keamanan" ? "block" : "hidden lg:block"
                 }`}>
                   <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <HardDrive className="w-4 h-4 text-white" />
                     </div>
                     <h2 className="font-bold text-sm text-slate-900 font-display">3. Backup Database &amp; Keamanan Server</h2>
@@ -282,7 +282,7 @@ export default function SuperAdminConfigPage() {
                         <p className="text-[11px] text-slate-500 font-medium">Kunci akses publik aplikasi hanya untuk Super Admin</p>
                       </div>
                       <button onClick={() => setMaintenance(!maintenance)} className="cursor-pointer">
-                        {maintenance ? <ToggleRight className="w-8 h-8 text-[#C62828]" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                        {maintenance ? <ToggleRight className="w-8 h-8 text-[#2563eb]" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
                       </button>
                     </div>
 
@@ -319,13 +319,13 @@ export default function SuperAdminConfigPage() {
                     {/* Status Server Box */}
                     <div className="pb-3 border-b border-slate-100 space-y-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-[#C62828] text-white flex items-center justify-center font-bold shadow-xs">
+                        <div className="w-7 h-7 rounded-lg bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                           <Cpu className="w-3.5 h-3.5 text-white" />
                         </div>
                         <h3 className="text-sm font-black text-slate-900 font-display">4. Server Infrastructure</h3>
                       </div>
-                      <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs font-medium space-y-1">
-                        <div className="flex items-center justify-between font-bold text-rose-800">
+                      <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-rose-900 text-xs font-medium space-y-1">
+                        <div className="flex items-center justify-between font-bold text-blue-800">
                           <span>Status Server:</span>
                           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Online (99.98%)</span>
                         </div>
@@ -377,7 +377,7 @@ export default function SuperAdminConfigPage() {
 
                     <button
                       onClick={handleSave}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#B71C1C] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs font-display cursor-pointer"
                     >
                       <Save className="w-4 h-4 text-white" />
                       <span>{savedSuccess ? "Berhasil Disimpan!" : "Simpan Semua Pengaturan"}</span>

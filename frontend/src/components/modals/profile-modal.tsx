@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/components/ui/toast";
-import { storeProposal, storePembimbing, storeBimbingan, storeJadwal } from "@/lib/sipeta-store";
+import { storeProposal, storePembimbing, storeBimbingan, storeJadwal } from "@/lib/final-project-store";
 import {
   User,
   GraduationCap,
@@ -47,7 +47,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   const [userData, setUserData] = useState({
     nama: "Danu Zen",
     nim: "20101152630045",
-    email: "danuzen@student.upiyptk.ac.id",
+    email: "danuzen@mbois.id",
     telepon: "+62 812-3456-7890",
     alamat: "Jl. Lubuk Begalung No. 45, Kota Padang, Sumatera Barat",
     tanggalBergabung: "1 September 2020",
@@ -215,7 +215,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
       sub: "100% Bebas SKS",
       progress: 100,
       icon: <Hash className="w-3.5 h-3.5 text-white" />,
-      badgeBg: "bg-[#C62828]",
+      badgeBg: "bg-[#2563eb]",
     },
     {
       label: "Indeks Prestasi",
@@ -223,7 +223,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
       sub: "Cum Laude",
       progress: 91,
       icon: <BarChart2 className="w-3.5 h-3.5 text-white" />,
-      badgeBg: "bg-[#C62828]",
+      badgeBg: "bg-[#2563eb]",
     },
     {
       label: "Masa Studi",
@@ -244,16 +244,16 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   ];
 
   const profileAndAkademikInfo = [
-    { label: "Nama Lengkap Mahasiswa", value: userData.nama, icon: <User className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "NIM Mahasiswa", value: userData.nim, icon: <IdCard className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Email Akademik", value: userData.email, icon: <Mail className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Tahun Angkatan", value: `Angkatan ${userData.angkatan}`, icon: <Calendar className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Program Studi", value: userData.prodi, icon: <GraduationCap className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Fakultas", value: userData.fakultas, icon: <Building2 className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Jenjang Studi", value: "Strata 1 (S1)", icon: <Award className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Status Akademik", value: `Semester ${userData.semester} (Aktif TA)`, icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Dosen Pembimbing Utama", value: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.", icon: <UserCheck className="w-3.5 h-3.5 text-[#C62828]" /> },
-    { label: "Dosen Wali Akademik", value: "Dr. Jasmir, S.Kom., M.Kom.", icon: <UserCheck className="w-3.5 h-3.5 text-[#C62828]" /> },
+    { label: "Nama Lengkap Mahasiswa", value: userData.nama, icon: <User className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "NIM Mahasiswa", value: userData.nim, icon: <IdCard className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Email Akademik", value: userData.email, icon: <Mail className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Tahun Angkatan", value: `Angkatan ${userData.angkatan}`, icon: <Calendar className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Program Studi", value: userData.prodi, icon: <GraduationCap className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Fakultas", value: userData.fakultas, icon: <Building2 className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Jenjang Studi", value: "Strata 1 (S1)", icon: <Award className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Status Akademik", value: `Semester ${userData.semester} (Aktif TA)`, icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Dosen Pembimbing Utama", value: "Dr. Eng. H. Sarjon Defit, S.Kom., M.Sc.", icon: <UserCheck className="w-3.5 h-3.5 text-[#2563eb]" /> },
+    { label: "Dosen Wali Akademik", value: "Dr. Jasmir, S.Kom., M.Kom.", icon: <UserCheck className="w-3.5 h-3.5 text-[#2563eb]" /> },
   ];
 
   const completedStepsCount = timelineData.filter((t) => t.status === "COMPLETED").length;
@@ -278,7 +278,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
         <div className="bg-[#1A1A1A] text-white p-4 md:p-5 shrink-0 relative overflow-hidden">
           <div className="flex items-center justify-between gap-4 relative z-10">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C62828] via-[#B71C1C] to-[#8B0000] text-white font-black text-lg flex items-center justify-center shrink-0 shadow-md border border-white/20 font-display">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#1e3a8a] text-white font-black text-lg flex items-center justify-center shrink-0 shadow-md border border-white/20 font-display">
                 DZ
               </div>
               <div className="space-y-0.5">
@@ -300,7 +300,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
               </button>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
         </div>
 
         {/* Modal Inner Navigation Tabs */}
@@ -309,7 +309,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
             onClick={() => setActiveTab("AKADEMIK")}
             className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "AKADEMIK"
-                ? "bg-[#C62828] text-white shadow-xs"
+                ? "bg-[#2563eb] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
@@ -321,7 +321,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
             onClick={() => setActiveTab("TIMELINE")}
             className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "TIMELINE"
-                ? "bg-[#C62828] text-white shadow-xs"
+                ? "bg-[#2563eb] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
@@ -333,7 +333,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
             onClick={() => setActiveTab("SANDI")}
             className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer font-display ${
               activeTab === "SANDI"
-                ? "bg-[#C62828] text-white shadow-xs"
+                ? "bg-[#2563eb] text-white shadow-xs"
                 : "text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-bold"
             }`}
           >
@@ -351,12 +351,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col h-full min-h-0">
                 <div className="px-4 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <GraduationCap className="w-4 h-4" />
                     </div>
                     <div>
                       <h3 className="font-bold text-sm text-slate-900 font-display">
-                        Data Terdaftar Pangkalan Data UPI YPTK
+                        Data Terdaftar Pangkalan Data PT MBOIS
                       </h3>
                       <p className="text-[10px] text-slate-500 font-medium">
                         Informasi resmi identitas &amp; akademik terverifikasi kampus
@@ -365,7 +365,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                   </div>
                   <button
                     onClick={() => setIsEditContactOpen(!isEditContactOpen)}
-                    className="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-[#C62828] hover:text-white text-slate-700 text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1 shrink-0"
+                    className="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-[#2563eb] hover:text-white text-slate-700 text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1 shrink-0"
                   >
                     <Edit3 className="w-3 h-3" />
                     <span>{isEditContactOpen ? "Batal Edit" : "Edit Kontak"}</span>
@@ -373,14 +373,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                 </div>
 
                 {isEditContactOpen ? (
-                  <form onSubmit={handleSaveProfile} className="p-3 space-y-2 text-xs bg-rose-50/20 border-b border-slate-100 shrink-0">
+                  <form onSubmit={handleSaveProfile} className="p-3 space-y-2 text-xs bg-blue-50/20 border-b border-slate-100 shrink-0">
                     <div className="space-y-0.5">
                       <label className="font-bold text-slate-700 text-[9px] uppercase">Email Kontak</label>
                       <input
                         type="email"
                         value={editForm.email}
                         onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                        className="w-full p-2 rounded-lg border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] bg-white text-xs"
+                        className="w-full p-2 rounded-lg border border-slate-300 font-semibold focus:outline-none focus:border-[#2563eb] bg-white text-xs"
                         required
                       />
                     </div>
@@ -390,14 +390,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         rows={2}
                         value={editForm.alamat}
                         onChange={(e) => setEditForm({ ...editForm, alamat: e.target.value })}
-                        className="w-full p-2 rounded-lg border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] resize-none bg-white text-xs"
+                        className="w-full p-2 rounded-lg border border-slate-300 font-semibold focus:outline-none focus:border-[#2563eb] resize-none bg-white text-xs"
                         required
                       />
                     </div>
                     <div className="flex justify-end">
                       <button
                         type="submit"
-                        className="px-3 py-1 bg-[#C62828] text-white rounded-lg text-xs font-bold shadow-xs hover:bg-[#B71C1C] flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-1 bg-[#2563eb] text-white rounded-lg text-xs font-bold shadow-xs hover:bg-[#1d4ed8] flex items-center gap-1 cursor-pointer"
                       >
                         <Save className="w-3.5 h-3.5" /> Simpan Kontak
                       </button>
@@ -417,7 +417,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         {item.label === "NIM Mahasiswa" && (
                           <button
                             onClick={() => handleCopy(userData.nim, "NIM Mahasiswa")}
-                            className="px-2 py-0.5 rounded-md bg-slate-200 hover:bg-[#C62828] hover:text-white text-slate-700 text-[10px] font-bold transition-all cursor-pointer inline-flex items-center gap-1 shrink-0"
+                            className="px-2 py-0.5 rounded-md bg-slate-200 hover:bg-[#2563eb] hover:text-white text-slate-700 text-[10px] font-bold transition-all cursor-pointer inline-flex items-center gap-1 shrink-0"
                           >
                             {copiedField === "NIM Mahasiswa" ? (
                               <Check className="w-3 h-3 text-emerald-500" />
@@ -432,7 +432,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                   ))}
                   <div className="sm:col-span-2 p-2 bg-slate-50/80 rounded-lg border border-slate-200/80 space-y-0.5">
                     <div className="flex items-center gap-1 text-[9px] font-bold text-slate-400 uppercase tracking-wider font-display">
-                      <MapPin className="w-3.5 h-3.5 text-[#C62828]" />
+                      <MapPin className="w-3.5 h-3.5 text-[#2563eb]" />
                       <span>Alamat Domisili Lengkap</span>
                     </div>
                     <p className="text-xs font-bold text-slate-900 leading-snug">{userData.alamat}</p>
@@ -448,7 +448,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col h-full justify-between">
                 <div className="px-4 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Layers className="w-4 h-4" />
                     </div>
                     <div>
@@ -478,7 +478,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                               isCompleted
                                 ? "bg-emerald-600 border-emerald-600 text-white shadow-xs"
                                 : isInProgress
-                                ? "bg-[#C62828] border-[#C62828] text-white animate-pulse shadow-md ring-4 ring-rose-100"
+                                ? "bg-[#2563eb] border-[#2563eb] text-white animate-pulse shadow-md ring-4 ring-blue-100"
                                 : "bg-white border-slate-300 text-slate-400 font-bold"
                             }`}
                           >
@@ -490,7 +490,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                               <div className="flex items-center gap-2">
                                 <h4
                                   className={`text-xs font-extrabold font-display ${
-                                    isCompleted ? "text-slate-900" : isInProgress ? "text-[#C62828]" : "text-slate-700"
+                                    isCompleted ? "text-slate-900" : isInProgress ? "text-[#2563eb]" : "text-slate-700"
                                   }`}
                                 >
                                   {step.title}
@@ -507,7 +507,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                                 </span>
                               )}
                               {isInProgress && (
-                                <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#C62828] text-white shadow-xs animate-pulse">
+                                <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#2563eb] text-white shadow-xs animate-pulse">
                                   ● Tahap Aktif
                                 </span>
                               )}
@@ -533,7 +533,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col h-full min-h-0">
                 <div className="px-4 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
                       <Lock className="w-4 h-4" />
                     </div>
                     <div>
@@ -559,7 +559,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         value={passForm.currentPass}
                         onChange={(e) => setPassForm({ ...passForm, currentPass: e.target.value })}
                         placeholder="••••••••"
-                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#2563eb] text-xs bg-slate-50/50 focus:bg-white transition-all"
                         required
                       />
                     </div>
@@ -571,7 +571,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         value={passForm.newPass}
                         onChange={(e) => setPassForm({ ...passForm, newPass: e.target.value })}
                         placeholder="Minimal 8 karakter"
-                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#2563eb] text-xs bg-slate-50/50 focus:bg-white transition-all"
                         required
                       />
                     </div>
@@ -583,14 +583,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         value={passForm.confirmPass}
                         onChange={(e) => setPassForm({ ...passForm, confirmPass: e.target.value })}
                         placeholder="Ulangi kata sandi baru"
-                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#C62828] text-xs bg-slate-50/50 focus:bg-white transition-all"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:outline-none focus:border-[#2563eb] text-xs bg-slate-50/50 focus:bg-white transition-all"
                         required
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full py-2.5 bg-[#C62828] hover:bg-[#B71C1C] text-white font-extrabold rounded-xl shadow-md shadow-[#C62828]/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 active:scale-95"
+                      className="w-full py-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-extrabold rounded-xl shadow-md shadow-[#2563eb]/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 active:scale-95"
                     >
                       <ShieldCheck className="w-4 h-4" />
                       <span>Perbarui Kata Sandi Akun</span>

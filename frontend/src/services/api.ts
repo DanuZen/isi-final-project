@@ -1,5 +1,5 @@
 /**
- * API Client Helper Layer — SIPETA UPI YPTK Padang
+ * API Client Helper Layer — SIPETA PT MBOIS
  * File ini menyediakan helper fetcher terstruktur untuk menghubungkan Frontend UI
  * dengan Backend API Server (Next.js Route Handlers / Express / NestJS).
  */
@@ -35,7 +35,7 @@ async function fetcher<T>(endpoint: string, options: RequestInit = {}): Promise<
       statusCode: 500,
       error: {
         code: "NETWORK_ERROR",
-        message: err.message || "Gagal menghubungkan ke server API SIPETA",
+        message: err.message || "Gagal menghubungkan ke server API PT MBOIS",
       },
     };
   }

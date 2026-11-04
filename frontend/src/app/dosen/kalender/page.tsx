@@ -26,13 +26,13 @@ interface EventItem {
   judul: string;
 }
 
-import { storeJadwal, storeBimbingan } from "@/lib/sipeta-store";
+import { storeJadwal, storeBimbingan } from "@/lib/final-project-store";
 
 const EVENTS: Array<EventItem> = [];
 
 const JENIS_SOLID: Record<string, { bg: string; text: string }> = {
   "Seminar":   { bg: "bg-blue-600",   text: "text-white" },
-  "Sidang":    { bg: "bg-[#C62828]",  text: "text-white" },
+  "Sidang":    { bg: "bg-[#2563eb]",  text: "text-white" },
   "Bimbingan": { bg: "bg-[#D97706]",  text: "text-white" },
 };
 
@@ -60,7 +60,7 @@ export default function DosenKalenderPage() {
       nim: j.studentNim,
       prodi: j.prodi,
       waktu: j.waktu || "09:00 - 10:30 WIB",
-      ruang: j.ruang || "Aula FIK UPI YPTK",
+      ruang: j.ruang || "Aula FIK PT MBOIS",
       role: "Dosen Penguji / Pembimbing",
       judul: j.judul,
     }));
@@ -126,7 +126,7 @@ export default function DosenKalenderPage() {
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-                <Sparkles className="w-4 h-4 text-[#ffd01d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#38bdf8] shrink-0" />
                 <p className="text-xs font-bold font-display">{toastMessage}</p>
                 <button onClick={() => setToastMessage(null)} className="ml-2 text-neutral-400 hover:text-white cursor-pointer">
                   <X className="w-3.5 h-3.5" />
@@ -139,7 +139,7 @@ export default function DosenKalenderPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
                       <CalendarDays className="w-3.5 h-3.5 text-white" /> Agenda Akademik Dosen Active
                     </span>
                   </div>
@@ -154,14 +154,14 @@ export default function DosenKalenderPage() {
                 <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
                   <Link
                     href="/dosen/dashboard"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white border border-red-500/30 shadow-md shadow-red-950/40 transition-all active:scale-95 cursor-pointer font-display"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white border border-blue-500/30 shadow-md shadow-blue-950/20 transition-all active:scale-95 cursor-pointer font-display"
                   >
                     <span>Kembali ke Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </Link>
                 </div>
               </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
             </div>
 
             {/* ── Split 2-Column Card Layout (7/12 & 5/12) ── */}
@@ -174,7 +174,7 @@ export default function DosenKalenderPage() {
                 {/* Card Header + Filters */}
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap shrink-0 bg-slate-50/50">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs font-bold">
                       <CalendarDays className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -190,7 +190,7 @@ export default function DosenKalenderPage() {
                       className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-white hover:bg-slate-50 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
                     >
                       <div className="flex items-center gap-2">
-                        <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+                        <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
                         <span>{filterJenis}</span>
                       </div>
                       <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -208,7 +208,7 @@ export default function DosenKalenderPage() {
                                 setIsFilterOpen(false);
                               }}
                               className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                                filterJenis === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                                filterJenis === f ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
                               }`}
                             >
                               <span>{f}</span>
@@ -229,7 +229,7 @@ export default function DosenKalenderPage() {
                       <span
                         key={d}
                         className={`text-[11px] font-extrabold uppercase font-display ${
-                          i === 0 ? "text-[#C62828]" : "text-slate-500"
+                          i === 0 ? "text-[#2563eb]" : "text-slate-500"
                         }`}
                       >
                         {d}
@@ -277,7 +277,7 @@ export default function DosenKalenderPage() {
                             <span
                               className={`text-xs font-mono font-bold ${
                                 isDaySelected
-                                  ? "text-[#C62828] font-black"
+                                  ? "text-[#2563eb] font-black"
                                   : hasEvents
                                   ? "text-slate-900"
                                   : "text-slate-400"
@@ -286,7 +286,7 @@ export default function DosenKalenderPage() {
                               {dayNum}
                             </span>
                             {hasEvents && (
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
                             )}
                           </div>
 
@@ -316,7 +316,7 @@ export default function DosenKalenderPage() {
                   <div className="mt-4 pt-3.5 border-t border-slate-100 space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#C62828]" />
+                        <span className="w-2 h-2 rounded-full bg-[#2563eb]" />
                         <h3 className="text-xs font-bold text-slate-800 font-display">
                           Agenda {selectedDayNum} Agustus 2026
                         </h3>
@@ -400,13 +400,13 @@ export default function DosenKalenderPage() {
                     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
                     title="Kembali ke Kalender"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
                     <span>Kembali</span>
                   </button>
 
                   {/* Desktop Title & Icon (Hidden on Mobile) */}
                   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <BookOpen className="w-4 h-4 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -441,10 +441,10 @@ export default function DosenKalenderPage() {
 
                       <div className="pt-2 border-t border-slate-200/60 space-y-1.5 text-xs text-slate-700 font-medium">
                         <p className="flex items-center gap-2">
-                          <Clock className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Waktu:</strong> {selectedEv.waktu}
+                          <Clock className="w-3.5 h-3.5 text-[#2563eb]" /> <strong>Waktu:</strong> {selectedEv.waktu}
                         </p>
                         <p className="flex items-center gap-2">
-                          <MapPin className="w-3.5 h-3.5 text-[#C62828]" /> <strong>Lokasi:</strong> {selectedEv.ruang}
+                          <MapPin className="w-3.5 h-3.5 text-[#2563eb]" /> <strong>Lokasi:</strong> {selectedEv.ruang}
                         </p>
                       </div>
                     </div>
@@ -495,7 +495,7 @@ export default function DosenKalenderPage() {
                       {selectedEv.jenis !== "Bimbingan" && (
                         <button
                           onClick={() => setShowBeritaAcaraModal(true)}
-                          className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#C62828] hover:bg-[#a81f1f] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
+                          className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer font-display active:scale-95"
                         >
                           <FileText className="w-4 h-4 text-white" /> Berita Acara
                         </button>
@@ -527,7 +527,7 @@ export default function DosenKalenderPage() {
                   {/* Modal Header */}
                   <div className="p-4 bg-[#1A1A1A] text-white flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold">
+                      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold">
                         <FileText className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -551,7 +551,7 @@ export default function DosenKalenderPage() {
                         showToast(`Mengunduh Berita Acara ${selectedEv.jenis} ${selectedEv.nama}...`);
                         setShowBeritaAcaraModal(false);
                       }}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#a81f1f] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
                     >
                       <FileText className="w-3.5 h-3.5" /> Cetak / Download PDF
                     </button>
@@ -567,7 +567,7 @@ export default function DosenKalenderPage() {
                         <h2 className="text-xs font-black uppercase tracking-wider font-sans text-slate-900">
                           FAKULTAS ILMU KOMPUTER — PRODI {selectedEv.prodi.toUpperCase()}
                         </h2>
-                        <p className="text-[11px] font-bold font-sans pt-1 text-[#C62828]">
+                        <p className="text-[11px] font-bold font-sans pt-1 text-[#2563eb]">
                           BERITA ACARA {selectedEv.jenis.toUpperCase()} TUGAS AKHIR
                         </p>
                       </div>
