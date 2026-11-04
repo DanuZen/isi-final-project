@@ -1,6 +1,6 @@
-# Workflow & Alur Kerja Detail — SIPETA UPI YPTK Padang
+# Workflow & Alur Kerja Detail — PT MBOIS Final Project
 
-Dokumen ini menjelaskan alur kerja (*end-to-end workflow*) dan diagram interaksi (*sequence & flowchart*) untuk setiap tahapan dalam **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)**.
+Dokumen ini menjelaskan alur kerja (*end-to-end workflow*) dan diagram interaksi (*sequence & flowchart*) untuk setiap tahapan dalam **PT MBOIS - Final Project Platform**.
 
 ---
 
@@ -18,7 +18,7 @@ flowchart TD
     G -->|Disetujui Dosen| H[Stage 4: ACC & Ujian Sidang Skripsi Final]
     H --> I[Ujian Komprehensif Dewan Penguji]
     I --> J[Upload Naskah Final Hardcover & Bebas Revisi]
-    J --> K[Penyelesaian Perjalanan TA FIK UPI YPTK]
+    J --> K[Penyelesaian Perjalanan TA FIK PT MBOIS]
 ```
 
 ---
@@ -28,8 +28,8 @@ flowchart TD
 ### 2.1 Prasyarat: Clearing Nilai Manual (Luring / Offline di Kampus)
 Pengurusan Clearing Nilai SKS & IPK dilakukan mahasiswa secara **manual/langsung di kampus** dengan mendatangi Bagian Akademik / Admin Prodi.  
 * **Proses Offline:** Mahasiswa membawa bukti transkrip nilai ke kampus untuk diverifikasi oleh Admin Prodi.  
-* **Tidak Ada di Sistem:** Proses pemeriksaan berkas clearing nilai **TIDAK memiliki form / modul input di dalam aplikasi web SIPETA**.  
-* **Aktivasi Akun:** Setelah mahasiswa dinyatakan lulus clearing nilai secara luring, Admin Prodi akan membuatkan/mengaktifkan akun SIPETA mahasiswa agar dapat login dan mengusulkan judul TA.
+* **Tidak Ada di Sistem:** Proses pemeriksaan berkas clearing nilai **TIDAK memiliki form / modul input di dalam aplikasi web Final Project**.  
+* **Aktivasi Akun:** Setelah mahasiswa dinyatakan lulus clearing nilai secara luring, Admin Prodi akan membuatkan/mengaktifkan akun Final Project mahasiswa agar dapat login dan mengusulkan judul TA.
 
 ---
 
@@ -41,10 +41,10 @@ sequenceDiagram
     actor M as Mahasiswa
     actor D as Dosen Pembimbing
     actor P as Admin Prodi
-    participant S as Sistem SIPETA
+    participant S as Sistem Final Project
 
     note over M,P: Prasyarat Luring: Mahasiswa Mengurus Clearing Nilai Langsung di Kampus
-    P->>S: Buatkan / Aktifkan Akun SIPETA Mahasiswa
+    P->>S: Buatkan / Aktifkan Akun Final Project Mahasiswa
     M->>S: Login & Isi Form Usulan Judul (Judul, Abstrak, Bidang Kajian)
     M->>S: Klik "Cek Kemiripan (Similarity)" Realtime
     S->>S: Calculate Fuzzy Match Similarity Score (%)
@@ -66,7 +66,7 @@ sequenceDiagram
     actor M as Mahasiswa
     actor D as Dosen Pembimbing
     actor P as Admin Prodi
-    participant S as Sistem SIPETA
+    participant S as Sistem Final Project
 
     loop Minimal 5 Sesi Bimbingan Rutin
         M->>S: Catat Log Bimbingan + Upload Draft Naskah (PDF)
@@ -93,7 +93,7 @@ sequenceDiagram
     actor D as Dosen Pembimbing
     actor P as Admin Prodi
     actor G as Dosen Penguji
-    participant S as Sistem SIPETA
+    participant S as Sistem Final Project
 
     M->>S: Ajukan ACC Seminar Proposal (Syarat 5 Sesi Bimbingan)
     D->>S: Verifikasi & Klik "ACC Seminar"
@@ -117,7 +117,7 @@ sequenceDiagram
     actor D as Dosen Pembimbing
     actor P as Admin Prodi
     actor G as Dosen Penguji
-    participant S as Sistem SIPETA
+    participant S as Sistem Final Project
 
     M->>S: Ajukan ACC Ujian Sidang Skripsi
     D->>S: Klik "ACC Ujian Sidang Skripsi"

@@ -1,6 +1,6 @@
 # PRODUCT KNOWLEDGE
 
-# SIPETA — Sistem Informasi Perjalanan & Evaluasi Tugas Akhir
+# PT MBOIS — Final Project Platform
 
 **Dokumen Pengetahuan Produk (Product Knowledge Document)**
 
@@ -8,12 +8,12 @@
 
 | Informasi Dokumen | Keterangan |
 |---|---|
-| **Nama Produk** | SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir) |
-| **Instansi** | Fakultas Ilmu Komputer (FIK), Universitas Putra Indonesia YPTK Padang |
+| **Nama Produk** | PT MBOIS - Final Project Platform |
+| **Instansi** | PT MBOIS |
 | **Versi Dokumen** | 1.0 |
 | **Tanggal Terbit** | 30 Juli 2026 |
 | **Klasifikasi** | Dokumen Resmi — Untuk Diserahkan Kepada Klien |
-| **Disusun Oleh** | Tim Pengembang SIPETA |
+| **Disusun Oleh** | Tim Pengembang PT MBOIS |
 
 ---
 
@@ -39,7 +39,7 @@
 
 ## 1. Ringkasan Eksekutif
 
-**SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** adalah platform digital terintegrasi yang dirancang untuk **seluruh Civitas Akademika Universitas Putra Indonesia YPTK Padang** (mencakup seluruh Fakultas dan Program Pascasarjana) guna **memantau, mengelola, dan mengevaluasi seluruh perjalanan Tugas Akhir (TA) dan Skripsi mahasiswa** secara visual, terstruktur, transparan, dan realtime.
+**PT MBOIS - Final Project Platform** adalah platform digital terintegrasi yang dirancang untuk **seluruh Civitas Akademika PT MBOIS** (mencakup seluruh Fakultas dan Program Pascasarjana) guna **memantau, mengelola, dan mengevaluasi seluruh perjalanan Tugas Akhir (TA) dan Skripsi mahasiswa** secara visual, terstruktur, transparan, dan realtime.
 
 Platform ini menghubungkan **7 peran pengguna (role)** dalam satu ekosistem digital terpadu:
 
@@ -54,7 +54,7 @@ Platform ini menghubungkan **7 peran pengguna (role)** dalam satu ekosistem digi
 | 7 | Super Admin (Administrator Teknis) | 5 Modul |
 | | **Total** | **38 Modul** |
 
-SIPETA mengotomasi **4 tahapan inti Tugas Akhir**: Usulan Judul & Cek Kemiripan → Bimbingan TA → Seminar Proposal → Ujian Sidang Skripsi, dengan tetap mempertahankan proses clearing nilai sebagai tahapan luring (offline) yang dilakukan langsung di kampus.
+Final Project mengotomasi **4 tahapan inti Tugas Akhir**: Usulan Judul & Cek Kemiripan → Bimbingan TA → Seminar Proposal → Ujian Sidang Skripsi, dengan tetap mempertahankan proses clearing nilai sebagai tahapan luring (offline) yang dilakukan langsung di kampus.
 
 ---
 
@@ -62,7 +62,7 @@ SIPETA mengotomasi **4 tahapan inti Tugas Akhir**: Usulan Judul & Cek Kemiripan 
 
 ### 2.1 Kondisi Eksisting
 
-Pengelolaan Tugas Akhir di lingkungan Universitas Putra Indonesia YPTK Padang selama ini masih mengandalkan proses manual dan semi-digital yang menimbulkan berbagai kendala operasional lintas fakultas:
+Pengelolaan Tugas Akhir di lingkungan PT MBOIS selama ini masih mengandalkan proses manual dan semi-digital yang menimbulkan berbagai kendala operasional lintas fakultas:
 
 | No | Permasalahan | Dampak |
 |:---:|---|---|
@@ -89,7 +89,7 @@ Dibutuhkan sebuah **platform terpusat berbasis web** yang mampu:
 
 ### 3.1 Visi
 
-> Menjadi platform pengelolaan Tugas Akhir terdepan yang memberikan **transparansi, efisiensi, dan akuntabilitas** dalam setiap tahapan perjalanan akademik mahasiswa di seluruh Fakultas Universitas Putra Indonesia YPTK Padang.
+> Menjadi platform pengelolaan Tugas Akhir terdepan yang memberikan **transparansi, efisiensi, dan akuntabilitas** dalam setiap tahapan perjalanan akademik mahasiswa di seluruh Fakultas PT MBOIS.
 
 ### 3.2 Misi
 
@@ -128,9 +128,9 @@ Dibutuhkan sebuah **platform terpusat berbasis web** yang mampu:
 | Aspek | Keterangan |
 |---|---|
 | Proses clearing nilai online | Verifikasi SKS & IPK tetap dilakukan secara manual/luring di kampus |
-| Sistem informasi akademik (SIAKAD) | SIPETA berdiri sendiri dan tidak menggantikan SIAKAD eksisting |
-| Pembayaran SPP & keuangan | Tidak termasuk dalam modul SIPETA |
-| E-learning & perkuliahan | Bukan domain SIPETA |
+| Sistem informasi akademik (SIAKAD) | Final Project berdiri sendiri dan tidak menggantikan SIAKAD eksisting |
+| Pembayaran SPP & keuangan | Tidak termasuk dalam modul Final Project PT MBOIS |
+| E-learning & perkuliahan | Bukan domain Final Project |
 
 ---
 
@@ -151,7 +151,7 @@ Dibutuhkan sebuah **platform terpusat berbasis web** yang mampu:
 
 ### 5.2 Arsitektur Viewport
 
-SIPETA mengadopsi **Fit-Viewport Architecture (`100dvh`)** untuk pengalaman pengguna desktop yang premium:
+Final Project mengadopsi **Fit-Viewport Architecture (`100dvh`)** untuk pengalaman pengguna desktop yang premium:
 
 - **Desktop (≥ 1024px):** Halaman fit 1 layar penuh tanpa scroll global. Konten panjang menggunakan scroll internal per-komponen.
 - **Tablet (768–1024px):** Sidebar collapsible minimal, grid 2 kolom adaptif.
@@ -207,7 +207,7 @@ graph TD
 
 ### 6.1 Diagram Hierarki Peran Pengguna (RBAC)
 
-SIPETA menerapkan **Role-Based Access Control (RBAC)** dengan 7 peran pengguna yang disusun berdasarkan hierarki kewenangan:
+Final Project menerapkan **Role-Based Access Control (RBAC)** dengan 7 peran pengguna yang disusun berdasarkan hierarki kewenangan:
 
 ```mermaid
 graph TD
@@ -227,7 +227,7 @@ graph TD
 | Aspek | Deskripsi |
 |---|---|
 | **Kategori** | Pengguna Akademik (End User Utama) |
-| **Prasyarat Akses** | Mahasiswa menyelesaikan clearing nilai SKS & IPK secara **luring di kampus** → Admin Prodi memverifikasi → Akun SIPETA diaktifkan |
+| **Prasyarat Akses** | Mahasiswa menyelesaikan clearing nilai SKS & IPK secara **luring di kampus** → Admin Prodi memverifikasi → Akun Final Project diaktifkan |
 | **Jumlah Modul** | 11 modul halaman |
 | **Fungsi Utama** | Mengusulkan judul TA, cek kemiripan judul, memilih dosen pembimbing, mencatat log bimbingan rutin, mengajukan perubahan judul, memantau jadwal seminar & sidang, mengunggah naskah revisi/final, melihat repositori judul alumni |
 
@@ -307,7 +307,7 @@ graph TD
 | Aspek | Deskripsi |
 |---|---|
 | **Kategori** | Administrator Administrasi Fakultas |
-| **Konteks Peran** | Staf Tata Usaha di tingkat Fakultas Ilmu Komputer UPI YPTK Padang |
+| **Konteks Peran** | Staf Tata Usaha di tingkat Fakultas Ilmu Komputer PT MBOIS |
 | **Jumlah Modul** | 4 modul halaman |
 | **Fungsi Utama** | Menerbitkan SK Dekan penetapan pembimbing/penguji, memverifikasi bebas fakultas (pustaka, lab, SPP), mengarsipkan dokumen resmi TA |
 
@@ -325,7 +325,7 @@ graph TD
 | Aspek | Deskripsi |
 |---|---|
 | **Kategori** | Executive Monitoring & Decision Making |
-| **Konteks Peran** | Dekan, Wakil Dekan, dan Ketua Lembaga Penjaminan Mutu FIK UPI YPTK Padang |
+| **Konteks Peran** | Dekan, Wakil Dekan, dan Ketua Lembaga Penjaminan Mutu FIK PT MBOIS |
 | **Jumlah Modul** | 4 modul halaman |
 | **Fungsi Utama** | Memantau indikator kinerja utama TA secara read-only, menganalisis tren riset, mengevaluasi durasi masa studi, mengunduh laporan eksekutif |
 
@@ -361,13 +361,13 @@ graph TD
 
 ### 7.1 Diagram Alur Kerja End-to-End Tugas Akhir
 
-Seluruh perjalanan Tugas Akhir mahasiswa di SIPETA melewati **5 tahapan besar** yang saling terhubung:
+Seluruh perjalanan Tugas Akhir mahasiswa di Final Project melewati **5 tahapan besar** yang saling terhubung:
 
 ```mermaid
 flowchart TD
     subgraph S0["STAGE 0: Clearing Nilai Luring (Kampus Offline)"]
         A1["Mahasiswa Mengurus Clearing SKS & IPK di Kampus"] --> A2["Admin Prodi Verifikasi Syarat 110 SKS & IPK ≥ 2.00"]
-        A2 --> A3["Admin Prodi Aktifkan Akun SIPETA Mahasiswa"]
+        A2 --> A3["Admin Prodi Aktifkan Akun Final Project Mahasiswa"]
     end
 
     subgraph S1["STAGE 1: Usulan Judul & Cek Kemiripan (Online)"]
@@ -408,17 +408,17 @@ flowchart TD
 |:---:|---|---|---|
 | 1 | Mahasiswa | Datang ke kampus dengan membawa transkrip nilai | Bagian Akademik FIK |
 | 2 | Admin Prodi | Memverifikasi kelengkapan SKS (≥ 144) dan IPK | Kantor Admin Prodi |
-| 3 | Admin Prodi | Mengaktifkan akun SIPETA mahasiswa (`/admin-prodi/aktivasi`) | Sistem SIPETA |
+| 3 | Admin Prodi | Mengaktifkan akun Final Project mahasiswa (`/admin-prodi/aktivasi`) | Sistem Final Project |
 
-> **Catatan Penting:** Proses clearing nilai **TIDAK** dilakukan di dalam aplikasi SIPETA. Ini merupakan proses manual yang harus diselesaikan langsung di kampus. Setelah clearing selesai, Admin Prodi akan membuat dan mengaktifkan akun SIPETA mahasiswa.
+> **Catatan Penting:** Proses clearing nilai **TIDAK** dilakukan di dalam aplikasi Final Project PT MBOIS. Ini merupakan proses manual yang harus diselesaikan langsung di kampus. Setelah clearing selesai, Admin Prodi akan membuat dan mengaktifkan akun Final Project mahasiswa.
 
 ---
 
 #### Stage 1 — Pengajuan Judul, Cek Kemiripan & Pemilihan Dosen Pembimbing
 
-| Langkah | Pelaku | Aksi | Modul SIPETA |
+| Langkah | Pelaku | Aksi | Modul Final Project |
 |:---:|---|---|---|
-| 1 | Mahasiswa | Login ke SIPETA dan mengisi form usulan judul (judul, abstrak, bidang kajian) | `/proposal` |
+| 1 | Mahasiswa | Login ke Final Project dan mengisi form usulan judul (judul, abstrak, bidang kajian) | `/proposal` |
 | 2 | Mahasiswa | Menjalankan **Simulator Cek Kemiripan (Similarity)** realtime | `/proposal` |
 | 3 | Sistem | Menghitung skor kemiripan dengan judul-judul terdaftar (< 25% = Layak) | Otomatis |
 | 4 | Mahasiswa | Mencari dan memilih calon Dosen Pembimbing I & II dari katalog dosen | `/pembimbing` |
@@ -431,7 +431,7 @@ flowchart TD
 
 #### Stage 2 — Bimbingan TA (Minimal 5 Sesi Terverifikasi)
 
-| Langkah | Pelaku | Aksi | Modul SIPETA |
+| Langkah | Pelaku | Aksi | Modul Final Project |
 |:---:|---|---|---|
 | 1 | Mahasiswa | Mengunggah draft naskah PDF dan mencatat log sesi bimbingan | `/bimbingan` |
 | 2 | Dosen Pembimbing | Mereview draft, memberikan feedback via thread catatan | `/dosen/bimbingan` |
@@ -445,7 +445,7 @@ flowchart TD
 
 #### Stage 3 — ACC & Pelaksanaan Seminar Proposal
 
-| Langkah | Pelaku | Aksi | Modul SIPETA |
+| Langkah | Pelaku | Aksi | Modul Final Project |
 |:---:|---|---|---|
 | 1 | Mahasiswa | Mengajukan permintaan ACC Seminar Proposal | `/seminar` |
 | 2 | Dosen Pembimbing | Memverifikasi kelengkapan bimbingan (≥ 5 sesi) dan klik **ACC Seminar** | `/dosen/bimbingan` |
@@ -460,7 +460,7 @@ flowchart TD
 
 #### Stage 4 — ACC & Pelaksanaan Ujian Sidang Skripsi Final
 
-| Langkah | Pelaku | Aksi | Modul SIPETA |
+| Langkah | Pelaku | Aksi | Modul Final Project |
 |:---:|---|---|---|
 | 1 | Dosen Pembimbing | Memberikan **ACC Ujian Sidang Skripsi** | `/dosen/bimbingan` |
 | 2 | Admin Prodi | Menjadwalkan ujian sidang di Aula FIK dan menetapkan Dewan Penguji | `/admin-prodi/jadwal` |
@@ -476,7 +476,7 @@ flowchart TD
 
 ### 7.3 Peta Interkoneksi Antar Role
 
-Berikut adalah ringkasan hubungan dan pertukaran data antar 7 role dalam SIPETA:
+Berikut adalah ringkasan hubungan dan pertukaran data antar 7 role dalam Final Project:
 
 | Koneksi | Penjelasan Interaksi | Data yang Dipertukarkan |
 |---|---|---|
@@ -607,12 +607,12 @@ Tabel berikut merangkum hak akses setiap role terhadap fitur-fitur utama sistem:
 
 ### 10.1 Identitas Brand
 
-SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka modern berkelas tinggi:
+Final Project memadukan identitas resmi **PT MBOIS** dengan estetika antarmuka modern berkelas tinggi:
 
 | Elemen | Spesifikasi |
 |---|---|
-| **Warna Utama (Primary)** | Deep Crimson Red `#C62828` — Warna khas UPI YPTK Padang |
-| **Warna Aksen (Accent)** | Amber Gold `#ffd01d` — Aksen akademik premium |
+| **Warna Utama (Primary)** | Deep Crimson Red `#2563eb` — Warna khas PT MBOIS |
+| **Warna Aksen (Accent)** | Amber Gold `#38bdf8` — Aksen akademik premium |
 | **Warna Sukses (Success)** | Emerald Green `#2F8F5B` — Status disetujui/lulus |
 | **Background Utama** | Clean Slate `#FAFAFA` — Latar bersih dan profesional |
 | **Surface Card** | Pure White `#FFFFFF` — Kartu konten bersih |
@@ -624,8 +624,8 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 #### Sidebar Navigasi
 
-- Latar belakang gelap (`#1A1A1A`) dengan logo emblem **UPI YPTK Padang** di bagian atas
-- Menu aktif menggunakan pill gradient merah khas (`#C62828` → `#990000`)
+- Latar belakang gelap (`#1A1A1A`) dengan logo emblem **PT MBOIS** di bagian atas
+- Menu aktif menggunakan pill gradient merah khas (`#2563eb` → `#1d4ed8`)
 - Animasi collapse/expand 300ms untuk pengalaman responsif
 
 #### Header Bar
@@ -636,20 +636,20 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 - Layout fit-viewport 100% atau natural page scroll yang responsif
 - Tombol toggle sidebar di pojok kiri
-- Garis aksen warna merah-emas di bagian atas (`#C62828` via `#ffd01d`)
+- Garis aksen warna merah-emas di bagian atas (`#2563eb` via `#38bdf8`)
 - Indikator profil pengguna dengan nama, NIK/NIM, dan prodi
 
 #### Welcome Banner
 
 - Banner gelap (`#1A1A1A`) dengan border neutral di setiap halaman portal
 - Garis aksen gradient merah-emas di bagian bawah banner
-- Badge warna sesuai role pengguna dengan Red Signature (`#C62828`)
+- Badge warna sesuai role pengguna dengan Red Signature (`#2563eb`)
 
 #### Pola Tabel List Ringkas + Live Side Detail Panel Card
 
 - Seluruh tabel utama menghilangkan kolom `AKSI` redundan demi efisiensi ruang
 - Dikombinasikan dengan kartu panel detail di kolom kanan (`w-80 shrink-0`) yang ter-update secara *live* saat pengguna mengklik baris mana saja pada tabel list
-- Baris terdefinisi dengan indikator highlight `bg-rose-50/70 border-l-4 border-l-[#C62828]`
+- Baris terdefinisi dengan indikator highlight `bg-blue-50/70 border-l-4 border-l-[#2563eb]`
 
 #### Kartu Statistik Seragam
 
@@ -658,23 +658,23 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 #### Skeleton Loading UI System (`loading.tsx`)
 
-- Terpasang pada seluruh 7 role portal di aplikasi SIPETA via file `loading.tsx` App Router dan komponen `PageSkeleton`
-- Menggunakan animasi denyut halus (`animate-pulse bg-slate-200`) yang menyerupai arsitektur 3-layer flex SIPETA untuk impresi respon instan
+- Terpasang pada seluruh 7 role portal di aplikasi Final Project PT MBOIS via file `loading.tsx` App Router dan komponen `PageSkeleton`
+- Menggunakan animasi denyut halus (`animate-pulse bg-slate-200`) yang menyerupai arsitektur 3-layer flex Final Project untuk impresi respon instan
 
 #### Empty State UI System
 
 - Ditampilkan otomatis apabila kontainer tabel atau thread bimbingan masih dalam kondisi kosong (0 data)
-- Dilengkapi dengan ikon kontekstual ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*)
+- Dilengkapi dengan ikon kontekstual ber-border soft blue, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*)
 
 ### 10.3 Warna Akses & Palette Sistem
 
 | Elemen UI | Warna Utama | Kode Warna Tailwind |
 |---|---|---|
-| Red Signature (Tombol & Banner) | Merah Signature UPI | `bg-[#C62828]` / `#C62828` |
+| Red Signature (Tombol & Banner) | Royal Blue Signature PT MBOIS | `bg-[#2563eb]` / `#2563eb` |
 | Kartu Statistik Antrean | Kuning Emas Amber Warm | `bg-amber-500` / `#D97706` |
 | Indikator Seminar Proposal | Teal Modern | `bg-teal-600` / `#0D9488` |
 | Teks Highlight & Status Lulus | Emerald | `bg-emerald-600` / `#059669` |
-| Slate & Neutral Background | Neutral Slate | `bg-[#FAFAFA]` / `bg-slate-900` |
+| Slate & Neutral Background | Neutral Slate | `bg-[#f8fafc]` / `bg-slate-900` |
 
 ### 10.4 Responsivitas Multi-Device
 
@@ -690,7 +690,7 @@ SIPETA memadukan identitas resmi **UPI YPTK Padang** dengan estetika antarmuka m
 
 ### 11.1 Ringkasan Entitas
 
-SIPETA menggunakan **15 tabel utama** dan **6 enum state** dalam skema basis data PostgreSQL:
+Final Project menggunakan **15 tabel utama** dan **6 enum state** dalam skema basis data PostgreSQL:
 
 | Kategori | Tabel | Keterangan |
 |---|---|---|
@@ -868,7 +868,7 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 | **Fase 1A — Fondasi & Design System** | ✅ Selesai | Arsitektur viewport, tokens warna, tipografi, komponen layout |
 | **Fase 1B — Portal Mahasiswa (11 Modul)** | ✅ Selesai | Seluruh 11 sub-halaman mahasiswa |
 | **Fase 1C — Portal 6 Role Tambahan (26 Modul)** | ✅ Selesai | Dosen Pembimbing (4), Dosen Penguji (4), Admin Prodi (5), Admin Fakultas (4), Dekanat (4), Super Admin (5) |
-| **Fase 1E — Audit & Verifikasi Sub-Halaman** | ✅ Selesai | 100% audit visual 38 rute, perbaikan warna Red Signature `#C62828` & Amber `#D97706`, fit layout & natural scroll, serta pola Side Detail Panel Card |
+| **Fase 1E — Audit & Verifikasi Sub-Halaman** | ✅ Selesai | 100% audit visual 38 rute, perbaikan warna Red Signature `#2563eb` & Amber `#D97706`, fit layout & natural scroll, serta pola Side Detail Panel Card |
 
 ### 13.2 Roadmap Fase Selanjutnya
 
@@ -894,13 +894,13 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 
 | Role | Langkah Pertama |
 |---|---|
-| **Mahasiswa** | Selesaikan clearing nilai luring di kampus → Terima kredensial dari Admin Prodi → Login ke SIPETA → Ajukan judul TA |
-| **Dosen Pembimbing** | Login ke SIPETA → Cek dashboard permohonan bimbingan → Terima/tolak permohonan → Mulai review log bimbingan |
-| **Dosen Penguji** | Login ke SIPETA → Cek jadwal pengujian → Laksanakan ujian → Input nilai & catatan revisi |
-| **Admin Prodi** | Login ke SIPETA → Verifikasi clearing luring mahasiswa → Aktifkan akun → Kelola jadwal & pembimbing |
-| **Admin Fakultas** | Login ke SIPETA → Terbitkan SK Dekan → Verifikasi bebas fakultas → Arsipkan dokumen |
-| **Pimpinan/Dekanat** | Login ke SIPETA → Pantau dashboard eksekutif → Analisis statistik → Unduh laporan PDF |
-| **Super Admin** | Login ke SIPETA → Kelola akun user → Pantau audit log → Konfigurasi parameter sistem |
+| **Mahasiswa** | Selesaikan clearing nilai luring di kampus → Terima kredensial dari Admin Prodi → Login ke Final Project → Ajukan judul TA |
+| **Dosen Pembimbing** | Login ke Final Project → Cek dashboard permohonan bimbingan → Terima/tolak permohonan → Mulai review log bimbingan |
+| **Dosen Penguji** | Login ke Final Project → Cek jadwal pengujian → Laksanakan ujian → Input nilai & catatan revisi |
+| **Admin Prodi** | Login ke Final Project → Verifikasi clearing luring mahasiswa → Aktifkan akun → Kelola jadwal & pembimbing |
+| **Admin Fakultas** | Login ke Final Project → Terbitkan SK Dekan → Verifikasi bebas fakultas → Arsipkan dokumen |
+| **Pimpinan/Dekanat** | Login ke Final Project → Pantau dashboard eksekutif → Analisis statistik → Unduh laporan PDF |
+| **Super Admin** | Login ke Final Project → Kelola akun user → Pantau audit log → Konfigurasi parameter sistem |
 
 ---
 
@@ -910,9 +910,9 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 
 | Istilah | Definisi |
 |---|---|
-| **SIPETA** | Sistem Informasi Perjalanan & Evaluasi Tugas Akhir |
+| **Final Project** | Sistem Informasi Perjalanan & Evaluasi Tugas Akhir |
 | **FIK** | Fakultas Ilmu Komputer |
-| **UPI YPTK** | Universitas Putra Indonesia Yayasan Perguruan Tinggi Komputer |
+| **PT MBOIS** | Universitas Putra Indonesia Yayasan Perguruan Tinggi Komputer |
 | **TA** | Tugas Akhir (Skripsi) |
 | **Clearing** | Proses verifikasi kelengkapan nilai SKS & IPK sebelum memulai TA |
 | **Similarity Check** | Pengecekan kemiripan judul untuk mencegah plagiarisme |
@@ -934,7 +934,7 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 
 | No | Judul Screenshot | Keterangan |
 |:---:|---|---|
-| 1 | Halaman Login SIPETA | Tampilan form login dengan branding UPI YPTK |
+| 1 | Halaman Login Final Project | Tampilan form login dengan branding PT MBOIS |
 | 2 | Dashboard Mahasiswa | Stepper 4 tahap, banner status, quick actions |
 | 3 | Halaman Usulan Judul | Form pengajuan judul & simulator similarity |
 | 4 | Halaman Pengajuan Pembimbing | Katalog dosen dengan kuota realtime |
@@ -960,8 +960,8 @@ Seluruh aktivitas penting dalam sistem dicatat dalam tabel `AuditLog` yang menca
 
 ---
 
-> **Dokumen ini bersifat rahasia dan ditujukan hanya untuk pihak-pihak yang berkepentingan. Dilarang memperbanyak atau mendistribusikan tanpa izin tertulis dari Tim Pengembang SIPETA.**
+> **Dokumen ini bersifat rahasia dan ditujukan hanya untuk pihak-pihak yang berkepentingan. Dilarang memperbanyak atau mendistribusikan tanpa izin tertulis dari Tim Pengembang PT MBOIS.**
 
 ---
 
-*Dokumen Product Knowledge SIPETA v1.0 — Disusun oleh Tim Pengembang SIPETA untuk Fakultas Ilmu Komputer, Universitas Putra Indonesia YPTK Padang.*
+*Dokumen Product Knowledge Final Project v1.0 — Disusun oleh Tim Pengembang PT MBOIS untuk Fakultas Ilmu Komputer, PT MBOIS.*

@@ -1,7 +1,7 @@
-# Panduan Integrasi Backend & Spesifikasi Kontrak API — SIPETA UPI YPTK Padang
+# Panduan Integrasi Backend & Spesifikasi Kontrak API — PT MBOIS Final Project
 
-**Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)**  
-Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)  
+**PT MBOIS - Final Project Platform**  
+PT MBOIS (Seluruh Departemen & Divisi)  
 *Versi Dokumen:* 1.0 (Panduan Kontrak API Production-Ready)  
 *Tanggal:* 31 Juli 2026  
 
@@ -9,11 +9,11 @@ Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)
 
 ## 1. Ringkasan Eksekutif & Arsitektur Integration Layer
 
-Dokumen ini disusun sebagai **spesifikasi kontrak API resmi (*API Contract & Integration Blueprint*)** untuk pengembang Backend dalam mengintegrasikan antarmuka frontend Next.js App Router SIPETA dengan server API & Basis Data PostgreSQL.
+Dokumen ini disusun sebagai **spesifikasi kontrak API resmi (*API Contract & Integration Blueprint*)** untuk pengembang Backend dalam mengintegrasikan antarmuka frontend Next.js App Router Final Project dengan server API & Basis Data PostgreSQL.
 
 ### 🛠️ Teknologi & Standar Backend yang Direkomendasikan:
 - **Framework Server:** Next.js Route Handlers (`src/app/api/...`) ATAU Node.js Express / NestJS.
-- **ORM & Basis Data:** Prisma ORM + PostgreSQL (Skema lengkap mengacu pada [`docs/DATABASE.md`](file:///c:/Users/wira1/sipeta-upiyptk/docs/DATABASE.md)).
+- **ORM & Basis Data:** Prisma ORM + PostgreSQL (Skema lengkap mengacu pada [`docs/DATABASE.md`](file:///isi-final-project/docs/DATABASE.md)).
 - **Protokol Autentikasi:** HTTP-Only Secure Cookie / Bearer JWT with Role-Based Access Control (RBAC).
 - **Format Pertukaran Data:** JSON (UTF-8) dengan standar response yang seragam.
 
@@ -100,7 +100,7 @@ Dokumen ini disusun sebagai **spesifikasi kontrak API resmi (*API Contract & Int
 
 | Method | Endpoint Path | Akses Role | Deskripsi Fungsi |
 |---|---|---|---|
-| `POST` | `/api/v1/admin-prodi/aktivasi` | `ADMIN_PRODI` | Memverifikasi clearing luring (110 SKS, IPK ≥ 2.00) & mengaktifkan akun SIPETA mahasiswa. |
+| `POST` | `/api/v1/admin-prodi/aktivasi` | `ADMIN_PRODI` | Memverifikasi clearing luring (110 SKS, IPK ≥ 2.00) & mengaktifkan akun Final Project mahasiswa. |
 | `POST` | `/api/v1/admin-prodi/pembimbing/assign` | `ADMIN_PRODI` | Pengesahan penetapan Dosen Pembimbing I & II per-mahasiswa. |
 | `POST` | `/api/v1/admin-prodi/jadwal/create` | `ADMIN_PRODI` | Menetapkan jadwal, ruangan, dan majelis Dosen Penguji Seminar Proposal/Sidang. |
 | `GET` | `/api/v1/admin-prodi/repositori` | `ADMIN_PRODI` | Pengelolaan repositori judul & dokumen skripsi lulusan prodi. |
@@ -145,14 +145,14 @@ Jalankan migrasi tabel PostgreSQL menggunakan Prisma CLI:
 npx prisma migrate dev --name init_sipeta_multi_faculty
 ```
 
-### Langkah 3: Seeding Master Data 6 Fakultas & 14 Prodi UPI YPTK
-Eksekusi script seeder untuk memasukkan master data fakultas & prodi ([`upiyptk.ts`](file:///c:/Users/wira1/sipeta-upiyptk/frontend/src/constants/upiyptk.ts)):
+### Langkah 3: Seeding Master Data 6 Fakultas & 14 Prodi PT MBOIS
+Eksekusi script seeder untuk memasukkan master data fakultas & prodi ([`academic.ts`](file:///@/constants/academic.ts)):
 ```bash
 npx prisma db seed
 ```
 
 ### Langkah 4: Menghubungkan Frontend API Service Layer
-Pada berkas helper API Frontend ([`frontend/src/services/api.ts`](file:///c:/Users/wira1/sipeta-upiyptk/frontend/src/services/api.ts)), hubungkan fungsi `fetch` ke `process.env.NEXT_PUBLIC_API_URL`.
+Pada berkas helper API Frontend ([`frontend/src/services/api.ts`](file:///isi-final-project/frontend/src/services/api.ts)), hubungkan fungsi `fetch` ke `process.env.NEXT_PUBLIC_API_URL`.
 
 ---
 

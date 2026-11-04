@@ -1,6 +1,6 @@
-# Database Schema & Data Models — SIMTA-Next
+# Database Schema & Data Models — PT MBOIS Final Project
 
-Dokumen ini menjelaskan rancangan basis data, Entity-Relationship Diagram (ERD), serta spesifikasi model **Prisma ORM** yang digunakan pada **SIPETA**.
+Dokumen ini menjelaskan rancangan basis data, Entity-Relationship Diagram (ERD), serta spesifikasi model **Prisma ORM** yang digunakan pada **Final Project**.
 
 ---
 

@@ -1,6 +1,6 @@
-# 📱 SIPETA Mobile Design System & UI Consistency Standard
+# 📱 PT MBOIS - Final Project Mobile Design System & UI Consistency Standard
 
-Dokumentasi ini dibuat sebagai standar desain antarmuka mobile (**Mobile Responsive Design System**) untuk seluruh rute dan role di aplikasi **SIPETA (Sistem Informasi Manajemen Perjalanan & Evaluasi Tugas Akhir UPI YPTK Padang)**.
+Dokumentasi ini dibuat sebagai standar desain antarmuka mobile (**Mobile Responsive Design System**) untuk seluruh rute dan role di aplikasi **PT MBOIS - Final Project (Sistem Informasi Manajemen Perjalanan & Evaluasi Tugas Akhir PT MBOIS)**.
 
 Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan penyempurnaan UI pada 2 Portal Utama yang telah diselesaikan:
 1. **Portal Mahasiswa** (7 Halaman)
@@ -11,16 +11,16 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
 ## 🎨 1. Core Brand & Design Tokens
 
 ### Color Palette (Red & Gold Theme)
-- **Primary Red (SIPETA Red)**: `#C62828` (Gunakan `bg-[#C62828]`, `text-[#C62828]`, `border-[#C62828]`)
-- **Secondary Gold/Yellow**: `#ffd01d` (Gunakan `bg-[#ffd01d] text-slate-950 font-black` untuk badge bidang/revisi)
+- **Primary Red (PT MBOIS - Final Project Red)**: `#2563eb` (Gunakan `bg-[#2563eb]`, `text-[#2563eb]`, `border-[#2563eb]`)
+- **Secondary Gold/Yellow**: `#38bdf8` (Gunakan `bg-[#38bdf8] text-slate-950 font-black` untuk badge bidang/revisi)
 - **Dark Banner Background**: `#1A1A1A` / `bg-neutral-900`
 - **Neutral Surface**: `bg-[#F5F5F7]` (Background halaman), `bg-white` (Kartu utama), `bg-slate-50` (Section container)
 - **Neutral Border**: `border-slate-200/80` (Standard), `border-slate-300` (Hover/Active)
 
 ### Status Badges (Solid Vibrant Colors Only)
 - **ACC / Approved / Lulus**: `bg-emerald-600 text-white font-black shadow-2xs`
-- **Seminar / Sidang / Important**: `bg-[#C62828] text-white font-black` atau `bg-blue-600 text-white`
-- **Status Pending / Warning**: `bg-[#ffd01d] text-slate-950 font-black`
+- **Seminar / Sidang / Important**: `bg-[#2563eb] text-white font-black` atau `bg-blue-600 text-white`
+- **Status Pending / Warning**: `bg-[#38bdf8] text-slate-950 font-black`
 
 ---
 
@@ -31,14 +31,14 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
   - Halaman **Dashboard Utama** (`/dashboard`): Gunakan judul **`Selamat Datang`** (tanpa nama pengguna).
   - Halaman **Fitur / Inner Sub-pages** (`/mahasiswa`, `/bimbingan`, `/jadwal`, dll): Gunakan **Judul Deskriptif Halaman** (contoh: `Manajemen Data Mahasiswa`, `Jadwal Pengujian`, `Bimbingan Tugas Akhir`).
 - **Sub-judul**: Maksimal 2 baris ringkas yang menjelaskan fungsi halaman.
-- **Visual Accent**: Di bagian bawah banner terdapat garis aksen gradasi `h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]`.
+- **Visual Accent**: Di bagian bawah banner terdapat garis aksen gradasi `h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]`.
 
 ```tsx
 <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
   <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
     <div className="space-y-1.5 flex-1 min-w-0">
       <div className="flex items-center gap-2 flex-wrap mb-1">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
           <BadgeIcon className="w-3.5 h-3.5 text-white" /> Label Portal
         </span>
       </div>
@@ -50,7 +50,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
       </p>
     </div>
   </div>
-  <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+  <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
 </div>
 ```
 
@@ -93,7 +93,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
     <input
       type="text"
       placeholder="Cari nama / NIM..."
-      className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#C62828] focus:bg-white transition-all font-medium"
+      className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:outline-none focus:border-[#2563eb] focus:bg-white transition-all font-medium"
     />
   </div>
 
@@ -104,7 +104,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
       className="flex items-center justify-between gap-2.5 px-4 py-2 min-w-[125px] rounded-xl border border-slate-200 text-xs bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 transition-all cursor-pointer whitespace-nowrap font-display shadow-2xs"
     >
       <div className="flex items-center gap-2">
-        <Filter className="w-3.5 h-3.5 text-[#C62828]" />
+        <Filter className="w-3.5 h-3.5 text-[#2563eb]" />
         <span>{selectedFilter}</span>
       </div>
       <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -119,7 +119,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
               key={f}
               onClick={() => { setSelectedFilter(f); setIsFilterOpen(false); }}
               className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                selectedFilter === f ? "bg-[#C62828] text-white" : "text-slate-700 hover:bg-slate-100"
+                selectedFilter === f ? "bg-[#2563eb] text-white" : "text-slate-700 hover:bg-slate-100"
               }`}
             >
               <span>{f}</span>
@@ -134,7 +134,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
   <button
     onClick={handleAction}
     title="Input Data Baru"
-    className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#C62828] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
+    className="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#B71C1C] transition-all cursor-pointer font-display shadow-xs shrink-0 active:scale-95 flex items-center justify-center gap-1.5"
   >
     <Plus className="w-4 h-4 text-white shrink-0" />
     <span>Tambah</span>
@@ -145,7 +145,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
 ---
 
 ### D. Kartu Daftar Mahasiswa & Aturan Selected State
-- **Aturan Tanpa Outline Merah**: Dilarang menggunakan border merah (`border-[#C62828]`) atau latar kemerahan (`bg-rose-50`) pada kartu yang aktif/diklik.
+- **Aturan Tanpa Outline Merah**: Dilarang menggunakan border merah (`border-[#2563eb]`) atau latar kemerahan (`bg-rose-50`) pada kartu yang aktif/diklik.
 - **Gaya Seragam (Uniform Clean Cards)**:
   - Kartu Standar: `className="p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50/60 hover:border-slate-300 transition-all cursor-pointer space-y-2"`
   - Kartu Aktif/Pilihan (jika diperlukan): `className="p-3.5 rounded-xl border border-slate-300 bg-slate-50 shadow-2xs transition-all cursor-pointer space-y-2"`
@@ -173,13 +173,13 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
     onClick={() => setActiveMobileTab("list")}
     className="lg:hidden p-1.5 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-bold font-display shadow-2xs active:scale-95"
   >
-    <ArrowLeft className="w-3.5 h-3.5 text-[#C62828]" />
+    <ArrowLeft className="w-3.5 h-3.5 text-[#2563eb]" />
     <span>Kembali</span>
   </button>
 
   {/* Desktop Title & Icon (Hidden on Mobile <1024px) */}
   <div className="hidden lg:flex items-center gap-2.5 min-w-0">
-    <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center shrink-0 shadow-xs">
+    <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shrink-0 shadow-xs">
       <FileText className="w-4 h-4 text-white" />
     </div>
     <div className="min-w-0">
@@ -217,7 +217,7 @@ Standar ini dirumuskan berdasarkan audit mendalam, preferensi pengguna, dan peny
 
   <button
     onClick={handleReject}
-    className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#C62828] hover:border-rose-200 transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-2xs cursor-pointer whitespace-nowrap"
+    className="py-2.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-[#2563eb] hover:border-rose-200 transition-all flex items-center justify-center gap-1.5 font-display active:scale-95 shadow-2xs cursor-pointer whitespace-nowrap"
   >
     <X className="w-4 h-4 shrink-0 text-slate-400" />
     <span>Tolak</span>

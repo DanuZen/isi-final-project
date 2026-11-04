@@ -1,7 +1,7 @@
-# Dokumentasi Role, Hak Akses & Matriks Kewenangan — SIPETA UPI YPTK Padang
+# Dokumentasi Role, Hak Akses & Matriks Kewenangan — PT MBOIS Final Project
 
-**Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)**  
-Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)  
+**PT MBOIS - Final Project Platform**  
+PT MBOIS (Seluruh Departemen & Divisi)  
 *Versi Dokumentasi:* 1.4 (Pembaruan Skala Multi-Fakultas & Multi-Prodi Civitas Akademika)  
 *Tanggal:* 31 Juli 2026  
 
@@ -9,7 +9,7 @@ Universitas Putra Indonesia YPTK Padang (Seluruh Fakultas & Pascasarjana)
 
 ## 1. Pendahuluan
 
-Dokumen ini mendefinisikan secara menyeluruh seluruh **Role (Peran)**, **Hak Akses**, **Matriks Kewenangan**, dan **Alur Kerja Interaksi** pengguna dalam aplikasi **SIPETA (Sistem Informasi Perjalanan & Evaluasi Tugas Akhir)** untuk **seluruh Civitas Akademika Universitas Putra Indonesia YPTK Padang**.
+Dokumen ini mendefinisikan secara menyeluruh seluruh **Role (Peran)**, **Hak Akses**, **Matriks Kewenangan**, dan **Alur Kerja Interaksi** pengguna dalam aplikasi **PT MBOIS - Final Project Platform** untuk **seluruh Civitas Akademika PT MBOIS**.
 
 Dokumen ini disusun sebagai panduan pengembang (developer), administrator prodi & fakultas, serta dasar acuan dalam penerapan Role-Based Access Control (RBAC).
 
@@ -17,14 +17,14 @@ Dokumen ini disusun sebagai panduan pengembang (developer), administrator prodi 
 
 ## 2. Ringkasan Role & Hirarki Akses
 
-Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum `RoleEnum` pada skema basis data Prisma):
+Dalam sistem Final Project, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum `RoleEnum` pada skema basis data Prisma):
 
 | No | Role (`RoleEnum`) | Kategori | Ringkasan Peran & Fokus Utama |
 |---|---|---|---|
-| 1 | **`MAHASISWA`** | Pengguna Akademik | Mengurus clearing nilai secara luring di kampus, kemudian mengakses aplikasi SIPETA untuk mengusulkan judul, cek kemiripan, memilih dosen pembimbing, mengisi log bimbingan, mengajukan ACC, dan memantau kalender jadwal TA. |
+| 1 | **`MAHASISWA`** | Pengguna Akademik | Mengurus clearing nilai secara luring di kampus, kemudian mengakses aplikasi Final Project untuk mengusulkan judul, cek kemiripan, memilih dosen pembimbing, mengisi log bimbingan, mengajukan ACC, dan memantau kalender jadwal TA. |
 | 2 | **`DOSEN` (Pembimbing)** | Evaluator & Pembimbing | Membimbing mahasiswa, mengonfirmasi pengajuan pembimbing, mereview draft naskah, approve perubahan judul, serta memberikan ACC Seminar & Ujian Sidang. |
 | 3 | **`DOSEN` (Penguji)** | Evaluator Ujian | Menguji pelaksanaan Seminar Proposal & Sidang Skripsi, menginput nilai komprehensif, dan memverifikasi perbaikan/revisi. |
-| 4 | **`ADMIN_PRODI`** | Pengelola Operasional Prodi | Memverifikasi bukti clearing nilai manual luring dari mahasiswa, mengaktifkan akun SIPETA, mengonfirmasi pengajuan & assign pembimbing/penguji prodi, mengelola jadwal di kalender, serta repositori judul. |
+| 4 | **`ADMIN_PRODI`** | Pengelola Operasional Prodi | Memverifikasi bukti clearing nilai manual luring dari mahasiswa, mengaktifkan akun Final Project, mengonfirmasi pengajuan & assign pembimbing/penguji prodi, mengelola jadwal di kalender, serta repositori judul. |
 | 5 | **`ADMIN_FAKULTAS`** | Administrator Fakultas | Pengelolaan administrasi data fakultas, penerbitan Surat Keputusan (SK) Dekan untuk Dosen Pembimbing & Penguji per-Fakultas, serta verifikasi 3-kriteria bebas fakultas/yudisium. |
 | 6 | **`PIMPINAN`** | Executive Monitoring | Akses *Executive Read-Only* ke kalender sidang, grafik komparasi antar-prodi & fakultas, rekapitulasi masa studi, dan laporan kelulusan angkatan. |
 | 7 | **`SUPERADMIN`** | Administrator Teknis | Pengelolaan master data multi-fakultas/prodi, manajemen akun user, audit log keamanan (HMAC SHA-256), dan konfigurasi parameter sistem. |
@@ -34,8 +34,8 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 ## 3. Rincian Fungsi & Hak Akses Masing-Masing Role
 
 ### 3.1 Mahasiswa (`MAHASISWA`)
-* **Prasyarat Akses (Offline di Kampus):** Mahasiswa mendatangi langsung Bagian Akademik / Admin Prodi di kampus untuk mengurus verifikasi clearing nilai (SKS & IPK). Proses clearing nilai ini **TIDAK diproses di dalam aplikasi web SIPETA**.
-* **Status Akun:** Memperoleh/diaktifkan akun SIPETA oleh Admin Prodi setelah bukti clearing nilai manual diverifikasi di kampus.
+* **Prasyarat Akses (Offline di Kampus):** Mahasiswa mendatangi langsung Bagian Akademik / Admin Prodi di kampus untuk mengurus verifikasi clearing nilai (SKS & IPK). Proses clearing nilai ini **TIDAK diproses di dalam aplikasi web Final Project**.
+* **Status Akun:** Memperoleh/diaktifkan akun Final Project oleh Admin Prodi setelah bukti clearing nilai manual diverifikasi di kampus.
 * **Fungsi & Fitur Utama di Aplikasi:**
   1. **Usulan Judul & Similarity (`/proposal`):** 
      - Mengisi form proposal judul skripsi, abstrak, dan bidang kajian (RPL, AI/Data Mining, Jaringan).
@@ -84,7 +84,7 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 ### 3.4 Admin Program Studi / Admin Prodi (`ADMIN_PRODI`)
 * **Konteks Peran:** Pengelola administrasi akademik Tugas Akhir di tingkat Program Studi (Teknik Informatika, Sistem Informasi, dll.).
 * **Fungsi & Fitur Utama:**
-  1. **Aktivasi Akun (Pasca Clearing Luring):** Memeriksa bukti fisik clearing nilai dari mahasiswa yang mengurus langsung ke kampus, lalu mengaktifkan akun SIPETA mahasiswa.
+  1. **Aktivasi Akun (Pasca Clearing Luring):** Memeriksa bukti fisik clearing nilai dari mahasiswa yang mengurus langsung ke kampus, lalu mengaktifkan akun Final Project mahasiswa.
   2. **Penetapan & Verifikasi Pembimbing/Penguji:** Memvalidasi pengajuan pembimbing dari mahasiswa, assign Dosen Pembimbing I & II, serta menetapkan Dosen Penguji Sempro & Sidang.
   3. **Penjadwalan Interaktif:** Mengatur tanggal, waktu, dan ruangan (*misal: Ruang 302 FIK, Aula Utama*) untuk seminar & sidang yang otomatis masuk ke Kalender Interaktif.
   4. **Konfirmasi Final Judul:** Memberikan approval tingkat Prodi untuk perubahan judul TA.
@@ -93,7 +93,7 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 ---
 
 ### 3.5 Admin Fakultas (`ADMIN_FAKULTAS`)
-* **Konteks Peran:** Staf Administrasi dan Tata Usaha di tingkat Fakultas Ilmu Komputer UPI YPTK Padang.
+* **Konteks Peran:** Staf Administrasi dan Tata Usaha di tingkat PT MBOIS.
 * **Fungsi & Fitur Utama:**
   1. **Penerbitan Surat Keputusan (SK) Dekan:** Mengunggah dan menerbitkan dokumen resmi SK Dekan tentang penetapan Dosen Pembimbing & Dewan Penguji.
   2. **Verifikasi Bebas Fakultas:** Memverifikasi dokumen bebas laboratorium, perpustakaan fakultas, dan administrasi keuangan tingkat fakultas.
@@ -103,7 +103,7 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 ---
 
 ### 3.6 Pimpinan (`PIMPINAN`)
-* **Konteks Peran:** Dekan, Wakil Dekan, dan Ketua Lembaga Penjaminan Mutu di lingkungan FIK UPI YPTK Padang.
+* **Konteks Peran:** Dekan, Wakil Dekan, dan Ketua Lembaga Penjaminan Mutu di lingkungan FIK PT MBOIS.
 * **Fungsi & Fitur Utama:**
   1. **Executive Dashboard:** Akses *Executive Read-Only* ke seluruh indikator kinerja utama TA mahasiswa.
   2. **Monitoring Kalender Sidang:** Melihat kalender jadwal seminar proposal dan sidang skripsi harian/mingguan/bulanan.
@@ -140,11 +140,11 @@ Dalam sistem SIPETA, pengguna dibagi menjadi **7 Role Utama** (berdasarkan enum 
 
 ## 5. Rationale & Justifikasi Desain 7 Role System
 
-Arsitektur **7 Role System** pada SIPETA didesain berdasarkan analisis tata kelola akademik nyata di Fakultas Ilmu Komputer (FIK) UPI YPTK Padang. Berikut adalah justifikasi teknis dan operasionalnya:
+Arsitektur **7 Role System** pada Final Project didesain berdasarkan analisis tata kelola akademik nyata di Fakultas Ilmu Komputer (FIK) PT MBOIS. Berikut adalah justifikasi teknis dan operasionalnya:
 
 ### 5.1 Hirarki Visual RBAC 7 Role
 ```
-SIPETA RBAC Hierarchy
+Final Project RBAC Hierarchy
  ├── 1. SUPERADMIN       (Technical System Administrator & Security Audit)
  ├── 2. PIMPINAN         (Executive Analytical Monitoring & Decision Making)
  ├── 3. ADMIN_FAKULTAS   (SK Dekan & Verifikasi Bebas Fakultas)
@@ -175,4 +175,4 @@ Peran `SUPERADMIN` memisahkan fungsi pemeliharaan teknis sistem (reset password,
 
 ## 6. Penutup & Langkah Selanjutnya
 
-Dokumen ini menjadi acuan resmi pengembangan backend API authorization (RBAC - Role-Based Access Control) dan perancangan UI/UX Dashboard tiap role pada SIPETA UPI YPTK Padang.
+Dokumen ini menjadi acuan resmi pengembangan backend API authorization (RBAC - Role-Based Access Control) dan perancangan UI/UX Dashboard tiap role pada PT MBOIS Final Project.

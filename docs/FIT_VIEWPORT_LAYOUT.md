@@ -1,6 +1,6 @@
-# Fit-Viewport Layout & Flexible Scroll Architecture — SIPETA
+# Fit-Viewport Layout & Flexible Scroll Architecture — Final Project
 
-> **Tujuan:** Menjelaskan arsitektur tata letak antarmuka SIPETA pada 38 rute di 7 role pengguna. Mengkombinasikan **Fit-Viewport Layout 100% (100dvh)** untuk halaman list view & manajemen cepat dengan **Natural Page Scroll Layout** untuk halaman analitik eksekutif kaya data.
+> **Tujuan:** Menjelaskan arsitektur tata letak antarmuka Final Project pada 38 rute di 7 role pengguna. Mengkombinasikan **Fit-Viewport Layout 100% (100dvh)** untuk halaman list view & manajemen cepat dengan **Natural Page Scroll Layout** untuk halaman analitik eksekutif kaya data.
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## 🏗️ Struktur Layout 3-Layer Flex (Fit Viewport)
 
-Gunakan tiga lapis container standar pada seluruh halaman SIPETA yang bertipe Fit Viewport:
+Gunakan tiga lapis container standar pada seluruh halaman Final Project yang bertipe Fit Viewport:
 
 ```tsx
 <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA]">
@@ -55,7 +55,7 @@ Halaman berorientasi tabel list (seperti `/admin-prodi/mahasiswa`, `/admin-prodi
 2. **Side Detail Panel Card di Kolom Kanan (`w-80 shrink-0`)**:
    - Berada di posisi kanan dengan layout flex `flex flex-col justify-between`.
    - Konten detail di dalamnya otomatis ter-update secara *live* saat pengguna mengklik baris mana saja pada tabel list.
-   - Baris tabel yang dipilih ditandai dengan highlight `bg-rose-50/70 border-l-4 border-l-[#C62828]`.
+   - Baris tabel yang dipilih ditandai dengan highlight `bg-blue-50/70 border-l-4 border-l-[#2563eb]`.
 
 ---
 
@@ -76,7 +76,7 @@ Untuk memastikan scrolling terasa sehalus aplikasi desktop tanpa indikator *scro
 
 ---
 
-## 🚀 Status Implementasi Halaman SIPETA
+## 🚀 Status Implementasi Halaman Final Project
 
 Seluruh 38 rute aplikasi telah 100% mematuhi arsitektur Fit-Viewport Layout & Clean Scroll:
 
@@ -95,7 +95,7 @@ Seluruh 38 rute aplikasi telah 100% mematuhi arsitektur Fit-Viewport Layout & Cl
 ## 📋 Checklist Verifikasi Desain
 
 - [x] Resize dari 1920px → 768px: kolom grid menyesuaikan secara responsif tanpa overflow.
-- [x] Seluruh warna utama menggunakan Red Signature `#C62828` dan Stat Card Kuning Emas Amber Warm `#D97706`.
+- [x] Seluruh warna utama menggunakan Red Signature `#2563eb` dan Stat Card Kuning Emas Amber Warm `#D97706`.
 - [x] Warna ungu (`#7C3AED`) sepenuhnya dihapus dari seluruh grafik/indikator.
 - [x] Penggunaan `.scrollbar-none` menghilangkan garis scrollbar kasar browser.
 - [x] `npm run build` sukses tanpa warning/error TypeScript.

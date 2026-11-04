@@ -1,7 +1,7 @@
-# Dokumentasi Arsitektur Berkas & Alur Kerja End-to-End 7 Role SIPETA
+# Dokumentasi Arsitektur Berkas & Alur Kerja End-to-End 7 Role Final Project
 
-**Sistem Informasi Perjalanan & Evaluasi Tugas Akhir (SIPETA)**  
-Fakultas Ilmu Komputer, Universitas Putra Indonesia YPTK Padang  
+**PT MBOIS - Final Project Platform**  
+PT MBOIS  
 *Versi Dokumentasi:* 2.0 (Analisis Kompleksitas Berkas, Pemetaan 39 Rute, & Diagram Interkoneksi Role)  
 *Tanggal:* 30 Juli 2026  
 
@@ -9,10 +9,10 @@ Fakultas Ilmu Komputer, Universitas Putra Indonesia YPTK Padang
 
 ## 📂 1. Inventarisasi & Struktur Berkas Repository
 
-SIPETA dibangun menggunakan **Next.js 14 App Router** dengan pendekatan **Fit-Viewport Architecture (`100dvh`)** dan Tailwind CSS. Aplikasi ini memuat **39 Rute Halaman** yang terbagi dalam **7 Role Utama**:
+Final Project dibangun menggunakan **Next.js 14 App Router** dengan pendekatan **Fit-Viewport Architecture (`100dvh`)** dan Tailwind CSS. Aplikasi ini memuat **39 Rute Halaman** yang terbagi dalam **7 Role Utama**:
 
 ```
-sipeta-upiyptk/
+isi-final-project/
 ├── docs/                        # Dokumentasi Sistem & Spesifikasi
 │   ├── TASKS.md                 # Checklist & Roadmap Audit Sub-Halaman
 │   ├── ROLES.md                 # Spesifikasi 7 Role & RBAC Matrix
@@ -143,7 +143,7 @@ flowchart TD
     %% Flow connections
     MHS_OFFLINE -->|Bawa bukti clearing luring| AP_AKTIVASI
     SA_CONFIG -.->|Manajemen akun & master data| AP_AKTIVASI
-    AP_AKTIVASI -->|Aktifkan akun SIPETA| MHS_PROP
+    AP_AKTIVASI -->|Aktifkan akun Final Project| MHS_PROP
 
     MHS_PROP --> MHS_DOS
     MHS_DOS -->|Kirim permohonan| DOS_PENG
@@ -177,7 +177,7 @@ flowchart TD
 ## 🔗 4. Rincian Keterhubungan Antar Role
 
 ### 1. Mahasiswa ↔ Admin Prodi
-- **Interaksi:** Mahasiswa melakukan clearing manual di kampus → Admin Prodi memverifikasi berkas luring → Admin Prodi mengaktifkan akun SIPETA mahasiswa (`/admin-prodi/aktivasi`).
+- **Interaksi:** Mahasiswa melakukan clearing manual di kampus → Admin Prodi memverifikasi berkas luring → Admin Prodi mengaktifkan akun Final Project mahasiswa (`/admin-prodi/aktivasi`).
 - **Data:** NIM, IPK, SKS, dan Status Akun.
 
 ### 2. Mahasiswa ↔ Dosen Pembimbing

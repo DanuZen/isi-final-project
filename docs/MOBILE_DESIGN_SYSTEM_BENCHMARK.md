@@ -1,4 +1,4 @@
-# 📱 SIPETA Mobile Design System & UI Benchmark Standard
+# 📱 PT MBOIS - Final Project Mobile Design System & UI Benchmark Standard
 **Acuan Resmi Standar Responsif & UI/UX Porting Seluruh Role Portal (Dosen, Admin Prodi, Admin Fakultas, Dekanat)**
 
 Dokumen ini berisi rangkuman analisis lengkap dari seluruh aturan, pola komponen, hierarki tipografi, dan penanganan data yang telah diselaraskan dan disetujui 100% pada **Portal Mahasiswa (11 Halaman)**. Dokumen ini menjadi **standar acuan mutlak** untuk mengimplementasikan tampilan responsif pada Portal Dosen, Admin Prodi, Admin Fakultas, dan Dekanat.
@@ -15,7 +15,7 @@ Dokumen ini berisi rangkuman analisis lengkap dari seluruh aturan, pola komponen
   - Hiding elemen di mobile: `hidden sm:inline-block` atau `hidden sm:flex`
 
 ### 1.1 🎨 Aturan Palet Warna Tema (Strict Red & Gold Theme)
-- **HANYA GUNAKAN WARNA TEMA RESMI**: **Merah Utama (`#C62828` / `#B71C1C`)** dan **Emas/Kuning Akses (`#ffd01d` / `amber-500` / `amber-600`)**.
+- **HANYA GUNAKAN WARNA TEMA RESMI**: **Merah Utama (`#2563eb` / `#B71C1C`)** dan **Emas/Kuning Akses (`#38bdf8` / `amber-500` / `amber-600`)**.
 - **DILARANG MENGGUNAKAN WARNA LAIN** (seperti *Ungu*, *Hijau Emerald*, atau *Biru*) pada ikon box, tombol aksi, maupun aksen statistik di seluruh halaman web aplikasi ini.
 - Gunakan aksen Netral Slate/Abu-abu (`bg-slate-100`, `bg-slate-200`, `text-slate-700`) untuk elemen pendukung non-utama.
 
@@ -31,7 +31,7 @@ Setiap halaman utama di atas memiliki Banner Sambutan gelap dengan latar belakan
     <div className="space-y-1.5 flex-1 min-w-0">
       {/* 1. Top Pill Badge */}
       <div className="flex items-center gap-2 flex-wrap mb-1">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C62828] text-white shadow-xs font-display">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
           <Icon className="w-3.5 h-3.5" /> Label Status / Portal
         </span>
       </div>
@@ -54,7 +54,7 @@ Setiap halaman utama di atas memiliki Banner Sambutan gelap dengan latar belakan
   </div>
 
   {/* 5. Bottom Accent Line Gradien Merah-Emas */}
-  <div className="h-0.5 bg-gradient-to-r from-[#C62828] via-[#ffd01d] to-[#C62828]" />
+  <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
 </div>
 ```
 
@@ -71,7 +71,7 @@ Digunakan untuk halaman yang memiliki beberapa sub-view (misal: *Form vs Usulan*
     onClick={() => setActiveTab("tab1")}
     className={`flex-1 min-w-[130px] py-1.5 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer ${
       activeTab === "tab1"
-        ? "bg-white text-[#C62828] shadow-xs font-extrabold"
+        ? "bg-white text-[#2563eb] shadow-xs font-extrabold"
         : "text-slate-600 hover:text-slate-900"
     }`}
   >
@@ -86,7 +86,7 @@ Digunakan untuk tombol pilihan sub-tab di dalam banner (seperti `1. Sempro` vs `
 
 ```tsx
 <div className="flex items-center gap-2 p-1 bg-neutral-900/90 rounded-xl border border-neutral-800 w-full sm:w-auto">
-  <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-extrabold text-white bg-[#C62828] shadow-xs">
+  <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-extrabold text-white bg-[#2563eb] shadow-xs">
     <span>1. Opsi A</span>
   </button>
   <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-extrabold text-neutral-400 hover:text-white">
@@ -107,7 +107,7 @@ Setiap kartu putih (`White Card Container`) di dalam area konten harus menggunak
   <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
     {/* Left: Icon Box + Title */}
     <div className="flex items-center gap-2.5 min-w-0">
-      <div className="w-8 h-8 rounded-xl bg-[#C62828] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+      <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
         <Icon className="w-4 h-4" />
       </div>
       <div className="min-w-0">
@@ -122,7 +122,7 @@ Setiap kartu putih (`White Card Container`) di dalam area konten harus menggunak
 
     {/* Right: Conditional Header Action Button */}
     {listData.length > 0 && (
-      <button className="px-3 py-1.5 rounded-xl bg-[#C62828] text-white text-xs font-bold hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shrink-0 shadow-xs">
+      <button className="px-3 py-1.5 rounded-xl bg-[#2563eb] text-white text-xs font-bold hover:bg-[#B71C1C] transition-all flex items-center gap-1.5 shrink-0 shadow-xs">
         <PlusCircle className="w-3.5 h-3.5" />
         <span>Tambah</span>
       </button>

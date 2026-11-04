@@ -1,4 +1,4 @@
-# Tasks & Audit Roadmap — SIPETA UPI YPTK Development
+# Tasks & Audit Roadmap — PT MBOIS Final Project Development
 
 Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh rute halaman per-role, standar desain UI/UX terverifikasi, serta checklist audit sub-halaman yang telah 100% diselesaikan.
 
@@ -16,7 +16,7 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 | **4. Portal Admin Fakultas** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
 | **5. Portal Pimpinan / Dekanat** | 4 Rute | ✅ Selesai | ✅ 4 Sub-Halaman Selesai & Terverifikasi |
 | **6. Portal Super Admin** | 5 Rute | ✅ Selesai | ✅ 5 Sub-Halaman Selesai & Terverifikasi |
-| **7. Backend Integration Guide** | — | ✅ Selesai | ✅ [BACKEND_INTEGRATION_GUIDE.md](file:///c:/Users/wira1/sipeta-upiyptk/docs/BACKEND_INTEGRATION_GUIDE.md) |
+| **7. Backend Integration Guide** | — | ✅ Selesai | ✅ [BACKEND_INTEGRATION_GUIDE.md](file:///isi-final-project/docs/BACKEND_INTEGRATION_GUIDE.md) |
 | **TOTAL KESELURUHAN** | **37 Rute** | **✅ 100% Built** | **✅ 100% Audited & Polished** |
 
 ---
@@ -25,7 +25,7 @@ Dokumen ini memuat breakdown status pengembangan frontend UI/UX, daftar seluruh 
 
 Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 
-1. **Warna Red Signature (`#C62828` / `bg-[#C62828]`)**:
+1. **Warna Red Signature (`#2563eb` / `bg-[#2563eb]`)**:
    - Digunakan sebagai warna aksen utama, tombol primer, badge role penting, dan border aktif.
 2. **Warna Kartu Statistik Kuning Emas Amber Warm (`#D97706` / `bg-amber-500`)**:
    - Digunakan secara seragam untuk seluruh ikon kartu statistik antrean/pending di dashboard (`/dekanat/dashboard`, `/super-admin/dashboard`, `/admin-prodi/dashboard`, `/admin-fakultas/dashboard`).
@@ -34,14 +34,14 @@ Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 4. **Pola Tabel Ringkas + Kartu Panel Detail Samping (Compact List + Side Detail Panel Card)**:
    - Kolom `AKSI` yang memakan tempat dihapus dari tabel utama.
    - Mengklik baris tabel akan mengupdate secara *live* kartu panel detail di sebelah kanan (`w-80 shrink-0 bg-[#FAFAFA] rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between p-5`).
-   - Baris tabel yang dipilih ditandai dengan highlight `bg-rose-50/70 border-l-4 border-l-[#C62828]`.
+   - Baris tabel yang dipilih ditandai dengan highlight `bg-blue-50/70 border-l-4 border-l-[#2563eb]`.
 5. **Layout Fit to Viewport 100% vs Natural Page Scroll**:
    - *Fit to Viewport (`viewport-shell bg-[#FAFAFA]`)*: Diterapkan pada rute berorientasi tabel list & manajemen cepat agar tidak ada vertical scrolling di layar utama.
    - *Natural Page Scroll (`min-h-screen pb-16`)*: Diterapkan pada halaman analitik/statistik kaya data seperti `/dekanat/statistik` agar kartu dan grafik dapat mengembang secara alami.
 6. **Tidak Ada Badge Redundan**:
    - Penghapusan badge "Menunggu Verifikasi" pada antrean yang sudah didedikasikan khusus untuk barang yang butuh verifikasi.
 7. **Skeleton Loading UI System (`loading.tsx`)**:
-   - Terpasang pada seluruh 6 role portal di aplikasi SIPETA menggunakan komponen `PageSkeleton` beranimasi denyut halus (`animate-pulse bg-slate-200`) untuk memberikan masukan visual instan saat halaman dimuat.
+   - Terpasang pada seluruh 6 role portal di aplikasi Final Project menggunakan komponen `PageSkeleton` beranimasi denyut halus (`animate-pulse bg-slate-200`) untuk memberikan masukan visual instan saat halaman dimuat.
 8. **Empty State UI System**:
    - Apabila tabel, histori data, bimbingan, atau jadwal ujian masih kosong, sistem wajib menampilkan visual Empty State berupa ikon terkait ber-border soft rose/red, judul status kosong, teks penjelas penyebab, dan tombol tindakan cepat (*call-to-action*).
 
@@ -108,7 +108,7 @@ Seluruh 37 rute di 6 role utama telah diselaraskan dengan standar berikut:
 - [x] **Client-Side State Persistence (`localStorage` / Mock State)**
   - Membuat interaktivitas simulasi menggunakan `localStorage` agar sesi bimbingan & ACC tersimpan di browser.
 - [x] **Pratinjau Dokumen & Fitur Cetak PDF (Client-Side PDF Previewer & Print UI)**
-  - Membuat komponen modal pratinjau PDF (`PDFModalViewer`) ber-Kop Surat UPI YPTK Padang untuk SK Dekan, Berita Acara, & Lembar Revisi.
+  - Membuat komponen modal pratinjau PDF (`PDFModalViewer`) ber-Kop Surat PT MBOIS untuk SK Dekan, Berita Acara, & Lembar Revisi.
   - Menambahkan fitur tombol "Cetak / Download PDF" menggunakan fungsi bawaan browser (`window.print()`).
 - [x] **Penyiapan Layer API Client Helper (`services/api.ts` / Fetcher Stubs)**
   - Menyiapkan berkas `frontend/src/services/api.ts` yang berisi fungsi-fungsi fetcher terstruktur untuk 24 endpoint backend.
@@ -176,7 +176,7 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 ## 📱 Penyempurnaan Responsif & Interaktivitas Mobile < 768px (SELESAI ✅)
 
 - [x] **1. Perbaikan Navigasi Sidebar Mobile & Trigger Button**
-  - [x] Memastikan tombol hamburger `≡ SIPETA` (44x44px touch target) pada header seluruh rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.
+  - [x] Memastikan tombol hamburger `≡ Final Project` (44x44px touch target) pada header seluruh rute antarmuka memicu pembukaan slide-over drawer secara konsisten di layar smartphone.
   - [x] Overlay mobile diisolasi dengan `z-[9998]` & `z-[9999]` agar tidak terpotong oleh container `overflow-hidden`.
 - [x] **2. Audit Interaktivitas & Target Sentuh (Touch Target Area)**
   - [x] Memastikan tombol navigasi, hamburger, close button, dan action trigger memenuhi standar ukuran sentuh minimal 44x44px (`min-h-[44px]`, `w-11 h-11`).
@@ -191,9 +191,9 @@ Progress audit dan penyempurnaan tampilan per-halaman satu per satu di layar sma
 
 - [ ] **1. Basis Data & Environment Setup**
   - [ ] Konfigurasi PostgreSQL Database Server & `.env` connection string (`DATABASE_URL`, `JWT_SECRET`).
-  - [ ] Inisialisasi skema tabel Prisma ORM mengacu pada [`docs/DATABASE.md`](file:///c:/Users/wira1/sipeta-upiyptk/docs/DATABASE.md).
+  - [ ] Inisialisasi skema tabel Prisma ORM mengacu pada [`docs/DATABASE.md`](file:///isi-final-project/docs/DATABASE.md).
   - [ ] Jalankan migrasi basis data (`npx prisma migrate dev --name init_sipeta_db`).
-  - [ ] Jalankan seeder master data 6 Fakultas & 14 Program Studi resmi UPI YPTK Padang (`npx prisma db seed`).
+  - [ ] Jalankan seeder master data 6 Fakultas & 14 Program Studi resmi PT MBOIS (`npx prisma db seed`).
 - [ ] **2. Modul Autentikasi & Authorization Guard (RBAC)**
   - [ ] Implementasi Login Endpoint (`POST /api/v1/auth/login`) dengan hashing kata sandi (Bcrypt / Argon2).
   - [ ] Implementasi Session Token / JWT & Cookie HTTP-Only.
