@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { TaStepper } from "@/components/ui/ta-stepper";
 import Link from "next/link";
 import {
@@ -17,12 +18,12 @@ import {
   FileEdit,
   MessageSquare,
   User2,
-  Sparkles,
-  Layers
+  Layers,
+  Award,
 } from "lucide-react";
 import { SplashScreen } from "@/components/ui/splash-screen";
 
-// ─── Mock Data ──────────────────────────────────────────────
+// â”€â”€â”€ Mock Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const STUDENT = {
   name: "Danu Zen",
   nim: "20101152630045",
@@ -40,17 +41,17 @@ const PEMBIMBING: { label: string; color: string; nama: string; nidn: string; ku
 const ACC_CHECKLIST = [
   {
     label: "Clearing SKS & IPK",
-    detail: "Terpenuhi — 144 SKS · IPK 3.65",
+    detail: "Terpenuhi â€” 144 SKS Â· IPK 3.65",
     done: true,
   },
   {
     label: "Judul Disetujui Prodi",
-    detail: "Menunggu — Judul belum diajukan",
+    detail: "Menunggu â€” Judul belum diajukan",
     done: false,
   },
   {
     label: "Dosen Pembimbing Ditetapkan",
-    detail: "Menunggu — Pilih pembimbing terlebih dahulu",
+    detail: "Menunggu â€” Pilih pembimbing terlebih dahulu",
     done: false,
   },
 ];
@@ -111,47 +112,49 @@ export default function DashboardPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-3.5 md:space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-3.5 md:space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 md:pt-0">
 
-            {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-xs">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
-                {/* Left: greeting + status */}
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Akun Terverifikasi Akademik
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Selamat Datang, {STUDENT.name}
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Progres Tugas Akhir Anda saat ini berada pada tahap{" "}
-                    <strong className="text-[#38bdf8] font-bold">{STUDENT.tahapAktif}</strong>.
-                    Lanjutkan konsultasi rutin untuk memenuhi syarat pengajuan ACC Seminar Proposal.
-                  </p>
-                </div>
-
-                {/* Right: quick actions for desktop */}
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
+            {/* â”€â”€ Welcome Banner â”€â”€ */}
+            <PageBanner
+              badge={
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Akun Terverifikasi Akademik
+                </span>
+              }
+              title={`Selamat Datang, ${STUDENT.name}`}
+              description={
+                <>
+                  Progres Tugas Akhir Anda saat ini berada pada tahap{" "}
+                  <strong className="text-sky-300 font-bold">{STUDENT.tahapAktif}</strong>.
+                  Lanjutkan konsultasi rutin untuk memenuhi syarat pengajuan ACC Seminar Proposal.
+                </>
+              }
+              stats={[
+                { icon: BookOpen, value: `${STUDENT.sks} SKS`, label: "Beban SKS Lulus" },
+                { icon: Award, value: `IPK ${STUDENT.ipk}`, label: "Prestasi Akademik" },
+                { icon: CheckCircle2, value: STUDENT.tahapAktif, label: "Tahap Berjalan" },
+              ]}
+              actions={
+                <>
                   {QUICK_ACTIONS.map((a) => (
                     <Link
                       key={a.label}
                       href={a.href}
-                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${a.btnClass}`}
+                      className={
+                        a.label === "Ajukan Judul TA"
+                          ? bannerPrimaryBtn
+                          : bannerSecondaryBtn
+                      }
                     >
                       {a.icon}
                       <span>{a.label}</span>
                     </Link>
                   ))}
-                </div>
-              </div>
-              {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                </>
+              }
+            />
 
-            {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
+            {/* â”€â”€ Sleek Mobile Segmented Control Tab Switcher (<1024px) â”€â”€ */}
             <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">
               <button
                 onClick={() => setActiveMobileTab("tahapan")}
@@ -202,12 +205,12 @@ export default function DashboardPage() {
               </button>
             </div>
 
-            {/* ── TA Stepper (Desktop: Always Visible, Mobile: Visible when activeMobileTab === 'tahapan') ── */}
+            {/* â”€â”€ TA Stepper (Desktop: Always Visible, Mobile: Visible when activeMobileTab === 'tahapan') â”€â”€ */}
             <div className={`shrink-0 ${activeMobileTab === "tahapan" ? "block" : "hidden lg:block"}`}>
               <TaStepper />
             </div>
 
-            {/* ── Main Grid (8/12 & 4/12 on Desktop / Tabbed on Mobile) ── */}
+            {/* â”€â”€ Main Grid (8/12 & 4/12 on Desktop / Tabbed on Mobile) â”€â”€ */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0">
 
               {/* Judul TA Card (Desktop: Always Visible in 8/12 column, Mobile: Shown when activeMobileTab === 'judul') */}
@@ -262,14 +265,14 @@ export default function DashboardPage() {
                             </div>
                             <p className="text-xs font-bold text-slate-900 leading-tight">{p.nama}</p>
                             <p className="text-[10px] text-slate-500">
-                              NIDN: {p.nidn} &nbsp;·&nbsp; Kuota: {p.kuota}
+                              NIDN: {p.nidn} &nbsp;Â·&nbsp; Kuota: {p.kuota}
                             </p>
                           </div>
                         ))}
                       </div>
                     </>
                   ) : (
-                    /* Empty State — Belum ada judul diajukan */
+                    /* Empty State â€” Belum ada judul diajukan */
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-5 sm:p-8 space-y-3.5">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563eb] shadow-xs">
                         <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#2563eb]" />
@@ -372,7 +375,7 @@ export default function DashboardPage() {
                         <span className="font-bold text-slate-900 truncate">Sesi 5 Bimbingan TA</span>
                         <span className="text-[10px] font-bold text-[#2563eb] bg-blue-50 px-1.5 py-0.5 rounded font-mono-data">Besok</span>
                       </div>
-                      <p className="text-[11px] text-slate-500 font-medium">10:00 WIB · Ruang Dosen FIK 3</p>
+                      <p className="text-[11px] text-slate-500 font-medium">10:00 WIB Â· Ruang Dosen FIK 3</p>
                     </div>
 
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">

@@ -1,13 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, BarChart2, CalendarDays, FileDown,
-  MapPin, Clock, ArrowRight, ArrowLeft, Filter, Check, ChevronDown,
-  Building2, Users, FileText, UserCheck, Sparkles, X, ShieldCheck
+  LayoutDashboard,
+  BarChart2,
+  CalendarDays,
+  FileDown,
+  MapPin,
+  Clock,
+  ArrowRight,
+  ArrowLeft,
+  Filter,
+  Check,
+  ChevronDown,
+  Building2,
+  Users,
+  FileText,
+  UserCheck,
+  Sparkles,
+  X,
+  ShieldCheck,
 } from "lucide-react";
 import { storeJadwal } from "@/lib/final-project-store";
 
@@ -120,37 +137,27 @@ export default function DekanatKalenderPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 px-3 py-3 md:p-5 pt-16 md:pt-5 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
+          <main className="flex-1 px-3 py-3 md:p-5 pt-16 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between md:pt-0">
             
             {/* ── 1. Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
-                <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
-                      <CalendarDays className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Agenda Akademik Dekanat FIK
-                    </span>
-                  </div>
-                  <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Kalender Sidang &amp; Seminar FIK PT MBOIS
-                  </h1>
-                  <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Jadwal terintegrasi pelaksanaan Ujian Sidang Skripsi dan Seminar Proposal seluruh Program Studi di Fakultas Ilmu Komputer.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/dekanat/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white transition-all active:scale-95 shadow-xs font-display cursor-pointer"
-                  >
-                    <span>Kembali ke Dashboard</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Kalender Sidang & Seminar FIK PT MBOIS"
+              description="Jadwal terintegrasi pelaksanaan Ujian Sidang Skripsi dan Seminar Proposal seluruh Program Studi di Fakultas Ilmu Komputer."
+              stats={[
+                { icon: CalendarDays, value: "Semester Ganjil", label: "2026/2027" },
+                { icon: Clock, value: "Sempro & Sidang", label: "Jadwal Terbuka" },
+                { icon: ShieldCheck, value: "Ruang Ujian", label: "Terjadwal" },
+              ]}
+              actions={
+                <Link
+                  href="/dekanat/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Kembali ke Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* ── 2. Split 2-Column Card Layout (7/12 & 5/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 flex-1 min-h-0 items-stretch">

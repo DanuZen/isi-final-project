@@ -1,12 +1,31 @@
 "use client";
+import Link from "next/link";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
-import { Header } from "@/components/layout/header";
 import {
-  LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  UserCheck, ShieldCheck, Search, Filter, CheckCircle2, ChevronDown, Check, ArrowLeft,
-  Sparkles, X, Save, Edit3, Award, FileText
+  Sidebar } from "@/components/layout/sidebar";
+import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
+import {
+  LayoutDashboard,
+  Users,
+  UserPlus,
+  CalendarDays,
+  BookOpen,
+  UserCheck,
+  ShieldCheck,
+  Search,
+  Filter,
+  CheckCircle2,
+  ChevronDown,
+  Check,
+  ArrowLeft,
+  Sparkles,
+  X,
+  Save,
+  Edit3,
+  Award,
+  FileText,
 } from "lucide-react";
 
 const NAV = [
@@ -155,7 +174,7 @@ export default function AdminProdiDosenPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ratna Dewi, M.Kom." userRole="Admin Prodi" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
             {/* Toast Notification */}
             {toastMessage && (
               <div className="fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white px-4 py-3 rounded-xl shadow-xl border border-neutral-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
@@ -168,25 +187,29 @@ export default function AdminProdiDosenPage() {
             )}
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 p-5 md:p-6 text-white shadow-xs shrink-0 relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="px-3 py-0.5 rounded-full text-[10px] font-bold bg-[#2563eb] text-white border border-rose-600 font-display">
-                      PENETAPAN HAK AKSES DOSEN
-                    </span>
-                    <span className="text-xs text-neutral-400 font-medium">Program Studi Teknik Informatika</span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display tracking-wide text-white leading-tight">
-                    Penugasan Dosen Pembimbing &amp; Penguji
-                  </h1>
-                  <p className="text-xs text-neutral-300 max-w-2xl leading-relaxed font-medium">
-                    Tentukan dan kelola hak penugasan Dosen sebagai Pembimbing I/II dan Dosen Penguji Ujian Sempro &amp; Sidang di lingkungan prodi.
-                  </p>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb] absolute bottom-0 left-0 right-0" />
-            </div>
+            <PageBanner
+              badge={
+                <span className="hidden sm:inline-block text-[11px] font-semibold text-blue-100/90">
+                  Program Studi Teknik Informatika
+                </span>
+              }
+              title="Penugasan Dosen Pembimbing & Penguji"
+              description="Tentukan dan kelola hak penugasan Dosen sebagai Pembimbing I/II dan Dosen Penguji Ujian Sempro & Sidang di lingkungan prodi."
+              stats={[
+                { icon: Users, value: "24 Dosen", label: "Katalog Prodi" },
+                { icon: BookOpen, value: "Kuota Maks. 10", label: "Beban Bimbingan" },
+                { icon: ShieldCheck, value: "SK Dekan", label: "Terhubung" },
+              ]}
+              actions={
+                <Link
+                  href="/admin-prodi/jadwal"
+                  className={bannerPrimaryBtn}
+                >
+                  <CalendarDays className="w-4 h-4" />
+                  <span>Plotting Dewan Penguji</span>
+                </Link>
+              }
+            />
 
             {/* ── Filter Bar (Single Row Alignment) ── */}
             <div className="flex items-center justify-between gap-2.5 bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs shrink-0">

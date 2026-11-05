@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
+import {
+  Sidebar,
+  DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
   LayoutDashboard,
@@ -130,30 +133,45 @@ export default function DosenDashboardPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 md:pt-0">
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 p-5 md:p-6 text-white shadow-xs shrink-0 relative overflow-hidden">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                <div className="space-y-1.5 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <UserCheck className="w-3.5 h-3.5 text-white" /> Portal Dosen
-                    </span>
-                    <span className="hidden sm:inline-block text-xs text-neutral-400 font-medium">
-                      NIDN: {DOSEN.nidn} · {DOSEN.prodi}
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display tracking-wide text-white leading-tight">
-                    Selamat Datang
-                  </h1>
-                  <p className="text-xs text-neutral-300 leading-relaxed max-w-2xl font-medium">
-                    Anda memiliki <strong className="text-[#38bdf8]">{DOSEN.kuotaTerisi} dari {DOSEN.kuotaMaks} Mahasiswa Bimbingan Aktif</strong>. 
-                    Terdapat permohonan bimbingan baru yang membutuhkan konfirmasi Anda.
-                  </p>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb] absolute bottom-0 left-0 right-0" />
-            </div>
+            <PageBanner
+              badge={
+                <span className="hidden sm:inline-block text-[11px] font-semibold text-blue-100/90">
+                  NIDN: {DOSEN.nidn} · {DOSEN.prodi}
+                </span>
+              }
+              title={`Selamat Datang, ${DOSEN.nama}`}
+              description={
+                <>
+                  Anda memiliki <strong className="text-sky-300 font-bold">{DOSEN.kuotaTerisi} dari {DOSEN.kuotaMaks} Mahasiswa Bimbingan Aktif</strong>. 
+                  Terdapat permohonan bimbingan baru yang membutuhkan konfirmasi Anda.
+                </>
+              }
+              stats={[
+                { icon: Users, value: `${DOSEN.kuotaTerisi} Mhs`, label: `Kuota Terisi (${DOSEN.kuotaMaks} Maks)` },
+                { icon: BookOpen, value: `3 Pengajuan`, label: "Menunggu ACC" },
+                { icon: CalendarDays, value: "4 Agenda", label: "Sidang Minggu Ini" },
+              ]}
+              actions={
+                <>
+                  <Link
+                    href="/dosen/pengajuan"
+                    className={bannerPrimaryBtn}
+                  >
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Verifikasi Pengajuan</span>
+                  </Link>
+                  <Link
+                    href="/dosen/bimbingan"
+                    className={bannerSecondaryBtn}
+                  >
+                    <Users className="w-4 h-4" />
+                    <span>Daftar Bimbingan</span>
+                  </Link>
+                </>
+              }
+            />
 
             {/* ── Quick Stats Grid ── */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 shrink-0">

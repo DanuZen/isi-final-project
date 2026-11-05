@@ -1,13 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, FileText, Shield, Archive,
-  Download, CheckCircle2, Clock, Search, Filter, ArrowRight, XCircle, FileCheck, Building2,
-  Plus, ChevronDown, Check, X, ArrowLeft
+  LayoutDashboard,
+  FileText,
+  Shield,
+  Archive,
+  Download,
+  CheckCircle2,
+  Clock,
+  Search,
+  Filter,
+  ArrowRight,
+  XCircle,
+  FileCheck,
+  Building2,
+  Plus,
+  ChevronDown,
+  Check,
+  X,
+  ArrowLeft,
+  Users,
+  GraduationCap,
 } from "lucide-react";
 
 const NAV = [
@@ -128,37 +147,27 @@ export default function AdminFakultasSkPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <FileText className="w-3.5 h-3.5 text-white" /> Generasi SK Dekan Resmi
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Penerbitan Surat Keputusan (SK) Dekan FIK
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Proses verifikasi dan penerbitan SK Pembimbing &amp; Penguji Tugas Akhir secara digital dengan ttd Dekan Fakultas Ilmu Komputer.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/admin-fakultas/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <span>Dashboard Dekanat</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Penerbitan SK Pembimbing & Penguji Skripsi"
+              description="Penerbitan Surat Keputusan (SK) resmi Dekan Fakultas untuk dosen pembimbing dan dewan penguji tugas akhir seluruh prodi."
+              stats={[
+                { icon: FileText, value: "Nomor SK Resmi", label: "Format Digital" },
+                { icon: Users, value: "Dosen Pembimbing", label: "Terdaftar SK" },
+                { icon: GraduationCap, value: "Dewan Penguji", label: "SK Sidang" },
+              ]}
+              actions={
+                <Link
+                  href="/admin-fakultas/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Fakultas</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">

@@ -1,13 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  Plus, MapPin, Clock, User, ArrowRight, Search, Calendar as CalendarIcon,
-  CheckCircle2, XCircle, Trash2, Edit3, X, Check
+  LayoutDashboard,
+  Users,
+  UserPlus,
+  CalendarDays,
+  BookOpen,
+  Plus,
+  MapPin,
+  Clock,
+  User,
+  ArrowRight,
+  Search,
+  Calendar as CalendarIcon,
+  CheckCircle2,
+  XCircle,
+  Trash2,
+  Edit3,
+  X,
+  Check,
 } from "lucide-react";
 
 const NAV = [
@@ -182,39 +199,27 @@ export default function AdminProdiJadwalPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Hafizah, S.Kom., M.Kom." userNim="NIP: 198504122010122001" userRole="Admin Prodi" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
-                      <CalendarDays className="w-3.5 h-3.5 text-white shrink-0" />
-                      <span className="truncate">Penjadwalan Majelis Penguji FIK</span>
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Penjadwalan Seminar Proposal &amp; Ujian Sidang
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Atur jadwal waktu, ruangan seminar/sidang, serta penugasan Majelis Dosen Penguji I &amp; II untuk seluruh mahasiswa prodi.
-                  </p>
-                </div>
-
-                <div className="shrink-0 flex items-center gap-2">
-                  <button
-                    onClick={handleOpenAddModal}
-                    title="Buat Jadwal Baru"
-                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer flex items-center gap-2"
-                  >
-                    <Plus className="w-4 h-4 text-white shrink-0" />
-                    <span>Buat Jadwal Baru</span>
-                  </button>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Plotting Dewan Penguji & Jadwal Ujian Sidang"
+              description="Atur jadwal pelaksanaan ujian seminar proposal dan sidang skripsi serta plotting susunan dewan dosen penguji."
+              stats={[
+                { icon: CalendarDays, value: "18 Jadwal", label: "Sempro & Sidang" },
+                { icon: Users, value: "Dewan Penguji", label: "Plotting Lengkap" },
+                { icon: Clock, value: "Ruangan", label: "Lab & Ruang Sidang" },
+              ]}
+              actions={
+                <Link
+                  href="/admin-prodi/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Prodi</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* ── Main Card Table ── */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col min-h-0">

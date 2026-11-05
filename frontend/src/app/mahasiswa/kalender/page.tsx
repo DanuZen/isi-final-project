@@ -1,8 +1,13 @@
 "use client";
+import Link from "next/link";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import {
   CalendarDays,
   Calendar as CalendarIcon,
@@ -17,6 +22,7 @@ import {
   Sparkles,
   Building2,
   GraduationCap,
+  ArrowRight,
 } from "lucide-react";
 import { UPI_YPTK_FAKULTAS, PROGRAM_PASCASARJANA } from "@/constants/academic";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
@@ -150,28 +156,26 @@ export default function KalenderPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                {/* Left: greeting + status */}
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs">
-                      <CalendarDays className="w-3.5 h-3.5" /> Kalender Akademik Universitas
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Kalender Interaktif TA &amp; Sidang Skripsi
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Jadwal alokasi bimbingan rutin, seminar proposal, ujian sidang skripsi, dan batas akhir akademik mahasiswa PT MBOIS.
-                  </p>
-                </div>
-              </div>
-              {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Kalender Interaktif TA & Sidang Skripsi"
+              description="Jadwal alokasi bimbingan rutin, seminar proposal, ujian sidang skripsi, dan batas akhir akademik mahasiswa PT MBOIS."
+              stats={[
+                { icon: CalendarDays, value: "Semester Ganjil", label: "2026/2027" },
+                { icon: Clock, value: "Timeline Sidang", label: "Agustus - Desember" },
+                { icon: Sparkles, value: "Sync Google Cal", label: "Terintegrasi" },
+              ]}
+              actions={
+                <Link
+                  href="/mahasiswa/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Kembali ke Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* Controls Bar & Filter Legend */}
             <div className="bg-white rounded-xl border border-slate-200 p-2 sm:p-3 shadow-xs flex flex-row items-center justify-between gap-2 shrink-0">

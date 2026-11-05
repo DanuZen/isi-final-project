@@ -1,15 +1,37 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  CheckCircle2, Clock, XCircle, Search, Filter,
-  FileText, AlertCircle, Building2, ShieldCheck, ArrowRight,
-  UserCheck, Sparkles, FileCheck, Check, Eye, Trash2,
-  ChevronDown, ChevronUp
+  LayoutDashboard,
+  Users,
+  UserPlus,
+  CalendarDays,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  XCircle,
+  Search,
+  Filter,
+  FileText,
+  AlertCircle,
+  Building2,
+  ShieldCheck,
+  ArrowRight,
+  UserCheck,
+  Sparkles,
+  FileCheck,
+  Check,
+  Eye,
+  Trash2,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 const NAV = [
@@ -107,45 +129,36 @@ export default function AdminProdiDashboard() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
             
             {/* ── Welcome Banner Command Center ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
-                      <Building2 className="w-3.5 h-3.5 text-white shrink-0" />
-                      <span className="truncate">Prodi Teknik Informatika</span>
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Selamat Datang
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Portal utama program studi. Terdapat <strong className="text-[#38bdf8] font-bold">{proposalList.length} proposal judul</strong> baru yang memerlukan verifikasi hari ini.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/admin-prodi/aktivasi"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <UserPlus className="w-4 h-4 text-white" />
-                    <span>Aktivasi Akun Clearing</span>
-                  </Link>
+            <PageBanner
+              title="Dashboard Program Studi Teknik Informatika"
+              description="Pusat monitoring dan kendali operasional Tugas Akhir: aktivasi mahasiswa, penugasan dosen pembimbing & penguji, plotting jadwal ujian, dan arsip skripsi."
+              stats={[
+                { icon: Users, value: "128 Mahasiswa", label: "Terdaftar TA" },
+                { icon: BookOpen, value: "24 Dosen", label: "Pembimbing Aktif" },
+                { icon: CalendarDays, value: "18 Jadwal", label: "Ujian Sidang" },
+              ]}
+              actions={
+                <>
                   <Link
                     href="/admin-prodi/jadwal"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 font-display"
+                    className={bannerPrimaryBtn}
                   >
-                    <CalendarDays className="w-4 h-4 text-white" />
-                    <span>Jadwal Ujian</span>
+                    <CalendarDays className="w-4 h-4" />
+                    <span>Plotting Sidang</span>
                   </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                  <Link
+                    href="/admin-prodi/dosen"
+                    className={bannerSecondaryBtn}
+                  >
+                    <Users className="w-4 h-4" />
+                    <span>Kelola Dosen</span>
+                  </Link>
+                </>
+              }
+            />
 
             {/* ── 4 Executive Stat Cards ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">

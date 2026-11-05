@@ -1,12 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, UserPlus, CalendarDays, BookOpen,
-  CheckCircle2, Search, UserCheck, ArrowRight, XCircle, Plus, X, User, ArrowLeft, FileText
+  LayoutDashboard,
+  Users,
+  UserPlus,
+  CalendarDays,
+  BookOpen,
+  CheckCircle2,
+  Search,
+  UserCheck,
+  ArrowRight,
+  XCircle,
+  Plus,
+  X,
+  User,
+  ArrowLeft,
+  FileText,
+  ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 
 const NAV = [
@@ -109,28 +126,27 @@ export default function AdminProdiAktivasiPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Hafizah, S.Kom., M.Kom." userNim="NIP: 198504122010122001" userRole="Admin Prodi" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs max-w-full truncate">
-                      <UserCheck className="w-3.5 h-3.5 text-white shrink-0" />
-                      <span className="truncate">Prodi Teknik Informatika</span>
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Input &amp; Verifikasi Clearing Mahasiswa
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Admin Prodi dapat menginputkan langsung data mahasiswa yang telah divalidasi clearing luringnya untuk langsung diaktifkan di portal SIPETA.
-                  </p>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Aktivasi & Verifikasi Mahasiswa Tugas Akhir"
+              description="Kelola status aktivasi KRS Tugas Akhir dan kelayakan mahasiswa untuk memulai tahapan skripsi semester ini."
+              stats={[
+                { icon: UserCheck, value: "Semester Ganjil", label: "2026/2027" },
+                { icon: ShieldCheck, value: "KRS Terverifikasi", label: "SIAK Cloud" },
+                { icon: Sparkles, value: "Batas Registrasi", label: "Aktif" },
+              ]}
+              actions={
+                <Link
+                  href="/admin-prodi/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Prodi</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* ── Grid Split View (Flex-1 Table & Fixed 350px Detail Side Panel) ── */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">

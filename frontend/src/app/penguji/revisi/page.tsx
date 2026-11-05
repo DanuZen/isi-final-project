@@ -1,14 +1,35 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
+import {
+  Sidebar,
+  DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
-  LayoutDashboard, CalendarDays, Star, FileEdit,
-  CheckCircle2, Clock, Send, AlertCircle, ArrowRight, ArrowLeft, ShieldCheck, Award,
-  Sparkles, X, Search, Filter, FileText, Download, Eye, ChevronDown, Check
+  LayoutDashboard,
+  CalendarDays,
+  Star,
+  FileEdit,
+  CheckCircle2,
+  Clock,
+  Send,
+  AlertCircle,
+  ArrowRight,
+  ArrowLeft,
+  ShieldCheck,
+  Award,
+  Sparkles,
+  X,
+  Search,
+  Filter,
+  FileText,
+  Download,
+  Eye,
+  ChevronDown,
+  Check,
 } from "lucide-react";
 
 interface RevisiItem {
@@ -103,7 +124,7 @@ export default function PengujiRevisiPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ahmad Fauzi, M.T." userNim="NIDN: 1012345678" userRole="Dosen Penguji" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
 
             {/* Toast Notification */}
             {toastMessage && (
@@ -117,34 +138,24 @@ export default function PengujiRevisiPage() {
             )}
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <FileEdit className="w-3.5 h-3.5 text-white" /> Monitoring Lembar Revisi Active
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Catatan Revisi &amp; Verifikasi Perbaikan Naskah
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Verifikasi dokumen naskah perbaikan mahasiswa pasca seminar proposal atau ujian sidang skripsi.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/penguji/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <span>Dashboard Penguji</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Verifikasi & ACC Revisi Pasca-Sidang"
+              description="Periksa berkas naskah perbaikan yang diunggah mahasiswa setelah pelaksanaan ujian sidang atau seminar proposal."
+              stats={[
+                { icon: ShieldCheck, value: "Revisi Naskah", label: "Pasca Ujian" },
+                { icon: FileText, value: "Catatan Penguji", label: "Form Perbaikan" },
+                { icon: CheckCircle2, value: "ACC Yudisium", label: "Syarat Kelulusan" },
+              ]}
+              actions={
+                <Link
+                  href="/penguji/jadwal"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Kembali ke Jadwal</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* ── Split 2-Column Layout (5/12 & 7/12) ── */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">

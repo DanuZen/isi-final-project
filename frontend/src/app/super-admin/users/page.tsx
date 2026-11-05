@@ -1,12 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, ClipboardList, Settings, Database,
-  Search, Plus, KeyRound, ShieldAlert, Check, ShieldCheck, UserCheck, ArrowRight, ArrowLeft
+  LayoutDashboard,
+  Users,
+  ClipboardList,
+  Settings,
+  Database,
+  Search,
+  Plus,
+  KeyRound,
+  ShieldAlert,
+  Check,
+  ShieldCheck,
+  UserCheck,
+  ArrowRight,
+  ArrowLeft,
 } from "lucide-react";
 
 const NAV = [
@@ -77,37 +91,27 @@ export default function SuperAdminUsersPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <Users className="w-3.5 h-3.5 text-white" /> Manajemen User &amp; Otorisasi
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Pengelolaan Akun Pengguna PT MBOIS - Final Project
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Kelola pendaftaran akun baru, reset kata sandi, pengaturan perizinan role, serta penguncian akses pengguna secara terpusat.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <button
-                    onClick={() => alert("Membuka form pembuatan akun user baru...")}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
-                  >
-                    <Plus className="w-4 h-4 text-white" />
-                    <span>Tambah User Baru</span>
-                  </button>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Kelola Akun Pengguna & RBAC Sistem"
+              description="Manajemen kredensial akun mahasiswa, dosen, admin prodi, staf fakultas, dan pengaturan hak akses role-based."
+              stats={[
+                { icon: UserCheck, value: "7 Role Aktif", label: "RBAC Hierarchy" },
+                { icon: Users, value: "1,240 Akun", label: "Terdaftar Resmi" },
+                { icon: ShieldCheck, value: "Single Sign-On", label: "SIAK Auth" },
+              ]}
+              actions={
+                <Link
+                  href="/super-admin/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Admin</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">

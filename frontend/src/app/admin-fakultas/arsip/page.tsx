@@ -1,13 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, FileText, Shield, Archive,
-  Search, Download, File, ArrowRight, Tag, Filter, Building2,
-  Plus, ChevronDown, Check, X, ArrowLeft, CheckCircle2, XCircle
+  LayoutDashboard,
+  FileText,
+  Shield,
+  Archive,
+  Search,
+  Download,
+  File,
+  ArrowRight,
+  Tag,
+  Filter,
+  Building2,
+  Plus,
+  ChevronDown,
+  Check,
+  X,
+  ArrowLeft,
+  CheckCircle2,
+  XCircle,
+  ShieldCheck,
+  BookOpen,
 } from "lucide-react";
 
 const NAV = [
@@ -109,37 +128,27 @@ export default function AdminFakultasArsipPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <Archive className="w-3.5 h-3.5 text-white" /> Repository Digital Fakultas
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Arsip Dokumen &amp; Berita Acara Fakultas
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Penyimpanan resmi berkas SK Dekan, Berita Acara Yudisium, dan Dokumen Pedoman Tata Tulis Tugas Akhir.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/admin-fakultas/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <span>Dashboard Admin</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Penerbitan Surat Bebas Tanggungan Fakultas"
+              description="Verifikasi dan validasi status bebas laboratorium, bebas perpustakaan fakultas, dan administrasi keuangan sebelum yudisium."
+              stats={[
+                { icon: ShieldCheck, value: "Bebas Lab", label: "Fasilitas Komputer" },
+                { icon: BookOpen, value: "Bebas Perpus", label: "Koleksi Buku" },
+                { icon: CheckCircle2, value: "Validasi Yudisium", label: "Syarat Ijazah" },
+              ]}
+              actions={
+                <Link
+                  href="/admin-fakultas/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Fakultas</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* Grid layout with Detail Side Panel */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">

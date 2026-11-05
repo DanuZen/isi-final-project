@@ -1,8 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { ViewportFitGrid } from "@/components/ViewportFitGrid";
 import Link from "next/link";
 import {
@@ -15,6 +19,7 @@ import {
   Clock,
   Send,
   XCircle,
+  BookOpen,
 } from "lucide-react";
 import { CustomDropdown } from "@/components/ui/custom-dropdown";
 
@@ -203,39 +208,31 @@ export default function PengajuanPembimbingPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
-                {/* Left: greeting + status */}
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Pembimbing Disetujui Prodi
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Pengajuan &amp; Usulan Dosen Pembimbing TA
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Mahasiswa memilih dan mengajukan calon Dosen Pembimbing Utama (Pembimbing I) dan Pendamping (Pembimbing II) dari katalog dosen PT MBOIS.
-                  </p>
-                </div>
-
-                {/* Right: quick action button */}
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <button
-                    onClick={() => setShowFormModal(true)}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <UserCheck className="w-4 h-4" />
-                    <span>Form Usulan Pembimbing</span>
-                  </button>
-                </div>
-              </div>
-              {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              badge={
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Pembimbing Disetujui Prodi
+                </span>
+              }
+              title="Pengajuan & Usulan Dosen Pembimbing TA"
+              description="Mahasiswa memilih dan mengajukan calon Dosen Pembimbing Utama (Pembimbing I) dan Pendamping (Pembimbing II) dari katalog dosen PT MBOIS."
+              stats={[
+                { icon: UserCheck, value: "2 Dosen", label: "Pembimbing I & II" },
+                { icon: ShieldCheck, value: "Kuota Kuota", label: "Sesuai Bidang" },
+                { icon: BookOpen, value: "Katalog Aktif", label: "Dosen Prodi TI" },
+              ]}
+              actions={
+                <button
+                  onClick={() => setShowFormModal(true)}
+                  className={bannerPrimaryBtn}
+                >
+                  <UserCheck className="w-4 h-4" />
+                  <span>Form Usulan Pembimbing</span>
+                </button>
+              }
+            />
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
             <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">

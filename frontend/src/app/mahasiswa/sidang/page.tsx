@@ -1,8 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
@@ -16,6 +20,8 @@ import {
   Upload,
   ArrowRight,
   Download,
+  CalendarDays,
+  ShieldCheck,
 } from "lucide-react";
 
 import { storeJadwal } from "@/lib/final-project-store";
@@ -60,54 +66,34 @@ export default function UjianSidangPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
-                {/* Left: greeting + status */}
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> ACC Ujian Akademik Disetujui
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Jadwal &amp; Ujian Akademik Tugas Akhir
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Pusat informasi alokasi ujian Seminar Proposal (Sempro) dan Ujian Sidang Akhir Skripsi mahasiswa PT MBOIS.
-                  </p>
-                </div>
-
-                {/* Tab Controls */}
-                <div className="flex items-center gap-1.5 bg-[#141414] p-1.5 rounded-xl border border-neutral-700 w-full sm:w-auto">
-                  <button
-                    onClick={() => setActiveTab("SEMPRO")}
-                    className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
-                      activeTab === "SEMPRO"
-                        ? "bg-[#2563eb] text-white shadow-xs font-extrabold"
-                        : "text-neutral-400 hover:text-white font-medium"
-                    }`}
-                  >
-                    <Calendar className="w-3.5 h-3.5 shrink-0" />
-                    <span className="whitespace-nowrap">1. Sempro</span>
+            <PageBanner
+              badge={
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Lulus Validasi Bebas Lab & Perpus
+                </span>
+              }
+              title="Jadwal & Pelaksanaan Sidang Skripsi"
+              description="Informasi jadwal sidang skripsi, dewan dosen penguji, ruang ujian sidang, dan berkas persyaratan kelulusan sarjana."
+              stats={[
+                { icon: GraduationCap, value: "Sidang Skripsi", label: "Ujian Terbuka" },
+                { icon: CalendarDays, value: "Jadwal Resmi", label: "Ruang & Sesi" },
+                { icon: ShieldCheck, value: "Verifikasi Berkas", label: "Lengkap" },
+              ]}
+              actions={
+                <>
+                  <button className={bannerSecondaryBtn}>
+                    <Download className="w-4 h-4" />
+                    <span>Unduh Form Revisi (PDF)</span>
                   </button>
-                  <button
-                    onClick={() => setActiveTab("SIDANG")}
-                    className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 font-display cursor-pointer ${
-                      activeTab === "SIDANG"
-                        ? "bg-[#2563eb] text-white shadow-xs font-extrabold"
-                        : "text-neutral-400 hover:text-white font-medium"
-                    }`}
-                  >
-                    <GraduationCap className="w-3.5 h-3.5 shrink-0" />
-                    <span className="whitespace-nowrap">2. Sidang Skripsi</span>
+                  <button className={bannerPrimaryBtn}>
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Cek Ruang Sidang</span>
                   </button>
-                </div>
-              </div>
-              {/* Bottom accent bar */}
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                </>
+              }
+            />
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
             <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">

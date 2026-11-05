@@ -1,12 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, BarChart2, CalendarDays, FileDown, Building2,
-  TrendingUp, TrendingDown, Users, Award, FileText, CheckCircle2, Clock
+  LayoutDashboard,
+  BarChart2,
+  CalendarDays,
+  FileDown,
+  Building2,
+  TrendingUp,
+  TrendingDown,
+  Users,
+  Award,
+  FileText,
+  CheckCircle2,
+  Clock,
+  BookOpen,
+  GraduationCap,
+  BarChart3,
 } from "lucide-react";
 
 const NAV = [
@@ -109,37 +126,36 @@ export default function DekanatDashboard() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 px-3 py-3 md:p-5 pt-16 md:pt-5 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
+          <main className="flex-1 px-3 py-3 md:p-5 pt-16 space-y-3 md:space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between md:pt-0">
             
             {/* ── 1. Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 md:gap-5 p-4 md:p-6 relative">
-                <div className="space-y-1 md:space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-0.5 md:mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
-                      <Award className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" /> Pimpinan / Dekanat FIK
-                    </span>
-                  </div>
-                  <h1 className="text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Dashboard Eksekutif — FIK PT MBOIS
-                  </h1>
-                  <p className="text-[11px] md:text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Ringkasan performa Tugas Akhir Fakultas Ilmu Komputer semester 2025/2026 Genap. Tingkat kelulusan bulan ini: <strong className="text-emerald-400 font-bold">94%</strong>.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
+            <PageBanner
+              title="Monitoring Eksekutif Tugas Akhir Fakultas"
+              description="Ikhtisar capaian akademik, statistik kelulusan tepat waktu, dan beban bimbingan dosen di seluruh program studi."
+              stats={[
+                { icon: Users, value: "480+ Mahasiswa", label: "Terdaftar FIK" },
+                { icon: BookOpen, value: "3 Program Studi", label: "Aktif TA" },
+                { icon: GraduationCap, value: "94.2% Lulus", label: "Target Capaian" },
+              ]}
+              actions={
+                <>
                   <Link
-                    href="/dekanat/laporan"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display cursor-pointer"
+                    href="/dekanat/statistik"
+                    className={bannerPrimaryBtn}
                   >
-                    <FileDown className="w-4 h-4 text-white" />
-                    <span>Laporan Eksekutif</span>
+                    <BarChart3 className="w-4 h-4" />
+                    <span>Statistik Detail</span>
                   </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                  <Link
+                    href="/dekanat/kalender"
+                    className={bannerSecondaryBtn}
+                  >
+                    <CalendarDays className="w-4 h-4" />
+                    <span>Kalender Sidang</span>
+                  </Link>
+                </>
+              }
+            />
 
             {/* ── 2. 4 Stat Cards (Statistik TA Design System - 2 Cols on Mobile) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4 shrink-0">

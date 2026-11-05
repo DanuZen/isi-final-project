@@ -1,14 +1,35 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
+import {
+  Sidebar,
+  DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, UserCheck, CalendarDays,
-  BookOpen, CheckCircle2, Clock, AlertCircle, MessageSquare,
-  FileText, Search, Filter, Eye, ArrowRight, ArrowLeft, X, Send, Award,
-  Sparkles, Check, ChevronDown, Download
+  LayoutDashboard,
+  Users,
+  UserCheck,
+  CalendarDays,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  AlertCircle,
+  MessageSquare,
+  FileText,
+  Search,
+  Filter,
+  Eye,
+  ArrowRight,
+  ArrowLeft,
+  X,
+  Send,
+  Award,
+  Sparkles,
+  Check,
+  ChevronDown,
+  Download,
 } from "lucide-react";
 
 type TahapKey = "Usulan" | "Bimbingan" | "Seminar" | "Sidang" | "Selesai";
@@ -239,7 +260,7 @@ export default function DosenBimbinganPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Sarjon Defit" userNim="NIDN: 1012057301" userRole="Dosen Pembimbing" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
             
             {/* Toast Notification */}
             {toastMessage && (
@@ -253,34 +274,24 @@ export default function DosenBimbinganPage() {
             )}
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <UserCheck className="w-3.5 h-3.5" /> Mahasiswa Bimbingan Active
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Monitoring Mahasiswa Bimbingan TA
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Pantau progres bab skripsi, verifikasi log konsultasi rutin, dan berikan persetujuan (ACC) Seminar &amp; Ujian Sidang.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/dosen/pengajuan"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white border border-blue-500/30 shadow-md shadow-blue-950/20 transition-all active:scale-95 cursor-pointer"
-                  >
-                    <span>Permohonan Masuk</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Daftar Mahasiswa Bimbingan Aktif"
+              description="Kelola progres bimbingan mahasiswa, berikan catatan konsultasi, dan pantau kesiapan naskah proposal atau sidang skripsi."
+              stats={[
+                { icon: Users, value: "8 Mahasiswa", label: "Bimbingan Aktif" },
+                { icon: CheckCircle2, value: "5 Siap Sempro", label: "Target Kelulusan" },
+                { icon: Clock, value: "3 Menunggu Paraf", label: "Logbook Terkini" },
+              ]}
+              actions={
+                <Link
+                  href="/dosen/kalender"
+                  className={bannerPrimaryBtn}
+                >
+                  <CalendarDays className="w-4 h-4" />
+                  <span>Jadwalkan Konsultasi</span>
+                </Link>
+              }
+            />
 
 
 

@@ -1,13 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
+import {
+  Sidebar,
+  DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, CalendarDays, Star, FileEdit,
-  CheckCircle2, Clock, AlertCircle, TrendingUp, ShieldCheck, Award,
-  Users, ArrowRight
+  LayoutDashboard,
+  CalendarDays,
+  Star,
+  FileEdit,
+  CheckCircle2,
+  Clock,
+  AlertCircle,
+  TrendingUp,
+  ShieldCheck,
+  Award,
+  Users,
+  ArrowRight,
+  GraduationCap,
 } from "lucide-react";
 
 /* ── Nav Dosen Penguji ── */
@@ -51,40 +64,36 @@ export default function PengujiDashboard() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ahmad Fauzi, M.T." userNim="NIDN: 1012345678" userRole="Dosen Penguji" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* Welcome Banner */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                    <Star className="w-3.5 h-3.5 text-white" /> Dosen Penguji Aktif
-                  </span>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Selamat Datang, Dr. Ahmad Fauzi
-                  </h1>
-                  <p className="text-xs text-neutral-400 max-w-2xl font-medium">
-                    Anda memiliki <strong className="text-blue-400 font-bold">5 jadwal seminar</strong> dan{" "}
-                    <strong className="text-rose-400 font-bold">3 jadwal sidang</strong> aktif bulan ini. Harap segera input nilai setelah pengujian selesai.
-                  </p>
-                </div>
-                <div className="flex gap-2.5 shrink-0 flex-wrap">
-                  <Link
-                    href="/penguji/jadwal"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-xs transition-all active:scale-95 cursor-pointer font-display"
-                  >
-                    <CalendarDays className="w-4 h-4 text-white" /> Lihat Jadwal
-                  </Link>
+            <PageBanner
+              title="Dashboard Penguji Skripsi & Sempro"
+              description="Panel pengujian sidang skripsi dan seminar proposal. Input nilai ujian, evaluasi rubrik kompetensi, dan verifikasi perbaikan naskah revisi."
+              stats={[
+                { icon: CalendarDays, value: "6 Jadwal Ujian", label: "Sempro & Sidang" },
+                { icon: Award, value: "Rubrik OBE", label: "Standar Penilaian" },
+                { icon: ShieldCheck, value: "Revisi Masuk", label: "Perlu Verifikasi" },
+              ]}
+              actions={
+                <>
                   <Link
                     href="/penguji/nilai"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 cursor-pointer font-display"
+                    className={bannerPrimaryBtn}
                   >
-                    <Award className="w-4 h-4 text-white" /> Input Nilai
+                    <Award className="w-4 h-4" />
+                    <span>Input Nilai Sidang</span>
                   </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                  <Link
+                    href="/penguji/jadwal"
+                    className={bannerSecondaryBtn}
+                  >
+                    <CalendarDays className="w-4 h-4" />
+                    <span>Lihat Jadwal</span>
+                  </Link>
+                </>
+              }
+            />
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">

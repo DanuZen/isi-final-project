@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
@@ -24,7 +24,7 @@ export default function ProfilAkademikPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 md:p-5 overflow-hidden shell-body flex flex-col min-h-0 relative">
+          <main className="flex-1 p-4 pt-16 md:p-5 overflow-hidden shell-body flex flex-col min-h-0 relative md:pt-0">
             {/* Background Preview Shell */}
             <div className="flex-1 rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-xs flex items-center justify-center p-6 text-center">
               <div className="space-y-2 max-w-sm">

@@ -1,8 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
@@ -15,6 +19,9 @@ import {
   Upload,
   ArrowRight,
   Download,
+  FileText,
+  CalendarDays,
+  ShieldCheck,
 } from "lucide-react";
 
 import { storeJadwal } from "@/lib/final-project-store";
@@ -49,42 +56,37 @@ export default function SeminarPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative">
-            {/* Welcome Banner */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> ACC Seminar Proposal Disetujui
-                    </span>
-                    <span className="hidden sm:inline-block text-xs font-mono text-neutral-400">
-                      Ref ID: SM-2026-0914
-                    </span>
-                  </div>
-                  <h1 className="text-base sm:text-lg md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Jadwal &amp; Pelaksanaan Seminar Proposal Skripsi
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Informasi alokasi waktu seminar proposal, lokasi ruangan, dewan penguji, dan unggah revisi naskah pasca-seminar.
-                  </p>
-                </div>
-
-                {/* Right: action buttons (Desktop only) */}
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <button className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all flex items-center gap-1.5 shadow-xs font-display">
-                    <Download className="w-4 h-4 text-neutral-300" /> Berita Acara Seminar (PDF)
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto scrollbar-none shell-body flex flex-col min-h-0 relative md:pt-0">
+            {/* ── Welcome Banner ── */}
+            <PageBanner
+              badge={
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-xs font-display">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> ACC Seminar Proposal Disetujui
+                </span>
+              }
+              title="Jadwal & Pelaksanaan Seminar Proposal Skripsi"
+              description="Informasi alokasi waktu seminar proposal, lokasi ruangan, dewan penguji, dan unggah revisi naskah pasca-seminar."
+              stats={[
+                { icon: FileText, value: "Proposal Ter-ACC", label: "Syarat Terpenuhi" },
+                { icon: CalendarDays, value: "Jadwal Sempro", label: "SIAK Terintegrasi" },
+                { icon: ShieldCheck, value: "Ref ID", label: "SM-2026-0914" },
+              ]}
+              actions={
+                <>
+                  <button className={bannerSecondaryBtn}>
+                    <Download className="w-4 h-4" />
+                    <span>Berita Acara Seminar (PDF)</span>
                   </button>
                   <Link
                     href="/mahasiswa/sidang"
-                    className="px-4 py-2.5 text-xs font-bold rounded-xl bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all shadow-xs flex items-center gap-1.5 font-display"
+                    className={bannerPrimaryBtn}
                   >
-                    Lanjut ke Sidang <ArrowRight className="w-4 h-4" />
+                    <span>Lanjut ke Sidang</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                </>
+              }
+            />
 
             {/* ── Sleek Mobile Segmented Control Tab Switcher (<1024px) ── */}
             <div className="lg:hidden flex p-1 bg-slate-200/80 rounded-xl shrink-0 gap-1 font-display border border-slate-300/60 shadow-2xs overflow-x-auto scrollbar-none whitespace-nowrap">

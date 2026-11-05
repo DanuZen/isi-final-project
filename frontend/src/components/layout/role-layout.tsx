@@ -1,20 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { ChevronDown, User, LogOut, Menu, X } from "lucide-react";
 
+import { Sidebar, type NavItem } from "@/components/layout/sidebar";
+import { Header } from "@/components/layout/header";
 import { SplashScreen } from "@/components/ui/splash-screen";
-import { ProfileModal } from "@/components/modals/profile-modal";
-
-interface NavItem {
-  label: string;
-  href: string;
-  icon: React.ReactNode;
-  badge?: string;
-}
 
 interface RoleLayoutProps {
   children: React.ReactNode;
@@ -23,9 +13,14 @@ interface RoleLayoutProps {
   userCode: string;   // NIM/NIDN/Username
   userRole: string;
   userUnit: string;   // Prodi / Fakultas / etc.
+  /** @deprecated Warna aksen kini mengikuti tema royal blue global */
   accentColor?: string;
 }
 
+/**
+ * Shell layout generik per-role. Memakai Sidebar & Header yang sama dengan
+ * seluruh halaman agar tampilan konsisten (design system PT MBOIS Learning Hub).
+ */
 export function RoleLayout({
   children,
   navItems,
@@ -33,320 +28,39 @@ export function RoleLayout({
   userCode,
   userRole,
   userUnit,
-  accentColor = "#2563eb",
 }: RoleLayoutProps) {
-  const pathname = usePathname();
-  const router   = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showPortalSplash, setShowPortalSplash] = useState(true);
-  const dropRef = React.useRef<HTMLDivElement>(null);
-
-  // Close dropdown on outside click
-  React.useEffect(() => {
-    const h = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) setDropdownOpen(false);
-    };
-    document.addEventListener("mousedown", h);
-    return () => document.removeEventListener("mousedown", h);
-  }, []);
-
-  // Auto close mobile sidebar on route change
-  React.useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
-      setSidebarOpen(false);
-    }
-  }, [pathname]);
-
-  const initials = userName
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
 
   return (
-    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden bg-[#F8FAFC]">
+    <div className="flex flex-col h-auto md:h-dvh md:overflow-hidden viewport-shell bg-[#FAFAFA] font-display text-slate-900">
       <div className="flex flex-1 min-h-0 overflow-hidden">
+        <Sidebar
+          isOpen={sidebarOpen}
+          onToggle={() => setSidebarOpen((v) => !v)}
+          items={navItems}
+          userName={userName}
+          userNim={userCode}
+          roleName={userRole}
+          prodiName={userUnit}
+        />
 
-        {/* ── 1. Mobile Drawer View (< md) ── */}
-        {sidebarOpen && (
-          <div className="md:hidden">
-            <div
-              onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 bg-black/75 backdrop-blur-xs z-[9998] animate-fade-in-scale cursor-pointer"
-            />
-            {/* Full-Page Mobile Drawer from RIGHT */}
-            <aside className="fixed inset-0 w-full h-full bg-[#0f172a] text-white flex flex-col z-[9999] shadow-2xl overflow-hidden animate-slide-in-right">
-              {/* Top Header with emblem logo and close button */}
-              <div className="flex items-center justify-between p-4 md:p-5 border-b border-slate-800 shrink-0 bg-[#0f172a]">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 relative shrink-0">
-                    <Image src="/mbois_white.png" alt="Logo PT MBOIS" fill sizes="36px" className="object-contain" priority />
-                  </div>
-                  <div>
-                    <h1 className="font-black text-lg tracking-wider font-display text-white leading-none">PT MBOIS</h1>
-                    <p className="text-[8.5px] font-bold text-blue-400 font-display tracking-widest uppercase mt-0.5 leading-none">FINAL PROJECT</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setSidebarOpen(false)}
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 hover:text-white hover:bg-white/10 active:bg-white/20 transition-all cursor-pointer shrink-0"
-                  title="Tutup Menu"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Middle Section: Links */}
-              <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-                <div className="px-3 pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-blue-400 font-display">
-                  Menu Utama
-                </div>
-                {navItems.map((item) => {
-                  const active = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.href}
-                      onClick={() => setSidebarOpen(false)}
-                      href={item.href}
-                      className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-98 ${
-                        active
-                          ? "bg-blue-600 text-white shadow-md shadow-blue-900/30 font-extrabold"
-                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
-                      }`}
-                    >
-                      <span className={active ? "text-white" : "text-slate-400"}>
-                        {item.icon}
-                      </span>
-                      <span>{item.label}</span>
-                    </Link>
-                  );
-                })}
-              </nav>
-
-              {/* Bottom Footer: User Profile + Logout */}
-              <div className="p-3 border-t border-slate-800 bg-[#0b1329] shrink-0 space-y-2">
-                <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex flex-col gap-2">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div
-                      className="w-9 h-9 rounded-full text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs border border-white/20 font-display"
-                      style={{ background: `linear-gradient(135deg, ${accentColor}, #1d4ed8)` }}
-                    >
-                      {initials}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-bold text-white truncate font-display">{userName}</p>
-                      <p className="text-[9.5px] text-slate-400 truncate">{userRole} · {userUnit}</p>
-                      <p className="text-[9px] text-slate-500 font-mono mt-0.5 truncate">{userCode}</p>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      setSidebarOpen(false);
-                      setIsProfileOpen(true);
-                    }}
-                    className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all cursor-pointer shadow-xs active:scale-98 font-display"
-                  >
-                    <User className="w-3.5 h-3.5 stroke-[2.5]" />
-                    <span>Profil &amp; Detail Akun Saya</span>
-                  </button>
-                </div>
-
-                {/* Solid Color Logout Button */}
-                <button
-                  onClick={() => {
-                    setSidebarOpen(false);
-                    if (typeof window !== "undefined") {
-                      localStorage.removeItem("mbois_logged_in");
-                    }
-                    router.push("/login");
-                  }}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white transition-all cursor-pointer shadow-sm active:scale-98 font-display"
-                >
-                  <LogOut className="w-3.5 h-3.5 text-white" />
-                  <span>Keluar</span>
-                </button>
-              </div>
-            </aside>
-          </div>
-        )}
-
-        {/* ── 2. Desktop Permanent/Collapsible Sidebar (md:flex) ── */}
-        <aside
-          className={`hidden md:flex flex-col h-screen sticky top-0 shrink-0 bg-[#0f172a] text-white border-r border-slate-800 transition-all duration-300 z-30 overflow-hidden ${
-            sidebarOpen ? "w-[260px]" : "w-[64px]"
-          }`}
-        >
-          {/* Logo area */}
-          <div className={`flex items-center shrink-0 py-5 ${sidebarOpen ? "px-5 gap-3.5 justify-center" : "justify-center px-2"}`}>
-            <div className="w-10 h-10 relative shrink-0">
-              <Image src="/mbois_white.png" alt="Logo PT MBOIS" fill className="object-contain" />
-            </div>
-            {sidebarOpen && (
-              <div className="min-w-0">
-                <p className="font-black text-xl tracking-wider text-white font-display leading-none">PT MBOIS</p>
-                <p className="text-[9px] font-bold tracking-widest uppercase mt-1 leading-none text-blue-400 font-display">
-                  FINAL PROJECT
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Nav items */}
-          <nav className="flex-1 py-3 overflow-y-auto scrollbar-none space-y-0.5 px-2">
-            {sidebarOpen && (
-              <div className="px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-blue-400 font-display">Menu Utama</div>
-            )}
-            {navItems.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  title={!sidebarOpen ? item.label : undefined}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all group relative ${
-                    active
-                      ? "text-white font-bold bg-blue-600/30"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
-                  }`}
-                  style={active ? { background: accentColor + "33", color: "white" } : {}}
-                >
-                  {active && (
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full" style={{ background: accentColor }} />
-                  )}
-                  <span className={`shrink-0 transition-colors ${active ? "" : "group-hover:text-white"}`} style={active ? { color: accentColor } : {}}>
-                    {item.icon}
-                  </span>
-                  {sidebarOpen && (
-                    <span className="text-[12.5px] truncate flex-1">{item.label}</span>
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Toggle button */}
-          <div className="px-2 py-3 border-t border-slate-800 shrink-0">
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all"
-            >
-              {sidebarOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-              {sidebarOpen && <span className="text-xs">Tutup Sidebar</span>}
-            </button>
-          </div>
-        </aside>
-
-        {/* ── Main content ── */}
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+          <Header
+            className="shell-header shrink-0"
+            userName={userName}
+            userNim={userCode}
+            userRole={userRole}
+            prodiName={userUnit}
+            onToggleSidebar={() => setSidebarOpen((v) => !v)}
+          />
 
-          {/* Header */}
-          <header className="sticky top-0 z-30 shrink-0 bg-white border-b border-slate-200">
-            <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${accentColor}, #38bdf8, ${accentColor})` }} />
-            <div className="h-14 md:h-12 px-4 md:px-5 flex items-center justify-between md:justify-end">
-              {/* Mobile Brand (Left side on < md) */}
-              <div className="flex items-center gap-2.5 md:hidden">
-                <div className="w-8 h-8 relative shrink-0">
-                  <Image
-                    src="/mbois_blue.png"
-                    alt="Logo PT MBOIS"
-                    fill
-                    sizes="32px"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-                <div>
-                  <h1 className="font-black text-base tracking-wider font-display text-slate-900 leading-none">
-                    PT MBOIS
-                  </h1>
-                  <p className="text-[7.5px] font-bold text-blue-600 font-display tracking-widest uppercase mt-0.5 leading-none">
-                    FINAL PROJECT
-                  </p>
-                </div>
-              </div>
-
-              {/* Mobile Burger Button (Right side on < md) */}
-              <div className="md:hidden">
-                <button
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="flex items-center justify-center w-10 h-10 rounded-full text-slate-800 hover:text-blue-600 hover:bg-blue-50 active:scale-95 transition-all cursor-pointer shrink-0"
-                  title="Buka Navigasi Menu &amp; Profil"
-                >
-                  <Menu className="w-6 h-6 text-blue-600" />
-                </button>
-              </div>
-
-              {/* Desktop Profile Trigger (Hidden on < md, Visible on ≥ md) */}
-              <div ref={dropRef} className="hidden md:block relative">
-                <button
-                  onClick={() => setDropdownOpen((v) => !v)}
-                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-all group cursor-pointer"
-                >
-                  <div
-                    className="w-7 h-7 rounded-full text-white font-bold text-[11px] flex items-center justify-center shrink-0 select-none"
-                    style={{ background: `linear-gradient(135deg, ${accentColor}, ${accentColor}99)` }}
-                  >
-                    {initials}
-                  </div>
-                  <div className="flex flex-col leading-tight text-left">
-                    <span className="text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition-colors">{userName}</span>
-                    <span className="text-[10px] text-slate-400">{userRole}</span>
-                  </div>
-                  <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {dropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-slate-200 shadow-lg overflow-hidden z-50">
-                    <div className="p-4 border-b border-slate-100">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-10 h-10 rounded-full text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-sm"
-                          style={{ background: `linear-gradient(135deg, ${accentColor}, ${accentColor}aa)` }}
-                        >
-                          {initials}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-bold text-slate-800 truncate">{userName}</p>
-                          <p className="text-[11px] text-slate-500 truncate">{userRole} · {userUnit}</p>
-                          <p className="text-[10px] text-slate-400 mt-0.5 truncate">{userCode}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-2">
-                      <button
-                        onClick={() => { setDropdownOpen(false); setIsProfileOpen(true); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-blue-50 text-left text-xs text-slate-700 hover:text-blue-600 font-medium transition-all"
-                      >
-                        <User className="w-3.5 h-3.5 text-blue-600" /> Profil &amp; Detail Akun
-                      </button>
-                      <button
-                        onClick={() => { setDropdownOpen(false); router.push("/login"); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-100 text-left text-xs text-slate-700 font-medium transition-all"
-                      >
-                        <LogOut className="w-3.5 h-3.5" /> Keluar
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </header>
-
-          {/* Page content */}
-          <main className="flex-1 p-5 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none">
+          <main className="flex-1 p-4 pt-16 md:px-5 md:pb-5 md:pt-0 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body">
             {children}
           </main>
         </div>
       </div>
 
-      {/* Profile Modal */}
-      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
-
-      {/* Portal Splash Transition */}
       {showPortalSplash && (
         <SplashScreen
           isVisible={showPortalSplash}

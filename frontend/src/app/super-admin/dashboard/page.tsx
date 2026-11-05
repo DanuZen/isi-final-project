@@ -1,13 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner,
+  bannerPrimaryBtn,
+  bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, ClipboardList, Settings, Database,
-  CheckCircle2, AlertTriangle, Search, ShieldCheck, UserCog,
-  ArrowRight, HardDrive, RefreshCw, Activity, Lock, ArrowLeft, Terminal, Check
+  LayoutDashboard,
+  Users,
+  ClipboardList,
+  Settings,
+  Database,
+  CheckCircle2,
+  AlertTriangle,
+  Search,
+  ShieldCheck,
+  UserCog,
+  ArrowRight,
+  HardDrive,
+  RefreshCw,
+  Activity,
+  Lock,
+  ArrowLeft,
+  Terminal,
+  Check,
 } from "lucide-react";
 
 const NAV = [
@@ -94,44 +113,36 @@ export default function SuperAdminDashboard() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto lg:overflow-hidden shell-body flex flex-col min-h-0 justify-between md:pt-0">
             
             {/* ── 1. Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shadow-sm shrink-0">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white font-display shadow-xs">
-                      <ShieldCheck className="w-3.5 h-3.5 text-white" /> Executive Summary Control Center
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Rekapitulasi Utama PT MBOIS - Final Project PT MBOIS
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Rangkuman performa sistem, rekapitulasi data pengguna, catatan jejak audit log, serta status kesehatan server &amp; database terpusat.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/super-admin/users"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <UserCog className="w-4 h-4 text-white" />
-                    <span>Manajemen User</span>
-                  </Link>
+            <PageBanner
+              title="Control Panel & Master Configuration"
+              description="Pusat monitoring status server, konektivitas database SIAK, log audit aktivitas sistem, dan kesehatan layanan."
+              stats={[
+                { icon: Activity, value: "Server Online", label: "Uptime 99.98%" },
+                { icon: Users, value: "1,240 Users", label: "Akun Terdaftar" },
+                { icon: ShieldCheck, value: "Sistem Aman", label: "Zero Breach" },
+              ]}
+              actions={
+                <>
                   <Link
                     href="/super-admin/config"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition-all active:scale-95 font-display"
+                    className={bannerPrimaryBtn}
                   >
-                    <Settings className="w-4 h-4 text-white" />
-                    <span>Konfigurasi System</span>
+                    <Settings className="w-4 h-4" />
+                    <span>Konfigurasi Sistem</span>
                   </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+                  <Link
+                    href="/super-admin/audit"
+                    className={bannerSecondaryBtn}
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Audit Trail</span>
+                  </Link>
+                </>
+              }
+            />
 
             {/* ── 2. Executive Stat Cards (4 Cards) ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-3 shrink-0">

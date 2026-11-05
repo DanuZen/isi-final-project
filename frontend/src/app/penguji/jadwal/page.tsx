@@ -1,13 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar, DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
+import {
+  Sidebar,
+  DOSEN_NAV_ITEMS } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import {
-  LayoutDashboard, CalendarDays, Star, FileEdit,
-  Clock, MapPin, CheckCircle2, Search, Filter, ArrowRight, ShieldCheck, Award, ChevronDown, Check
+  LayoutDashboard,
+  CalendarDays,
+  Star,
+  FileEdit,
+  Clock,
+  MapPin,
+  CheckCircle2,
+  Search,
+  Filter,
+  ArrowRight,
+  ShieldCheck,
+  Award,
+  ChevronDown,
+  Check,
+  GraduationCap,
 } from "lucide-react";
 
 const DEFAULT_JADWAL = [
@@ -99,44 +115,27 @@ export default function PengujiJadwalPage() {
         <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
           <Header className="shell-header shrink-0" userName="Dr. Ahmad Fauzi, M.T." userNim="NIDN: 1012345678" userRole="Dosen Penguji" prodiName="Teknik Informatika" onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-y-auto overflow-x-hidden scrollbar-none shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="p-5 md:p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-5">
-                <div className="space-y-1 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#2563eb] text-white font-display">
-                      PENUGASAN PENGUJI
-                    </span>
-                    <span className="text-[11px] text-neutral-400 font-mono font-semibold">T.A. 2026/2027</span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display tracking-wide leading-tight">
-                    Jadwal Ujian &amp; Penilaian
-                  </h1>
-                  <p className="text-xs text-neutral-400 font-medium leading-relaxed max-w-2xl">
-                    Daftar mahasiswa yang ditugaskan kepada Anda untuk diuji pada Seminar Proposal &amp; Ujian Sidang Skripsi.
-                  </p>
-                </div>
-                {/* Combined Solid Stat Pill Container */}
-                <div className="hidden md:flex items-center gap-1.5 p-1 rounded-2xl bg-[#262626] border border-neutral-800 shadow-sm shrink-0 font-display">
-                  {/* Stat 1: Perlu Dinilai (Solid Gold Pill) */}
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#38bdf8] text-slate-950 font-black shadow-2xs">
-                    <Clock className="w-4 h-4 text-slate-950 shrink-0 stroke-[2.5]" />
-                    <span className="text-sm font-black text-slate-950 leading-none">{perluDinilaiCount}</span>
-                    <span className="text-[10px] font-black text-slate-950 uppercase tracking-wider">Perlu Dinilai</span>
-                  </div>
-
-                  {/* Stat 2: Selesai (Solid Emerald Pill) */}
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-black shadow-2xs">
-                    <CheckCircle2 className="w-4 h-4 text-white shrink-0 stroke-[2.5]" />
-                    <span className="text-sm font-black text-white leading-none">{selesaiCount}</span>
-                    <span className="text-[10px] font-black text-white uppercase tracking-wider">Selesai</span>
-                  </div>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Jadwal Pengujian Sidang & Seminar"
+              description="Daftar jadwal pengujian seminar proposal dan sidang skripsi mahasiswa yang ditugaskan kepada Anda sebagai dewan penguji."
+              stats={[
+                { icon: CalendarDays, value: "Semester Ganjil", label: "2026/2027" },
+                { icon: GraduationCap, value: "Sidang Skripsi", label: "Dewan Penguji" },
+                { icon: Clock, value: "Ruangan Ujian", label: "Luring & Daring" },
+              ]}
+              actions={
+                <Link
+                  href="/penguji/nilai"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Lembar Penilaian</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* ── Table Card ── */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs flex-1 flex flex-col min-h-0 overflow-hidden">

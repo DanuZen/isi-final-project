@@ -1,12 +1,28 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar } from "@/components/layout/sidebar";
+import {
+  Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { PageBanner, bannerPrimaryBtn, bannerSecondaryBtn } from "@/components/layout/page-banner";
 import Link from "next/link";
 import {
-  LayoutDashboard, Users, ClipboardList, Settings, Database,
-  Search, ArrowRight, ShieldCheck, CheckCircle2, XCircle, AlertTriangle, Activity, Terminal, ArrowLeft
+  LayoutDashboard,
+  Users,
+  ClipboardList,
+  Settings,
+  Database,
+  Search,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  XCircle,
+  AlertTriangle,
+  Activity,
+  Terminal,
+  ArrowLeft,
+  Clock,
+  UserCheck,
 } from "lucide-react";
 
 const NAV = [
@@ -75,37 +91,27 @@ export default function SuperAdminAuditPage() {
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
-          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0">
+          <main className="flex-1 p-4 pt-16 md:p-6 space-y-4 overflow-hidden shell-body flex flex-col min-h-0 md:pt-0">
 
             {/* ── Welcome Banner ── */}
-            <div className="bg-[#1A1A1A] rounded-2xl border border-neutral-800 overflow-hidden shrink-0 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 md:p-6 relative">
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#2563eb] text-white shadow-xs font-display">
-                      <ClipboardList className="w-3.5 h-3.5 text-white" /> Audit Log &amp; Security Audit
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-black font-display text-white tracking-wide leading-tight">
-                    Catatan Jejak Aktivitas &amp; Log Sistem
-                  </h1>
-                  <p className="text-xs text-neutral-400 leading-relaxed max-w-2xl font-medium">
-                    Catatan realtime seluruh aksi pengguna, autentikasi login, IP Address, serta audit trail keamanan aplikasi Final Project.
-                  </p>
-                </div>
-
-                <div className="hidden md:flex flex-wrap gap-2.5 shrink-0">
-                  <Link
-                    href="/super-admin/dashboard"
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all active:scale-95 shadow-xs font-display"
-                  >
-                    <span>Dashboard System</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                </div>
-              </div>
-              <div className="h-0.5 bg-gradient-to-r from-[#2563eb] via-[#38bdf8] to-[#2563eb]" />
-            </div>
+            <PageBanner
+              title="Audit Trail & Rekam Jejak Sistem"
+              description="Rekam jejak seluruh aktivitas login pengguna, perubahan nilai ujian, mutasi data, dan interaksi sensitif sistem."
+              stats={[
+                { icon: ShieldCheck, value: "Immutable Log", label: "Enkripsi SHA-256" },
+                { icon: Clock, value: "Real-time Tracker", label: "Pencatatan Event" },
+                { icon: UserCheck, value: "Multi-Role Session", label: "Terdeteksi" },
+              ]}
+              actions={
+                <Link
+                  href="/super-admin/dashboard"
+                  className={bannerPrimaryBtn}
+                >
+                  <span>Ke Dashboard Admin</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              }
+            />
 
             {/* Grid Layout with Live Side Detail Panel Card */}
             <div className="flex flex-col lg:flex-row gap-4 items-stretch flex-1 min-h-0">
